@@ -1,0 +1,238 @@
+const fs = require("fs");
+const path = require("path");
+
+const outDir = path.join(process.cwd(), "assets", "capitulo-3");
+fs.mkdirSync(outDir, { recursive: true });
+
+const html = String.raw`<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>EcoCommute Capitulo III Assets</title>
+<style>
+  :root {
+    --green:#17A673;
+    --green-dark:#0F6B4F;
+    --lime:#C9F24D;
+    --blue:#2563EB;
+    --sky:#EAF3FF;
+    --ink:#16211F;
+    --muted:#64736F;
+    --line:#D6E2DE;
+    --bg:#F6FAF8;
+    --white:#FFFFFF;
+    --amber:#F59E0B;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #e9efed; font-family: Arial, Helvetica, sans-serif; color: var(--ink); }
+  .canvas { width: 1440px; min-height: 980px; padding: 56px; background: var(--bg); }
+  .title { font-size: 40px; font-weight: 800; margin: 0 0 8px; letter-spacing: 0; }
+  .sub { color: var(--muted); font-size: 18px; margin: 0 0 32px; line-height: 1.45; max-width: 940px; }
+  .grid { display: grid; gap: 22px; }
+  .two { grid-template-columns: 1fr 1fr; }
+  .three { grid-template-columns: repeat(3, 1fr); }
+  .four { grid-template-columns: repeat(4, 1fr); }
+  .card { background: var(--white); border: 1px solid var(--line); border-radius: 8px; padding: 24px; box-shadow: 0 12px 30px rgba(22,33,31,.08); }
+  .card h3 { margin: 0 0 14px; font-size: 21px; }
+  .label { font-size: 12px; color: var(--muted); text-transform: uppercase; font-weight: 700; letter-spacing: .08em; }
+  .swatches { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+  .swatch { height: 94px; border-radius: 8px; padding: 12px; color: #fff; display:flex; flex-direction:column; justify-content:flex-end; font-size:13px; font-weight:700; }
+  .button { display:inline-flex; align-items:center; justify-content:center; gap:10px; height:48px; border-radius:8px; padding:0 22px; font-weight:800; border:1px solid transparent; }
+  .primary { background: var(--green); color:white; }
+  .secondary { background:white; color:var(--green-dark); border-color:var(--green); }
+  .ghost { background:var(--sky); color:var(--blue); }
+  .input { height:48px; border:1px solid var(--line); border-radius:8px; padding:14px; color:var(--muted); background:#fff; }
+  .badge { display:inline-flex; align-items:center; gap:8px; background:#ECFDF5; color:var(--green-dark); border:1px solid #B8EBD7; border-radius:999px; padding:8px 12px; font-weight:800; }
+  .phone { width: 390px; height: 844px; background:white; border:10px solid #17211F; border-radius:38px; overflow:hidden; box-shadow: 0 20px 50px rgba(0,0,0,.25); margin:auto; }
+  .screen { background:white; border:1px solid var(--line); border-radius:12px; overflow:hidden; box-shadow:0 16px 34px rgba(22,33,31,.12); }
+  .nav { height:72px; display:flex; align-items:center; justify-content:space-between; padding:0 54px; border-bottom:1px solid var(--line); background:white; }
+  .brand { font-size:24px; font-weight:900; color:var(--green-dark); display:flex; gap:10px; align-items:center; }
+  .brand:before { content:""; width:28px; height:28px; border-radius:50%; background:linear-gradient(135deg,var(--green),var(--lime)); display:inline-block; }
+  .navlinks { display:flex; gap:26px; color:var(--muted); font-weight:700; }
+  .hero { display:grid; grid-template-columns: 1fr 1fr; gap:42px; padding:64px 54px; align-items:center; }
+  .hero h1 { font-size:58px; line-height:1.02; margin:0 0 20px; }
+  .hero p { font-size:20px; color:var(--muted); line-height:1.5; margin:0 0 28px; }
+  .map { height:430px; border-radius:20px; background:
+    radial-gradient(circle at 20% 20%, #fff 0 2px, transparent 3px),
+    linear-gradient(135deg,#DDF7EE,#EAF3FF); position:relative; overflow:hidden; border:1px solid #CBE5DD; }
+  .route { position:absolute; left:70px; top:210px; width:310px; height:90px; border-top:8px solid var(--green); border-right:8px solid var(--green); border-radius:80px 80px 0 0; }
+  .pin { position:absolute; width:30px; height:30px; border-radius:50%; background:var(--blue); border:5px solid white; box-shadow:0 4px 12px rgba(0,0,0,.2); }
+  .pin.a { left:58px; top:198px; } .pin.b { right:80px; top:286px; background:var(--green); }
+  .metric-row { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; padding:0 54px 58px; }
+  .metric { background:white; border:1px solid var(--line); border-radius:8px; padding:22px; }
+  .metric strong { display:block; font-size:30px; color:var(--green-dark); }
+  .metric span { color:var(--muted); font-weight:700; }
+  .app-shell { display:grid; grid-template-columns:260px 1fr; width:1280px; height:820px; background:white; border-radius:16px; overflow:hidden; border:1px solid var(--line); box-shadow:0 18px 45px rgba(22,33,31,.14); }
+  .side { background:#102A24; color:white; padding:28px; }
+  .side .brand { color:white; margin-bottom:30px; }
+  .side-item { padding:13px 14px; border-radius:8px; margin-bottom:8px; color:#D8EFE8; font-weight:700; }
+  .side-item.active { background:#1A7F61; color:white; }
+  .main { padding:30px; background:#F8FBFA; overflow:hidden; }
+  .topbar { display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; }
+  .dash-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap:18px; margin-bottom:20px; }
+  .kpi { background:white; border:1px solid var(--line); border-radius:8px; padding:18px; }
+  .kpi strong { display:block; font-size:31px; color:var(--green-dark); }
+  .chart { height:220px; background:white; border:1px solid var(--line); border-radius:8px; padding:20px; display:flex; align-items:end; gap:16px; }
+  .bar { width:44px; background:linear-gradient(180deg,var(--green),var(--blue)); border-radius:8px 8px 0 0; }
+  .list { background:white; border:1px solid var(--line); border-radius:8px; overflow:hidden; }
+  .row { display:grid; grid-template-columns:1fr 120px 120px; gap:16px; padding:14px 18px; border-bottom:1px solid var(--line); align-items:center; }
+  .row:last-child { border-bottom:0; }
+  .small { color:var(--muted); font-size:13px; }
+  .wire { background:#fff; border:2px solid #CBD5E1; border-radius:8px; color:#64748B; }
+  .wire .block { background:#EEF2F7; border:2px dashed #CBD5E1; border-radius:8px; display:flex; align-items:center; justify-content:center; color:#64748B; font-weight:800; }
+  .flow { display:flex; align-items:center; gap:20px; margin-bottom:24px; }
+  .flowbox { background:white; border:2px solid var(--green); border-radius:8px; padding:20px; width:230px; min-height:82px; font-weight:800; display:flex; align-items:center; justify-content:center; text-align:center; }
+  .arrow { color:var(--green-dark); font-size:36px; font-weight:900; }
+  .erd { display:grid; grid-template-columns: repeat(4, 1fr); gap:18px; }
+  .entity { background:white; border:2px solid var(--green-dark); border-radius:8px; overflow:hidden; font-size:14px; }
+  .entity h4 { margin:0; background:var(--green-dark); color:white; padding:10px 12px; font-size:16px; }
+  .entity ul { margin:0; padding:10px 18px 12px 28px; line-height:1.55; color:#33403C; }
+  .mock-grid { display:grid; grid-template-columns:repeat(2, 1fr); gap:26px; }
+  .mini-screen { height:390px; background:#F8FBFA; border:1px solid var(--line); border-radius:12px; padding:22px; overflow:hidden; }
+  .mini-title { font-weight:900; font-size:22px; margin-bottom:16px; color:var(--green-dark); }
+</style>
+</head>
+<body>
+<section class="canvas" id="style-guide">
+  <h1 class="title">EcoCommute - Style Guidelines</h1>
+  <p class="sub">Sistema visual para una experiencia de movilidad sostenible, urbana y confiable. El tono combina tecnología, impacto ambiental y gamificación responsable.</p>
+  <div class="grid two">
+    <div class="card">
+      <span class="label">Branding</span>
+      <h3>EcoCommute</h3>
+      <p class="sub" style="font-size:16px;margin:0">Identidad basada en rutas, progreso ambiental y comunidad. El símbolo circular representa ciudad, movimiento y ciclo sostenible.</p>
+      <div style="margin-top:22px" class="brand">EcoCommute</div>
+    </div>
+    <div class="card">
+      <span class="label">Tono de comunicación</span>
+      <h3>Entusiasta, claro y responsable</h3>
+      <p class="sub" style="font-size:16px;margin:0">Lenguaje cercano, motivador y medible: “Ahorra CO₂”, “gana puntos verdes”, “mejora tu EcoPerfil”.</p>
+    </div>
+  </div>
+  <div class="card" style="margin-top:22px">
+    <span class="label">Paleta</span>
+    <div class="swatches" style="margin-top:12px">
+      <div class="swatch" style="background:#17A673">Primary<br>#17A673</div>
+      <div class="swatch" style="background:#0F6B4F">Eco Dark<br>#0F6B4F</div>
+      <div class="swatch" style="background:#2563EB">Transit Blue<br>#2563EB</div>
+      <div class="swatch" style="background:#C9F24D;color:#243">Reward Lime<br>#C9F24D</div>
+      <div class="swatch" style="background:#16211F">Ink<br>#16211F</div>
+      <div class="swatch" style="background:#F6FAF8;color:#243;border:1px solid #d6e2de">Background<br>#F6FAF8</div>
+    </div>
+  </div>
+  <div class="grid three" style="margin-top:22px">
+    <div class="card"><span class="label">Typography</span><h3>Arial / Helvetica</h3><p class="small">H1 56-58 px, H2 32-40 px, body 16-20 px, captions 12-14 px.</p></div>
+    <div class="card"><span class="label">Buttons</span><h3>Estados principales</h3><div class="button primary">Empezar EcoRuta</div><br><br><div class="button secondary">Ver recompensas</div></div>
+    <div class="card"><span class="label">Inputs y badges</span><h3>Componentes base</h3><div class="input">Origen: UPC Monterrico</div><br><span class="badge">+35 puntos verdes</span></div>
+  </div>
+</section>
+
+<section class="canvas" id="landing-wireframe">
+  <h1 class="title">Landing Page Wireframe</h1>
+  <p class="sub">Estructura desktop y mobile para comunicar problema, solución, funcionamiento, beneficios, ODS 11 y llamada a la acción.</p>
+  <div class="grid two">
+    <div class="wire" style="height:760px;padding:28px">
+      <div class="block" style="height:60px;margin-bottom:24px">Header / navegación</div>
+      <div class="grid two" style="gap:20px;margin-bottom:24px"><div class="block" style="height:260px">Hero + CTA</div><div class="block" style="height:260px">Mapa / ruta sostenible</div></div>
+      <div class="grid three" style="gap:16px;margin-bottom:24px"><div class="block" style="height:130px">CO₂</div><div class="block" style="height:130px">Puntos</div><div class="block" style="height:130px">Ranking</div></div>
+      <div class="block" style="height:120px;margin-bottom:24px">Cómo funciona</div>
+      <div class="block" style="height:90px">ODS 11 + CTA final</div>
+    </div>
+    <div class="phone wire" style="padding:22px;border-color:#17211F">
+      <div class="block" style="height:56px;margin-bottom:18px">Header</div>
+      <div class="block" style="height:210px;margin-bottom:18px">Hero</div>
+      <div class="block" style="height:120px;margin-bottom:18px">Ruta</div>
+      <div class="block" style="height:90px;margin-bottom:18px">Métricas</div>
+      <div class="block" style="height:150px;margin-bottom:18px">Cómo funciona</div>
+      <div class="block" style="height:70px">CTA</div>
+    </div>
+  </div>
+</section>
+
+<section class="canvas" id="landing-mockup">
+  <div class="screen">
+    <div class="nav"><div class="brand">EcoCommute</div><div class="navlinks"><span>Solución</span><span>Impacto</span><span>Recompensas</span><span>ODS 11</span></div><div class="button primary">Empezar</div></div>
+    <div class="hero">
+      <div><h1>Muévete por Lima y convierte tu impacto en recompensas</h1><p>EcoCommute recomienda rutas sostenibles, calcula el CO₂ ahorrado y transforma cada viaje en puntos, logros y competencia sana por distrito.</p><div class="button primary">Empieza tu EcoRuta</div> <div class="button secondary">Ver beneficios</div></div>
+      <div class="map"><div class="route"></div><div class="pin a"></div><div class="pin b"></div></div>
+    </div>
+    <div class="metric-row"><div class="metric"><strong>12.8 kg</strong><span>CO₂ ahorrado</span></div><div class="metric"><strong>420</strong><span>puntos verdes</span></div><div class="metric"><strong>#3</strong><span>ranking distrital</span></div></div>
+  </div>
+</section>
+
+<section class="canvas" id="app-mockups">
+  <h1 class="title">Web Application Mock-ups</h1>
+  <p class="sub">Pantallas principales del MVP: autenticación, dashboard, rutas, registro de viaje, recompensas y ranking por distrito.</p>
+  <div class="mock-grid">
+    <div class="mini-screen"><div class="mini-title">Login / Registro</div><div class="input">Correo institucional o personal</div><br><div class="input">Contraseña segura</div><br><div class="button primary" style="width:100%">Ingresar</div><br><br><span class="badge">JWT + Spring Security</span></div>
+    <div class="mini-screen"><div class="mini-title">Dashboard personal</div><div class="dash-grid"><div class="kpi"><strong>8.4</strong><span class="small">kg CO₂</span></div><div class="kpi"><strong>260</strong><span class="small">puntos</span></div><div class="kpi"><strong>18</strong><span class="small">viajes</span></div></div><div class="chart"><div class="bar" style="height:40%"></div><div class="bar" style="height:70%"></div><div class="bar" style="height:52%"></div><div class="bar" style="height:86%"></div></div></div>
+    <div class="mini-screen"><div class="mini-title">Rutas sostenibles</div><div class="input">Origen</div><br><div class="input">Destino</div><br><div class="grid three"><div class="badge">Bici</div><div class="badge">Bus</div><div class="badge">Caminar</div></div><br><div class="button primary">Calcular ruta</div></div>
+    <div class="mini-screen"><div class="mini-title">Resultado del viaje</div><div class="card" style="box-shadow:none"><h3>Ruta recomendada</h3><p class="small">UPC Monterrico → Miraflores</p><h3 style="font-size:34px;color:var(--green-dark)">+1.85 kg CO₂</h3><span class="badge">+45 puntos</span></div></div>
+    <div class="mini-screen"><div class="mini-title">Recompensas</div><div class="list"><div class="row"><span>Café aliado</span><b>120 pts</b><button class="button primary">Canjear</button></div><div class="row"><span>Bici taller</span><b>250 pts</b><button class="button secondary">Ver</button></div><div class="row"><span>Eco cupón</span><b>300 pts</b><button class="button secondary">Ver</button></div></div></div>
+    <div class="mini-screen"><div class="mini-title">Ranking por distrito</div><div class="list"><div class="row"><b>#1 Valeria</b><span>920 pts</span><span>Miraflores</span></div><div class="row"><b>#2 Rodrigo</b><span>870 pts</span><span>Surco</span></div><div class="row"><b>#3 Diego</b><span>760 pts</span><span>San Miguel</span></div></div></div>
+  </div>
+</section>
+
+<section class="canvas" id="dashboard-full">
+  <div class="app-shell">
+    <aside class="side"><div class="brand">EcoCommute</div><div class="side-item active">Dashboard</div><div class="side-item">Rutas</div><div class="side-item">Viajes</div><div class="side-item">Recompensas</div><div class="side-item">Ranking</div><div class="side-item">EcoPerfil</div></aside>
+    <main class="main"><div class="topbar"><div><h1 class="title" style="font-size:34px;margin:0">Hola, Rodrigo</h1><p class="small">Tu impacto sostenible esta semana</p></div><span class="badge">Guardián del Aire</span></div><div class="dash-grid"><div class="kpi"><strong>14.2 kg</strong><span>CO₂ ahorrado</span></div><div class="kpi"><strong>580</strong><span>puntos verdes</span></div><div class="kpi"><strong>#2</strong><span>Surco</span></div></div><div class="grid two"><div class="chart"><div class="bar" style="height:42%"></div><div class="bar" style="height:60%"></div><div class="bar" style="height:35%"></div><div class="bar" style="height:82%"></div><div class="bar" style="height:72%"></div><div class="bar" style="height:95%"></div></div><div class="card"><h3>Recomendación IA</h3><p class="sub" style="font-size:16px;margin:0 0 18px">Si sales a las 7:00 a. m., la ruta en bicicleta por avenidas secundarias reduce 1.2 kg de CO₂ y suma 32 puntos adicionales.</p><div class="button primary">Usar recomendación</div></div></div><br><div class="list"><div class="row"><span>Bicicleta a Miraflores</span><b>+48 pts</b><span>1.95 kg CO₂</span></div><div class="row"><span>Bus eléctrico a San Isidro</span><b>+22 pts</b><span>0.84 kg CO₂</span></div></div></main>
+  </div>
+</section>
+
+<section class="canvas" id="wireflows">
+  <h1 class="title">Web Applications Wireflow Diagrams</h1>
+  <p class="sub">Flujos principales asociados a los objetivos de usuario del MVP.</p>
+  <div class="card">
+    <h3>Flujo 1: acceso seguro</h3>
+    <div class="flow"><div class="flowbox">Registro</div><div class="arrow">→</div><div class="flowbox">Inicio de sesión</div><div class="arrow">→</div><div class="flowbox">Dashboard</div></div>
+    <h3>Flujo 2: ruta sostenible e impacto</h3>
+    <div class="flow"><div class="flowbox">Buscar ruta</div><div class="arrow">→</div><div class="flowbox">Elegir medio sostenible</div><div class="arrow">→</div><div class="flowbox">Registrar viaje</div><div class="arrow">→</div><div class="flowbox">CO₂ + puntos</div></div>
+    <h3>Flujo 3: gamificación</h3>
+    <div class="flow"><div class="flowbox">Ver recompensas</div><div class="arrow">→</div><div class="flowbox">Seleccionar beneficio</div><div class="arrow">→</div><div class="flowbox">Canjear puntos</div><div class="arrow">→</div><div class="flowbox">Historial</div></div>
+  </div>
+</section>
+
+<section class="canvas" id="erd">
+  <h1 class="title">Database Diagram - EcoCommute</h1>
+  <p class="sub">Modelo relacional propuesto para soportar usuarios, seguridad, viajes, puntos, recompensas, rankings, logros y retos sostenibles.</p>
+  <div class="erd">
+    <div class="entity"><h4>usuarios</h4><ul><li>id PK</li><li>nombre</li><li>email UNIQUE</li><li>password</li><li>distrito_id FK</li><li>puntos_totales</li></ul></div>
+    <div class="entity"><h4>roles</h4><ul><li>id PK</li><li>nombre UNIQUE</li><li>descripcion</li></ul></div>
+    <div class="entity"><h4>usuario_roles</h4><ul><li>usuario_id PK/FK</li><li>rol_id PK/FK</li></ul></div>
+    <div class="entity"><h4>distritos</h4><ul><li>id PK</li><li>nombre UNIQUE</li><li>activo</li></ul></div>
+    <div class="entity"><h4>viajes</h4><ul><li>id PK</li><li>usuario_id FK</li><li>medio_transporte_id FK</li><li>distancia_km</li><li>co2_ahorrado_kg</li><li>puntos_ganados</li></ul></div>
+    <div class="entity"><h4>medios_transporte</h4><ul><li>id PK</li><li>nombre UNIQUE</li><li>factor_co2_kg_km</li><li>activo</li></ul></div>
+    <div class="entity"><h4>transacciones_puntos</h4><ul><li>id PK</li><li>usuario_id FK</li><li>viaje_id FK</li><li>canje_id FK</li><li>tipo</li><li>cantidad</li></ul></div>
+    <div class="entity"><h4>tiendas</h4><ul><li>id PK</li><li>nombre</li><li>direccion</li><li>activa</li></ul></div>
+    <div class="entity"><h4>recompensas</h4><ul><li>id PK</li><li>tienda_id FK</li><li>titulo</li><li>puntos_requeridos</li><li>activa</li></ul></div>
+    <div class="entity"><h4>canjes</h4><ul><li>id PK</li><li>usuario_id FK</li><li>recompensa_id FK</li><li>puntos_canjeados</li><li>codigo_descuento</li></ul></div>
+    <div class="entity"><h4>logros</h4><ul><li>id PK</li><li>nombre</li><li>puntos_requeridos</li><li>co2_requerido_kg</li></ul></div>
+    <div class="entity"><h4>usuario_logros</h4><ul><li>usuario_id PK/FK</li><li>logro_id PK/FK</li><li>fecha_obtenido</li></ul></div>
+    <div class="entity"><h4>retos</h4><ul><li>id PK</li><li>titulo</li><li>meta_co2_kg</li><li>meta_viajes</li><li>fecha_inicio</li><li>fecha_fin</li></ul></div>
+    <div class="entity"><h4>usuario_retos</h4><ul><li>usuario_id PK/FK</li><li>reto_id PK/FK</li><li>progreso_co2_kg</li><li>completado</li></ul></div>
+  </div>
+</section>
+</body>
+</html>`;
+
+fs.writeFileSync(path.join(outDir, "capitulo-3-assets.html"), html);
+
+async function main() {
+  const { chromium } = require("playwright");
+  const browser = await chromium.launch({ headless: true });
+  const page = await browser.newPage({ viewport: { width: 1500, height: 1100 }, deviceScaleFactor: 1 });
+  await page.goto("file://" + path.join(outDir, "capitulo-3-assets.html").replace(/\\/g, "/"));
+  const ids = ["style-guide", "landing-wireframe", "landing-mockup", "app-mockups", "dashboard-full", "wireflows", "erd"];
+  for (const id of ids) {
+    const el = await page.locator(`#${id}`);
+    await el.screenshot({ path: path.join(outDir, `${id}.png`) });
+  }
+  await browser.close();
+  console.log(outDir);
+}
+
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});

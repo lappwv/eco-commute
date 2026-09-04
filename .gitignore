@@ -1,0 +1,30 @@
+# Local and generated files
+chunk_*.txt
+contenido*.txt
+figma_probe_result.txt
+figma-onboarding-screen*.png
+*.tmp
+
+# Course reference files kept local
+RúbricaTP_*.xlsx
+upc-pre-*.docx
+upc-pre-*.pdf
+practica-calificada-*.pdf
+examen.txt
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Common build outputs
+node_modules/
+dist/
+build/
+target/
+*.log
+
+# Environment
+.env
+.env.*
