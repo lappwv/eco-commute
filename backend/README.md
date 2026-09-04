@@ -13,7 +13,7 @@ Backend propuesto para implementar con Spring Boot, Java, Spring Security, JWT y
 - Rankings por distrito.
 - Recomendaciones personalizadas con IA.
 
-## Endpoints mínimos del MVP
+## Endpoints mínimos del alcance inicial
 
 ```text
 POST   /api/auth/register

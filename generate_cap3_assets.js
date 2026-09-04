@@ -162,7 +162,7 @@ const html = String.raw`<!doctype html>
 
 <section class="canvas" id="app-mockups">
   <h1 class="title">Web Application Mock-ups</h1>
-  <p class="sub">Pantallas principales del MVP: autenticación, dashboard, rutas, registro de viaje, recompensas y ranking por distrito.</p>
+  <p class="sub">Pantallas principales del alcance inicial: autenticación, dashboard, rutas, registro de viaje, recompensas y ranking por distrito.</p>
   <div class="mock-grid">
     <div class="mini-screen"><div class="mini-title">Login / Registro</div><div class="input">Correo institucional o personal</div><br><div class="input">Contraseña segura</div><br><div class="button primary" style="width:100%">Ingresar</div><br><br><span class="badge">JWT + Spring Security</span></div>
     <div class="mini-screen"><div class="mini-title">Dashboard personal</div><div class="dash-grid"><div class="kpi"><strong>8.4</strong><span class="small">kg CO₂</span></div><div class="kpi"><strong>260</strong><span class="small">puntos</span></div><div class="kpi"><strong>18</strong><span class="small">viajes</span></div></div><div class="chart"><div class="bar" style="height:40%"></div><div class="bar" style="height:70%"></div><div class="bar" style="height:52%"></div><div class="bar" style="height:86%"></div></div></div>
@@ -182,7 +182,7 @@ const html = String.raw`<!doctype html>
 
 <section class="canvas" id="wireflows">
   <h1 class="title">Web Applications Wireflow Diagrams</h1>
-  <p class="sub">Flujos principales asociados a los objetivos de usuario del MVP.</p>
+  <p class="sub">Flujos principales asociados a los objetivos de usuario del alcance inicial.</p>
   <div class="card">
     <h3>Flujo 1: acceso seguro</h3>
     <div class="flow"><div class="flowbox">Registro</div><div class="arrow">→</div><div class="flowbox">Inicio de sesión</div><div class="arrow">→</div><div class="flowbox">Dashboard</div></div>
