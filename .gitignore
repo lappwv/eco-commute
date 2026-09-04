@@ -20,7 +20,6 @@ Thumbs.db
 
 # Common build outputs
 node_modules/
-dist/
 build/
 target/
 *.log
