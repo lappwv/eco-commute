@@ -17,7 +17,7 @@ EcoCommute es una aplicación web orientada a incentivar la movilidad sostenible
 - Propuesta de valor, problema, segmentos, Lean UX y Product Backlog.
 - Sprint Backlog con tareas de ingeniería de 4 a 8 horas.
 - Diseño de interfaz y artefactos de Figma.
-- Modelo de base de datos SQL Server para el MVP.
+- Modelo de base de datos SQL Server para el alcance inicial.
 
 ## Estructura
 
@@ -37,7 +37,7 @@ assets/                Recursos visuales auxiliares
 - Integraciones: Google Maps API y OpenAI API
 - Despliegue esperado: frontend público y backend en entorno cloud
 
-## Flujo principal del MVP
+## Flujo principal del alcance inicial
 
 1. El usuario se registra e inicia sesión.
 2. Consulta o registra un viaje sostenible.
