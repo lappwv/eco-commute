@@ -239,6 +239,40 @@ h3 {
   font-weight: 900;
 }
 
+.preview-grid,
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.preview-card,
+.contact-card {
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+}
+
+.preview-card {
+  overflow: hidden;
+}
+
+.preview-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  background: var(--soft);
+}
+
+.preview-card figcaption {
+  padding: 16px 18px 18px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
 .stats {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -264,8 +298,36 @@ h3 {
   font-weight: 700;
 }
 
+.contact-section {
+  background: var(--green-dark);
+  color: var(--white);
+}
+
+.contact-section .section-heading .eyebrow,
+.contact-section .section-heading h2 {
+  color: var(--white);
+}
+
+.contact-card {
+  display: block;
+  padding: 20px;
+  color: var(--ink);
+}
+
+.contact-card strong,
+.contact-card span {
+  display: block;
+}
+
+.contact-card span {
+  margin-top: 8px;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
 .footer {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   gap: 20px;
   padding: 26px 6vw;
@@ -287,7 +349,9 @@ h3 {
   .hero,
   .two-column,
   .feature-grid,
-  .stats {
+  .stats,
+  .preview-grid,
+  .contact-grid {
     grid-template-columns: 1fr;
   }
 

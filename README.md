@@ -1,6 +1,6 @@
 # EcoCommute
 
-EcoCommute es una aplicación web orientada a incentivar la movilidad sostenible en Lima Metropolitana mediante rutas ecoeficientes, cálculo de CO2 ahorrado, puntos verdes, recompensas, rankings por distrito y recomendaciones personalizadas con IA.
+EcoCommute es una aplicación web orientada a incentivar la movilidad sostenible en Lima Metropolitana mediante rutas ecoeficientes, cálculo de CO₂ ahorrado, puntos verdes, recompensas, rankings por distrito y recomendaciones personalizadas con IA.
 
 ## Equipo
 
@@ -18,6 +18,8 @@ EcoCommute es una aplicación web orientada a incentivar la movilidad sostenible
 - Sprint Backlog con tareas de ingeniería de 4 a 8 horas.
 - Diseño de interfaz y artefactos de Figma.
 - Modelo de base de datos SQL Server para el alcance inicial.
+- Landing page pública con CTA, mockups, contacto y redes sociales referenciales.
+- Tablero público del Sprint 1 para seguimiento del avance.
 
 ## Estructura
 
@@ -27,6 +29,7 @@ backend/               Guía inicial del backend Spring Boot
 database/              Script SQL Server del modelo de datos
 capitulo3_figma_exports/ Imágenes usadas en el informe
 assets/                Recursos visuales auxiliares
+docs/                  Evidencias y tablero de seguimiento del Sprint
 ```
 
 ## Tecnologías Propuestas
@@ -41,7 +44,7 @@ assets/                Recursos visuales auxiliares
 
 1. El usuario se registra e inicia sesión.
 2. Consulta o registra un viaje sostenible.
-3. El sistema calcula CO2 ahorrado y puntos verdes.
+3. El sistema calcula CO₂ ahorrado y puntos verdes.
 4. El usuario revisa su dashboard, historial y ranking.
 5. El usuario canjea puntos por recompensas.
 6. La IA sugiere mejores hábitos de movilidad.
@@ -53,3 +56,9 @@ https://docs.google.com/document/d/1rS2YmaUWzP3o-Y5hm9gAD7u6cKaOvi2Oyo4YMZHumaI
 
 Figma:
 https://www.figma.com/design/qUCg9tJfKBqd5KAsD9DALq/Untitled
+
+Landing pública:
+https://lappwv.github.io/eco-commute/
+
+Tablero Sprint 1:
+https://github.com/lappwv/eco-commute/blob/main/docs/sprint-1-board.md

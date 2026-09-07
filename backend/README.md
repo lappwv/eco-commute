@@ -7,7 +7,7 @@ Backend propuesto para implementar con Spring Boot, Java, Spring Security, JWT y
 - Autenticación y registro de usuarios.
 - Gestión de usuarios y perfiles.
 - Registro de viajes sostenibles.
-- Cálculo de CO2 ahorrado y puntos verdes.
+- Cálculo de CO₂ ahorrado y puntos verdes.
 - Transacciones de puntos.
 - Catálogo de recompensas y canjes.
 - Rankings por distrito.
