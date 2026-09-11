@@ -1,15 +1,22 @@
 package com.ecocommute.controller;
 
+import com.ecocommute.dto.EcoRouteRequest;
+import com.ecocommute.dto.RecalculateRouteRequest;
+import com.ecocommute.dto.RoutePlanRequest;
+import com.ecocommute.dto.TelemetryTickRequest;
 import com.ecocommute.service.EcoRoutingService;
 import com.ecocommute.service.RoutingEngineService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
 @RestController
-@RequestMapping({"/api/v1", "/api"})
-@CrossOrigin(origins = "*")
+@RequestMapping("/api/v1")
+@Tag(name = "Rutas", description = "Planificacion de rutas sostenibles y telemetria")
 public class RouteController {
 
     private final EcoRoutingService ecoRoutingService;
@@ -22,22 +29,26 @@ public class RouteController {
     }
 
     @PostMapping("/routes/plan")
-    public ResponseEntity<Map<String, Object>> planRoutes(@RequestBody Map<String, Object> request) {
-        return ResponseEntity.ok(routingEngineService.planRoutes(request, 1));
+    @Operation(summary = "Compara rutas sostenibles y recomienda una alternativa optimizada")
+    public ResponseEntity<Map<String, Object>> planRoutes(@Valid @RequestBody RoutePlanRequest request) {
+        return ResponseEntity.ok(routingEngineService.planRoutes(request.toMap(), 1));
     }
 
     @PostMapping("/routes/eco-route")
-    public ResponseEntity<Map<String, Object>> getInitialEcoRoute(@RequestBody Map<String, Object> request) {
-        return ResponseEntity.ok(ecoRoutingService.calculateInitialEcoRoute(request));
+    @Operation(summary = "Genera la primera ruta ecologica para seguimiento en vivo")
+    public ResponseEntity<Map<String, Object>> getInitialEcoRoute(@Valid @RequestBody EcoRouteRequest request) {
+        return ResponseEntity.ok(ecoRoutingService.calculateInitialEcoRoute(request.toMap()));
     }
 
     @PostMapping("/routes/recalculate")
-    public ResponseEntity<Map<String, Object>> recalculateRoute(@RequestBody Map<String, Object> request) {
-        return ResponseEntity.ok(ecoRoutingService.recalculateRoute(request));
+    @Operation(summary = "Recalcula una ruta ecologica desde la ubicacion actual")
+    public ResponseEntity<Map<String, Object>> recalculateRoute(@Valid @RequestBody RecalculateRouteRequest request) {
+        return ResponseEntity.ok(ecoRoutingService.recalculateRoute(request.toMap()));
     }
 
     @PostMapping("/telemetry/tick")
-    public ResponseEntity<Map<String, Object>> recordTelemetryTick(@RequestBody Map<String, Object> request) {
-        return ResponseEntity.ok(ecoRoutingService.processTelemetryTick(request));
+    @Operation(summary = "Registra un punto de telemetria del viaje en curso")
+    public ResponseEntity<Map<String, Object>> recordTelemetryTick(@Valid @RequestBody TelemetryTickRequest request) {
+        return ResponseEntity.ok(ecoRoutingService.processTelemetryTick(request.toMap()));
     }
 }

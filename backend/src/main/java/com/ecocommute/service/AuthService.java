@@ -1,5 +1,8 @@
 package com.ecocommute.service;
 
+import com.ecocommute.dto.GoogleLoginRequest;
+import com.ecocommute.dto.LoginRequest;
+import com.ecocommute.dto.RegisterRequest;
 import com.ecocommute.entity.Role;
 import com.ecocommute.entity.User;
 import com.ecocommute.entity.UserStats;
@@ -41,14 +44,10 @@ public class AuthService {
     }
 
     @Transactional
-    public Map<String, Object> register(Map<String, Object> request) {
-        String email = (String) request.get("email");
-        String password = (String) request.get("password");
-        String fullName = (String) request.get("fullName");
-
-        if (email == null || password == null || fullName == null) {
-            throw new IllegalArgumentException("Campos obligatorios incompletos");
-        }
+    public Map<String, Object> register(RegisterRequest request) {
+        String email = request.email();
+        String password = request.password();
+        String fullName = request.fullName();
 
         if (userRepository.existsByEmail(email.toLowerCase().trim())) {
             throw new IllegalArgumentException("El correo ya se encuentra registrado");
@@ -61,8 +60,8 @@ public class AuthService {
         user.setRole(Role.ROLE_USER);
         user.setAuthProvider("LOCAL");
         user.setAvatarUrl("https://api.dicebear.com/7.x/bottts/svg?seed=" + user.getEmail());
-        if (request.get("hasBicycle") instanceof Boolean b) user.setHasBicycle(b);
-        if (request.get("maxWalkingMinutes") instanceof Number n) user.setMaxWalkingMinutes(n.intValue());
+        if (request.hasBicycle() != null) user.setHasBicycle(request.hasBicycle());
+        if (request.maxWalkingMinutes() != null) user.setMaxWalkingMinutes(request.maxWalkingMinutes());
 
         user = userRepository.save(user);
 
@@ -74,13 +73,9 @@ public class AuthService {
     }
 
     @Transactional(readOnly = true)
-    public Map<String, Object> login(Map<String, Object> request) {
-        String email = (String) request.get("email");
-        String password = (String) request.get("password");
-
-        if (email == null || password == null) {
-            throw new IllegalArgumentException("Email y contraseña requeridos");
-        }
+    public Map<String, Object> login(LoginRequest request) {
+        String email = request.email();
+        String password = request.password();
 
         User user = userRepository.findByEmail(email.toLowerCase().trim())
                 .orElseThrow(() -> new IllegalArgumentException("Credenciales inválidas"));
@@ -98,9 +93,8 @@ public class AuthService {
     }
 
     @Transactional
-    public Map<String, Object> googleLogin(Map<String, Object> request) {
-        String idToken = (String) request.get("idToken");
-        if (idToken == null) throw new IllegalArgumentException("idToken requerido");
+    public Map<String, Object> googleLogin(GoogleLoginRequest request) {
+        String idToken = request.idToken();
 
         GoogleTokenVerifierService.GoogleUserInfo googleUser = googleTokenVerifierService.verifyToken(idToken);
         if (googleUser == null) {

@@ -40,6 +40,12 @@ Ejecutar:
 
 La API queda disponible en `http://localhost:8080`.
 
+Documentacion interactiva:
+
+```text
+http://localhost:8080/swagger-ui/index.html
+```
+
 Ejecutar pruebas:
 
 ```bash
@@ -77,6 +83,8 @@ PUT    /api/v1/admin/settings/emission-factors/{id}
 - Rutas privadas protegidas con Spring Security.
 - Rol administrador para endpoints `/api/v1/admin/**`.
 - CORS habilitado para integración con el frontend.
+- Validación de entradas con DTOs y Bean Validation.
+- Respuestas de error uniformes mediante un manejador global.
 
 ## Datos demo
 
