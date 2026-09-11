@@ -35,10 +35,16 @@ SEED_DEMO_DATA=true
 Ejecutar:
 
 ```bash
-mvn spring-boot:run
+./mvnw spring-boot:run
 ```
 
 La API queda disponible en `http://localhost:8080`.
+
+Ejecutar pruebas:
+
+```bash
+./mvnw test
+```
 
 ## Endpoints principales
 

@@ -32,7 +32,8 @@ class SecurityIntegrationTest {
     void testPublicEndpointsAccess() throws Exception {
         mockMvc.perform(get("/api/v1/dashboard/community-impact"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.totalCo2SavedKg").exists());
+                .andExpect(jsonPath("$.totalCo2SavedTons").exists())
+                .andExpect(jsonPath("$.totalActiveUsers").exists());
     }
 
     @Test
