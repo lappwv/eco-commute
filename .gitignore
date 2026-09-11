@@ -29,3 +29,5 @@ target/
 # Environment
 .env
 .env.*
+!.env.example
+!**/.env.example

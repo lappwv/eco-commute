@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: eco_commute_postgres
+    environment:
+      POSTGRES_DB: eco_commute
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - eco_commute_pgdata:/var/lib/postgresql/data
+
+volumes:
+  eco_commute_pgdata:

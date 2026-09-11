@@ -1,0 +1,42 @@
+server:
+  port: ${PORT:8080}
+  compression:
+    enabled: true
+  shutdown: graceful
+
+spring:
+  application:
+    name: ecocommute-backend
+  threads:
+    virtual:
+      enabled: true
+
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/eco_commute}
+    driverClassName: ${SPRING_DATASOURCE_DRIVER:org.postgresql.Driver}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:postgres}
+
+  h2:
+    console:
+      enabled: false
+      path: /h2-console
+
+  jpa:
+    database-platform: ${SPRING_JPA_DATABASE_PLATFORM:org.hibernate.dialect.PostgreSQLDialect}
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970}
+    expiration-ms: 86400000 # 24 hours
+  google:
+    client-id: ${GOOGLE_CLIENT_ID:ecocommute-demo-client.apps.googleusercontent.com}
+  openai:
+    api-key: ${OPENAI_API_KEY:}
+  seed-demo-data: ${SEED_DEMO_DATA:true}
