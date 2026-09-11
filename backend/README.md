@@ -40,6 +40,12 @@ Ejecutar:
 
 La API queda disponible en `http://localhost:8080`.
 
+Si PostgreSQL local no esta configurado todavia, se puede levantar la API con H2 en memoria para revisar Swagger y tomar evidencias:
+
+```bash
+./mvnw spring-boot:run -Dspring-boot.run.profiles=local
+```
+
 Documentacion interactiva:
 
 ```text
