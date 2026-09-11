@@ -1,5 +1,7 @@
 package com.ecocommute.service;
 
+import com.ecocommute.dto.LoginRequest;
+import com.ecocommute.dto.RegisterRequest;
 import com.ecocommute.entity.Role;
 import com.ecocommute.entity.User;
 import com.ecocommute.repository.UserBadgeRepository;
@@ -15,7 +17,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.Map;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -59,12 +60,14 @@ class AuthServiceTest {
     }
 
     @Test
-    @DisplayName("Debe registrar un nuevo usuario exitosamente sin DTO")
+    @DisplayName("Debe registrar un nuevo usuario exitosamente")
     void testRegisterSuccess() {
-        Map<String, Object> req = Map.of(
-                "email", "test@ecocommute.org",
-                "password", "Secret123!",
-                "fullName", "Test User"
+        RegisterRequest req = new RegisterRequest(
+                "test@ecocommute.org",
+                "Secret123!",
+                "Test User",
+                true,
+                20
         );
 
         when(userRepository.existsByEmail(anyString())).thenReturn(false);
@@ -76,7 +79,7 @@ class AuthServiceTest {
         });
         when(jwtService.generateToken(any(User.class))).thenReturn("jwt.token.here");
 
-        Map<String, Object> response = authService.register(req);
+        java.util.Map<String, Object> response = authService.register(req);
 
         assertNotNull(response);
         assertEquals("jwt.token.here", response.get("token"));
@@ -88,10 +91,12 @@ class AuthServiceTest {
     @Test
     @DisplayName("Debe lanzar excepción si el email ya existe")
     void testRegisterDuplicateEmail() {
-        Map<String, Object> req = Map.of(
-                "email", "existing@ecocommute.org",
-                "password", "Secret123!",
-                "fullName", "Test User"
+        RegisterRequest req = new RegisterRequest(
+                "existing@ecocommute.org",
+                "Secret123!",
+                "Test User",
+                true,
+                20
         );
 
         when(userRepository.existsByEmail("existing@ecocommute.org")).thenReturn(true);
@@ -103,10 +108,7 @@ class AuthServiceTest {
     @Test
     @DisplayName("Debe iniciar sesión exitosamente con credenciales válidas")
     void testLoginSuccess() {
-        Map<String, Object> req = Map.of(
-                "email", "test@ecocommute.org",
-                "password", "Secret123!"
-        );
+        LoginRequest req = new LoginRequest("test@ecocommute.org", "Secret123!");
 
         User user = new User();
         user.setId("user-123");
@@ -118,7 +120,7 @@ class AuthServiceTest {
         when(passwordEncoder.matches("Secret123!", "hashed_password")).thenReturn(true);
         when(jwtService.generateToken(user)).thenReturn("jwt.token.here");
 
-        Map<String, Object> response = authService.login(req);
+        java.util.Map<String, Object> response = authService.login(req);
 
         assertNotNull(response);
         assertEquals("jwt.token.here", response.get("token"));
@@ -128,10 +130,7 @@ class AuthServiceTest {
     @Test
     @DisplayName("Debe fallar el inicio de sesión con contraseña incorrecta")
     void testLoginInvalidPassword() {
-        Map<String, Object> req = Map.of(
-                "email", "test@ecocommute.org",
-                "password", "WrongPassword"
-        );
+        LoginRequest req = new LoginRequest("test@ecocommute.org", "WrongPassword");
 
         User user = new User();
         user.setEmail("test@ecocommute.org");

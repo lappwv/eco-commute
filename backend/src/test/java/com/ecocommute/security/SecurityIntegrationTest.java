@@ -37,6 +37,27 @@ class SecurityIntegrationTest {
     }
 
     @Test
+    @DisplayName("Registro con datos invalidos debe responder error de validacion")
+    void testRegisterValidationError() throws Exception {
+        String invalidRegisterJson = """
+                {
+                  "email": "correo-invalido",
+                  "password": "123",
+                  "fullName": ""
+                }
+                """;
+
+        mockMvc.perform(post("/api/v1/auth/register")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(invalidRegisterJson))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.code").value("VALIDATION_ERROR"))
+                .andExpect(jsonPath("$.details.email").exists())
+                .andExpect(jsonPath("$.details.password").exists())
+                .andExpect(jsonPath("$.details.fullName").exists());
+    }
+
+    @Test
     @DisplayName("Acceso anónimo a /api/v1/admin/dashboard/kpis debe ser rechazado con 401 Unauthorized")
     void testAnonymousAccessToAdminDenied() throws Exception {
         mockMvc.perform(get("/api/v1/admin/dashboard/kpis"))
