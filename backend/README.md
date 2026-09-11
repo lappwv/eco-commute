@@ -1,31 +1,67 @@
 # Backend EcoCommute
 
-Backend propuesto para implementar con Spring Boot, Java, Spring Security, JWT y SQL Server.
+API REST inicial de EcoCommute desarrollada con Spring Boot, Java 21, Spring Security, JWT, JPA y PostgreSQL. Esta base permite demostrar el núcleo funcional del proyecto: autenticación, registro de viajes sostenibles, cálculo de CO2 ahorrado, puntos verdes, dashboard y rankings.
 
-## Módulos previstos
+## Requisitos
 
-- Autenticación y registro de usuarios.
-- Gestión de usuarios y perfiles.
-- Registro de viajes sostenibles.
-- Cálculo de CO₂ ahorrado y puntos verdes.
-- Transacciones de puntos.
-- Catálogo de recompensas y canjes.
-- Rankings por distrito.
-- Recomendaciones personalizadas con IA.
+- Java 21
+- Maven 3.9 o superior
+- PostgreSQL 15 o superior
 
-## Endpoints mínimos del alcance inicial
+## Configuración local
+
+Crear la base de datos:
+
+```sql
+CREATE DATABASE eco_commute;
+```
+
+También puedes levantar PostgreSQL con Docker:
+
+```bash
+docker compose up -d
+```
+
+Variables recomendadas:
+
+```env
+SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/eco_commute
+SPRING_DATASOURCE_USERNAME=postgres
+SPRING_DATASOURCE_PASSWORD=postgres
+JWT_SECRET=404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+SEED_DEMO_DATA=true
+```
+
+Ejecutar:
+
+```bash
+mvn spring-boot:run
+```
+
+La API queda disponible en `http://localhost:8080`.
+
+## Endpoints principales
 
 ```text
-POST   /api/auth/register
-POST   /api/auth/login
-GET    /api/users/me
-POST   /api/trips
-GET    /api/trips/me
-GET    /api/dashboard/me
-GET    /api/rewards
-POST   /api/redemptions
-GET    /api/rankings/districts
-POST   /api/recommendations
+POST   /api/v1/auth/register
+POST   /api/v1/auth/login
+POST   /api/v1/auth/google
+GET    /api/v1/users/me
+GET    /api/v1/users/profile/{userId}
+POST   /api/v1/routes/plan
+POST   /api/v1/routes/eco-route
+POST   /api/v1/routes/recalculate
+POST   /api/v1/trips
+GET    /api/v1/trips/history
+GET    /api/v1/dashboard/summary
+GET    /api/v1/dashboard/community-impact
+GET    /api/v1/leaderboard
+GET    /api/v1/admin/dashboard/kpis
+GET    /api/v1/admin/users
+PUT    /api/v1/admin/users/{userId}/toggle-status
+GET    /api/v1/admin/trips/suspicious
+GET    /api/v1/admin/settings/emission-factors
+PUT    /api/v1/admin/settings/emission-factors/{id}
 ```
 
 ## Seguridad
@@ -33,5 +69,16 @@ POST   /api/recommendations
 - Contraseñas encriptadas con BCrypt.
 - Autenticación mediante JWT.
 - Rutas privadas protegidas con Spring Security.
-- CORS configurado para el frontend.
-- Validaciones de entrada en DTO.
+- Rol administrador para endpoints `/api/v1/admin/**`.
+- CORS habilitado para integración con el frontend.
+
+## Datos demo
+
+`SEED_DEMO_DATA=true` crea usuarios, factores de emisión, logros y viajes de ejemplo para la exposición. En producción o evaluación técnica estricta puede usarse `SEED_DEMO_DATA=false`.
+
+## Integraciones opcionales
+
+- `GOOGLE_CLIENT_ID`: habilita autenticación con Google si se configura el cliente real.
+- `OPENAI_API_KEY`: habilita sugerencias de rutas con IA si se configura la clave.
+
+Si esas variables no están configuradas, el backend mantiene el flujo principal con autenticación local, viajes, CO2, puntos, dashboard y ranking.

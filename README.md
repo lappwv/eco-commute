@@ -17,16 +17,17 @@ EcoCommute es una aplicación web orientada a incentivar la movilidad sostenible
 - Propuesta de valor, problema, segmentos, Lean UX y Product Backlog.
 - Sprint Backlog con tareas de ingeniería de 4 a 8 horas.
 - Diseño de interfaz y artefactos de Figma.
-- Modelo de base de datos SQL Server para el alcance inicial.
+- Modelo de base de datos PostgreSQL para el alcance inicial.
 - Landing page pública con CTA, mockups, contacto y redes sociales referenciales.
 - Tablero público del Sprint 1 para seguimiento del avance.
+- Primera base de API REST con autenticación, viajes, CO2, puntos, dashboard y ranking.
 
 ## Estructura
 
 ```text
 frontend/landing/      Landing page del proyecto
-backend/               Guía inicial del backend Spring Boot
-database/              Script SQL Server del modelo de datos
+backend/               API REST Spring Boot
+database/              Script PostgreSQL del modelo de datos
 capitulo3_figma_exports/ Imágenes usadas en el informe
 assets/                Recursos visuales auxiliares
 docs/                  Evidencias y tablero de seguimiento del Sprint
@@ -36,7 +37,7 @@ docs/                  Evidencias y tablero de seguimiento del Sprint
 
 - Frontend: Angular + TypeScript + Material Design
 - Backend: Spring Boot + Java + Spring Security + JWT
-- Base de datos: SQL Server
+- Base de datos: PostgreSQL
 - Integraciones: Google Maps API y OpenAI API
 - Despliegue esperado: frontend público y backend en entorno cloud
 
