@@ -1,6 +1,7 @@
 package com.ecocommute.controller;
 
 import com.ecocommute.dto.TripRequest;
+import com.ecocommute.dto.TripResponse;
 import com.ecocommute.entity.Trip;
 import com.ecocommute.entity.User;
 import com.ecocommute.repository.TripRepository;
@@ -30,19 +31,20 @@ public class TripController {
 
     @PostMapping
     @Operation(summary = "Registra un viaje finalizado y calcula CO2, puntos e insignias")
-    public ResponseEntity<Trip> recordTrip(
+    public ResponseEntity<TripResponse> recordTrip(
             @AuthenticationPrincipal User user,
             @Valid @RequestBody TripRequest trip) {
 
         if (user == null) {
             return ResponseEntity.status(401).build();
         }
-        return ResponseEntity.ok(gamificationService.recordTrip(user.getId(), trip.toEntity()));
+        Trip savedTrip = gamificationService.recordTrip(user.getId(), trip.toEntity());
+        return ResponseEntity.ok(TripResponse.fromEntity(savedTrip));
     }
 
     @GetMapping("/history")
     @Operation(summary = "Lista el historial paginado del usuario autenticado")
-    public ResponseEntity<Page<Trip>> getMyTrips(
+    public ResponseEntity<Page<TripResponse>> getMyTrips(
             @AuthenticationPrincipal User user,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
@@ -53,6 +55,6 @@ public class TripController {
 
         PageRequest pageRequest = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "completedAt"));
         Page<Trip> trips = tripRepository.findByUserIdOrderByCompletedAtDesc(user.getId(), pageRequest);
-        return ResponseEntity.ok(trips);
+        return ResponseEntity.ok(trips.map(TripResponse::fromEntity));
     }
 }
