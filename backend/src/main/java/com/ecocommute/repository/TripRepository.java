@@ -17,6 +17,8 @@ public interface TripRepository extends JpaRepository<Trip, String> {
 
     List<Trip> findByUserIdOrderByCompletedAtDesc(String userId);
 
+    long deleteByUserId(String userId);
+
     Page<Trip> findByUserIdOrderByCompletedAtDesc(String userId, Pageable pageable);
 
     Page<Trip> findBySuspiciousTrueOrderByCompletedAtDesc(Pageable pageable);

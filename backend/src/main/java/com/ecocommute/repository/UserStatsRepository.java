@@ -13,6 +13,8 @@ public interface UserStatsRepository extends JpaRepository<UserStats, String> {
 
     Optional<UserStats> findByUserId(String userId);
 
+    long deleteByUserId(String userId);
+
     @Query("SELECT s FROM UserStats s JOIN FETCH s.user u WHERE u.active = true ORDER BY s.totalCo2SavedKg DESC")
     List<UserStats> findTopEcoUsers();
 

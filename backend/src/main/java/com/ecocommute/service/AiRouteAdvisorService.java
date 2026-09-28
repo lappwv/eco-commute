@@ -21,6 +21,12 @@ public class AiRouteAdvisorService {
     @Value("${app.openai.api-key:}")
     private String openAiApiKey;
 
+    @Value("${app.gemini.api-key:}")
+    private String geminiApiKey;
+
+    @Value("${app.gemini.model:gemini-2.0-flash}")
+    private String geminiModel;
+
     private final RestClient restClient;
 
     public AiRouteAdvisorService() {
@@ -41,17 +47,29 @@ public class AiRouteAdvisorService {
         double treesSavedFraction = (co2SavedGrams / 1000.0) / 22.0;
         int calories = (int) Math.round(distanceKm * selectedMode.getCaloriesPerKm());
         String weatherContext = "21°C, cielo despejado, viento favorable";
+        String prompt = String.format(
+                "Actúa como el motor de IA de EcoCommute para Lima y el ODS 11. " +
+                "El usuario eligió viajar en %s. La ruta prioriza calles arboladas, ciclovías, menor exposición a tráfico y flujo continuo. " +
+                "Distancia: %.2f km, CO2 ahorrado: %.0f g, duración estimada: %d min, hora punta: %s. " +
+                "Responde en español con un título atractivo y una explicación breve de máximo dos oraciones.",
+                selectedMode.getDisplayName(), distanceKm, co2SavedGrams, durationMinutes, isRushHour ? "sí" : "no"
+        );
+
+        if (geminiApiKey != null && !geminiApiKey.isBlank()) {
+            try {
+                String geminiText = requestGeminiInsight(prompt);
+                if (geminiText != null && !geminiText.isBlank()) {
+                    Map<String, Object> insight = baseInsight(selectedMode, calories, treesSavedFraction);
+                    insight.put("ecoReasoning", geminiText.trim());
+                    return insight;
+                }
+            } catch (Exception e) {
+                log.warn("Gemini API call failed, using the next available advisor: {}", e.getMessage());
+            }
+        }
 
         if (openAiApiKey != null && !openAiApiKey.isBlank()) {
             try {
-                String prompt = String.format(
-                        "Actúa como el motor de IA de EcoCommute para Lima y el ODS 11. " +
-                        "El usuario eligió viajar en %s. La ruta prioriza calles arboladas, ciclovías, menor exposición a tráfico y flujo continuo. " +
-                        "Distancia: %.2f km, CO2 ahorrado: %.0f g, duración estimada: %d min, hora punta: %s. " +
-                        "Responde en español con un título atractivo y una explicación breve de máximo dos oraciones.",
-                        selectedMode.getDisplayName(), distanceKm, co2SavedGrams, durationMinutes, isRushHour ? "sí" : "no"
-                );
-
                 Map<String, Object> requestBody = Map.of(
                         "model", "gpt-4o-mini",
                         "messages", List.of(
@@ -96,6 +114,23 @@ public class AiRouteAdvisorService {
         return insight;
     }
 
+    private String requestGeminiInsight(String prompt) {
+        Map<String, Object> requestBody = Map.of(
+                "contents", List.of(
+                        Map.of("parts", List.of(Map.of("text", prompt)))
+                )
+        );
+
+        Map response = restClient.post()
+                .uri("https://generativelanguage.googleapis.com/v1beta/models/" + geminiModel + ":generateContent?key=" + geminiApiKey)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(requestBody)
+                .retrieve()
+                .body(Map.class);
+
+        return extractGeminiText(response);
+    }
+
     private String extractOpenAiText(Map response) {
         if (response == null || !response.containsKey("choices")) {
             return null;
@@ -109,6 +144,25 @@ public class AiRouteAdvisorService {
         Map first = (Map) choices.get(0);
         Map message = (Map) first.get("message");
         return message != null ? (String) message.get("content") : null;
+    }
+
+    private String extractGeminiText(Map response) {
+        if (response == null || !(response.get("candidates") instanceof List<?> candidates) || candidates.isEmpty()) {
+            return null;
+        }
+
+        Object candidate = candidates.get(0);
+        if (!(candidate instanceof Map<?, ?> candidateMap) || !(candidateMap.get("content") instanceof Map<?, ?> content)) {
+            return null;
+        }
+
+        Object partsValue = content.get("parts");
+        if (!(partsValue instanceof List<?> parts) || parts.isEmpty() || !(parts.get(0) instanceof Map<?, ?> part)) {
+            return null;
+        }
+
+        Object text = part.get("text");
+        return text instanceof String value ? value : null;
     }
 
     private Map<String, Object> baseInsight(TransportMode selectedMode, int calories, double treesSavedFraction) {

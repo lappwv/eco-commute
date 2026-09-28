@@ -108,6 +108,79 @@ public class GamificationService {
         return trip;
     }
 
+    @Transactional
+    public Trip updateTrip(String tripId, Trip tripData) {
+        Trip trip = tripRepository.findById(tripId)
+                .orElseThrow(() -> new IllegalArgumentException("Viaje no encontrado"));
+
+        applyTripData(trip, tripData);
+        calculateTripMetrics(trip);
+        Trip savedTrip = tripRepository.save(trip);
+        rebuildUserProgress(savedTrip.getUser());
+        return savedTrip;
+    }
+
+    @Transactional
+    public void deleteTrip(String tripId) {
+        Trip trip = tripRepository.findById(tripId)
+                .orElseThrow(() -> new IllegalArgumentException("Viaje no encontrado"));
+
+        User user = trip.getUser();
+        tripRepository.delete(trip);
+        rebuildUserProgress(user);
+    }
+
+    private void applyTripData(Trip trip, Trip tripData) {
+        trip.setTransportMode(tripData.getTransportMode());
+        trip.setOriginName(tripData.getOriginName());
+        trip.setOriginLat(tripData.getOriginLat());
+        trip.setOriginLng(tripData.getOriginLng());
+        trip.setDestinationName(tripData.getDestinationName());
+        trip.setDestinationLat(tripData.getDestinationLat());
+        trip.setDestinationLng(tripData.getDestinationLng());
+        trip.setDistanceKm(tripData.getDistanceKm());
+        trip.setDurationMinutes(tripData.getDurationMinutes());
+    }
+
+    private void calculateTripMetrics(Trip trip) {
+        double distanceKm = trip.getDistanceKm();
+        TransportMode mode = trip.getTransportMode();
+        double savedCo2 = carbonEmissionService.calculateCo2SavedGrams(mode, distanceKm);
+        int durationMinutes = Math.max(1, trip.getDurationMinutes());
+        double speedKmh = distanceKm / (durationMinutes / 60.0);
+
+        trip.setBaselineCo2Grams(carbonEmissionService.calculateBaselineEmissionGrams(distanceKm));
+        trip.setCo2EmittedGrams(carbonEmissionService.calculateModeEmissionGrams(mode, distanceKm));
+        trip.setCo2SavedGrams(savedCo2);
+        trip.setCaloriesBurned(carbonEmissionService.calculateCaloriesBurned(mode, distanceKm));
+        trip.setPointsEarned(carbonEmissionService.calculatePoints(mode, savedCo2, trip.getUser().getStreakDays()));
+        trip.setSuspicious((mode == TransportMode.WALKING && speedKmh > 12.0)
+                || (mode == TransportMode.BICYCLE && speedKmh > 50.0));
+        trip.setSuspiciousReason(trip.isSuspicious()
+                ? String.format("Velocidad anormal para %s: %.1f km/h", mode.getDisplayName().toLowerCase(), speedKmh)
+                : null);
+    }
+
+    private void rebuildUserProgress(User user) {
+        List<Trip> trips = tripRepository.findByUserIdOrderByCompletedAtDesc(user.getId());
+        int points = trips.stream().mapToInt(Trip::getPointsEarned).sum();
+        double savedCo2Kg = trips.stream().mapToDouble(Trip::getCo2SavedGrams).sum() / 1000.0;
+        double distanceKm = trips.stream().mapToDouble(Trip::getDistanceKm).sum();
+        int calories = trips.stream().mapToInt(Trip::getCaloriesBurned).sum();
+
+        user.setCurrentPoints(points);
+        user.setCurrentLevel(calculateLevel(points));
+        userRepository.save(user);
+
+        UserStats stats = userStatsRepository.findByUserId(user.getId()).orElseGet(() -> new UserStats(user));
+        stats.setTotalCo2SavedKg(savedCo2Kg);
+        stats.setTotalDistanceKm(distanceKm);
+        stats.setTotalTrips(trips.size());
+        stats.setTotalCaloriesBurned(calories);
+        stats.setUpdatedAt(LocalDateTime.now());
+        userStatsRepository.save(stats);
+    }
+
     private void updateUserStreak(User user) {
         LocalDateTime lastTrip = user.getLastTripDate();
         if (lastTrip == null) {

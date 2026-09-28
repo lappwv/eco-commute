@@ -21,4 +21,7 @@ app:
     client-id: ecocommute-demo-client.apps.googleusercontent.com
   openai:
     api-key:
+  gemini:
+    api-key:
+    model: gemini-2.0-flash
   seed-demo-data: true
