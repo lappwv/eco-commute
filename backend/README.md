@@ -29,6 +29,8 @@ SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/eco_commute
 SPRING_DATASOURCE_USERNAME=postgres
 SPRING_DATASOURCE_PASSWORD=postgres
 JWT_SECRET=404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+GEMINI_API_KEY=
+GEMINI_MODEL=gemini-2.0-flash
 SEED_DEMO_DATA=true
 ```
 
@@ -71,15 +73,26 @@ POST   /api/v1/routes/eco-route
 POST   /api/v1/routes/recalculate
 POST   /api/v1/trips
 GET    /api/v1/trips/history
+GET    /api/v1/trips/{tripId}                          (admin)
+PUT    /api/v1/trips/{tripId}                          (admin)
+DELETE /api/v1/trips/{tripId}                          (admin)
 GET    /api/v1/dashboard/summary
 GET    /api/v1/dashboard/community-impact
 GET    /api/v1/leaderboard
 GET    /api/v1/admin/dashboard/kpis
 GET    /api/v1/admin/users
 PUT    /api/v1/admin/users/{userId}/toggle-status
+PUT    /api/v1/admin/users/{userId}
+DELETE /api/v1/admin/users/{userId}
 GET    /api/v1/admin/trips/suspicious
 GET    /api/v1/admin/settings/emission-factors
+POST   /api/v1/admin/settings/emission-factors
 PUT    /api/v1/admin/settings/emission-factors/{id}
+DELETE /api/v1/admin/settings/emission-factors/{id}
+GET    /api/v1/admin/badges
+POST   /api/v1/admin/badges
+PUT    /api/v1/admin/badges/{id}
+DELETE /api/v1/admin/badges/{id}
 ```
 
 ## Seguridad
@@ -100,5 +113,7 @@ PUT    /api/v1/admin/settings/emission-factors/{id}
 
 - `GOOGLE_CLIENT_ID`: habilita autenticación con Google si se configura el cliente real.
 - `OPENAI_API_KEY`: habilita sugerencias de rutas con IA si se configura la clave.
+- `GEMINI_API_KEY`: habilita sugerencias de rutas con Google Gemini. Si ambas claves estan configuradas, Gemini tiene prioridad y OpenAI queda como alternativa de respaldo.
+- `GEMINI_MODEL`: permite cambiar el modelo de Gemini; el valor por defecto es `gemini-2.0-flash`.
 
 Si esas variables no están configuradas, el backend mantiene el flujo principal con autenticación local, viajes, CO2, puntos, dashboard y ranking.

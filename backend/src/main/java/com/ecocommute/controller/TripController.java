@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -56,5 +57,31 @@ public class TripController {
         PageRequest pageRequest = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "completedAt"));
         Page<Trip> trips = tripRepository.findByUserIdOrderByCompletedAtDesc(user.getId(), pageRequest);
         return ResponseEntity.ok(trips.map(TripResponse::fromEntity));
+    }
+
+    @GetMapping("/{tripId}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @Operation(summary = "Obtiene un viaje por identificador para auditoria")
+    public ResponseEntity<TripResponse> getTrip(@PathVariable String tripId) {
+        Trip trip = tripRepository.findById(tripId)
+                .orElseThrow(() -> new IllegalArgumentException("Viaje no encontrado"));
+        return ResponseEntity.ok(TripResponse.fromEntity(trip));
+    }
+
+    @PutMapping("/{tripId}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @Operation(summary = "Actualiza un viaje y recalcula sus metricas")
+    public ResponseEntity<TripResponse> updateTrip(
+            @PathVariable String tripId,
+            @Valid @RequestBody TripRequest request) {
+        return ResponseEntity.ok(TripResponse.fromEntity(gamificationService.updateTrip(tripId, request.toEntity())));
+    }
+
+    @DeleteMapping("/{tripId}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @Operation(summary = "Elimina un viaje y recalcula los acumulados del usuario")
+    public ResponseEntity<Void> deleteTrip(@PathVariable String tripId) {
+        gamificationService.deleteTrip(tripId);
+        return ResponseEntity.noContent().build();
     }
 }

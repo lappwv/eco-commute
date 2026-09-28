@@ -1,15 +1,15 @@
 :root {
-  --ink: #18211d;
-  --muted: #52615a;
-  --line: #d8e3db;
-  --paper: #fbfdf9;
-  --soft: #edf6ef;
-  --green: #1f8f59;
-  --green-dark: #16633f;
-  --lime: #cbe65d;
-  --blue: #2f6fa3;
+  --brand-500: #10b981;
+  --brand-400: #34d399;
+  --brand-700: #047857;
+  --background: #060913;
+  --surface: #0c1323;
+  --surface-raised: #111b2e;
+  --ink: #e2e8f0;
+  --muted: #94a3b8;
+  --line: #1e293b;
   --white: #ffffff;
-  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  font-family: Inter, "Jakarta Sans", "Segoe UI", Arial, sans-serif;
 }
 
 * {
@@ -19,7 +19,7 @@
 body {
   margin: 0;
   color: var(--ink);
-  background: var(--paper);
+  background: var(--background);
 }
 
 a {
@@ -37,7 +37,7 @@ a {
   gap: 24px;
   min-height: 72px;
   padding: 0 6vw;
-  background: rgba(251, 253, 249, 0.92);
+  background: rgba(6, 9, 19, 0.92);
   border-bottom: 1px solid var(--line);
   backdrop-filter: blur(14px);
 }
@@ -54,8 +54,8 @@ a {
   width: 38px;
   height: 38px;
   place-items: center;
-  color: var(--white);
-  background: var(--green-dark);
+  color: var(--background);
+  background: var(--brand-400);
   border-radius: 8px;
   font-size: 13px;
 }
@@ -75,12 +75,20 @@ a {
   align-items: end;
   min-height: calc(100vh - 72px);
   padding: 9vh 6vw 7vh;
-  background:
-    linear-gradient(120deg, rgba(24, 33, 29, 0.76), rgba(24, 33, 29, 0.28)),
-    url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1800&q=80");
+  position: relative;
+  isolation: isolate;
+  background-image: url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1800&q=80");
   background-position: center;
   background-size: cover;
   color: var(--white);
+}
+
+.hero::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  content: "";
+  background: rgba(6, 9, 19, 0.72);
 }
 
 .hero-content {
@@ -89,7 +97,7 @@ a {
 
 .eyebrow {
   margin: 0 0 12px;
-  color: var(--lime);
+  color: var(--brand-400);
   font-size: 13px;
   font-weight: 800;
   letter-spacing: 0;
@@ -144,19 +152,27 @@ h3 {
   justify-content: center;
   min-height: 46px;
   padding: 0 18px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid var(--brand-400);
   border-radius: 8px;
   font-weight: 800;
 }
 
 .button.primary {
-  color: var(--ink);
-  background: var(--lime);
-  border-color: var(--lime);
+  color: var(--background);
+  background: var(--brand-500);
+  border-color: var(--brand-500);
 }
 
 .button.secondary {
-  color: var(--white);
+  color: var(--brand-400);
+  background: rgba(6, 9, 19, 0.48);
+}
+
+.button:hover,
+.button:focus-visible {
+  background: var(--brand-400);
+  border-color: var(--brand-400);
+  color: var(--background);
 }
 
 .impact-panel {
@@ -170,7 +186,7 @@ h3 {
 .two-column article {
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: var(--white);
+  background: var(--surface);
 }
 
 .impact-panel div {
@@ -197,7 +213,7 @@ h3 {
 }
 
 .section.muted {
-  background: var(--soft);
+  background: var(--surface);
 }
 
 .section-heading {
@@ -205,7 +221,7 @@ h3 {
 }
 
 .section-heading .eyebrow {
-  color: var(--green-dark);
+  color: var(--brand-400);
 }
 
 .two-column {
@@ -235,7 +251,7 @@ h3 {
 .feature-card span {
   display: inline-block;
   margin-bottom: 20px;
-  color: var(--blue);
+  color: var(--brand-400);
   font-weight: 900;
 }
 
@@ -251,7 +267,7 @@ h3 {
   margin: 0;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: var(--white);
+  background: var(--surface-raised);
 }
 
 .preview-card {
@@ -263,7 +279,7 @@ h3 {
   width: 100%;
   aspect-ratio: 16 / 10;
   object-fit: cover;
-  background: var(--soft);
+  background: var(--surface);
 }
 
 .preview-card figcaption {
@@ -281,7 +297,7 @@ h3 {
 
 .stats div {
   padding: 22px;
-  border-left: 5px solid var(--green);
+  border-left: 5px solid var(--brand-500);
 }
 
 .team-list {
@@ -294,12 +310,12 @@ h3 {
   padding: 12px 14px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: var(--white);
+  background: var(--surface-raised);
   font-weight: 700;
 }
 
 .contact-section {
-  background: var(--green-dark);
+  background: var(--brand-700);
   color: var(--white);
 }
 
@@ -332,6 +348,7 @@ h3 {
   gap: 20px;
   padding: 26px 6vw;
   color: var(--muted);
+  background: var(--background);
   border-top: 1px solid var(--line);
 }
 

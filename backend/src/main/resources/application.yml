@@ -39,4 +39,7 @@ app:
     client-id: ${GOOGLE_CLIENT_ID:ecocommute-demo-client.apps.googleusercontent.com}
   openai:
     api-key: ${OPENAI_API_KEY:}
+  gemini:
+    api-key: ${GEMINI_API_KEY:}
+    model: ${GEMINI_MODEL:gemini-2.0-flash}
   seed-demo-data: ${SEED_DEMO_DATA:true}
