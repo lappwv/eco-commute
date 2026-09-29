@@ -6,9 +6,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.PositiveOrZero;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public record RecalculateRouteRequestDTO(
         String tripId,
 
@@ -41,16 +38,4 @@ public record RecalculateRouteRequestDTO(
         @PositiveOrZero(message = "La distancia acumulada no puede ser negativa")
         Double accumulatedDistanceKm
 ) {
-    public Map<String, Object> toMap() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("tripId", tripId);
-        map.put("currentLat", currentLat);
-        map.put("currentLng", currentLng);
-        map.put("destinationLat", destinationLat);
-        map.put("destinationLng", destinationLng);
-        map.put("vehicleMode", vehicleMode);
-        map.put("accumulatedCo2SavedGrams", accumulatedCo2SavedGrams);
-        map.put("accumulatedDistanceKm", accumulatedDistanceKm);
-        return map;
-    }
 }

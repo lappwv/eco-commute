@@ -1,5 +1,6 @@
 package com.ecocommute.services;
 
+import com.ecocommute.dto.AdminKpisDTO;
 import com.ecocommute.dto.AdminUserUpdateRequestDTO;
 import com.ecocommute.dto.BadgeRequestDTO;
 import com.ecocommute.dto.ChallengeRequestDTO;
@@ -13,9 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.time.LocalDateTime;
 
 @Service
@@ -52,18 +51,13 @@ public class AdminService {
     }
 
     @Transactional(readOnly = true)
-    public Map<String, Object> getAdminKpis() {
+    public AdminKpisDTO getAdminKpis() {
         long totalUsers = userRepository.count();
         long totalTrips = tripRepository.count();
         double totalCo2 = userStatsRepository.sumTotalCo2SavedKg();
         long suspiciousCount = tripRepository.findBySuspiciousTrueOrderByCompletedAtDesc(PageRequest.of(0, 1)).getTotalElements();
 
-        Map<String, Object> kpis = new HashMap<>();
-        kpis.put("totalUsers", totalUsers);
-        kpis.put("totalTrips", totalTrips);
-        kpis.put("totalCo2SavedKg", totalCo2);
-        kpis.put("suspiciousTripsCount", suspiciousCount);
-        return kpis;
+        return new AdminKpisDTO(totalUsers, totalTrips, totalCo2, suspiciousCount);
     }
 
     @Transactional(readOnly = true)

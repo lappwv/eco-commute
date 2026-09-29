@@ -1,5 +1,6 @@
 package com.ecocommute.services;
 
+import com.ecocommute.dto.AiInsightDTO;
 import com.ecocommute.entities.TransportMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
 import java.time.LocalTime;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,7 +33,7 @@ public class AiRouteAdvisorService {
         this.restClient = RestClient.builder().build();
     }
 
-    public Map<String, Object> generateRouteInsight(double originLat, double originLng,
+    public AiInsightDTO generateRouteInsight(double originLat, double originLng,
                                                     double destLat, double destLng,
                                                     TransportMode selectedMode,
                                                     double distanceKm,
@@ -59,9 +59,7 @@ public class AiRouteAdvisorService {
             try {
                 String geminiText = requestGeminiInsight(prompt);
                 if (geminiText != null && !geminiText.isBlank()) {
-                    Map<String, Object> insight = baseInsight(selectedMode, calories, treesSavedFraction);
-                    insight.put("ecoReasoning", geminiText.trim());
-                    return insight;
+                    return baseInsight(selectedMode, calories, treesSavedFraction, geminiText.trim());
                 }
             } catch (Exception e) {
                 log.warn("Gemini API call failed, using the next available advisor: {}", e.getMessage());
@@ -89,9 +87,7 @@ public class AiRouteAdvisorService {
 
                 String aiText = extractOpenAiText(response);
                 if (aiText != null && !aiText.isBlank()) {
-                    Map<String, Object> insight = baseInsight(selectedMode, calories, treesSavedFraction);
-                    insight.put("ecoReasoning", aiText.trim());
-                    return insight;
+                    return baseInsight(selectedMode, calories, treesSavedFraction, aiText.trim());
                 }
             } catch (Exception e) {
                 log.warn("OpenAI API call failed, using heuristic advisor: {}", e.getMessage());
@@ -109,9 +105,7 @@ public class AiRouteAdvisorService {
                 weatherContext, (co2SavedGrams / 1000.0)
         );
 
-        Map<String, Object> insight = baseInsight(selectedMode, calories, treesSavedFraction);
-        insight.put("ecoReasoning", fallbackTitle + "\n" + fallbackExplanation);
-        return insight;
+        return baseInsight(selectedMode, calories, treesSavedFraction, fallbackTitle + "\n" + fallbackExplanation);
     }
 
     private String requestGeminiInsight(String prompt) {
@@ -165,14 +159,16 @@ public class AiRouteAdvisorService {
         return text instanceof String value ? value : null;
     }
 
-    private Map<String, Object> baseInsight(TransportMode selectedMode, int calories, double treesSavedFraction) {
-        Map<String, Object> insight = new HashMap<>();
-        insight.put("greenScore", selectedMode == TransportMode.BICYCLE || selectedMode == TransportMode.WALKING ? 95 : 65);
-        insight.put("safetyRating", selectedMode == TransportMode.BICYCLE ? 90 : 85);
-        insight.put("shadeTreeCoveragePercent", 65.0);
-        insight.put("cyclingInfrastructureQuality", selectedMode == TransportMode.BICYCLE ? "Óptima con ciclovías" : "N/A");
-        insight.put("healthBenefitSummary", String.format("%d kcal quemadas", calories));
-        insight.put("treesEquivalentFraction", treesSavedFraction);
-        return insight;
+    private AiInsightDTO baseInsight(TransportMode selectedMode, int calories,
+                                     double treesSavedFraction, String ecoReasoning) {
+        boolean activeMode = selectedMode == TransportMode.BICYCLE || selectedMode == TransportMode.WALKING;
+        return new AiInsightDTO(
+                activeMode ? 95 : 65,
+                selectedMode == TransportMode.BICYCLE ? 90 : 85,
+                65.0,
+                selectedMode == TransportMode.BICYCLE ? "Óptima con ciclovías" : "N/A",
+                String.format("%d kcal quemadas", calories),
+                treesSavedFraction,
+                ecoReasoning);
     }
 }

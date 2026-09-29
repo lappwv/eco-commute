@@ -1,5 +1,10 @@
 package com.ecocommute.services;
 
+import com.ecocommute.dto.AiInsightDTO;
+import com.ecocommute.dto.CoordinateRequestDTO;
+import com.ecocommute.dto.RouteOptionDTO;
+import com.ecocommute.dto.RoutePlanRequestDTO;
+import com.ecocommute.dto.RoutePlanResponseDTO;
 import com.ecocommute.entities.TransportMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,12 +12,33 @@ import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 @Service
 public class RoutingEngineService {
 
     private static final Logger log = LoggerFactory.getLogger(RoutingEngineService.class);
+
+    private static final int OSRM_CONNECT_TIMEOUT_MS = 4000;
+    private static final int OSRM_READ_TIMEOUT_MS = 5000;
+
+    private static final String DEFAULT_PROFILE = "BICYCLE";
+    private static final String RECOMMENDED_ROUTE_ID = "route-ai-green-corridor";
+
+    private static final double BICYCLE_SPEED_KMH = 16.0;
+    private static final double WALKING_SPEED_KMH = 4.8;
+    private static final double GREEN_CORRIDOR_BICYCLE_SPEED_KMH = 15.5;
+    private static final double GREEN_CORRIDOR_WALKING_SPEED_KMH = 4.5;
+    private static final int MIN_ROUTE_DURATION_MINUTES = 3;
+    private static final int GREEN_CORRIDOR_BONUS_POINTS = 10;
+
+    private static final double EARTH_RADIUS_KM = 6371.0;
+    private static final double STREET_NETWORK_DETOUR_FACTOR = 1.35;
+    private static final double AVERAGE_STREET_SPEED_KMH = 35.0;
 
     private final CarbonEmissionService carbonEmissionService;
     private final AiRouteAdvisorService aiAdvisorService;
@@ -24,124 +50,98 @@ public class RoutingEngineService {
         this.aiAdvisorService = aiAdvisorService;
 
         SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
-        factory.setConnectTimeout(4000);
-        factory.setReadTimeout(5000);
+        factory.setConnectTimeout(OSRM_CONNECT_TIMEOUT_MS);
+        factory.setReadTimeout(OSRM_READ_TIMEOUT_MS);
 
         this.restClient = RestClient.builder()
                 .requestFactory(factory)
                 .build();
     }
 
-    public Map<String, Object> planRoutes(Map<String, Object> request, int userStreakDays) {
-        Map origin = (Map) request.get("origin");
-        Map destination = (Map) request.get("destination");
-        double originLat = ((Number) origin.get("latitude")).doubleValue();
-        double originLng = ((Number) origin.get("longitude")).doubleValue();
-        double destLat = ((Number) destination.get("latitude")).doubleValue();
-        double destLng = ((Number) destination.get("longitude")).doubleValue();
+    public RoutePlanResponseDTO planRoutes(RoutePlanRequestDTO request, int userStreakDays) {
+        Coordinates origin = toCoordinates(request.origin());
+        Coordinates destination = toCoordinates(request.destination());
+        TransportMode targetMode = resolveTargetMode(request.selectedProfile());
 
-        String selectedProfile = request.get("selectedProfile") != null ? request.get("selectedProfile").toString().toUpperCase() : "BICYCLE";
-        boolean enableAi = Boolean.TRUE.equals(request.get("enableAiOptimization"));
-
-        // 1. Fetch Driving Route with street alternatives
-        List<OsrmRouteResult> drivingStreetRoutes = fetchOsrmStreetRoutes(
-                "driving",
-                originLat, originLng,
-                destLat, destLng,
-                true
-        );
-
-        OsrmRouteResult primaryDrivingRoute = !drivingStreetRoutes.isEmpty()
-                ? drivingStreetRoutes.get(0)
-                : createGeometricFallback(originLat, originLng, destLat, destLng);
-
-        double baselineStreetDistanceKm = primaryDrivingRoute.distanceKm;
-        int drivingDurationMinutes = primaryDrivingRoute.durationMinutes;
+        List<OsrmRouteResult> drivingStreetRoutes = fetchOsrmStreetRoutes("driving", origin, destination, true);
+        OsrmRouteResult primaryDrivingRoute = firstOrFallback(
+                drivingStreetRoutes, () -> createGeometricFallback(origin, destination));
+        double baselineStreetDistanceKm = primaryDrivingRoute.distanceKm();
         double baselineCo2 = carbonEmissionService.calculateBaselineEmissionGrams(baselineStreetDistanceKm);
 
-        TransportMode targetMode = switch (selectedProfile) {
-            case "WALKING", "WALK" -> TransportMode.WALKING;
-            case "DRIVING", "CAR" -> TransportMode.CAR_SOLO;
-            default -> TransportMode.BICYCLE;
-        };
+        RouteOptionDTO baselineCar = buildBaselineCarOption(primaryDrivingRoute, baselineCo2);
 
-        // 2. Baseline Car Option
-        Map<String, Object> baselineCar = createRouteOption(
+        List<OsrmRouteResult> activeModeRoutes = fetchOsrmStreetRoutes(
+                osrmProfileFor(targetMode), origin, destination, true);
+        OsrmRouteResult standardActiveRoute = firstOrFallback(activeModeRoutes, () -> primaryDrivingRoute);
+        RouteOptionDTO standardOption = buildStandardProfileOption(targetMode, standardActiveRoute, baselineCo2, userStreakDays);
+
+        OsrmRouteResult greenStreetRoute = pickGreenCorridorRoute(activeModeRoutes, drivingStreetRoutes, standardActiveRoute);
+        RouteOptionDTO greenOption = buildGreenCorridorOption(
+                greenStreetRoute, targetMode, baselineCo2, origin, destination, userStreakDays);
+
+        return new RoutePlanResponseDTO(baselineCar, standardOption, greenOption, RECOMMENDED_ROUTE_ID);
+    }
+
+    private RouteOptionDTO buildBaselineCarOption(OsrmRouteResult drivingRoute, double baselineCo2) {
+        return createRouteOption(
                 "route-baseline-car",
                 "🚗 Auto / Vehículo Convencional (Línea Base)",
                 TransportMode.CAR_SOLO,
-                baselineStreetDistanceKm,
-                drivingDurationMinutes,
+                drivingRoute.distanceKm(),
+                drivingRoute.durationMinutes(),
                 baselineCo2,
                 0.0,
                 0,
-                (int) Math.round(baselineStreetDistanceKm * TransportMode.CAR_SOLO.getCaloriesPerKm()),
+                caloriesFor(drivingRoute.distanceKm(), TransportMode.CAR_SOLO),
                 false,
                 null,
-                primaryDrivingRoute.pathCoordinates,
+                drivingRoute.pathCoordinates(),
                 "Ruta vehicular estándar directa por avenidas principales."
         );
+    }
 
-        // 3. Active Mode Street Route
-        String osrmProfile = (targetMode == TransportMode.WALKING) ? "foot" : "driving";
-        List<OsrmRouteResult> activeModeRoutes = fetchOsrmStreetRoutes(
-                osrmProfile,
-                originLat, originLng,
-                destLat, destLng,
-                true
-        );
-
-        OsrmRouteResult standardActiveRoute = !activeModeRoutes.isEmpty()
-                ? activeModeRoutes.get(0)
-                : primaryDrivingRoute;
-
-        double standardDistanceKm = standardActiveRoute.distanceKm;
-        int standardDuration = (targetMode == TransportMode.BICYCLE)
-                ? (int) Math.max(3, Math.round((standardDistanceKm / 16.0) * 60))
-                : (targetMode == TransportMode.WALKING ? (int) Math.max(3, Math.round((standardDistanceKm / 4.8) * 60)) : standardActiveRoute.durationMinutes);
+    private RouteOptionDTO buildStandardProfileOption(TransportMode targetMode, OsrmRouteResult route,
+                                                      double baselineCo2, int userStreakDays) {
+        double standardDistanceKm = route.distanceKm();
+        int standardDuration = estimateDurationMinutes(route, targetMode, BICYCLE_SPEED_KMH, WALKING_SPEED_KMH);
 
         double standardEmitted = carbonEmissionService.calculateModeEmissionGrams(targetMode, standardDistanceKm);
         double standardSaved = Math.max(0, baselineCo2 - standardEmitted);
         int standardPoints = carbonEmissionService.calculatePoints(targetMode, standardSaved, userStreakDays);
 
-        Map<String, Object> standardOption = createRouteOption(
+        return createRouteOption(
                 "route-standard-direct",
-                targetMode == TransportMode.BICYCLE ? "🚲 Bicicleta (Ruta Directa)" : (targetMode == TransportMode.WALKING ? "🚶 Caminata (Ruta Directa)" : "🚗 Vehículo Eficiente"),
+                standardProfileTitle(targetMode),
                 targetMode,
                 standardDistanceKm,
                 standardDuration,
                 standardEmitted,
                 standardSaved,
                 standardPoints,
-                (int) Math.round(standardDistanceKm * targetMode.getCaloriesPerKm()),
+                caloriesFor(standardDistanceKm, targetMode),
                 false,
                 null,
-                standardActiveRoute.pathCoordinates,
+                route.pathCoordinates(),
                 "Ruta directa sobre la red vial de la ciudad."
         );
+    }
 
-        // 4. AI Optimized Green Corridor
-        OsrmRouteResult greenStreetRoute;
-        if (activeModeRoutes.size() > 1) {
-            greenStreetRoute = activeModeRoutes.get(1);
-        } else if (drivingStreetRoutes.size() > 1) {
-            greenStreetRoute = drivingStreetRoutes.get(1);
-        } else {
-            greenStreetRoute = standardActiveRoute;
-        }
-
-        double greenDistanceKm = greenStreetRoute.distanceKm;
-        int greenDuration = (targetMode == TransportMode.BICYCLE)
-                ? (int) Math.max(3, Math.round((greenDistanceKm / 15.5) * 60))
-                : (targetMode == TransportMode.WALKING ? (int) Math.max(3, Math.round((greenDistanceKm / 4.5) * 60)) : greenStreetRoute.durationMinutes);
+    private RouteOptionDTO buildGreenCorridorOption(OsrmRouteResult greenRoute, TransportMode targetMode,
+                                                    double baselineCo2, Coordinates origin, Coordinates destination,
+                                                    int userStreakDays) {
+        double greenDistanceKm = greenRoute.distanceKm();
+        int greenDuration = estimateDurationMinutes(
+                greenRoute, targetMode, GREEN_CORRIDOR_BICYCLE_SPEED_KMH, GREEN_CORRIDOR_WALKING_SPEED_KMH);
 
         double greenEmitted = carbonEmissionService.calculateModeEmissionGrams(targetMode, greenDistanceKm);
         double greenSaved = Math.max(0, baselineCo2 - greenEmitted);
-        int greenPoints = carbonEmissionService.calculatePoints(targetMode, greenSaved, userStreakDays) + 10;
+        int greenPoints = carbonEmissionService.calculatePoints(targetMode, greenSaved, userStreakDays)
+                + GREEN_CORRIDOR_BONUS_POINTS;
 
-        Map<String, Object> aiInsight = aiAdvisorService.generateRouteInsight(
-                originLat, originLng,
-                destLat, destLng,
+        AiInsightDTO aiInsight = aiAdvisorService.generateRouteInsight(
+                origin.lat(), origin.lng(),
+                destination.lat(), destination.lng(),
                 targetMode,
                 greenDistanceKm,
                 greenSaved,
@@ -149,8 +149,8 @@ public class RoutingEngineService {
                 true
         );
 
-        Map<String, Object> greenOption = createRouteOption(
-                "route-ai-green-corridor",
+        return createRouteOption(
+                RECOMMENDED_ROUTE_ID,
                 "🌿 Corredor Verde Optimizado con IA",
                 targetMode,
                 greenDistanceKm,
@@ -158,26 +158,77 @@ public class RoutingEngineService {
                 greenEmitted,
                 greenSaved,
                 greenPoints,
-                (int) Math.round(greenDistanceKm * targetMode.getCaloriesPerKm()),
+                caloriesFor(greenDistanceKm, targetMode),
                 true,
                 aiInsight,
-                greenStreetRoute.pathCoordinates,
+                greenRoute.pathCoordinates(),
                 "Corredor seleccionado por menor exposición a tráfico y mejor infraestructura."
         );
-
-        Map<String, Object> result = new HashMap<>();
-        result.put("baselineCarRoute", baselineCar);
-        result.put("standardProfileRoute", standardOption);
-        result.put("aiGreenCorridorRoute", greenOption);
-        result.put("recommendedRouteId", "route-ai-green-corridor");
-        return result;
     }
 
-    private List<OsrmRouteResult> fetchOsrmStreetRoutes(String profile, double lat1, double lon1, double lat2, double lon2, boolean requestAlternatives) {
+    private OsrmRouteResult pickGreenCorridorRoute(List<OsrmRouteResult> activeModeRoutes,
+                                                   List<OsrmRouteResult> drivingStreetRoutes,
+                                                   OsrmRouteResult standardActiveRoute) {
+        if (activeModeRoutes.size() > 1) {
+            return activeModeRoutes.get(1);
+        }
+        if (drivingStreetRoutes.size() > 1) {
+            return drivingStreetRoutes.get(1);
+        }
+        return standardActiveRoute;
+    }
+
+    private TransportMode resolveTargetMode(String selectedProfile) {
+        String profile = selectedProfile != null ? selectedProfile.toUpperCase() : DEFAULT_PROFILE;
+        return switch (profile) {
+            case "WALKING", "WALK" -> TransportMode.WALKING;
+            case "DRIVING", "CAR" -> TransportMode.CAR_SOLO;
+            default -> TransportMode.BICYCLE;
+        };
+    }
+
+    private String osrmProfileFor(TransportMode mode) {
+        return (mode == TransportMode.WALKING) ? "foot" : "driving";
+    }
+
+    private String standardProfileTitle(TransportMode mode) {
+        return switch (mode) {
+            case BICYCLE -> "🚲 Bicicleta (Ruta Directa)";
+            case WALKING -> "🚶 Caminata (Ruta Directa)";
+            default -> "🚗 Vehículo Eficiente";
+        };
+    }
+
+    private int estimateDurationMinutes(OsrmRouteResult route, TransportMode mode,
+                                        double bicycleSpeedKmh, double walkingSpeedKmh) {
+        if (mode == TransportMode.BICYCLE) {
+            return (int) Math.max(MIN_ROUTE_DURATION_MINUTES, Math.round((route.distanceKm() / bicycleSpeedKmh) * 60));
+        }
+        if (mode == TransportMode.WALKING) {
+            return (int) Math.max(MIN_ROUTE_DURATION_MINUTES, Math.round((route.distanceKm() / walkingSpeedKmh) * 60));
+        }
+        return route.durationMinutes();
+    }
+
+    private int caloriesFor(double distanceKm, TransportMode mode) {
+        return (int) Math.round(distanceKm * mode.getCaloriesPerKm());
+    }
+
+    private Coordinates toCoordinates(CoordinateRequestDTO coordinate) {
+        return new Coordinates(coordinate.latitude(), coordinate.longitude());
+    }
+
+    private OsrmRouteResult firstOrFallback(List<OsrmRouteResult> routes, java.util.function.Supplier<OsrmRouteResult> fallback) {
+        return routes.isEmpty() ? fallback.get() : routes.get(0);
+    }
+
+    private List<OsrmRouteResult> fetchOsrmStreetRoutes(String profile, Coordinates origin, Coordinates destination,
+                                                        boolean requestAlternatives) {
         String url = String.format(
                 Locale.US,
                 "https://router.project-osrm.org/route/v1/%s/%.6f,%.6f;%.6f,%.6f?overview=full&geometries=geojson&alternatives=%s",
-                profile, lon1, lat1, lon2, lat2, requestAlternatives ? "true" : "false"
+                profile, origin.lng(), origin.lat(), destination.lng(), destination.lat(),
+                requestAlternatives ? "true" : "false"
         );
 
         try {
@@ -221,61 +272,55 @@ public class RoutingEngineService {
         return Collections.emptyList();
     }
 
-    private OsrmRouteResult createGeometricFallback(double lat1, double lon1, double lat2, double lon2) {
-        double dLat = Math.toRadians(lat2 - lat1);
-        double dLon = Math.toRadians(lon2 - lon1);
+    private OsrmRouteResult createGeometricFallback(Coordinates origin, Coordinates destination) {
+        double dLat = Math.toRadians(destination.lat() - origin.lat());
+        double dLon = Math.toRadians(destination.lng() - origin.lng());
         double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
+                Math.cos(Math.toRadians(origin.lat())) * Math.cos(Math.toRadians(destination.lat())) *
                         Math.sin(dLon / 2) * Math.sin(dLon / 2);
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        double straightDistance = 6371.0 * c;
-        double streetDistance = straightDistance * 1.35;
-        int duration = (int) Math.round((streetDistance / 35.0) * 60);
+        double straightDistance = EARTH_RADIUS_KM * c;
+        double streetDistance = straightDistance * STREET_NETWORK_DETOUR_FACTOR;
+        int duration = (int) Math.round((streetDistance / AVERAGE_STREET_SPEED_KMH) * 60);
 
         List<List<Double>> path = List.of(
-                List.of(lat1, lon1),
-                List.of((lat1 + lat2) / 2, (lon1 + lon2) / 2),
-                List.of(lat2, lon2)
+                List.of(origin.lat(), origin.lng()),
+                List.of((origin.lat() + destination.lat()) / 2, (origin.lng() + destination.lng()) / 2),
+                List.of(destination.lat(), destination.lng())
         );
 
         return new OsrmRouteResult(streetDistance, duration, path);
     }
 
-    private Map<String, Object> createRouteOption(
+    private RouteOptionDTO createRouteOption(
             String id, String title, TransportMode mode,
             double distanceKm, int durationMinutes,
             double co2Emitted, double co2Saved,
             int points, int calories,
-            boolean isAi, Map<String, Object> aiInsight,
+            boolean isAi, AiInsightDTO aiInsight,
             List<List<Double>> path, String summary) {
 
-        Map<String, Object> map = new HashMap<>();
-        map.put("id", id);
-        map.put("title", title);
-        map.put("mode", mode);
-        map.put("modeDisplayName", mode.getDisplayName());
-        map.put("distanceKm", Math.round(distanceKm * 100.0) / 100.0);
-        map.put("durationMinutes", durationMinutes);
-        map.put("co2EmittedGrams", Math.round(co2Emitted));
-        map.put("co2SavedGrams", Math.round(co2Saved));
-        map.put("potentialPoints", points);
-        map.put("caloriesBurned", calories);
-        map.put("isAiRecommended", isAi);
-        map.put("aiInsight", aiInsight);
-        map.put("pathCoordinates", path);
-        map.put("summary", summary);
-        return map;
+        return new RouteOptionDTO(
+                id,
+                title,
+                mode,
+                mode.getDisplayName(),
+                Math.round(distanceKm * 100.0) / 100.0,
+                durationMinutes,
+                Math.round(co2Emitted),
+                Math.round(co2Saved),
+                points,
+                calories,
+                isAi,
+                aiInsight,
+                path,
+                summary
+        );
     }
 
-    private static class OsrmRouteResult {
-        final double distanceKm;
-        final int durationMinutes;
-        final List<List<Double>> pathCoordinates;
+    private record Coordinates(double lat, double lng) {
+    }
 
-        OsrmRouteResult(double distanceKm, int durationMinutes, List<List<Double>> pathCoordinates) {
-            this.distanceKm = distanceKm;
-            this.durationMinutes = durationMinutes;
-            this.pathCoordinates = pathCoordinates;
-        }
+    private record OsrmRouteResult(double distanceKm, int durationMinutes, List<List<Double>> pathCoordinates) {
     }
 }

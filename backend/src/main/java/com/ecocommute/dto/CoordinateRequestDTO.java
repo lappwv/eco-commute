@@ -4,8 +4,6 @@ import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
 
-import java.util.Map;
-
 public record CoordinateRequestDTO(
         @NotNull(message = "La latitud es obligatoria")
         @DecimalMin(value = "-90.0", message = "La latitud minima es -90")
@@ -17,7 +15,4 @@ public record CoordinateRequestDTO(
         @DecimalMax(value = "180.0", message = "La longitud maxima es 180")
         Double longitude
 ) {
-    public Map<String, Object> toMap() {
-        return Map.of("latitude", latitude, "longitude", longitude);
-    }
 }

@@ -1,5 +1,6 @@
 package com.ecocommute.controllers;
 
+import com.ecocommute.dto.LeaderboardEntryDTO;
 import com.ecocommute.services.LeaderboardService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/leaderboard")
@@ -21,7 +21,7 @@ public class LeaderboardController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Map<String, Object>>> getLeaderboard(
+    public ResponseEntity<List<LeaderboardEntryDTO>> getLeaderboard(
             @RequestParam(required = false) String district) {
         return ResponseEntity.ok(leaderboardService.getLeaderboardByDistrict(district));
     }

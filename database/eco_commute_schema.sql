@@ -1,10 +1,16 @@
-CREATE DATABASE eco_commute;
-
-\c eco_commute;
+-- EcoCommute - esquema de produccion (PostgreSQL 16)
+--
+-- Uso:
+--   createdb eco_commute
+--   psql -d eco_commute -f database/eco_commute_schema.sql
+--
+-- El script es idempotente: puede re-ejecutarse sobre una base ya existente
+-- (tablas y columnas nuevas se crean; las existentes se conservan).
+-- El backend no modifica el esquema: arranca con spring.jpa.hibernate.ddl-auto=validate.
 
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
     id VARCHAR(36) PRIMARY KEY DEFAULT gen_random_uuid()::text,
     email VARCHAR(150) NOT NULL UNIQUE,
     password VARCHAR(255),
@@ -28,7 +34,10 @@ CREATE TABLE users (
     CONSTRAINT chk_users_streak CHECK (streak_days >= 0)
 );
 
-CREATE TABLE emission_factors (
+ALTER TABLE users ADD COLUMN IF NOT EXISTS district VARCHAR(80);
+
+
+CREATE TABLE IF NOT EXISTS emission_factors (
     id BIGSERIAL PRIMARY KEY,
     transport_mode VARCHAR(40) NOT NULL UNIQUE,
     grams_co2_per_km NUMERIC(10,2) NOT NULL,
@@ -38,7 +47,7 @@ CREATE TABLE emission_factors (
     CONSTRAINT chk_emission_factor CHECK (grams_co2_per_km >= 0)
 );
 
-CREATE TABLE badges (
+CREATE TABLE IF NOT EXISTS badges (
     id BIGSERIAL PRIMARY KEY,
     code VARCHAR(60) NOT NULL UNIQUE,
     title VARCHAR(120) NOT NULL,
@@ -55,7 +64,7 @@ CREATE TABLE badges (
     CONSTRAINT chk_badges_trips CHECK (required_trips >= 0)
 );
 
-CREATE TABLE trips (
+CREATE TABLE IF NOT EXISTS trips (
     id VARCHAR(36) PRIMARY KEY DEFAULT gen_random_uuid()::text,
     user_id VARCHAR(36) NOT NULL,
     transport_mode VARCHAR(40) NOT NULL,
@@ -82,7 +91,7 @@ CREATE TABLE trips (
     CONSTRAINT chk_trips_points CHECK (points_earned >= 0)
 );
 
-CREATE TABLE user_stats (
+CREATE TABLE IF NOT EXISTS user_stats (
     id VARCHAR(36) PRIMARY KEY DEFAULT gen_random_uuid()::text,
     user_id VARCHAR(36) NOT NULL UNIQUE,
     total_co2_saved_kg NUMERIC(12,4) NOT NULL DEFAULT 0,
@@ -96,7 +105,7 @@ CREATE TABLE user_stats (
     CONSTRAINT chk_user_stats_trips CHECK (total_trips >= 0)
 );
 
-CREATE TABLE user_badges (
+CREATE TABLE IF NOT EXISTS user_badges (
     id VARCHAR(36) PRIMARY KEY DEFAULT gen_random_uuid()::text,
     user_id VARCHAR(36) NOT NULL,
     badge_id BIGINT NOT NULL,
@@ -106,7 +115,7 @@ CREATE TABLE user_badges (
     CONSTRAINT fk_user_badges_badges FOREIGN KEY (badge_id) REFERENCES badges(id)
 );
 
-CREATE TABLE rewards (
+CREATE TABLE IF NOT EXISTS rewards (
     id BIGSERIAL PRIMARY KEY,
     code VARCHAR(60) NOT NULL UNIQUE,
     title VARCHAR(120) NOT NULL,
@@ -118,7 +127,7 @@ CREATE TABLE rewards (
     CONSTRAINT chk_rewards_points CHECK (points_cost >= 0)
 );
 
-CREATE TABLE redemptions (
+CREATE TABLE IF NOT EXISTS redemptions (
     id BIGSERIAL PRIMARY KEY,
     user_id VARCHAR(36) NOT NULL,
     reward_id BIGINT NOT NULL,
@@ -131,7 +140,7 @@ CREATE TABLE redemptions (
     CONSTRAINT chk_redemptions_status CHECK (status IN ('PENDING', 'COMPLETED', 'CANCELLED'))
 );
 
-CREATE TABLE challenges (
+CREATE TABLE IF NOT EXISTS challenges (
     id BIGSERIAL PRIMARY KEY,
     title VARCHAR(120) NOT NULL,
     description VARCHAR(255),
@@ -143,8 +152,8 @@ CREATE TABLE challenges (
     CONSTRAINT chk_challenges_goal CHECK (goal_value >= 0)
 );
 
-CREATE INDEX idx_trips_user_completed_at ON trips(user_id, completed_at DESC);
-CREATE INDEX idx_trips_transport_mode ON trips(transport_mode);
-CREATE INDEX idx_user_stats_co2 ON user_stats(total_co2_saved_kg DESC);
-CREATE INDEX idx_users_district ON users(district);
-CREATE INDEX idx_redemptions_user_created ON redemptions(user_id, created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_trips_user_completed_at ON trips(user_id, completed_at DESC);
+CREATE INDEX IF NOT EXISTS idx_trips_transport_mode ON trips(transport_mode);
+CREATE INDEX IF NOT EXISTS idx_user_stats_co2 ON user_stats(total_co2_saved_kg DESC);
+CREATE INDEX IF NOT EXISTS idx_users_district ON users(district);
+CREATE INDEX IF NOT EXISTS idx_redemptions_user_created ON redemptions(user_id, created_at DESC);

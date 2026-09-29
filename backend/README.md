@@ -10,10 +10,14 @@ API REST inicial de EcoCommute desarrollada con Spring Boot, Java 21, Spring Sec
 
 ## Configuración local
 
-Crear la base de datos:
+Crear la base de datos y aplicar el esquema:
 
 ```sql
 CREATE DATABASE eco_commute;
+```
+
+```bash
+psql -d eco_commute -f ../database/eco_commute_schema.sql
 ```
 
 También puedes levantar PostgreSQL con Docker:
@@ -22,17 +26,27 @@ También puedes levantar PostgreSQL con Docker:
 docker compose up -d
 ```
 
+El backend no genera el esquema: arranca con `spring.jpa.hibernate.ddl-auto=validate`
+y falla al iniciar si `database/eco_commute_schema.sql` no coincide con las entidades.
+Para regenerarlo desde las entidades (solo como ultima alternativa):
+`SPRING_JPA_DDL_AUTO=update`.
+
 Variables recomendadas:
 
 ```env
 SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/eco_commute
 SPRING_DATASOURCE_USERNAME=postgres
 SPRING_DATASOURCE_PASSWORD=postgres
-JWT_SECRET=404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+# Obligatorio: minimo 32 bytes, sin valor por defecto.
+# Generar con: openssl rand -hex 32
+JWT_SECRET=<tu-secreto-de-al-menos-32-bytes>
 GEMINI_API_KEY=
 GEMINI_MODEL=gemini-2.0-flash
 SEED_DEMO_DATA=true
 ```
+
+`JWT_SECRET` es obligatorio para cualquier perfil distinto de `local` y `test`
+(ambos traen su propio valor de desarrollo). La API no arranca sin el.
 
 Ejecutar:
 
