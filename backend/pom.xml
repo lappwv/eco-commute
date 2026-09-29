@@ -19,6 +19,8 @@
     <properties>
         <java.version>21</java.version>
         <jjwt.version>0.12.6</jjwt.version>
+        <!-- Nuevo Lombok: la version de Spring Boot 3.3.3 no compila con JDKs recientes -->
+        <lombok.version>1.18.48</lombok.version>
     </properties>
 
     <dependencies>
