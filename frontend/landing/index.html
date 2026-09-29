@@ -3,195 +3,201 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>EcoCommute</title>
+    <title>EcoCommute — movilidad sostenible en Lima</title>
     <meta
       name="description"
-      content="EcoCommute incentiva la movilidad sostenible en Lima con rutas, puntos verdes, rankings y recompensas."
+      content="EcoCommute compara tu ruta en bici, a pie o en auto, calcula el CO2 que dejas de emitir y te da puntos por elegir mejor. Proyecto de la UPC, ODS 11."
     />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <header class="topbar">
-      <a class="brand" href="#inicio" aria-label="EcoCommute">
-        <span class="brand-mark">EC</span>
-        <span>EcoCommute</span>
-      </a>
+      <a class="brand" href="#inicio">EcoCommute</a>
       <nav class="nav" aria-label="Navegación principal">
-        <a href="#solucion">Solución</a>
-        <a href="#funciones">Funciones</a>
-        <a href="#demo">Vista del producto</a>
-        <a href="#impacto">Impacto</a>
-        <a href="#contacto">Contacto</a>
+        <a href="#solucion">Por qué existe</a>
+        <a href="#funciones">Qué hace</a>
+        <a href="#demo">Pantallas</a>
         <a href="#equipo">Equipo</a>
+        <a href="#contacto">Contacto</a>
       </nav>
     </header>
 
     <main>
       <section id="inicio" class="hero">
-        <div class="hero-content">
-          <p class="eyebrow">Movilidad sostenible para Lima</p>
-          <h1>EcoCommute</h1>
+        <div class="hero-main">
+          <p class="kicker">Lima · ODS 11 · Proyecto universitario</p>
+          <h1>
+            Antes de subirte al auto,
+            <em>mira cuánto CO₂ podrías ahorrar.</em>
+          </h1>
           <p class="lead">
-            Una web app que convierte cada viaje sostenible en CO₂ ahorrado, puntos verdes,
-            logros y recompensas para motivar mejores hábitos de transporte.
+            EcoCommute compara tu recorrido en bici, a pie o en auto, te muestra el CO₂ que
+            dejas de emitir y te da puntos verdes por elegir mejor. Todo queda guardado en un
+            historial que sí se entiende de un vistazo.
           </p>
           <div class="hero-actions">
-            <a class="button primary" href="#demo">Ver la experiencia</a>
-            <a class="button secondary" href="#funciones">Explorar alcance inicial</a>
+            <a class="button primary" href="#demo">Ver las pantallas</a>
+            <a class="text-link" href="#funciones">Qué funciona hoy &rarr;</a>
           </div>
         </div>
-        <div class="impact-panel" aria-label="Resumen de impacto">
-          <div>
-            <strong>12.8 kg</strong>
-            <span>CO₂ ahorrado</span>
-          </div>
-          <div>
-            <strong>420</strong>
-            <span>puntos verdes</span>
-          </div>
-          <div>
-            <strong>#3</strong>
-            <span>ranking distrital</span>
-          </div>
-        </div>
+
+        <aside class="hero-note">
+          <p class="note-label">Un viaje de la demo</p>
+          <p class="note-route">Miraflores &rarr; San Isidro, 4.2 km</p>
+          <ul class="note-figures">
+            <li><span>En auto</span><strong>640 g de CO₂</strong></li>
+            <li><span>En bicicleta</span><strong>0 g de CO₂</strong></li>
+            <li><span>Tu saldo</span><strong>+15 puntos verdes</strong></li>
+          </ul>
+          <p class="note-foot">
+            Así se ve cada viaje registrado en la app. Los factores de emisión están
+            configurados por la aplicación, no los pone el usuario.
+          </p>
+        </aside>
       </section>
 
       <section id="solucion" class="section">
-        <div class="section-heading">
-          <p class="eyebrow">Problema y solución</p>
-          <h2>Hacer visible el impacto para cambiar hábitos</h2>
-        </div>
-        <div class="two-column">
-          <article>
-            <h3>El problema</h3>
+        <div class="story">
+          <h2>Por qué existe</h2>
+          <p>
+            En Lima la decisión de cómo movernos se toma por rapidez, costo o costumbre. Nadie
+            ve cuánto CO₂ produce el trayecto que acaba de elegir, y las herramientas de mapas
+            nomás comparten tiempo y tráfico: el impacto ambiental queda fuera de la pantalla.
+          </p>
+          <p>
+            Lo que falta no es otro mapa. Falta ver el costo ambiental de la decisión
+            <span class="underline">antes</span> de tomarla, y algo que te haga querer repetir
+            la alternativa buena la semana siguiente. Eso es lo que intentamos construir.
+          </p>
+          <blockquote>
             <p>
-              En Lima, muchas decisiones de transporte se toman por rapidez, costo o costumbre.
-              El impacto ambiental suele percibirse como lejano y no existe un incentivo claro
-              para repetir alternativas sostenibles.
+              «Si el ahorro de CO₂ se ve igual de concreto que los minutos del viaje, la gente
+              lo considera.»
             </p>
-          </article>
-          <article>
-            <h3>La solución</h3>
-            <p>
-              EcoCommute recomienda rutas sostenibles, calcula el ahorro estimado de CO₂,
-              asigna puntos verdes y refuerza la motivación mediante recompensas, logros
-              y rankings por distrito.
-            </p>
-          </article>
+            <footer>— El equipo EcoCommute, probando la app con usuarios en Lima</footer>
+          </blockquote>
         </div>
       </section>
 
-      <section id="funciones" class="section muted">
-        <div class="section-heading">
-          <p class="eyebrow">Alcance inicial</p>
-          <h2>Funciones principales</h2>
+      <section id="funciones" class="section alt">
+        <div class="section-intro">
+          <h2>Qué hace hoy</h2>
+          <p class="intro-note">
+            Todo lo de abajo está implementado en el backend (Spring Boot) y cubierto por 23
+            tests automáticos que corren en cada Pull Request.
+          </p>
         </div>
-        <div class="feature-grid">
-          <article class="feature-card">
-            <span>01</span>
+
+        <div class="feature-list">
+          <article class="feature feature-lead">
             <h3>Rutas sostenibles</h3>
-            <p>Consulta alternativas de movilidad con menor impacto usando Google Maps API.</p>
+            <p>
+              Ingresás origen y destino y la app arma alternativas con OSRM: qué tan lejos es,
+              cuánto tarda cada medio de transporte y qué te conviene según tu historial. La
+              recomendación con IA explica en lenguaje simple por qué sugiere esa ruta, no
+              nomás la señala.
+            </p>
           </article>
-          <article class="feature-card">
-            <span>02</span>
-            <h3>CO₂ y puntos</h3>
-            <p>Registra viajes, calcula ahorro ambiental y acumula puntos verdes.</p>
+          <article class="feature">
+            <h3>Viajes y CO₂</h3>
+            <p>Registrás el viaje y la app calcula el CO₂ ahorrado frente al auto y los puntos que ganás.</p>
           </article>
-          <article class="feature-card">
-            <span>03</span>
+          <article class="feature">
             <h3>Dashboard</h3>
-            <p>Visualiza historial, métricas personales, evolución semanal y ranking distrital.</p>
+            <p>CO₂ acumulado, distancia, evolución semanal e historial de viajes, en gráficos legibles.</p>
           </article>
-          <article class="feature-card">
-            <span>04</span>
-            <h3>IA personalizada</h3>
-            <p>Recibe recomendaciones según horarios, rutas frecuentes y hábitos de movilidad.</p>
+          <article class="feature">
+            <h3>Ranking por distrito</h3>
+            <p>Te comparás con gente de tu distrito. La competencia sana funciona mejor que el recordatorio.</p>
+          </article>
+          <article class="feature">
+            <h3>Medallas y recompensas</h3>
+            <p>Las medallas se desbloquean solas al alcanzar hitos; los puntos se canjean por recompensas del catálogo.</p>
+          </article>
+          <article class="feature">
+            <h3>Retos</h3>
+            <p>Metas semanales o mensuales que el administrador publica desde el panel de administración.</p>
           </article>
         </div>
       </section>
 
       <section id="demo" class="section">
-        <div class="section-heading">
-          <p class="eyebrow">Vista del producto</p>
-          <h2>Una experiencia simple para registrar viajes y ver impacto</h2>
+        <div class="section-intro">
+          <h2>Cómo se ve</h2>
+          <p class="intro-note">
+            Los mismos mock-ups que presentamos en el informe (Capítulo III): pantallas
+            principales, dashboard y landing.
+          </p>
         </div>
         <div class="preview-grid">
-          <figure class="preview-card">
-            <img src="./media/landing-mockup.png" alt="Mock-up de landing page de EcoCommute" />
-            <figcaption>Landing page con propuesta de valor, métricas ambientales y llamada a la acción.</figcaption>
+          <figure class="preview-card preview-app">
+            <img src="./media/app-mockups.png" alt="Mock-ups de las pantallas principales de EcoCommute" />
+            <figcaption>
+              Pantallas principales: acceso con JWT, dashboard personal, rutas sostenibles,
+              resultado del viaje, recompensas y ranking por distrito.
+            </figcaption>
           </figure>
-          <figure class="preview-card">
-            <img src="./media/dashboard-mockup.png" alt="Mock-up de dashboard principal de EcoCommute" />
-            <figcaption>Dashboard con CO₂ ahorrado, puntos verdes, recomendación de IA e historial.</figcaption>
-          </figure>
-        </div>
-      </section>
-
-      <section id="impacto" class="section">
-        <div class="section-heading">
-          <p class="eyebrow">ODS 11</p>
-          <h2>Ciudades y comunidades sostenibles</h2>
-        </div>
-        <div class="stats">
-          <div>
-            <strong>Meta 11.2</strong>
-            <span>Transporte seguro, accesible, asequible y sostenible.</span>
-          </div>
-          <div>
-            <strong>EcoIdentidad</strong>
-            <span>El usuario transforma su huella de carbono en progreso social visible.</span>
-          </div>
-          <div>
-            <strong>Gamificación</strong>
-            <span>Retos, logros y rankings para sostener la participación semanal.</span>
+          <div class="preview-stack">
+            <figure class="preview-card">
+              <img src="./media/dashboard-mockup.png" alt="Mock-up del dashboard principal de EcoCommute" />
+              <figcaption>Dashboard con CO₂ ahorrado, puntos, recomendación e historial.</figcaption>
+            </figure>
+            <figure class="preview-card">
+              <img src="./media/landing-mockup.png" alt="Mock-up de la landing page de EcoCommute" />
+              <figcaption>Mock-up de la landing con la propuesta de valor.</figcaption>
+            </figure>
           </div>
         </div>
       </section>
 
-      <section id="equipo" class="section muted">
-        <div class="section-heading">
-          <p class="eyebrow">Equipo</p>
-          <h2>Ingeniería de Sistemas de la UPC</h2>
-        </div>
-        <div class="team-list">
-          <span>Rodrigo Condor</span>
-          <span>Diego Avalos</span>
-          <span>Odar Alcocer</span>
-          <span>Paulo Espinoza</span>
-          <span>Jeampiero Ramos</span>
-          <span>Matías Mariños</span>
+      <section id="impacto" class="section alt">
+        <div class="impact-line">
+          <h2>Estamos alineados con la Meta 11.2 del ODS 11</h2>
+          <p>
+            Transporte seguro, accesible, asequible y sostenible para todas las personas.
+            El usuario transforma su huella de carbono en progreso visible, y la gamificación
+            (retos, medallas y rankings) está para sostener el hábito más allá de la primera
+            semana.
+          </p>
         </div>
       </section>
 
-      <section id="contacto" class="section contact-section">
-        <div class="section-heading">
-          <p class="eyebrow">Contacto</p>
-          <h2>Conoce y prueba la propuesta de EcoCommute</h2>
+      <section id="equipo" class="section">
+        <div class="section-intro">
+          <h2>Quiénes lo hacemos</h2>
+          <p class="intro-note">
+            Seis estudiantes de Ingeniería de Sistemas de la UPC, NRC 8247, Ciclo 2026-2.
+            Cada quien una parte del producto; todo el proceso en el repositorio.
+          </p>
         </div>
-        <div class="contact-grid">
-          <a class="contact-card" href="mailto:ecocommute.upc@gmail.com">
-            <strong>Correo</strong>
-            <span>ecocommute.upc@gmail.com</span>
-          </a>
-          <a class="contact-card" href="https://github.com/lappwv/eco-commute">
-            <strong>Repositorio</strong>
-            <span>github.com/lappwv/eco-commute</span>
-          </a>
-          <a class="contact-card" href="https://www.instagram.com/ecocommute.lima">
-            <strong>Instagram</strong>
-            <span>@ecocommute.lima</span>
-          </a>
-          <a class="contact-card" href="https://www.linkedin.com/company/ecocommute-lima">
-            <strong>LinkedIn</strong>
-            <span>EcoCommute Lima</span>
-          </a>
+        <ul class="team-list">
+          <li><strong>Rodrigo Condor</strong><span>IA y recomendaciones de ruta</span></li>
+          <li><strong>Diego Avalos</strong><span>Rutas, dashboard y medallas</span></li>
+          <li><strong>Odar Alcocer</strong><span>Entidades, viajes y cálculo de CO₂</span></li>
+          <li><strong>Paulo Espinoza</strong><span>Puntos verdes y ranking</span></li>
+          <li><strong>Jeampiero Ramos</strong><span>Seguridad, JWT y registro</span></li>
+          <li><strong>Matías Mariños</strong><span>Documentación, evidencias y landing</span></li>
+        </ul>
+      </section>
+
+      <section id="contacto" class="section alt">
+        <div class="contact-block">
+          <h2>Probalo y contanos</h2>
+          <p class="intro-note">
+            Si algo no te cuadra o tenés una idea para Lima, escribinos: leemos todo.
+          </p>
+          <ul class="contact-links">
+            <li><a href="mailto:ecocommute.upc@gmail.com">ecocommute.upc@gmail.com</a></li>
+            <li><a href="https://github.com/lappwv/eco-commute">Código en GitHub</a></li>
+            <li><a href="https://www.instagram.com/ecocommute.lima">@ecocommute.lima</a></li>
+            <li><a href="https://www.linkedin.com/company/ecocommute-lima">EcoCommute en LinkedIn</a></li>
+          </ul>
         </div>
       </section>
     </main>
 
     <footer class="footer">
-      <span>EcoCommute</span>
-      <span>Trabajo Parcial - Aplicaciones Web</span>
+      <span>EcoCommute · Trabajo Parcial de Aplicaciones Web</span>
       <span>ecocommute.upc@gmail.com</span>
     </footer>
   </body>
