@@ -10,14 +10,10 @@ API REST inicial de EcoCommute desarrollada con Spring Boot, Java 21, Spring Sec
 
 ## Configuración local
 
-Crear la base de datos y aplicar el esquema:
+Crear la base de datos:
 
 ```sql
 CREATE DATABASE eco_commute;
-```
-
-```bash
-psql -d eco_commute -f ../database/eco_commute_schema.sql
 ```
 
 También puedes levantar PostgreSQL con Docker:
@@ -26,10 +22,11 @@ También puedes levantar PostgreSQL con Docker:
 docker compose up -d
 ```
 
-El backend no genera el esquema: arranca con `spring.jpa.hibernate.ddl-auto=validate`
-y falla al iniciar si `database/eco_commute_schema.sql` no coincide con las entidades.
-Para regenerarlo desde las entidades (solo como ultima alternativa):
-`SPRING_JPA_DDL_AUTO=update`.
+El esquema lo crea el propio backend al arrancar
+(`spring.jpa.hibernate.ddl-auto=update`): no hay que ejecutar SQL a mano.
+`../database/eco_commute_schema.sql` queda solo como referencia documental del
+modelo (punto de partida del ERD). Para forzar la validacion del esquema en
+lugar de modificarlo: `SPRING_JPA_DDL_AUTO=validate`.
 
 Variables recomendadas:
 
