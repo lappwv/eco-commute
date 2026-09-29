@@ -1,12 +1,12 @@
 package com.ecocommute.controllers;
 
+import com.ecocommute.dto.CommunityImpactDTO;
+import com.ecocommute.dto.DashboardSummaryDTO;
 import com.ecocommute.entities.User;
 import com.ecocommute.services.DashboardService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/dashboard")
@@ -19,7 +19,7 @@ public class DashboardController {
     }
 
     @GetMapping("/summary")
-    public ResponseEntity<Map<String, Object>> getUserDashboard(@AuthenticationPrincipal User user) {
+    public ResponseEntity<DashboardSummaryDTO> getUserDashboard(@AuthenticationPrincipal User user) {
         if (user == null) {
             return ResponseEntity.status(401).build();
         }
@@ -27,7 +27,7 @@ public class DashboardController {
     }
 
     @GetMapping({"/community-impact", "/community"})
-    public ResponseEntity<Map<String, Object>> getCommunityImpact() {
+    public ResponseEntity<CommunityImpactDTO> getCommunityImpact() {
         return ResponseEntity.ok(dashboardService.getCommunityImpact());
     }
 }

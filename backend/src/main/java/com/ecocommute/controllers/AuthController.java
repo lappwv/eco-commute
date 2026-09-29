@@ -1,8 +1,10 @@
 package com.ecocommute.controllers;
 
+import com.ecocommute.dto.AuthResponseDTO;
 import com.ecocommute.dto.GoogleLoginRequestDTO;
 import com.ecocommute.dto.LoginRequestDTO;
 import com.ecocommute.dto.RegisterRequestDTO;
+import com.ecocommute.dto.UserProfileDTO;
 import com.ecocommute.entities.User;
 import com.ecocommute.services.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -11,8 +13,6 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -27,31 +27,31 @@ public class AuthController {
 
     @PostMapping("/auth/register")
     @Operation(summary = "Registra un usuario EcoCommute")
-    public ResponseEntity<Map<String, Object>> register(@Valid @RequestBody RegisterRequestDTO request) {
+    public ResponseEntity<AuthResponseDTO> register(@Valid @RequestBody RegisterRequestDTO request) {
         return ResponseEntity.ok(authService.register(request));
     }
 
     @PostMapping("/auth/login")
     @Operation(summary = "Inicia sesion con correo y contrasena")
-    public ResponseEntity<Map<String, Object>> login(@Valid @RequestBody LoginRequestDTO request) {
+    public ResponseEntity<AuthResponseDTO> login(@Valid @RequestBody LoginRequestDTO request) {
         return ResponseEntity.ok(authService.login(request));
     }
 
     @PostMapping("/auth/google")
     @Operation(summary = "Inicia sesion con Google")
-    public ResponseEntity<Map<String, Object>> googleLogin(@Valid @RequestBody GoogleLoginRequestDTO request) {
+    public ResponseEntity<AuthResponseDTO> googleLogin(@Valid @RequestBody GoogleLoginRequestDTO request) {
         return ResponseEntity.ok(authService.googleLogin(request));
     }
 
     @GetMapping("/users/profile/{userId}")
     @Operation(summary = "Obtiene el perfil publico de un usuario")
-    public ResponseEntity<Map<String, Object>> getProfile(@PathVariable String userId) {
+    public ResponseEntity<UserProfileDTO> getProfile(@PathVariable String userId) {
         return ResponseEntity.ok(authService.getProfile(userId));
     }
 
     @GetMapping("/users/me")
     @Operation(summary = "Obtiene el perfil del usuario autenticado")
-    public ResponseEntity<Map<String, Object>> getMyProfile(@AuthenticationPrincipal User user) {
+    public ResponseEntity<UserProfileDTO> getMyProfile(@AuthenticationPrincipal User user) {
         if (user == null) {
             return ResponseEntity.status(401).build();
         }

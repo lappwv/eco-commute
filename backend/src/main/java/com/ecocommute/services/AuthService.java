@@ -1,8 +1,11 @@
 package com.ecocommute.services;
 
+import com.ecocommute.dto.AuthResponseDTO;
+import com.ecocommute.dto.BadgeAwardDTO;
 import com.ecocommute.dto.GoogleLoginRequestDTO;
 import com.ecocommute.dto.LoginRequestDTO;
 import com.ecocommute.dto.RegisterRequestDTO;
+import com.ecocommute.dto.UserProfileDTO;
 import com.ecocommute.entities.Role;
 import com.ecocommute.entities.User;
 import com.ecocommute.entities.UserStats;
@@ -15,9 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class AuthService {
@@ -44,7 +45,7 @@ public class AuthService {
     }
 
     @Transactional
-    public Map<String, Object> register(RegisterRequestDTO request) {
+    public AuthResponseDTO register(RegisterRequestDTO request) {
         String email = request.email();
         String password = request.password();
         String fullName = request.fullName();
@@ -73,7 +74,7 @@ public class AuthService {
     }
 
     @Transactional(readOnly = true)
-    public Map<String, Object> login(LoginRequestDTO request) {
+    public AuthResponseDTO login(LoginRequestDTO request) {
         String email = request.email();
         String password = request.password();
 
@@ -93,7 +94,7 @@ public class AuthService {
     }
 
     @Transactional
-    public Map<String, Object> googleLogin(GoogleLoginRequestDTO request) {
+    public AuthResponseDTO googleLogin(GoogleLoginRequestDTO request) {
         String idToken = request.idToken();
 
         GoogleTokenVerifierService.GoogleUserInfo googleUser = googleTokenVerifierService.verifyToken(idToken);
@@ -135,58 +136,53 @@ public class AuthService {
     }
 
     @Transactional(readOnly = true)
-    public Map<String, Object> getProfile(String userId) {
+    public UserProfileDTO getProfile(String userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado"));
 
         UserStats stats = userStatsRepository.findByUserId(userId)
                 .orElseGet(() -> new UserStats(user));
 
-        List<Map<String, Object>> badges = userBadgeRepository.findByUserId(userId).stream()
-                .map(ub -> {
-                    Map<String, Object> map = new HashMap<>();
-                    map.put("id", ub.getBadge().getId());
-                    map.put("code", ub.getBadge().getCode());
-                    map.put("title", ub.getBadge().getTitle());
-                    map.put("description", ub.getBadge().getDescription());
-                    map.put("iconEmoji", ub.getBadge().getIconEmoji());
-                    map.put("awardedAt", ub.getAwardedAt().toString());
-                    return map;
-                })
+        List<BadgeAwardDTO> badges = userBadgeRepository.findByUserId(userId).stream()
+                .map(ub -> new BadgeAwardDTO(
+                        ub.getBadge().getId(),
+                        ub.getBadge().getCode(),
+                        ub.getBadge().getTitle(),
+                        ub.getBadge().getDescription(),
+                        ub.getBadge().getIconEmoji(),
+                        ub.getAwardedAt().toString()))
                 .toList();
 
-        Map<String, Object> profile = new HashMap<>();
-        profile.put("id", user.getId());
-        profile.put("email", user.getEmail());
-        profile.put("fullName", user.getFullName());
-        profile.put("avatarUrl", user.getAvatarUrl());
-        profile.put("role", user.getRole());
-        profile.put("currentPoints", user.getCurrentPoints());
-        profile.put("currentLevel", user.getCurrentLevel());
-        profile.put("streakDays", user.getStreakDays());
-        profile.put("hasBicycle", user.isHasBicycle());
-        profile.put("maxWalkingMinutes", user.getMaxWalkingMinutes());
-        profile.put("totalCo2SavedKg", stats.getTotalCo2SavedKg());
-        profile.put("totalDistanceKm", stats.getTotalDistanceKm());
-        profile.put("totalTrips", stats.getTotalTrips());
-        profile.put("totalCaloriesBurned", stats.getTotalCaloriesBurned());
-        profile.put("treesEquivalent", stats.getTreesEquivalent());
-        profile.put("badges", badges);
-        return profile;
+        return new UserProfileDTO(
+                user.getId(),
+                user.getEmail(),
+                user.getFullName(),
+                user.getAvatarUrl(),
+                user.getRole(),
+                user.getCurrentPoints(),
+                user.getCurrentLevel(),
+                user.getStreakDays(),
+                user.isHasBicycle(),
+                user.getMaxWalkingMinutes(),
+                stats.getTotalCo2SavedKg(),
+                stats.getTotalDistanceKm(),
+                stats.getTotalTrips(),
+                stats.getTotalCaloriesBurned(),
+                stats.getTreesEquivalent(),
+                badges);
     }
 
-    private Map<String, Object> toAuthResponse(User user, String token) {
-        Map<String, Object> response = new HashMap<>();
-        response.put("token", token);
-        response.put("tokenType", "Bearer");
-        response.put("id", user.getId());
-        response.put("email", user.getEmail());
-        response.put("fullName", user.getFullName());
-        response.put("avatarUrl", user.getAvatarUrl());
-        response.put("role", user.getRole());
-        response.put("currentPoints", user.getCurrentPoints());
-        response.put("currentLevel", user.getCurrentLevel());
-        response.put("streakDays", user.getStreakDays());
-        return response;
+    private AuthResponseDTO toAuthResponse(User user, String token) {
+        return new AuthResponseDTO(
+                token,
+                "Bearer",
+                user.getId(),
+                user.getEmail(),
+                user.getFullName(),
+                user.getAvatarUrl(),
+                user.getRole(),
+                user.getCurrentPoints(),
+                user.getCurrentLevel(),
+                user.getStreakDays());
     }
 }

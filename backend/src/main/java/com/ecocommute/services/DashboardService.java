@@ -1,5 +1,9 @@
 package com.ecocommute.services;
 
+import com.ecocommute.dto.CommunityImpactDTO;
+import com.ecocommute.dto.DashboardBadgeDTO;
+import com.ecocommute.dto.DashboardSummaryDTO;
+import com.ecocommute.dto.WeeklyTrendPointDTO;
 import com.ecocommute.entities.Badge;
 import com.ecocommute.entities.Trip;
 import com.ecocommute.entities.User;
@@ -16,6 +20,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class DashboardService {
+
+    private static final double KG_OF_CO2_PER_TREE_PER_YEAR = 21.77;
 
     private final UserRepository userRepository;
     private final UserStatsRepository userStatsRepository;
@@ -36,7 +42,7 @@ public class DashboardService {
     }
 
     @Transactional(readOnly = true)
-    public Map<String, Object> getUserDashboard(String userId) {
+    public DashboardSummaryDTO getUserDashboard(String userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado"));
 
@@ -66,12 +72,9 @@ public class DashboardService {
 
         // Weekly trend combined into the shape the dashboard UI expects:
         // [{ dayOfWeek: "lun.", co2SavedGrams: 123.0 }, ...]
-        List<Map<String, Object>> weeklyTrend = new ArrayList<>();
+        List<WeeklyTrendPointDTO> weeklyTrend = new ArrayList<>();
         for (int i = 0; i < weeklyLabels.size(); i++) {
-            Map<String, Object> day = new HashMap<>();
-            day.put("dayOfWeek", weeklyLabels.get(i));
-            day.put("co2SavedGrams", weeklyCo2SavedGrams.get(i));
-            weeklyTrend.add(day);
+            weeklyTrend.add(new WeeklyTrendPointDTO(weeklyLabels.get(i), weeklyCo2SavedGrams.get(i)));
         }
 
         // Trips count by mode
@@ -85,37 +88,34 @@ public class DashboardService {
                 .collect(Collectors.toSet());
         List<Badge> allBadgeEntities = badgeRepository.findAll();
 
-        List<Map<String, Object>> recentBadges = allBadgeEntities.stream()
-                .map(badge -> {
-                    boolean unlocked = unlockedBadgeIds.contains(badge.getId());
-                    Map<String, Object> b = new HashMap<>();
-                    b.put("id", badge.getId());
-                    b.put("code", badge.getCode());
-                    b.put("title", badge.getTitle());
-                    b.put("description", badge.getDescription());
-                    b.put("iconEmoji", badge.getIconEmoji());
-                    b.put("unlocked", unlocked);
-                    b.put("progressPercent", unlocked ? 100 : calculateBadgeProgress(badge, user, stats));
-                    return b;
-                })
+        List<DashboardBadgeDTO> recentBadges = allBadgeEntities.stream()
+                .map(badge -> new DashboardBadgeDTO(
+                        badge.getId(),
+                        badge.getCode(),
+                        badge.getTitle(),
+                        badge.getDescription(),
+                        badge.getIconEmoji(),
+                        unlockedBadgeIds.contains(badge.getId()),
+                        unlockedBadgeIds.contains(badge.getId())
+                                ? 100
+                                : calculateBadgeProgress(badge, user, stats)))
                 .toList();
 
-        Map<String, Object> dashboard = new HashMap<>();
-        dashboard.put("userId", user.getId());
-        dashboard.put("fullName", user.getFullName());
-        dashboard.put("email", user.getEmail());
-        dashboard.put("avatarUrl", user.getAvatarUrl());
-        dashboard.put("totalCo2SavedKg", stats.getTotalCo2SavedKg());
-        dashboard.put("totalDistanceKm", stats.getTotalDistanceKm());
-        dashboard.put("totalTrips", stats.getTotalTrips());
-        dashboard.put("currentPoints", user.getCurrentPoints());
-        dashboard.put("currentLevel", user.getCurrentLevel());
-        dashboard.put("totalCaloriesBurned", stats.getTotalCaloriesBurned());
-        dashboard.put("treesEquivalent", stats.getTreesEquivalent());
-        dashboard.put("weeklyTrend", weeklyTrend);
-        dashboard.put("tripsByMode", tripsByMode);
-        dashboard.put("recentBadges", recentBadges);
-        return dashboard;
+        return new DashboardSummaryDTO(
+                user.getId(),
+                user.getFullName(),
+                user.getEmail(),
+                user.getAvatarUrl(),
+                stats.getTotalCo2SavedKg(),
+                stats.getTotalDistanceKm(),
+                stats.getTotalTrips(),
+                user.getCurrentPoints(),
+                user.getCurrentLevel(),
+                stats.getTotalCaloriesBurned(),
+                stats.getTreesEquivalent(),
+                weeklyTrend,
+                tripsByMode,
+                recentBadges);
     }
 
     private int calculateBadgeProgress(Badge badge, User user, UserStats stats) {
@@ -138,18 +138,17 @@ public class DashboardService {
     }
 
     @Transactional(readOnly = true)
-    public Map<String, Object> getCommunityImpact() {
+    public CommunityImpactDTO getCommunityImpact() {
         double totalCo2Kg = userStatsRepository.sumTotalCo2SavedKg();
         double totalKm = userStatsRepository.sumTotalDistanceKm();
         long totalTrips = userStatsRepository.sumTotalTrips();
         long activeUsers = userRepository.count();
 
-        Map<String, Object> impact = new HashMap<>();
-        impact.put("totalCo2SavedTons", totalCo2Kg / 1000.0);
-        impact.put("totalCleanKm", totalKm);
-        impact.put("totalTrips", totalTrips);
-        impact.put("totalActiveUsers", activeUsers);
-        impact.put("totalTreesEquivalent", totalCo2Kg / 21.77);
-        return impact;
+        return new CommunityImpactDTO(
+                totalCo2Kg / 1000.0,
+                totalKm,
+                totalTrips,
+                activeUsers,
+                totalCo2Kg / KG_OF_CO2_PER_TREE_PER_YEAR);
     }
 }

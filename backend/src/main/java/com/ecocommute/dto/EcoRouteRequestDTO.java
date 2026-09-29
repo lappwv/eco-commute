@@ -5,9 +5,6 @@ import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public record EcoRouteRequestDTO(
         @NotNull(message = "La latitud de origen es obligatoria")
         @DecimalMin(value = "-90.0", message = "La latitud minima es -90")
@@ -32,13 +29,4 @@ public record EcoRouteRequestDTO(
         @Pattern(regexp = "(?i)BICYCLE|WALKING|DRIVING|CAR", message = "El modo debe ser BICYCLE, WALKING o CAR")
         String vehicleMode
 ) {
-    public Map<String, Object> toMap() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("originLat", originLat);
-        map.put("originLng", originLng);
-        map.put("destinationLat", destinationLat);
-        map.put("destinationLng", destinationLng);
-        map.put("vehicleMode", vehicleMode);
-        return map;
-    }
 }

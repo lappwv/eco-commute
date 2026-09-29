@@ -1,5 +1,6 @@
 package com.ecocommute.controllers;
 
+import com.ecocommute.dto.RedeemResponseDTO;
 import com.ecocommute.dto.RedemptionResponseDTO;
 import com.ecocommute.entities.Reward;
 import com.ecocommute.entities.User;
@@ -10,7 +11,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -28,12 +28,11 @@ public class RewardController {
     }
 
     @PostMapping("/rewards/{rewardId}/redeem")
-    public ResponseEntity<Map<String, Object>> redeem(
+    public ResponseEntity<RedeemResponseDTO> redeem(
             @AuthenticationPrincipal User user,
             @PathVariable @Min(1) Long rewardId) {
-        return ResponseEntity.ok(Map.of(
-                "redemption", RedemptionResponseDTO.fromEntity(rewardService.redeem(user.getId(), rewardId))
-        ));
+        return ResponseEntity.ok(new RedeemResponseDTO(
+                RedemptionResponseDTO.fromEntity(rewardService.redeem(user.getId(), rewardId))));
     }
 
     @GetMapping("/redemptions")

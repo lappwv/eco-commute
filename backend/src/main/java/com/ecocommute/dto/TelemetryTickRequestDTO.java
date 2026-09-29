@@ -3,9 +3,6 @@ package com.ecocommute.dto;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public record TelemetryTickRequestDTO(
         String tripId,
 
@@ -23,13 +20,4 @@ public record TelemetryTickRequestDTO(
         @PositiveOrZero(message = "La distancia acumulada no puede ser negativa")
         Double accumulatedDistanceKm
 ) {
-    public Map<String, Object> toMap() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("tripId", tripId);
-        map.put("distanceIncrementMeters", distanceIncrementMeters);
-        map.put("speedKmh", speedKmh);
-        map.put("accumulatedCo2SavedGrams", accumulatedCo2SavedGrams);
-        map.put("accumulatedDistanceKm", accumulatedDistanceKm);
-        return map;
-    }
 }

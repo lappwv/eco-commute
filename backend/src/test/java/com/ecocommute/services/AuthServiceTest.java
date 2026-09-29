@@ -1,5 +1,6 @@
 package com.ecocommute.services;
 
+import com.ecocommute.dto.AuthResponseDTO;
 import com.ecocommute.dto.LoginRequestDTO;
 import com.ecocommute.dto.RegisterRequestDTO;
 import com.ecocommute.entities.Role;
@@ -79,11 +80,11 @@ class AuthServiceTest {
         });
         when(jwtTokenUtil.generateToken(any(User.class))).thenReturn("jwt.token.here");
 
-        java.util.Map<String, Object> response = authService.register(req);
+        AuthResponseDTO response = authService.register(req);
 
         assertNotNull(response);
-        assertEquals("jwt.token.here", response.get("token"));
-        assertEquals("test@ecocommute.org", response.get("email"));
+        assertEquals("jwt.token.here", response.token());
+        assertEquals("test@ecocommute.org", response.email());
         verify(userRepository, times(1)).save(any(User.class));
         verify(userStatsRepository, times(1)).save(any());
     }
@@ -120,11 +121,11 @@ class AuthServiceTest {
         when(passwordEncoder.matches("Secret123!", "hashed_password")).thenReturn(true);
         when(jwtTokenUtil.generateToken(user)).thenReturn("jwt.token.here");
 
-        java.util.Map<String, Object> response = authService.login(req);
+        AuthResponseDTO response = authService.login(req);
 
         assertNotNull(response);
-        assertEquals("jwt.token.here", response.get("token"));
-        assertEquals("user-123", response.get("id"));
+        assertEquals("jwt.token.here", response.token());
+        assertEquals("user-123", response.id());
     }
 
     @Test

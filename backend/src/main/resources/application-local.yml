@@ -17,3 +17,6 @@ spring:
 
 app:
   seed-demo-data: true
+  jwt:
+    # Solo desarrollo local (perfil local con H2); nunca usar en produccion.
+    secret: dev-only-ecocommute-local-secret-change-me-0123456789
