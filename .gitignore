@@ -26,6 +26,13 @@ build/
 target/
 *.log
 
+# Landing: la fuente es frontend/landing y se publica desde la rama gh-pages
+/dist/
+
+# Artefactos intermedios regenerables (node generate_cap3_assets.js)
+assets/capitulo-3/capitulo-3-assets.html
+capitulo3_figma_exports/landing_mockup_export.html
+
 # Environment
 .env
 .env.*
