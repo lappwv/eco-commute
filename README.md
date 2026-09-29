@@ -50,6 +50,35 @@ docs/                  Evidencias y tablero de seguimiento del Sprint
 5. El usuario canjea puntos por recompensas.
 6. La IA sugiere mejores hábitos de movilidad.
 
+## Despliegue del backend (Render, gratis, sin tarjeta)
+
+El backend se despliega con el Blueprint `render.yaml` de la raíz (Docker + PostgreSQL gestionado):
+
+1. Crear cuenta en https://render.com (no pide tarjeta).
+2. **New → Blueprint →** elegir este repo → Render lee `render.yaml`, crea el servicio
+   `ecocommute-backend` (plan free, 512 MB) y la base `ecocommute-db` (Postgres free, 256 MB),
+   y genera `JWT_SECRET` automáticamente.
+3. Esperar el primer deploy. La URL queda tipo `https://ecocommute-backend.onrender.com`;
+   el chequeo de salud es `GET /health`.
+
+Variables de entorno que usa el backend (todas resueltas por el Blueprint):
+
+| Variable | Origen |
+|---|---|
+| `JWT_SECRET` | generada por Render |
+| `DB_HOST`, `DB_PORT`, `DB_NAME`, `SPRING_DATASOURCE_USERNAME`, `SPRING_DATASOURCE_PASSWORD` | desde `ecocommute-db` |
+| `PORT` | inyectada por Render (el backend la respeta) |
+| `SEED_DEMO_DATA` | `true` |
+
+Cosas a tener en cuenta del plan free:
+
+- Tras ~15 min sin tráfico la instancia duerme y el primer request tarda ~30-60 s (cold start).
+- El Postgres free expira a los 90 días (para la demo del TP no afecta).
+- Cada push a `main` redeploya automáticamente.
+
+Verificación post-deploy: `https://<tu-url>/health` debe responder `{"status":"UP",...}` y
+`POST https://<tu-url>/api/v1/auth/login` con las credenciales demo.
+
 ## Documento del Proyecto
 
 Google Docs del informe:

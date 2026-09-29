@@ -1,0 +1,41 @@
+# Render Blueprint: backend gratis (web service 512MB + Postgres 256MB, plan free).
+# Activacion: render.com -> New -> Blueprint -> elegir este repo.
+services:
+  - type: web
+    name: ecocommute-backend
+    runtime: docker
+    plan: free
+    dockerfilePath: backend/Dockerfile
+    dockerContext: backend
+    healthCheckPath: /health
+    autoDeployTrigger: commit
+    envVars:
+      - key: JWT_SECRET
+        generateValue: true
+      - key: DB_HOST
+        fromDatabase:
+          name: ecocommute-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: ecocommute-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: ecocommute-db
+          property: database
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase:
+          name: ecocommute-db
+          property: user
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase:
+          name: ecocommute-db
+          property: password
+      - key: SEED_DEMO_DATA
+        value: "true"
+
+databases:
+  - name: ecocommute-db
+    plan: free
+    databaseName: eco_commute
