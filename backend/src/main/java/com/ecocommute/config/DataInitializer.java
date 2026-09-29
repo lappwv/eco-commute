@@ -1,8 +1,8 @@
 package com.ecocommute.config;
 
-import com.ecocommute.entity.*;
-import com.ecocommute.repository.*;
-import com.ecocommute.service.GamificationService;
+import com.ecocommute.entities.*;
+import com.ecocommute.repositories.*;
+import com.ecocommute.services.GamificationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,6 +10,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Component
@@ -21,6 +22,8 @@ public class DataInitializer implements CommandLineRunner {
     private final UserStatsRepository userStatsRepository;
     private final BadgeRepository badgeRepository;
     private final EmissionFactorRepository emissionFactorRepository;
+    private final RewardRepository rewardRepository;
+    private final ChallengeRepository challengeRepository;
     private final PasswordEncoder passwordEncoder;
     private final GamificationService gamificationService;
     private final boolean seedDemoData;
@@ -29,6 +32,8 @@ public class DataInitializer implements CommandLineRunner {
                            UserStatsRepository userStatsRepository,
                            BadgeRepository badgeRepository,
                            EmissionFactorRepository emissionFactorRepository,
+                           RewardRepository rewardRepository,
+                           ChallengeRepository challengeRepository,
                            PasswordEncoder passwordEncoder,
                            GamificationService gamificationService,
                            @Value("${app.seed-demo-data:true}") boolean seedDemoData) {
@@ -36,6 +41,8 @@ public class DataInitializer implements CommandLineRunner {
         this.userStatsRepository = userStatsRepository;
         this.badgeRepository = badgeRepository;
         this.emissionFactorRepository = emissionFactorRepository;
+        this.rewardRepository = rewardRepository;
+        this.challengeRepository = challengeRepository;
         this.passwordEncoder = passwordEncoder;
         this.gamificationService = gamificationService;
         this.seedDemoData = seedDemoData;
@@ -50,6 +57,8 @@ public class DataInitializer implements CommandLineRunner {
 
         initEmissionFactors();
         initBadges();
+        initRewards();
+        initChallenges();
         initUsersAndTrips();
         log.info("EcoCommute Database populated with rich demo and community data!");
     }
@@ -79,15 +88,39 @@ public class DataInitializer implements CommandLineRunner {
         }
     }
 
+    private void initRewards() {
+        if (rewardRepository.count() == 0) {
+            rewardRepository.saveAll(List.of(
+                    new Reward("COFFEE_50", "Café de cortesía", "Un café gratis en una cafetería aliada del distrito", 50, "☕"),
+                    new Reward("BIKE_HOUR", "Alquiler de bicicleta", "Una hora de bicicleta compartida sin costo", 120, "🚲"),
+                    new Reward("PARK_PASS", "Entrada al Parque de la Reserva", "Pase libre para el parque más verde de Lima", 200, "🎟️"),
+                    new Reward("TREE_300", "Planta un árbol", "Dona tus puntos para plantar un árbol en Lima", 300, "🌳")
+            ));
+        }
+    }
+
+    private void initChallenges() {
+        if (challengeRepository.count() == 0) {
+            challengeRepository.saveAll(List.of(
+                    new Challenge("Setiembre sin auto", "Completa todos tus traslados sin usar auto particular",
+                            50, "kg_co2", LocalDate.now().withDayOfMonth(1), LocalDate.now().withDayOfMonth(1).plusMonths(1).minusDays(1)),
+                    new Challenge("Reto bicicleta semanal", "Acumula kilómetros pedaleando durante la semana",
+                            40, "km", LocalDate.now().withDayOfMonth(1), LocalDate.now().withDayOfMonth(1).plusWeeks(1).minusDays(1)),
+                    new Challenge("10 viajes sostenibles", "Registra diez viajes a pie o en bicicleta",
+                            10, "trips", LocalDate.now().withDayOfMonth(1), LocalDate.now().withDayOfMonth(1).plusMonths(1).minusDays(1))
+            ));
+        }
+    }
+
     private void initUsersAndTrips() {
         if (userRepository.count() == 0) {
-            User admin = createUser("admin@ecocommute.org", "Admin123!", "Administrador EcoCommute", Role.ROLE_ADMIN, "admin", true);
-            User elena = createUser("demo@ecocommute.org", "Demo123!", "Elena Rios", Role.ROLE_USER, "elena", true);
-            User mateo = createUser("mateo@ecocommute.org", "Mateo123!", "Mateo Silva", Role.ROLE_USER, "mateo", true);
-            User sofia = createUser("sofia@ecocommute.org", "Sofia123!", "Sofia Morales", Role.ROLE_USER, "sofia", false);
-            User carlos = createUser("carlos@ecocommute.org", "Carlos123!", "Carlos Mendoza", Role.ROLE_USER, "carlos", true);
-            User lucia = createUser("lucia@ecocommute.org", "Lucia123!", "Lucía Vega", Role.ROLE_USER, "lucia", true);
-            User diego = createUser("diego@ecocommute.org", "Diego123!", "Diego Torres", Role.ROLE_USER, "diego", false);
+            User admin = createUser("admin@ecocommute.org", "Admin123!", "Administrador EcoCommute", Role.ROLE_ADMIN, "admin", true, "San Isidro");
+            User elena = createUser("demo@ecocommute.org", "Demo123!", "Elena Rios", Role.ROLE_USER, "elena", true, "San Isidro");
+            User mateo = createUser("mateo@ecocommute.org", "Mateo123!", "Mateo Silva", Role.ROLE_USER, "mateo", true, "Lince");
+            User sofia = createUser("sofia@ecocommute.org", "Sofia123!", "Sofia Morales", Role.ROLE_USER, "sofia", false, "Surco");
+            User carlos = createUser("carlos@ecocommute.org", "Carlos123!", "Carlos Mendoza", Role.ROLE_USER, "carlos", true, "Surquillo");
+            User lucia = createUser("lucia@ecocommute.org", "Lucia123!", "Lucía Vega", Role.ROLE_USER, "lucia", true, "Barranco");
+            User diego = createUser("diego@ecocommute.org", "Diego123!", "Diego Torres", Role.ROLE_USER, "diego", false, "Breña");
 
             recordDemoTrip(elena.getId(), TransportMode.BICYCLE, "Casa (San Isidro)", -12.0897, -77.0543, "Centro Financiero", -12.0965, -77.0285, 8.5, 32);
             recordDemoTrip(elena.getId(), TransportMode.BICYCLE, "Parque Kennedy", -12.1215, -77.0298, "Café Verde Miraflores", -12.1280, -77.0310, 1.6, 6);
@@ -124,7 +157,7 @@ public class DataInitializer implements CommandLineRunner {
         gamificationService.recordTrip(userId, trip);
     }
 
-    private User createUser(String email, String password, String name, Role role, String seed, boolean hasBike) {
+    private User createUser(String email, String password, String name, Role role, String seed, boolean hasBike, String district) {
         User user = new User();
         user.setEmail(email);
         user.setPassword(passwordEncoder.encode(password));
@@ -132,6 +165,7 @@ public class DataInitializer implements CommandLineRunner {
         user.setRole(role);
         user.setAvatarUrl("https://api.dicebear.com/7.x/bottts/svg?seed=" + seed);
         user.setHasBicycle(hasBike);
+        user.setDistrict(district);
         user = userRepository.save(user);
         userStatsRepository.save(new UserStats(user));
         return user;
