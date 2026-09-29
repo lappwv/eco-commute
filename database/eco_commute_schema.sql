@@ -1,12 +1,15 @@
 -- EcoCommute - esquema de produccion (PostgreSQL 16)
 --
--- Uso:
+-- REFERENCIA: el backend crea el esquema automaticamente al arrancar
+-- (spring.jpa.hibernate.ddl-auto=update), por lo que este archivo no es
+-- obligatorio para levantar la aplicacion. Sirve como documentacion del
+-- modelo y punto de partida del ERD.
+--
+-- Si se quiere aplicar a mano sobre una base nueva:
 --   createdb eco_commute
 --   psql -d eco_commute -f database/eco_commute_schema.sql
 --
--- El script es idempotente: puede re-ejecutarse sobre una base ya existente
--- (tablas y columnas nuevas se crean; las existentes se conservan).
--- El backend no modifica el esquema: arranca con spring.jpa.hibernate.ddl-auto=validate.
+-- El script es idempotente: puede re-ejecutarse sin borrar datos.
 
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
