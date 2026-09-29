@@ -79,6 +79,12 @@ DELETE /api/v1/trips/{tripId}                          (admin)
 GET    /api/v1/dashboard/summary
 GET    /api/v1/dashboard/community-impact
 GET    /api/v1/leaderboard
+GET    /api/v1/leaderboard?district={district}
+GET    /api/v1/leaderboard/districts
+GET    /api/v1/rewards
+POST   /api/v1/rewards/{rewardId}/redeem
+GET    /api/v1/redemptions
+GET    /api/v1/challenges
 GET    /api/v1/admin/dashboard/kpis
 GET    /api/v1/admin/users
 PUT    /api/v1/admin/users/{userId}/toggle-status
@@ -93,6 +99,14 @@ GET    /api/v1/admin/badges
 POST   /api/v1/admin/badges
 PUT    /api/v1/admin/badges/{id}
 DELETE /api/v1/admin/badges/{id}
+GET    /api/v1/admin/rewards
+POST   /api/v1/admin/rewards
+PUT    /api/v1/admin/rewards/{id}
+DELETE /api/v1/admin/rewards/{id}
+GET    /api/v1/admin/challenges
+POST   /api/v1/admin/challenges
+PUT    /api/v1/admin/challenges/{id}
+DELETE /api/v1/admin/challenges/{id}
 ```
 
 ## Seguridad

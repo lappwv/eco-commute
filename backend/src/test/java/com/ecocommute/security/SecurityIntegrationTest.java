@@ -1,8 +1,8 @@
 package com.ecocommute.security;
 
-import com.ecocommute.entity.Role;
-import com.ecocommute.entity.User;
-import com.ecocommute.repository.UserRepository;
+import com.ecocommute.entities.Role;
+import com.ecocommute.entities.User;
+import com.ecocommute.repositories.UserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ class SecurityIntegrationTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private JwtService jwtService;
+    private JwtTokenUtil jwtTokenUtil;
 
     @Autowired
     private UserRepository userRepository;
@@ -68,7 +68,7 @@ class SecurityIntegrationTest {
     @DisplayName("Usuario con ROLE_USER debe ser rechazado con 403 al intentar acceder a /api/v1/admin/**")
     void testUserRoleAccessToAdminDenied() throws Exception {
         User normalUser = userRepository.findByEmail("demo@ecocommute.org").orElseThrow();
-        String userToken = jwtService.generateToken(normalUser);
+        String userToken = jwtTokenUtil.generateToken(normalUser);
 
         mockMvc.perform(get("/api/v1/admin/dashboard/kpis")
                         .header("Authorization", "Bearer " + userToken))
@@ -79,7 +79,7 @@ class SecurityIntegrationTest {
     @DisplayName("Usuario con ROLE_ADMIN debe tener acceso 200 OK a /api/v1/admin/**")
     void testAdminRoleAccessGranted() throws Exception {
         User adminUser = userRepository.findByEmail("admin@ecocommute.org").orElseThrow();
-        String adminToken = jwtService.generateToken(adminUser);
+        String adminToken = jwtTokenUtil.generateToken(adminUser);
 
         mockMvc.perform(get("/api/v1/admin/dashboard/kpis")
                         .header("Authorization", "Bearer " + adminToken))

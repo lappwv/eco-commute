@@ -10,6 +10,7 @@ CREATE TABLE users (
     password VARCHAR(255),
     full_name VARCHAR(120) NOT NULL,
     avatar_url VARCHAR(500),
+    district VARCHAR(80),
     role VARCHAR(30) NOT NULL DEFAULT 'ROLE_USER',
     active BOOLEAN NOT NULL DEFAULT TRUE,
     auth_provider VARCHAR(30) NOT NULL DEFAULT 'LOCAL',
@@ -105,6 +106,45 @@ CREATE TABLE user_badges (
     CONSTRAINT fk_user_badges_badges FOREIGN KEY (badge_id) REFERENCES badges(id)
 );
 
+CREATE TABLE rewards (
+    id BIGSERIAL PRIMARY KEY,
+    code VARCHAR(60) NOT NULL UNIQUE,
+    title VARCHAR(120) NOT NULL,
+    description VARCHAR(255),
+    points_cost INTEGER NOT NULL DEFAULT 0,
+    icon_emoji VARCHAR(32),
+    icon_url VARCHAR(500),
+    active BOOLEAN NOT NULL DEFAULT TRUE,
+    CONSTRAINT chk_rewards_points CHECK (points_cost >= 0)
+);
+
+CREATE TABLE redemptions (
+    id BIGSERIAL PRIMARY KEY,
+    user_id VARCHAR(36) NOT NULL,
+    reward_id BIGINT NOT NULL,
+    points_used INTEGER NOT NULL,
+    status VARCHAR(30) NOT NULL DEFAULT 'COMPLETED',
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_redemptions_users FOREIGN KEY (user_id) REFERENCES users(id),
+    CONSTRAINT fk_redemptions_rewards FOREIGN KEY (reward_id) REFERENCES rewards(id),
+    CONSTRAINT chk_redemptions_points CHECK (points_used >= 0),
+    CONSTRAINT chk_redemptions_status CHECK (status IN ('PENDING', 'COMPLETED', 'CANCELLED'))
+);
+
+CREATE TABLE challenges (
+    id BIGSERIAL PRIMARY KEY,
+    title VARCHAR(120) NOT NULL,
+    description VARCHAR(255),
+    goal_value INTEGER NOT NULL DEFAULT 0,
+    goal_unit VARCHAR(32),
+    period_start DATE,
+    period_end DATE,
+    active BOOLEAN NOT NULL DEFAULT TRUE,
+    CONSTRAINT chk_challenges_goal CHECK (goal_value >= 0)
+);
+
 CREATE INDEX idx_trips_user_completed_at ON trips(user_id, completed_at DESC);
 CREATE INDEX idx_trips_transport_mode ON trips(transport_mode);
 CREATE INDEX idx_user_stats_co2 ON user_stats(total_co2_saved_kg DESC);
+CREATE INDEX idx_users_district ON users(district);
+CREATE INDEX idx_redemptions_user_created ON redemptions(user_id, created_at DESC);
