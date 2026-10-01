@@ -4,6 +4,7 @@ import com.ecocommute.entities.TransportMode;
 import com.ecocommute.entities.Trip;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public record TripResponseDTO(
         String id,
@@ -24,8 +25,36 @@ public record TripResponseDTO(
         int pointsEarned,
         boolean suspicious,
         String suspiciousReason,
-        LocalDateTime completedAt
+        LocalDateTime completedAt,
+        List<BadgeAwardDTO> newlyAwardedBadges
 ) {
+    public TripResponseDTO(
+            String id,
+            TransportMode transportMode,
+            String modeDisplayName,
+            String originName,
+            double originLat,
+            double originLng,
+            String destinationName,
+            double destinationLat,
+            double destinationLng,
+            double distanceKm,
+            int durationMinutes,
+            double baselineCo2Grams,
+            double co2EmittedGrams,
+            double co2SavedGrams,
+            int caloriesBurned,
+            int pointsEarned,
+            boolean suspicious,
+            String suspiciousReason,
+            LocalDateTime completedAt
+    ) {
+        this(id, transportMode, modeDisplayName, originName, originLat, originLng,
+                destinationName, destinationLat, destinationLng, distanceKm, durationMinutes,
+                baselineCo2Grams, co2EmittedGrams, co2SavedGrams, caloriesBurned, pointsEarned,
+                suspicious, suspiciousReason, completedAt, List.of());
+    }
+
     public static TripResponseDTO fromEntity(Trip trip) {
         TransportMode mode = trip.getTransportMode();
         return new TripResponseDTO(
@@ -47,7 +76,8 @@ public record TripResponseDTO(
                 trip.getPointsEarned(),
                 trip.isSuspicious(),
                 trip.getSuspiciousReason(),
-                trip.getCompletedAt()
+                trip.getCompletedAt(),
+                trip.getNewlyAwardedBadges() != null ? trip.getNewlyAwardedBadges() : List.of()
         );
     }
 }

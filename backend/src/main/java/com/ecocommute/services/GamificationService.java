@@ -1,5 +1,6 @@
 package com.ecocommute.services;
 
+import com.ecocommute.dto.BadgeAwardDTO;
 import com.ecocommute.entities.*;
 import com.ecocommute.repositories.*;
 import org.springframework.stereotype.Service;
@@ -7,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -103,7 +106,8 @@ public class GamificationService {
         userStatsRepository.save(stats);
 
         // Check & Unlock Badges
-        checkAndAwardBadges(user, stats);
+        List<BadgeAwardDTO> newlyAwarded = checkAndAwardBadges(user, stats);
+        trip.setNewlyAwardedBadges(newlyAwarded);
 
         return trip;
     }
@@ -205,8 +209,11 @@ public class GamificationService {
         return 6;
     }
 
-    private void checkAndAwardBadges(User user, UserStats stats) {
+    public List<BadgeAwardDTO> checkAndAwardBadges(User user, UserStats stats) {
         List<Badge> allBadges = badgeRepository.findAll();
+        List<BadgeAwardDTO> newlyAwarded = new ArrayList<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+
         for (Badge badge : allBadges) {
             if (!userBadgeRepository.existsByUserIdAndBadgeId(user.getId(), badge.getId())) {
                 boolean qualifies = true;
@@ -217,9 +224,18 @@ public class GamificationService {
 
                 if (qualifies) {
                     UserBadge userBadge = new UserBadge(user, badge);
-                    userBadgeRepository.save(userBadge);
+                    userBadge = userBadgeRepository.save(userBadge);
+                    newlyAwarded.add(new BadgeAwardDTO(
+                            badge.getId(),
+                            badge.getCode(),
+                            badge.getTitle(),
+                            badge.getDescription(),
+                            badge.getIconEmoji(),
+                            userBadge.getAwardedAt() != null ? userBadge.getAwardedAt().format(formatter) : null
+                    ));
                 }
             }
         }
+        return newlyAwarded;
     }
 }
