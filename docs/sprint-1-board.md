@@ -24,7 +24,7 @@ Implementar la base funcional de EcoCommute para evidenciar avance del Trabajo P
 
 ## Verificación técnica
 
-- `backend`: `.\mvnw.cmd clean test` → **23 tests en verde** (CRUD, seguridad, servicios).
+- `backend`: `.\mvnw.cmd clean test` → **31 tests en verde** (CRUD, seguridad, servicios, medallas y estadísticas).
 - Endpoint de salud desplegable: `GET /health`.
 - Modelos de datos alineados: `database/eco_commute_schema.sql` + `assets/capitulo-3/erd.png` (9 tablas).
 
