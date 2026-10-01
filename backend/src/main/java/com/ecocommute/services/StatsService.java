@@ -1,8 +1,6 @@
 package com.ecocommute.services;
 
-import com.ecocommute.dto.CommunityImpactDTO;
-import com.ecocommute.dto.TransportModeStatsDTO;
-import com.ecocommute.dto.UserStatsDetailDTO;
+import com.ecocommute.dto.*;
 import com.ecocommute.entities.TransportMode;
 import com.ecocommute.entities.Trip;
 import com.ecocommute.entities.User;
@@ -11,9 +9,12 @@ import com.ecocommute.repositories.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -95,6 +96,120 @@ public class StatsService {
                 })
                 .sorted(Comparator.comparing(TransportModeStatsDTO::tripsCount).reversed())
                 .toList();
+    }
+
+    @Transactional(readOnly = true)
+    public EcoCertificateDTO generateCertificate(String userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado"));
+
+        UserStats stats = userStatsRepository.findByUserId(userId)
+                .orElseGet(() -> new UserStats(user));
+
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+        List<BadgeAwardDTO> unlockedBadges = userBadgeRepository.findByUserId(userId).stream()
+                .map(ub -> new BadgeAwardDTO(
+                        ub.getBadge().getId(),
+                        ub.getBadge().getCode(),
+                        ub.getBadge().getTitle(),
+                        ub.getBadge().getDescription(),
+                        ub.getBadge().getIconEmoji(),
+                        ub.getAwardedAt() != null ? ub.getAwardedAt().format(formatter) : null
+                ))
+                .toList();
+
+        String certId = UUID.randomUUID().toString();
+        String verificationCode = "ECO-CERT-" + certId.substring(0, 8).toUpperCase();
+        String levelTitle = getLevelTitle(user.getCurrentLevel());
+
+        String statement = String.format(
+                "Certificado oficial de movilidad sostenible otorgado a %s por haber ahorrado %.2f kg de CO2 en Lima Metropolitana a lo largo de %d viajes limpios.",
+                user.getFullName(), stats.getTotalCo2SavedKg(), stats.getTotalTrips()
+        );
+
+        return new EcoCertificateDTO(
+                certId,
+                verificationCode,
+                LocalDateTime.now(),
+                user.getFullName(),
+                user.getEmail(),
+                user.getDistrict() != null ? user.getDistrict() : "Lima Metropolitana",
+                user.getCurrentLevel(),
+                levelTitle,
+                user.getCurrentPoints(),
+                user.getStreakDays(),
+                stats.getTotalCo2SavedKg(),
+                stats.getTreesEquivalent(),
+                stats.getGasolineLitersSaved(),
+                stats.getKwhEquivalent(),
+                stats.getTotalTrips(),
+                stats.getTotalDistanceKm(),
+                stats.getTotalCaloriesBurned(),
+                stats.getEcoScore(),
+                unlockedBadges,
+                statement
+        );
+    }
+
+    @Transactional(readOnly = true)
+    public EcoImpactReportDTO generateImpactReport(String userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado"));
+
+        UserStatsDetailDTO statsDetail = getUserStats(userId);
+        List<TransportModeStatsDTO> breakdown = getTransportModeBreakdown(userId);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+        List<BadgeAwardDTO> unlockedBadges = userBadgeRepository.findByUserId(userId).stream()
+                .map(ub -> new BadgeAwardDTO(
+                        ub.getBadge().getId(),
+                        ub.getBadge().getCode(),
+                        ub.getBadge().getTitle(),
+                        ub.getBadge().getDescription(),
+                        ub.getBadge().getIconEmoji(),
+                        ub.getAwardedAt() != null ? ub.getAwardedAt().format(formatter) : null
+                ))
+                .toList();
+
+        int totalAvailable = (int) badgeRepository.count();
+        int totalEarned = unlockedBadges.size();
+        double completionRate = totalAvailable > 0
+                ? Math.round((totalEarned / (double) totalAvailable) * 1000.0) / 10.0
+                : 0.0;
+
+        String recommendation;
+        if (statsDetail.totalTrips() == 0) {
+            recommendation = "Aún no registras viajes sostenibles. Te sugerimos empezar con caminatas de 15 minutos o trayectos cortos en bicicleta para desbloquear tu medalla Primer Paso Verde.";
+        } else if (statsDetail.totalDistanceKm() < 20.0) {
+            recommendation = "¡Excelente comienzo! Mantén tu racha diaria activa para duplicar tu multiplicador de puntos verdes en tus próximos recorridos.";
+        } else {
+            recommendation = "¡Eres un referente ecológico urbano! Tu aporte equivale a haber plantado más de " + Math.max(1, (int) Math.round(statsDetail.treesEquivalent())) + " árboles maduros en la ciudad.";
+        }
+
+        return new EcoImpactReportDTO(
+                user.getId(),
+                user.getFullName(),
+                user.getDistrict() != null ? user.getDistrict() : "Lima Metropolitana",
+                LocalDateTime.now(),
+                statsDetail,
+                breakdown,
+                totalEarned,
+                totalAvailable,
+                completionRate,
+                unlockedBadges,
+                recommendation
+        );
+    }
+
+    private String getLevelTitle(int level) {
+        return switch (level) {
+            case 1 -> "Eco Novato";
+            case 2 -> "Viajero Verde";
+            case 3 -> "Explorador Sostenible";
+            case 4 -> "Defensor del Clima";
+            case 5 -> "Líder Cero Emisiones";
+            default -> "Campeón Planetario";
+        };
     }
 
     @Transactional(readOnly = true)
