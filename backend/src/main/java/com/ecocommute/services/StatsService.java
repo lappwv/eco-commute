@@ -1,7 +1,9 @@
 package com.ecocommute.services;
 
 import com.ecocommute.dto.CommunityImpactDTO;
+import com.ecocommute.dto.TransportModeStatsDTO;
 import com.ecocommute.dto.UserStatsDetailDTO;
+import com.ecocommute.entities.TransportMode;
 import com.ecocommute.entities.Trip;
 import com.ecocommute.entities.User;
 import com.ecocommute.entities.UserStats;
@@ -9,6 +11,7 @@ import com.ecocommute.repositories.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -71,6 +74,27 @@ public class StatsService {
                 tripsByMode,
                 stats.getUpdatedAt()
         );
+    }
+
+    @Transactional(readOnly = true)
+    public List<TransportModeStatsDTO> getTransportModeBreakdown(String userId) {
+        List<Trip> trips = tripRepository.findByUserIdOrderByCompletedAtDesc(userId);
+        Map<TransportMode, List<Trip>> grouped = trips.stream()
+                .filter(t -> t.getTransportMode() != null)
+                .collect(Collectors.groupingBy(Trip::getTransportMode));
+
+        return grouped.entrySet().stream()
+                .map(entry -> {
+                    TransportMode mode = entry.getKey();
+                    List<Trip> modeTrips = entry.getValue();
+                    long count = modeTrips.size();
+                    double distanceKm = Math.round(modeTrips.stream().mapToDouble(Trip::getDistanceKm).sum() * 100.0) / 100.0;
+                    double co2SavedKg = Math.round((modeTrips.stream().mapToDouble(Trip::getCo2SavedGrams).sum() / 1000.0) * 100.0) / 100.0;
+                    int calories = modeTrips.stream().mapToInt(Trip::getCaloriesBurned).sum();
+                    return new TransportModeStatsDTO(mode, mode.getDisplayName(), count, distanceKm, co2SavedKg, calories);
+                })
+                .sorted(Comparator.comparing(TransportModeStatsDTO::tripsCount).reversed())
+                .toList();
     }
 
     @Transactional(readOnly = true)

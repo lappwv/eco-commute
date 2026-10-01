@@ -5,6 +5,7 @@ import com.ecocommute.dto.BadgeDetailDTO;
 import com.ecocommute.entities.User;
 import com.ecocommute.services.BadgeService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -24,9 +25,12 @@ public class BadgeController {
     }
 
     @GetMapping
-    @Operation(summary = "Obtiene el catalogo de medallas con el progreso del usuario actual")
-    public ResponseEntity<List<BadgeDetailDTO>> getAllBadges(@AuthenticationPrincipal User user) {
-        return ResponseEntity.ok(badgeService.getAllBadgesForUser(user));
+    @Operation(summary = "Obtiene el catalogo de medallas con filtro opcional de estado (ALL, UNLOCKED, LOCKED)")
+    public ResponseEntity<List<BadgeDetailDTO>> getAllBadges(
+            @AuthenticationPrincipal User user,
+            @Parameter(description = "Filtro por estado: ALL, UNLOCKED o LOCKED")
+            @RequestParam(required = false, defaultValue = "ALL") String status) {
+        return ResponseEntity.ok(badgeService.getAllBadgesForUser(user, status));
     }
 
     @GetMapping("/my-badges")
@@ -36,6 +40,15 @@ public class BadgeController {
             return ResponseEntity.status(401).build();
         }
         return ResponseEntity.ok(badgeService.getMyBadges(user.getId()));
+    }
+
+    @PostMapping("/sync")
+    @Operation(summary = "Sincroniza y reevalua todas las medallas para el usuario autenticado")
+    public ResponseEntity<List<BadgeAwardDTO>> syncMyBadges(@AuthenticationPrincipal User user) {
+        if (user == null) {
+            return ResponseEntity.status(401).build();
+        }
+        return ResponseEntity.ok(badgeService.syncUserBadges(user));
     }
 
     @GetMapping("/{id}")
