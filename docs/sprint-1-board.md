@@ -19,7 +19,7 @@ Implementar la base funcional de EcoCommute para evidenciar avance del Trabajo P
 | Done | HU10-HU11 | Medallas: desbloqueo automático y consulta en el perfil. | Diego Avalos | 8 h |
 | Done | HU12-HU14 | Catálogo de recompensas, canjes e historial; retos (CRUD admin). | Diego Avalos / Matías Mariños | 8 h |
 | Done | Evidencia | Publicar landing page en GitHub Pages. | Matías Mariños | 4 h |
-| En curso | Evidencia | Desplegar el backend en la nube (Render Blueprint `render.yaml`, plan free). | Rodrigo Condor | 2 h |
+| Done | Evidencia | Desplegar el backend en la nube (Render Blueprint `render.yaml`, plan free). | Rodrigo Condor | 2 h |
 | To-do | Evidencia | Preparar capturas, pruebas funcionales y documentación de Sprint Review. | Matías Mariños | 6 h |
 
 ## Verificación técnica
@@ -34,4 +34,4 @@ Implementar la base funcional de EcoCommute para evidenciar avance del Trabajo P
 - Repositorio: https://github.com/lappwv/eco-commute
 - Product Backlog (HU01–HU14): [docs/product-backlog.md](product-backlog.md)
 - Tablero de seguimiento: https://github.com/lappwv/eco-commute/blob/main/docs/sprint-1-board.md
-- Backend desplegado: _(pendiente de activar el Blueprint en render.com; colocar aquí la URL `https://ecocommute-backend.onrender.com`)_
+- Backend desplegado: **https://ecocommute-backend-a14m.onrender.com** — `GET /health` → `{"status":"UP"}` (verificado 01/10/2026); login `POST /api/v1/auth/login` → 200 con JWT; endpoints protegidos responden 200 con token y 403 sin rol admin. Swagger: `https://ecocommute-backend-a14m.onrender.com/swagger-ui.html`
