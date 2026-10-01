@@ -1,6 +1,7 @@
 package com.ecocommute.controllers;
 
 import com.ecocommute.dto.CommunityImpactDTO;
+import com.ecocommute.dto.TransportModeStatsDTO;
 import com.ecocommute.dto.UserStatsDetailDTO;
 import com.ecocommute.entities.User;
 import com.ecocommute.services.StatsService;
@@ -11,6 +12,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/stats")
@@ -30,6 +33,15 @@ public class StatsController {
             return ResponseEntity.status(401).build();
         }
         return ResponseEntity.ok(statsService.getUserStats(user.getId()));
+    }
+
+    @GetMapping("/breakdown")
+    @Operation(summary = "Obtiene el desglose de impacto y distancia por modo de transporte")
+    public ResponseEntity<List<TransportModeStatsDTO>> getMyModeBreakdown(@AuthenticationPrincipal User user) {
+        if (user == null) {
+            return ResponseEntity.status(401).build();
+        }
+        return ResponseEntity.ok(statsService.getTransportModeBreakdown(user.getId()));
     }
 
     @GetMapping("/summary")

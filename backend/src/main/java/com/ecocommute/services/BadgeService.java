@@ -22,39 +22,60 @@ public class BadgeService {
     private final BadgeRepository badgeRepository;
     private final UserBadgeRepository userBadgeRepository;
     private final UserStatsRepository userStatsRepository;
+    private final GamificationService gamificationService;
 
     public BadgeService(BadgeRepository badgeRepository,
                         UserBadgeRepository userBadgeRepository,
-                        UserStatsRepository userStatsRepository) {
+                        UserStatsRepository userStatsRepository,
+                        GamificationService gamificationService) {
         this.badgeRepository = badgeRepository;
         this.userBadgeRepository = userBadgeRepository;
         this.userStatsRepository = userStatsRepository;
+        this.gamificationService = gamificationService;
     }
 
     @Transactional(readOnly = true)
     public List<BadgeDetailDTO> getAllBadgesForUser(User user) {
+        return getAllBadgesForUser(user, "ALL");
+    }
+
+    @Transactional(readOnly = true)
+    public List<BadgeDetailDTO> getAllBadgesForUser(User user, String status) {
         List<Badge> allBadges = badgeRepository.findAll();
+        List<BadgeDetailDTO> details;
+
         if (user == null) {
-            return allBadges.stream()
+            details = allBadges.stream()
                     .map(b -> toDetailDTO(b, false, 0, null))
+                    .toList();
+        } else {
+            Map<Long, UserBadge> userBadgesMap = userBadgeRepository.findByUserId(user.getId())
+                    .stream()
+                    .collect(Collectors.toMap(ub -> ub.getBadge().getId(), ub -> ub, (a, b) -> a));
+
+            UserStats stats = userStatsRepository.findByUserId(user.getId())
+                    .orElseGet(() -> new UserStats(user));
+
+            details = allBadges.stream()
+                    .map(badge -> {
+                        UserBadge ub = userBadgesMap.get(badge.getId());
+                        boolean unlocked = ub != null;
+                        int progress = unlocked ? 100 : calculateProgress(badge, user, stats);
+                        return toDetailDTO(badge, unlocked, progress, ub != null ? ub.getAwardedAt() : null);
+                    })
                     .toList();
         }
 
-        Map<Long, UserBadge> userBadgesMap = userBadgeRepository.findByUserId(user.getId())
-                .stream()
-                .collect(Collectors.toMap(ub -> ub.getBadge().getId(), ub -> ub, (a, b) -> a));
-
-        UserStats stats = userStatsRepository.findByUserId(user.getId())
-                .orElseGet(() -> new UserStats(user));
-
-        return allBadges.stream()
-                .map(badge -> {
-                    UserBadge ub = userBadgesMap.get(badge.getId());
-                    boolean unlocked = ub != null;
-                    int progress = unlocked ? 100 : calculateProgress(badge, user, stats);
-                    return toDetailDTO(badge, unlocked, progress, ub != null ? ub.getAwardedAt() : null);
-                })
-                .toList();
+        if (status == null || status.equalsIgnoreCase("ALL")) {
+            return details;
+        }
+        if (status.equalsIgnoreCase("UNLOCKED")) {
+            return details.stream().filter(BadgeDetailDTO::unlocked).toList();
+        }
+        if (status.equalsIgnoreCase("LOCKED")) {
+            return details.stream().filter(b -> !b.unlocked()).toList();
+        }
+        return details;
     }
 
     @Transactional(readOnly = true)
@@ -70,6 +91,16 @@ public class BadgeService {
                         ub.getAwardedAt() != null ? ub.getAwardedAt().format(formatter) : null
                 ))
                 .toList();
+    }
+
+    @Transactional
+    public List<BadgeAwardDTO> syncUserBadges(User user) {
+        if (user == null) {
+            return List.of();
+        }
+        UserStats stats = userStatsRepository.findByUserId(user.getId())
+                .orElseGet(() -> new UserStats(user));
+        return gamificationService.checkAndAwardBadges(user, stats);
     }
 
     @Transactional(readOnly = true)

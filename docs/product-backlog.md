@@ -39,7 +39,7 @@ Espejo del Capítulo II del informe
 | T11 | Implementar sistema de medallas por logros | 8h | Diego Avalos, Matías Mariños | Done |
 | T12 | Preparar capturas, pruebas funcionales y resumen de colaboración | 6h | Matías Mariños | To-do |
 
-Estado verificado contra el código (31 tests en verde):
+Estado verificado contra el código (42 tests en verde):
 `Auth`, `Route`, `Trip`, `Dashboard`, `Leaderboard`, `Reward`, `Challenge`,
 `Badge`, `Stats`, `Admin` y `Health` controllers + servicios en
 `backend/src/main/java/com/ecocommute/`.

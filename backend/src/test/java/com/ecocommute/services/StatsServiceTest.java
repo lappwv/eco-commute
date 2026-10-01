@@ -98,4 +98,49 @@ class StatsServiceTest {
         assertEquals(1L, result.tripsByTransportMode().get("BICYCLE"));
         assertEquals(1L, result.tripsByTransportMode().get("WALKING"));
     }
+
+    @Test
+    @DisplayName("Debe agrupar métricas por modo de transporte correctamente")
+    void testGetTransportModeBreakdown() {
+        Trip trip1 = new Trip();
+        trip1.setTransportMode(TransportMode.BICYCLE);
+        trip1.setDistanceKm(10.0);
+        trip1.setCo2SavedGrams(2000.0);
+        trip1.setCaloriesBurned(300);
+
+        Trip trip2 = new Trip();
+        trip2.setTransportMode(TransportMode.BICYCLE);
+        trip2.setDistanceKm(5.0);
+        trip2.setCo2SavedGrams(1000.0);
+        trip2.setCaloriesBurned(150);
+
+        Trip trip3 = new Trip();
+        trip3.setTransportMode(TransportMode.WALKING);
+        trip3.setDistanceKm(3.0);
+        trip3.setCo2SavedGrams(600.0);
+        trip3.setCaloriesBurned(180);
+
+        when(tripRepository.findByUserIdOrderByCompletedAtDesc("u-odar"))
+                .thenReturn(List.of(trip1, trip2, trip3));
+
+        var breakdown = statsService.getTransportModeBreakdown("u-odar");
+
+        assertEquals(2, breakdown.size());
+
+        var bikeStats = breakdown.stream()
+                .filter(b -> b.transportMode() == TransportMode.BICYCLE)
+                .findFirst().orElseThrow();
+        assertEquals(2L, bikeStats.tripsCount());
+        assertEquals(15.0, bikeStats.totalDistanceKm());
+        assertEquals(3.0, bikeStats.totalCo2SavedKg());
+        assertEquals(450, bikeStats.totalCaloriesBurned());
+
+        var walkStats = breakdown.stream()
+                .filter(w -> w.transportMode() == TransportMode.WALKING)
+                .findFirst().orElseThrow();
+        assertEquals(1L, walkStats.tripsCount());
+        assertEquals(3.0, walkStats.totalDistanceKm());
+        assertEquals(0.6, walkStats.totalCo2SavedKg());
+        assertEquals(180, walkStats.totalCaloriesBurned());
+    }
 }
