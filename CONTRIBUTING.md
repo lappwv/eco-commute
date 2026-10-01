@@ -17,12 +17,12 @@ Sin esto, todos los commits quedan con el mismo autor y no se ve quién hizo qu�
 
 | Feature (rama) | Alcance | Integrante |
 |---|---|---|
-| `feature/auth` | registro, login, JWT, perfil de usuario, distrito | |
-| `feature/trips` | registro de viajes, telemetría, cálculo CO₂, `EcoRoute` | |
-| `feature/stats-badges` | `user_stats`, insignias, niveles, streaks | |
-| `feature/challenges-leaderboard` | retos, ranking comunitario | |
-| `feature/rewards` | catálogo de recompensas, canjes, puntos | |
-| `feature/dashboard-ia` | dashboard semanal/comunitario, asistente IA de rutas | |
+| `feature/auth` | registro, login, JWT, perfil de usuario, distrito | Rodrigo Condor |
+| `feature/trips` | registro de viajes, telemetría, cálculo CO₂, `EcoRoute` | Jeampiero Ramos |
+| `feature/stats-badges` | `user_stats`, insignias, niveles, streaks | Odar Alcocer |
+| `feature/challenges-leaderboard` | retos, ranking comunitario | Paulo Espinoza |
+| `feature/rewards` | catálogo de recompensas, canjes, puntos | Diego Avalos |
+| `feature/dashboard-ia` | dashboard semanal/comunitario, asistente IA de rutas | Matías Mariños |
 
 Cada feature es una **rebanada vertical**: entidad + repositorio + servicio +
 controller + test. No se reparte por capas ("el back lo hace uno, el front otro").
