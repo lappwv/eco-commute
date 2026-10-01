@@ -58,8 +58,8 @@ El backend se despliega con el Blueprint `render.yaml` de la raíz (Docker + Pos
 2. **New → Blueprint →** elegir este repo → Render lee `render.yaml`, crea el servicio
    `ecocommute-backend` (plan free, 512 MB) y la base `ecocommute-db` (Postgres free, 256 MB),
    y genera `JWT_SECRET` automáticamente.
-3. Esperar el primer deploy. La URL queda tipo `https://ecocommute-backend.onrender.com`;
-   el chequeo de salud es `GET /health`.
+3. Esperar el primer deploy. La URL es **`https://ecocommute-backend-a14m.onrender.com`**;
+   el chequeo de salud es `GET /health` → `{"status":"UP"}`.
 
 Variables de entorno que usa el backend (todas resueltas por el Blueprint):
 
@@ -68,7 +68,7 @@ Variables de entorno que usa el backend (todas resueltas por el Blueprint):
 | `JWT_SECRET` | generada por Render |
 | `DB_HOST`, `DB_PORT`, `DB_NAME`, `SPRING_DATASOURCE_USERNAME`, `SPRING_DATASOURCE_PASSWORD` | desde `ecocommute-db` |
 | `PORT` | inyectada por Render (el backend la respeta) |
-| `SEED_DEMO_DATA` | `true` |
+| `APP_SEED_DEMO_DATA` | `true` |
 
 Cosas a tener en cuenta del plan free:
 
