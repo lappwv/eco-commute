@@ -58,6 +58,8 @@ public class WebSecurityConfig {
                         .requestMatchers("/api/v1/telemetry/**", "/api/telemetry/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/dashboard/community-impact", "/api/v1/dashboard/community", "/api/dashboard/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/leaderboard/**", "/api/leaderboard/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/badges/**", "/api/badges/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/stats/summary", "/api/stats/summary").permitAll()
                         // Admin restricted endpoints
                         .requestMatchers("/api/v1/admin/**", "/api/admin/**").hasAuthority("ROLE_ADMIN")
                         // Authenticated user endpoints
