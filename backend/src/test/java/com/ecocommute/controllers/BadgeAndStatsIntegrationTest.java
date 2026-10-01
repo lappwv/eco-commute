@@ -114,4 +114,25 @@ class BadgeAndStatsIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray());
     }
+
+    @Test
+    @DisplayName("GET /api/v1/stats/certificate - Debe responder 200 OK con certificado y codigo de verificacion")
+    void testGetCertificate() throws Exception {
+        mockMvc.perform(get("/api/v1/stats/certificate").header("Authorization", userToken))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.certificateId").exists())
+                .andExpect(jsonPath("$.verificationCode").exists())
+                .andExpect(jsonPath("$.holderName").value("Odar Alcocer Test"))
+                .andExpect(jsonPath("$.summaryStatement").exists());
+    }
+
+    @Test
+    @DisplayName("GET /api/v1/stats/report - Debe responder 200 OK con reporte integral y recomendaciones")
+    void testGetImpactReport() throws Exception {
+        mockMvc.perform(get("/api/v1/stats/report").header("Authorization", userToken))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.userId").value(testUser.getId()))
+                .andExpect(jsonPath("$.lifetimeStats").exists())
+                .andExpect(jsonPath("$.ecoRecommendation").exists());
+    }
 }

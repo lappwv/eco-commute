@@ -1,8 +1,6 @@
 package com.ecocommute.controllers;
 
-import com.ecocommute.dto.CommunityImpactDTO;
-import com.ecocommute.dto.TransportModeStatsDTO;
-import com.ecocommute.dto.UserStatsDetailDTO;
+import com.ecocommute.dto.*;
 import com.ecocommute.entities.User;
 import com.ecocommute.services.StatsService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -17,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/stats")
-@Tag(name = "Estadisticas", description = "Metricas ambientales, equivalencias ecologicas y resumen de usuario (HU07)")
+@Tag(name = "Estadisticas", description = "Metricas ambientales, equivalencias ecologicas, reportes y certificados (HU07)")
 public class StatsController {
 
     private final StatsService statsService;
@@ -42,6 +40,24 @@ public class StatsController {
             return ResponseEntity.status(401).build();
         }
         return ResponseEntity.ok(statsService.getTransportModeBreakdown(user.getId()));
+    }
+
+    @GetMapping("/certificate")
+    @Operation(summary = "Genera el certificado oficial de movilidad sostenible del usuario autenticado")
+    public ResponseEntity<EcoCertificateDTO> getMyCertificate(@AuthenticationPrincipal User user) {
+        if (user == null) {
+            return ResponseEntity.status(401).build();
+        }
+        return ResponseEntity.ok(statsService.generateCertificate(user.getId()));
+    }
+
+    @GetMapping("/report")
+    @Operation(summary = "Genera un reporte integral de impacto ecologico, medallas y recomendaciones")
+    public ResponseEntity<EcoImpactReportDTO> getMyImpactReport(@AuthenticationPrincipal User user) {
+        if (user == null) {
+            return ResponseEntity.status(401).build();
+        }
+        return ResponseEntity.ok(statsService.generateImpactReport(user.getId()));
     }
 
     @GetMapping("/summary")

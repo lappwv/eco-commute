@@ -143,4 +143,41 @@ class StatsServiceTest {
         assertEquals(0.6, walkStats.totalCo2SavedKg());
         assertEquals(180, walkStats.totalCaloriesBurned());
     }
+
+    @Test
+    @DisplayName("Debe generar certificado oficial de movilidad sostenible con codigo unico")
+    void testGenerateCertificate() {
+        when(userRepository.findById("u-odar")).thenReturn(Optional.of(user));
+        when(userStatsRepository.findByUserId("u-odar")).thenReturn(Optional.of(stats));
+        when(userBadgeRepository.findByUserId("u-odar")).thenReturn(List.of());
+
+        var cert = statsService.generateCertificate("u-odar");
+
+        assertNotNull(cert);
+        assertNotNull(cert.certificateId());
+        assertTrue(cert.verificationCode().startsWith("ECO-CERT-"));
+        assertEquals("Odar Alcocer", cert.holderName());
+        assertEquals("Explorador Sostenible", cert.levelTitle());
+        assertEquals(46.2, cert.totalCo2SavedKg());
+        assertNotNull(cert.summaryStatement());
+    }
+
+    @Test
+    @DisplayName("Debe generar reporte integral de impacto con porcentaje de medallas y recomendaciones")
+    void testGenerateImpactReport() {
+        when(userRepository.findById("u-odar")).thenReturn(Optional.of(user));
+        when(userStatsRepository.findByUserId("u-odar")).thenReturn(Optional.of(stats));
+        when(tripRepository.findByUserIdOrderByCompletedAtDesc("u-odar")).thenReturn(List.of());
+        when(userBadgeRepository.findByUserId("u-odar")).thenReturn(List.of());
+        when(badgeRepository.count()).thenReturn(8L);
+
+        var report = statsService.generateImpactReport("u-odar");
+
+        assertNotNull(report);
+        assertEquals("u-odar", report.userId());
+        assertEquals(8, report.totalBadgesAvailable());
+        assertEquals(0, report.totalBadgesEarned());
+        assertNotNull(report.ecoRecommendation());
+        assertNotNull(report.lifetimeStats());
+    }
 }
