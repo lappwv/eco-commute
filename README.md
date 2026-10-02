@@ -2,44 +2,63 @@
 
 EcoCommute es una aplicación web orientada a incentivar la movilidad sostenible en Lima Metropolitana mediante rutas ecoeficientes, cálculo de CO₂ ahorrado, puntos verdes, recompensas, rankings por distrito y recomendaciones personalizadas con IA.
 
-## Equipo
+## Equipo y forma de trabajo
 
-- Rodrigo Condor Silvera - Líder del proyecto
-- Diego Avalos - Frontend
-- Odar Alcocer - Backend
-- Paulo Espinoza - Base de datos
-- Jeampiero Ramos - Pruebas
-- Matías Mariños - Documentación
+El desarrollo partió de una estructura base y arquitectura general preparada por Rodrigo Condor. A partir de esa base, el equipo trabajó por funcionalidades mediante ramas `feature/*`, refinando, completando, corrigiendo, integrando y validando los módulos asignados.
+
+Responsabilidades principales del Sprint:
+
+- Rodrigo Condor Silvera — estructura base, arquitectura general, autenticación e integración.
+- Jeampiero Ramos — rutas, viajes y validación del cálculo de CO₂.
+- Odar Alcocer — puntos verdes, gamificación y medallas.
+- Paulo Espinoza — ranking por distrito.
+- Matías Mariños — dashboard, IA y evidencias del Sprint.
+- Diego Avalos — recompensas, canjes y retos.
+
+El flujo de contribución (ramas, convención de commits, Pull Requests) está documentado en [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Arquitectura objetivo del producto
+
+La aplicación web principal de EcoCommute se implementará con:
+
+- Frontend principal: **Angular + TypeScript + Angular Material**.
+- Backend: Java 21 + Spring Boot 3.3.3 + Spring Security + JWT + Spring Data JPA.
+- Base de datos: PostgreSQL.
+- Ruteo: OSRM.
+- Inteligencia artificial: Google Gemini, con fallback heurístico.
+- Documentación de API: OpenAPI / Swagger (springdoc).
 
 ## Alcance del Trabajo Parcial
 
-- Landing page responsive lista para publicación.
-- Propuesta de valor, problema, segmentos, Lean UX y Product Backlog.
-- Sprint Backlog con tareas de ingeniería de 4 a 8 horas.
-- Diseño de interfaz y artefactos de Figma.
-- Modelo de base de datos PostgreSQL para el alcance inicial.
-- Landing page pública con CTA, mockups, contacto y redes sociales referenciales.
-- Tablero público del Sprint 1 para seguimiento del avance.
-- Primera base de API REST con autenticación, viajes, CO2, puntos, dashboard y ranking.
+En esta entrega se implementan y despliegan:
+
+- Landing page responsive.
+- Backend API REST.
+- Persistencia de datos.
+- Seguridad y autenticación.
+- Rutas, viajes, CO₂, puntos, dashboard, ranking, medallas, recompensas y retos.
+- Documentación OpenAPI/Swagger.
+- Despliegue del backend en Render.
+- Landing publicada en GitHub Pages.
+- Product Backlog.
+- Sprint Backlog.
+- Lean UX.
+- Diseño y evidencias del Sprint.
+
+La aplicación Angular completa **NO** forma parte todavía del entregable implementado del Trabajo Parcial.
+
+Sus pantallas y flujos se representan actualmente mediante mock-ups y wireflows, y serán implementados en siguientes iteraciones.
 
 ## Estructura
 
 ```text
-frontend/landing/      Landing page del proyecto
-backend/               API REST Spring Boot
-database/              Script PostgreSQL del modelo de datos
-capitulo3_figma_exports/ Imágenes usadas en el informe
-assets/                Recursos visuales auxiliares
-docs/                  Evidencias y tablero de seguimiento del Sprint
+frontend/landing/        Landing page del Trabajo Parcial
+backend/                 API REST Spring Boot
+database/                Modelo y scripts PostgreSQL
+capitulo3_figma_exports/ Artefactos visuales usados en el informe
+assets/                  Recursos visuales auxiliares
+docs/                    Backlog, evidencias y seguimiento del Sprint
 ```
-
-## Tecnologías Propuestas
-
-- Frontend: Angular + TypeScript + Material Design
-- Backend: Spring Boot + Java + Spring Security + JWT
-- Base de datos: PostgreSQL
-- Integraciones: Google Maps API y OpenAI API
-- Despliegue esperado: frontend público y backend en entorno cloud
 
 ## Flujo principal del alcance inicial
 
@@ -50,6 +69,12 @@ docs/                  Evidencias y tablero de seguimiento del Sprint
 5. El usuario canjea puntos por recompensas.
 6. La IA sugiere mejores hábitos de movilidad.
 
+## Estado del backend (verificado)
+
+- 46 endpoints bajo `/api/v1` (auth, rutas, viajes, dashboard, ranking, recompensas, retos, admin, salud).
+- 23 tests automatizados en verde: `cd backend && ./mvnw.cmd clean test`.
+- Documentación interactiva: `https://ecocommute-backend-a14m.onrender.com/swagger-ui.html`.
+
 ## Despliegue del backend (Render, gratis, sin tarjeta)
 
 El backend se despliega con el Blueprint `render.yaml` de la raíz (Docker + PostgreSQL gestionado):
@@ -58,8 +83,8 @@ El backend se despliega con el Blueprint `render.yaml` de la raíz (Docker + Pos
 2. **New → Blueprint →** elegir este repo → Render lee `render.yaml`, crea el servicio
    `ecocommute-backend` (plan free, 512 MB) y la base `ecocommute-db` (Postgres free, 256 MB),
    y genera `JWT_SECRET` automáticamente.
-3. Esperar el primer deploy. La URL queda tipo `https://ecocommute-backend.onrender.com`;
-   el chequeo de salud es `GET /health`.
+3. Esperar el primer deploy. La URL es **`https://ecocommute-backend-a14m.onrender.com`**;
+   el chequeo de salud es `GET /health` → `{"status":"UP"}`.
 
 Variables de entorno que usa el backend (todas resueltas por el Blueprint):
 
@@ -68,16 +93,23 @@ Variables de entorno que usa el backend (todas resueltas por el Blueprint):
 | `JWT_SECRET` | generada por Render |
 | `DB_HOST`, `DB_PORT`, `DB_NAME`, `SPRING_DATASOURCE_USERNAME`, `SPRING_DATASOURCE_PASSWORD` | desde `ecocommute-db` |
 | `PORT` | inyectada por Render (el backend la respeta) |
-| `SEED_DEMO_DATA` | `true` |
+| `APP_SEED_DEMO_DATA` | `true` |
+
+Cuentas de demostración:
+
+| Rol | Email | Contraseña |
+|---|---|---|
+| Usuario | `demo@ecocommute.org` | `Demo123!` |
+| Administrador | `admin@ecocommute.org` | `Admin123!` |
 
 Cosas a tener en cuenta del plan free:
 
-- Tras ~15 min sin tráfico la instancia duerme y el primer request tarda ~30-60 s (cold start).
+- Tras ~30 min sin tráfico la instancia duerme y el primer request tarda ~30-60 s (cold start).
 - El Postgres free expira a los 90 días (para la demo del TP no afecta).
 - Cada push a `main` redeploya automáticamente.
 
-Verificación post-deploy: `https://<tu-url>/health` debe responder `{"status":"UP",...}` y
-`POST https://<tu-url>/api/v1/auth/login` con las credenciales demo.
+Verificación post-deploy: `https://ecocommute-backend-a14m.onrender.com/health` debe responder
+`{"status":"UP",...}` y `POST /api/v1/auth/login` con las credenciales demo debe devolver un JWT.
 
 ## Documento del Proyecto
 
