@@ -26,17 +26,17 @@ Espejo del Capítulo II del informe
 
 | Id | Title | Estimation | Assigned To | Status |
 | --- | --- | --- | --- | --- |
-| T01 | Diseñar DTO y validaciones de registro de usuario | 4h | Jeampiero Ramos | Done |
-| T02 | Implementar endpoint POST /api/auth/register y prueba básica | 6h | Odar Alcocer | Done |
-| T03 | Configurar Spring Security, JWT y filtros de autenticación | 8h | Jeampiero Ramos | Done |
-| T04 | Integrar búsqueda de ruta/distancia con OSRM | 8h | Diego Avalos | Done |
-| T05 | Crear entidades JPA y repositorios para viajes y medios de transporte | 6h | Odar Alcocer | Done |
-| T06 | Implementar servicio de cálculo de CO2 y reglas de puntos | 6h | Odar Alcocer | Done |
-| T07 | Registrar transacciones de puntos al guardar un viaje | 5h | Paulo Espinoza | Done |
-| T08 | Construir dashboard con KPIs e historial inicial | 8h | Diego Avalos | Done |
+| T01 | Diseñar DTO y validaciones de registro de usuario | 4h | Rodrigo Condor | Done |
+| T02 | Implementar endpoint POST /api/auth/register y prueba básica | 6h | Rodrigo Condor | Done |
+| T03 | Configurar Spring Security, JWT y filtros de autenticación | 8h | Rodrigo Condor | Done |
+| T04 | Integrar búsqueda de ruta/distancia con OSRM | 8h | Jeampiero Ramos | Done |
+| T05 | Crear entidades JPA y repositorios para viajes y medios de transporte | 6h | Jeampiero Ramos | Done |
+| T06 | Implementar servicio de cálculo de CO2 y reglas de puntos | 6h | Jeampiero Ramos | Done |
+| T07 | Registrar transacciones de puntos al guardar un viaje | 5h | Odar Alcocer | Done |
+| T08 | Construir dashboard con KPIs e historial inicial | 8h | Matías Mariños | Done |
 | T09 | Crear endpoint y vista de ranking por distrito | 6h | Paulo Espinoza | Done |
-| T10 | Diseñar prompt y servicio para recomendación con IA (Gemini) | 6h | Rodrigo Condor | Done |
-| T11 | Implementar sistema de medallas por logros | 8h | Diego Avalos, Matías Mariños | Done |
+| T10 | Diseñar prompt y servicio para recomendación con IA (Gemini) | 6h | Matías Mariños | Done |
+| T11 | Implementar sistema de medallas por logros | 8h | Odar Alcocer | Done |
 | T12 | Preparar capturas, pruebas funcionales y resumen de colaboración | 6h | Matías Mariños | To-do |
 
 Estado verificado contra el código (46 tests en verde):

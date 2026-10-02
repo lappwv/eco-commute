@@ -15,13 +15,13 @@ pertenecían a otro proyecto y restan puntos por inconsistencia.
 >
 > La configuración inyecta las variables de entorno `JWT_SECRET` (generada por Render), `DB_HOST`, `DB_PORT`, `DB_NAME`, `SPRING_DATASOURCE_USERNAME`, `SPRING_DATASOURCE_PASSWORD` y `PORT`; la aplicación crea o actualiza el esquema al arrancar (`spring.jpa.hibernate.ddl-auto=update`), por lo que no requiere ejecutar scripts SQL manualmente. El servicio expone `GET /health` como chequeo de salud para Render.
 >
-> URL pública del backend: `https://ecocommute-backend.onrender.com` *(completar después de activar el Blueprint)*. La landing page permanece publicada de forma independiente en GitHub Pages: https://lappwv.github.io/eco-commute/
+> URL pública del backend: **`https://ecocommute-backend-a14m.onrender.com`** (Blueprint activado; `GET /health` responde `{"status":"UP"}`). La landing page permanece publicada de forma independiente en GitHub Pages: https://lappwv.github.io/eco-commute/
 >
 > Repositorio principal: https://github.com/lappwv/eco-commute. Configuración de desarrollo: Git y GitHub para el control de versiones, con flujo por features (ramas `feature/*` y Pull Requests según `CONTRIBUTING.md`); Java 21, Spring Boot 3.3.3, Spring Security, Spring Data JPA, JWT y Maven en el backend; HTML5, Tailwind CSS, Leaflet y Chart.js en la aplicación estática; PostgreSQL (Render) en producción; Docker y Render para el despliegue. La API integra OSRM para el cálculo de rutas y Gemini cuando se configura la clave correspondiente.
 
 ## 2. Reemplazar 4.2.1.3 Execution Evidence for Sprint Review
 
-> La aplicación puede revisarse en vivo en dos URL públicas: la landing page en GitHub Pages (https://lappwv.github.io/eco-commute/) y la API del backend en Render (`https://ecocommute-backend.onrender.com`, chequeo de salud en `/health`). Esta evidencia permite validar en vivo el flujo completo: registro e inicio de sesión con JWT, planificación de rutas con comparación de CO₂ frente al auto, recomendación con IA, registro de viajes, dashboard de impacto, ranking por distrito, medallas, recompensas y retos.
+> La aplicación puede revisarse en vivo en dos URL públicas: la landing page en GitHub Pages (https://lappwv.github.io/eco-commute/) y la API del backend en Render (`https://ecocommute-backend-a14m.onrender.com`, chequeo de salud en `/health`). Esta evidencia permite validar en vivo el flujo completo: registro e inicio de sesión con JWT, planificación de rutas con comparación de CO₂ frente al auto, recomendación con IA, registro de viajes, dashboard de impacto, ranking por distrito, medallas, recompensas y retos.
 
 ## 3. Reemplazar 4.2.1.5 Software Deployment Evidence for Sprint Review
 
