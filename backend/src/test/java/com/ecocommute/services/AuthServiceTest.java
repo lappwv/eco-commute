@@ -5,6 +5,7 @@ import com.ecocommute.dto.LoginRequestDTO;
 import com.ecocommute.dto.RegisterRequestDTO;
 import com.ecocommute.entities.Role;
 import com.ecocommute.entities.User;
+import com.ecocommute.exception.InvalidCredentialsException;
 import com.ecocommute.repositories.UserBadgeRepository;
 import com.ecocommute.repositories.UserRepository;
 import com.ecocommute.repositories.UserStatsRepository;
@@ -90,7 +91,7 @@ class AuthServiceTest {
     }
 
     @Test
-    @DisplayName("Debe lanzar excepción si el email ya existe")
+    @DisplayName("Debe lanzar excepciÃ³n si el email ya existe")
     void testRegisterDuplicateEmail() {
         RegisterRequestDTO req = new RegisterRequestDTO(
                 "existing@ecocommute.org",
@@ -107,7 +108,7 @@ class AuthServiceTest {
     }
 
     @Test
-    @DisplayName("Debe iniciar sesión exitosamente con credenciales válidas")
+    @DisplayName("Debe iniciar sesiÃ³n exitosamente con credenciales vÃ¡lidas")
     void testLoginSuccess() {
         LoginRequestDTO req = new LoginRequestDTO("test@ecocommute.org", "Secret123!");
 
@@ -129,7 +130,7 @@ class AuthServiceTest {
     }
 
     @Test
-    @DisplayName("Debe fallar el inicio de sesión con contraseña incorrecta")
+    @DisplayName("Debe fallar el inicio de sesion con contrasena incorrecta")
     void testLoginInvalidPassword() {
         LoginRequestDTO req = new LoginRequestDTO("test@ecocommute.org", "WrongPassword");
 
@@ -140,6 +141,38 @@ class AuthServiceTest {
         when(userRepository.findByEmail("test@ecocommute.org")).thenReturn(Optional.of(user));
         when(passwordEncoder.matches("WrongPassword", "hashed_password")).thenReturn(false);
 
-        assertThrows(IllegalArgumentException.class, () -> authService.login(req));
+        assertThrows(InvalidCredentialsException.class, () -> authService.login(req));
+    }
+
+    @Test
+    @DisplayName("Debe fallar el inicio de sesion si el correo no existe, sin revelar que no existe")
+    void testLoginUnknownEmail() {
+        LoginRequestDTO req = new LoginRequestDTO("nobody@ecocommute.org", "Secret123!");
+
+        when(userRepository.findByEmail("nobody@ecocommute.org")).thenReturn(Optional.empty());
+
+        InvalidCredentialsException ex = assertThrows(
+                InvalidCredentialsException.class, () -> authService.login(req));
+        assertEquals("Credenciales invalidas", ex.getMessage());
+        verify(jwtTokenUtil, never()).generateToken(any(User.class));
+    }
+
+    @Test
+    @DisplayName("Debe rechazar la contrasena sin letras ni numeros en el registro (HU01)")
+    void testRegisterWeakPassword() {
+        RegisterRequestDTO req = new RegisterRequestDTO(
+                "weak@ecocommute.org",
+                "        ",   // 8 espacios: pasa el tamano pero no las reglas minimas
+                "Weak User",
+                false,
+                15
+        );
+
+        jakarta.validation.Validator validator = jakarta.validation.Validation
+                .buildDefaultValidatorFactory().getValidator();
+
+        var violations = validator.validate(req);
+        assertFalse(violations.isEmpty(), "La contrasena sin letra ni numero debe ser invalida");
+        assertTrue(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("password")));
     }
 }
