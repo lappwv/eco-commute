@@ -4,6 +4,15 @@ El profesor pidió que el trabajo se organice **por features** y que cada integr
 haga su parte. Esto es el flujo obligatorio: nada entra a `main` sin pasar por una
 rama `feature/*` y un Pull Request revisado por otro integrante.
 
+El desarrollo partió de una estructura base y arquitectura general preparada por
+Rodrigo Condor (organización del backend, configuración común, entidades base y
+flujo de integración); a partir de esa base, cada integrante trabajó su feature.
+
+Arquitectura objetivo del producto: **Angular + TypeScript + Angular Material** en el
+frontend principal (iteraciones posteriores). El alcance del Trabajo Parcial incluye
+landing page responsive, backend API REST, base de datos, seguridad, despliegue y
+documentación/evidencias.
+
 ## 1. Configuración inicial (una sola vez)
 
 ```powershell
@@ -17,12 +26,12 @@ Sin esto, todos los commits quedan con el mismo autor y no se ve quién hizo qu�
 
 | Feature (rama) | Alcance | Integrante |
 |---|---|---|
-| `feature/auth` | registro, login, JWT, perfil de usuario, distrito | Rodrigo Condor |
+| `feature/auth` | registro, login, JWT, perfil de usuario, distrito | Rodrigo Condor (estructura base e integración) |
 | `feature/trips` | registro de viajes, telemetría, cálculo CO₂, `EcoRoute` | Jeampiero Ramos |
-| `feature/stats-badges` | `user_stats`, insignias, niveles, streaks | Odar Alcocer |
-| `feature/challenges-leaderboard` | retos, ranking comunitario | Paulo Espinoza |
-| `feature/rewards` | catálogo de recompensas, canjes, puntos | Diego Avalos |
-| `feature/dashboard-ia` | dashboard semanal/comunitario, asistente IA de rutas | Matías Mariños |
+| `feature/stats-badges` | `user_stats`, puntos verdes, medallas, niveles, streaks | Odar Alcocer |
+| `feature/challenges-leaderboard` | ranking por distrito (HU08) y retos (HU13) | Paulo Espinoza (ranking) y Diego Avalos (retos) |
+| `feature/rewards` | catálogo de recompensas, canjes e historial (HU12, HU14) | Diego Avalos |
+| `feature/dashboard-ia` | dashboard semanal/comunitario, asistente IA de rutas, evidencias del Sprint | Matías Mariños |
 
 Cada feature es una **rebanada vertical**: entidad + repositorio + servicio +
 controller + test. No se reparte por capas ("el back lo hace uno, el front otro").
