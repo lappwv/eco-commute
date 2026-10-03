@@ -26,7 +26,7 @@ public class DashboardController {
         return ResponseEntity.ok(dashboardService.getUserDashboard(user.getId()));
     }
 
-    @GetMapping({"/community-impact", "/community"})
+    @GetMapping("/community-impact")
     public ResponseEntity<CommunityImpactDTO> getCommunityImpact() {
         return ResponseEntity.ok(dashboardService.getCommunityImpact());
     }

@@ -1,7 +1,6 @@
 package com.ecocommute.controllers;
 
 import com.ecocommute.dto.AuthResponseDTO;
-import com.ecocommute.dto.GoogleLoginRequestDTO;
 import com.ecocommute.dto.LoginRequestDTO;
 import com.ecocommute.dto.RegisterRequestDTO;
 import com.ecocommute.dto.UserProfileDTO;
@@ -50,18 +49,6 @@ public class AuthController {
     })
     public ResponseEntity<AuthResponseDTO> login(@Valid @RequestBody LoginRequestDTO request) {
         return ResponseEntity.ok(authService.login(request));
-    }
-
-    @PostMapping("/auth/google")
-    @Operation(summary = "Inicia sesion con Google")
-    public ResponseEntity<AuthResponseDTO> googleLogin(@Valid @RequestBody GoogleLoginRequestDTO request) {
-        return ResponseEntity.ok(authService.googleLogin(request));
-    }
-
-    @GetMapping("/users/profile/{userId}")
-    @Operation(summary = "Obtiene el perfil publico de un usuario")
-    public ResponseEntity<UserProfileDTO> getProfile(@PathVariable String userId) {
-        return ResponseEntity.ok(authService.getProfile(userId));
     }
 
     @GetMapping("/users/me")
