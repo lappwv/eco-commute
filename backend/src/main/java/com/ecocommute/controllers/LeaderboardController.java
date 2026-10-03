@@ -25,9 +25,4 @@ public class LeaderboardController {
             @RequestParam(required = false) String district) {
         return ResponseEntity.ok(leaderboardService.getLeaderboardByDistrict(district));
     }
-
-    @GetMapping("/districts")
-    public ResponseEntity<List<String>> getDistricts() {
-        return ResponseEntity.ok(leaderboardService.getDistricts());
-    }
 }

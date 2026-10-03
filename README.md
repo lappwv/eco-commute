@@ -71,8 +71,8 @@ docs/                    Backlog, evidencias y seguimiento del Sprint
 
 ## Estado del backend (verificado)
 
-- 46 endpoints bajo `/api/v1` (auth, rutas, viajes, dashboard, ranking, recompensas, retos, admin, salud).
-- 23 tests automatizados en verde: `cd backend && ./mvnw.cmd clean test`.
+- 24 endpoints bajo `/api/v1` más `GET /health` = 25 rutas expuestas (auth y perfil, rutas, viajes, dashboard, ranking, recompensas, retos y CRUD administrativo de rewards/challenges).
+- 28 tests automatizados en verde: `cd backend && ./mvnw.cmd clean test`.
 - Documentación interactiva: `https://ecocommute-backend-a14m.onrender.com/swagger-ui.html`.
 
 ## Despliegue del backend (Render, gratis, sin tarjeta)
