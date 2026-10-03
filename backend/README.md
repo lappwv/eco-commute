@@ -91,8 +91,7 @@ PUT    /api/v1/trips/{tripId}                          (admin)
 DELETE /api/v1/trips/{tripId}                          (admin)
 GET    /api/v1/dashboard/summary
 GET    /api/v1/dashboard/community-impact
-GET    /api/v1/leaderboard
-GET    /api/v1/leaderboard?district={district}
+GET    /api/v1/leaderboard[?district={district}]
 GET    /api/v1/rewards
 POST   /api/v1/rewards/{rewardId}/redeem
 GET    /api/v1/redemptions
@@ -107,6 +106,21 @@ PUT    /api/v1/admin/challenges/{id}
 DELETE /api/v1/admin/challenges/{id}
 GET    /health
 ```
+
+Son 25 rutas expuestas: `GET /api/v1/leaderboard` es un único endpoint cuyo
+query param `district` es opcional (sin `district` devuelve el ranking general,
+con `district` filtra por distrito). El conteo se puede verificar en vivo contra
+`/v3/api-docs`.
+
+### Cobertura de HU10-HU14
+
+| HU | Título | Cómo se cubre |
+|---|---|---|
+| HU10 | Desbloqueo automático de medallas | Se ejecuta automáticamente cuando se registra un viaje válido; no necesita endpoint propio. La lógica queda ligada al flujo de `POST /api/v1/trips`. |
+| HU11 | Consulta de medallas | Se consulta desde el perfil del usuario autenticado: `GET /api/v1/users/me`, que devuelve las medallas obtenidas. |
+| HU12 | Gestión de recompensas | CRUD administrativo: `GET/POST/PUT/DELETE /api/v1/admin/rewards` (y `.../rewards/{id}` en PUT/DELETE). |
+| HU13 | Gestión de retos sostenibles | CRUD administrativo: `GET/POST/PUT/DELETE /api/v1/admin/challenges` (y `.../challenges/{id}` en PUT/DELETE). |
+| HU14 | Historial de canjes | `GET /api/v1/redemptions`. |
 
 ## Seguridad
 
