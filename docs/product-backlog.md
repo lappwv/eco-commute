@@ -1,7 +1,7 @@
 # Product Backlog — EcoCommute (TP1)
 
-Espejo del Capítulo II del informe
-(https://docs.google.com/document/d/1rS2YmaUWzP3o-Y5hm9gAD7u6cKaOvi2Oyo4YMZHumaI).
+Espejo del Capítulo II del informe oficial en Markdown
+([docs/Universidad Peruana de Ciencias Aplicadas.md](Universidad%20Peruana%20de%20Ciencias%20Aplicadas.md)).
 
 ## 2.1 Product Backlog
 
@@ -26,20 +26,29 @@ Espejo del Capítulo II del informe
 
 | Id | Title | Estimation | Assigned To | Status |
 | --- | --- | --- | --- | --- |
-| T01 | Diseñar DTO y validaciones de registro de usuario | 4h | Rodrigo Condor | Done |
-| T02 | Implementar endpoint POST /api/auth/register y prueba básica | 6h | Rodrigo Condor | Done |
-| T03 | Configurar Spring Security, JWT y filtros de autenticación | 8h | Rodrigo Condor | Done |
-| T04 | Integrar búsqueda de ruta/distancia con OSRM | 8h | Jeampiero Ramos | Done |
-| T05 | Crear entidades JPA y repositorios para viajes y medios de transporte | 6h | Jeampiero Ramos | Done |
-| T06 | Implementar servicio de cálculo de CO2 y reglas de puntos | 6h | Jeampiero Ramos | Done |
-| T07 | Registrar transacciones de puntos al guardar un viaje | 5h | Odar Alcocer | Done |
-| T08 | Construir dashboard con KPIs e historial inicial | 8h | Matías Mariños | Done |
-| T09 | Crear endpoint y vista de ranking por distrito | 6h | Paulo Espinoza | Done |
-| T10 | Diseñar prompt y servicio para recomendación con IA (Gemini) | 6h | Matías Mariños | Done |
-| T11 | Implementar sistema de medallas por logros | 8h | Odar Alcocer | Done |
+| T01 | Refinar DTO y validaciones de registro de usuario sobre la estructura base | 4h | Rodrigo Condor | Done |
+| T02 | Completar el endpoint POST /api/auth/register y su prueba básica | 6h | Rodrigo Condor | Done |
+| T03 | Refinar y validar Spring Security, JWT y filtros de autenticación | 8h | Rodrigo Condor | Done |
+| T04 | Refinar e integrar la búsqueda de ruta/distancia con OSRM | 8h | Jeampiero Ramos | Done |
+| T05 | Completar y ajustar entidades JPA y repositorios para viajes y medios de transporte | 6h | Jeampiero Ramos | Done |
+| T06 | Refinar y validar el servicio de cálculo de CO2 y reglas de puntos | 6h | Jeampiero Ramos | Done |
+| T07 | Mejorar la actualización de puntos verdes al registrar un viaje | 5h | Odar Alcocer | Done |
+| T08 | Extender y ajustar el dashboard con KPIs, historial y evolución semanal | 8h | Matías Mariños | Done |
+| T09 | Mejorar el endpoint y la vista de ranking por distrito | 6h | Paulo Espinoza | Done |
+| T10 | Refinar el prompt y el servicio de recomendación con IA (Gemini) | 6h | Matías Mariños | Done |
+| T11 | Completar y validar el sistema de medallas por logros | 8h | Odar Alcocer | Done |
 | T12 | Preparar capturas, pruebas funcionales y resumen de colaboración | 6h | Matías Mariños | To-do |
 
-Estado verificado contra el código (23 tests en verde):
+T12 queda **To-do** hasta contar con la evidencia real (capturas, pruebas
+funcionales y resumen de colaboración) del Sprint Review.
+
+Nota sobre HU10–HU14 en el Sprint 1: el Sprint Backlog del informe incluye la
+tarea T11 (HU10–HU11, medallas). HU12–HU14 (recompensas, retos y canjes) quedan
+cubiertas por la feature `feature/rewards` de Diego Avalos, descrita en
+[CONTRIBUTING.md](../CONTRIBUTING.md); el informe no les asigna horas dentro del
+Sprint Backlog.
+
+Estado verificado contra el código (28 tests en verde, `main`):
 `Auth`, `Route`, `Trip`, `Dashboard`, `Leaderboard`, `Reward`, `Challenge`,
 `Admin` y `Health` controllers + servicios en
 `backend/src/main/java/com/ecocommute/`.

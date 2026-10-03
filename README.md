@@ -71,7 +71,8 @@ docs/                    Backlog, evidencias y seguimiento del Sprint
 
 ## Estado del backend (verificado)
 
-- 24 endpoints bajo `/api/v1` más `GET /health` = 25 rutas expuestas (auth y perfil, rutas, viajes, dashboard, ranking, recompensas, retos y CRUD administrativo de rewards/challenges).
+- 24 endpoints bajo `/api/v1` más `GET /health` = 25 rutas expuestas (auth y perfil, rutas,
+  viajes, dashboard, ranking, recompensas, retos y CRUD administrativo de rewards/challenges).
 - 28 tests automatizados en verde: `cd backend && ./mvnw.cmd clean test`.
 - Documentación interactiva: `https://ecocommute-backend-a14m.onrender.com/swagger-ui.html`.
 
@@ -110,6 +111,22 @@ Cosas a tener en cuenta del plan free:
 
 Verificación post-deploy: `https://ecocommute-backend-a14m.onrender.com/health` debe responder
 `{"status":"UP",...}` y `POST /api/v1/auth/login` con las credenciales demo debe devolver un JWT.
+
+## Documento de referencia para desarrollo
+
+- [docs/Universidad Peruana de Ciencias Aplicadas.md](docs/Universidad%20Peruana%20de%20Ciencias%20Aplicadas.md)
+
+Es la conversión en Markdown del informe del Trabajo Parcial (versión 1.5 del
+02/10/2026) y la **referencia académica principal** del repositorio para desarrollo
+asistido por IA: alcance del TP, HU01–HU14, responsabilidades, arquitectura,
+tecnologías y despliegue.
+
+Alcance que debe respetarse al leer o generar documentación:
+
+- Arquitectura objetivo del producto: Angular + TypeScript + Angular Material
+  (**aún no implementada**; sus pantallas se representan con mock-ups y wireflows).
+- Alcance implementado del TP: landing page responsive, backend API REST, base de
+  datos, seguridad, despliegue y documentación/evidencias.
 
 ## Documento del Proyecto
 
