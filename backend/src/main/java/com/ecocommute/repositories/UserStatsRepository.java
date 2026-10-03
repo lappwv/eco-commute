@@ -19,8 +19,14 @@ public interface UserStatsRepository extends JpaRepository<UserStats, String> {
     @Query("SELECT s FROM UserStats s JOIN FETCH s.user u WHERE u.active = true ORDER BY s.totalCo2SavedKg DESC")
     List<UserStats> findTopEcoUsers();
 
-    @Query("SELECT s FROM UserStats s JOIN FETCH s.user u WHERE u.active = true AND u.district = :district ORDER BY s.totalCo2SavedKg DESC")
+    @Query("SELECT s FROM UserStats s JOIN FETCH s.user u WHERE u.active = true AND LOWER(u.district) = LOWER(:district) ORDER BY s.totalCo2SavedKg DESC")
     List<UserStats> findTopEcoUsersByDistrict(@Param("district") String district);
+
+    @Query("SELECT s FROM UserStats s JOIN FETCH s.user u WHERE u.active = true ORDER BY u.currentPoints DESC, s.totalCo2SavedKg DESC")
+    List<UserStats> findTopEcoUsersOrderByPoints();
+
+    @Query("SELECT s FROM UserStats s JOIN FETCH s.user u WHERE u.active = true AND LOWER(u.district) = LOWER(:district) ORDER BY u.currentPoints DESC, s.totalCo2SavedKg DESC")
+    List<UserStats> findTopEcoUsersByDistrictOrderByPoints(@Param("district") String district);
 
     @Query("SELECT DISTINCT u.district FROM UserStats s JOIN s.user u WHERE u.active = true AND u.district IS NOT NULL ORDER BY u.district")
     List<String> findActiveDistricts();
