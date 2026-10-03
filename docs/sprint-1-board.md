@@ -57,6 +57,16 @@ al registrar un viaje en `POST /api/v1/trips`; HU11 (consulta de medallas) se cu
 con `GET /api/v1/users/me`; HU09 (recomendación con IA) se entrega dentro del flujo
 de `POST /api/v1/routes/plan`.
 
+HU10–HU14 mapeadas al código:
+
+| HU | Cobertura |
+|---|---|
+| HU10 Desbloqueo automático de medallas | lógica automática en el flujo de `POST /api/v1/trips` |
+| HU11 Consulta de medallas | `GET /api/v1/users/me` |
+| HU12 Gestión de recompensas | CRUD `GET/POST/PUT/DELETE /api/v1/admin/rewards` |
+| HU13 Gestión de retos sostenibles | CRUD `GET/POST/PUT/DELETE /api/v1/admin/challenges` |
+| HU14 Historial de canjes | `GET /api/v1/redemptions` |
+
 ## Verificación técnica
 
 - `backend`: `.\mvnw.cmd clean test` → **28 tests en verde** (CRUD, seguridad,
