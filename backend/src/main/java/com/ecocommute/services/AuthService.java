@@ -9,6 +9,7 @@ import com.ecocommute.dto.UserProfileDTO;
 import com.ecocommute.entities.Role;
 import com.ecocommute.entities.User;
 import com.ecocommute.entities.UserStats;
+import com.ecocommute.exception.InvalidCredentialsException;
 import com.ecocommute.repositories.UserBadgeRepository;
 import com.ecocommute.repositories.UserRepository;
 import com.ecocommute.repositories.UserStatsRepository;
@@ -79,14 +80,14 @@ public class AuthService {
         String password = request.password();
 
         User user = userRepository.findByEmail(email.toLowerCase().trim())
-                .orElseThrow(() -> new IllegalArgumentException("Credenciales inválidas"));
+                .orElseThrow(() -> new InvalidCredentialsException("Credenciales invalidas"));
 
         if (!user.isActive()) {
             throw new IllegalStateException("Esta cuenta ha sido suspendida");
         }
 
         if (user.getPassword() == null || !passwordEncoder.matches(password, user.getPassword())) {
-            throw new IllegalArgumentException("Credenciales inválidas");
+            throw new InvalidCredentialsException("Credenciales invalidas");
         }
 
         String token = jwtTokenUtil.generateToken(user);

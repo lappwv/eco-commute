@@ -4,6 +4,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 public record RegisterRequestDTO(
@@ -13,6 +14,8 @@ public record RegisterRequestDTO(
 
         @NotBlank(message = "La contrasena es obligatoria")
         @Size(min = 8, max = 72, message = "La contrasena debe tener entre 8 y 72 caracteres")
+        @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d).*$",
+                message = "La contrasena debe contener al menos una letra y un numero")
         String password,
 
         @NotBlank(message = "El nombre completo es obligatorio")
