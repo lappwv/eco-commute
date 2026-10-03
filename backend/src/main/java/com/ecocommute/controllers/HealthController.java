@@ -16,16 +16,4 @@ public class HealthController {
                 "service", "ecocommute-backend",
                 "timestamp", Instant.now().toString());
     }
-
-    @GetMapping("/")
-    public Map<String, Object> root() {
-        return Map.of(
-                "service", "EcoCommute API",
-                "description", "Backend de movilidad urbana sostenible: rutas eco, CO2 ahorrado, gamificacion y recompensas.",
-                "status", "UP",
-                "health", "/health",
-                "swagger", "/swagger-ui.html",
-                "apiDocs", "/v3/api-docs",
-                "timestamp", Instant.now().toString());
-    }
 }
