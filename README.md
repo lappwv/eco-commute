@@ -25,7 +25,7 @@ La aplicación web principal de EcoCommute se implementará con:
 - Backend: Java 21 + Spring Boot 3.3.3 + Spring Security + JWT + Spring Data JPA.
 - Base de datos: PostgreSQL.
 - Ruteo: OSRM.
-- Inteligencia artificial: Google Gemini, con fallback heurístico.
+- Inteligencia artificial: Google Gemini, con fallback heurístico para explicar la alternativa recomendada según los datos de la ruta.
 - Documentación de API: OpenAPI / Swagger (springdoc).
 
 ## Alcance del Trabajo Parcial
@@ -47,7 +47,7 @@ En esta entrega se implementan y despliegan:
 
 La aplicación Angular completa **NO** forma parte todavía del entregable implementado del Trabajo Parcial.
 
-Sus pantallas y flujos se representan actualmente mediante mock-ups y wireflows, y serán implementados en siguientes iteraciones.
+Sus pantallas y flujos se representan actualmente mediante mock-ups y wireflows. La implementación del frontend Angular queda para siguientes iteraciones.
 
 ## Estructura
 

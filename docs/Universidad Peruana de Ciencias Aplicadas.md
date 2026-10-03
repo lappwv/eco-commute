@@ -37,6 +37,7 @@ Ciclo 202620
 | 1.3 | 29/09/2026 | Equipo EcoCommute | Actualización del despliegue a Render, corrección de evidencias del Sprint Review, actualización del modelo de base de datos y reemplazo de la Figura 7. |
 | 1.4 | 02/10/2026 | Equipo EcoCommute | Alineación integral del informe con la rúbrica del Trabajo Parcial y el repositorio actual: mejora de Lean UX (Problem Statement, Assumptions, Hypotheses y métricas), actualización de perfiles y Student Outcome, sincronización del Sprint Backlog y de la metodología de trabajo por features, corrección de landing page, arquitectura, base de datos, OpenAPI/Swagger y despliegue en Render, actualización de evidencias del Sprint Review, conclusiones y recomendaciones. |
 | 1.5 | 02/10/2026 | Equipo EcoCommute | Clarificación del alcance técnico: Angular + TypeScript + Angular Material se mantienen como arquitectura objetivo de la aplicación web principal, mientras que el Trabajo Parcial implementa y despliega la landing page responsive y el backend. Se actualizaron alcance, Web Style Guidelines, configuración técnica e implementación para diferenciar correctamente producto final y entregable del TP. |
+| 1.6 | 03/10/2026 | Equipo EcoCommute | Ajuste final del informe al alcance implementado del TP: precisión de las recomendaciones con IA, aclaración del alcance de rutas y actualización de evidencias del Sprint. |
 
 ## Tabla de Contenidos
 
@@ -176,7 +177,7 @@ EcoCommute busca ofrecer recomendaciones de ruta confiables generadas con inteli
 
 **Features**
 
-- Mapa con geolocalización en tiempo real
+- Consulta de rutas mediante origen, destino y coordenadas proporcionadas por el usuario
 - Comparación de rutas por CO2 emitido y ahorrado frente al auto
 - Recomendación de ruta con IA (Google Gemini)
 - Sistema de medallas por logros
@@ -187,7 +188,7 @@ EcoCommute busca ofrecer recomendaciones de ruta confiables generadas con inteli
 
 #### 1.2.2.3 Lean UX Hypothesis Statements
 
-1. Creemos que los estudiantes y trabajadores que realizan traslados diarios aumentarán el uso de rutas sostenibles si la función de mapa con geolocalización les permite seguir el trayecto sugerido en tiempo real. El resultado esperado para el usuario es mayor confianza para iniciar el recorrido; el resultado de negocio es incrementar los viajes sostenibles registrados. Sabremos que la hipótesis es correcta si más del 50% de los usuarios activa la geolocalización durante sus primeros viajes.
+1. Creemos que los estudiantes y trabajadores que realizan traslados diarios aumentarán el uso de rutas sostenibles si la función de consulta de rutas les permite comparar alternativas antes de iniciar el recorrido. El resultado esperado para el usuario es mayor confianza para elegir una opción sostenible; el resultado de negocio es incrementar los viajes sostenibles registrados. Sabremos que la hipótesis es correcta si más del 50% de los usuarios selecciona una alternativa sostenible en sus primeros viajes.
 2. Creemos que mostrar la comparación de CO2 emitido y ahorrado frente a un viaje en auto ayudará a que el usuario elija más veces bicicleta o caminata. Sabremos que estamos en lo correcto si más del 40% de los viajes registrados corresponden a modos no motorizados.
 3. Creemos que la recomendación de ruta generada con IA (Google Gemini) ayudará a que el usuario confíe y elija la ruta sugerida. Sabremos que estamos en lo correcto si la ruta "Corredor Verde Optimizado con IA" es seleccionada en más del 50% de los casos en que se ofrece.
 4. Creemos que el sistema de medallas por logros ayudará a mantener el hábito de movilidad sostenible en el tiempo. Sabremos que estamos en lo correcto si los usuarios con al menos una medalla desbloqueada registran más viajes mensuales que los que no tienen ninguna.
@@ -232,7 +233,7 @@ El Product Backlog de EcoCommute organiza las funcionalidades del alcance inicia
 | 4 | HU06 | Acumulación de puntos verdes | Como usuario, deseo recibir puntos por mis viajes sostenibles para mantener la motivación y avanzar en mi EcoPerfil. | Given que se registra un viaje válido, When se calcula el CO₂ ahorrado, Then el sistema asigna puntos de acuerdo con reglas definidas y actualiza el total acumulado. | 3 | Gamificación |
 | 5 | HU07 | Dashboard personal | Como usuario, deseo visualizar mis estadísticas de movilidad para evaluar mi progreso ambiental y mis puntos acumulados. | Given que el usuario tiene viajes registrados, When ingresa al dashboard, Then visualiza CO₂ total ahorrado, puntos, historial de viajes y evolución semanal mediante gráficos. | 8 | Reportes |
 | 6 | HU08 | Ranking por distrito | Como usuario, deseo comparar mi impacto con otros usuarios de mi distrito para participar en una competencia sana por movilidad sostenible. | Given que existen usuarios con viajes registrados, When el usuario consulta el ranking, Then el sistema muestra posiciones por distrito ordenadas por puntos o CO₂ ahorrado. | 5 | Eco Identidad Urbana |
-| 7 | HU09 | Recomendaciones con IA | Como usuario, deseo recibir recomendaciones personalizadas para mejorar mis hábitos de movilidad sostenible de forma realista. | Given que el usuario tiene historial de viajes, When solicita una recomendación, Then la IA genera una sugerencia basada en horarios, distancias, medios frecuentes y puntos acumulados. | 8 | Inteligencia artificial |
+| 7 | HU09 | Recomendaciones con IA | Como usuario, deseo recibir una recomendación explicada sobre la ruta sostenible más conveniente para mi viaje. | Given que el usuario ingresa origen, destino y medio de transporte, When consulta las alternativas, Then el sistema genera una recomendación basada en la distancia, duración estimada, horario del viaje y CO₂ ahorrado. | 8 | Inteligencia artificial |
 | 8 | HU10 | Desbloqueo automático de medallas | Como usuario, deseo desbloquear medallas automáticamente al alcanzar hitos de movilidad sostenible, para sentir reconocimiento tangible por mis hábitos. | Given que el usuario cumple la condición de una medalla (por ejemplo, cierto número de viajes en bicicleta o cierto CO2 ahorrado), When se registra el viaje que cumple la condición, Then el sistema desbloquea la medalla y la asocia a su perfil. | 3 | Recompensas |
 | 9 | HU11 | Consulta de medallas | Como usuario, deseo revisar mis medallas obtenidas para llevar control del reconocimiento ganado por mis hábitos sostenibles. | Given que el usuario tiene medallas desbloqueadas, When consulta su perfil, Then el sistema muestra el listado de medallas con nombre, ícono y fecha de obtención. | 5 | Recompensas |
 | 13 | HU12 | Gestión de recompensas | Como administrador, deseo crear, actualizar y desactivar recompensas para mantener vigente el catálogo de beneficios de EcoCommute. | Given que el administrador está autenticado, When registra o modifica una recompensa, Then el sistema guarda los cambios y controla el acceso por rol. | 5 | Administración |
@@ -271,7 +272,7 @@ Para el Trabajo Parcial se prioriza un primer sprint sobre una estructura base y
 | T09 | Mejorar el endpoint y la vista de ranking por distrito | 6h | Paulo Espinoza | Done |
 | T10 | Refinar el prompt y el servicio de recomendación con IA (Gemini) | 6h | Matías Mariños | Done |
 | T11 | Completar y validar el sistema de medallas por logros | 8h | Odar Alcocer | Done |
-| T12 | Preparar capturas, pruebas funcionales y resumen de colaboración | 6h | Matías Mariños | To-do |
+| T12 | Preparar capturas, pruebas funcionales y resumen de colaboración | 6h | Matías Mariños | Done |
 
 ### 2.1.2 Priorización del backlog
 
@@ -281,7 +282,7 @@ La priorización inicia con las funcionalidades que entregan valor directo al us
 
 | Componente del alcance inicial | Descripción |
 | --- | --- |
-| Geolocalización en tiempo real | Mapa interactivo con Leaflet.js y OpenStreetMap, con geolocalización continua del usuario durante el trayecto activo. |
+| Consulta de rutas | El usuario proporciona origen y destino, y el backend consulta OSRM para calcular alternativas con distancia, duración, coordenadas y comparación de emisiones. |
 | Aplicación web responsive | Arquitectura objetivo: aplicación web principal responsive con Angular + TypeScript + Angular Material. Para el TP se implementa la landing responsive y el backend; el frontend Angular queda para iteraciones posteriores. |
 | Seguridad | Registro e inicio de sesión con JWT, Spring Security y contraseñas encriptadas con BCrypt, más autenticación alternativa con Google OAuth2 para inicio de sesión con un clic. |
 | Rutas sostenibles | Consulta de rutas o distancias mediante OSRM (Open Source Routing Machine), con cálculo de trayectos alternativos por perfil de transporte. |
@@ -327,7 +328,7 @@ La tipografía base es Plus Jakarta Sans para títulos y elementos destacados, e
 
 Para el producto completo, la aplicación web principal se plantea con Angular, TypeScript y Angular Material, manteniendo un enfoque responsive y una arquitectura de componentes reutilizables. Sin embargo, el alcance del Trabajo Parcial no incluye todavía la implementación del frontend Angular completo: en esta entrega se implementa y publica la landing page responsive con HTML5, JavaScript y Tailwind CSS, mientras que la experiencia de la futura aplicación Angular se representa mediante los mock-ups y wireflows del Capítulo III. Los botones principales se reservan para acciones críticas como iniciar sesión, calcular ruta o registrar un viaje, y los secundarios para acciones de consulta o navegación.
 
-El formulario de registro e inicio de sesión solicita únicamente nombre, correo y contraseña (con la alternativa de autenticarse con Google OAuth2 en un clic), manteniendo el flujo lo más simple posible. Los campos muestran etiquetas claras y validaciones visibles cuando el usuario ingresa datos inválidos.
+El formulario de registro e inicio de sesión solicita únicamente nombre, correo y contraseña. El backend también permite autenticación alternativa con Google OAuth2 cuando se configura la integración correspondiente. Los campos muestran etiquetas claras y validaciones visibles cuando el usuario ingresa datos inválidos.
 
 La navegación principal del alcance inicial se organiza en Rutas, Impacto y Ranking, más una vista adicional de Administración visible solo para usuarios con rol administrador. Esta estructura permite que el usuario entienda rápidamente dónde planificar y comparar un viaje, dónde revisar su impacto acumulado (CO2 ahorrado, distancia, medallas) y dónde compararse con otros usuarios. En dispositivos móviles, la navegación se adapta a un menú compacto para mantener el mapa y el contenido principal visibles.
 
@@ -355,7 +356,7 @@ El diseño de la aplicación web se orienta a un alcance inicial viable para el 
 
 ### 3.3.1 Web Applications Mock-ups
 
-Los mock-ups de la aplicación muestran las pantallas centrales que permiten validar la experiencia del usuario. La pantalla de acceso protege el uso de la aplicación mediante JWT y Spring Security, con opción adicional de autenticación con Google OAuth2. La vista de Rutas permite ingresar origen y destino, elegir el medio de transporte y comparar alternativas sostenibles con ayuda de IA (Gemini). La vista de Impacto presenta el CO2 ahorrado, los puntos y las medallas obtenidas por el usuario. La vista de Ranking refuerza la gamificación comparando el impacto entre usuarios de un mismo distrito.
+Los mock-ups de la aplicación muestran las pantallas centrales que permiten validar la experiencia del usuario. La pantalla de acceso protege el uso de la aplicación mediante JWT y Spring Security, con opción adicional de autenticación con Google OAuth2. La vista de Rutas permite ingresar origen y destino, elegir el medio de transporte y comparar alternativas sostenibles con una recomendación explicada por IA (Gemini). La vista de Impacto presenta el CO2 ahorrado, los puntos y las medallas obtenidas por el usuario. La vista de Ranking refuerza la gamificación comparando el impacto entre usuarios de un mismo distrito.
 
 [Figura 4 - Mockups de la aplicación]
 
