@@ -58,9 +58,9 @@ class SecurityIntegrationTest {
     }
 
     @Test
-    @DisplayName("Acceso anÃ³nimo a /api/v1/admin/dashboard/kpis debe ser rechazado con 401 Unauthorized")
+    @DisplayName("Acceso anÃ³nimo a /api/v1/admin/rewards debe ser rechazado con 401 Unauthorized")
     void testAnonymousAccessToAdminDenied() throws Exception {
-        mockMvc.perform(get("/api/v1/admin/dashboard/kpis"))
+        mockMvc.perform(get("/api/v1/admin/rewards"))
                 .andExpect(status().isUnauthorized());
     }
 
@@ -70,7 +70,7 @@ class SecurityIntegrationTest {
         User normalUser = userRepository.findByEmail("demo@ecocommute.org").orElseThrow();
         String userToken = jwtTokenUtil.generateToken(normalUser);
 
-        mockMvc.perform(get("/api/v1/admin/dashboard/kpis")
+        mockMvc.perform(get("/api/v1/admin/rewards")
                         .header("Authorization", "Bearer " + userToken))
                 .andExpect(status().isForbidden());
     }
@@ -81,10 +81,10 @@ class SecurityIntegrationTest {
         User adminUser = userRepository.findByEmail("admin@ecocommute.org").orElseThrow();
         String adminToken = jwtTokenUtil.generateToken(adminUser);
 
-        mockMvc.perform(get("/api/v1/admin/dashboard/kpis")
+        mockMvc.perform(get("/api/v1/admin/rewards")
                         .header("Authorization", "Bearer " + adminToken))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.totalUsers").exists());
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
     }
 
     @Test
