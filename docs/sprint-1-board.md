@@ -29,7 +29,7 @@ técnica y evidencias del Sprint.
 | Done | HU12-HU14 | Completar y validar catálogo de recompensas, canjes e historial; retos (CRUD admin). | Diego Avalos | — |
 | Done | Evidencia | Publicar landing page en GitHub Pages. | Matías Mariños | 4 h |
 | Done | Evidencia | Desplegar el backend en la nube (Render Blueprint `render.yaml`, plan free). | Rodrigo Condor | 2 h |
-| To-do | T12 / Evidencia | Preparar capturas, pruebas funcionales y resumen de colaboración del Sprint Review. | Matías Mariños | 6 h |
+| Done | T12 / Evidencia | Preparar capturas, pruebas funcionales y resumen de colaboración del Sprint Review. | Matías Mariños | 6 h |
 
 HU12–HU14 no tienen horas asignadas en el Sprint Backlog del informe; la cobertura
 queda documentada en `feature/rewards` ([CONTRIBUTING.md](../CONTRIBUTING.md)) y
