@@ -59,9 +59,11 @@ public class DashboardService {
         }
 
         for (Trip trip : recentTrips) {
-            LocalDate tripDay = trip.getCompletedAt().toLocalDate();
-            if (dailyCo2.containsKey(tripDay)) {
-                dailyCo2.put(tripDay, dailyCo2.get(tripDay) + trip.getCo2SavedGrams());
+            if (trip.getCompletedAt() != null) {
+                LocalDate tripDay = trip.getCompletedAt().toLocalDate();
+                if (dailyCo2.containsKey(tripDay)) {
+                    dailyCo2.put(tripDay, dailyCo2.get(tripDay) + trip.getCo2SavedGrams());
+                }
             }
         }
 
@@ -80,6 +82,7 @@ public class DashboardService {
         // Trips count by mode
         List<Trip> allUserTrips = tripRepository.findByUserIdOrderByCompletedAtDesc(userId);
         Map<String, Long> tripsByMode = allUserTrips.stream()
+                .filter(t -> t.getTransportMode() != null)
                 .collect(Collectors.groupingBy(t -> t.getTransportMode().name(), Collectors.counting()));
 
         // Badges: every badge, marked as unlocked/locked with progress toward the next one
