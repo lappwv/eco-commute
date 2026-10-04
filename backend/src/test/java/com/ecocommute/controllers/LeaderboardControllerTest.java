@@ -105,15 +105,4 @@ class LeaderboardControllerTest {
                 .andExpect(jsonPath("$.code").value("BAD_REQUEST"))
                 .andExpect(jsonPath("$.message", containsString("no puede superar los 80 caracteres")));
     }
-
-    @Test
-    @DisplayName("HU08: Listado de distritos activos retorna HTTP 200 y array con distritos")
-    void testGetDistricts_returnsActiveDistricts() throws Exception {
-        mockMvc.perform(get("/api/v1/leaderboard/districts")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$").isArray())
-                .andExpect(jsonPath("$", not(empty())))
-                .andExpect(jsonPath("$", hasItem("San Isidro")));
-    }
 }

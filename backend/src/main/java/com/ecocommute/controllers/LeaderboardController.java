@@ -42,16 +42,4 @@ public class LeaderboardController {
             @RequestParam(required = false, defaultValue = "co2") String sortBy) {
         return ResponseEntity.ok(leaderboardService.getLeaderboardByDistrict(district, sortBy));
     }
-
-    @GetMapping("/districts")
-    @Operation(
-            summary = "HU08 - Listado de distritos activos",
-            description = "HU08: Retorna la lista de nombres de distritos donde existen usuarios activos con viajes y estadisticas registradas."
-    )
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Lista de distritos activos obtenida exitosamente")
-    })
-    public ResponseEntity<List<String>> getDistricts() {
-        return ResponseEntity.ok(leaderboardService.getDistricts());
-    }
 }
