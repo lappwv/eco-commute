@@ -9,7 +9,9 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
+import java.time.Clock;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +19,8 @@ import java.util.Map;
 public class AiRouteAdvisorService {
 
     private static final Logger log = LoggerFactory.getLogger(AiRouteAdvisorService.class);
+
+    private static final ZoneId LIMA_ZONE = ZoneId.of("America/Lima");
 
     @Value("${app.openai.api-key:}")
     private String openAiApiKey;
@@ -28,9 +32,19 @@ public class AiRouteAdvisorService {
     private String geminiModel;
 
     private final RestClient restClient;
+    private final Clock clock;
 
     public AiRouteAdvisorService() {
-        this.restClient = RestClient.builder().build();
+        this(RestClient.builder().build(), Clock.system(LIMA_ZONE));
+    }
+
+    AiRouteAdvisorService(RestClient restClient) {
+        this(restClient, Clock.system(LIMA_ZONE));
+    }
+
+    AiRouteAdvisorService(RestClient restClient, Clock clock) {
+        this.restClient = restClient;
+        this.clock = clock;
     }
 
     public AiInsightDTO generateRouteInsight(double originLat, double originLng,
@@ -41,16 +55,16 @@ public class AiRouteAdvisorService {
                                                     int durationMinutes,
                                                     boolean userHasBicycle) {
 
-        int currentHour = LocalTime.now().getHour();
+        int currentHour = LocalTime.now(clock).getHour();
         boolean isRushHour = (currentHour >= 7 && currentHour <= 9) || (currentHour >= 17 && currentHour <= 20);
 
-        double treesSavedFraction = (co2SavedGrams / 1000.0) / 22.0;
+        double treesSavedFraction = (co2SavedGrams / 1000.0) / 21.77;
         int calories = (int) Math.round(distanceKm * selectedMode.getCaloriesPerKm());
-        String weatherContext = "21°C, cielo despejado, viento favorable";
         String prompt = String.format(
                 "Actúa como el motor de IA de EcoCommute para Lima y el ODS 11. " +
-                "El usuario eligió viajar en %s. La ruta prioriza calles arboladas, ciclovías, menor exposición a tráfico y flujo continuo. " +
-                "Distancia: %.2f km, CO2 ahorrado: %.0f g, duración estimada: %d min, hora punta: %s. " +
+                "El usuario eligió viajar en %s por la alternativa de menor tráfico y emisiones. " +
+                "Distancia: %.2f km, CO2 ahorrado frente al auto: %.0f g, duración estimada: %d min, hora punta: %s. " +
+                "Usa únicamente estos datos y no inventes clima, infraestructura ni otros hechos. " +
                 "Responde en español con un título atractivo y una explicación breve de máximo dos oraciones.",
                 selectedMode.getDisplayName(), distanceKm, co2SavedGrams, durationMinutes, isRushHour ? "sí" : "no"
         );
@@ -100,9 +114,10 @@ public class AiRouteAdvisorService {
             default -> "Ruta con Menor Tráfico y Emisiones";
         };
 
+        String scheduleNote = isRushHour ? "en hora punta" : "fuera de hora punta";
         String fallbackExplanation = String.format(
-                "Ruta adaptada por calles arboladas, ciclovías y vías con menor exposición a smog (%s). Permite un ahorro de %.2f kg de CO2 frente a un auto convencional.",
-                weatherContext, (co2SavedGrams / 1000.0)
+                "Ruta de %.1f km (%d min) recomendada %s. Ahorra %.2f kg de CO2 frente a un auto convencional.",
+                distanceKm, durationMinutes, scheduleNote, (co2SavedGrams / 1000.0)
         );
 
         return baseInsight(selectedMode, calories, treesSavedFraction, fallbackTitle + "\n" + fallbackExplanation);
@@ -125,7 +140,7 @@ public class AiRouteAdvisorService {
         return extractGeminiText(response);
     }
 
-    private String extractOpenAiText(Map response) {
+    String extractOpenAiText(Map response) {
         if (response == null || !response.containsKey("choices")) {
             return null;
         }
@@ -140,7 +155,7 @@ public class AiRouteAdvisorService {
         return message != null ? (String) message.get("content") : null;
     }
 
-    private String extractGeminiText(Map response) {
+    String extractGeminiText(Map response) {
         if (response == null || !(response.get("candidates") instanceof List<?> candidates) || candidates.isEmpty()) {
             return null;
         }
@@ -172,3 +187,4 @@ public class AiRouteAdvisorService {
                 ecoReasoning);
     }
 }
+
