@@ -1,7 +1,7 @@
 # Product Backlog — EcoCommute (TP1)
 
-Espejo del Capítulo II del informe
-(https://docs.google.com/document/d/1rS2YmaUWzP3o-Y5hm9gAD7u6cKaOvi2Oyo4YMZHumaI).
+Espejo del Capítulo II del informe oficial en Markdown
+([docs/Universidad Peruana de Ciencias Aplicadas.md](Universidad%20Peruana%20de%20Ciencias%20Aplicadas.md)).
 
 ## 2.1 Product Backlog
 
@@ -15,7 +15,7 @@ Espejo del Capítulo II del informe
 | 4 | HU06 | Acumulación de puntos verdes | Como usuario, deseo recibir puntos por mis viajes sostenibles para mantener la motivación y avanzar en mi EcoPerfil. | Given que se registra un viaje válido, When se calcula el CO₂ ahorrado, Then el sistema asigna puntos de acuerdo con reglas definidas y actualiza el total acumulado. | 3 | Gamificación | Done |
 | 5 | HU07 | Dashboard personal | Como usuario, deseo visualizar mis estadísticas de movilidad para evaluar mi progreso ambiental y mis puntos acumulados. | Given que el usuario tiene viajes registrados, When ingresa al dashboard, Then visualiza CO₂ total ahorrado, puntos, historial de viajes y evolución semanal mediante gráficos. | 8 | Reportes | Done |
 | 6 | HU08 | Ranking por distrito | Como usuario, deseo comparar mi impacto con otros usuarios de mi distrito para participar en una competencia sana por movilidad sostenible. | Given que existen usuarios con viajes registrados, When el usuario consulta el ranking, Then el sistema muestra posiciones por distrito ordenadas por puntos o CO₂ ahorrado. | 5 | Eco Identidad Urbana | Done |
-| 7 | HU09 | Recomendaciones con IA | Como usuario, deseo recibir recomendaciones personalizadas para mejorar mis hábitos de movilidad sostenible de forma realista. | Given que el usuario tiene historial de viajes, When solicita una recomendación, Then la IA genera una sugerencia basada en horarios, distancias, medios frecuentes y puntos acumulados. | 8 | Inteligencia artificial | Done |
+| 7 | HU09 | Recomendaciones con IA | Como usuario, deseo recibir una recomendación explicada sobre la ruta sostenible más conveniente para mi viaje. | Given que el usuario ingresa origen, destino y medio de transporte, When consulta las alternativas, Then el sistema genera una recomendación basada en la distancia, duración estimada, horario del viaje y CO₂ ahorrado. | 8 | Inteligencia artificial | Done |
 | 8 | HU10 | Desbloqueo automático de medallas | Como usuario, deseo desbloquear medallas automáticamente al alcanzar hitos de movilidad sostenible, para sentir reconocimiento tangible por mis hábitos. | Given que el usuario cumple la condición de una medalla (por ejemplo, cierto número de viajes en bicicleta o cierto CO2 ahorrado), When se registra el viaje que cumple la condición, Then el sistema desbloquea la medalla y la asocia a su perfil. | 3 | Recompensas | Done |
 | 9 | HU11 | Consulta de medallas | Como usuario, deseo revisar mis medallas obtenidas para llevar control del reconocimiento ganado por mis hábitos sostenibles. | Given que el usuario tiene medallas desbloqueadas, When consulta su perfil, Then el sistema muestra el listado de medallas con nombre, ícono y fecha de obtención. | 5 | Recompensas | Done |
 | 13 | HU12 | Gestión de recompensas | Como administrador, deseo crear, actualizar y desactivar recompensas para mantener vigente el catálogo de beneficios de EcoCommute. | Given que el administrador está autenticado, When registra o modifica una recompensa, Then el sistema guarda los cambios y controla el acceso por rol. | 5 | Administración | Done |
@@ -26,20 +26,29 @@ Espejo del Capítulo II del informe
 
 | Id | Title | Estimation | Assigned To | Status |
 | --- | --- | --- | --- | --- |
-| T01 | Diseñar DTO y validaciones de registro de usuario | 4h | Rodrigo Condor | Done |
-| T02 | Implementar endpoint POST /api/auth/register y prueba básica | 6h | Rodrigo Condor | Done |
-| T03 | Configurar Spring Security, JWT y filtros de autenticación | 8h | Rodrigo Condor | Done |
-| T04 | Integrar búsqueda de ruta/distancia con OSRM | 8h | Jeampiero Ramos | Done |
-| T05 | Crear entidades JPA y repositorios para viajes y medios de transporte | 6h | Jeampiero Ramos | Done |
-| T06 | Implementar servicio de cálculo de CO2 y reglas de puntos | 6h | Jeampiero Ramos | Done |
-| T07 | Registrar transacciones de puntos al guardar un viaje | 5h | Odar Alcocer | Done |
-| T08 | Construir dashboard con KPIs e historial inicial | 8h | Matías Mariños | Done |
-| T09 | Crear endpoint y vista de ranking por distrito | 6h | Paulo Espinoza | Done |
-| T10 | Diseñar prompt y servicio para recomendación con IA (Gemini) | 6h | Matías Mariños | Done |
-| T11 | Implementar sistema de medallas por logros | 8h | Odar Alcocer | Done |
-| T12 | Preparar capturas, pruebas funcionales y resumen de colaboración | 6h | Matías Mariños | To-do |
+| T01 | Refinar DTO y validaciones de registro de usuario sobre la estructura base | 4h | Rodrigo Condor | Done |
+| T02 | Completar el endpoint POST /api/auth/register y su prueba básica | 6h | Rodrigo Condor | Done |
+| T03 | Refinar y validar Spring Security, JWT y filtros de autenticación | 8h | Rodrigo Condor | Done |
+| T04 | Refinar e integrar la búsqueda de ruta/distancia con OSRM | 8h | Jeampiero Ramos | Done |
+| T05 | Completar y ajustar entidades JPA y repositorios para viajes y medios de transporte | 6h | Jeampiero Ramos | Done |
+| T06 | Refinar y validar el servicio de cálculo de CO2 y reglas de puntos | 6h | Jeampiero Ramos | Done |
+| T07 | Mejorar la actualización de puntos verdes al registrar un viaje | 5h | Odar Alcocer | Done |
+| T08 | Extender y ajustar el dashboard con KPIs, historial y evolución semanal | 8h | Matías Mariños | Done |
+| T09 | Mejorar el endpoint y la vista de ranking por distrito | 6h | Paulo Espinoza | Done |
+| T10 | Refinar el prompt y el servicio de recomendación con IA (Gemini) | 6h | Matías Mariños | Done |
+| T11 | Completar y validar el sistema de medallas por logros | 8h | Odar Alcocer | Done |
+| T12 | Preparar capturas, pruebas funcionales y resumen de colaboración | 6h | Matías Mariños | Done |
 
-Estado verificado contra el código (46 tests en verde):
+La evidencia del Sprint Review se encuentra documentada en el informe, el tablero
+del Sprint y los recursos visuales del repositorio.
+
+Nota sobre HU10–HU14 en el Sprint 1: el Sprint Backlog del informe incluye la
+tarea T11 (HU10–HU11, medallas). HU12–HU14 (recompensas, retos y canjes) quedan
+cubiertas por la feature `feature/rewards` de Diego Avalos, descrita en
+[CONTRIBUTING.md](../CONTRIBUTING.md); el informe no les asigna horas dentro del
+Sprint Backlog.
+
+Estado verificado contra el código (28 tests en verde, `main`):
 `Auth`, `Route`, `Trip`, `Dashboard`, `Leaderboard`, `Reward`, `Challenge`,
-`Badge`, `Stats`, `Admin` y `Health` controllers + servicios en
+`Admin` y `Health` controllers + servicios en
 `backend/src/main/java/com/ecocommute/`.
