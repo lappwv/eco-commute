@@ -47,7 +47,4 @@ public class Trip {
     private String suspiciousReason;
 
     private LocalDateTime completedAt = LocalDateTime.now();
-
-    @Transient
-    private java.util.List<com.ecocommute.dto.BadgeAwardDTO> newlyAwardedBadges = new java.util.ArrayList<>();
 }
