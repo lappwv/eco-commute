@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
         info = @Info(
                 title = "EcoCommute API",
                 version = "1.0.0",
-                description = "API REST para registrar viajes sostenibles, calcular CO2 ahorrado, gestionar puntos y consultar estadisticas.",
+                description = "API REST de EcoCommute para movilidad sostenible (ODS 11.2), cálculo de emisiones de CO₂, gamificación y recomendaciones de ruta optimizadas con Google Gemini.",
                 contact = @Contact(name = "Equipo EcoCommute")
         ),
         servers = {
