@@ -106,8 +106,7 @@ public class GamificationService {
         userStatsRepository.save(stats);
 
         // Check & Unlock Badges
-        List<BadgeAwardDTO> newlyAwarded = checkAndAwardBadges(user, stats);
-        trip.setNewlyAwardedBadges(newlyAwarded);
+        checkAndAwardBadges(user, stats);
 
         return trip;
     }

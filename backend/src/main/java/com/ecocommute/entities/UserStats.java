@@ -34,22 +34,6 @@ public class UserStats {
     }
 
     public double getTreesEquivalent() {
-        return Math.round((this.totalCo2SavedKg / 22.0) * 100.0) / 100.0;
-    }
-
-    public double getGasolineLitersSaved() {
-        // 1 litro de gasolina = ~2.31 kg CO2
-        return Math.round((this.totalCo2SavedKg / 2.31) * 100.0) / 100.0;
-    }
-
-    public double getKwhEquivalent() {
-        // Red electrica equivalente ~0.20 kg CO2 / kWh
-        return Math.round((this.totalCo2SavedKg / 0.20) * 100.0) / 100.0;
-    }
-
-    public int getEcoScore() {
-        // EcoScore 0-100 ponderado por viajes, distancia y CO2 ahorrado
-        double score = (totalTrips * 2.0) + (totalDistanceKm * 0.5) + (totalCo2SavedKg * 1.5);
-        return (int) Math.min(100, Math.round(score));
+        return this.totalCo2SavedKg / 22.0;
     }
 }
