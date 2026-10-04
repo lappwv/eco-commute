@@ -32,7 +32,7 @@ services:
         fromDatabase:
           name: ecocommute-db
           property: password
-      - key: SEED_DEMO_DATA
+      - key: APP_SEED_DEMO_DATA
         value: "true"
 
 databases:

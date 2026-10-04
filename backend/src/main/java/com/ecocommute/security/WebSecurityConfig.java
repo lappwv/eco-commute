@@ -53,15 +53,15 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // Public API documentation and authentication endpoints
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
-                        .requestMatchers("/api/v1/auth/**", "/api/auth/**").permitAll()
-                        .requestMatchers("/api/v1/routes/**", "/api/routes/**").permitAll()
-                        .requestMatchers("/api/v1/telemetry/**", "/api/telemetry/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/v1/dashboard/community-impact", "/api/v1/dashboard/community", "/api/dashboard/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/v1/leaderboard/**", "/api/leaderboard/**").permitAll()
+                        .requestMatchers("/api/v1/auth/**").permitAll()
+                        // Public route planning and read-only reports
+                        .requestMatchers(HttpMethod.POST, "/api/v1/routes/plan").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/dashboard/community-impact").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/leaderboard/**").permitAll()
                         // Admin restricted endpoints
-                        .requestMatchers("/api/v1/admin/**", "/api/admin/**").hasAuthority("ROLE_ADMIN")
+                        .requestMatchers("/api/v1/admin/**").hasAuthority("ROLE_ADMIN")
                         // Authenticated user endpoints
-                        .requestMatchers("/api/v1/**", "/api/**").authenticated()
+                        .requestMatchers("/api/v1/**").authenticated()
                         .anyRequest().permitAll()
                 )
                 .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);

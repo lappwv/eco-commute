@@ -78,7 +78,8 @@ public class RoutingEngineService {
 
         OsrmRouteResult greenStreetRoute = pickGreenCorridorRoute(activeModeRoutes, drivingStreetRoutes, standardActiveRoute);
         RouteOptionDTO greenOption = buildGreenCorridorOption(
-                greenStreetRoute, targetMode, baselineCo2, origin, destination, userStreakDays);
+                greenStreetRoute, targetMode, baselineCo2, origin, destination, userStreakDays,
+                !Boolean.FALSE.equals(request.enableAiOptimization()));
 
         return new RoutePlanResponseDTO(baselineCar, standardOption, greenOption, RECOMMENDED_ROUTE_ID);
     }
@@ -129,7 +130,7 @@ public class RoutingEngineService {
 
     private RouteOptionDTO buildGreenCorridorOption(OsrmRouteResult greenRoute, TransportMode targetMode,
                                                     double baselineCo2, Coordinates origin, Coordinates destination,
-                                                    int userStreakDays) {
+                                                    int userStreakDays, boolean enableAiOptimization) {
         double greenDistanceKm = greenRoute.distanceKm();
         int greenDuration = estimateDurationMinutes(
                 greenRoute, targetMode, GREEN_CORRIDOR_BICYCLE_SPEED_KMH, GREEN_CORRIDOR_WALKING_SPEED_KMH);
@@ -139,7 +140,7 @@ public class RoutingEngineService {
         int greenPoints = carbonEmissionService.calculatePoints(targetMode, greenSaved, userStreakDays)
                 + GREEN_CORRIDOR_BONUS_POINTS;
 
-        AiInsightDTO aiInsight = aiAdvisorService.generateRouteInsight(
+        AiInsightDTO aiInsight = enableAiOptimization ? aiAdvisorService.generateRouteInsight(
                 origin.lat(), origin.lng(),
                 destination.lat(), destination.lng(),
                 targetMode,
@@ -147,11 +148,11 @@ public class RoutingEngineService {
                 greenSaved,
                 greenDuration,
                 true
-        );
+        ) : null;
 
         return createRouteOption(
                 RECOMMENDED_ROUTE_ID,
-                "🌿 Corredor Verde Optimizado con IA",
+                enableAiOptimization ? "🌿 Corredor Verde Optimizado con IA" : "🌿 Corredor Verde",
                 targetMode,
                 greenDistanceKm,
                 greenDuration,
@@ -159,7 +160,7 @@ public class RoutingEngineService {
                 greenSaved,
                 greenPoints,
                 caloriesFor(greenDistanceKm, targetMode),
-                true,
+                enableAiOptimization,
                 aiInsight,
                 greenRoute.pathCoordinates(),
                 "Corredor seleccionado por menor exposición a tráfico y mejor infraestructura."
