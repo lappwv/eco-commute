@@ -27,7 +27,7 @@ Sin esto, todos los commits quedan con el mismo autor y no se ve quién hizo qu�
 | Feature (rama) | Alcance | Integrante |
 |---|---|---|
 | `feature/auth` | registro, login, JWT, perfil de usuario, distrito | Rodrigo Condor (estructura base e integración) |
-| `feature/trips` | registro de viajes, telemetría, cálculo CO₂, `EcoRoute` | Jeampiero Ramos |
+| `feature/trips` | registro de viajes, cálculo CO₂, rutas sostenibles | Jeampiero Ramos |
 | `feature/stats-badges` | `user_stats`, puntos verdes, medallas, niveles, streaks | Odar Alcocer |
 | `feature/challenges-leaderboard` | ranking por distrito (HU08) y retos (HU13) | Paulo Espinoza (ranking) y Diego Avalos (retos) |
 | `feature/rewards` | catálogo de recompensas, canjes e historial (HU12, HU14) | Diego Avalos |
@@ -35,8 +35,6 @@ Sin esto, todos los commits quedan con el mismo autor y no se ve quién hizo qu�
 
 Cada feature es una **rebanada vertical**: entidad + repositorio + servicio +
 controller + test. No se reparte por capas ("el back lo hace uno, el front otro").
-
-Cada rama tiene su issue asociado en GitHub para registrar el avance.
 
 ## 3. Flujo de trabajo
 
@@ -76,6 +74,6 @@ Luego, en GitHub: **Pull request → base `main`, compare `feature/rewards`** (o
 ## 5. Requisitos del repo (rúbrica)
 
 - Historial con commits de **todos** los integrantes.
-- `main` siempre verde (compila + 23 tests).
+- `main` siempre verde (compila + 28 tests).
 - Modelo de datos (`database/eco_commute_schema.sql`) y ERD
   (`assets/capitulo-3/erd.png`) sincronizados con el código.
