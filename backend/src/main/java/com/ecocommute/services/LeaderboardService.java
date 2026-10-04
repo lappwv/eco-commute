@@ -18,17 +18,54 @@ public class LeaderboardService {
         this.userStatsRepository = userStatsRepository;
     }
 
+    private static final int MAX_DISTRICT_LENGTH = 80;
+
     @Transactional(readOnly = true)
     public List<LeaderboardEntryDTO> getLeaderboard() {
+        return getLeaderboard("co2");
+    }
+
+    @Transactional(readOnly = true)
+    public List<LeaderboardEntryDTO> getLeaderboard(String sortBy) {
+        String normalizedSort = normalizeSortBy(sortBy);
+        if ("points".equals(normalizedSort)) {
+            return buildRanking(userStatsRepository.findTopEcoUsersOrderByPoints());
+        }
         return buildRanking(userStatsRepository.findTopEcoUsers());
     }
 
     @Transactional(readOnly = true)
     public List<LeaderboardEntryDTO> getLeaderboardByDistrict(String district) {
-        if (district == null || district.isBlank()) {
-            return getLeaderboard();
+        return getLeaderboardByDistrict(district, "co2");
+    }
+
+    @Transactional(readOnly = true)
+    public List<LeaderboardEntryDTO> getLeaderboardByDistrict(String district, String sortBy) {
+        if (district != null && district.trim().length() > MAX_DISTRICT_LENGTH) {
+            throw new IllegalArgumentException("El nombre del distrito no puede superar los 80 caracteres.");
         }
-        return buildRanking(userStatsRepository.findTopEcoUsersByDistrict(district.trim()));
+        if (district == null || district.isBlank()) {
+            return getLeaderboard(sortBy);
+        }
+
+        String normalizedSort = normalizeSortBy(sortBy);
+        String trimmedDistrict = district.trim();
+
+        if ("points".equals(normalizedSort)) {
+            return buildRanking(userStatsRepository.findTopEcoUsersByDistrictOrderByPoints(trimmedDistrict));
+        }
+        return buildRanking(userStatsRepository.findTopEcoUsersByDistrict(trimmedDistrict));
+    }
+
+    private String normalizeSortBy(String sortBy) {
+        if (sortBy == null || sortBy.isBlank()) {
+            return "co2";
+        }
+        String normalized = sortBy.trim().toLowerCase();
+        if (!"co2".equals(normalized) && !"points".equals(normalized)) {
+            throw new IllegalArgumentException("Criterio de ordenamiento invalido ('" + sortBy + "'). Use 'co2' o 'points'.");
+        }
+        return normalized;
     }
 
     @Transactional(readOnly = true)
