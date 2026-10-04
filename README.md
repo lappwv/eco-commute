@@ -1,6 +1,6 @@
 # EcoCommute
 
-EcoCommute es una aplicación web orientada a incentivar la movilidad sostenible en Lima Metropolitana mediante rutas ecoeficientes, cálculo de CO₂ ahorrado, puntos verdes, recompensas, rankings por distrito y recomendaciones personalizadas con IA.
+EcoCommute es una aplicación web orientada a incentivar la movilidad urbana sostenible en Lima Metropolitana, alineada estrictamente con el **ODS 11 (Meta 11.2: Proporcionar acceso a sistemas de transporte seguros, asequibles, accesibles y sostenibles para todos)** mediante rutas ecoeficientes, cálculo de CO₂ ahorrado, puntos verdes, recompensas, rankings por distrito y recomendaciones personalizadas optimizadas con **Google Gemini (modelo `gemini-1.5-flash`)**.
 
 ## Equipo y forma de trabajo
 
@@ -15,7 +15,15 @@ Responsabilidades principales del Sprint:
 - Matías Mariños — dashboard, IA y evidencias del Sprint.
 - Diego Avalos — recompensas, canjes y retos.
 
-El flujo de contribución (ramas, convención de commits, Pull Requests) está documentado en [CONTRIBUTING.md](CONTRIBUTING.md).
+## 📋 Gestión del Proyecto y Tableros
+
+El seguimiento del proyecto, historias de usuario, asignación de responsables y avance de sprints se gestiona a través de GitHub Projects:
+
+- **Tablero Público del Proyecto (GitHub Projects):** [https://github.com/users/lappwv/projects/1](https://github.com/users/lappwv/projects/1)
+- **Tablero del Sprint 1 (Markdown):** [docs/sprint-1-board.md](docs/sprint-1-board.md)
+- **Tablero del Sprint 2 (Markdown):** [docs/sprint-2-board.md](docs/sprint-2-board.md)
+
+El flujo de trabajo ágil se realiza mediante ramas de funcionalidad `feature/*` (o `fix/*` para correcciones puntuales). Cada cambio se somete a revisión y validación mediante **Pull Requests (PR)** hacia la rama `main`, garantizando la ejecución de pruebas unitarias y de integración según lo detallado en [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Arquitectura objetivo del producto
 
@@ -24,8 +32,8 @@ La aplicación web principal de EcoCommute se implementará con:
 - Frontend principal: **Angular + TypeScript + Angular Material**.
 - Backend: Java 21 + Spring Boot 3.3.3 + Spring Security + JWT + Spring Data JPA.
 - Base de datos: PostgreSQL.
-- Ruteo: OSRM.
-- Inteligencia artificial: Google Gemini, con fallback heurístico para explicar la alternativa recomendada según los datos de la ruta.
+- Ruteo: OSRM (Open Source Routing Machine) sobre OpenStreetMap.
+- Inteligencia artificial: **Google Gemini (`gemini-1.5-flash`)**, con fallback heurístico contextual para explicar la alternativa recomendada según los datos de la ruta y métricas de impacto ambiental.
 - Documentación de API: OpenAPI / Swagger (springdoc).
 
 ## Alcance del Trabajo Parcial
@@ -139,5 +147,12 @@ https://www.figma.com/design/qUCg9tJfKBqd5KAsD9DALq/Untitled
 Landing pública:
 https://lappwv.github.io/eco-commute/
 
+Tablero de seguimiento del proyecto (GitHub Projects):
+https://github.com/users/lappwv/projects/1
+
 Tablero Sprint 1:
 https://github.com/lappwv/eco-commute/blob/main/docs/sprint-1-board.md
+
+Tablero Sprint 2:
+https://github.com/lappwv/eco-commute/blob/main/docs/sprint-2-board.md
+

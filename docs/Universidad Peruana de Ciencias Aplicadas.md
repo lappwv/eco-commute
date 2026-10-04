@@ -38,6 +38,7 @@ Ciclo 202620
 | 1.4 | 02/10/2026 | Equipo EcoCommute | Alineación integral del informe con la rúbrica del Trabajo Parcial y el repositorio actual: mejora de Lean UX (Problem Statement, Assumptions, Hypotheses y métricas), actualización de perfiles y Student Outcome, sincronización del Sprint Backlog y de la metodología de trabajo por features, corrección de landing page, arquitectura, base de datos, OpenAPI/Swagger y despliegue en Render, actualización de evidencias del Sprint Review, conclusiones y recomendaciones. |
 | 1.5 | 02/10/2026 | Equipo EcoCommute | Clarificación del alcance técnico: Angular + TypeScript + Angular Material se mantienen como arquitectura objetivo de la aplicación web principal, mientras que el Trabajo Parcial implementa y despliega la landing page responsive y el backend. Se actualizaron alcance, Web Style Guidelines, configuración técnica e implementación para diferenciar correctamente producto final y entregable del TP. |
 | 1.6 | 03/10/2026 | Equipo EcoCommute | Ajuste final del informe al alcance implementado del TP: precisión de las recomendaciones con IA, aclaración del alcance de rutas y actualización de evidencias del Sprint. |
+| 1.7 | 04/10/2026 | Equipo EcoCommute | Incorporación del Sprint Backlog 2 y evidencias de consolidación técnica del Trabajo Parcial: refactorización de API a 25 rutas, pruebas automatizadas en verde, validación de OSRM, CO₂ y retos, y sincronización documental. |
 
 ## Tabla de Contenidos
 
@@ -53,6 +54,8 @@ Ciclo 202620
 - CAPÍTULO II: REQUIREMENTS SPECIFICATION
   - 2.1 Product Backlog
     - 2.1.1 Sprint Backlog
+      - 2.1.1.1 Sprint Backlog 1
+      - 2.1.1.2 Sprint Backlog 2
     - 2.1.2 Priorización del backlog
     - 2.1.3 Alcance inicial del producto
     - 2.1.4 Funcionalidades fuera del alcance inicial
@@ -65,6 +68,8 @@ Ciclo 202620
 - CAPÍTULO IV: PRODUCT IMPLEMENTATION, VALIDATION & DEPLOYMENT
   - 4.1 Software Deployment Configuration
   - 4.2 Landing Page, Services & Applications Implementation
+    - 4.2.1 Sprint 1
+    - 4.2.2 Sprint 2
   - 4.3 Validation Interviews
   - 4.4 Video About-the-Product
 - Conclusiones
@@ -72,6 +77,7 @@ Ciclo 202620
 - Video About-the-Team
 - Bibliografía
 - Anexos
+
 
 ## Student Outcome
 
@@ -242,7 +248,9 @@ El Product Backlog de EcoCommute organiza las funcionalidades del alcance inicia
 
 ### 2.1.1 Sprint Backlog
 
-Para el Trabajo Parcial se prioriza un primer sprint sobre una estructura base y arquitectura general preparada inicialmente por Rodrigo Condor. A partir de esa base, el trabajo se distribuyó mediante ramas feature/* para que cada integrante refinara, completara, corrigiera y validara los módulos asignados. Las historias se descomponen en tareas técnicas estimadas entre 4 y 8 horas, de acuerdo con la rúbrica, y representan la evolución del incremento funcional, no necesariamente la creación de cada módulo desde cero.
+Para el Trabajo Parcial se estructuraron dos sprints de trabajo sobre el incremento del proyecto: un primer sprint enfocado en la construcción inicial de las funcionalidades sobre la arquitectura general preparada por Rodrigo Condor, y un segundo sprint enfocado en la consolidación técnica, cobertura de pruebas automatizadas, acotamiento de la API, integración de ramas y actualización documental. Las historias se descomponen en tareas técnicas estimadas entre 4 y 8 horas, de acuerdo con la rúbrica, representando la evolución incremental del producto.
+
+#### 2.1.1.1 Sprint Backlog 1
 
 | Sprint | User Story | Engineering Task | Responsable | Horas |
 | --- | --- | --- | --- | --- |
@@ -273,6 +281,35 @@ Para el Trabajo Parcial se prioriza un primer sprint sobre una estructura base y
 | T10 | Refinar el prompt y el servicio de recomendación con IA (Gemini) | 6h | Matías Mariños | Done |
 | T11 | Completar y validar el sistema de medallas por logros | 8h | Odar Alcocer | Done |
 | T12 | Preparar capturas, pruebas funcionales y resumen de colaboración | 6h | Matías Mariños | Done |
+
+#### 2.1.1.2 Sprint Backlog 2
+
+| Sprint | User Story | Engineering Task | Responsable | Horas |
+| --- | --- | --- | --- | --- |
+| Sprint 2 | HU01-HU02, Arquitectura | Refactorizar controladores y acotar la superficie de la API a 25 rutas expuestas | Rodrigo Condor | 6 |
+| Sprint 2 | HU03 | Corregir el flag de optimización IA y validar respuestas con fallback heurístico en rutas | Matías Mariños | 5 |
+| Sprint 2 | HU03 | Diseñar e implementar pruebas de integración para rutas y fallback OSRM | Jeampiero Ramos | 6 |
+| Sprint 2 | HU04-HU05 | Implementar pruebas de integración para registro de viajes, historial y cálculo de CO₂ | Jeampiero Ramos | 6 |
+| Sprint 2 | HU06, HU10-HU11 | Validar consistencia de cálculo de puntos y desbloqueo automático de medallas | Odar Alcocer | 5 |
+| Sprint 2 | HU08, HU13 | Integrar y validar consistencia del ranking distrital y catálogo de retos | Paulo Espinoza | 6 |
+| Sprint 2 | HU12, HU14 | Implementar pruebas de integración para endpoints de recompensas, canjes y administración | Diego Avalos | 6 |
+| Sprint 2 | Landing UI | Actualizar capturas de pantalla, catálogo demo y textos neutros de la landing page | Matías Mariños | 5 |
+| Sprint 2 | DevOps | Verificar pipeline de despliegue continuo en Render Blueprint con PostgreSQL y health check | Rodrigo Condor | 4 |
+| Sprint 2 | QA & Evidencias | Ejecutar la suite completa de 28 tests automatizados en verde y sincronizar informe técnico | Matías Mariños | 5 |
+
+| Id | Title | Estimation | Assigned To | Status |
+| --- | --- | --- | --- | --- |
+| T13 | Refactorizar controladores y acotar la superficie de la API a 25 rutas expuestas | 6h | Rodrigo Condor | Done |
+| T14 | Corregir el flag de optimización IA y validar respuestas con fallback heurístico en rutas | 5h | Matías Mariños | Done |
+| T15 | Diseñar e implementar pruebas de integración para rutas y fallback OSRM (HU03) | 6h | Jeampiero Ramos | Done |
+| T16 | Implementar pruebas de integración para registro de viajes, historial y cálculo de CO₂ (HU04, HU05) | 6h | Jeampiero Ramos | Done |
+| T17 | Validar consistencia de cálculo de puntos y desbloqueo automático de medallas (HU06, HU10-HU11) | 5h | Odar Alcocer | Done |
+| T18 | Integrar y validar consistencia del ranking distrital y catálogo de retos (HU08, HU13) | 6h | Paulo Espinoza | Done |
+| T19 | Implementar pruebas de integración para endpoints de recompensas, canjes y administración (HU12, HU14) | 6h | Diego Avalos | Done |
+| T20 | Actualizar capturas de pantalla, catálogo demo y textos neutros de la landing page | 5h | Matías Mariños | Done |
+| T21 | Verificar pipeline de despliegue continuo en Render Blueprint con PostgreSQL y health check | 4h | Rodrigo Condor | Done |
+| T22 | Ejecutar la suite completa de 28 tests automatizados en verde y sincronizar informe del TP | 5h | Matías Mariños | Done |
+
 
 ### 2.1.2 Priorización del backlog
 
@@ -436,7 +473,57 @@ La evidencia de despliegue corresponde al backend publicado en Render mediante e
 
 La estrategia de desarrollo comenzó con una estructura base y arquitectura general preparada por Rodrigo Condor, con el objetivo de establecer una organización común del backend, la configuración, las entidades principales y los flujos del producto. A partir de esa base, el trabajo se distribuyó entre los integrantes mediante ramas feature/auth, feature/trips, feature/stats-badges, feature/challenges-leaderboard, feature/rewards y feature/dashboard-ia. Cada integrante trabajó sobre su feature realizando mejoras, ampliaciones funcionales, correcciones, integración con otros módulos y validación del comportamiento esperado antes de incorporar los cambios a la rama principal. Esta organización permite distinguir la construcción de la base común de la evolución posterior de cada funcionalidad y debe complementarse con commits y Pull Requests atribuibles a cada integrante para evidenciar la participación individual en GitHub.
 
+### 4.2.2 Sprint 2
+
+El Sprint 2 cerró la consolidación del alcance del Trabajo Parcial: se redujo la superficie de API al alcance definido (25 rutas expuestas), se sumaron pruebas de integración para viajes, rutas y ranking, se corrigió el flag de optimización con IA, se integraron las ramas pendientes y se actualizó la evidencia de la landing page. No incorpora funcionalidades nuevas: su objetivo fue calidad, documentación e integración.
+
+#### 4.2.2.1 Sprint Backlog 2
+
+El Sprint Backlog 2 se encuentra registrado en el Capítulo II (sección 2.1.1.2) y en el tablero `docs/sprint-2-board.md`, organizado en el formato de columnas Id, Title, Estimation, Assigned To y Status. Las tareas técnicas reflejan las actividades de consolidación ejecutadas sobre las ramas de features: refactorización de rutas, pruebas de integración automatizadas, alineación de modelos de transporte y sincronización de documentación.
+
+| Id | Title | Estimation | Assigned To | Status |
+| --- | --- | --- | --- | --- |
+| T13 | Refactorizar controladores y acotar la superficie de la API a 25 rutas expuestas | 6h | Rodrigo Condor | Done |
+| T14 | Corregir el flag de optimización IA y validar respuestas con fallback heurístico en rutas | 5h | Matías Mariños | Done |
+| T15 | Diseñar e implementar pruebas de integración para rutas y fallback OSRM (HU03) | 6h | Jeampiero Ramos | Done |
+| T16 | Implementar pruebas de integración para registro de viajes, historial y cálculo de CO₂ (HU04, HU05) | 6h | Jeampiero Ramos | Done |
+| T17 | Validar consistencia de cálculo de puntos y desbloqueo automático de medallas (HU06, HU10-HU11) | 5h | Odar Alcocer | Done |
+| T18 | Integrar y validar consistencia del ranking distrital y catálogo de retos (HU08, HU13) | 6h | Paulo Espinoza | Done |
+| T19 | Implementar pruebas de integración para endpoints de recompensas, canjes y administración (HU12, HU14) | 6h | Diego Avalos | Done |
+| T20 | Actualizar capturas de pantalla, catálogo demo y textos neutros de la landing page | 5h | Matías Mariños | Done |
+| T21 | Verificar pipeline de despliegue continuo en Render Blueprint con PostgreSQL y health check | 4h | Rodrigo Condor | Done |
+| T22 | Ejecutar la suite completa de 28 tests automatizados en verde y sincronizar informe del TP | 5h | Matías Mariños | Done |
+
+#### 4.2.2.2 Development Evidence for Sprint Review
+
+Como evidencia de desarrollo del Sprint 2 se cuentan los Pull Requests integrados en GitHub, que documentan la revisión cruzada de código y la consolidación de las ramas de trabajo hacia `main`:
+- **PR #2 (`refactor/reduce-api-surface`)**: Reducción de la API a 25 rutas públicas manteniendo cobertura HU01–HU14.
+- **PR #3 (`docs/sync-current-tp-report`)**: Sincronización del informe técnico, capturas actualizadas de la landing y textos neutros.
+- **PR #4 (`feature/challenges-leaderboard`)**: Consistencia del ranking distrital, retos y badges con los modos de transporte soportados.
+- **PR #5 (`feature/trips`)**: Pruebas de integración de viajes (`TripControllerTest`), cálculo de CO₂ (`CarbonServiceTest`) y corrección del flag de optimización IA (`RouteServiceTest`).
+- **PR #6 (`feature/rewards`)**: Pruebas de integración para el controlador de recompensas (`RewardControllerTest`), canjes y CRUD administrativo.
+
+#### 4.2.2.3 Execution Evidence for Sprint Review
+
+El producto fue verificado de forma integral mediante:
+1. **Ejecución local automatizada**: `.\mvnw.cmd clean test` arrojando **28 pruebas en verde** (0 fallas, 0 errores), cubriendo controladores de autenticación, rutas, viajes, recompensas, retos, ranking y cálculo de emisiones.
+2. **Ambiente productivo en Render**: Verificación del endpoint `GET https://ecocommute-backend-a14m.onrender.com/health` retornando `{"status":"UP"}` y autenticación funcional con token JWT vía `POST /api/v1/auth/login`.
+3. **Landing page en GitHub Pages**: Accesible públicamente en `https://lappwv.github.io/eco-commute/`, con catálogo demostrativo consistente con los factores de emisión del backend.
+
+#### 4.2.2.4 Services Documentation Evidence for Sprint Review
+
+La documentación interactiva OpenAPI / Swagger UI en `https://ecocommute-backend-a14m.onrender.com/swagger-ui.html` refleja con exactitud la superficie acotada de 25 rutas expuestas (24 bajo `/api/v1` y `GET /health`), con esquemas de entrada y salida, códigos de estado HTTP y requerimientos de autorización JWT consistentes con las historias de usuario HU01 a HU14.
+
+#### 4.2.2.5 Software Deployment Evidence for Sprint Review
+
+El despliegue en Render se encuentra automatizado mediante el Blueprint `render.yaml`. Cada integración de Pull Request a la rama `main` dispara automáticamente un nuevo ciclo de build y deploy en la nube, manteniendo sincronizado el contenedor Docker del backend (`ecocommute-backend`) y la base de datos PostgreSQL gestionada (`ecocommute-db`), asegurando disponibilidad sin costo operativo bajo el plan gratuito de Render.
+
+#### 4.2.2.6 Team Collaboration Insights during Sprint
+
+Durante el Sprint 2 el equipo consolidó la comunicación mediante la revisión de Pull Requests entre pares. Se identificaron y resolvieron tempranamente divergencias de formato en los controladores y se estandarizaron los mensajes de respuesta. Esta práctica permitió que cada integrante defendiera técnicamente los cambios de su feature y garantizara que la suite general de pruebas mantuviera el 100% de éxito antes de cualquier despliegue a producción.
+
 ## 4.3 Validation Interviews
+
 
 ### 4.3.1 Diseño de Entrevistas
 
