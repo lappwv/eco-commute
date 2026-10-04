@@ -46,9 +46,25 @@ Nota sobre HU10–HU14 en el Sprint 1: el Sprint Backlog del informe incluye la
 tarea T11 (HU10–HU11, medallas). HU12–HU14 (recompensas, retos y canjes) quedan
 cubiertas por la feature `feature/rewards` de Diego Avalos, descrita en
 [CONTRIBUTING.md](../CONTRIBUTING.md); el informe no les asigna horas dentro del
-Sprint Backlog.
+Sprint Backlog 1, siendo consolidadas con pruebas en el Sprint 2.
+
+## Sprint Backlog 2 (Capítulo II, sección 2.1.1.2)
+
+| Id | Title | Estimation | Assigned To | Status |
+| --- | --- | --- | --- | --- |
+| T13 | Refactorizar controladores y acotar la superficie de la API a 25 rutas expuestas | 6h | Rodrigo Condor | Done |
+| T14 | Corregir el flag de optimización IA y validar respuestas con fallback heurístico en rutas | 5h | Matías Mariños | Done |
+| T15 | Diseñar e implementar pruebas de integración para rutas y fallback OSRM (HU03) | 6h | Jeampiero Ramos | Done |
+| T16 | Implementar pruebas de integración para registro de viajes, historial y cálculo de CO₂ (HU04, HU05) | 6h | Jeampiero Ramos | Done |
+| T17 | Validar consistencia de cálculo de puntos y desbloqueo automático de medallas (HU06, HU10-HU11) | 5h | Odar Alcocer | Done |
+| T18 | Integrar y validar consistencia del ranking distrital y catálogo de retos (HU08, HU13) | 6h | Paulo Espinoza | Done |
+| T19 | Implementar pruebas de integración para endpoints de recompensas, canjes y administración (HU12, HU14) | 6h | Diego Avalos | Done |
+| T20 | Actualizar capturas de pantalla, catálogo demo y textos neutros de la landing page | 5h | Matías Mariños | Done |
+| T21 | Verificar pipeline de despliegue continuo en Render Blueprint con PostgreSQL y health check | 4h | Rodrigo Condor | Done |
+| T22 | Ejecutar la suite completa de 28 tests automatizados en verde y sincronizar informe del TP | 5h | Matías Mariños | Done |
 
 Estado verificado contra el código (28 tests en verde, `main`):
 `Auth`, `Route`, `Trip`, `Dashboard`, `Leaderboard`, `Reward`, `Challenge`,
 `Admin` y `Health` controllers + servicios en
-`backend/src/main/java/com/ecocommute/`.
+`backend/src/main/java/com/ecocommute/`. Tablero detallado en [docs/sprint-2-board.md](sprint-2-board.md).
+

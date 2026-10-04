@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Database Diagram - EcoCommute</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { overflow: hidden; }
+  body {
+    margin: 0;
+    padding: 30px;
+    background: #F8FAFC;
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    color: #0F172A;
+  }
+  .header { margin-bottom: 18px; }
+  .header h1 { font-size: 30px; font-weight: 800; color: #064E3B; margin: 0 0 6px 0; }
+  .header p { font-size: 14px; color: #64748B; margin: 0 0 10px 0; }
+  .legend { display: flex; gap: 18px; font-size: 12px; font-weight: 600; align-items: center; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .badge-pk, .badge-fk, .badge-uk { padding: 1px 5px; border-radius: 4px; font-weight: 700; font-size: 10px; }
+  .badge-pk { background: #FEF3C7; color: #92400E; }
+  .badge-fk { background: #DBEAFE; color: #1E40AF; }
+  .badge-uk { background: #F3E8FF; color: #6B21A8; }
+
+  .diagram { position: relative; width: 1340px; height: 1040px; }
+  svg.connections { position: absolute; inset: 0; width: 1340px; height: 1040px; z-index: 3; pointer-events: none; }
+
+  .entity {
+    position: absolute; width: 300px;
+    background: #FFFFFF; border: 1.5px solid #CBD5E1; border-radius: 10px;
+    box-shadow: 0 8px 20px -6px rgba(0,0,0,.10);
+    overflow: hidden; z-index: 2;
+  }
+  .entity-header {
+    background: linear-gradient(135deg, #064E3B, #047857);
+    color: #fff; padding: 9px 14px; font-size: 15px; font-weight: 700;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .entity-header small { font-size: 10.5px; font-weight: 400; color: #A7F3D0; }
+  .entity-body { padding: 6px 0; font-size: 12px; }
+  .f { display: flex; justify-content: space-between; align-items: center; padding: 3px 14px; line-height: 1.4; }
+  .n { font-family: Consolas, Menlo, monospace; display: flex; gap: 5px; align-items: center; }
+  .n.pk { font-weight: 700; color: #064E3B; }
+  .n.fk { font-weight: 700; color: #1E40AF; }
+  .t { color: #64748B; font-size: 10.5px; }
+  .div { height: 1px; background: #E2E8F0; margin: 4px 0; }
+  .lbl rect { fill: #fff; stroke-width: 1; }
+  .lbl text { font-size: 11px; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Modelo Relacional de Base de Datos - EcoCommute</h1>
+  <p>Diagrama entidad-relación implementado en PostgreSQL: 9 tablas con relaciones 1:1, 1:N y N:M (tablas asociativas) e integridad referencial mediante claves foráneas.</p>
+  <div class="legend">
+    <span><span class="badge-pk">PK</span> Clave primaria</span>
+    <span><span class="badge-fk">FK</span> Clave foránea</span>
+    <span><span class="badge-uk">UK</span> Clave única</span>
+    <span>
+      <svg width="46" height="16"><line x1="2" y1="8" x2="44" y2="8" stroke="#059669" stroke-width="2"/><line x1="8" y1="2" x2="8" y2="14" stroke="#059669" stroke-width="2"/><line x1="13" y1="2" x2="13" y2="14" stroke="#059669" stroke-width="2"/></svg>
+      Uno (obligatorio)
+    </span>
+    <span>
+      <svg width="46" height="16"><line x1="2" y1="8" x2="44" y2="8" stroke="#059669" stroke-width="2"/><line x1="30" y1="8" x2="44" y2="2" stroke="#059669" stroke-width="2"/><line x1="30" y1="8" x2="44" y2="14" stroke="#059669" stroke-width="2"/><circle cx="25" cy="8" r="3.5" fill="#fff" stroke="#059669" stroke-width="2"/></svg>
+      Muchos (cero o más)
+    </span>
+  </div>
+</div>
+
+<div class="diagram">
+
+  <svg class="connections" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <!-- Uno obligatorio: dos barras -->
+      <marker id="one" markerUnits="userSpaceOnUse" viewBox="0 0 20 20" refX="0" refY="10" markerWidth="20" markerHeight="20" orient="auto-start-reverse">
+        <path d="M 6 3 L 6 17 M 11 3 L 11 17" stroke="#059669" stroke-width="2.2" fill="none"/>
+      </marker>
+      <!-- Muchos: pata de gallo + círculo (cero o más) -->
+      <marker id="many" markerUnits="userSpaceOnUse" viewBox="0 0 26 20" refX="26" refY="10" markerWidth="26" markerHeight="20" orient="auto">
+        <circle cx="6" cy="10" r="4" fill="#fff" stroke="#059669" stroke-width="2"/>
+        <path d="M 12 10 L 26 2 M 12 10 L 26 18 M 12 10 L 26 10" stroke="#059669" stroke-width="2.2" fill="none"/>
+      </marker>
+    </defs>
+
+    <g stroke="#059669" stroke-width="2.2" fill="none">
+      <!-- 1. users (1) -> trips (N) -->
+      <path d="M 340 130 H 520" marker-start="url(#one)" marker-end="url(#many)"/>
+      <!-- 2. users (1) -> user_stats (1) -->
+      <path d="M 190 460 V 500" marker-start="url(#one)" marker-end="url(#one)"/>
+      <!-- 3. users (1) -> user_badges (N) -->
+      <path d="M 340 380 H 440 V 600 H 520" marker-start="url(#one)" marker-end="url(#many)"/>
+      <!-- 4. users (1) -> redemptions (N) -->
+      <path d="M 340 425 H 400 V 850 H 520" marker-start="url(#one)" marker-end="url(#many)"/>
+      <!-- 5. emission_factors (1) -> trips (N) -->
+      <path d="M 1000 155 H 820" marker-start="url(#one)" marker-end="url(#many)"/>
+      <!-- 6. badges (1) -> user_badges (N) -->
+      <path d="M 1000 610 H 820" marker-start="url(#one)" marker-end="url(#many)"/>
+      <!-- 7. rewards (1) -> redemptions (N) -->
+      <path d="M 1000 870 H 820" marker-start="url(#one)" marker-end="url(#many)"/>
+    </g>
+
+    <!-- Etiquetas de cardinalidad y verbo -->
+    <g class="lbl">
+      <rect x="390" y="104" width="80" height="18" rx="4" stroke="#059669"/><text x="398" y="117" fill="#064E3B">1 : N registra</text>
+      <rect x="200" y="471" width="76" height="18" rx="4" stroke="#059669"/><text x="207" y="484" fill="#064E3B">1 : 1 acumula</text>
+      <rect x="448" y="480" width="66" height="18" rx="4" stroke="#059669"/><text x="454" y="493" fill="#064E3B">1 : N gana</text>
+      <rect x="406" y="740" width="74" height="18" rx="4" stroke="#059669"/><text x="412" y="753" fill="#064E3B">1 : N canjea</text>
+      <rect x="866" y="129" width="88" height="18" rx="4" stroke="#059669"/><text x="872" y="142" fill="#064E3B">1 : N factor CO₂</text>
+      <rect x="870" y="584" width="80" height="18" rx="4" stroke="#059669"/><text x="876" y="597" fill="#064E3B">1 : N otorgada</text>
+      <rect x="870" y="844" width="80" height="18" rx="4" stroke="#059669"/><text x="876" y="857" fill="#064E3B">1 : N canjeada</text>
+    </g>
+  </svg>
+
+  <!-- ===== COLUMNA A ===== -->
+  <div class="entity" style="left:40px; top:60px; height:400px;">
+    <div class="entity-header"><span>users</span><small>Entidad principal</small></div>
+    <div class="entity-body">
+      <div class="f"><span class="n pk"><span class="badge-pk">PK</span>id</span><span class="t">VARCHAR(36)</span></div>
+      <div class="f"><span class="n"><span class="badge-uk">UK</span>email</span><span class="t">VARCHAR(150)</span></div>
+      <div class="f"><span class="n">password</span><span class="t">VARCHAR(255)</span></div>
+      <div class="f"><span class="n">full_name</span><span class="t">VARCHAR(120)</span></div>
+      <div class="f"><span class="n">avatar_url</span><span class="t">VARCHAR(500)</span></div>
+      <div class="f"><span class="n">district</span><span class="t">VARCHAR(80)</span></div>
+      <div class="f"><span class="n">role (CHK)</span><span class="t">VARCHAR(30)</span></div>
+      <div class="f"><span class="n">auth_provider</span><span class="t">VARCHAR(30)</span></div>
+      <div class="f"><span class="n">current_points</span><span class="t">INTEGER</span></div>
+      <div class="f"><span class="n">current_level</span><span class="t">INTEGER</span></div>
+      <div class="f"><span class="n">streak_days</span><span class="t">INTEGER</span></div>
+      <div class="f"><span class="n">last_trip_date</span><span class="t">TIMESTAMP</span></div>
+      <div class="f"><span class="n">has_bicycle</span><span class="t">BOOLEAN</span></div>
+      <div class="f"><span class="n">created_at</span><span class="t">TIMESTAMP</span></div>
+    </div>
+  </div>
+
+  <div class="entity" style="left:40px; top:500px; height:230px;">
+    <div class="entity-header"><span>user_stats</span><small>Impacto acumulado</small></div>
+    <div class="entity-body">
+      <div class="f"><span class="n pk"><span class="badge-pk">PK</span>id</span><span class="t">VARCHAR(36)</span></div>
+      <div class="f"><span class="n fk"><span class="badge-fk">FK</span><span class="badge-uk">UK</span>user_id</span><span class="t">→ users.id</span></div>
+      <div class="div"></div>
+      <div class="f"><span class="n">total_co2_saved_kg</span><span class="t">NUMERIC(12,4)</span></div>
+      <div class="f"><span class="n">total_distance_km</span><span class="t">NUMERIC(12,2)</span></div>
+      <div class="f"><span class="n">total_trips</span><span class="t">INTEGER</span></div>
+      <div class="f"><span class="n">total_calories_burned</span><span class="t">INTEGER</span></div>
+      <div class="f"><span class="n">updated_at</span><span class="t">TIMESTAMP</span></div>
+    </div>
+  </div>
+
+  <div class="entity" style="left:40px; top:780px; height:230px;">
+    <div class="entity-header"><span>challenges</span><small>Catálogo de retos</small></div>
+    <div class="entity-body">
+      <div class="f"><span class="n pk"><span class="badge-pk">PK</span>id</span><span class="t">BIGSERIAL</span></div>
+      <div class="f"><span class="n">title</span><span class="t">VARCHAR(120)</span></div>
+      <div class="f"><span class="n">description</span><span class="t">VARCHAR(255)</span></div>
+      <div class="div"></div>
+      <div class="f"><span class="n">goal_value</span><span class="t">INTEGER</span></div>
+      <div class="f"><span class="n">goal_unit</span><span class="t">VARCHAR(32)</span></div>
+      <div class="f"><span class="n">period_start, period_end</span><span class="t">DATE</span></div>
+      <div class="f"><span class="n">active</span><span class="t">BOOLEAN</span></div>
+    </div>
+  </div>
+
+  <!-- ===== COLUMNA B ===== -->
+  <div class="entity" style="left:520px; top:60px; height:420px;">
+    <div class="entity-header"><span>trips</span><small>Viajes sostenibles</small></div>
+    <div class="entity-body">
+      <div class="f"><span class="n pk"><span class="badge-pk">PK</span>id</span><span class="t">VARCHAR(36)</span></div>
+      <div class="f"><span class="n fk"><span class="badge-fk">FK</span>user_id</span><span class="t">→ users.id</span></div>
+      <div class="f"><span class="n fk"><span class="badge-fk">FK</span>transport_mode</span><span class="t">→ emission_factors</span></div>
+      <div class="div"></div>
+      <div class="f"><span class="n">origin_name</span><span class="t">VARCHAR(180)</span></div>
+      <div class="f"><span class="n">origin_lat, origin_lng</span><span class="t">NUMERIC(10,7)</span></div>
+      <div class="f"><span class="n">destination_name</span><span class="t">VARCHAR(180)</span></div>
+      <div class="f"><span class="n">destination_lat, lng</span><span class="t">NUMERIC(10,7)</span></div>
+      <div class="f"><span class="n">distance_km</span><span class="t">NUMERIC(10,2)</span></div>
+      <div class="f"><span class="n">duration_minutes</span><span class="t">INTEGER</span></div>
+      <div class="f"><span class="n">baseline_co2_grams</span><span class="t">NUMERIC(12,2)</span></div>
+      <div class="f"><span class="n">co2_emitted_grams</span><span class="t">NUMERIC(12,2)</span></div>
+      <div class="f"><span class="n">co2_saved_grams</span><span class="t">NUMERIC(12,2)</span></div>
+      <div class="f"><span class="n">calories_burned</span><span class="t">INTEGER</span></div>
+      <div class="f"><span class="n">points_earned</span><span class="t">INTEGER</span></div>
+      <div class="f"><span class="n">completed_at</span><span class="t">TIMESTAMP</span></div>
+    </div>
+  </div>
+
+  <div class="entity" style="left:520px; top:520px; height:190px;">
+    <div class="entity-header"><span>user_badges</span><small>Asociativa (N : M)</small></div>
+    <div class="entity-body">
+      <div class="f"><span class="n pk"><span class="badge-pk">PK</span>id</span><span class="t">VARCHAR(36)</span></div>
+      <div class="f"><span class="n fk"><span class="badge-fk">FK</span>user_id</span><span class="t">→ users.id</span></div>
+      <div class="f"><span class="n fk"><span class="badge-fk">FK</span>badge_id</span><span class="t">→ badges.id</span></div>
+      <div class="div"></div>
+      <div class="f"><span class="n"><span class="badge-uk">UK</span>(user_id, badge_id)</span><span class="t">UNIQUE</span></div>
+      <div class="f"><span class="n">awarded_at</span><span class="t">TIMESTAMP</span></div>
+    </div>
+  </div>
+
+  <div class="entity" style="left:520px; top:760px; height:220px;">
+    <div class="entity-header"><span>redemptions</span><small>Asociativa (N : M)</small></div>
+    <div class="entity-body">
+      <div class="f"><span class="n pk"><span class="badge-pk">PK</span>id</span><span class="t">BIGSERIAL</span></div>
+      <div class="f"><span class="n fk"><span class="badge-fk">FK</span>user_id</span><span class="t">→ users.id</span></div>
+      <div class="f"><span class="n fk"><span class="badge-fk">FK</span>reward_id</span><span class="t">→ rewards.id</span></div>
+      <div class="div"></div>
+      <div class="f"><span class="n">points_used</span><span class="t">INTEGER</span></div>
+      <div class="f"><span class="n">status (CHK)</span><span class="t">VARCHAR(30)</span></div>
+      <div class="f"><span class="n">created_at</span><span class="t">TIMESTAMP</span></div>
+    </div>
+  </div>
+
+  <!-- ===== COLUMNA C ===== -->
+  <div class="entity" style="left:1000px; top:60px; height:190px;">
+    <div class="entity-header"><span>emission_factors</span><small>Factores de emisión</small></div>
+    <div class="entity-body">
+      <div class="f"><span class="n pk"><span class="badge-pk">PK</span>id</span><span class="t">BIGSERIAL</span></div>
+      <div class="f"><span class="n"><span class="badge-uk">UK</span>transport_mode</span><span class="t">VARCHAR(40)</span></div>
+      <div class="div"></div>
+      <div class="f"><span class="n">grams_co2_per_km</span><span class="t">NUMERIC(10,2)</span></div>
+      <div class="f"><span class="n">description</span><span class="t">VARCHAR(255)</span></div>
+      <div class="f"><span class="n">updated_at</span><span class="t">TIMESTAMP</span></div>
+    </div>
+  </div>
+
+  <div class="entity" style="left:1000px; top:480px; height:270px;">
+    <div class="entity-header"><span>badges</span><small>Catálogo de medallas</small></div>
+    <div class="entity-body">
+      <div class="f"><span class="n pk"><span class="badge-pk">PK</span>id</span><span class="t">BIGINT</span></div>
+      <div class="f"><span class="n"><span class="badge-uk">UK</span>code</span><span class="t">VARCHAR(60)</span></div>
+      <div class="f"><span class="n">title</span><span class="t">VARCHAR(120)</span></div>
+      <div class="f"><span class="n">description</span><span class="t">VARCHAR(255)</span></div>
+      <div class="f"><span class="n">icon_emoji, icon_url</span><span class="t">VARCHAR</span></div>
+      <div class="f"><span class="n">required_points</span><span class="t">INTEGER</span></div>
+      <div class="f"><span class="n">required_co2_saved_kg</span><span class="t">NUMERIC(10,2)</span></div>
+      <div class="f"><span class="n">required_streak_days</span><span class="t">INTEGER</span></div>
+      <div class="f"><span class="n">required_trips</span><span class="t">INTEGER</span></div>
+    </div>
+  </div>
+
+  <div class="entity" style="left:1000px; top:790px; height:220px;">
+    <div class="entity-header"><span>rewards</span><small>Catálogo de beneficios</small></div>
+    <div class="entity-body">
+      <div class="f"><span class="n pk"><span class="badge-pk">PK</span>id</span><span class="t">BIGINT</span></div>
+      <div class="f"><span class="n"><span class="badge-uk">UK</span>code</span><span class="t">VARCHAR(60)</span></div>
+      <div class="f"><span class="n">title</span><span class="t">VARCHAR(120)</span></div>
+      <div class="f"><span class="n">description</span><span class="t">VARCHAR(255)</span></div>
+      <div class="f"><span class="n">points_cost</span><span class="t">INTEGER</span></div>
+      <div class="f"><span class="n">icon_emoji, icon_url</span><span class="t">VARCHAR</span></div>
+      <div class="f"><span class="n">active</span><span class="t">BOOLEAN</span></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
