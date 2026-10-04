@@ -49,7 +49,7 @@ public class DashboardService {
         UserStats stats = userStatsRepository.findByUserId(userId)
                 .orElseGet(() -> new UserStats(user));
 
-        List<Trip> recentTrips = tripRepository.findUserTripsSince(userId, LocalDateTime.now().minusDays(7));
+        List<Trip> recentTrips = tripRepository.findUserTripsSince(userId, LocalDate.now().minusDays(6).atStartOfDay());
 
         // Group CO2 saved by day of week
         Map<LocalDate, Double> dailyCo2 = new LinkedHashMap<>();
@@ -155,3 +155,4 @@ public class DashboardService {
                 totalCo2Kg / KG_OF_CO2_PER_TREE_PER_YEAR);
     }
 }
+
