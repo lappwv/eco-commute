@@ -45,4 +45,11 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.CONFLICT)
                 .body(ApiError.of("CONFLICT", exception.getMessage(), Map.of()));
     }
+
+    @ExceptionHandler(InvalidCredentialsException.class)
+    public ResponseEntity<ApiError> handleInvalidCredentials(InvalidCredentialsException exception) {
+        return ResponseEntity
+                .status(HttpStatus.UNAUTHORIZED)
+                .body(ApiError.of("UNAUTHORIZED", exception.getMessage(), Map.of()));
+    }
 }
