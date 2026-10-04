@@ -36,11 +36,21 @@ class RoutingEngineServiceTest {
     @Test
     @DisplayName("Debe generar plan de rutas con 3 alternativas (Baseline, Directa, Corredor Verde)")
     void testPlanRoutesSuccess() {
+        assertPlanRoutesWithAi(null);
+    }
+
+    @Test
+    @DisplayName("Debe invocar IA cuando la optimización está activada")
+    void testPlanRoutesWithAiEnabled() {
+        assertPlanRoutesWithAi(true);
+    }
+
+    private void assertPlanRoutesWithAi(Boolean enableAiOptimization) {
         RoutePlanRequestDTO request = new RoutePlanRequestDTO(
                 new CoordinateRequestDTO(-12.0897, -77.0543),
                 new CoordinateRequestDTO(-12.0965, -77.0285),
                 "BICYCLE",
-                null);
+                enableAiOptimization);
 
         when(carbonEmissionService.calculateBaselineEmissionGrams(anyDouble())).thenReturn(1445.0);
         when(carbonEmissionService.calculateModeEmissionGrams(eq(TransportMode.BICYCLE), anyDouble())).thenReturn(0.0);
@@ -61,5 +71,40 @@ class RoutingEngineServiceTest {
         assertTrue(green.isAiRecommended());
         assertEquals("Ruta de prueba", green.aiInsight().ecoReasoning());
         assertEquals(TransportMode.BICYCLE, green.mode());
+        verify(aiAdvisorService).generateRouteInsight(
+                eq(-12.0897), eq(-77.0543), eq(-12.0965), eq(-77.0285), eq(TransportMode.BICYCLE),
+                anyDouble(), anyDouble(), anyInt(), eq(true));
+        verifyNoMoreInteractions(aiAdvisorService);
+    }
+    @Test
+    @DisplayName("Debe conservar 3 alternativas sin invocar IA cuando la optimización está desactivada")
+    void testPlanRoutesWithAiDisabled() {
+        RoutePlanRequestDTO request = new RoutePlanRequestDTO(
+                new CoordinateRequestDTO(-12.0897, -77.0543),
+                new CoordinateRequestDTO(-12.0965, -77.0285),
+                "BICYCLE",
+                false);
+
+        when(carbonEmissionService.calculateBaselineEmissionGrams(anyDouble())).thenReturn(1445.0);
+        when(carbonEmissionService.calculateModeEmissionGrams(eq(TransportMode.BICYCLE), anyDouble())).thenReturn(0.0);
+        when(carbonEmissionService.calculatePoints(eq(TransportMode.BICYCLE), anyDouble(), anyInt())).thenReturn(45);
+
+        RoutePlanResponseDTO response = routingEngineService.planRoutes(request, 1);
+
+        assertNotNull(response.baselineCarRoute());
+        assertNotNull(response.standardProfileRoute());
+        RouteOptionDTO green = response.aiGreenCorridorRoute();
+        assertNotNull(green);
+        assertEquals("route-ai-green-corridor", response.recommendedRouteId());
+        assertEquals(response.recommendedRouteId(), green.id());
+        assertEquals(TransportMode.BICYCLE, green.mode());
+        assertFalse(green.isAiRecommended());
+        assertNull(green.aiInsight());
+        assertEquals("🌿 Corredor Verde", green.title());
+        assertFalse(green.pathCoordinates().isEmpty());
+        assertTrue(green.distanceKm() > 0);
+        assertTrue(green.durationMinutes() > 0);
+        assertEquals(55, green.potentialPoints());
+        verifyNoInteractions(aiAdvisorService);
     }
 }
