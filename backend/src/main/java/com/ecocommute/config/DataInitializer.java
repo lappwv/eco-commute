@@ -80,7 +80,7 @@ public class DataInitializer implements CommandLineRunner {
             badgeRepository.saveAll(List.of(
                     new Badge("FIRST_STEP", "Primer Paso Verde", "Completaste tu primer viaje sostenible en EcoCommute", "🌱", 10, 0.0, 0, 1),
                     new Badge("BIKE_CHAMP", "Ciclista Urbano", "Ahorraste tus primeros 5 kg de CO₂ pedaleando", "🚲", 50, 5.0, 0, 3),
-                    new Badge("TRANSIT_PRO", "Guardián del Aire", "Completaste 10 viajes en transporte público o metro", "🚇", 150, 15.0, 0, 10),
+                    new Badge("TRANSIT_PRO", "Guardián del Aire", "Completaste 10 viajes sostenibles en bicicleta o caminata", "🌱", 150, 15.0, 0, 10),
                     new Badge("STREAK_7", "Semana Imparable", "Mantuviste una racha de 7 días consecutivos de transporte limpio", "🔥", 300, 20.0, 7, 7),
                     new Badge("FOREST_HERO", "Salvador del Bosque", "Evitaste más de 50 kg de CO₂ (equivalente a más de 2 árboles maduros)", "🌳", 600, 50.0, 0, 20),
                     new Badge("ZERO_EMISSION", "Maestro Cero Emisiones", "Acumulaste 100 km recorridos a pie o en bicicleta mecánica", "⚡", 1000, 100.0, 14, 30)
