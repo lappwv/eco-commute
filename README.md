@@ -147,6 +147,12 @@ https://www.figma.com/design/qUCg9tJfKBqd5KAsD9DALq/Untitled
 Landing pública:
 https://lappwv.github.io/eco-commute/
 
+Backend API (Render):
+https://ecocommute-backend-a14m.onrender.com
+
+Swagger / OpenAPI (Render):
+https://ecocommute-backend-a14m.onrender.com/swagger-ui.html
+
 Tablero de seguimiento del proyecto (GitHub Projects):
 https://github.com/users/lappwv/projects/1
 
