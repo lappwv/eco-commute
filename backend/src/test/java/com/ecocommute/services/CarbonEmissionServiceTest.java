@@ -7,6 +7,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -85,5 +87,53 @@ class CarbonEmissionServiceTest {
     void testNonSustainablePoints() {
         int pointsCar = emissionService.calculatePoints(TransportMode.CAR_SOLO, 0.0, 5);
         assertEquals(0, pointsCar);
+    }
+
+    @ParameterizedTest
+    @EnumSource(TransportMode.class)
+    @DisplayName("HU05: usa factores por defecto cuando no existe configuración en la BD")
+    void testDefaultEmissionFactors(TransportMode mode) {
+        when(emissionFactorRepository.findByTransportMode(any(TransportMode.class))).thenReturn(Optional.empty());
+
+        double distanceKm = 2.5;
+        assertEquals(distanceKm * 170.0, emissionService.calculateBaselineEmissionGrams(distanceKm), 0.001);
+        assertEquals(distanceKm * mode.getCo2GramsPerKm(),
+                emissionService.calculateModeEmissionGrams(mode, distanceKm), 0.001);
+        assertEquals(Math.max(0, distanceKm * (170.0 - mode.getCo2GramsPerKm())),
+                emissionService.calculateCo2SavedGrams(mode, distanceKm), 0.001);
+    }
+
+    @Test
+    @DisplayName("HU05: respeta factores configurados para automóvil y medio sostenible")
+    void testConfiguredFactorsAndFractionalDistance() {
+        when(emissionFactorRepository.findByTransportMode(TransportMode.CAR_SOLO))
+                .thenReturn(Optional.of(new EmissionFactor(TransportMode.CAR_SOLO, 200.0, "Car")));
+        when(emissionFactorRepository.findByTransportMode(TransportMode.BICYCLE))
+                .thenReturn(Optional.of(new EmissionFactor(TransportMode.BICYCLE, 12.0, "Bicycle")));
+
+        assertEquals(250.0, emissionService.calculateBaselineEmissionGrams(1.25), 0.001);
+        assertEquals(15.0, emissionService.calculateModeEmissionGrams(TransportMode.BICYCLE, 1.25), 0.001);
+        assertEquals(235.0, emissionService.calculateCo2SavedGrams(TransportMode.BICYCLE, 1.25), 0.001);
+    }
+
+    @Test
+    @DisplayName("HU05: el ahorro no puede ser negativo si el medio emite más que el automóvil")
+    void testSavingsAreClampedToZero() {
+        when(emissionFactorRepository.findByTransportMode(TransportMode.CAR_SOLO))
+                .thenReturn(Optional.of(new EmissionFactor(TransportMode.CAR_SOLO, 170.0, "Car")));
+        when(emissionFactorRepository.findByTransportMode(TransportMode.WALKING))
+                .thenReturn(Optional.of(new EmissionFactor(TransportMode.WALKING, 200.0, "Configured")));
+
+        double saved = emissionService.calculateCo2SavedGrams(TransportMode.WALKING, 2.0);
+        assertEquals(0.0, saved, 0.001);
+        assertEquals(0, emissionService.calculatePoints(TransportMode.WALKING, saved, 1));
+    }
+
+    @Test
+    @DisplayName("HU05: el bono de racha se limita a 50% y los ahorros positivos pequeños reciben un punto")
+    void testStreakCapAndMinimumPositivePoints() {
+        assertEquals(90, emissionService.calculatePoints(TransportMode.BICYCLE, 2000.0, 10));
+        assertEquals(90, emissionService.calculatePoints(TransportMode.BICYCLE, 2000.0, 100));
+        assertEquals(1, emissionService.calculatePoints(TransportMode.WALKING, 1.0, 0));
     }
 }
