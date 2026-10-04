@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>EcoCommute — movilidad sostenible en Lima</title>
+    <title data-i18n="page.title">EcoCommute — Movilidad Sostenible en Lima</title>
     <meta
       name="description"
       content="EcoCommute compara tu ruta en bici, a pie o en auto, calcula el CO2 que dejas de emitir y te da puntos por elegir mejor. Proyecto de la UPC, ODS 11."
@@ -11,45 +11,57 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <header class="topbar">
-      <a class="brand" href="#inicio">EcoCommute</a>
-      <nav class="nav" aria-label="Navegación principal">
-        <a href="#solucion">Por qué existe</a>
-        <a href="#funciones">Qué hace</a>
-        <a href="#demo">Pantallas</a>
-        <a href="#equipo">Equipo</a>
-        <a href="#contacto">Contacto</a>
-      </nav>
+    <header class="topbar" role="banner">
+      <a class="brand" href="#inicio" aria-label="EcoCommute - Inicio">EcoCommute</a>
+      <div class="topbar-right">
+        <nav class="nav" role="navigation" aria-label="Navegación principal" data-i18n-aria="nav.aria">
+          <a href="#solucion" data-i18n="nav.why">Por qué existe</a>
+          <a href="#funciones" data-i18n="nav.features">Qué hace</a>
+          <a href="#demo" data-i18n="nav.screens">Pantallas</a>
+          <a href="#equipo" data-i18n="nav.team">Equipo</a>
+          <a href="#contacto" data-i18n="nav.contact">Contacto</a>
+        </nav>
+        <button
+          type="button"
+          id="lang-toggle"
+          class="lang-toggle"
+          aria-label="Cambiar idioma (Español / English)"
+          data-i18n-aria="lang.toggle_label"
+          aria-pressed="false"
+        >
+          <span class="lang-es active">ES</span><span class="lang-sep">/</span><span class="lang-en">EN</span>
+        </button>
+      </div>
     </header>
 
-    <main>
+    <main role="main">
       <section id="inicio" class="hero">
         <div class="hero-main">
-          <p class="kicker">Lima · ODS 11 · Proyecto universitario</p>
+          <p class="kicker" data-i18n="hero.kicker">Lima · ODS 11 · Meta 11.2 · Proyecto UPC</p>
           <h1>
-            Antes de subirte al auto,
-            <em>mira cuánto CO₂ podrías ahorrar.</em>
+            <span data-i18n="hero.title">Antes de subirte al auto, </span>
+            <em data-i18n="hero.title_em">mira cuánto CO₂ podrías ahorrar.</em>
           </h1>
-          <p class="lead">
+          <p class="lead" data-i18n="hero.lead">
             EcoCommute compara tu recorrido en bici, a pie o en auto, te muestra el CO₂ que
             dejas de emitir y te da puntos verdes por elegir mejor. Todo queda guardado en un
             historial que sí se entiende de un vistazo.
           </p>
           <div class="hero-actions">
-            <a class="button primary" href="#demo">Ver las pantallas</a>
-            <a class="text-link" href="#funciones">Qué funciona hoy &rarr;</a>
+            <a class="button primary" href="#demo" role="button" data-i18n="hero.btn_screens">Ver las pantallas</a>
+            <a class="text-link" href="#funciones" data-i18n="hero.btn_features">Qué funciona hoy &rarr;</a>
           </div>
         </div>
 
-        <aside class="hero-note">
-          <p class="note-label">Un viaje de la demo</p>
-          <p class="note-route">Miraflores &rarr; San Isidro, 4.2 km</p>
+        <aside class="hero-note" aria-label="Cálculo de ejemplo de un viaje sostenible">
+          <p class="note-label" data-i18n="hero.card_label">Un viaje de la demo</p>
+          <p class="note-route" data-i18n="hero.card_route">Miraflores &rarr; San Isidro, 4.2 km</p>
           <ul class="note-figures">
-            <li><span>En auto</span><strong>640 g de CO₂</strong></li>
-            <li><span>En bicicleta</span><strong>0 g de CO₂</strong></li>
-            <li><span>Tu saldo</span><strong>+15 puntos verdes</strong></li>
+            <li><span data-i18n="hero.car">En auto</span><strong data-i18n="hero.car_val">640 g de CO₂</strong></li>
+            <li><span data-i18n="hero.bike">En bicicleta</span><strong data-i18n="hero.bike_val">0 g de CO₂</strong></li>
+            <li><span data-i18n="hero.points">Tu saldo</span><strong data-i18n="hero.points_val">+15 puntos verdes</strong></li>
           </ul>
-          <p class="note-foot">
+          <p class="note-foot" data-i18n="hero.card_foot">
             Así se ve cada viaje registrado en la app. Los factores de emisión están
             configurados por la aplicación, no los pone el usuario.
           </p>
@@ -58,85 +70,106 @@
 
       <section id="solucion" class="section">
         <div class="story">
-          <h2>Por qué existe</h2>
-          <p>
+          <h2 data-i18n="story.title">Por qué existe</h2>
+          <p data-i18n="story.p1">
             En Lima la decisión de cómo movernos se toma por rapidez, costo o costumbre. Nadie
             ve cuánto CO₂ produce el trayecto que acaba de elegir, y las herramientas de mapas
             simplemente comparten tiempo y tráfico: el impacto ambiental queda fuera de la pantalla.
           </p>
           <p>
-            Lo que falta no es otro mapa. Falta ver el costo ambiental de la decisión
-            <span class="underline">antes</span> de tomarla, y algo que te haga querer repetir
-            la alternativa buena la semana siguiente. Eso es lo que intentamos construir.
+            <span data-i18n="story.p2_pre">Lo que falta no es otro mapa. Falta ver el costo ambiental de la decisión </span>
+            <span class="underline" data-i18n="story.p2_under">antes</span>
+            <span data-i18n="story.p2_post"> de tomarla, y algo que te haga querer repetir la alternativa buena la semana siguiente. Eso es lo que intentamos construir.</span>
           </p>
           <blockquote>
-            <p>
+            <p data-i18n="story.quote">
               «Si el ahorro de CO₂ se ve igual de concreto que los minutos del viaje, la gente
               lo considera.»
             </p>
-            <footer>— El equipo EcoCommute, probando la app con usuarios en Lima</footer>
+            <footer data-i18n="story.quote_author">— El equipo EcoCommute, probando la app con usuarios en Lima</footer>
           </blockquote>
         </div>
       </section>
 
       <section id="funciones" class="section alt">
         <div class="section-intro">
-          <h2>Qué hace hoy</h2>
-          <p class="intro-note">
-            Todo lo de abajo está implementado en el backend (Spring Boot) y cubierto por 23
+          <h2 data-i18n="feat.title">Qué hace hoy</h2>
+          <p class="intro-note" data-i18n="feat.intro">
+            Todo lo de abajo está implementado en el backend (Spring Boot) y cubierto por 28
             tests automáticos que corren en cada Pull Request.
           </p>
         </div>
 
         <div class="feature-list">
           <article class="feature feature-lead">
-            <h3>Rutas sostenibles</h3>
-            <p>
+            <h3 data-i18n="feat.routes_title">Rutas sostenibles y Google Gemini</h3>
+            <p data-i18n="feat.routes_desc">
               Introduces el origen y el destino y la app arma alternativas con OSRM: qué tan lejos es,
               cuánto tarda cada medio de transporte y qué te conviene según tu historial. La
-              recomendación con IA explica en lenguaje simple por qué sugiere esa ruta, en lugar
+              recomendación con IA (Google Gemini 1.5 Flash) explica en lenguaje simple por qué sugiere esa ruta, en lugar
               de solo señalarla.
             </p>
           </article>
           <article class="feature">
-            <h3>Viajes y CO₂</h3>
-            <p>Registras el viaje y la app calcula el CO₂ ahorrado frente al auto y los puntos que ganas.</p>
+            <h3 data-i18n="feat.trips_title">Viajes y CO₂</h3>
+            <p data-i18n="feat.trips_desc">Registras el viaje y la app calcula el CO₂ ahorrado frente al auto (152 g CO₂/km) y los puntos verdes que ganas.</p>
           </article>
           <article class="feature">
-            <h3>Dashboard</h3>
-            <p>CO₂ acumulado, distancia, evolución semanal e historial de viajes, en gráficos legibles.</p>
+            <h3 data-i18n="feat.dash_title">Dashboard de impacto</h3>
+            <p data-i18n="feat.dash_desc">CO₂ acumulado, distancia, evolución semanal, árboles equivalentes e historial de viajes, en gráficos legibles.</p>
           </article>
           <article class="feature">
-            <h3>Ranking por distrito</h3>
-            <p>Puedes compararte con personas de tu distrito. La competencia sana ayuda a mantener el hábito.</p>
+            <h3 data-i18n="feat.rank_title">Ranking por distrito</h3>
+            <p data-i18n="feat.rank_desc">Puedes compararte con personas de tu distrito en Lima. La competencia sana ayuda a mantener el hábito.</p>
           </article>
           <article class="feature">
-            <h3>Medallas y recompensas</h3>
-            <p>Las medallas se desbloquean solas al alcanzar hitos; los puntos se canjean por recompensas del catálogo.</p>
+            <h3 data-i18n="feat.badges_title">Medallas y recompensas</h3>
+            <p data-i18n="feat.badges_desc">Las medallas se desbloquean solas al alcanzar hitos; los puntos se canjean por recompensas del catálogo.</p>
           </article>
           <article class="feature">
-            <h3>Retos</h3>
-            <p>Metas semanales o mensuales que el administrador publica desde el panel de administración.</p>
+            <h3 data-i18n="feat.challenges_title">Retos sostenibles</h3>
+            <p data-i18n="feat.challenges_desc">Metas semanales o mensuales que el administrador publica desde el panel de administración.</p>
           </article>
+        </div>
+
+        <!-- Tarjeta distintiva de ODS 11 e Inteligencia Artificial -->
+        <div class="ods-card" role="region" aria-label="Alineación con ODS 11 e Inteligencia Artificial">
+          <h3 data-i18n="ods.title">Alineados con el ODS 11 (Meta 11.2) e Inteligencia Artificial</h3>
+          <p data-i18n="ods.desc">
+            EcoCommute responde de manera directa al Objetivo de Desarrollo Sostenible 11 de la ONU (Meta 11.2: Proporcionar acceso a sistemas de transporte seguros, asequibles, accesibles y sostenibles para todos). Además, optimizamos la toma de decisiones con Google Gemini 1.5 Flash para brindar explicaciones contextuales.
+          </p>
+          <div class="ods-card-badges">
+            <span class="badge-pill badge-ods" data-i18n="ods.badge_ods">ODS 11 · Meta 11.2: Movilidad Sostenible</span>
+            <span class="badge-pill badge-ai" data-i18n="ods.badge_ai">Optimización con IA · Google Gemini 1.5 Flash</span>
+            <span class="badge-pill badge-osrm" data-i18n="ods.badge_osrm">Ruteo Open Source OSRM</span>
+          </div>
         </div>
       </section>
 
       <section id="demo" class="section">
         <div class="section-intro">
-          <h2>Cómo se ve</h2>
+          <h2 data-i18n="demo.title">Cómo se ve</h2>
         </div>
         <div class="preview-grid">
           <figure class="preview-card preview-app">
-            <img src="./media/app-mockups.png" alt="Vista de rutas sostenibles de EcoCommute sobre el mapa de Lima" />
-            <figcaption>
+            <img
+              src="./media/app-mockups.png"
+              alt="Vista de rutas sostenibles de EcoCommute sobre el mapa de Lima"
+              data-i18n-alt="demo.img1_alt"
+            />
+            <figcaption data-i18n="demo.cap1">
               Planificación de rutas sostenibles con ubicación, medios de transporte,
               alternativas y optimización asistida por IA.
             </figcaption>
           </figure>
           <div class="preview-stack">
             <figure class="preview-card">
-              <img src="./media/dashboard-mockup.png" alt="Dashboard oscuro de impacto sostenible de EcoCommute" />
-              <figcaption>Dashboard de impacto con CO₂ ahorrado, viajes, árboles equivalentes, medallas e historial.</figcaption>
+              <img
+                src="./media/dashboard-mockup.png"
+                alt="Dashboard oscuro de impacto sostenible de EcoCommute"
+                data-i18n-alt="demo.img2_alt"
+              />
+              <figcaption data-i18n="demo.cap2">Dashboard de impacto con CO₂ ahorrado, viajes, árboles equivalentes, medallas e historial.</figcaption>
             </figure>
           </div>
         </div>
@@ -156,41 +189,67 @@
 
       <section id="equipo" class="section">
         <div class="section-intro">
-          <h2>Quiénes lo hacemos</h2>
-          <p class="intro-note">
+          <h2 data-i18n="team.title">Quiénes lo hacemos</h2>
+          <p class="intro-note" data-i18n="team.intro">
             Seis estudiantes de Ingeniería de Sistemas de la UPC, NRC 8247, Ciclo 2026-2.
             Cada quien una parte del producto; todo el proceso en el repositorio.
           </p>
         </div>
         <ul class="team-list">
-          <li><strong>Rodrigo Condor</strong><span>IA y recomendaciones de ruta</span></li>
-          <li><strong>Diego Avalos</strong><span>Rutas, dashboard y medallas</span></li>
-          <li><strong>Odar Alcocer</strong><span>Entidades, viajes y cálculo de CO₂</span></li>
-          <li><strong>Paulo Espinoza</strong><span>Puntos verdes y ranking</span></li>
-          <li><strong>Jeampiero Ramos</strong><span>Seguridad, JWT y registro</span></li>
-          <li><strong>Matías Mariños</strong><span>Documentación, evidencias y landing</span></li>
+          <li><strong>Rodrigo Condor</strong><span data-i18n="team.member1_role">IA y recomendaciones de ruta</span></li>
+          <li><strong>Diego Avalos</strong><span data-i18n="team.member2_role">Rutas, dashboard y medallas</span></li>
+          <li><strong>Odar Alcocer</strong><span data-i18n="team.member3_role">Entidades, viajes y cálculo de CO₂</span></li>
+          <li><strong>Paulo Espinoza</strong><span data-i18n="team.member4_role">Puntos verdes y ranking</span></li>
+          <li><strong>Jeampiero Ramos</strong><span data-i18n="team.member5_role">Seguridad, JWT y registro</span></li>
+          <li><strong>Matías Mariños</strong><span data-i18n="team.member6_role">Documentación, evidencias y landing</span></li>
         </ul>
       </section>
 
       <section id="contacto" class="section alt">
         <div class="contact-block">
-          <h2>Pruébalo y cuéntanos</h2>
-          <p class="intro-note">
+          <h2 data-i18n="contact.title">Pruébalo y cuéntanos</h2>
+          <p class="intro-note" data-i18n="contact.intro">
             Si algo no te convence o tienes una idea para Lima, escríbenos: leemos todo.
           </p>
           <ul class="contact-links">
-            <li><a href="mailto:ecocommute.upc@gmail.com">ecocommute.upc@gmail.com</a></li>
-            <li><a href="https://github.com/lappwv/eco-commute">Código en GitHub</a></li>
-            <li><a href="https://www.instagram.com/ecocommute.lima">@ecocommute.lima</a></li>
-            <li><a href="https://www.linkedin.com/company/ecocommute-lima">EcoCommute en LinkedIn</a></li>
+            <li><a href="mailto:ecocommute.upc@gmail.com" aria-label="Enviar correo a ecocommute.upc@gmail.com">ecocommute.upc@gmail.com</a></li>
+            <li><a href="https://github.com/lappwv/eco-commute" data-i18n="contact.github" aria-label="Ver código fuente en GitHub">Código en GitHub</a></li>
+            <li><a href="https://www.instagram.com/ecocommute.lima" aria-label="Perfil de EcoCommute en Instagram">@ecocommute.lima</a></li>
+            <li><a href="https://www.linkedin.com/company/ecocommute-lima" data-i18n="contact.linkedin" aria-label="Perfil de EcoCommute en LinkedIn">EcoCommute en LinkedIn</a></li>
           </ul>
         </div>
       </section>
     </main>
 
-    <footer class="footer">
-      <span>EcoCommute · Trabajo Parcial de Aplicaciones Web</span>
-      <span>ecocommute.upc@gmail.com</span>
+    <footer class="footer" role="contentinfo">
+      <span data-i18n="footer.academic">EcoCommute · Trabajo Parcial de Aplicaciones Web (UPC 2026-2)</span>
+      <nav class="footer-nav" aria-label="Enlaces legales y de privacidad">
+        <a href="./terms.html" class="open-terms-modal" data-i18n="footer.terms" aria-haspopup="dialog">Términos y Condiciones</a>
+        <a href="./terms.html#privacidad" class="open-terms-modal" data-i18n="footer.privacy" aria-haspopup="dialog">Política de Privacidad</a>
+        <a href="mailto:ecocommute.upc@gmail.com" aria-label="Contacto por correo electrónico">ecocommute.upc@gmail.com</a>
+      </nav>
     </footer>
+
+    <!-- Modal accesible para Términos de Servicio y Privacidad -->
+    <div id="terms-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
+      <div id="modal-backdrop" class="modal-backdrop" tabindex="-1"></div>
+      <div class="modal-card">
+        <div class="modal-header">
+          <h2 id="modal-title" data-i18n="modal.title">Términos de Servicio y Privacidad — EcoCommute</h2>
+          <button type="button" id="modal-close-btn" class="modal-close-btn" aria-label="Cerrar ventana modal" data-i18n-aria="modal.close">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p data-i18n="modal.intro">Compromiso ético, legal y ambiental del proyecto EcoCommute:</p>
+          <p data-i18n="modal.p1"><strong>Protección de Datos:</strong> Cumplimos estrictamente la Ley N° 29733 (Perú). Tus coordenadas se procesan de forma efímera para calcular rutas y ahorro de CO₂; no rastreamos en segundo plano ni comercializamos datos.</p>
+          <p data-i18n="modal.p2"><strong>Ruteo Abierto e IA:</strong> Empleamos OSRM sobre OpenStreetMap y Google Gemini 1.5 Flash para recomendaciones transparentes y sin sesgo comercial.</p>
+          <p data-i18n="modal.p3"><strong>Ética Profesional:</strong> El desarrollo se rige bajo los Códigos de Ética de Software ACM/IEEE y el Código Deontológico del Colegio de Ingenieros del Perú (CIP), priorizando el interés público y la movilidad sostenible.</p>
+        </div>
+        <div class="modal-footer">
+          <a href="./terms.html" class="button primary" style="font-size: 14px; min-height: 40px; padding: 0 16px;" data-i18n="modal.full_link">Abrir página completa de Términos y Condiciones &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+    <script src="./i18n.js"></script>
   </body>
 </html>
