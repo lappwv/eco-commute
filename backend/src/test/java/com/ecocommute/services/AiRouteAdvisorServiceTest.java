@@ -43,7 +43,7 @@ class AiRouteAdvisorServiceTest {
         assertEquals(65.0, insight.shadeTreeCoveragePercent());
         assertEquals("Óptima con ciclovías", insight.cyclingInfrastructureQuality());
         assertEquals("175 kcal quemadas", insight.healthBenefitSummary()); // 5.0 km * 35 kcal/km
-        assertEquals((850.0 / 1000.0) / 22.0, insight.treesEquivalentFraction(), 0.0001);
+        assertEquals((850.0 / 1000.0) / 21.77, insight.treesEquivalentFraction(), 0.0001);
 
         String ecoReasoning = insight.ecoReasoning();
         assertNotNull(ecoReasoning);
@@ -132,3 +132,4 @@ class AiRouteAdvisorServiceTest {
         assertNull(advisorService.extractOpenAiText(Map.of("choices", List.of())));
     }
 }
+

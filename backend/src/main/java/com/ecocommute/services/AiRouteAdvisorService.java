@@ -58,7 +58,7 @@ public class AiRouteAdvisorService {
         int currentHour = LocalTime.now(clock).getHour();
         boolean isRushHour = (currentHour >= 7 && currentHour <= 9) || (currentHour >= 17 && currentHour <= 20);
 
-        double treesSavedFraction = (co2SavedGrams / 1000.0) / 22.0;
+        double treesSavedFraction = (co2SavedGrams / 1000.0) / 21.77;
         int calories = (int) Math.round(distanceKm * selectedMode.getCaloriesPerKm());
         String prompt = String.format(
                 "Actúa como el motor de IA de EcoCommute para Lima y el ODS 11. " +
@@ -187,3 +187,4 @@ public class AiRouteAdvisorService {
                 ecoReasoning);
     }
 }
+
