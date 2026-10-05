@@ -27,6 +27,9 @@ public class UserStats {
     private int totalTrips = 0;
     private int totalCaloriesBurned = 0;
 
+    @Version
+    private Long version;
+
     private LocalDateTime updatedAt = LocalDateTime.now();
 
     public UserStats(User user) {
