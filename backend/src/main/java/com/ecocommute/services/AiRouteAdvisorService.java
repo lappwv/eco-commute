@@ -28,7 +28,7 @@ public class AiRouteAdvisorService {
     @Value("${app.gemini.api-key:}")
     private String geminiApiKey;
 
-    @Value("${app.gemini.model:gemini-2.0-flash}")
+    @Value("${app.gemini.model:gemini-1.5-flash}")
     private String geminiModel;
 
     private final RestClient restClient;
