@@ -6,6 +6,7 @@ import com.ecocommute.entities.Trip;
 import com.ecocommute.entities.User;
 import com.ecocommute.repositories.TripRepository;
 import com.ecocommute.services.GamificationService;
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/trips")
-@Tag(name = "Viajes", description = "Registro e historial de viajes sostenibles")
+@Tag(name = "Viajes", description = "HU04, HU05 - Registro transaccional e historial de viajes")
 public class TripController {
 
     private final GamificationService gamificationService;
@@ -31,7 +32,7 @@ public class TripController {
     }
 
     @PostMapping
-    @Operation(summary = "Registra un viaje finalizado y calcula CO2, puntos e insignias")
+    @Operation(summary = "HU04, HU05 - Registro transaccional de viajes y cálculo de CO2 ahorrado (EPA)")
     public ResponseEntity<TripResponseDTO> recordTrip(
             @AuthenticationPrincipal User user,
             @Valid @RequestBody TripRequestDTO trip) {
@@ -44,7 +45,7 @@ public class TripController {
     }
 
     @GetMapping("/history")
-    @Operation(summary = "Lista el historial paginado del usuario autenticado")
+    @Operation(summary = "HU04 - Historial de viajes realizados por el usuario autenticado (extraído vía token JWT)")
     public ResponseEntity<Page<TripResponseDTO>> getMyTrips(
             @AuthenticationPrincipal User user,
             @RequestParam(defaultValue = "0") int page,
@@ -61,25 +62,25 @@ public class TripController {
 
     @GetMapping("/{tripId}")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    @Operation(summary = "Obtiene un viaje por identificador para auditoria")
+    @Operation(summary = "HU04 - Detalle y métricas de emisiones de un viaje específico")
     public ResponseEntity<TripResponseDTO> getTrip(@PathVariable String tripId) {
         Trip trip = tripRepository.findById(tripId)
                 .orElseThrow(() -> new IllegalArgumentException("Viaje no encontrado"));
         return ResponseEntity.ok(TripResponseDTO.fromEntity(trip));
     }
 
+    @Hidden
     @PutMapping("/{tripId}")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    @Operation(summary = "Actualiza un viaje y recalcula sus metricas")
     public ResponseEntity<TripResponseDTO> updateTrip(
             @PathVariable String tripId,
             @Valid @RequestBody TripRequestDTO request) {
         return ResponseEntity.ok(TripResponseDTO.fromEntity(gamificationService.updateTrip(tripId, request.toEntity())));
     }
 
+    @Hidden
     @DeleteMapping("/{tripId}")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    @Operation(summary = "Elimina un viaje y recalcula los acumulados del usuario")
     public ResponseEntity<Void> deleteTrip(@PathVariable String tripId) {
         gamificationService.deleteTrip(tripId);
         return ResponseEntity.noContent().build();
