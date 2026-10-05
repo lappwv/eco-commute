@@ -1,5 +1,11 @@
 # EcoCommute
 
+> ### 🌐 Enlaces Oficiales de Despliegue en Producción
+> - **Landing Page Pública:** [https://lappwv.github.io/eco-commute/](https://lappwv.github.io/eco-commute/)
+> - **API Backend en Render (Health Check):** [https://ecocommute-backend-a14m.onrender.com/health](https://ecocommute-backend-a14m.onrender.com/health)
+> - **Documentación Swagger UI (25 Rutas Activas):** [https://ecocommute-backend-a14m.onrender.com/swagger-ui.html](https://ecocommute-backend-a14m.onrender.com/swagger-ui.html)
+> - **Tablero de Gestión (GitHub Projects):** [https://github.com/users/lappwv/projects/1](https://github.com/users/lappwv/projects/1)
+
 EcoCommute es una aplicación web orientada a incentivar la movilidad urbana sostenible en Lima Metropolitana, alineada estrictamente con el **ODS 11 (Meta 11.2: Proporcionar acceso a sistemas de transporte seguros, asequibles, accesibles y sostenibles para todos)** mediante rutas ecoeficientes, cálculo de CO₂ ahorrado, puntos verdes, recompensas, rankings por distrito y recomendaciones personalizadas optimizadas con **Google Gemini (modelo `gemini-1.5-flash`)**.
 
 ## Equipo y forma de trabajo
