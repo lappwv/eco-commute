@@ -101,12 +101,15 @@ CREATE TABLE IF NOT EXISTS user_stats (
     total_distance_km NUMERIC(12,2) NOT NULL DEFAULT 0,
     total_trips INTEGER NOT NULL DEFAULT 0,
     total_calories_burned INTEGER NOT NULL DEFAULT 0,
+    version BIGINT DEFAULT 0,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_user_stats_users FOREIGN KEY (user_id) REFERENCES users(id),
     CONSTRAINT chk_user_stats_co2 CHECK (total_co2_saved_kg >= 0),
     CONSTRAINT chk_user_stats_distance CHECK (total_distance_km >= 0),
     CONSTRAINT chk_user_stats_trips CHECK (total_trips >= 0)
 );
+
+ALTER TABLE user_stats ADD COLUMN IF NOT EXISTS version BIGINT DEFAULT 0;
 
 CREATE TABLE IF NOT EXISTS user_badges (
     id VARCHAR(36) PRIMARY KEY DEFAULT gen_random_uuid()::text,
