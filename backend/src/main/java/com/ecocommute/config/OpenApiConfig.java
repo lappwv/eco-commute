@@ -15,6 +15,7 @@ import org.springframework.context.annotation.Configuration;
                 contact = @Contact(name = "Equipo EcoCommute")
         ),
         servers = {
+                @Server(url = "https://ecocommute-backend-a14m.onrender.com", description = "Servidor Producción (Render)"),
                 @Server(url = "http://localhost:8080", description = "Entorno local")
         }
 )
