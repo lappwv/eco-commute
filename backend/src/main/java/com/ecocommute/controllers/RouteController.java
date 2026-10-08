@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1")
-@Tag(name = "Rutas", description = "Planificacion de rutas sostenibles")
+@Tag(name = "Rutas", description = "HU03, HU09 - Planificación geoespacial y recomendación de rutas")
 public class RouteController {
 
     private static final int DEFAULT_STREAK_DAYS = 1;
@@ -23,7 +23,7 @@ public class RouteController {
     }
 
     @PostMapping("/routes/plan")
-    @Operation(summary = "Compara rutas sostenibles y recomienda una alternativa optimizada")
+    @Operation(summary = "HU03 - Planificación y consulta geoespacial de rutas optimizadas (OSRM) con fallback de Haversine")
     public ResponseEntity<RoutePlanResponseDTO> planRoutes(@Valid @RequestBody RoutePlanRequestDTO request) {
         return ResponseEntity.ok(routingEngineService.planRoutes(request, DEFAULT_STREAK_DAYS));
     }

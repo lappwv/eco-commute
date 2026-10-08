@@ -7,6 +7,8 @@ server:
 spring:
   application:
     name: ecocommute-backend
+  profiles:
+    default: local
   threads:
     virtual:
       enabled: true
@@ -37,8 +39,8 @@ spring:
 
 app:
   jwt:
-    # Obligatorio: sin el, la aplicacion no arranca (evita el secreto por defecto de jjwt).
-    secret: ${JWT_SECRET}
+    # Si JWT_SECRET no esta definida (ej. desarrollo local), usa el secreto por defecto para pruebas.
+    secret: ${JWT_SECRET:dev-only-ecocommute-local-secret-change-me-0123456789}
     expiration-ms: 86400000 # 24 hours
   google:
     client-id: ${GOOGLE_CLIENT_ID:ecocommute-demo-client.apps.googleusercontent.com}
@@ -46,5 +48,5 @@ app:
     api-key: ${OPENAI_API_KEY:}
   gemini:
     api-key: ${GEMINI_API_KEY:}
-    model: ${GEMINI_MODEL:gemini-2.0-flash}
+    model: ${GEMINI_MODEL:gemini-1.5-flash}
   seed-demo-data: ${SEED_DEMO_DATA:true}

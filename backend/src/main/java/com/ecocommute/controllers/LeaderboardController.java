@@ -2,6 +2,7 @@ package com.ecocommute.controllers;
 
 import com.ecocommute.dto.LeaderboardEntryDTO;
 import com.ecocommute.services.LeaderboardService;
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/leaderboard")
@@ -26,20 +29,38 @@ public class LeaderboardController {
         this.leaderboardService = leaderboardService;
     }
 
+    @Hidden
     @GetMapping
-    @Operation(
-            summary = "HU08 - Consulta de ranking distrital o global",
-            description = "HU08: Permite comparar el impacto ambiental entre usuarios, con filtro opcional por distrito y ordenamiento por CO2 ahorrado ('co2') o puntos acumulados ('points')."
-    )
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Ranking obtenido exitosamente"),
-            @ApiResponse(responseCode = "400", description = "Parametro de ordenamiento o nombre de distrito invalido")
-    })
     public ResponseEntity<List<LeaderboardEntryDTO>> getLeaderboard(
-            @Parameter(description = "Nombre del distrito para filtrar (ej. 'Miraflores', 'San Isidro')", example = "Miraflores")
             @RequestParam(required = false) String district,
-            @Parameter(description = "Criterio de ordenamiento: 'co2' (por defecto) o 'points'", example = "co2")
             @RequestParam(required = false, defaultValue = "co2") String sortBy) {
         return ResponseEntity.ok(leaderboardService.getLeaderboardByDistrict(district, sortBy));
+    }
+
+    @GetMapping("/districts")
+    @Operation(summary = "HU08 - Ranking distrital con métricas de emisiones",
+            description = "HU08: Retorna el ranking de usuarios agrupado y clasificado por distritos de Lima Metropolitana.")
+    public ResponseEntity<List<LeaderboardEntryDTO>> getDistrictRanking() {
+        return ResponseEntity.ok(leaderboardService.getLeaderboard("co2"));
+    }
+
+    @GetMapping("/districts/summary")
+    @Operation(summary = "HU08 - Resumen consolidado de métricas distritales y vecinos activos",
+            description = "HU08: Retorna el resumen distrital de distritos activos y su participación.")
+    public ResponseEntity<Map<String, Object>> getDistrictsSummary() {
+        List<String> districts = leaderboardService.getDistricts();
+        List<LeaderboardEntryDTO> leaders = leaderboardService.getLeaderboard("co2");
+        Map<String, Object> summary = new HashMap<>();
+        summary.put("activeDistrictsCount", districts.size());
+        summary.put("activeDistricts", districts);
+        summary.put("totalRankedUsers", leaders.size());
+        return ResponseEntity.ok(summary);
+    }
+
+    @GetMapping("/users")
+    @Operation(summary = "HU06, HU08 - Tabla de posiciones de usuarios por puntos acumulados",
+            description = "HU06, HU08: Retorna la clasificación general de usuarios ordenada por puntos verdes acumulados.")
+    public ResponseEntity<List<LeaderboardEntryDTO>> getUsersRanking() {
+        return ResponseEntity.ok(leaderboardService.getLeaderboard("points"));
     }
 }
