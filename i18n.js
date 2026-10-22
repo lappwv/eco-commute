@@ -1,6 +1,6 @@
 /**
- * EcoCommute Landing Page — i18n, Circular Recycling Alchemy Lab, Scrollytelling & Modern Web UI
- * Soporta Español de Latinoamérica (es_419) e Inglés (en_US)
+ * EcoCommute Landing Page — 3D Spatial Terrarium, Botanical Ornaments,
+ * Interactive Exploded Stack, Circular Recycling Alchemy Lab & i18n (es_419 / en_US)
  */
 
 const CORRIDORS = {
@@ -9,8 +9,10 @@ const CORRIDORS = {
     coords: "-12.1219, -77.0297",
     bikeMin: 14,
     carMin: 22,
-    carPath: "M 38 88 C 120 92, 165 25, 250 42 C 310 52, 345 30, 382 34",
-    ecoPath: "M 38 88 C 110 82, 155 58, 225 56 C 295 54, 330 38, 382 34",
+    originTag: "ORIGEN // MIRAFLORES",
+    destTag: "META // SAN ISIDRO",
+    carPath: "M 38 94 C 120 98, 165 28, 250 45 C 310 55, 345 32, 382 36",
+    ecoPath: "M 38 94 C 110 86, 155 60, 225 58 C 295 56, 330 40, 382 36",
     es: {
       routeTitle: "Miraflores → San Isidro",
       gemini:
@@ -27,8 +29,10 @@ const CORRIDORS = {
     coords: "-12.1041, -76.9629",
     bikeMin: 19,
     carMin: 31,
-    carPath: "M 38 92 C 95 40, 190 95, 275 38 C 325 22, 355 48, 382 28",
-    ecoPath: "M 38 92 C 115 74, 185 65, 260 48 C 315 36, 350 32, 382 28",
+    originTag: "ORIGEN // UPC MONTERRICO",
+    destTag: "META // SAN BORJA",
+    carPath: "M 38 96 C 95 42, 190 98, 275 40 C 325 24, 355 50, 382 30",
+    ecoPath: "M 38 96 C 115 76, 185 66, 260 50 C 315 38, 350 34, 382 30",
     es: {
       routeTitle: "UPC Monterrico → San Borja",
       gemini:
@@ -45,8 +49,10 @@ const CORRIDORS = {
     coords: "-12.0686, -77.0414",
     bikeMin: 12,
     carMin: 19,
-    carPath: "M 38 42 C 110 22, 195 88, 280 72 C 330 64, 355 82, 382 68",
-    ecoPath: "M 38 42 C 115 48, 195 54, 275 60 C 325 64, 355 66, 382 68",
+    originTag: "ORIGEN // JESÚS MARÍA",
+    destTag: "META // LINCE",
+    carPath: "M 38 46 C 110 24, 195 92, 280 76 C 330 66, 355 84, 382 70",
+    ecoPath: "M 38 46 C 115 50, 195 56, 275 62 C 325 66, 355 68, 382 70",
     es: {
       routeTitle: "Jesús María → Lince",
       gemini:
@@ -63,8 +69,10 @@ const CORRIDORS = {
     coords: "-12.1497, -77.0219",
     bikeMin: 10,
     carMin: 16,
-    carPath: "M 38 94 C 130 98, 210 75, 290 60 C 340 48, 360 35, 382 26",
-    ecoPath: "M 38 94 C 105 68, 180 42, 265 34 C 325 28, 355 26, 382 26",
+    originTag: "ORIGEN // BARRANCO",
+    destTag: "META // MIRAFLORES",
+    carPath: "M 38 98 C 130 102, 210 78, 290 62 C 340 50, 360 36, 382 28",
+    ecoPath: "M 38 98 C 105 70, 180 44, 265 36 C 325 30, 355 28, 382 28",
     es: {
       routeTitle: "Barranco → Miraflores",
       gemini:
@@ -78,22 +86,85 @@ const CORRIDORS = {
   }
 };
 
+const STACK_LAYERS = {
+  4: {
+    es: {
+      title: "Capa 04: Dosel de Interacción (React 18 + Leaflet)",
+      desc: "Renderiza la cartografía abierta de Lima sobre OpenStreetMap, traza corredores ciclistas y peatonales sin rastreo invasivo y traduce instantáneamente entre Español e Inglés.",
+      artifact: "RoutePlannerView.tsx + MapCanvas",
+      sla: "60 FPS · WCAG AA · Sin telemetría oculta"
+    },
+    en: {
+      title: "Layer 04: Interaction Canopy (React 18 + Leaflet)",
+      desc: "Renders Lima's open cartography over OpenStreetMap, plots cycling and walking corridors without invasive tracking, and switches seamlessly between Spanish and English.",
+      artifact: "RoutePlannerView.tsx + MapCanvas",
+      sla: "60 FPS · WCAG AA · Zero hidden tracking"
+    }
+  },
+  3: {
+    es: {
+      title: "Capa 03: Clorofila Cognitiva (Google Gemini 1.5 Flash + CarbonService)",
+      desc: "Evalúa determinísticamente el ahorro de carbono (152 g CO₂/km frente al auto) y genera explicaciones contextuales con gemini-1.5-flash y fallback heurístico resiliente.",
+      artifact: "AiRouteAdvisorService.java + CarbonService.java",
+      sla: "Modelo: gemini-1.5-flash · Fallback 100% disponible"
+    },
+    en: {
+      title: "Layer 03: Cognitive Chlorophyll (Google Gemini 1.5 Flash + CarbonService)",
+      desc: "Deterministically computes carbon savings (152 g CO₂/km vs. car) and generates contextual route advice with gemini-1.5-flash and resilient heuristic fallback.",
+      artifact: "AiRouteAdvisorService.java + CarbonService.java",
+      sla: "Model: gemini-1.5-flash · 100% Fallback uptime"
+    }
+  },
+  2: {
+    es: {
+      title: "Capa 02: Tallo Transaccional REST (Spring Boot 3.2 + 25 Endpoints)",
+      desc: "Orquesta autenticación stateless con JWT, registro de viajes, cálculo de Puntos Verdes, medallas automáticas, retos semanales y ranking distrital de Lima.",
+      artifact: "TripController + GamificationController + SecurityConfig",
+      sla: "25 Rutas OpenAPI 3.0 · 28/28 Tests en Verde"
+    },
+    en: {
+      title: "Layer 02: Transactional REST Stem (Spring Boot 3.2 + 25 Endpoints)",
+      desc: "Orchestrates stateless JWT authentication, trip logging, Green Points accounting, automated milestone badges, weekly challenges, and Lima's district leaderboard.",
+      artifact: "TripController + GamificationController + SecurityConfig",
+      sla: "25 OpenAPI 3.0 Routes · 28/28 Passing Tests"
+    }
+  },
+  1: {
+    es: {
+      title: "Capa 01: Raíz de Persistencia Concurrente (PostgreSQL 16 + Liquibase)",
+      desc: "Garantiza integridad transaccional con aislamiento REPEATABLE_READ y control de concurrencia optimista (@Version) en user_stats para evitar condiciones de carrera.",
+      artifact: "UserStats.java (@Version) + db.changelog-master.yaml",
+      sla: "ACID · REPEATABLE_READ · Ley N° 29733"
+    },
+    en: {
+      title: "Layer 01: Concurrent Persistence Root (PostgreSQL 16 + Liquibase)",
+      desc: "Guarantees transactional integrity with REPEATABLE_READ isolation and optimistic concurrency locking (@Version) on user_stats to prevent race conditions.",
+      artifact: "UserStats.java (@Version) + db.changelog-master.yaml",
+      sla: "ACID · REPEATABLE_READ · Law N° 29733"
+    }
+  }
+};
+
 const translations = {
   es_419: {
     // Meta & topbar
-    "page.title": "EcoCommute — Metabolismo Urbano y Movilidad Circular en Lima",
+    "page.title": "EcoCommute — Terrario Urbano 3D y Movilidad Circular en Lima",
     "nav.skip": "Saltar al contenido principal",
-    "topbar.badge": "METABOLISMO URBANO · LIMA METROPOLITANA",
+    "topbar.badge": "TERRARIO URBANO 3D · LIMA METROPOLITANA",
     "topbar.spec": "Spring Boot 3.3 · OSRM · Gemini 1.5 Flash · 25 endpoints activos",
-    "topbar.recycled_label": "CO₂ RECICLADO EN SESIÓN:",
+    "topbar.recycled_label": "CO₂ RECICLADO:",
     "topbar.swagger": "Swagger OpenAPI",
+    "biome.amancaes": "Amancaes",
+    "biome.terracota": "Solar",
+    "biome.micelio": "Micelio",
     "nav.aria": "Navegación principal",
-    "nav.cycle": "Ciclo Circular",
-    "nav.alchemy": "Reciclaje CO₂",
+    "nav.cycle": "Fotosíntesis Urbana",
+    "nav.alchemy": "Terrario & Alquimia",
     "nav.why": "Manifiesto",
-    "nav.features": "Arquitectura",
+    "nav.features": "Capas 3D",
     "nav.screens": "Interfaz",
     "nav.team": "Equipo",
+    "nav.pollinate": "Polinizar",
     "lang.toggle_label": "Cambiar idioma (Español / English)",
 
     // Hero
@@ -101,16 +172,17 @@ const translations = {
     "hero.title": "Antes de subirte al auto, ",
     "hero.title_em": "recicla el CO₂ que aún no has emitido.",
     "hero.lead":
-      "EcoCommute trata cada kilómetro en Lima como materia prima circular: compara tu ruta en bici, a pie o en auto con OSRM, explica la decisión con Google Gemini 1.5 Flash y transforma el humo evitado en puntos verdes, equivalentes de reciclaje PET y recompensas reales.",
-    "hero.btn_simulator": "Abrir Laboratorio de Reciclaje CO₂",
-    "hero.btn_cycle": "Ver el Ciclo Circular",
+      "EcoCommute convierte el gris del asfalto limeño en un ecosistema vivo: compara tu ruta en bici, a pie o en auto con OSRM, explica la decisión con Google Gemini 1.5 Flash y transforma el humo evitado en biomasa digital, equivalentes de reciclaje PET y recompensas reales.",
+    "hero.flora_tag": "ÍNDICE DE CLOROFILA DE TU SESIÓN EN VIVO",
+    "hero.btn_simulator": "Abrir Terrario & Alquimia CO₂",
+    "hero.btn_cycle": "Explorar Capas 3D",
     "hero.btn_screens": "Ver las pantallas →",
     "hero.stat1_label": "Emisión evitada vs. auto",
     "hero.stat2_label": "Equivalencia circular",
     "hero.stat2_unit": "botellas PET/km",
     "hero.stat3_label": "Backend verificado",
     "hero.stat3_unit": "tests en verde",
-    "hero.card_label": "TELEMETRÍA DE VIAJE · DEMO INTERACTIVA",
+    "hero.card_label": "BIORREACTOR DE RUTA 3D · DEMO INTERACTIVA",
     "hero.card_route": "Miraflores → San Isidro, 4.2 km",
     "hero.car": "En auto (combustión)",
     "hero.car_val": "640 g de CO₂",
@@ -126,22 +198,30 @@ const translations = {
     "sim.route2": "UPC Monterrico → San Borja",
     "sim.route3": "Jesús María → Lince",
     "sim.route4": "Barranco → Miraflores",
+    "sim.cam_label": "CÁMARA ESPACIAL:",
+    "sim.cam_iso": "Isométrica 3D",
+    "sim.cam_orbit": "Vuelo de Ave",
+    "sim.cam_flat": "Cenital 2D",
     "sim.by_bike": "en bici",
-    "sim.by_car_traffic": "en auto (tráfico hora punta)",
-    "sim.adjust_distance": "Ajustar distancia del trayecto",
+    "sim.by_car_traffic": "en auto (hora punta)",
+    "sim.adjust_distance": "Ajustar distancia del corredor ecológico",
     "sim.pet_equiv_label": "Reciclaje equivalente evitado",
     "sim.gemini_tag": "GEMINI 1.5 FLASH · EXPLICACIÓN CONTEXTUAL",
     "sim.gemini_miraflores":
       "«Por la ciclovía de Av. Arequipa llegas en 14 min sin congestión vehicular, ahorras 638 g de CO₂ frente al auto particular (152 g/km) y sumas puntos para el ranking de Miraflores.»",
-    "sim.btn_recycle_trip": "Reciclar este viaje en el contador global",
+    "sim.btn_recycle_trip": "Sembrar y reciclar este viaje en el contador global",
 
     // Circular Scrollytelling
-    "cycle.title": "Cómo reciclamos un viaje urbano en valor ecológico",
+    "cycle.title": "Cómo transmutamos el humo urbano en vida ecológica",
     "cycle.intro":
-      "Reciclar no es solo separar plástico o vidrio: es evitar que el carbono fósil entre a la atmósfera de Lima y reintroducir esa energía en la comunidad.",
+      "Reciclar en la ciudad no es solo separar plástico o vidrio: es impedir que el carbono fósil entre a la atmósfera de Lima y transformarlo en energía comunitaria.",
     "cycle.badge1": "Intercepción de combustión",
     "cycle.badge2": "Conversión en puntos verdes",
-    "cycle.badge3": "Recompensas y hábito circular",
+    "cycle.badge3": "Recompensas y bioma circular",
+    "cycle.mode_orbit": "🌿 Órbita Clorofila",
+    "cycle.mode_vortex": "🌀 Vórtice Polinizador",
+    "cycle.mode_mycelium": "🍄 Red de Micelio",
+    "cycle.btn_pulse": "Inyectar Pulso de Fotosíntesis (+152 g CO₂)",
     "cycle.s1_tag": "INTERCEPCIÓN EN EL ORIGEN",
     "cycle.s1_title": "Sustituir combustión por tracción limpia antes de girar la llave",
     "cycle.s1_desc":
@@ -151,19 +231,21 @@ const translations = {
     "cycle.s2_desc":
       "Nuestro backend en Spring Boot procesa las coordenadas de forma efímera sobre OpenStreetMap (OSRM), valida el ahorro con CarbonService y utiliza Google Gemini 1.5 Flash para explicarte por qué esa ruta ciclista o peatonal optimiza tu tiempo y tu salud.",
     "cycle.s3_tag": "ECONOMÍA CIRCULAR DISTRITAL",
-    "cycle.s3_title": "El carbono evitado regresa a ti como puntos, medallas y beneficios",
+    "cycle.s3_title": "El carbono evitado regresa a ti como puntos, medallas y bosque urbano",
     "cycle.s3_desc":
       "Cada gramo ahorrado alimenta tu cuenta de Puntos Verdes, desbloquea medallas automáticas al superar hitos y posiciona a tu distrito (Miraflores, San Isidro, Surco, Barranco, Jesús María) en el ranking metropolitano sostenible.",
 
-    // Alchemy Lab
-    "alchemy.title": "¿A cuánto reciclaje físico equivale dejar el auto en Lima?",
+    // Alchemy Lab & Terrarium
+    "alchemy.title": "¿A cuánto reciclaje físico y biomasa equivale dejar el auto en Lima?",
     "alchemy.intro":
-      "Un gramo de CO₂ es abstracto; una botella PET reciclada o una lata de aluminio recuperada se pueden tocar. Mueve la frecuencia semanal y observa la equivalencia material exacta.",
-    "alchemy.p1": "Ciclista casual (3 días/sem)",
-    "alchemy.p2": "Commuter UPC (5 días/sem)",
-    "alchemy.p3": "Guardián del Aire (7 días/sem)",
+      "Un gramo de CO₂ es invisible; una botella PET reciclada, una lata de aluminio recuperada o una flor de Amancaes brotando en nuestro domo se pueden ver y tocar.",
+    "alchemy.p1": "🌱 Brote Urbano (3 días/sem)",
+    "alchemy.p2": "🌿 Commuter UPC (5 días/sem)",
+    "alchemy.p3": "🌳 Guardián del Bosque (7 días/sem)",
     "alchemy.slider_trips": "Viajes sostenibles por semana",
     "alchemy.slider_km": "Distancia media por trayecto",
+    "alchemy.terrarium_label": "DOMO BIOMECÁNICO · GERMINACIÓN EN VIVO",
+    "alchemy.btn_plant": "Plantar Semilla de Amancaes en el Terrario",
     "alchemy.annual_saved_label": "CARBONO ANUAL QUE NO ENTRARÁ AL AIRE DE LIMA",
     "alchemy.card1_title": "Botellas plásticas PET recicladas",
     "alchemy.card1_desc":
@@ -176,7 +258,7 @@ const translations = {
       "Cantidad de árboles urbanos maduros trabajando durante 365 días para fijar el mismo volumen de carbono (21 kg CO₂/año).",
     "alchemy.card4_title": "Puntos Verdes canjeables en catálogo",
     "alchemy.card4_desc":
-      "Saldo acumulado en tu perfil de EcoCommute para desbloquear mantenimientos de bici, café aliado y accesorios reciclados.",
+      "Saldo acumulado en tu perfil de EcoCommute para desbloquear mantenimientos de bici, café orgánico aliado y accesorios reciclados.",
 
     // Solution / Story
     "story.title": "Por qué existe",
@@ -188,20 +270,24 @@ const translations = {
     "story.p2_under": "antes",
     "story.p2_post":
       " de tomarla, y algo que te haga querer repetir la alternativa buena la semana siguiente. Eso es lo que intentamos construir.",
-    "story.comp_old_tag": "Apps de mapas tradicionales (Modelo Lineal)",
+    "story.comp_old_tag": "Apps de mapas tradicionales (Modelo Extractivo Lineal)",
     "story.comp_old_desc":
       "Solo muestran minutos estimados y congestión. El impacto de carbono es invisible y el viaje termina en humo sin retorno.",
-    "story.comp_new_tag": "Enfoque EcoCommute (Modelo Circular)",
+    "story.comp_new_tag": "Enfoque EcoCommute (Bioma Circular Regenerativo)",
     "story.comp_new_desc":
       "Contrasta gramos de CO₂ antes de salir, explica por qué te conviene la ruta con IA y recicla tu constancia en puntos y comunidad.",
     "story.quote":
       "«Si el ahorro de CO₂ se ve igual de concreto que los minutos del viaje, la gente lo considera.»",
     "story.quote_author": "— El equipo EcoCommute, probando la app con usuarios en Lima",
 
-    // Features
-    "feat.title": "Qué hace hoy",
+    // Exploded 3D Stack & Features
+    "feat.title": "Qué hace hoy (y cómo late por dentro)",
     "feat.intro":
-      "Todo lo de abajo está implementado en el backend (Spring Boot) y cubierto por 28 tests automáticos que corren en cada Pull Request.",
+      "Despliega las 4 capas del ecosistema en el espacio 3D o explora los módulos en producción respaldados por 28 tests automáticos.",
+    "stack.kicker": "INSPECTOR ESTRATIGRÁFICO 3D INTERACTIVO",
+    "stack.slider_z": "Separación Espacial Eje-Z (Exploded View)",
+    "stack.slider_rot": "Rotación Azimutal de Cámara 3D",
+    "stack.btn_pulse": "Transmitir Pulso de Savia por las 4 Capas 3D",
     "feat.routes_title": "Rutas sostenibles y Google Gemini",
     "feat.routes_desc":
       "Introduces el origen y el destino y la app arma alternativas con OSRM: qué tan lejos es, cuánto tarda cada medio de transporte y qué te conviene según tu historial. La recomendación asistida por Inteligencia Artificial (Google Gemini 1.5 Flash) explica en lenguaje simple por qué sugiere esa ruta.",
@@ -231,7 +317,7 @@ const translations = {
 
     // Screenshots
     "demo.title": "Cómo se ve",
-    "demo.tab_all": "Vista comparativa",
+    "demo.tab_all": "Vista comparativa 3D",
     "demo.tab_routes": "Planificador y Mapa",
     "demo.tab_dash": "Dashboard de Impacto",
     "demo.img1_alt": "Mockup interactivo de rutas sostenibles con mapas y alternativas en Lima",
@@ -288,19 +374,23 @@ const translations = {
 
   en_US: {
     // Meta & topbar
-    "page.title": "EcoCommute — Urban Metabolism & Circular Mobility in Lima",
+    "page.title": "EcoCommute — 3D Urban Terrarium & Circular Mobility in Lima",
     "nav.skip": "Skip to main content",
-    "topbar.badge": "URBAN METABOLISM · LIMA METROPOLITAN AREA",
+    "topbar.badge": "3D URBAN TERRARIUM · LIMA METROPOLITAN AREA",
     "topbar.spec": "Spring Boot 3.3 · OSRM · Gemini 1.5 Flash · 25 active endpoints",
-    "topbar.recycled_label": "SESSION RECYCLED CO₂:",
+    "topbar.recycled_label": "RECYCLED CO₂:",
     "topbar.swagger": "Swagger OpenAPI",
+    "biome.amancaes": "Amancaes",
+    "biome.terracota": "Solar Clay",
+    "biome.micelio": "Mycelium",
     "nav.aria": "Main navigation",
-    "nav.cycle": "Circular Loop",
-    "nav.alchemy": "CO₂ Recycling",
+    "nav.cycle": "Urban Photosynthesis",
+    "nav.alchemy": "Terrarium & Alchemy",
     "nav.why": "Manifesto",
-    "nav.features": "Architecture",
+    "nav.features": "3D Strata",
     "nav.screens": "Interface",
     "nav.team": "Team",
+    "nav.pollinate": "Pollinate",
     "lang.toggle_label": "Switch language (Español / English)",
 
     // Hero
@@ -308,16 +398,17 @@ const translations = {
     "hero.title": "Before taking your car, ",
     "hero.title_em": "recycle the CO₂ you haven't emitted yet.",
     "hero.lead":
-      "EcoCommute treats every kilometer in Lima as circular raw material: it compares your bike, walk, or car route via OSRM, explains the choice with Google Gemini 1.5 Flash, and turns avoided exhaust into green points, PET recycling equivalents, and real rewards.",
-    "hero.btn_simulator": "Open CO₂ Recycling Lab",
-    "hero.btn_cycle": "Explore Circular Loop",
+      "EcoCommute turns Lima's asphalt gray into a living ecosystem: it compares your bike, walk, or car route via OSRM, explains the choice with Google Gemini 1.5 Flash, and transforms avoided exhaust into digital biomass, PET recycling equivalents, and real rewards.",
+    "hero.flora_tag": "LIVE SESSION CHLOROPHYLL INDEX",
+    "hero.btn_simulator": "Open Terrarium & CO₂ Alchemy",
+    "hero.btn_cycle": "Explore 3D Strata",
     "hero.btn_screens": "View Screenshots →",
     "hero.stat1_label": "Avoided vs. car",
     "hero.stat2_label": "Circular equivalence",
     "hero.stat2_unit": "PET bottles/km",
     "hero.stat3_label": "Verified backend",
     "hero.stat3_unit": "passing tests",
-    "hero.card_label": "TRIP TELEMETRY · INTERACTIVE DEMO",
+    "hero.card_label": "3D ROUTE BIOREACTOR · INTERACTIVE DEMO",
     "hero.card_route": "Miraflores → San Isidro, 4.2 km",
     "hero.car": "By Car (combustion)",
     "hero.car_val": "640 g of CO₂",
@@ -333,22 +424,30 @@ const translations = {
     "sim.route2": "UPC Monterrico → San Borja",
     "sim.route3": "Jesús María → Lince",
     "sim.route4": "Barranco → Miraflores",
+    "sim.cam_label": "SPATIAL CAMERA:",
+    "sim.cam_iso": "3D Isometric",
+    "sim.cam_orbit": "Bird's-Eye",
+    "sim.cam_flat": "2D Zenith",
     "sim.by_bike": "by bike",
-    "sim.by_car_traffic": "by car (rush-hour traffic)",
-    "sim.adjust_distance": "Adjust trip distance",
+    "sim.by_car_traffic": "by car (rush hour)",
+    "sim.adjust_distance": "Adjust ecological corridor distance",
     "sim.pet_equiv_label": "Equivalent recycling avoided",
     "sim.gemini_tag": "GEMINI 1.5 FLASH · CONTEXTUAL INSIGHT",
     "sim.gemini_miraflores":
       "“Taking the Av. Arequipa protected bike lane gets you there in 14 min bypassing rush-hour traffic, avoiding 638 g of CO₂ vs. driving (152 g/km) and earning Miraflores leaderboard points.”",
-    "sim.btn_recycle_trip": "Recycle this trip into global counter",
+    "sim.btn_recycle_trip": "Plant & recycle this trip into global counter",
 
     // Circular Scrollytelling
-    "cycle.title": "How we recycle an urban commute into ecological value",
+    "cycle.title": "How we transmute urban exhaust into ecological life",
     "cycle.intro":
-      "Recycling isn't just sorting plastic or glass: it's preventing fossil carbon from entering Lima's sky and feeding that clean energy back into the community.",
+      "Urban recycling isn't just sorting plastic or glass: it's preventing fossil carbon from entering Lima's atmosphere and turning it into community energy.",
     "cycle.badge1": "Combustion interception",
     "cycle.badge2": "Green points conversion",
-    "cycle.badge3": "Rewards & circular habit",
+    "cycle.badge3": "Rewards & circular biome",
+    "cycle.mode_orbit": "🌿 Chlorophyll Orbit",
+    "cycle.mode_vortex": "🌀 Pollinator Vortex",
+    "cycle.mode_mycelium": "🍄 Mycelium Lattice",
+    "cycle.btn_pulse": "Inject Photosynthesis Pulse (+152 g CO₂)",
     "cycle.s1_tag": "SOURCE INTERCEPTION",
     "cycle.s1_title": "Replacing combustion with human traction before turning the key",
     "cycle.s1_desc":
@@ -358,19 +457,21 @@ const translations = {
     "cycle.s2_desc":
       "Our Spring Boot backend processes coordinates ephemerally over OpenStreetMap (OSRM), validates savings via CarbonService, and uses Google Gemini 1.5 Flash to explain why that cycling or walking corridor optimizes your time and health.",
     "cycle.s3_tag": "DISTRICT CIRCULAR ECONOMY",
-    "cycle.s3_title": "Avoided carbon returns to you as points, medals, and perks",
+    "cycle.s3_title": "Avoided carbon returns to you as points, medals, and urban forest",
     "cycle.s3_desc":
       "Every gram saved feeds your Green Points balance, unlocks automated milestone medals, and elevates your Lima district (Miraflores, San Isidro, Surco, Barranco, Jesús María) on the metropolitan leaderboard.",
 
-    // Alchemy Lab
-    "alchemy.title": "How much physical recycling does leaving your car equal?",
+    // Alchemy Lab & Terrarium
+    "alchemy.title": "How much physical recycling and biomass does leaving your car equal?",
     "alchemy.intro":
-      "A gram of CO₂ feels abstract; a recycled PET bottle or recovered aluminum can is tangible. Adjust your weekly commute frequency to see the exact material equivalence.",
-    "alchemy.p1": "Casual cyclist (3 days/wk)",
-    "alchemy.p2": "UPC Commuter (5 days/wk)",
-    "alchemy.p3": "Air Guardian (7 days/wk)",
+      "A gram of CO₂ is invisible; a recycled PET bottle, a recovered aluminum can, or an Amancaes flower sprouting inside our dome can be seen and touched.",
+    "alchemy.p1": "🌱 Urban Sprout (3 days/wk)",
+    "alchemy.p2": "🌿 UPC Commuter (5 days/wk)",
+    "alchemy.p3": "🌳 Forest Guardian (7 days/wk)",
     "alchemy.slider_trips": "Sustainable trips per week",
     "alchemy.slider_km": "Average distance per trip",
+    "alchemy.terrarium_label": "BIOMECHANICAL DOME · LIVE GERMINATION",
+    "alchemy.btn_plant": "Plant Amancaes Seed in Terrarium",
     "alchemy.annual_saved_label": "ANNUAL CARBON KEPT OUT OF LIMA'S AIR",
     "alchemy.card1_title": "Recycled 500ml PET plastic bottles",
     "alchemy.card1_desc":
@@ -383,7 +484,7 @@ const translations = {
       "Number of mature urban trees working 365 days to sequester the same volume of atmospheric carbon (21 kg CO₂/year).",
     "alchemy.card4_title": "Redeemable Green Points",
     "alchemy.card4_desc":
-      "Balance earned in your EcoCommute profile to unlock bike tune-ups, partner coffee, and upcycled accessories.",
+      "Balance earned in your EcoCommute profile to unlock bike tune-ups, organic partner coffee, and upcycled accessories.",
 
     // Solution / Story
     "story.title": "Why it exists",
@@ -395,20 +496,24 @@ const translations = {
     "story.p2_under": "before",
     "story.p2_post":
       " making it, and provide incentives to repeat sustainable habits the next week. That is what we are building.",
-    "story.comp_old_tag": "Traditional map apps (Linear Model)",
+    "story.comp_old_tag": "Traditional map apps (Linear Extractive Model)",
     "story.comp_old_desc":
       "Only display estimated minutes and traffic congestion. Carbon impact is invisible and the trip ends in unrecovered exhaust.",
-    "story.comp_new_tag": "The EcoCommute approach (Circular Model)",
+    "story.comp_new_tag": "The EcoCommute approach (Regenerative Circular Biome)",
     "story.comp_new_desc":
       "Contrasts grams of CO₂ before you depart, explains why the route fits you with AI, and recycles consistency into points and community.",
     "story.quote":
       "“If carbon savings are presented as clearly as travel minutes, citizens genuinely take them into account.”",
     "story.quote_author": "— The EcoCommute Team, testing the prototype with urban commuters in Lima",
 
-    // Features
-    "feat.title": "What works today",
+    // Exploded 3D Stack & Features
+    "feat.title": "What works today (and how it breathes inside)",
     "feat.intro":
-      "Everything below is fully implemented in the backend (Spring Boot) and covered by 28 automated tests running on every Pull Request.",
+      "Expand the 4 ecosystem strata in 3D space or explore the production modules backed by 28 automated tests.",
+    "stack.kicker": "INTERACTIVE 3D STRATIGRAPHIC INSPECTOR",
+    "stack.slider_z": "Z-Axis Spatial Separation (Exploded View)",
+    "stack.slider_rot": "3D Camera Azimuth Rotation",
+    "stack.btn_pulse": "Transmit Sap / REST Pulse Across All 4 3D Layers",
     "feat.routes_title": "Sustainable Routes & Google Gemini",
     "feat.routes_desc":
       "Enter origin and destination, and the app generates alternatives via OSRM: distance, travel time by mode, and tailored insights. AI recommendations powered by Google Gemini 1.5 Flash explain clearly why a route is suggested.",
@@ -438,7 +543,7 @@ const translations = {
 
     // Screenshots
     "demo.title": "Application Preview",
-    "demo.tab_all": "Side-by-side view",
+    "demo.tab_all": "3D Side-by-side view",
     "demo.tab_routes": "Route Planner & Map",
     "demo.tab_dash": "Impact Dashboard",
     "demo.img1_alt": "Interactive mockup of sustainable route options across Lima map",
@@ -498,9 +603,32 @@ let currentLang = localStorage.getItem("ecocommute_lang") || "es_419";
 let currentCorridor = "miraflores";
 let currentKm = 4.2;
 let sessionRecycledGrams = 1920;
+let sessionSprouts = 12;
 
 let alchemyTrips = 6;
 let alchemyKm = 4.2;
+let plantedBonusSeeds = 0;
+
+let currentSelectedSlab = 4;
+let spawnGlobalPollenBurst = null;
+
+function updateSessionFloraBanner() {
+  const isEn = currentLang === "en_US";
+  const statusEl = document.getElementById("session-flora-status");
+  const counterEl = document.getElementById("session-recycled-co2");
+  const petEq = Math.max(1, Math.round(sessionRecycledGrams / 82.8));
+
+  if (counterEl) {
+    counterEl.textContent = `${sessionRecycledGrams.toLocaleString()} g`;
+  }
+  if (statusEl) {
+    if (isEn) {
+      statusEl.innerHTML = `You have sprouted <strong>${sessionSprouts} Amancaes shoots</strong> and prevented <strong>${sessionRecycledGrams.toLocaleString()} g of CO₂</strong> equal to <strong>${petEq} PET bottles</strong>.`;
+    } else {
+      statusEl.innerHTML = `Has germinado <strong>${sessionSprouts} brotes de Amancaes</strong> y evitado <strong>${sessionRecycledGrams.toLocaleString()} g de CO₂</strong> equivalentes a <strong>${petEq} botellas PET</strong>.`;
+    }
+  }
+}
 
 function renderSimulatorMetrics() {
   const isEn = currentLang === "en_US";
@@ -525,6 +653,8 @@ function renderSimulatorMetrics() {
   const geminiTextEl = document.getElementById("sim-gemini-text");
   const svgCarPath = document.getElementById("svg-car-path");
   const svgEcoPath = document.getElementById("svg-eco-path");
+  const originTagEl = document.getElementById("holo-origin-tag");
+  const destTagEl = document.getElementById("holo-dest-tag");
 
   const localeData = isEn ? corridor.en : corridor.es;
 
@@ -550,12 +680,58 @@ function renderSimulatorMetrics() {
   if (geminiTextEl) geminiTextEl.textContent = localeData.gemini;
   if (svgCarPath) svgCarPath.setAttribute("d", corridor.carPath);
   if (svgEcoPath) svgEcoPath.setAttribute("d", corridor.ecoPath);
+  if (originTagEl) originTagEl.textContent = corridor.originTag;
+  if (destTagEl) destTagEl.textContent = corridor.destTag;
+}
+
+function renderLivingTerrarium(annualKg) {
+  const group = document.getElementById("terrarium-flora-group");
+  const stageLabel = document.getElementById("terrarium-stage-label");
+  if (!group) return;
+
+  const isEn = currentLang === "en_US";
+  const count = Math.min(18, Math.max(4, Math.round(annualKg / 26) + plantedBonusSeeds));
+
+  if (stageLabel) {
+    if (count >= 12) {
+      stageLabel.textContent = isEn ? "STAGE: CLIMAX LOMAS FOREST" : "ETAPA: BOSQUE CLÍMAX DE LOMAS";
+    } else if (count >= 7) {
+      stageLabel.textContent = isEn ? "STAGE: BLOOMING AMANCAES" : "ETAPA: FLORACIÓN DE AMANCAES";
+    } else {
+      stageLabel.textContent = isEn ? "STAGE: YOUNG GERMINATION" : "ETAPA: GERMINACIÓN INICIAL";
+    }
+  }
+
+  let svgMarkup = "";
+  for (let i = 0; i < count; i++) {
+    const x = 48 + ((i * 257) % 264);
+    const h = 24 + ((i * 19) % 58);
+    const topY = 140 - h;
+    const sway = (i % 2 === 0 ? 1 : -1) * (6 + (i % 7));
+    const hasFlower = i % 3 === 0;
+
+    svgMarkup += `
+      <g class="terrarium-plant">
+        <path d="M ${x} 140 Q ${x + sway} ${140 - h * 0.55}, ${x + sway * 0.5} ${topY}" stroke="#8ce868" stroke-width="2" fill="none" stroke-linecap="round" />
+        <path d="M ${x + sway * 0.3} ${140 - h * 0.45} C ${x + sway * 0.3 - 12} ${140 - h * 0.6}, ${x + sway * 0.3 - 6} ${140 - h * 0.72}, ${x + sway * 0.3} ${140 - h * 0.52} Z" fill="#d4ff59" opacity="0.85" />
+        <path d="M ${x + sway * 0.4} ${140 - h * 0.65} C ${x + sway * 0.4 + 12} ${140 - h * 0.8}, ${x + sway * 0.4 + 6} ${140 - h * 0.9}, ${x + sway * 0.4} ${140 - h * 0.7} Z" fill="#52b788" opacity="0.9" />
+        ${
+          hasFlower
+            ? `<circle cx="${x + sway * 0.5}" cy="${topY}" r="4.5" fill="#ff8c61" />
+               <circle cx="${x + sway * 0.5}" cy="${topY}" r="2" fill="#d4ff59" />`
+            : `<circle cx="${x + sway * 0.5}" cy="${topY}" r="3" fill="#d4ff59" />`
+        }
+      </g>
+    `;
+  }
+  group.innerHTML = svgMarkup;
 }
 
 function renderAlchemyLab() {
   const isEn = currentLang === "en_US";
   const annualGrams = alchemyTrips * alchemyKm * 152 * 52;
-  const annualKg = (annualGrams / 1000).toFixed(1);
+  const annualKgNum = annualGrams / 1000;
+  const annualKg = annualKgNum.toFixed(1);
   const petBottles = Math.round(annualGrams / 82.8);
   const aluCans = Math.round(annualGrams / 170);
   const trees = (annualGrams / 21000).toFixed(1);
@@ -589,6 +765,24 @@ function renderAlchemyLab() {
       tokenGrid.appendChild(span);
     }
   }
+
+  renderLivingTerrarium(annualKgNum);
+}
+
+function renderExplodedSlabDetails() {
+  const isEn = currentLang === "en_US";
+  const layer = STACK_LAYERS[currentSelectedSlab] || STACK_LAYERS[4];
+  const copy = isEn ? layer.en : layer.es;
+
+  const titleEl = document.getElementById("slab-detail-title");
+  const descEl = document.getElementById("slab-detail-desc");
+  const artifactEl = document.getElementById("slab-detail-artifact");
+  const slaEl = document.getElementById("slab-detail-sla");
+
+  if (titleEl) titleEl.textContent = copy.title;
+  if (descEl) descEl.textContent = copy.desc;
+  if (artifactEl) artifactEl.textContent = copy.artifact;
+  if (slaEl) slaEl.textContent = copy.sla;
 }
 
 function applyTranslations(lang) {
@@ -635,8 +829,10 @@ function applyTranslations(lang) {
     }
   }
 
+  updateSessionFloraBanner();
   renderSimulatorMetrics();
   renderAlchemyLab();
+  renderExplodedSlabDetails();
 }
 
 function setupLanguageToggle() {
@@ -656,11 +852,42 @@ function setupLanguageToggle() {
   }
 }
 
+// Selector interactivo de Biomas / Paletas Ecológicas
+function setupBiomeSwitcher() {
+  const chips = document.querySelectorAll(".biome-chip");
+  const savedBiome = localStorage.getItem("ecocommute_biome") || "amancaes";
+  document.documentElement.setAttribute("data-biome", savedBiome);
+
+  chips.forEach((chip) => {
+    chip.classList.toggle("is-active", chip.getAttribute("data-biome-target") === savedBiome);
+    chip.addEventListener("click", () => {
+      const targetBiome = chip.getAttribute("data-biome-target") || "amancaes";
+      chips.forEach((c) => c.classList.toggle("is-active", c === chip));
+      localStorage.setItem("ecocommute_biome", targetBiome);
+
+      const applyBiome = () => {
+        document.documentElement.setAttribute("data-biome", targetBiome);
+      };
+
+      if (document.startViewTransition) {
+        document.startViewTransition(applyBiome);
+      } else {
+        applyBiome();
+      }
+
+      if (typeof spawnGlobalPollenBurst === "function") {
+        spawnGlobalPollenBurst(window.innerWidth * 0.5, window.innerHeight * 0.25, 22);
+      }
+    });
+  });
+}
+
 function setupSimulator() {
   const corridorBtns = document.querySelectorAll(".corridor-btn");
+  const camBtns = document.querySelectorAll(".cam-angle-btn");
+  const holoStage = document.getElementById("holo-map-stage");
   const rangeInput = document.getElementById("sim-distance-range");
   const recycleBtn = document.getElementById("recycle-trip-btn");
-  const sessionCounter = document.getElementById("session-recycled-co2");
   const routeTitleEl = document.getElementById("sim-route-title");
 
   corridorBtns.forEach((btn) => {
@@ -687,6 +914,16 @@ function setupSimulator() {
     });
   });
 
+  camBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const mode = btn.getAttribute("data-cam") || "iso";
+      camBtns.forEach((b) => b.classList.toggle("is-active", b === btn));
+      if (holoStage) {
+        holoStage.setAttribute("data-cam-mode", mode);
+      }
+    });
+  });
+
   if (rangeInput) {
     rangeInput.addEventListener("input", (e) => {
       currentKm = parseFloat(e.target.value) || 4.2;
@@ -694,19 +931,19 @@ function setupSimulator() {
     });
   }
 
-  if (recycleBtn && sessionCounter) {
-    recycleBtn.addEventListener("click", () => {
+  if (recycleBtn) {
+    recycleBtn.addEventListener("click", (e) => {
       const addedGrams = Math.round(currentKm * 152);
       sessionRecycledGrams += addedGrams;
-      sessionCounter.textContent = `${sessionRecycledGrams.toLocaleString()} g`;
-      sessionCounter.animate(
-        [
-          { transform: "scale(1)", color: "#f0b429" },
-          { transform: "scale(1.22)", color: "#34d399" },
-          { transform: "scale(1)", color: "#f0b429" }
-        ],
-        { duration: 480, easing: "ease-out" }
-      );
+      sessionSprouts += 1;
+      plantedBonusSeeds = Math.min(8, plantedBonusSeeds + 1);
+      updateSessionFloraBanner();
+      renderAlchemyLab();
+
+      if (typeof spawnGlobalPollenBurst === "function") {
+        const rect = e.currentTarget.getBoundingClientRect();
+        spawnGlobalPollenBurst(rect.left + rect.width / 2, rect.top, 26);
+      }
     });
   }
 }
@@ -715,6 +952,8 @@ function setupAlchemyLab() {
   const presets = document.querySelectorAll(".alchemy-preset");
   const tripsSlider = document.getElementById("alchemy-trips-range");
   const kmSlider = document.getElementById("alchemy-km-range");
+  const plantSeedBtn = document.getElementById("plant-seed-btn");
+  const cutoutCards = document.querySelectorAll(".unified-cutout-card");
 
   presets.forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -739,6 +978,110 @@ function setupAlchemyLab() {
     kmSlider.addEventListener("input", (e) => {
       alchemyKm = parseFloat(e.target.value) || 4.2;
       renderAlchemyLab();
+    });
+  }
+
+  if (plantSeedBtn) {
+    plantSeedBtn.addEventListener("click", (e) => {
+      plantedBonusSeeds = (plantedBonusSeeds + 1) % 10;
+      sessionSprouts += 1;
+      sessionRecycledGrams += 152;
+      updateSessionFloraBanner();
+      renderAlchemyLab();
+
+      if (typeof spawnGlobalPollenBurst === "function") {
+        const rect = e.currentTarget.getBoundingClientRect();
+        spawnGlobalPollenBurst(rect.left + rect.width / 2, rect.top, 20);
+      }
+    });
+  }
+
+  cutoutCards.forEach((card) => {
+    card.addEventListener("click", (e) => {
+      if (typeof spawnGlobalPollenBurst === "function") {
+        spawnGlobalPollenBurst(e.clientX || window.innerWidth / 2, e.clientY || window.innerHeight / 2, 16);
+      }
+    });
+  });
+}
+
+// Mesa Holográfica 3D de Capas Explotadas (Exploded View 3D Stack)
+function setupExplodedArchitectureStack() {
+  const scene = document.getElementById("iso-stack-scene");
+  const slabs = document.querySelectorAll(".iso-slab");
+  const pills = document.querySelectorAll(".slab-pill");
+  const spreadRange = document.getElementById("stack-explosion-range");
+  const spreadOut = document.getElementById("stack-explosion-out");
+  const angleRange = document.getElementById("stack-angle-range");
+  const angleOut = document.getElementById("stack-angle-out");
+  const pulseBtn = document.getElementById("trigger-packet-btn");
+
+  if (!scene || !slabs.length) return;
+
+  function selectLayer(layerNum) {
+    currentSelectedSlab = layerNum;
+    slabs.forEach((s) => {
+      s.classList.toggle("is-selected", Number(s.getAttribute("data-slab-layer")) === layerNum);
+    });
+    pills.forEach((p) => {
+      p.classList.toggle("is-active", Number(p.getAttribute("data-select-slab")) === layerNum);
+    });
+    renderExplodedSlabDetails();
+  }
+
+  slabs.forEach((slab) => {
+    slab.addEventListener("click", () => {
+      selectLayer(Number(slab.getAttribute("data-slab-layer")) || 4);
+    });
+    slab.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        selectLayer(Number(slab.getAttribute("data-slab-layer")) || 4);
+      }
+    });
+  });
+
+  pills.forEach((pill) => {
+    pill.addEventListener("click", () => {
+      selectLayer(Number(pill.getAttribute("data-select-slab")) || 4);
+    });
+  });
+
+  if (spreadRange) {
+    spreadRange.addEventListener("input", (e) => {
+      const pct = Number(e.target.value) || 100;
+      const px = Math.round((pct / 100) * 42);
+      scene.style.setProperty("--stack-spread", `${px}px`);
+      if (spreadOut) spreadOut.textContent = `${pct}%`;
+    });
+  }
+
+  if (angleRange) {
+    angleRange.addEventListener("input", (e) => {
+      const deg = Number(e.target.value) || -32;
+      scene.style.setProperty("--stack-rot", `${deg}deg`);
+      if (angleOut) angleOut.textContent = `${deg}°`;
+    });
+  }
+
+  if (pulseBtn) {
+    pulseBtn.addEventListener("click", (e) => {
+      const ordered = [4, 3, 2, 1];
+      ordered.forEach((layerNum, idx) => {
+        setTimeout(() => {
+          const target = document.querySelector(`.iso-slab[data-slab-layer="${layerNum}"]`);
+          if (target) {
+            target.classList.add("is-pulsing");
+            selectLayer(layerNum);
+            setTimeout(() => target.classList.remove("is-pulsing"), 420);
+          }
+        }, idx * 180);
+      });
+
+      if (typeof spawnGlobalPollenBurst === "function") {
+        const rect = e.currentTarget.getBoundingClientRect();
+        spawnGlobalPollenBurst(rect.left + rect.width / 2, rect.top, 20);
+      }
     });
   }
 }
@@ -767,10 +1110,12 @@ function setupCircularScrollytelling() {
   stepCards.forEach((card) => observer.observe(card));
 }
 
-// Canvas de partículas circulares con pausa inteligente fuera de pantalla (efficient-background-processing)
+// Canvas de partículas del reactor de fotosíntesis con modos físicos e interacción (efficient-background-processing)
 function setupCircularParticleReactor() {
   const canvas = document.getElementById("circular-particles-canvas");
   const scrollySection = document.getElementById("ciclo-circular");
+  const modeBtns = document.querySelectorAll(".reactor-mode-btn");
+  const pulseBtn = document.getElementById("reactor-pulse-btn");
   if (!canvas || !scrollySection) return;
 
   const prefersReduced = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
@@ -779,33 +1124,124 @@ function setupCircularParticleReactor() {
   const ctx = canvas.getContext("2d");
   if (!ctx) return;
 
-  const particles = Array.from({ length: 42 }, (_, i) => ({
-    angle: (i / 42) * Math.PI * 2,
-    radius: 58 + (i % 4) * 26,
-    speed: 0.004 + (i % 3) * 0.0025,
-    size: 1.6 + (i % 3) * 0.8
+  let reactorMode = "orbit";
+  let pointerX = canvas.width / 2;
+  let pointerY = canvas.height / 2;
+  let pointerActive = false;
+  let shockwaveRadius = 0;
+
+  const particles = Array.from({ length: 48 }, (_, i) => ({
+    angle: (i / 48) * Math.PI * 2,
+    radius: 52 + (i % 5) * 24,
+    baseRadius: 52 + (i % 5) * 24,
+    speed: 0.005 + (i % 3) * 0.0028,
+    size: 1.8 + (i % 3) * 0.9,
+    x: 0,
+    y: 0
   }));
 
+  modeBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      reactorMode = btn.getAttribute("data-reactor-mode") || "orbit";
+      modeBtns.forEach((b) => b.classList.toggle("is-active", b === btn));
+    });
+  });
+
+  function triggerShockwave() {
+    shockwaveRadius = 12;
+    sessionRecycledGrams += 152;
+    sessionSprouts += 1;
+    updateSessionFloraBanner();
+  }
+
+  if (pulseBtn) {
+    pulseBtn.addEventListener("click", triggerShockwave);
+  }
+
+  canvas.addEventListener("pointermove", (e) => {
+    const rect = canvas.getBoundingClientRect();
+    pointerX = ((e.clientX - rect.left) / rect.width) * canvas.width;
+    pointerY = ((e.clientY - rect.top) / rect.height) * canvas.height;
+    pointerActive = true;
+  });
+
+  canvas.addEventListener("pointerleave", () => {
+    pointerActive = false;
+  });
+
+  canvas.addEventListener("click", triggerShockwave);
+
   let rafId = null;
-  const stageColors = ["#34d399", "#38bdf8", "#f0b429"];
+  const stageColors = ["#d4ff59", "#7de2d1", "#ff8c61"];
 
   function drawFrame() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     const cx = canvas.width / 2;
     const cy = canvas.height / 2;
-    const primaryColor = stageColors[activeReactorStage] || "#34d399";
+    const primaryColor = stageColors[activeReactorStage] || "#d4ff59";
 
-    for (const p of particles) {
-      p.angle += p.speed;
-      const x = cx + Math.cos(p.angle) * p.radius;
-      const y = cy + Math.sin(p.angle) * p.radius;
+    if (shockwaveRadius > 0) {
+      ctx.beginPath();
+      ctx.arc(cx, cy, shockwaveRadius, 0, Math.PI * 2);
+      ctx.strokeStyle = "#d4ff59";
+      ctx.lineWidth = 2.5;
+      ctx.globalAlpha = Math.max(0, 1 - shockwaveRadius / 240);
+      ctx.stroke();
+      shockwaveRadius += 6.5;
+      if (shockwaveRadius > 240) shockwaveRadius = 0;
+    }
+
+    for (let i = 0; i < particles.length; i++) {
+      const p = particles[i];
+      p.angle += reactorMode === "vortex" ? p.speed * 1.9 : p.speed;
+
+      let targetR = p.baseRadius;
+      if (reactorMode === "vortex") {
+        targetR = 32 + ((p.baseRadius + Math.sin(p.angle * 2) * 35) % 140);
+      }
+      p.radius += (targetR - p.radius) * 0.08;
+
+      let x = cx + Math.cos(p.angle) * p.radius;
+      let y = cy + Math.sin(p.angle) * p.radius;
+
+      if (pointerActive) {
+        const dx = pointerX - x;
+        const dy = pointerY - y;
+        const dist = Math.hypot(dx, dy);
+        if (dist < 120 && dist > 1) {
+          x += (dx / dist) * 14;
+          y += (dy / dist) * 14;
+        }
+      }
+
+      p.x = x;
+      p.y = y;
 
       ctx.beginPath();
       ctx.arc(x, y, p.size, 0, Math.PI * 2);
-      ctx.fillStyle = primaryColor;
-      ctx.globalAlpha = 0.55;
+      ctx.fillStyle = i % 4 === 0 ? "#ff8c61" : primaryColor;
+      ctx.globalAlpha = 0.72;
       ctx.fill();
     }
+
+    // En modo Red de Micelio, trazamos filamentos bioluminiscentes entre partículas cercanas
+    if (reactorMode === "mycelium") {
+      ctx.strokeStyle = primaryColor;
+      ctx.lineWidth = 0.75;
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const d = Math.hypot(particles[i].x - particles[j].x, particles[i].y - particles[j].y);
+          if (d < 68) {
+            ctx.globalAlpha = (1 - d / 68) * 0.35;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
     rafId = requestAnimationFrame(drawFrame);
   }
 
@@ -847,6 +1283,190 @@ function setupCircularParticleReactor() {
   } else {
     startSimulation();
   }
+}
+
+// Lienzo 3D de Fondo con Esporas Bioluminiscentes en 3 Planos Z + Ráfagas de Polinización
+function setupSpatialDepthField() {
+  const canvas = document.getElementById("spatial-depth-canvas");
+  const pollinateBtn = document.getElementById("pollinate-burst-btn");
+  const counterPill = document.getElementById("global-counter-pill");
+  if (!canvas) return;
+
+  const prefersReduced = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+  if (prefersReduced) return;
+
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener("resize", resize, { passive: true });
+
+  const spores = Array.from({ length: 42 }, (_, i) => ({
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * window.innerHeight,
+    z: 0.25 + (i % 3) * 0.35, // 3 planos de profundidad Z
+    vx: (Math.random() - 0.5) * 0.28,
+    vy: -0.18 - Math.random() * 0.35,
+    size: 1.2 + (i % 3) * 1.1,
+    hueType: i % 3
+  }));
+
+  const burstSpores = [];
+
+  spawnGlobalPollenBurst = function (originX, originY, count = 20) {
+    for (let i = 0; i < count; i++) {
+      const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.4;
+      const speed = 1.4 + Math.random() * 3.6;
+      burstSpores.push({
+        x: originX,
+        y: originY,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed - 1.2,
+        size: 2.2 + Math.random() * 2.5,
+        alpha: 1,
+        isLeaf: i % 2 === 0
+      });
+    }
+  };
+
+  if (pollinateBtn) {
+    pollinateBtn.addEventListener("click", (e) => {
+      const rect = e.currentTarget.getBoundingClientRect();
+      spawnGlobalPollenBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 28);
+      sessionSprouts += 1;
+      updateSessionFloraBanner();
+    });
+  }
+
+  if (counterPill) {
+    counterPill.addEventListener("click", (e) => {
+      const rect = e.currentTarget.getBoundingClientRect();
+      spawnGlobalPollenBurst(rect.left + rect.width / 2, rect.bottom, 22);
+    });
+  }
+
+  let camOffsetX = 0;
+  let camOffsetY = 0;
+  window.addEventListener(
+    "pointermove",
+    (e) => {
+      camOffsetX = (e.clientX / window.innerWidth - 0.5) * 28;
+      camOffsetY = (e.clientY / window.innerHeight - 0.5) * 28;
+    },
+    { passive: true }
+  );
+
+  function renderAmbient() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const palette = ["#d4ff59", "#8ce868", "#ff8c61"];
+
+    for (const s of spores) {
+      s.x += s.vx * s.z;
+      s.y += s.vy * s.z;
+
+      if (s.y < -10) s.y = canvas.height + 10;
+      if (s.x < -10) s.x = canvas.width + 10;
+      if (s.x > canvas.width + 10) s.x = -10;
+
+      const drawX = s.x + camOffsetX * s.z;
+      const drawY = s.y + camOffsetY * s.z;
+
+      ctx.beginPath();
+      ctx.arc(drawX, drawY, s.size * s.z, 0, Math.PI * 2);
+      ctx.fillStyle = palette[s.hueType];
+      ctx.globalAlpha = 0.22 * s.z;
+      ctx.fill();
+    }
+
+    for (let i = burstSpores.length - 1; i >= 0; i--) {
+      const b = burstSpores[i];
+      b.x += b.vx;
+      b.y += b.vy;
+      b.vy -= 0.02;
+      b.alpha -= 0.018;
+
+      if (b.alpha <= 0) {
+        burstSpores.splice(i, 1);
+        continue;
+      }
+
+      ctx.save();
+      ctx.translate(b.x, b.y);
+      ctx.globalAlpha = b.alpha;
+      ctx.fillStyle = b.isLeaf ? "#d4ff59" : "#ff8c61";
+      ctx.beginPath();
+      if (b.isLeaf) {
+        ctx.ellipse(0, 0, b.size * 1.6, b.size * 0.8, Math.atan2(b.vy, b.vx), 0, Math.PI * 2);
+      } else {
+        ctx.arc(0, 0, b.size, 0, Math.PI * 2);
+      }
+      ctx.fill();
+      ctx.restore();
+    }
+
+    requestAnimationFrame(renderAmbient);
+  }
+
+  requestAnimationFrame(renderAmbient);
+}
+
+// Motor de Profundidad Estereoscópica 3D para tarjetas ([data-tilt-3d]) + Cursor Espacial
+function setup3DTiltCards() {
+  const prefersReduced = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+  const isFinePointer = window.matchMedia?.("(pointer: fine)")?.matches;
+  if (prefersReduced || !isFinePointer) return;
+
+  const cards = document.querySelectorAll("[data-tilt-3d]");
+  const cursorHud = document.getElementById("spatial-cursor-hud");
+  const cursorReadout = document.getElementById("cursor-coords-readout");
+
+  window.addEventListener(
+    "pointermove",
+    (e) => {
+      const nx = e.clientX / window.innerWidth - 0.5;
+      const ny = e.clientY / window.innerHeight - 0.5;
+      document.documentElement.style.setProperty("--parallax-x", `${nx * -26}px`);
+      document.documentElement.style.setProperty("--parallax-y", `${ny * -26}px`);
+
+      if (cursorHud) {
+        cursorHud.style.setProperty("--cursor-x", `${e.clientX}px`);
+        cursorHud.style.setProperty("--cursor-y", `${e.clientY}px`);
+      }
+      if (cursorReadout) {
+        const lat = (-12.04 - ny * 0.12).toFixed(2);
+        const lon = (-77.03 + nx * 0.12).toFixed(2);
+        cursorReadout.textContent = `BIOMA // ${lat}°S ${lon}°W`;
+      }
+    },
+    { passive: true }
+  );
+
+  cards.forEach((card) => {
+    card.addEventListener("pointermove", (e) => {
+      const rect = card.getBoundingClientRect();
+      const px = (e.clientX - rect.left) / rect.width;
+      const py = (e.clientY - rect.top) / rect.height;
+
+      const tiltX = (0.5 - py) * 9.5;
+      const tiltY = (px - 0.5) * 9.5;
+
+      card.style.setProperty("--tilt-x", `${tiltX.toFixed(2)}deg`);
+      card.style.setProperty("--tilt-y", `${tiltY.toFixed(2)}deg`);
+      card.style.setProperty("--glare-x", `${(px * 100).toFixed(1)}%`);
+      card.style.setProperty("--glare-y", `${(py * 100).toFixed(1)}%`);
+      card.style.setProperty("--glare-opacity", "1");
+    });
+
+    card.addEventListener("pointerleave", () => {
+      card.style.setProperty("--tilt-x", "0deg");
+      card.style.setProperty("--tilt-y", "0deg");
+      card.style.setProperty("--glare-opacity", "0");
+    });
+  });
 }
 
 // Fallback para sibling-index() en listas escalonadas (dynamic-sibling-animations)
@@ -1000,42 +1620,11 @@ function setupScrollTelemetry() {
       }
       if (railReadout) {
         const num = String(Math.round(pct * 100)).padStart(2, "0");
-        railReadout.textContent = `CICLO · ${num}%`;
+        railReadout.textContent = `FLORA · ${num}%`;
       }
     },
     { passive: true }
   );
-}
-
-// Fallback con IntersectionObserver para entry effects en navegadores sin view() timeline (scroll-entry-exit-effects)
-function setupScrollEntryFallback() {
-  const prefersReduced = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
-  if (prefersReduced) return;
-
-  if (!window.CSS?.supports?.("(animation-timeline: view()) and (animation-range: entry)")) {
-    const targets = document.querySelectorAll(".bento-card, .preview-card, .ods-card");
-    if (!("IntersectionObserver" in window) || !targets.length) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            entry.target.style.opacity = "1";
-            entry.target.style.transform = "translateY(0)";
-            observer.unobserve(entry.target);
-          }
-        }
-      },
-      { threshold: 0.12 }
-    );
-
-    targets.forEach((el) => {
-      el.style.opacity = "0";
-      el.style.transform = "translateY(18px)";
-      el.style.transition = "opacity 0.45s ease-out, transform 0.45s ease-out";
-      observer.observe(el);
-    });
-  }
 }
 
 function checkBackendHealth() {
@@ -1051,7 +1640,7 @@ function checkBackendHealth() {
     .then((data) => {
       if (data && data.status === "UP") {
         healthLink.textContent = "GET /health · UP";
-        if (statusDot) statusDot.style.background = "#10b981";
+        if (statusDot) statusDot.style.background = "#d4ff59";
       }
     })
     .catch(() => {});
@@ -1059,16 +1648,19 @@ function checkBackendHealth() {
 
 document.addEventListener("DOMContentLoaded", () => {
   setupSiblingIndexFallback();
+  setupBiomeSwitcher();
   setupLanguageToggle();
+  setupSpatialDepthField();
+  setup3DTiltCards();
   setupSimulator();
   setupAlchemyLab();
+  setupExplodedArchitectureStack();
   setupCircularScrollytelling();
   setupCircularParticleReactor();
   setupShowcaseTabs();
   setupSpotlightCards();
   setupTermsModal();
   setupScrollTelemetry();
-  setupScrollEntryFallback();
   applyTranslations(currentLang);
   checkBackendHealth();
 });
