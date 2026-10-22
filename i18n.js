@@ -1,6 +1,6 @@
-﻿/**
- * EcoCommute Landing Page ÔÇö i18n, Circular Recycling Alchemy Lab, Scrollytelling & Modern Web UI
- * Soporta Espa├▒ol de Latinoam├®rica (es_419) e Ingl├®s (en_US)
+/**
+ * EcoCommute Landing Page — i18n, Circular Recycling Alchemy Lab, Scrollytelling & Modern Web UI
+ * Soporta Español de Latinoamérica (es_419) e Inglés (en_US)
  */
 
 const CORRIDORS = {
@@ -12,14 +12,14 @@ const CORRIDORS = {
     carPath: "M 38 88 C 120 92, 165 25, 250 42 C 310 52, 345 30, 382 34",
     ecoPath: "M 38 88 C 110 82, 155 58, 225 56 C 295 54, 330 38, 382 34",
     es: {
-      routeTitle: "Miraflores ÔåÆ San Isidro",
+      routeTitle: "Miraflores → San Isidro",
       gemini:
-        "┬½Por la ciclov├¡a de Av. Arequipa llegas en 14 min sin congesti├│n vehicular, ahorras 638 g de COÔéé frente al auto particular (152 g/km) y sumas puntos para el ranking de Miraflores.┬╗"
+        "«Por la ciclovía de Av. Arequipa llegas en 14 min sin congestión vehicular, ahorras 638 g de CO₂ frente al auto particular (152 g/km) y sumas puntos para el ranking de Miraflores.»"
     },
     en: {
-      routeTitle: "Miraflores ÔåÆ San Isidro",
+      routeTitle: "Miraflores → San Isidro",
       gemini:
-        "ÔÇ£Taking the Av. Arequipa protected bike lane gets you there in 14 min bypassing rush-hour traffic, avoiding 638 g of COÔéé vs. driving (152 g/km) and earning Miraflores leaderboard points.ÔÇØ"
+        "“Taking the Av. Arequipa protected bike lane gets you there in 14 min bypassing rush-hour traffic, avoiding 638 g of CO₂ vs. driving (152 g/km) and earning Miraflores leaderboard points.”"
     }
   },
   upc: {
@@ -30,14 +30,14 @@ const CORRIDORS = {
     carPath: "M 38 92 C 95 40, 190 95, 275 38 C 325 22, 355 48, 382 28",
     ecoPath: "M 38 92 C 115 74, 185 65, 260 48 C 315 36, 350 32, 382 28",
     es: {
-      routeTitle: "UPC Monterrico ÔåÆ San Borja",
+      routeTitle: "UPC Monterrico → San Borja",
       gemini:
-        "┬½Conectando Av. Primavera con el eje ciclista de San Borja evitas el cuello de botella de Panamericana Sur, ahorras 882 g de COÔéé y desbloqueas progreso en el reto universitario.┬╗"
+        "«Conectando Av. Primavera con el eje ciclista de San Borja evitas el cuello de botella de Panamericana Sur, ahorras 882 g de CO₂ y desbloqueas progreso en el reto universitario.»"
     },
     en: {
-      routeTitle: "UPC Monterrico ÔåÆ San Borja",
+      routeTitle: "UPC Monterrico → San Borja",
       gemini:
-        "ÔÇ£Connecting Av. Primavera to San Borja's cycling network avoids the Panamericana Sur bottleneck, saving 882 g of COÔéé and advancing your campus challenge.ÔÇØ"
+        "“Connecting Av. Primavera to San Borja's cycling network avoids the Panamericana Sur bottleneck, saving 882 g of CO₂ and advancing your campus challenge.”"
     }
   },
   jesusmaria: {
@@ -48,14 +48,14 @@ const CORRIDORS = {
     carPath: "M 38 42 C 110 22, 195 88, 280 72 C 330 64, 355 82, 382 68",
     ecoPath: "M 38 42 C 115 48, 195 54, 275 60 C 325 64, 355 66, 382 68",
     es: {
-      routeTitle: "Jes├║s Mar├¡a ÔåÆ Lince",
+      routeTitle: "Jesús María → Lince",
       gemini:
-        "┬½El corredor arbolado de Av. Salaverry ofrece sombra continua y pendiente plana: evitas 547 g de COÔéé y llegas 7 minutos antes que en auto particular.┬╗"
+        "«El corredor arbolado de Av. Salaverry ofrece sombra continua y pendiente plana: evitas 547 g de CO₂ y llegas 7 minutos antes que en auto particular.»"
     },
     en: {
-      routeTitle: "Jes├║s Mar├¡a ÔåÆ Lince",
+      routeTitle: "Jesús María → Lince",
       gemini:
-        "ÔÇ£The tree-lined Av. Salaverry corridor provides continuous shade and flat terrain: you avoid 547 g of COÔéé and arrive 7 minutes faster than driving.ÔÇØ"
+        "“The tree-lined Av. Salaverry corridor provides continuous shade and flat terrain: you avoid 547 g of CO₂ and arrive 7 minutes faster than driving.”"
     }
   },
   barranco: {
@@ -66,14 +66,14 @@ const CORRIDORS = {
     carPath: "M 38 94 C 130 98, 210 75, 290 60 C 340 48, 360 35, 382 26",
     ecoPath: "M 38 94 C 105 68, 180 42, 265 34 C 325 28, 355 26, 382 26",
     es: {
-      routeTitle: "Barranco ÔåÆ Miraflores",
+      routeTitle: "Barranco → Miraflores",
       gemini:
-        "┬½Bordeando el Malec├│n Paul Harris y Cisneros pedaleas con brisa marina sin cruces semaf├│ricos pesados, dejando de emitir 441 g de COÔéé en un trayecto corto.┬╗"
+        "«Bordeando el Malecón Paul Harris y Cisneros pedaleas con brisa marina sin cruces semafóricos pesados, dejando de emitir 441 g de CO₂ en un trayecto corto.»"
     },
     en: {
-      routeTitle: "Barranco ÔåÆ Miraflores",
+      routeTitle: "Barranco → Miraflores",
       gemini:
-        "ÔÇ£Riding along the Malec├│n coastal path gives you ocean breeze and zero heavy intersections, avoiding 441 g of COÔéé on a quick coastal commute.ÔÇØ"
+        "“Riding along the Malecón coastal path gives you ocean breeze and zero heavy intersections, avoiding 441 g of CO₂ on a quick coastal commute.”"
     }
   }
 };
@@ -81,265 +81,265 @@ const CORRIDORS = {
 const translations = {
   es_419: {
     // Meta & topbar
-    "page.title": "EcoCommute ÔÇö Metabolismo Urbano y Movilidad Circular en Lima",
+    "page.title": "EcoCommute — Metabolismo Urbano y Movilidad Circular en Lima",
     "nav.skip": "Saltar al contenido principal",
-    "topbar.badge": "METABOLISMO URBANO ┬À LIMA METROPOLITANA",
-    "topbar.spec": "Spring Boot 3.3 ┬À OSRM ┬À Gemini 1.5 Flash ┬À 25 endpoints activos",
-    "topbar.recycled_label": "COÔéé RECICLADO EN SESI├ôN:",
+    "topbar.badge": "METABOLISMO URBANO · LIMA METROPOLITANA",
+    "topbar.spec": "Spring Boot 3.3 · OSRM · Gemini 1.5 Flash · 25 endpoints activos",
+    "topbar.recycled_label": "CO₂ RECICLADO EN SESIÓN:",
     "topbar.swagger": "Swagger OpenAPI",
-    "nav.aria": "Navegaci├│n principal",
+    "nav.aria": "Navegación principal",
     "nav.cycle": "Ciclo Circular",
-    "nav.alchemy": "Reciclaje COÔéé",
+    "nav.alchemy": "Reciclaje CO₂",
     "nav.why": "Manifiesto",
     "nav.features": "Arquitectura",
     "nav.screens": "Interfaz",
     "nav.team": "Equipo",
-    "lang.toggle_label": "Cambiar idioma (Espa├▒ol / English)",
+    "lang.toggle_label": "Cambiar idioma (Español / English)",
 
     // Hero
-    "hero.kicker": "Lima ┬À ODS 11 ┬À Meta 11.2 ┬À Ingenier├¡a de Sistemas UPC",
+    "hero.kicker": "Lima · ODS 11 · Meta 11.2 · Ingeniería de Sistemas UPC",
     "hero.title": "Antes de subirte al auto, ",
-    "hero.title_em": "recicla el COÔéé que a├║n no has emitido.",
+    "hero.title_em": "recicla el CO₂ que aún no has emitido.",
     "hero.lead":
-      "EcoCommute trata cada kil├│metro en Lima como materia prima circular: compara tu ruta en bici, a pie o en auto con OSRM, explica la decisi├│n con Google Gemini 1.5 Flash y transforma el humo evitado en puntos verdes, equivalentes de reciclaje PET y recompensas reales.",
-    "hero.btn_simulator": "Abrir Laboratorio de Reciclaje COÔéé",
+      "EcoCommute trata cada kilómetro en Lima como materia prima circular: compara tu ruta en bici, a pie o en auto con OSRM, explica la decisión con Google Gemini 1.5 Flash y transforma el humo evitado en puntos verdes, equivalentes de reciclaje PET y recompensas reales.",
+    "hero.btn_simulator": "Abrir Laboratorio de Reciclaje CO₂",
     "hero.btn_cycle": "Ver el Ciclo Circular",
-    "hero.btn_screens": "Ver las pantallas ÔåÆ",
-    "hero.stat1_label": "Emisi├│n evitada vs. auto",
+    "hero.btn_screens": "Ver las pantallas →",
+    "hero.stat1_label": "Emisión evitada vs. auto",
     "hero.stat2_label": "Equivalencia circular",
     "hero.stat2_unit": "botellas PET/km",
     "hero.stat3_label": "Backend verificado",
     "hero.stat3_unit": "tests en verde",
-    "hero.card_label": "TELEMETR├ìA DE VIAJE ┬À DEMO INTERACTIVA",
-    "hero.card_route": "Miraflores ÔåÆ San Isidro, 4.2 km",
-    "hero.car": "En auto (combusti├│n)",
-    "hero.car_val": "640 g de COÔéé",
+    "hero.card_label": "TELEMETRÍA DE VIAJE · DEMO INTERACTIVA",
+    "hero.card_route": "Miraflores → San Isidro, 4.2 km",
+    "hero.car": "En auto (combustión)",
+    "hero.car_val": "640 g de CO₂",
     "hero.bike": "En bicicleta / a pie",
-    "hero.bike_val": "0 g de COÔéé",
+    "hero.bike_val": "0 g de CO₂",
     "hero.points": "Tu saldo circular",
     "hero.points_val": "+15 puntos verdes",
     "hero.card_foot":
-      "As├¡ se ve cada viaje registrado en la app. Los factores de emisi├│n est├ín configurados por la aplicaci├│n, no los pone el usuario.",
+      "Así se ve cada viaje registrado en la app. Los factores de emisión están configurados por la aplicación, no los pone el usuario.",
 
     // Simulator
-    "sim.route1": "Miraflores ÔåÆ San Isidro",
-    "sim.route2": "UPC Monterrico ÔåÆ San Borja",
-    "sim.route3": "Jes├║s Mar├¡a ÔåÆ Lince",
-    "sim.route4": "Barranco ÔåÆ Miraflores",
+    "sim.route1": "Miraflores → San Isidro",
+    "sim.route2": "UPC Monterrico → San Borja",
+    "sim.route3": "Jesús María → Lince",
+    "sim.route4": "Barranco → Miraflores",
     "sim.by_bike": "en bici",
-    "sim.by_car_traffic": "en auto (tr├ífico hora punta)",
+    "sim.by_car_traffic": "en auto (tráfico hora punta)",
     "sim.adjust_distance": "Ajustar distancia del trayecto",
     "sim.pet_equiv_label": "Reciclaje equivalente evitado",
-    "sim.gemini_tag": "GEMINI 1.5 FLASH ┬À EXPLICACI├ôN CONTEXTUAL",
+    "sim.gemini_tag": "GEMINI 1.5 FLASH · EXPLICACIÓN CONTEXTUAL",
     "sim.gemini_miraflores":
-      "┬½Por la ciclov├¡a de Av. Arequipa llegas en 14 min sin congesti├│n vehicular, ahorras 638 g de COÔéé frente al auto particular (152 g/km) y sumas puntos para el ranking de Miraflores.┬╗",
+      "«Por la ciclovía de Av. Arequipa llegas en 14 min sin congestión vehicular, ahorras 638 g de CO₂ frente al auto particular (152 g/km) y sumas puntos para el ranking de Miraflores.»",
     "sim.btn_recycle_trip": "Reciclar este viaje en el contador global",
 
     // Circular Scrollytelling
-    "cycle.title": "C├│mo reciclamos un viaje urbano en valor ecol├│gico",
+    "cycle.title": "Cómo reciclamos un viaje urbano en valor ecológico",
     "cycle.intro":
-      "Reciclar no es solo separar pl├ístico o vidrio: es evitar que el carbono f├│sil entre a la atm├│sfera de Lima y reintroducir esa energ├¡a en la comunidad.",
-    "cycle.badge1": "Intercepci├│n de combusti├│n",
-    "cycle.badge2": "Conversi├│n en puntos verdes",
-    "cycle.badge3": "Recompensas y h├íbito circular",
-    "cycle.s1_tag": "INTERCEPCI├ôN EN EL ORIGEN",
-    "cycle.s1_title": "Sustituir combusti├│n por tracci├│n limpia antes de girar la llave",
+      "Reciclar no es solo separar plástico o vidrio: es evitar que el carbono fósil entre a la atmósfera de Lima y reintroducir esa energía en la comunidad.",
+    "cycle.badge1": "Intercepción de combustión",
+    "cycle.badge2": "Conversión en puntos verdes",
+    "cycle.badge3": "Recompensas y hábito circular",
+    "cycle.s1_tag": "INTERCEPCIÓN EN EL ORIGEN",
+    "cycle.s1_title": "Sustituir combustión por tracción limpia antes de girar la llave",
     "cycle.s1_desc":
-      "Un autom├│vil promedio en el tr├ífico de Lima emite 152 gramos de COÔéé por cada kil├│metro. Cuando eliges bicicleta o caminata en EcoCommute, ese carbono se ┬½recicla┬╗ preventivamente: nunca llega al aire de tu distrito.",
-    "cycle.s2_tag": "REFINACI├ôN CON OSRM + GEMINI 1.5 FLASH",
-    "cycle.s2_title": "Los datos geogr├íficos crudos se transforman en inteligencia accionable",
+      "Un automóvil promedio en el tráfico de Lima emite 152 gramos de CO₂ por cada kilómetro. Cuando eliges bicicleta o caminata en EcoCommute, ese carbono se «recicla» preventivamente: nunca llega al aire de tu distrito.",
+    "cycle.s2_tag": "REFINACIÓN CON OSRM + GEMINI 1.5 FLASH",
+    "cycle.s2_title": "Los datos geográficos crudos se transforman en inteligencia accionable",
     "cycle.s2_desc":
-      "Nuestro backend en Spring Boot procesa las coordenadas de forma ef├¡mera sobre OpenStreetMap (OSRM), valida el ahorro con CarbonService y utiliza Google Gemini 1.5 Flash para explicarte por qu├® esa ruta ciclista o peatonal optimiza tu tiempo y tu salud.",
-    "cycle.s3_tag": "ECONOM├ìA CIRCULAR DISTRITAL",
+      "Nuestro backend en Spring Boot procesa las coordenadas de forma efímera sobre OpenStreetMap (OSRM), valida el ahorro con CarbonService y utiliza Google Gemini 1.5 Flash para explicarte por qué esa ruta ciclista o peatonal optimiza tu tiempo y tu salud.",
+    "cycle.s3_tag": "ECONOMÍA CIRCULAR DISTRITAL",
     "cycle.s3_title": "El carbono evitado regresa a ti como puntos, medallas y beneficios",
     "cycle.s3_desc":
-      "Cada gramo ahorrado alimenta tu cuenta de Puntos Verdes, desbloquea medallas autom├íticas al superar hitos y posiciona a tu distrito (Miraflores, San Isidro, Surco, Barranco, Jes├║s Mar├¡a) en el ranking metropolitano sostenible.",
+      "Cada gramo ahorrado alimenta tu cuenta de Puntos Verdes, desbloquea medallas automáticas al superar hitos y posiciona a tu distrito (Miraflores, San Isidro, Surco, Barranco, Jesús María) en el ranking metropolitano sostenible.",
 
     // Alchemy Lab
-    "alchemy.title": "┬┐A cu├ínto reciclaje f├¡sico equivale dejar el auto en Lima?",
+    "alchemy.title": "¿A cuánto reciclaje físico equivale dejar el auto en Lima?",
     "alchemy.intro":
-      "Un gramo de COÔéé es abstracto; una botella PET reciclada o una lata de aluminio recuperada se pueden tocar. Mueve la frecuencia semanal y observa la equivalencia material exacta.",
-    "alchemy.p1": "Ciclista casual (3 d├¡as/sem)",
-    "alchemy.p2": "Commuter UPC (5 d├¡as/sem)",
-    "alchemy.p3": "Guardi├ín del Aire (7 d├¡as/sem)",
+      "Un gramo de CO₂ es abstracto; una botella PET reciclada o una lata de aluminio recuperada se pueden tocar. Mueve la frecuencia semanal y observa la equivalencia material exacta.",
+    "alchemy.p1": "Ciclista casual (3 días/sem)",
+    "alchemy.p2": "Commuter UPC (5 días/sem)",
+    "alchemy.p3": "Guardián del Aire (7 días/sem)",
     "alchemy.slider_trips": "Viajes sostenibles por semana",
     "alchemy.slider_km": "Distancia media por trayecto",
-    "alchemy.annual_saved_label": "CARBONO ANUAL QUE NO ENTRAR├ü AL AIRE DE LIMA",
-    "alchemy.card1_title": "Botellas pl├ísticas PET recicladas",
+    "alchemy.annual_saved_label": "CARBONO ANUAL QUE NO ENTRARÁ AL AIRE DE LIMA",
+    "alchemy.card1_title": "Botellas plásticas PET recicladas",
     "alchemy.card1_desc":
-      "Equivalente en huella de carbono evitada al reciclar botellas de 500 ml (82.8 g COÔéé evitados por envase recuperado).",
-    "alchemy.card2_title": "Latas de aluminio fundidas en fr├¡o",
+      "Equivalente en huella de carbono evitada al reciclar botellas de 500 ml (82.8 g CO₂ evitados por envase recuperado).",
+    "alchemy.card2_title": "Latas de aluminio fundidas en frío",
     "alchemy.card2_desc":
-      "Ahorro energ├®tico equivalente a recuperar latas de bebidas frente a producir aluminio primario desde bauxita (170 g COÔéé/lata).",
-    "alchemy.card3_title": "├ürboles adultos absorbiendo 1 a├▒o",
+      "Ahorro energético equivalente a recuperar latas de bebidas frente a producir aluminio primario desde bauxita (170 g CO₂/lata).",
+    "alchemy.card3_title": "Árboles adultos absorbiendo 1 año",
     "alchemy.card3_desc":
-      "Cantidad de ├írboles urbanos maduros trabajando durante 365 d├¡as para fijar el mismo volumen de carbono (21 kg COÔéé/a├▒o).",
-    "alchemy.card4_title": "Puntos Verdes canjeables en cat├ílogo",
+      "Cantidad de árboles urbanos maduros trabajando durante 365 días para fijar el mismo volumen de carbono (21 kg CO₂/año).",
+    "alchemy.card4_title": "Puntos Verdes canjeables en catálogo",
     "alchemy.card4_desc":
-      "Saldo acumulado en tu perfil de EcoCommute para desbloquear mantenimientos de bici, caf├® aliado y accesorios reciclados.",
+      "Saldo acumulado en tu perfil de EcoCommute para desbloquear mantenimientos de bici, café aliado y accesorios reciclados.",
 
     // Solution / Story
-    "story.title": "Por qu├® existe",
+    "story.title": "Por qué existe",
     "story.sidebar_note":
-      "Lima pierde m├ís de 150 horas al a├▒o por ciudadano en congesti├│n vehicular, mientras las emisiones de transporte urbano siguen siendo invisibles en las apps tradicionales.",
+      "Lima pierde más de 150 horas al año por ciudadano en congestión vehicular, mientras las emisiones de transporte urbano siguen siendo invisibles en las apps tradicionales.",
     "story.p1":
-      "En Lima la decisi├│n de c├│mo movernos se toma por rapidez, costo o costumbre. Nadie ve cu├ínto COÔéé produce el trayecto que acaba de elegir, y las herramientas de mapas simplemente comparten tiempo y tr├ífico: el impacto ambiental queda fuera de la pantalla.",
-    "story.p2_pre": "Lo que falta no es otro mapa. Falta ver el costo ambiental de la decisi├│n ",
+      "En Lima la decisión de cómo movernos se toma por rapidez, costo o costumbre. Nadie ve cuánto CO₂ produce el trayecto que acaba de elegir, y las herramientas de mapas simplemente comparten tiempo y tráfico: el impacto ambiental queda fuera de la pantalla.",
+    "story.p2_pre": "Lo que falta no es otro mapa. Falta ver el costo ambiental de la decisión ",
     "story.p2_under": "antes",
     "story.p2_post":
       " de tomarla, y algo que te haga querer repetir la alternativa buena la semana siguiente. Eso es lo que intentamos construir.",
     "story.comp_old_tag": "Apps de mapas tradicionales (Modelo Lineal)",
     "story.comp_old_desc":
-      "Solo muestran minutos estimados y congesti├│n. El impacto de carbono es invisible y el viaje termina en humo sin retorno.",
+      "Solo muestran minutos estimados y congestión. El impacto de carbono es invisible y el viaje termina en humo sin retorno.",
     "story.comp_new_tag": "Enfoque EcoCommute (Modelo Circular)",
     "story.comp_new_desc":
-      "Contrasta gramos de COÔéé antes de salir, explica por qu├® te conviene la ruta con IA y recicla tu constancia en puntos y comunidad.",
+      "Contrasta gramos de CO₂ antes de salir, explica por qué te conviene la ruta con IA y recicla tu constancia en puntos y comunidad.",
     "story.quote":
-      "┬½Si el ahorro de COÔéé se ve igual de concreto que los minutos del viaje, la gente lo considera.┬╗",
-    "story.quote_author": "ÔÇö El equipo EcoCommute, probando la app con usuarios en Lima",
+      "«Si el ahorro de CO₂ se ve igual de concreto que los minutos del viaje, la gente lo considera.»",
+    "story.quote_author": "— El equipo EcoCommute, probando la app con usuarios en Lima",
 
     // Features
-    "feat.title": "Qu├® hace hoy",
+    "feat.title": "Qué hace hoy",
     "feat.intro":
-      "Todo lo de abajo est├í implementado en el backend (Spring Boot) y cubierto por 28 tests autom├íticos que corren en cada Pull Request.",
+      "Todo lo de abajo está implementado en el backend (Spring Boot) y cubierto por 28 tests automáticos que corren en cada Pull Request.",
     "feat.routes_title": "Rutas sostenibles y Google Gemini",
     "feat.routes_desc":
-      "Introduces el origen y el destino y la app arma alternativas con OSRM: qu├® tan lejos es, cu├ínto tarda cada medio de transporte y qu├® te conviene seg├║n tu historial. La recomendaci├│n asistida por Inteligencia Artificial (Google Gemini 1.5 Flash) explica en lenguaje simple por qu├® sugiere esa ruta.",
-    "feat.trips_title": "Viajes y c├ílculo de COÔéé",
+      "Introduces el origen y el destino y la app arma alternativas con OSRM: qué tan lejos es, cuánto tarda cada medio de transporte y qué te conviene según tu historial. La recomendación asistida por Inteligencia Artificial (Google Gemini 1.5 Flash) explica en lenguaje simple por qué sugiere esa ruta.",
+    "feat.trips_title": "Viajes y cálculo de CO₂",
     "feat.trips_desc":
-      "Registras el viaje y la app calcula el COÔéé ahorrado frente al auto (152 g COÔéé/km ahorrados) y los puntos verdes que ganas.",
+      "Registras el viaje y la app calcula el CO₂ ahorrado frente al auto (152 g CO₂/km ahorrados) y los puntos verdes que ganas.",
     "feat.dash_title": "Dashboard de impacto",
     "feat.dash_desc":
-      "COÔéé acumulado, distancia recorrida, evoluci├│n semanal, ├írboles equivalentes salvados e historial de viajes en gr├íficos legibles.",
+      "CO₂ acumulado, distancia recorrida, evolución semanal, árboles equivalentes salvados e historial de viajes en gráficos legibles.",
     "feat.rank_title": "Ranking distrital",
     "feat.rank_desc":
-      "Compara tu impacto ecol├│gico con ciclistas y peatones de tu distrito en Lima para fortalecer la comunidad activa.",
+      "Compara tu impacto ecológico con ciclistas y peatones de tu distrito en Lima para fortalecer la comunidad activa.",
     "feat.badges_title": "Medallas y recompensas",
     "feat.badges_desc":
-      "Las medallas se desbloquean autom├íticamente al alcanzar hitos ecol├│gicos; los puntos se canjean por recompensas sostenibles.",
+      "Las medallas se desbloquean automáticamente al alcanzar hitos ecológicos; los puntos se canjean por recompensas sostenibles.",
     "feat.challenges_title": "Retos semanales",
     "feat.challenges_desc":
-      "Desaf├¡os mensuales y metas sostenibles administradas din├ímicamente desde el panel de gesti├│n para sostener el h├íbito.",
+      "Desafíos mensuales y metas sostenibles administradas dinámicamente desde el panel de gestión para sostener el hábito.",
 
     // Badges / ODS Callout
     "ods.title": "Alineados con el ODS 11 (Meta 11.2) e Inteligencia Artificial",
     "ods.desc":
-      "EcoCommute responde de manera directa al Objetivo de Desarrollo Sostenible 11 de la ONU (Meta 11.2: Proporcionar acceso a sistemas de transporte seguros, asequibles, accesibles y sostenibles para todos). Adem├ís, optimizamos la toma de decisiones con Google Gemini 1.5 Flash para brindar explicaciones contextuales.",
-    "ods.badge_ods": "ODS 11 ┬À Meta 11.2: Movilidad Sostenible",
-    "ods.badge_ai": "Optimizaci├│n con IA ┬À Google Gemini 1.5 Flash",
+      "EcoCommute responde de manera directa al Objetivo de Desarrollo Sostenible 11 de la ONU (Meta 11.2: Proporcionar acceso a sistemas de transporte seguros, asequibles, accesibles y sostenibles para todos). Además, optimizamos la toma de decisiones con Google Gemini 1.5 Flash para brindar explicaciones contextuales.",
+    "ods.badge_ods": "ODS 11 · Meta 11.2: Movilidad Sostenible",
+    "ods.badge_ai": "Optimización con IA · Google Gemini 1.5 Flash",
     "ods.badge_osrm": "Ruteo Open Source OSRM",
 
     // Screenshots
-    "demo.title": "C├│mo se ve",
+    "demo.title": "Cómo se ve",
     "demo.tab_all": "Vista comparativa",
     "demo.tab_routes": "Planificador y Mapa",
     "demo.tab_dash": "Dashboard de Impacto",
     "demo.img1_alt": "Mockup interactivo de rutas sostenibles con mapas y alternativas en Lima",
     "demo.cap1":
-      "Planificaci├│n de rutas sostenibles con ubicaci├│n, medios de transporte, alternativas y optimizaci├│n asistida por Google Gemini.",
-    "demo.img2_alt": "Mockup del dashboard de impacto ecol├│gico con CO2 y estad├¡sticas",
+      "Planificación de rutas sostenibles con ubicación, medios de transporte, alternativas y optimización asistida por Google Gemini.",
+    "demo.img2_alt": "Mockup del dashboard de impacto ecológico con CO2 y estadísticas",
     "demo.cap2":
-      "Dashboard de impacto con COÔéé ahorrado, viajes, ├írboles equivalentes, medallas e historial.",
+      "Dashboard de impacto con CO₂ ahorrado, viajes, árboles equivalentes, medallas e historial.",
 
     // Impact
     "impact.title": "Estamos alineados con la Meta 11.2 del ODS 11",
     "impact.desc":
-      "Transporte seguro, accesible, asequible y sostenible para todas las personas. El usuario transforma su huella de carbono en progreso visible, y la gamificaci├│n (retos, medallas y rankings) est├í para sostener el h├íbito m├ís all├í de la primera semana.",
+      "Transporte seguro, accesible, asequible y sostenible para todas las personas. El usuario transforma su huella de carbono en progreso visible, y la gamificación (retos, medallas y rankings) está para sostener el hábito más allá de la primera semana.",
     "impact.p1": "Emisiones directas en bicicleta o caminata",
-    "impact.p2": "Privacidad por dise├▒o sin rastreo en segundo plano",
-    "impact.p3": "Cartograf├¡a abierta sobre OpenStreetMap",
+    "impact.p2": "Privacidad por diseño sin rastreo en segundo plano",
+    "impact.p3": "Cartografía abierta sobre OpenStreetMap",
 
     // Team
-    "team.title": "Qui├®nes lo hacemos",
+    "team.title": "Quiénes lo hacemos",
     "team.intro":
-      "Seis estudiantes de Ingenier├¡a de Sistemas de la UPC, NRC 8247, Ciclo 2026-2. Cada quien una parte del producto; todo el proceso en el repositorio.",
+      "Seis estudiantes de Ingeniería de Sistemas de la UPC, NRC 8247, Ciclo 2026-2. Cada quien una parte del producto; todo el proceso en el repositorio.",
     "team.member1_role": "IA y recomendaciones de ruta",
     "team.member2_role": "Rutas, dashboard y medallas",
-    "team.member3_role": "Entidades, viajes y c├ílculo de COÔéé",
+    "team.member3_role": "Entidades, viajes y cálculo de CO₂",
     "team.member4_role": "Puntos verdes y ranking",
     "team.member5_role": "Seguridad, JWT y registro",
-    "team.member6_role": "Documentaci├│n, evidencias y landing",
+    "team.member6_role": "Documentación, evidencias y landing",
 
     // Contact
-    "contact.title": "Pru├®balo y cu├®ntanos",
+    "contact.title": "Pruébalo y cuéntanos",
     "contact.intro":
-      "Si algo no te convence o tienes una idea para Lima, escr├¡benos: leemos todo.",
-    "contact.github": "C├│digo en GitHub",
+      "Si algo no te convence o tienes una idea para Lima, escríbenos: leemos todo.",
+    "contact.github": "Código en GitHub",
     "contact.swagger": "API & Swagger en Render",
     "contact.linkedin": "EcoCommute en LinkedIn",
 
     // Footer & Legal
-    "footer.academic": "EcoCommute ┬À Trabajo Parcial de Aplicaciones Web (UPC 2026-2)",
-    "footer.terms": "T├®rminos y Condiciones",
-    "footer.privacy": "Pol├¡tica de Privacidad",
+    "footer.academic": "EcoCommute · Trabajo Parcial de Aplicaciones Web (UPC 2026-2)",
+    "footer.terms": "Términos y Condiciones",
+    "footer.privacy": "Política de Privacidad",
 
     // Modal
-    "modal.title": "T├®rminos de Servicio y Privacidad ÔÇö EcoCommute",
+    "modal.title": "Términos de Servicio y Privacidad — EcoCommute",
     "modal.close": "Cerrar ventana modal",
-    "modal.intro": "Compromiso ├®tico, legal y ambiental del proyecto EcoCommute:",
+    "modal.intro": "Compromiso ético, legal y ambiental del proyecto EcoCommute:",
     "modal.p1":
-      "<strong>Protecci├│n de Datos:</strong> Cumplimos estrictamente la Ley N┬░ 29733 (Per├║). Tus coordenadas se procesan de forma ef├¡mera para calcular rutas y ahorro de COÔéé; no rastreamos en segundo plano ni comercializamos datos.",
+      "<strong>Protección de Datos:</strong> Cumplimos estrictamente la Ley N° 29733 (Perú). Tus coordenadas se procesan de forma efímera para calcular rutas y ahorro de CO₂; no rastreamos en segundo plano ni comercializamos datos.",
     "modal.p2":
       "<strong>Ruteo Abierto e IA:</strong> Empleamos OSRM sobre OpenStreetMap y Google Gemini 1.5 Flash para recomendaciones transparentes y sin sesgo comercial.",
     "modal.p3":
-      "<strong>├ëtica Profesional:</strong> El desarrollo se rige bajo los C├│digos de ├ëtica de Software ACM/IEEE y el C├│digo Deontol├│gico del Colegio de Ingenieros del Per├║ (CIP), priorizando el inter├®s p├║blico y la movilidad sostenible.",
-    "modal.full_link": "Abrir p├ígina completa de T├®rminos y Condiciones ÔåÆ"
+      "<strong>Ética Profesional:</strong> El desarrollo se rige bajo los Códigos de Ética de Software ACM/IEEE y el Código Deontológico del Colegio de Ingenieros del Perú (CIP), priorizando el interés público y la movilidad sostenible.",
+    "modal.full_link": "Abrir página completa de Términos y Condiciones →"
   },
 
   en_US: {
     // Meta & topbar
-    "page.title": "EcoCommute ÔÇö Urban Metabolism & Circular Mobility in Lima",
+    "page.title": "EcoCommute — Urban Metabolism & Circular Mobility in Lima",
     "nav.skip": "Skip to main content",
-    "topbar.badge": "URBAN METABOLISM ┬À LIMA METROPOLITAN AREA",
-    "topbar.spec": "Spring Boot 3.3 ┬À OSRM ┬À Gemini 1.5 Flash ┬À 25 active endpoints",
-    "topbar.recycled_label": "SESSION RECYCLED COÔéé:",
+    "topbar.badge": "URBAN METABOLISM · LIMA METROPOLITAN AREA",
+    "topbar.spec": "Spring Boot 3.3 · OSRM · Gemini 1.5 Flash · 25 active endpoints",
+    "topbar.recycled_label": "SESSION RECYCLED CO₂:",
     "topbar.swagger": "Swagger OpenAPI",
     "nav.aria": "Main navigation",
     "nav.cycle": "Circular Loop",
-    "nav.alchemy": "COÔéé Recycling",
+    "nav.alchemy": "CO₂ Recycling",
     "nav.why": "Manifesto",
     "nav.features": "Architecture",
     "nav.screens": "Interface",
     "nav.team": "Team",
-    "lang.toggle_label": "Switch language (Espa├▒ol / English)",
+    "lang.toggle_label": "Switch language (Español / English)",
 
     // Hero
-    "hero.kicker": "Lima ┬À SDG 11 ┬À Target 11.2 ┬À UPC Systems Engineering",
+    "hero.kicker": "Lima · SDG 11 · Target 11.2 · UPC Systems Engineering",
     "hero.title": "Before taking your car, ",
-    "hero.title_em": "recycle the COÔéé you haven't emitted yet.",
+    "hero.title_em": "recycle the CO₂ you haven't emitted yet.",
     "hero.lead":
       "EcoCommute treats every kilometer in Lima as circular raw material: it compares your bike, walk, or car route via OSRM, explains the choice with Google Gemini 1.5 Flash, and turns avoided exhaust into green points, PET recycling equivalents, and real rewards.",
-    "hero.btn_simulator": "Open COÔéé Recycling Lab",
+    "hero.btn_simulator": "Open CO₂ Recycling Lab",
     "hero.btn_cycle": "Explore Circular Loop",
-    "hero.btn_screens": "View Screenshots ÔåÆ",
+    "hero.btn_screens": "View Screenshots →",
     "hero.stat1_label": "Avoided vs. car",
     "hero.stat2_label": "Circular equivalence",
     "hero.stat2_unit": "PET bottles/km",
     "hero.stat3_label": "Verified backend",
     "hero.stat3_unit": "passing tests",
-    "hero.card_label": "TRIP TELEMETRY ┬À INTERACTIVE DEMO",
-    "hero.card_route": "Miraflores ÔåÆ San Isidro, 4.2 km",
+    "hero.card_label": "TRIP TELEMETRY · INTERACTIVE DEMO",
+    "hero.card_route": "Miraflores → San Isidro, 4.2 km",
     "hero.car": "By Car (combustion)",
-    "hero.car_val": "640 g of COÔéé",
+    "hero.car_val": "640 g of CO₂",
     "hero.bike": "By Bicycle / Walking",
-    "hero.bike_val": "0 g of COÔéé",
+    "hero.bike_val": "0 g of CO₂",
     "hero.points": "Your circular balance",
     "hero.points_val": "+15 green points",
     "hero.card_foot":
       "This is how every logged commute looks in the app. Carbon emission factors are strictly configured by the system.",
 
     // Simulator
-    "sim.route1": "Miraflores ÔåÆ San Isidro",
-    "sim.route2": "UPC Monterrico ÔåÆ San Borja",
-    "sim.route3": "Jes├║s Mar├¡a ÔåÆ Lince",
-    "sim.route4": "Barranco ÔåÆ Miraflores",
+    "sim.route1": "Miraflores → San Isidro",
+    "sim.route2": "UPC Monterrico → San Borja",
+    "sim.route3": "Jesús María → Lince",
+    "sim.route4": "Barranco → Miraflores",
     "sim.by_bike": "by bike",
     "sim.by_car_traffic": "by car (rush-hour traffic)",
     "sim.adjust_distance": "Adjust trip distance",
     "sim.pet_equiv_label": "Equivalent recycling avoided",
-    "sim.gemini_tag": "GEMINI 1.5 FLASH ┬À CONTEXTUAL INSIGHT",
+    "sim.gemini_tag": "GEMINI 1.5 FLASH · CONTEXTUAL INSIGHT",
     "sim.gemini_miraflores":
-      "ÔÇ£Taking the Av. Arequipa protected bike lane gets you there in 14 min bypassing rush-hour traffic, avoiding 638 g of COÔéé vs. driving (152 g/km) and earning Miraflores leaderboard points.ÔÇØ",
+      "“Taking the Av. Arequipa protected bike lane gets you there in 14 min bypassing rush-hour traffic, avoiding 638 g of CO₂ vs. driving (152 g/km) and earning Miraflores leaderboard points.”",
     "sim.btn_recycle_trip": "Recycle this trip into global counter",
 
     // Circular Scrollytelling
@@ -352,7 +352,7 @@ const translations = {
     "cycle.s1_tag": "SOURCE INTERCEPTION",
     "cycle.s1_title": "Replacing combustion with human traction before turning the key",
     "cycle.s1_desc":
-      "An average passenger car in Lima traffic emits 152 grams of COÔéé per kilometer. When you choose cycling or walking in EcoCommute, that carbon is preventively recycledÔÇöit never enters your district's air.",
+      "An average passenger car in Lima traffic emits 152 grams of CO₂ per kilometer. When you choose cycling or walking in EcoCommute, that carbon is preventively recycled—it never enters your district's air.",
     "cycle.s2_tag": "REFINING WITH OSRM + GEMINI 1.5 FLASH",
     "cycle.s2_title": "Raw geographic telemetry becomes actionable urban intelligence",
     "cycle.s2_desc":
@@ -360,12 +360,12 @@ const translations = {
     "cycle.s3_tag": "DISTRICT CIRCULAR ECONOMY",
     "cycle.s3_title": "Avoided carbon returns to you as points, medals, and perks",
     "cycle.s3_desc":
-      "Every gram saved feeds your Green Points balance, unlocks automated milestone medals, and elevates your Lima district (Miraflores, San Isidro, Surco, Barranco, Jes├║s Mar├¡a) on the metropolitan leaderboard.",
+      "Every gram saved feeds your Green Points balance, unlocks automated milestone medals, and elevates your Lima district (Miraflores, San Isidro, Surco, Barranco, Jesús María) on the metropolitan leaderboard.",
 
     // Alchemy Lab
     "alchemy.title": "How much physical recycling does leaving your car equal?",
     "alchemy.intro":
-      "A gram of COÔéé feels abstract; a recycled PET bottle or recovered aluminum can is tangible. Adjust your weekly commute frequency to see the exact material equivalence.",
+      "A gram of CO₂ feels abstract; a recycled PET bottle or recovered aluminum can is tangible. Adjust your weekly commute frequency to see the exact material equivalence.",
     "alchemy.p1": "Casual cyclist (3 days/wk)",
     "alchemy.p2": "UPC Commuter (5 days/wk)",
     "alchemy.p3": "Air Guardian (7 days/wk)",
@@ -374,13 +374,13 @@ const translations = {
     "alchemy.annual_saved_label": "ANNUAL CARBON KEPT OUT OF LIMA'S AIR",
     "alchemy.card1_title": "Recycled 500ml PET plastic bottles",
     "alchemy.card1_desc":
-      "Equivalent carbon footprint avoided by recycling 500 ml PET bottles (82.8 g COÔéé avoided per recovered container).",
+      "Equivalent carbon footprint avoided by recycling 500 ml PET bottles (82.8 g CO₂ avoided per recovered container).",
     "alchemy.card2_title": "Cold-recovered aluminum cans",
     "alchemy.card2_desc":
-      "Energy savings equivalent to recycling beverage cans instead of smelting primary aluminum from bauxite (170 g COÔéé/can).",
+      "Energy savings equivalent to recycling beverage cans instead of smelting primary aluminum from bauxite (170 g CO₂/can).",
     "alchemy.card3_title": "Mature urban trees absorbing for 1 year",
     "alchemy.card3_desc":
-      "Number of mature urban trees working 365 days to sequester the same volume of atmospheric carbon (21 kg COÔéé/year).",
+      "Number of mature urban trees working 365 days to sequester the same volume of atmospheric carbon (21 kg CO₂/year).",
     "alchemy.card4_title": "Redeemable Green Points",
     "alchemy.card4_desc":
       "Balance earned in your EcoCommute profile to unlock bike tune-ups, partner coffee, and upcycled accessories.",
@@ -400,10 +400,10 @@ const translations = {
       "Only display estimated minutes and traffic congestion. Carbon impact is invisible and the trip ends in unrecovered exhaust.",
     "story.comp_new_tag": "The EcoCommute approach (Circular Model)",
     "story.comp_new_desc":
-      "Contrasts grams of COÔéé before you depart, explains why the route fits you with AI, and recycles consistency into points and community.",
+      "Contrasts grams of CO₂ before you depart, explains why the route fits you with AI, and recycles consistency into points and community.",
     "story.quote":
-      "ÔÇ£If carbon savings are presented as clearly as travel minutes, citizens genuinely take them into account.ÔÇØ",
-    "story.quote_author": "ÔÇö The EcoCommute Team, testing the prototype with urban commuters in Lima",
+      "“If carbon savings are presented as clearly as travel minutes, citizens genuinely take them into account.”",
+    "story.quote_author": "— The EcoCommute Team, testing the prototype with urban commuters in Lima",
 
     // Features
     "feat.title": "What works today",
@@ -412,12 +412,12 @@ const translations = {
     "feat.routes_title": "Sustainable Routes & Google Gemini",
     "feat.routes_desc":
       "Enter origin and destination, and the app generates alternatives via OSRM: distance, travel time by mode, and tailored insights. AI recommendations powered by Google Gemini 1.5 Flash explain clearly why a route is suggested.",
-    "feat.trips_title": "Trips & COÔéé Accounting",
+    "feat.trips_title": "Trips & CO₂ Accounting",
     "feat.trips_desc":
-      "Log your active commute and the system computes the exact COÔéé avoided compared to a passenger car (152 g COÔéé/km avoided) along with earned points.",
+      "Log your active commute and the system computes the exact CO₂ avoided compared to a passenger car (152 g CO₂/km avoided) along with earned points.",
     "feat.dash_title": "Impact Dashboard",
     "feat.dash_desc":
-      "Cumulative COÔéé saved, total distance, weekly trends, equivalent trees preserved, and complete trip logs in clear visual cards.",
+      "Cumulative CO₂ saved, total distance, weekly trends, equivalent trees preserved, and complete trip logs in clear visual cards.",
     "feat.rank_title": "District Leaderboard",
     "feat.rank_desc":
       "Compare your positive impact with fellow cyclists and pedestrians across Lima districts to build healthy community habits.",
@@ -432,8 +432,8 @@ const translations = {
     "ods.title": "Committed to SDG 11 (Target 11.2) & Artificial Intelligence",
     "ods.desc":
       "EcoCommute directly contributes to the United Nations Sustainable Development Goal 11 (Target 11.2: Providing access to safe, affordable, accessible, and sustainable transport systems for all). Furthermore, route evaluation is enhanced with Google Gemini 1.5 Flash for transparent, contextual advice.",
-    "ods.badge_ods": "SDG 11 ┬À Target 11.2: Sustainable Urban Mobility",
-    "ods.badge_ai": "AI-Powered Optimization ┬À Google Gemini 1.5 Flash",
+    "ods.badge_ods": "SDG 11 · Target 11.2: Sustainable Urban Mobility",
+    "ods.badge_ai": "AI-Powered Optimization · Google Gemini 1.5 Flash",
     "ods.badge_osrm": "Open Source Routing Engine (OSRM)",
 
     // Screenshots
@@ -446,7 +446,7 @@ const translations = {
       "Sustainable route planner showing live locations, transport modes, eco-alternatives, and Google Gemini AI insights.",
     "demo.img2_alt": "Impact dashboard mockup with CO2 metrics and user statistics",
     "demo.cap2":
-      "Impact dashboard displaying COÔéé saved, trips logged, tree equivalents, badges, and history.",
+      "Impact dashboard displaying CO₂ saved, trips logged, tree equivalents, badges, and history.",
 
     // Impact
     "impact.title": "Aligned with UN SDG 11 Target 11.2",
@@ -462,7 +462,7 @@ const translations = {
       "Six Software Engineering students at UPC, NRC 8247, 2026-2 Semester. Full development tracked publicly in the GitHub repository.",
     "team.member1_role": "AI & Route Recommendations",
     "team.member2_role": "Routes, Dashboard & Badges",
-    "team.member3_role": "Entities, Commute Logs & COÔéé Math",
+    "team.member3_role": "Entities, Commute Logs & CO₂ Math",
     "team.member4_role": "Green Points & Leaderboard",
     "team.member5_role": "Security, JWT & Authentication",
     "team.member6_role": "Documentation, Evidence & Landing",
@@ -476,21 +476,21 @@ const translations = {
     "contact.linkedin": "EcoCommute on LinkedIn",
 
     // Footer & Legal
-    "footer.academic": "EcoCommute ┬À Web Application Architecture Midterm Project (UPC 2026-2)",
+    "footer.academic": "EcoCommute · Web Application Architecture Midterm Project (UPC 2026-2)",
     "footer.terms": "Terms & Conditions",
     "footer.privacy": "Privacy Policy",
 
     // Modal
-    "modal.title": "Terms of Service & Privacy ÔÇö EcoCommute",
+    "modal.title": "Terms of Service & Privacy — EcoCommute",
     "modal.close": "Close modal window",
     "modal.intro": "Ethical, legal, and environmental commitments of EcoCommute:",
     "modal.p1":
-      "<strong>Data Privacy:</strong> We strictly follow Peru's Personal Data Protection Law (Law N┬░ 29733) and GDPR principles. Geolocation coordinates are processed ephemerally; we never perform background tracking nor monetize personal telemetry.",
+      "<strong>Data Privacy:</strong> We strictly follow Peru's Personal Data Protection Law (Law N° 29733) and GDPR principles. Geolocation coordinates are processed ephemerally; we never perform background tracking nor monetize personal telemetry.",
     "modal.p2":
       "<strong>Open Routing & AI:</strong> We rely on OSRM over OpenStreetMap and Google Gemini 1.5 Flash for unbiased, transparent routing recommendations.",
     "modal.p3":
-      "<strong>Professional Ethics:</strong> Development is guided by the ACM/IEEE Software Engineering Code of Ethics and the Deontological Code of the Colegio de Ingenieros del Per├║ (CIP), prioritizing public well-being and climate action.",
-    "modal.full_link": "Open full Terms & Conditions page ÔåÆ"
+      "<strong>Professional Ethics:</strong> Development is guided by the ACM/IEEE Software Engineering Code of Ethics and the Deontological Code of the Colegio de Ingenieros del Perú (CIP), prioritizing public well-being and climate action.",
+    "modal.full_link": "Open full Terms & Conditions page →"
   }
 };
 
@@ -534,13 +534,13 @@ function renderSimulatorMetrics() {
   if (coordsEl) coordsEl.textContent = corridor.coords;
   if (distOutEl) distOutEl.textContent = `${km.toFixed(1)} km`;
   if (carCo2El) {
-    carCo2El.textContent = isEn ? `${carCo2Grams} g of COÔéé` : `${carCo2Grams} g de COÔéé`;
+    carCo2El.textContent = isEn ? `${carCo2Grams} g of CO₂` : `${carCo2Grams} g de CO₂`;
   }
   if (bikeCo2El) {
-    bikeCo2El.textContent = isEn ? "0 g of COÔéé" : "0 g de COÔéé";
+    bikeCo2El.textContent = isEn ? "0 g of CO₂" : "0 g de CO₂";
   }
   if (petEquivEl) {
-    petEquivEl.textContent = isEn ? `ÔÖ╗ ${petBottles} PET bottles` : `ÔÖ╗ ${petBottles} botellas PET`;
+    petEquivEl.textContent = isEn ? `♻ ${petBottles} PET bottles` : `♻ ${petBottles} botellas PET`;
   }
   if (pointsEl) {
     pointsEl.textContent = isEn ? `+${greenPoints} green points` : `+${greenPoints} puntos verdes`;
@@ -767,7 +767,7 @@ function setupCircularScrollytelling() {
   stepCards.forEach((card) => observer.observe(card));
 }
 
-// Canvas de part├¡culas circulares con pausa inteligente fuera de pantalla (efficient-background-processing)
+// Canvas de partículas circulares con pausa inteligente fuera de pantalla (efficient-background-processing)
 function setupCircularParticleReactor() {
   const canvas = document.getElementById("circular-particles-canvas");
   const scrollySection = document.getElementById("ciclo-circular");
@@ -1000,7 +1000,7 @@ function setupScrollTelemetry() {
       }
       if (railReadout) {
         const num = String(Math.round(pct * 100)).padStart(2, "0");
-        railReadout.textContent = `CICLO ┬À ${num}%`;
+        railReadout.textContent = `CICLO · ${num}%`;
       }
     },
     { passive: true }
@@ -1050,7 +1050,7 @@ function checkBackendHealth() {
     .then((res) => (res.ok ? res.json() : null))
     .then((data) => {
       if (data && data.status === "UP") {
-        healthLink.textContent = "GET /health ┬À UP";
+        healthLink.textContent = "GET /health · UP";
         if (statusDot) statusDot.style.background = "#10b981";
       }
     })
