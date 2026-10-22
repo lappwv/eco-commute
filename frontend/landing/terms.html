@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#060913" />
+    <title>Términos y Condiciones & Política de Privacidad — EcoCommute</title>
+    <meta
+      name="description"
+      content="Términos de servicio, política de privacidad y código de ética de EcoCommute (UPC, ODS 11.2)."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:ital,wght@0,600;0,700;0,800;1,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <style>
+      .terms-container {
+        width: min(860px, 100% - 8vw);
+        margin-inline: auto;
+        padding-block: clamp(3rem, 6vh, 5rem);
+      }
+      .terms-container h1 {
+        font-size: clamp(2rem, 1.3rem + 2.5vw, 3.25rem);
+        margin-bottom: 0.85rem;
+      }
+      .terms-container .meta {
+        font-family: var(--mono);
+        color: var(--brand-400);
+        font-size: 0.78rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+      .terms-section {
+        margin-top: 2.5rem;
+        padding: 1.75rem;
+        background: var(--surface-alt);
+        border: 1px solid var(--line);
+        border-radius: 0.9rem;
+      }
+      .terms-section h2 {
+        font-size: 1.45rem;
+        margin-bottom: 1rem;
+        color: var(--brand-300);
+      }
+      .terms-section p,
+      .terms-section li {
+        color: var(--ink-secondary);
+        font-size: 1rem;
+        line-height: 1.7;
+      }
+      .terms-section strong {
+        color: var(--ink);
+      }
+      .terms-section ul {
+        padding-left: 1.35rem;
+        margin-bottom: 0;
+      }
+      .terms-section li + li {
+        margin-top: 0.6rem;
+      }
+      .terms-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+      }
+      .back-nav {
+        margin-bottom: 1.75rem;
+      }
+      .back-nav a {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--brand-400);
+        font-family: var(--mono);
+        font-size: 0.82rem;
+        font-weight: 600;
+      }
+      .back-nav a:hover {
+        color: var(--brand-300);
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="scroll-progress" class="scroll-progress" aria-hidden="true"></div>
+
+    <div class="ambient-canvas" aria-hidden="true">
+      <div class="ambient-glow ambient-glow-primary"></div>
+      <div class="architectural-grid"></div>
+    </div>
+
+    <header class="topbar" role="banner">
+      <div class="container topbar-inner">
+        <a class="brand" href="./index.html">
+          <span class="brand-mark" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" stroke-dasharray="42 14" />
+              <circle cx="12" cy="12" r="4" fill="#10b981" />
+              <circle cx="18.5" cy="6.5" r="2" fill="#34d399" />
+            </svg>
+          </span>
+          <span class="brand-text">EcoCommute</span>
+          <span class="brand-tag">LEGAL</span>
+        </a>
+        <nav class="nav" aria-label="Navegación principal">
+          <a href="./index.html#solucion">Manifiesto</a>
+          <a href="./index.html#simulador">Simulador</a>
+          <a href="./index.html#funciones">Arquitectura</a>
+          <a href="./index.html#demo">Interfaz</a>
+          <a href="./index.html#equipo">Equipo</a>
+          <a href="./index.html#contacto">Contacto</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="terms-container" role="main">
+      <div class="back-nav">
+        <a href="./index.html" aria-label="Volver a la página principal">&larr; Volver a EcoCommute</a>
+      </div>
+
+      <header>
+        <div class="meta">Marco Ético, Legal y de Privacidad · Versión 1.0 (Octubre 2026)</div>
+        <h1>Términos de Servicio y Política de Privacidad</h1>
+        <p class="lead">
+          EcoCommute es un proyecto académico y tecnológico desarrollado en la Universidad Peruana de Ciencias Aplicadas (UPC) comprometido con la sostenibilidad urbana (ODS 11, Meta 11.2) y los más rigurosos estándares éticos de la ingeniería de software.
+        </p>
+      </header>
+
+      <section class="terms-section" id="privacidad">
+        <h2>1. Política de Privacidad y Protección de Datos</h2>
+        <p>
+          En estricto cumplimiento con la <strong>Ley de Protección de Datos Personales del Perú (Ley N° 29733)</strong> y principios internacionales de privacidad por diseño:
+        </p>
+        <ul>
+          <li><strong>Datos Recopilados:</strong> Solo se recopilan el correo institucional/usuario, contraseña cifrada mediante BCrypt con salting seguro, distrito de residencia e historial de viajes registrados voluntariamente.</li>
+          <li><strong>Geolocalización Ética:</strong> Las coordenadas de origen y destino ingresadas se utilizan exclusivamente de forma transitoria para consultar rutas y calcular distancias. No se realiza rastreo continuo en segundo plano (background tracking) ni venta de telemetría a terceras entidades.</li>
+          <li><strong>Almacenamiento Seguro:</strong> La información reside en bases de datos PostgreSQL debidamente protegidas, con autenticación sin estado mediante tokens JWT (JSON Web Tokens) firmados criptográficamente.</li>
+          <li><strong>Derechos ARCO:</strong> Los usuarios conservan el derecho de Acceso, Rectificación, Cancelación y Oposición respecto a su perfil y datos de viaje en cualquier momento.</li>
+        </ul>
+      </section>
+
+      <section class="terms-section" id="algoritmos">
+        <h2>2. Uso de Ruteo OSRM y Algoritmos de Inteligencia Artificial</h2>
+        <p>
+          EcoCommute integra servicios abiertos de cómputo geográfico y modelos de lenguaje de última generación:
+        </p>
+        <ul>
+          <li><strong>Motor OSRM (Open Source Routing Machine):</strong> El cálculo de distancias y tiempos de viaje se basa en redes de transporte abiertas (OpenStreetMap), priorizando ciclovías y vías peatonales seguras. Las estimaciones son referenciales; el usuario es responsable de su seguridad vial en todo momento.</li>
+          <li><strong>Inteligencia Artificial (Google Gemini 1.5 Flash):</strong> Los resúmenes explicativos y recomendaciones de ruta son generados mediante el modelo <code>gemini-1.5-flash</code> o su mecanismo heurístico de respaldo (fallback). La IA analiza únicamente factores objetivos de distancia, tiempo y balance de CO₂ sin sesgos discriminatorios.</li>
+          <li><strong>Factores de Emisión de CO₂:</strong> Los factores de ahorro de CO₂ (152 g CO₂/km en auto promedio vs. 0 g en bicicleta o caminata) se fundamentan en literatura ambiental validada y son procesados determinísticamente en el backend.</li>
+        </ul>
+      </section>
+
+      <section class="terms-section" id="etica">
+        <h2>3. Adhesión a Códigos de Ética Profesional</h2>
+        <p>
+          El diseño, desarrollo y despliegue del sistema EcoCommute se rige rigurosamente bajo los principios deontológicos de:
+        </p>
+        <div class="terms-badges">
+          <span class="badge-pill badge-ai">ACM Code of Ethics</span>
+          <span class="badge-pill badge-ai">IEEE Software Engineering Code</span>
+          <span class="badge-pill badge-osrm">Colegio de Ingenieros del Perú (CIP)</span>
+          <span class="badge-pill badge-ods">ODS 11 · Meta 11.2</span>
+        </div>
+        <ul>
+          <li><strong>Código de Ética y Práctica Profesional de Ingeniería de Software (ACM / IEEE-CS):</strong>
+            <ul>
+              <li><em>Principio 1 (Público):</em> Desarrollar software consistente con el interés público y el cuidado ambiental colectivo.</li>
+              <li><em>Principio 2 (Cliente y Empleador):</em> Honestidad y transparencia en los algoritmos de gamificación, puntos y métricas de impacto ecológico reportadas.</li>
+              <li><em>Principio 3 (Producto):</em> Asegurar software de alta calidad, testeado con pruebas unitarias e integración automatizadas.</li>
+            </ul>
+          </li>
+          <li><strong>Código de Deontología y Ética del Colegio de Ingenieros del Perú (CIP):</strong>
+            <ul>
+              <li>Compromiso con el desarrollo sostenible, la protección de la calidad del aire y la seguridad ciudadana en las áreas metropolitanas de nuestro país.</li>
+              <li>Responsabilidad profesional en la veracidad técnica de los datos compartidos.</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section class="terms-section" id="responsabilidad">
+        <h2>4. Condiciones de Uso y Exención de Responsabilidad</h2>
+        <p>
+          EcoCommute es una plataforma de apoyo a la movilidad activa. El usuario acepta que:
+        </p>
+        <ul>
+          <li>Las rutas sugeridas dependen del estado de las vías públicas y disposiciones municipales locales. EcoCommute no asume responsabilidad por accidentes, desvíos o incidencias durante el trayecto físico del usuario.</li>
+          <li>El sistema de gamificación (puntos verdes, medallas y retos) está diseñado para motivar hábitos saludables y sostenibles. Queda prohibida la adulteración maliciosa de registros de kilometraje.</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+      <div class="container footer-inner">
+        <span>EcoCommute · Trabajo Parcial de Aplicaciones Web (UPC 2026-2)</span>
+        <span>ecocommute.upc@gmail.com</span>
+      </div>
+    </footer>
+  </body>
+</html>
