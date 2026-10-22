@@ -1,31 +1,33 @@
-:root {
+:root,
+html[data-biome="amancaes"] {
   color-scheme: dark;
 
-  /* Paleta Oficial EcoCommute (Informe Capítulo III + Estética de Metabolismo Urbano) */
-  --brand-50: #ecfdf5;
-  --brand-300: #6ee7b7;
-  --brand-400: #34d399;
-  --brand-500: #10b981;
-  --brand-700: #047857;
-  --brand-950: #022c22;
+  /* Paleta Botánica No Convencional: Bioma Lomas de Amancaes (Humus Volcánico, Musgo Ácido, Terracota Costera & Garúa) */
+  --brand-50: #f7ffe0;
+  --brand-300: #d4ff59;
+  --brand-400: #8ce868;
+  --brand-500: #52b788;
+  --brand-700: #2d6a4f;
+  --brand-950: #091c13;
 
-  --warm: #f0b429;
-  --danger: #f87171;
-  --sky: #38bdf8;
+  --warm: #ff8c61;
+  --danger: #ff6b6b;
+  --sky: #7de2d1;
 
-  --background: #060913;
-  --surface: #0b101b;
-  --surface-alt: #0f1624;
-  --surface-elevated: #131c2e;
+  --background: #0b0f0c;
+  --surface: #111813;
+  --surface-alt: #162019;
+  --surface-elevated: #1c2920;
 
-  --ink: #f4f1ea;
-  --ink-secondary: #cbd5e1;
-  --muted: #94a3b8;
+  --ink: #f4f1e6;
+  --ink-secondary: #c7c5b4;
+  --muted: #8e9485;
 
-  --line: rgba(255, 255, 255, 0.08);
-  --line-strong: rgba(52, 211, 153, 0.28);
+  --line: rgba(212, 255, 89, 0.11);
+  --line-strong: rgba(212, 255, 89, 0.34);
 
-  /* Tipografía oficial del proyecto (Plus Jakarta Sans + Inter + JetBrains Mono) */
+  /* Tipografía: Fraunces (orgánica botánica) + Plus Jakarta Sans + Inter + JetBrains Mono */
+  --serif-organic: "Fraunces", Georgia, serif;
   --display: "Plus Jakarta Sans", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
@@ -44,6 +46,58 @@
   /* Interpolación perceptual de color con fallback seguro */
   --in-oklab: ;
   --in-oklch: ;
+}
+
+/* Bioma 02: Arcilla Solar Costera & Desierto Florido */
+html[data-biome="terracota"] {
+  --brand-50: #fff8e6;
+  --brand-300: #ffd166;
+  --brand-400: #f4a261;
+  --brand-500: #e76f51;
+  --brand-700: #9c412c;
+  --brand-950: #29110b;
+
+  --warm: #90be6d;
+  --danger: #ff595e;
+  --sky: #4cc9f0;
+
+  --background: #130c09;
+  --surface: #1b120e;
+  --surface-alt: #241813;
+  --surface-elevated: #2e1f18;
+
+  --ink: #fbf4eb;
+  --ink-secondary: #d8c7b8;
+  --muted: #a38f7e;
+
+  --line: rgba(244, 162, 97, 0.14);
+  --line-strong: rgba(255, 209, 102, 0.36);
+}
+
+/* Bioma 03: Micelio Nocturno & Garúa Bioluminiscente */
+html[data-biome="micelio"] {
+  --brand-50: #ecfeff;
+  --brand-300: #72efdd;
+  --brand-400: #64dfdf;
+  --brand-500: #48bfe3;
+  --brand-700: #5390d9;
+  --brand-950: #0b192c;
+
+  --warm: #c77dff;
+  --danger: #ff758f;
+  --sky: #d9ed92;
+
+  --background: #070a12;
+  --surface: #0d1322;
+  --surface-alt: #131b30;
+  --surface-elevated: #1a2540;
+
+  --ink: #eef6ff;
+  --ink-secondary: #b8c7e0;
+  --muted: #7e90b0;
+
+  --line: rgba(114, 239, 221, 0.13);
+  --line-strong: rgba(199, 125, 255, 0.36);
 }
 
 @supports (background: linear-gradient(in oklab, white, black)) {
@@ -90,10 +144,11 @@ body {
   text-align: start;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.45s ease, color 0.35s ease;
 }
 
 ::selection {
-  background: rgba(16, 185, 129, 0.28);
+  background: rgba(212, 255, 89, 0.25);
   color: var(--brand-50);
 }
 
@@ -109,7 +164,7 @@ img {
   display: block;
 }
 
-/* Tipografía y balanceo moderno (improve-text-layout-and-legibility & typography) */
+/* Tipografía y balanceo moderno */
 h1,
 h2,
 h3,
@@ -124,7 +179,7 @@ h4 {
 }
 
 h1 {
-  font-size: clamp(2.45rem, 1.45rem + 3.5vw, 4.3rem);
+  font-size: clamp(2.45rem, 1.45rem + 3.5vw, 4.35rem);
   font-weight: 800;
   letter-spacing: -0.036em;
   line-height: 1.04;
@@ -152,7 +207,7 @@ p {
 
 .mono-tag {
   font-family: var(--mono);
-  font-size: 0.73rem;
+  font-size: 0.72rem;
   font-weight: 500;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -176,17 +231,224 @@ p {
 }
 
 .spring-btn:hover {
-  transform: scale(1.035);
+  transform: scale(1.04);
 }
 
 .spring-btn:active {
-  transform: scale(0.96);
+  transform: scale(0.95);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .spring-btn {
     transition: none;
   }
+}
+
+/* ---------- Sistema de Profundidad Estereoscópica 3D (preserve-3d & Z-planes) ---------- */
+.depth-3d-card {
+  position: relative;
+  transform-style: preserve-3d;
+  transform:
+    perspective(1100px)
+    rotateX(var(--tilt-x, 0deg))
+    rotateY(var(--tilt-y, 0deg))
+    translateZ(0);
+  transition:
+    transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.28s ease,
+    box-shadow 0.28s ease;
+  will-change: transform;
+}
+
+.depth-3d-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(
+    420px circle at var(--glare-x, 50%) var(--glare-y, 20%),
+    rgba(212, 255, 89, 0.11),
+    transparent 65%
+  );
+  opacity: var(--glare-opacity, 0);
+  transition: opacity 0.25s ease;
+}
+
+.depth-3d-card:hover {
+  box-shadow:
+    0 30px 70px -18px rgba(0, 0, 0, 0.82),
+    0 0 28px -8px rgba(212, 255, 89, 0.2);
+}
+
+.z-float-mid {
+  transform: translateZ(18px);
+  transform-style: preserve-3d;
+}
+
+.z-float-high {
+  transform: translateZ(34px);
+  transform-style: preserve-3d;
+}
+
+@media (prefers-reduced-motion: reduce), (max-width: 980px) {
+  .depth-3d-card {
+    transform: none !important;
+    transform-style: flat;
+  }
+  .z-float-mid,
+  .z-float-high {
+    transform: none !important;
+  }
+}
+
+/* ---------- Texturizado Visual de Etiquetas de Herbario (visually-texture-content) ---------- */
+.weathered-specimen-tag {
+  --specimen-grain-mask:
+    radial-gradient(circle at 20% 30%, #000 72%, transparent 74%),
+    radial-gradient(circle at 75% 65%, #000 78%, transparent 80%),
+    linear-gradient(135deg, #000 84%, rgba(0, 0, 0, 0.55) 85%, #000 92%);
+  display: inline-block;
+  padding: 0.18rem 0.55rem;
+  border-radius: 0.32rem;
+  background: rgba(212, 255, 89, 0.13);
+  border: 1px solid rgba(212, 255, 89, 0.32);
+  color: var(--brand-300);
+
+  -webkit-mask-image: var(--specimen-grain-mask);
+  -webkit-mask-repeat: repeat;
+  -webkit-mask-size: 16px 16px;
+
+  mask-image: var(--specimen-grain-mask);
+  mask-repeat: repeat;
+  mask-size: 16px 16px;
+}
+
+@supports (not (mask-image: url(x))) and (not (-webkit-mask-image: url(x))) {
+  .weathered-specimen-tag {
+    background-color: rgba(212, 255, 89, 0.18);
+  }
+}
+
+/* ---------- Adornos Botánicos y Marco Ecológico en Parallax 3D ---------- */
+.botanical-foreground-frame {
+  position: fixed;
+  inset: 0;
+  z-index: 650;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.botanical-corner {
+  position: absolute;
+  width: clamp(150px, 18vw, 250px);
+  height: auto;
+  opacity: 0.78;
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.65));
+  transform: translate3d(calc(var(--parallax-x, 0px) * 0.5), calc(var(--parallax-y, 0px) * 0.5), 0);
+  transition: transform 0.25s ease-out;
+}
+
+.corner-top-left {
+  top: 2.2rem;
+  left: 0;
+}
+
+.corner-top-right {
+  top: 2.2rem;
+  right: 0;
+}
+
+.corner-bottom-right {
+  bottom: 0;
+  right: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes botanical-sway {
+    0%, 100% {
+      transform: rotate(0deg) scale(1);
+    }
+    50% {
+      transform: rotate(2.8deg) scale(1.02);
+    }
+  }
+
+  @keyframes botanical-sway-reverse {
+    0%, 100% {
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(-3.2deg);
+    }
+  }
+
+  .sway-branch-slow {
+    transform-origin: 0% 0%;
+    animation: botanical-sway 7.5s ease-in-out infinite;
+  }
+
+  .sway-branch-alt {
+    transform-origin: 100% 100%;
+    animation: botanical-sway-reverse 9s ease-in-out infinite;
+  }
+}
+
+@media (max-width: 1100px) {
+  .botanical-corner {
+    opacity: 0.32;
+    width: 130px;
+  }
+}
+
+/* Retícula espacial interactiva de polinización */
+.spatial-cursor-hud {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1500;
+  pointer-events: none;
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  transform: translate3d(var(--cursor-x, -100px), var(--cursor-y, -100px), 0);
+  will-change: transform;
+}
+
+@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .spatial-cursor-hud {
+    display: inline-flex;
+  }
+}
+
+.cursor-ring {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px dashed rgba(212, 255, 89, 0.55);
+  display: grid;
+  place-items: center;
+  margin-left: -15px;
+  margin-top: -15px;
+  background: radial-gradient(circle, rgba(212, 255, 89, 0.14), transparent 70%);
+}
+
+.cursor-leaf-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--brand-300);
+  box-shadow: 0 0 8px var(--brand-300);
+}
+
+.cursor-telemetry {
+  font-size: 0.62rem;
+  padding: 0.12rem 0.42rem;
+  border-radius: 0.25rem;
+  background: rgba(11, 15, 12, 0.82);
+  border: 1px solid rgba(212, 255, 89, 0.24);
+  color: var(--brand-300);
+  white-space: nowrap;
 }
 
 /* ---------- Riel Lateral Arquitectónico + Rueda de Reciclaje vinculada al Scroll ---------- */
@@ -201,8 +463,8 @@ p {
   align-items: center;
   gap: 0.9rem;
   padding: 0.85rem 0.35rem;
-  background: rgba(11, 16, 27, 0.72);
-  border: 1px solid var(--line);
+  background: rgba(17, 24, 19, 0.78);
+  border: 1px solid var(--line-strong);
   border-radius: 999px;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -215,12 +477,12 @@ p {
   transform: rotate(180deg);
   font-size: 0.64rem;
   letter-spacing: 0.12em;
-  color: var(--muted);
+  color: var(--brand-300);
 }
 
 .rail-wheel-wrap {
-  width: 2.2rem;
-  height: 2.2rem;
+  width: 2.3rem;
+  height: 2.3rem;
 }
 
 .scroll-recycle-wheel {
@@ -260,8 +522,8 @@ p {
   left: 1rem;
   z-index: 2000;
   padding: 0.65rem 1.1rem;
-  background: var(--brand-500);
-  color: #022c22;
+  background: var(--brand-300);
+  color: #091c13;
   font-weight: 700;
   border-radius: 0.5rem;
 }
@@ -270,7 +532,7 @@ p {
   top: 1rem;
 }
 
-/* ---------- Barra de progreso impulsada por scroll (scroll-progress-indicator) ---------- */
+/* ---------- Barra de progreso impulsada por scroll ---------- */
 .scroll-progress {
   position: fixed;
   top: 0;
@@ -278,7 +540,7 @@ p {
   z-index: 1200;
   width: 100%;
   height: 3px;
-  background: linear-gradient(90deg var(--in-oklch), var(--brand-500), var(--brand-400), var(--warm));
+  background: linear-gradient(90deg var(--in-oklch), var(--brand-300), var(--brand-400), var(--warm));
   transform-origin: 0 50%;
   transform: scaleX(0);
   pointer-events: none;
@@ -302,7 +564,7 @@ p {
   }
 }
 
-/* ---------- Lienzo arquitectónico de fondo ---------- */
+/* ---------- Lienzo 3D de Fondo con Piso de Perspectiva y Esporas ---------- */
 .ambient-canvas {
   position: fixed;
   inset: 0;
@@ -312,52 +574,86 @@ p {
   isolation: isolate;
 }
 
+#spatial-depth-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.85;
+}
+
 .ambient-glow {
   position: absolute;
   border-radius: 50%;
-  filter: blur(110px);
+  filter: blur(120px);
   opacity: 0.22;
 }
 
 .ambient-glow-primary {
   top: -12%;
   right: 4%;
-  width: 38rem;
-  height: 38rem;
-  background: radial-gradient(circle var(--in-oklab), var(--brand-500), transparent 70%);
+  width: 40rem;
+  height: 40rem;
+  background: radial-gradient(circle var(--in-oklab), var(--brand-300), transparent 70%);
 }
 
 .ambient-glow-secondary {
   bottom: -15%;
   left: -8%;
-  width: 34rem;
-  height: 34rem;
-  background: radial-gradient(circle var(--in-oklab), var(--brand-700), transparent 72%);
+  width: 36rem;
+  height: 36rem;
+  background: radial-gradient(circle var(--in-oklab), var(--brand-500), transparent 72%);
+}
+
+.ambient-glow-terracotta {
+  top: 38%;
+  left: 42%;
+  width: 28rem;
+  height: 28rem;
+  opacity: 0.14;
+  background: radial-gradient(circle var(--in-oklab), var(--warm), transparent 72%);
+}
+
+/* Piso 3D en perspectiva en el horizonte inferior */
+.perspective-floor-grid {
+  position: absolute;
+  left: -20%;
+  right: -20%;
+  bottom: -32%;
+  height: 68vh;
+  background-image:
+    linear-gradient(to right, rgba(212, 255, 89, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(212, 255, 89, 0.06) 1px, transparent 1px);
+  background-size: 3.5rem 3.5rem;
+  transform: perspective(560px) rotateX(68deg);
+  transform-origin: 50% 100%;
+  mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.75) 10%, transparent 90%);
+  -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.75) 10%, transparent 90%);
 }
 
 .architectural-grid {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.022) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
-  background-size: 4rem 4rem;
+    linear-gradient(to right, rgba(212, 255, 89, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(212, 255, 89, 0.025) 1px, transparent 1px);
+  background-size: 4.5rem 4.5rem;
   mask-image: radial-gradient(ellipse 80% 65% at 50% 25%, #000 35%, transparent 100%);
 }
 
 .grain-overlay {
   position: absolute;
   inset: 0;
-  opacity: 0.032;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.7) 1px, transparent 0);
-  background-size: 24px 24px;
+  opacity: 0.036;
+  background-image: radial-gradient(rgba(244, 241, 230, 0.7) 1px, transparent 0);
+  background-size: 22px 22px;
 }
 
-/* ---------- System Status Bar ---------- */
+/* ---------- System Status Bar & Selector de Biomas ---------- */
 .SystemStatusBar {
   border-bottom: 1px solid var(--line);
-  background: rgba(6, 9, 19, 0.9);
-  font-size: 0.76rem;
+  background: color-mix(in oklab, var(--background) 92%, black);
+  font-size: 0.75rem;
   padding-block: 0.45rem;
 }
 
@@ -365,7 +661,7 @@ p {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 0.85rem;
   flex-wrap: wrap;
 }
 
@@ -373,7 +669,7 @@ p {
 .status-right {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.55rem;
   flex-wrap: wrap;
 }
 
@@ -381,19 +677,56 @@ p {
   width: 0.5rem;
   height: 0.5rem;
   border-radius: 50%;
-  background: var(--brand-400);
-  box-shadow: 0 0 10px var(--brand-400);
+  background: var(--brand-300);
+  box-shadow: 0 0 10px var(--brand-300);
+}
+
+.biome-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.14rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--line);
+}
+
+.biome-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28rem;
+  padding: 0.18rem 0.55rem;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.biome-chip:hover {
+  color: var(--ink);
+}
+
+.biome-chip.is-active {
+  background: rgba(212, 255, 89, 0.18);
+  color: var(--brand-300);
+  box-shadow: inset 0 0 0 1px rgba(212, 255, 89, 0.38);
 }
 
 .recycle-counter-pill {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  padding: 0.16rem 0.55rem;
+  padding: 0.18rem 0.6rem;
   border-radius: 999px;
-  background: rgba(16, 185, 129, 0.12);
-  border: 1px solid rgba(52, 211, 153, 0.3);
+  background: rgba(212, 255, 89, 0.1);
+  border: 1px solid var(--line-strong);
   color: var(--brand-300);
+  cursor: pointer;
 }
 
 .recycle-counter-pill strong {
@@ -412,7 +745,7 @@ p {
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
-  color: var(--brand-400);
+  color: var(--brand-300);
   font-weight: 500;
 }
 
@@ -447,7 +780,7 @@ p {
   align-items: center;
   gap: 0.65rem;
   font-family: var(--display);
-  font-size: 1.2rem;
+  font-size: 1.22rem;
   font-weight: 800;
   letter-spacing: -0.02em;
 }
@@ -456,12 +789,12 @@ p {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.15rem;
-  height: 2.15rem;
-  border-radius: 0.55rem;
-  background: rgba(16, 185, 129, 0.12);
-  border: 1px solid rgba(52, 211, 153, 0.3);
-  color: var(--brand-400);
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 0.6rem;
+  background: rgba(212, 255, 89, 0.12);
+  border: 1px solid var(--line-strong);
+  color: var(--brand-300);
 }
 
 .brand-tag {
@@ -471,23 +804,23 @@ p {
   letter-spacing: 0.08em;
   padding: 0.15rem 0.48rem;
   border-radius: 999px;
-  background: rgba(16, 185, 129, 0.1);
-  border: 1px solid rgba(52, 211, 153, 0.25);
-  color: var(--brand-300);
+  background: rgba(255, 140, 97, 0.14);
+  border: 1px solid rgba(255, 140, 97, 0.35);
+  color: var(--warm);
 }
 
 .topbar-right {
   display: flex;
   align-items: center;
-  gap: 1.4rem;
+  gap: 1.25rem;
 }
 
 .nav {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 1.2rem;
-  font-size: 0.9rem;
+  gap: 1.1rem;
+  font-size: 0.89rem;
   font-weight: 500;
   color: var(--muted);
 }
@@ -509,7 +842,7 @@ p {
   right: 0;
   bottom: -2px;
   height: 2px;
-  background: var(--brand-400);
+  background: var(--brand-300);
   transform: scaleX(0);
   transform-origin: right;
   transition: transform 0.22s ease;
@@ -524,7 +857,27 @@ p {
 .topbar-controls {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
+  gap: 0.55rem;
+}
+
+.btn-ecological-burst {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.36rem 0.72rem;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: rgba(212, 255, 89, 0.12);
+  color: var(--brand-300);
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-ecological-burst:hover {
+  background: rgba(212, 255, 89, 0.22);
+  box-shadow: 0 0 18px rgba(212, 255, 89, 0.3);
 }
 
 .lang-toggle {
@@ -543,12 +896,12 @@ p {
 }
 
 .lang-toggle:hover {
-  border-color: var(--brand-500);
+  border-color: var(--brand-300);
   color: var(--ink);
 }
 
 .lang-toggle:focus-visible {
-  outline: 2px solid var(--brand-400);
+  outline: 2px solid var(--brand-300);
   outline-offset: 2px;
 }
 
@@ -557,7 +910,7 @@ p {
 }
 
 .lang-toggle .active {
-  color: var(--brand-400);
+  color: var(--brand-300);
   font-weight: 700;
 }
 
@@ -576,20 +929,20 @@ p {
 
 .btn-ghost-sm:hover,
 .btn-ghost-sm:focus-visible {
-  border-color: rgba(255, 255, 255, 0.22);
+  border-color: var(--line-strong);
   background: rgba(255, 255, 255, 0.07);
   color: var(--ink);
 }
 
-/* ---------- Hero Section & Interactive Telemetry Card ---------- */
+/* ---------- Hero Section & 3D Holographic Telemetry Card ---------- */
 .hero-section {
-  padding-block: clamp(3rem, 6vh, 5.5rem) clamp(3.5rem, 6.5vh, 5.2rem);
+  padding-block: clamp(2.8rem, 5.5vh, 5rem) clamp(3.5rem, 6.5vh, 5.2rem);
   border-bottom: 1px solid var(--line);
 }
 
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(350px, 0.95fr);
+  grid-template-columns: minmax(0, 1.12fr) minmax(360px, 0.98fr);
   gap: clamp(2rem, 4.2vw, 4.2rem);
   align-items: center;
 }
@@ -601,22 +954,23 @@ p {
   padding: 0.35rem 0.85rem;
   margin-bottom: 0.9rem;
   border-radius: 999px;
-  background: rgba(16, 185, 129, 0.1);
-  border: 1px solid rgba(52, 211, 153, 0.26);
+  background: rgba(212, 255, 89, 0.1);
+  border: 1px solid var(--line-strong);
 }
 
 .kicker-pulse {
   width: 0.45rem;
   height: 0.45rem;
   border-radius: 50%;
-  background: var(--brand-400);
+  background: var(--brand-300);
+  box-shadow: 0 0 8px var(--brand-300);
 }
 
 .kicker {
   margin: 0;
   color: var(--brand-300);
   font-family: var(--mono);
-  font-size: 0.75rem;
+  font-size: 0.74rem;
   font-weight: 600;
   letter-spacing: 0.03em;
 }
@@ -624,18 +978,21 @@ p {
 .hero-stamp-row {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 0.65rem;
   margin-bottom: 0.85rem;
 }
 
 .stamp-code {
-  color: rgba(240, 180, 41, 0.85);
+  color: var(--warm);
   font-size: 0.68rem;
 }
 
 .hero-headline em {
-  font-style: normal;
-  background: linear-gradient(125deg var(--in-oklch), var(--brand-300) 0%, var(--brand-500) 55%, var(--warm) 100%);
+  font-family: var(--serif-organic);
+  font-style: italic;
+  font-weight: 700;
+  background: linear-gradient(125deg var(--in-oklch), var(--brand-300) 0%, var(--brand-400) 52%, var(--warm) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -643,11 +1000,38 @@ p {
 
 .lead {
   max-width: 60ch;
-  margin-top: 1.35rem;
+  margin-top: 1.25rem;
   margin-bottom: 0;
   color: var(--ink-secondary);
-  font-size: clamp(1.04rem, 0.95rem + 0.35vw, 1.2rem);
+  font-size: clamp(1.03rem, 0.95rem + 0.32vw, 1.18rem);
   line-height: 1.65;
+}
+
+/* Banner ecológico de flora de sesión */
+.ecological-vine-banner {
+  margin-top: 1.35rem;
+  padding: 0.8rem 1rem;
+  border-radius: 0.85rem;
+  background:
+    linear-gradient(110deg var(--in-oklab), rgba(212, 255, 89, 0.09), rgba(255, 140, 97, 0.06));
+  border: 1px solid var(--line-strong);
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.vine-icon-wrap {
+  flex-shrink: 0;
+}
+
+.vine-banner-text p {
+  margin: 0.15rem 0 0;
+  font-size: 0.86rem;
+  color: var(--ink-secondary);
+}
+
+.vine-banner-text strong {
+  color: var(--brand-300);
 }
 
 .hero-actions {
@@ -655,7 +1039,7 @@ p {
   flex-wrap: wrap;
   align-items: center;
   gap: 0.9rem 1.15rem;
-  margin-top: 1.9rem;
+  margin-top: 1.65rem;
 }
 
 .button {
@@ -665,7 +1049,7 @@ p {
   gap: 0.55rem;
   min-height: 3rem;
   padding: 0 1.35rem;
-  border-radius: 0.6rem;
+  border-radius: 0.65rem;
   font-family: var(--display);
   font-size: 0.94rem;
   font-weight: 700;
@@ -673,36 +1057,36 @@ p {
 }
 
 .button.primary {
-  background: linear-gradient(180deg var(--in-oklab), var(--brand-400), var(--brand-500));
-  border: 1px solid var(--brand-400);
-  color: #022017;
-  box-shadow: 0 8px 26px -6px rgba(16, 185, 129, 0.45);
+  background: linear-gradient(180deg var(--in-oklab), var(--brand-300), var(--brand-400));
+  border: 1px solid var(--brand-300);
+  color: #091c13;
+  box-shadow: 0 10px 28px -6px rgba(212, 255, 89, 0.42);
 }
 
 .button.primary:hover,
 .button.primary:focus-visible {
-  background: var(--brand-300);
-  border-color: var(--brand-300);
-  box-shadow: 0 12px 32px -6px rgba(52, 211, 153, 0.55);
+  background: var(--brand-50);
+  border-color: var(--brand-50);
+  box-shadow: 0 14px 36px -6px rgba(212, 255, 89, 0.6);
 }
 
 .button.secondary {
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  border: 1px solid var(--line-strong);
   color: var(--ink);
 }
 
 .button.secondary:hover,
 .button.secondary:focus-visible {
-  background: rgba(255, 255, 255, 0.09);
-  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(212, 255, 89, 0.1);
+  border-color: var(--brand-300);
 }
 
 .text-link {
   color: var(--ink-secondary);
   font-weight: 600;
   font-size: 0.94rem;
-  border-bottom: 1px solid var(--brand-500);
+  border-bottom: 1px solid var(--warm);
   padding-bottom: 0.15rem;
 }
 
@@ -712,75 +1096,77 @@ p {
   border-bottom-color: var(--brand-300);
 }
 
-/* Métricas del Hero con cruces de registro arquitectónicas */
+/* Métricas del Hero con íconos botánicos */
 .hero-metrics {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
-  margin: 2.5rem 0 0;
-  padding-top: 1.65rem;
+  margin: 2.2rem 0 0;
+  padding-top: 1.5rem;
   border-top: 1px solid var(--line);
 }
 
 .metric-item {
   position: relative;
-  padding-left: 0.85rem;
-  border-left: 1px solid var(--line);
+  padding: 0.65rem 0.85rem;
+  border-left: 2px solid var(--line-strong);
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 0 0.6rem 0.6rem 0;
 }
 
 .metric-item .crosshair {
   position: absolute;
-  top: -1.95rem;
-  left: -0.32rem;
-  font-family: var(--mono);
-  font-size: 0.72rem;
-  color: var(--brand-400);
+  top: -0.65rem;
+  left: -0.48rem;
+  font-size: 0.8rem;
+  color: var(--warm);
 }
 
 .metric-item dt {
-  font-size: 0.76rem;
+  font-size: 0.75rem;
   color: var(--muted);
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.2rem;
 }
 
 .metric-item dd {
   margin: 0;
-  font-size: clamp(1.3rem, 1.05rem + 0.75vw, 1.68rem);
+  font-size: clamp(1.25rem, 1.05rem + 0.7vw, 1.62rem);
   font-weight: 800;
   color: var(--ink);
 }
 
 .metric-item dd small {
   font-family: var(--sans);
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   font-weight: 500;
-  color: var(--brand-400);
+  color: var(--brand-300);
 }
 
-/* ---------- Tarjeta Interactiva de Telemetría ---------- */
+/* ---------- Consola 3D de Telemetría & Escenario Multicapa ---------- */
 .hero-telemetry-card {
   position: relative;
   padding: 1.5rem;
   background:
-    radial-gradient(120% 90% at 100% 0%, rgba(16, 185, 129, 0.14), transparent 60%),
-    linear-gradient(180deg var(--in-oklab), var(--surface-alt), var(--surface));
-  border: 1px solid rgba(52, 211, 153, 0.28);
-  border-radius: 1rem;
+    radial-gradient(120% 90% at 100% 0%, rgba(212, 255, 89, 0.14), transparent 60%),
+    radial-gradient(90% 80% at 0% 100%, rgba(255, 140, 97, 0.1), transparent 60%),
+    linear-gradient(180deg var(--in-oklab), var(--surface-elevated), var(--surface));
+  border: 1px solid var(--line-strong);
+  border-radius: 1.15rem;
   box-shadow:
-    0 24px 60px -15px rgba(0, 0, 0, 0.75),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    0 28px 70px -15px rgba(0, 0, 0, 0.82),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .card-corner-badge {
   position: absolute;
   top: -0.65rem;
   right: 1.25rem;
-  padding: 0.18rem 0.65rem;
-  background: #041e16;
-  border: 1px solid var(--brand-400);
+  padding: 0.2rem 0.7rem;
+  background: var(--brand-950);
+  border: 1px solid var(--brand-300);
   border-radius: 999px;
   font-family: var(--mono);
-  font-size: 0.66rem;
+  font-size: 0.65rem;
   font-weight: 700;
   color: var(--brand-300);
   letter-spacing: 0.06em;
@@ -791,15 +1177,15 @@ p {
   align-items: flex-start;
   justify-content: space-between;
   gap: 0.75rem;
-  margin-bottom: 0.9rem;
+  margin-bottom: 0.85rem;
 }
 
 .note-label {
   display: block;
   margin: 0 0 0.22rem;
-  color: var(--brand-400);
+  color: var(--brand-300);
   font-family: var(--mono);
-  font-size: 0.7rem;
+  font-size: 0.69rem;
   font-weight: 600;
   letter-spacing: 0.06em;
 }
@@ -826,45 +1212,159 @@ p {
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem;
-  margin-bottom: 0.9rem;
+  margin-bottom: 0.75rem;
 }
 
 .corridor-btn {
   padding: 0.34rem 0.65rem;
   border-radius: 0.45rem;
   border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.025);
+  background: rgba(255, 255, 255, 0.03);
   color: var(--muted);
   font-family: var(--sans);
-  font-size: 0.75rem;
+  font-size: 0.74rem;
   font-weight: 600;
   cursor: pointer;
 }
 
 .corridor-btn:hover {
   color: var(--ink);
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: var(--line-strong);
 }
 
 .corridor-btn.is-active {
-  background: rgba(16, 185, 129, 0.16);
-  border-color: var(--brand-400);
+  background: rgba(212, 255, 89, 0.16);
+  border-color: var(--brand-300);
   color: var(--brand-50);
 }
 
-.route-visualizer {
+/* Barra de Cámara 3D del Mapa */
+.holo-camera-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.65rem;
+  padding: 0.32rem 0.6rem;
+  border-radius: 0.5rem;
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid var(--line);
+}
+
+.cam-btn-group {
+  display: inline-flex;
+  gap: 0.28rem;
+}
+
+.cam-angle-btn {
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.35rem;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  cursor: pointer;
+}
+
+.cam-angle-btn.is-active {
+  background: rgba(212, 255, 89, 0.16);
+  border-color: var(--brand-300);
+  color: var(--brand-300);
+}
+
+/* Escenario 3D Multicapa (3 planos apilados en Z) */
+.route-visualizer-3d-stage {
   position: relative;
   margin-bottom: 0.9rem;
-  border-radius: 0.65rem;
-  background: #050811;
-  border: 1px solid var(--line);
+  height: 9.2rem;
+  border-radius: 0.75rem;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(212, 255, 89, 0.08), transparent 70%),
+    #070b08;
+  border: 1px solid var(--line-strong);
+  perspective: 800px;
   overflow: hidden;
+}
+
+.route-visualizer-3d-layers {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.65s var(--spring-easing);
+}
+
+.route-visualizer-3d-stage[data-cam-mode="iso"] .route-visualizer-3d-layers {
+  transform: rotateX(36deg) rotateZ(-8deg) scale(0.94);
+}
+
+.route-visualizer-3d-stage[data-cam-mode="orbital"] .route-visualizer-3d-layers {
+  transform: rotateX(22deg) rotateZ(4deg) scale(0.96);
+}
+
+.route-visualizer-3d-stage[data-cam-mode="flat"] .route-visualizer-3d-layers {
+  transform: rotateX(0deg) rotateZ(0deg) scale(1);
+}
+
+.holo-plane {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.holo-plane-subsoil {
+  transform: translateZ(-24px);
+  opacity: 0.8;
+}
+
+.holo-plane-vectors {
+  transform: translateZ(4px);
+}
+
+.holo-plane-hud {
+  transform: translateZ(32px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0.45rem 0.65rem;
+  pointer-events: none;
+}
+
+.levitating-node {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.14rem 0.48rem;
+  border-radius: 999px;
+  background: rgba(11, 15, 12, 0.86);
+  border: 1px solid var(--line-strong);
+  width: fit-content;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.6);
+}
+
+.node-dest {
+  align-self: flex-end;
+}
+
+.node-pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--brand-300);
+  box-shadow: 0 0 8px var(--brand-300);
+}
+
+.node-pulse.dest {
+  background: var(--warm);
+  box-shadow: 0 0 8px var(--warm);
 }
 
 .route-svg {
   display: block;
   width: 100%;
-  height: 6.4rem;
+  height: 100%;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -884,10 +1384,11 @@ p {
   display: flex;
   justify-content: space-between;
   gap: 0.5rem;
-  padding: 0.42rem 0.75rem;
-  background: rgba(11, 16, 27, 0.9);
-  border-top: 1px solid var(--line);
-  font-size: 0.75rem;
+  padding: 0.32rem 0.6rem;
+  border-radius: 0.45rem;
+  background: rgba(11, 15, 12, 0.88);
+  border: 1px solid var(--line);
+  font-size: 0.73rem;
 }
 
 .mini-tag {
@@ -901,7 +1402,7 @@ p {
 .distance-control {
   margin-bottom: 0.8rem;
   padding: 0.6rem 0.85rem;
-  background: rgba(255, 255, 255, 0.025);
+  background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--line);
   border-radius: 0.55rem;
 }
@@ -916,13 +1417,13 @@ p {
 }
 
 .distance-label-row output {
-  color: var(--brand-400);
+  color: var(--brand-300);
   font-weight: 700;
 }
 
 input[type="range"] {
   width: 100%;
-  accent-color: var(--brand-500);
+  accent-color: var(--brand-300);
   cursor: pointer;
 }
 
@@ -937,9 +1438,9 @@ input[type="range"] {
   justify-content: space-between;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.52rem 0;
+  padding: 0.5rem 0;
   border-top: 1px dashed var(--line);
-  font-size: 0.88rem;
+  font-size: 0.87rem;
 }
 
 .note-figures span {
@@ -957,7 +1458,7 @@ input[type="range"] {
 }
 
 .val-emerald {
-  color: var(--brand-400);
+  color: var(--brand-300);
 }
 
 .val-warm {
@@ -972,8 +1473,8 @@ input[type="range"] {
   margin-top: 0.75rem;
   padding: 0.75rem 0.9rem;
   border-radius: 0.6rem;
-  background: rgba(16, 185, 129, 0.07);
-  border: 1px solid rgba(52, 211, 153, 0.22);
+  background: rgba(212, 255, 89, 0.06);
+  border: 1px solid var(--line-strong);
 }
 
 .gemini-insight-head {
@@ -984,7 +1485,7 @@ input[type="range"] {
 }
 
 .gemini-sparkle {
-  color: var(--brand-400);
+  color: var(--brand-300);
   font-size: 0.85rem;
 }
 
@@ -1005,11 +1506,11 @@ input[type="range"] {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.62rem 1rem;
-  border-radius: 0.55rem;
-  border: 1px solid rgba(240, 180, 41, 0.4);
-  background: rgba(240, 180, 41, 0.1);
-  color: var(--warm);
+  padding: 0.65rem 1rem;
+  border-radius: 0.6rem;
+  border: 1px solid rgba(255, 140, 97, 0.45);
+  background: linear-gradient(90deg var(--in-oklab), rgba(255, 140, 97, 0.16), rgba(212, 255, 89, 0.12));
+  color: var(--brand-300);
   font-family: var(--mono);
   font-size: 0.78rem;
   font-weight: 700;
@@ -1017,8 +1518,8 @@ input[type="range"] {
 }
 
 .btn-recycle-action:hover {
-  background: rgba(240, 180, 41, 0.18);
-  border-color: var(--warm);
+  background: linear-gradient(90deg var(--in-oklab), rgba(255, 140, 97, 0.26), rgba(212, 255, 89, 0.22));
+  border-color: var(--brand-300);
 }
 
 .recycle-spin-icon {
@@ -1028,22 +1529,22 @@ input[type="range"] {
 }
 
 .btn-recycle-action:hover .recycle-spin-icon {
-  transform: rotate(180deg) scale(1.2);
+  transform: rotate(35deg) scale(1.25);
 }
 
 .note-foot {
   margin: 0.75rem 0 0;
   color: var(--muted);
-  font-size: 0.75rem;
+  font-size: 0.74rem;
   line-height: 1.45;
 }
 
-/* ---------- Cinta Cinética Transportadora (Marquee de Reciclaje) ---------- */
+/* ---------- Cinta Cinética Transportadora Botánica ---------- */
 .kinetic-ticker-band {
   overflow: hidden;
-  background: #041d15;
-  border-bottom: 1px solid rgba(52, 211, 153, 0.28);
-  padding-block: 0.7rem;
+  background: color-mix(in oklab, var(--surface-elevated) 85%, black);
+  border-bottom: 1px solid var(--line-strong);
+  padding-block: 0.72rem;
   white-space: nowrap;
 }
 
@@ -1052,7 +1553,7 @@ input[type="range"] {
   align-items: center;
   gap: 1.5rem;
   font-family: var(--mono);
-  font-size: 0.76rem;
+  font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   color: var(--brand-300);
@@ -1077,7 +1578,29 @@ input[type="range"] {
   }
 }
 
-/* ---------- Secciones Generales & Defer Rendering (defer-rendering-heavy-content) ---------- */
+/* Separador ornamental botánico */
+.botanical-section-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding-block: 0.5rem;
+  background: var(--background);
+}
+
+.divider-line {
+  width: min(260px, 30vw);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--line-strong), transparent);
+}
+
+.divider-flora-icon {
+  font-size: 0.95rem;
+  letter-spacing: 0.35em;
+  color: var(--brand-300);
+}
+
+/* ---------- Secciones Generales & Defer Rendering ---------- */
 .section {
   padding-block: clamp(4rem, 7.5vw, 6.2rem);
   border-bottom: 1px solid var(--line);
@@ -1095,7 +1618,7 @@ input[type="range"] {
 .section-index {
   display: inline-block;
   margin-bottom: 0.55rem;
-  color: var(--brand-400);
+  color: var(--brand-300);
 }
 
 .section-intro {
@@ -1114,28 +1637,31 @@ input[type="range"] {
   font-size: 0.98rem;
 }
 
-/* ---------- Sección 01: Scrollytelling del Ciclo Circular (scrollytelling) ---------- */
+/* ---------- Sección 01: Scrollytelling del Reactor de Fotosíntesis (scrollytelling) ---------- */
 .scrolly-layout {
   display: grid;
-  grid-template-columns: minmax(320px, 0.95fr) minmax(0, 1.05fr);
+  grid-template-columns: minmax(340px, 0.98fr) minmax(0, 1.02fr);
   gap: clamp(2rem, 4.5vw, 4rem);
   align-items: start;
 }
 
 .scrolly-sticky-stage {
   position: sticky;
-  top: 6rem;
-  height: 440px;
-  border-radius: 1.1rem;
+  top: 5.5rem;
+  height: 490px;
+  border-radius: 1.2rem;
   background:
-    radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.14), transparent 70%),
-    #050811;
-  border: 1px solid rgba(52, 211, 153, 0.28);
+    radial-gradient(circle at 50% 45%, rgba(212, 255, 89, 0.14), transparent 68%),
+    radial-gradient(circle at 80% 85%, rgba(255, 140, 97, 0.12), transparent 60%),
+    #070b08;
+  border: 1px solid var(--line-strong);
   overflow: hidden;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  box-shadow: 0 24px 60px -15px rgba(0, 0, 0, 0.7);
+  justify-content: space-between;
+  padding: 1.1rem;
+  box-shadow: 0 28px 65px -15px rgba(0, 0, 0, 0.8);
 }
 
 #circular-particles-canvas {
@@ -1143,17 +1669,19 @@ input[type="range"] {
   inset: 0;
   width: 100%;
   height: 100%;
-  pointer-events: none;
+  cursor: crosshair;
 }
 
 .reactor-wheel-overlay {
   position: relative;
   z-index: 2;
-  width: 300px;
-  height: 300px;
+  width: 290px;
+  height: 290px;
+  margin-top: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  pointer-events: none;
 }
 
 .mobius-reactor-svg {
@@ -1188,12 +1716,12 @@ input[type="range"] {
 
 .reactor-center-readout {
   position: relative;
-  width: 195px;
-  min-height: 115px;
-  padding: 0.9rem;
-  border-radius: 0.85rem;
-  background: rgba(6, 9, 19, 0.88);
-  border: 1px solid rgba(52, 211, 153, 0.35);
+  width: 198px;
+  min-height: 112px;
+  padding: 0.85rem;
+  border-radius: 0.9rem;
+  background: rgba(11, 15, 12, 0.88);
+  border: 1px solid var(--line-strong);
   backdrop-filter: blur(8px);
   text-align: center;
   display: grid;
@@ -1217,8 +1745,69 @@ input[type="range"] {
 }
 
 .stage-indicator small {
-  font-size: 0.75rem;
+  font-size: 0.74rem;
   color: var(--ink-secondary);
+}
+
+/* Controles Interactivos del Reactor */
+.reactor-interactive-hud {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: rgba(11, 15, 12, 0.86);
+  border: 1px solid var(--line);
+  border-radius: 0.8rem;
+  padding: 0.65rem;
+  backdrop-filter: blur(8px);
+}
+
+.reactor-modes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.35rem;
+}
+
+.reactor-mode-btn {
+  padding: 0.32rem 0.4rem;
+  border-radius: 0.45rem;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.reactor-mode-btn.is-active {
+  background: rgba(212, 255, 89, 0.16);
+  border-color: var(--brand-300);
+  color: var(--brand-300);
+}
+
+.btn-reactor-pulse {
+  width: 100%;
+  padding: 0.48rem 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--brand-300);
+  background: rgba(212, 255, 89, 0.14);
+  color: var(--brand-300);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.btn-reactor-pulse:hover {
+  background: rgba(212, 255, 89, 0.25);
+  box-shadow: 0 0 20px rgba(212, 255, 89, 0.32);
 }
 
 #tracked-cycle-steps {
@@ -1237,16 +1826,26 @@ input[type="range"] {
 }
 
 .cycle-step-card {
+  position: relative;
   padding: 1.75rem;
   border-radius: 1rem;
   background: var(--surface-alt);
   border: 1px solid var(--line);
-  transition: border-color 0.25s ease, transform 0.25s ease;
+  overflow: hidden;
+}
+
+.step-botanical-watermark {
+  position: absolute;
+  top: 0.85rem;
+  right: 1.1rem;
+  font-size: 2.4rem;
+  opacity: 0.14;
+  pointer-events: none;
 }
 
 .cycle-step-card.is-current {
-  border-color: var(--brand-400);
-  box-shadow: 0 14px 40px -12px rgba(16, 185, 129, 0.25);
+  border-color: var(--brand-300);
+  box-shadow: 0 16px 44px -12px rgba(212, 255, 89, 0.22);
 }
 
 .step-num-row {
@@ -1263,8 +1862,8 @@ input[type="range"] {
   width: 2rem;
   height: 2rem;
   border-radius: 0.45rem;
-  background: rgba(16, 185, 129, 0.15);
-  border: 1px solid var(--brand-400);
+  background: rgba(212, 255, 89, 0.14);
+  border: 1px solid var(--brand-300);
   color: var(--brand-300);
   font-size: 0.85rem;
   font-weight: 700;
@@ -1283,88 +1882,140 @@ input[type="range"] {
   color: var(--brand-300);
 }
 
-/* ---------- Sección 02: Laboratorio de Alquimia & Tickets Perforados (shaped-cutouts) ---------- */
+/* ---------- Sección 02: Terrario Vivo & Tickets Perforados (shaped-cutouts) ---------- */
 .alchemy-workbench {
   display: grid;
-  grid-template-columns: minmax(300px, 0.82fr) minmax(0, 1.18fr);
+  grid-template-columns: minmax(320px, 0.88fr) minmax(0, 1.12fr);
   gap: 1.75rem;
   align-items: start;
 }
 
 .alchemy-controls-panel {
-  padding: 1.6rem;
-  border-radius: 1rem;
+  padding: 1.55rem;
+  border-radius: 1.1rem;
   background: var(--surface-alt);
-  border: 1px solid rgba(52, 211, 153, 0.25);
+  border: 1px solid var(--line-strong);
 }
 
 .alchemy-preset-row {
   display: flex;
   flex-wrap: wrap;
   gap: 0.45rem;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.1rem;
 }
 
 .alchemy-preset {
-  padding: 0.4rem 0.72rem;
+  padding: 0.38rem 0.68rem;
   border-radius: 0.5rem;
   border: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.03);
   color: var(--muted);
   font-family: var(--sans);
-  font-size: 0.76rem;
+  font-size: 0.75rem;
   font-weight: 600;
   cursor: pointer;
 }
 
 .alchemy-preset.is-active {
-  background: rgba(16, 185, 129, 0.16);
-  border-color: var(--brand-400);
+  background: rgba(212, 255, 89, 0.16);
+  border-color: var(--brand-300);
   color: var(--brand-50);
 }
 
 .alchemy-sliders {
   display: grid;
-  gap: 1rem;
-  margin-bottom: 1.35rem;
+  gap: 0.85rem;
+  margin-bottom: 1.1rem;
 }
 
 .slider-group {
-  padding: 0.75rem 0.9rem;
+  padding: 0.7rem 0.85rem;
   border-radius: 0.6rem;
   background: rgba(255, 255, 255, 0.025);
   border: 1px solid var(--line);
 }
 
+/* Domo de Terrario Botánico en Vivo */
+.living-terrarium-box {
+  margin-bottom: 1.1rem;
+  padding: 0.85rem;
+  border-radius: 0.85rem;
+  background:
+    radial-gradient(circle at 50% 60%, rgba(212, 255, 89, 0.1), transparent 70%),
+    #070b08;
+  border: 1px solid var(--line-strong);
+}
+
+.terrarium-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.living-terrarium-svg {
+  width: 100%;
+  height: 8.4rem;
+  display: block;
+}
+
+.terrarium-actions {
+  margin-top: 0.45rem;
+}
+
+.btn-plant-seed {
+  width: 100%;
+  padding: 0.45rem 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 140, 97, 0.45);
+  background: rgba(255, 140, 97, 0.14);
+  color: var(--warm);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.btn-plant-seed:hover {
+  background: rgba(255, 140, 97, 0.24);
+  border-color: var(--warm);
+}
+
 .alchemy-total-readout {
-  padding: 1.15rem;
+  padding: 1.05rem;
   border-radius: 0.75rem;
-  background: #050912;
-  border: 1px solid rgba(52, 211, 153, 0.3);
+  background: #070b08;
+  border: 1px solid var(--line-strong);
 }
 
 .alchemy-big-number {
   display: flex;
   align-items: baseline;
   gap: 0.55rem;
-  margin-block: 0.35rem;
+  margin-block: 0.3rem;
 }
 
 .alchemy-big-number strong {
-  font-size: clamp(2rem, 1.5rem + 1.8vw, 2.8rem);
-  color: var(--brand-400);
+  font-size: clamp(1.9rem, 1.4rem + 1.6vw, 2.6rem);
+  color: var(--brand-300);
   line-height: 1;
 }
 
 .alchemy-big-number span {
   font-family: var(--mono);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   color: var(--ink-secondary);
 }
 
 .alchemy-formula {
   margin: 0;
-  font-size: 0.68rem;
+  font-size: 0.67rem;
   color: var(--muted);
 }
 
@@ -1377,27 +2028,32 @@ input[type="range"] {
 /* Diseño de dos partes para Shaped Cutouts sin recortar texto (shaped-cutouts) */
 .unified-cutout-card {
   display: flex;
-  border-radius: 0.9rem;
-  filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.4));
+  border-radius: 0.95rem;
+  filter: drop-shadow(0 14px 30px rgba(0, 0, 0, 0.48));
+  cursor: pointer;
 }
 
 .cutout-card-body {
   flex: 1;
   background-color: var(--surface-elevated);
   padding: 1.35rem;
-  border-top-left-radius: 0.9rem;
-  border-bottom-left-radius: 0.9rem;
+  border-top-left-radius: 0.95rem;
+  border-bottom-left-radius: 0.95rem;
   border: 1px solid var(--line);
-  border-right: 1px dashed rgba(52, 211, 153, 0.25);
+  border-right: 1px dashed var(--line-strong);
 }
 
 .cutout-card-accent {
   width: 28px;
   background-color: var(--surface-elevated);
-  border-top-right-radius: 0.9rem;
-  border-bottom-right-radius: 0.9rem;
+  border-top-right-radius: 0.95rem;
+  border-bottom-right-radius: 0.95rem;
   -webkit-mask-image: url(#ticket-notch-mask);
   mask-image: url(#ticket-notch-mask);
+}
+
+.unified-cutout-card:hover .cutout-card-body {
+  border-color: var(--brand-300);
 }
 
 .cutout-top {
@@ -1414,7 +2070,7 @@ input[type="range"] {
   font-weight: 700;
   padding: 0.12rem 0.45rem;
   border-radius: 0.3rem;
-  background: rgba(16, 185, 129, 0.14);
+  background: rgba(212, 255, 89, 0.14);
   color: var(--brand-300);
 }
 
@@ -1448,9 +2104,9 @@ input[type="range"] {
 .pet-dot {
   width: 8px;
   height: 14px;
-  border-radius: 2px;
-  background: var(--brand-400);
-  opacity: 0.85;
+  border-radius: 3px 3px 2px 2px;
+  background: var(--brand-300);
+  opacity: 0.88;
 }
 
 /* ---------- Staggered Sibling Animations (dynamic-sibling-animations) ---------- */
@@ -1482,7 +2138,7 @@ input[type="range"] {
   }
 }
 
-/* ---------- Sección 03: Manifiesto Editorial ---------- */
+/* ---------- Sección 03: Manifiesto Editorial & Sello Botánico ---------- */
 .editorial-grid {
   display: grid;
   grid-template-columns: minmax(240px, 0.42fr) minmax(0, 1fr);
@@ -1504,6 +2160,25 @@ input[type="range"] {
   border-left: 2px solid var(--line-strong);
 }
 
+.botanical-seal-badge {
+  margin-top: 1.4rem;
+}
+
+.seal-leaf-masked {
+  width: 170px;
+  height: 76px;
+  background: linear-gradient(135deg var(--in-oklab), rgba(212, 255, 89, 0.22), rgba(255, 140, 97, 0.22));
+  display: grid;
+  place-items: center;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--brand-300);
+  letter-spacing: 0.08em;
+  -webkit-mask-image: url(#leaf-medal-mask);
+  mask-image: url(#leaf-medal-mask);
+}
+
 .story {
   max-width: 72ch;
 }
@@ -1521,9 +2196,11 @@ input[type="range"] {
 }
 
 .story .underline {
+  font-family: var(--serif-organic);
+  font-style: italic;
   color: var(--brand-300);
   font-weight: 700;
-  border-bottom: 2px solid var(--brand-500);
+  border-bottom: 2px solid var(--warm);
   padding-bottom: 1px;
 }
 
@@ -1536,7 +2213,7 @@ input[type="range"] {
 
 .compare-col {
   padding: 1.25rem;
-  border-radius: 0.75rem;
+  border-radius: 0.85rem;
   border: 1px solid var(--line);
 }
 
@@ -1552,20 +2229,20 @@ input[type="range"] {
 
 .compare-legacy .compare-tag {
   font-family: var(--mono);
-  font-size: 0.75rem;
+  font-size: 0.74rem;
   color: var(--muted);
   text-transform: uppercase;
 }
 
 .compare-eco {
-  background: rgba(16, 185, 129, 0.06);
-  border-color: rgba(52, 211, 153, 0.28);
+  background: rgba(212, 255, 89, 0.07);
+  border-color: var(--line-strong);
 }
 
 .compare-eco .compare-tag {
   font-family: var(--mono);
-  font-size: 0.75rem;
-  color: var(--brand-400);
+  font-size: 0.74rem;
+  color: var(--brand-300);
   text-transform: uppercase;
   font-weight: 600;
 }
@@ -1574,13 +2251,14 @@ blockquote {
   margin: 2.2rem 0 0;
   padding: 1.25rem 1.5rem;
   background: var(--surface-alt);
-  border-left: 3px solid var(--brand-400);
-  border-radius: 0 0.75rem 0.75rem 0;
+  border-left: 3px solid var(--warm);
+  border-radius: 0 0.85rem 0.85rem 0;
 }
 
 blockquote p {
-  font-family: var(--display);
-  font-size: clamp(1.15rem, 1rem + 0.5vw, 1.38rem);
+  font-family: var(--serif-organic);
+  font-style: italic;
+  font-size: clamp(1.18rem, 1.02rem + 0.5vw, 1.42rem);
   font-weight: 600;
   line-height: 1.42;
   margin-bottom: 0.55rem;
@@ -1592,7 +2270,212 @@ blockquote footer {
   font-size: 0.88rem;
 }
 
-/* ---------- Sección 04: Bento Grid de Capacidades ---------- */
+/* ---------- Sección 04: Mesa Holográfica 3D de Capas Explotadas (Exploded View) ---------- */
+.exploded-architecture-workbench {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.95fr) minmax(0, 1.05fr);
+  gap: 2rem;
+  align-items: center;
+  margin-bottom: 2.75rem;
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+  border-radius: 1.2rem;
+  background:
+    radial-gradient(circle at 25% 50%, rgba(212, 255, 89, 0.11), transparent 65%),
+    var(--surface-alt);
+  border: 1px solid var(--line-strong);
+}
+
+.exploded-3d-viewport {
+  position: relative;
+  height: 410px;
+  border-radius: 1rem;
+  background:
+    radial-gradient(circle at 50% 55%, rgba(212, 255, 89, 0.12), transparent 68%),
+    #070b08;
+  border: 1px solid var(--line);
+  perspective: 1100px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.iso-stack-scene {
+  position: relative;
+  width: 270px;
+  height: 190px;
+  transform-style: preserve-3d;
+  transform: rotateX(56deg) rotateZ(var(--stack-rot, -32deg));
+  transition: transform 0.35s ease-out;
+}
+
+.iso-slab {
+  position: absolute;
+  inset: 0;
+  border-radius: 0.9rem;
+  background: rgba(22, 32, 25, 0.84);
+  border: 1.5px solid var(--line-strong);
+  box-shadow:
+    0 18px 36px rgba(0, 0, 0, 0.68),
+    inset 0 0 18px rgba(212, 255, 89, 0.08);
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition:
+    transform 0.45s var(--spring-easing),
+    border-color 0.25s ease,
+    background-color 0.25s ease,
+    box-shadow 0.25s ease;
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.15rem;
+}
+
+.iso-slab[data-slab-layer="1"] {
+  --slab-idx: 0;
+  transform: translateZ(calc(var(--slab-idx) * var(--stack-spread, 42px) - 55px));
+}
+.iso-slab[data-slab-layer="2"] {
+  --slab-idx: 1;
+  transform: translateZ(calc(var(--slab-idx) * var(--stack-spread, 42px) - 55px));
+}
+.iso-slab[data-slab-layer="3"] {
+  --slab-idx: 2;
+  transform: translateZ(calc(var(--slab-idx) * var(--stack-spread, 42px) - 55px));
+}
+.iso-slab[data-slab-layer="4"] {
+  --slab-idx: 3;
+  transform: translateZ(calc(var(--slab-idx) * var(--stack-spread, 42px) - 55px));
+}
+
+.iso-slab:hover,
+.iso-slab.is-selected {
+  border-color: var(--brand-300);
+  background: rgba(28, 44, 33, 0.92);
+  box-shadow:
+    0 22px 45px rgba(0, 0, 0, 0.78),
+    0 0 26px rgba(212, 255, 89, 0.32);
+}
+
+.iso-slab.is-pulsing {
+  border-color: var(--warm);
+  box-shadow:
+    0 0 38px rgba(255, 140, 97, 0.75),
+    inset 0 0 24px rgba(212, 255, 89, 0.45);
+}
+
+.slab-glass {
+  display: flex;
+  flex-direction: column;
+  gap: 0.22rem;
+  width: 100%;
+}
+
+.slab-num {
+  font-size: 0.66rem;
+  color: var(--warm);
+  font-weight: 700;
+}
+
+.slab-title {
+  font-family: var(--display);
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+
+.slab-chip {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  color: var(--brand-300);
+}
+
+.exploded-controls-panel {
+  padding: 1.5rem;
+  border-radius: 1rem;
+  background: rgba(11, 15, 12, 0.68);
+  border: 1px solid var(--line);
+}
+
+.exploded-header h3 {
+  margin-top: 0.3rem;
+  color: var(--brand-300);
+}
+
+.exploded-header p {
+  font-size: 0.9rem;
+  color: var(--ink-secondary);
+}
+
+.slab-selector-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-bottom: 1rem;
+}
+
+.slab-pill {
+  padding: 0.35rem 0.7rem;
+  border-radius: 0.48rem;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.slab-pill.is-active {
+  background: rgba(212, 255, 89, 0.16);
+  border-color: var(--brand-300);
+  color: var(--brand-300);
+}
+
+.exploded-sliders {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.slab-xray-meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  padding: 0.85rem;
+  border-radius: 0.65rem;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px dashed var(--line-strong);
+  margin-bottom: 1rem;
+}
+
+.slab-xray-meta strong {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--ink);
+  margin-top: 0.2rem;
+}
+
+.btn-packet-pulse {
+  width: 100%;
+  padding: 0.62rem 1rem;
+  border-radius: 0.6rem;
+  border: 1px solid var(--brand-300);
+  background: linear-gradient(90deg var(--in-oklab), rgba(212, 255, 89, 0.18), rgba(255, 140, 97, 0.16));
+  color: var(--brand-300);
+  font-family: var(--mono);
+  font-size: 0.76rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+}
+
+.btn-packet-pulse:hover {
+  background: linear-gradient(90deg var(--in-oklab), rgba(212, 255, 89, 0.28), rgba(255, 140, 97, 0.24));
+}
+
+/* ---------- Bento Grid de Capacidades ---------- */
 .bento-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1608,19 +2491,17 @@ blockquote footer {
   background:
     radial-gradient(
       420px circle at var(--spot-x, 50%) var(--spot-y, 0%),
-      rgba(52, 211, 153, 0.09),
+      rgba(212, 255, 89, 0.09),
       transparent 60%
     ),
     var(--surface-alt);
   border: 1px solid var(--line);
-  border-radius: 0.9rem;
-  transition: border-color 0.22s ease, transform 0.22s ease;
+  border-radius: 0.95rem;
   overflow: hidden;
 }
 
 .bento-card:hover {
-  border-color: rgba(52, 211, 153, 0.35);
-  transform: translateY(-2px);
+  border-color: var(--line-strong);
 }
 
 .feature-lead {
@@ -1630,9 +2511,9 @@ blockquote footer {
   gap: 2rem;
   align-items: center;
   background:
-    radial-gradient(80% 120% at 100% 0%, rgba(16, 185, 129, 0.14), transparent 65%),
+    radial-gradient(80% 120% at 100% 0%, rgba(212, 255, 89, 0.13), transparent 65%),
     var(--surface-alt);
-  border-color: rgba(52, 211, 153, 0.25);
+  border-color: var(--line-strong);
 }
 
 .bento-meta {
@@ -1649,9 +2530,9 @@ blockquote footer {
   font-size: 0.7rem;
   padding: 0.18rem 0.5rem;
   border-radius: 0.35rem;
-  background: rgba(16, 185, 129, 0.12);
+  background: rgba(212, 255, 89, 0.12);
   color: var(--brand-300);
-  border: 1px solid rgba(52, 211, 153, 0.22);
+  border: 1px solid var(--line-strong);
 }
 
 .feature p {
@@ -1671,11 +2552,11 @@ blockquote footer {
 }
 
 .terminal-window {
-  background: #050811;
-  border: 1px solid var(--line);
+  background: #070b08;
+  border: 1px solid var(--line-strong);
   border-radius: 0.7rem;
   overflow: hidden;
-  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.5);
 }
 
 .terminal-bar {
@@ -1758,7 +2639,7 @@ blockquote footer {
 }
 
 .e-bike {
-  background: var(--brand-400);
+  background: var(--brand-300);
 }
 
 .mini-bars-chart {
@@ -1772,7 +2653,7 @@ blockquote footer {
 
 .mini-bars-chart span {
   flex: 1;
-  background: rgba(52, 211, 153, 0.25);
+  background: rgba(212, 255, 89, 0.25);
   border-radius: 0.25rem 0.25rem 0 0;
   position: relative;
   display: flex;
@@ -1780,7 +2661,7 @@ blockquote footer {
 }
 
 .mini-bars-chart span.is-peak {
-  background: var(--brand-400);
+  background: var(--brand-300);
 }
 
 .mini-bars-chart i {
@@ -1808,7 +2689,7 @@ blockquote footer {
 
 .lb-pos {
   font-family: var(--mono);
-  color: var(--brand-400);
+  color: var(--brand-300);
   font-weight: 700;
   margin-right: 0.5rem;
 }
@@ -1824,9 +2705,9 @@ blockquote footer {
   font-weight: 600;
   padding: 0.28rem 0.6rem;
   border-radius: 999px;
-  background: rgba(16, 185, 129, 0.12);
+  background: rgba(212, 255, 89, 0.12);
   color: var(--brand-300);
-  border: 1px solid rgba(52, 211, 153, 0.25);
+  border: 1px solid var(--line-strong);
 }
 
 .challenge-progress-demo .cp-top {
@@ -1843,10 +2724,10 @@ blockquote footer {
   margin-top: 2rem;
   padding: clamp(1.5rem, 3vw, 2.25rem);
   background:
-    linear-gradient(120deg var(--in-oklab), rgba(16, 185, 129, 0.12), rgba(15, 22, 36, 0.95) 65%);
-  border: 1px solid rgba(52, 211, 153, 0.3);
-  border-left: 4px solid var(--brand-400);
-  border-radius: 0.9rem;
+    linear-gradient(120deg var(--in-oklab), rgba(212, 255, 89, 0.11), var(--surface-alt) 65%);
+  border: 1px solid var(--line-strong);
+  border-left: 4px solid var(--brand-300);
+  border-radius: 0.95rem;
   overflow: hidden;
 }
 
@@ -1878,10 +2759,11 @@ blockquote footer {
   position: absolute;
   right: 1.5rem;
   bottom: -1rem;
-  font-family: var(--display);
+  font-family: var(--serif-organic);
+  font-style: italic;
   font-size: clamp(4.5rem, 9vw, 7.5rem);
   font-weight: 800;
-  color: rgba(52, 211, 153, 0.06);
+  color: rgba(212, 255, 89, 0.07);
   line-height: 1;
   pointer-events: none;
   user-select: none;
@@ -1899,21 +2781,21 @@ blockquote footer {
 }
 
 .badge-ods {
-  background: rgba(240, 180, 41, 0.12);
+  background: rgba(255, 140, 97, 0.14);
   color: var(--warm);
-  border-color: rgba(240, 180, 41, 0.35);
+  border-color: rgba(255, 140, 97, 0.38);
 }
 
 .badge-ai {
-  background: rgba(16, 185, 129, 0.14);
+  background: rgba(212, 255, 89, 0.14);
   color: var(--brand-300);
-  border-color: rgba(52, 211, 153, 0.35);
+  border-color: var(--line-strong);
 }
 
 .badge-osrm {
-  background: rgba(56, 189, 248, 0.12);
+  background: rgba(125, 226, 209, 0.12);
   color: var(--sky);
-  border-color: rgba(56, 189, 248, 0.35);
+  border-color: rgba(125, 226, 209, 0.35);
 }
 
 /* ---------- Sección 05: Showcase de Pantallas ---------- */
@@ -1943,8 +2825,8 @@ blockquote footer {
 }
 
 .showcase-tab.is-active {
-  background: var(--brand-500);
-  color: #022017;
+  background: var(--brand-300);
+  color: #091c13;
 }
 
 .preview-grid {
@@ -1981,7 +2863,7 @@ blockquote footer {
   margin: 0;
   background: var(--surface-alt);
   border: 1px solid var(--line);
-  border-radius: 0.9rem;
+  border-radius: 0.95rem;
   overflow: hidden;
   box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.65);
 }
@@ -1992,7 +2874,7 @@ blockquote footer {
   justify-content: space-between;
   gap: 0.75rem;
   padding: 0.65rem 1rem;
-  background: #080c17;
+  background: #070b08;
   border-bottom: 1px solid var(--line);
 }
 
@@ -2009,13 +2891,13 @@ blockquote footer {
 }
 
 .window-dots span:nth-child(1) {
-  background: rgba(248, 113, 113, 0.65);
+  background: rgba(255, 107, 107, 0.75);
 }
 .window-dots span:nth-child(2) {
-  background: rgba(240, 180, 41, 0.65);
+  background: rgba(255, 140, 97, 0.75);
 }
 .window-dots span:nth-child(3) {
-  background: rgba(52, 211, 153, 0.65);
+  background: rgba(212, 255, 89, 0.75);
 }
 
 .window-url {
@@ -2029,13 +2911,13 @@ blockquote footer {
   font-size: 0.68rem;
   padding: 0.15rem 0.5rem;
   border-radius: 999px;
-  background: rgba(16, 185, 129, 0.14);
+  background: rgba(212, 255, 89, 0.14);
   color: var(--brand-300);
 }
 
 .preview-img-wrap {
   overflow: hidden;
-  background: #050811;
+  background: #070b08;
 }
 
 .preview-card img {
@@ -2079,7 +2961,7 @@ blockquote footer {
 
 .pillar-item {
   padding: 1rem;
-  border-radius: 0.75rem;
+  border-radius: 0.8rem;
   background: rgba(255, 255, 255, 0.025);
   border: 1px solid var(--line);
 }
@@ -2087,7 +2969,7 @@ blockquote footer {
 .pillar-item strong {
   display: block;
   font-size: 1.15rem;
-  color: var(--brand-400);
+  color: var(--brand-300);
   margin-bottom: 0.25rem;
 }
 
@@ -2115,12 +2997,10 @@ blockquote footer {
   background: var(--surface-alt);
   border: 1px solid var(--line);
   border-radius: 0.85rem;
-  transition: border-color 0.2s ease, transform 0.2s ease;
 }
 
 .team-card:hover {
-  border-color: rgba(52, 211, 153, 0.35);
-  transform: translateY(-2px);
+  border-color: var(--line-strong);
 }
 
 .team-card-top {
@@ -2137,8 +3017,8 @@ blockquote footer {
   width: 2.4rem;
   height: 2.4rem;
   border-radius: 0.6rem;
-  background: rgba(16, 185, 129, 0.14);
-  border: 1px solid rgba(52, 211, 153, 0.3);
+  background: rgba(212, 255, 89, 0.14);
+  border: 1px solid var(--line-strong);
   color: var(--brand-300);
   font-family: var(--mono);
   font-size: 0.82rem;
@@ -2197,7 +3077,7 @@ blockquote footer {
   content: "\2197";
   font-family: var(--mono);
   font-size: 1.1rem;
-  color: var(--brand-400);
+  color: var(--brand-300);
   transition: transform 0.2s ease;
 }
 
@@ -2244,30 +3124,6 @@ blockquote footer {
   color: var(--brand-300);
 }
 
-/* ---------- Scroll Entry Effects (scroll-entry-exit-effects) ---------- */
-@media (prefers-reduced-motion: no-preference) {
-  @supports ((animation-timeline: view()) and (animation-range: entry)) {
-    @keyframes reveal-up {
-      from {
-        opacity: 0;
-        transform: translateY(24px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .bento-card,
-    .preview-card,
-    .ods-card {
-      animation: reveal-up auto ease-out backwards;
-      animation-timeline: view(block);
-      animation-range: entry 5% cover 22%;
-    }
-  }
-}
-
 /* ---------- Native Top-Layer Dialog (<dialog closedby="any">) ---------- */
 dialog:modal {
   overscroll-behavior: contain;
@@ -2276,7 +3132,7 @@ dialog:modal {
 dialog::backdrop {
   overflow: hidden;
   overscroll-behavior: contain;
-  background-color: rgba(4, 9, 19, 0);
+  background-color: rgba(7, 11, 8, 0);
   backdrop-filter: blur(0px);
   -webkit-backdrop-filter: blur(0px);
   transition-property: background-color, backdrop-filter, display, overlay;
@@ -2311,12 +3167,12 @@ dialog.modal {
   }
 
   &::backdrop {
-    background-color: rgba(4, 9, 19, 0.82);
+    background-color: rgba(7, 11, 8, 0.82);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
 
     @starting-style {
-      background-color: rgba(4, 9, 19, 0);
+      background-color: rgba(7, 11, 8, 0);
       backdrop-filter: blur(0px);
     }
   }
@@ -2338,7 +3194,7 @@ dialog.modal {
 .modal-card {
   width: 100%;
   background: var(--surface-alt);
-  border: 1px solid rgba(52, 211, 153, 0.3);
+  border: 1px solid var(--line-strong);
   border-radius: 1rem;
   padding: clamp(1.5rem, 3vw, 2.25rem);
   box-shadow: 0 24px 64px rgba(0, 0, 0, 0.75);
@@ -2378,7 +3234,7 @@ dialog.modal {
 .modal-close-btn:hover,
 .modal-close-btn:focus-visible {
   color: var(--ink);
-  border-color: var(--brand-400);
+  border-color: var(--brand-300);
   outline: none;
 }
 
@@ -2406,6 +3262,7 @@ dialog.modal {
   .scrolly-layout,
   .alchemy-workbench,
   .editorial-grid,
+  .exploded-architecture-workbench,
   .bento-grid,
   .feature-lead,
   .preview-grid,
@@ -2420,7 +3277,7 @@ dialog.modal {
   }
 
   .scrolly-sticky-stage {
-    height: 340px;
+    height: 440px;
   }
 
   .topbar-inner {
@@ -2446,6 +3303,8 @@ dialog.modal {
   .hero-metrics,
   .alchemy-cards-grid,
   .comparison-strip,
+  .exploded-sliders,
+  .slab-xray-meta,
   .impact-pillars {
     grid-template-columns: 1fr;
   }
