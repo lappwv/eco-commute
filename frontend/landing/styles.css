@@ -3313,3 +3313,476 @@ dialog.modal {
     display: none;
   }
 }
+
+
+/* ---------- Portal de Realidad Virtual 360° & WebXR (#vr-portal) ---------- */
+.vr-cta-btn {
+  background: linear-gradient(135deg var(--in-oklab), rgba(255, 140, 97, 0.24), rgba(212, 255, 89, 0.2));
+  border: 1px solid var(--warm);
+  color: var(--brand-50);
+  box-shadow: 0 10px 28px -8px rgba(255, 140, 97, 0.45);
+}
+
+.vr-cta-btn:hover,
+.vr-cta-btn:focus-visible {
+  background: linear-gradient(135deg var(--in-oklab), rgba(255, 140, 97, 0.38), rgba(212, 255, 89, 0.3));
+  border-color: var(--brand-300);
+}
+
+.vr-cockpit-shell {
+  border-radius: 1.35rem;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(212, 255, 89, 0.14), transparent 65%),
+    var(--surface-alt);
+  border: 1.5px solid var(--line-strong);
+  overflow: hidden;
+  box-shadow:
+    0 32px 80px -18px rgba(0, 0, 0, 0.88),
+    0 0 36px -10px rgba(212, 255, 89, 0.22);
+}
+
+.vr-hud-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  padding: 0.85rem 1.25rem;
+  background: rgba(7, 11, 8, 0.92);
+  border-bottom: 1px solid var(--line);
+}
+
+.vr-hud-left,
+.vr-hud-metrics {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.vr-live-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--warm);
+  box-shadow: 0 0 12px var(--warm);
+}
+
+.vr-corridor-badge {
+  padding: 0.18rem 0.58rem;
+  border-radius: 999px;
+  background: rgba(212, 255, 89, 0.12);
+  border: 1px solid var(--line-strong);
+  color: var(--brand-300);
+}
+
+.vr-metric-pill {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  padding: 0.22rem 0.62rem;
+  border-radius: 0.45rem;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid var(--line);
+  color: var(--muted);
+}
+
+.vr-metric-pill strong {
+  color: var(--ink);
+  margin-left: 0.28rem;
+}
+
+.vr-metric-pill.highlight {
+  background: rgba(212, 255, 89, 0.14);
+  border-color: var(--brand-300);
+  color: var(--brand-300);
+}
+
+.vr-metric-pill.highlight strong {
+  color: var(--warm);
+}
+
+.vr-viewport-frame {
+  position: relative;
+  width: 100%;
+  height: clamp(320px, 52vh, 500px);
+  background: #050806;
+  overflow: hidden;
+  cursor: grab;
+  user-select: none;
+}
+
+.vr-viewport-frame:active {
+  cursor: grabbing;
+}
+
+#vr-corridor-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Máscara Estereoscópica VR de Doble Lente (SBS) */
+.vr-stereo-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  display: none;
+  grid-template-columns: 1fr 6px 1fr;
+  align-items: stretch;
+}
+
+.vr-cockpit-shell[data-stereo="true"] .vr-stereo-overlay {
+  display: grid;
+}
+
+.vr-eye-lens {
+  position: relative;
+  border-radius: 42% / 48%;
+  margin: 0.65rem;
+  box-shadow:
+    inset 0 0 38px rgba(0, 0, 0, 0.9),
+    0 0 0 999px rgba(4, 7, 5, 0.86);
+  border: 1.5px solid rgba(212, 255, 89, 0.4);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 0.6rem;
+}
+
+.lens-tag {
+  font-size: 0.62rem;
+  color: var(--brand-300);
+  background: rgba(7, 11, 8, 0.78);
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+}
+
+.vr-nose-bridge {
+  background: #040705;
+  border-inline: 1px solid rgba(212, 255, 89, 0.25);
+}
+
+.vr-gaze-reticle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px dashed rgba(212, 255, 89, 0.55);
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.reticle-cross {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--brand-300);
+  box-shadow: 0 0 10px var(--brand-300);
+}
+
+.vr-floating-hint {
+  position: absolute;
+  bottom: 0.85rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.32rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(7, 11, 8, 0.84);
+  border: 1px solid var(--line-strong);
+  color: var(--brand-300);
+  font-size: 0.68rem;
+  text-align: center;
+  pointer-events: none;
+  max-width: 92%;
+}
+
+.vr-cockpit-controls {
+  padding: 1.1rem 1.25rem;
+  background: rgba(11, 15, 12, 0.94);
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 0.95rem;
+}
+
+.vr-worlds-selector {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.55rem;
+}
+
+.vr-world-btn {
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.55rem;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--ink-secondary);
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.vr-world-btn.is-active {
+  background: rgba(212, 255, 89, 0.16);
+  border-color: var(--brand-300);
+  color: var(--brand-300);
+}
+
+.vr-action-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.vr-speed-slider-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 240px;
+  flex: 1;
+}
+
+.vr-hardware-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.btn-vr-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.48rem 0.85rem;
+  border-radius: 0.55rem;
+  border: 1px solid var(--line-strong);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-vr-action:hover,
+.btn-vr-action[aria-pressed="true"] {
+  background: rgba(212, 255, 89, 0.18);
+  border-color: var(--brand-300);
+  color: var(--brand-300);
+}
+
+.btn-vr-action.primary-vr {
+  background: linear-gradient(90deg var(--in-oklab), rgba(212, 255, 89, 0.22), rgba(255, 140, 97, 0.22));
+  border-color: var(--brand-300);
+  color: var(--brand-300);
+}
+
+/* ---------- Artefacto Volumétrico 3D Interactivo: Biocubo Holográfico ---------- */
+.volumetric-3d-showcase {
+  margin-top: 2.2rem;
+  display: grid;
+  grid-template-columns: minmax(300px, 0.95fr) minmax(0, 1.05fr);
+  gap: 2rem;
+  align-items: center;
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+  border-radius: 1.25rem;
+  background:
+    radial-gradient(circle at 25% 50%, rgba(255, 140, 97, 0.12), transparent 65%),
+    var(--surface-alt);
+  border: 1px solid var(--line-strong);
+}
+
+.ecocube-viewport {
+  position: relative;
+  height: 360px;
+  border-radius: 1rem;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(212, 255, 89, 0.15), transparent 68%),
+    #060a07;
+  border: 1px solid var(--line);
+  perspective: 950px;
+  display: grid;
+  place-items: center;
+  cursor: grab;
+  user-select: none;
+  overflow: hidden;
+}
+
+.ecocube-viewport:active {
+  cursor: grabbing;
+}
+
+.ecocube-scene {
+  position: relative;
+  width: 176px;
+  height: 176px;
+  transform-style: preserve-3d;
+  --cube-z: 88px;
+  transform: rotateX(var(--cube-rx, -18deg)) rotateY(var(--cube-ry, 28deg));
+  transition: transform 0.18s ease-out;
+}
+
+.ecocube-scene[data-exploded="true"] {
+  --cube-z: 136px;
+}
+
+.ecocube-inner-core {
+  position: absolute;
+  inset: 38px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--brand-300), var(--warm));
+  box-shadow: 0 0 36px var(--brand-300);
+  display: grid;
+  place-items: center;
+  font-size: 2rem;
+  transform: translateZ(0);
+}
+
+.cube-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 1rem;
+  background: rgba(18, 28, 21, 0.78);
+  border: 1.5px solid var(--brand-300);
+  box-shadow:
+    inset 0 0 24px rgba(212, 255, 89, 0.16),
+    0 10px 28px rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(6px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;
+  transition: transform 0.55s var(--spring-easing), border-color 0.25s ease;
+}
+
+.cube-face strong {
+  font-size: 1.45rem;
+  color: var(--brand-300);
+  margin-block: 0.25rem;
+}
+
+.cube-face small {
+  font-size: 0.75rem;
+  color: var(--ink-secondary);
+}
+
+.face-front {
+  transform: rotateY(0deg) translateZ(var(--cube-z));
+}
+.face-back {
+  transform: rotateY(180deg) translateZ(var(--cube-z));
+}
+.face-right {
+  transform: rotateY(90deg) translateZ(var(--cube-z));
+}
+.face-left {
+  transform: rotateY(-90deg) translateZ(var(--cube-z));
+}
+.face-top {
+  transform: rotateX(90deg) translateZ(var(--cube-z));
+}
+.face-bottom {
+  transform: rotateX(-90deg) translateZ(var(--cube-z));
+}
+
+.ecocube-drag-hint {
+  position: absolute;
+  bottom: 0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.22rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(7, 11, 8, 0.82);
+  border: 1px solid var(--line);
+  color: var(--brand-300);
+  font-size: 0.64rem;
+  white-space: nowrap;
+}
+
+.ecocube-controls-card {
+  padding: 1.5rem;
+  border-radius: 1rem;
+  background: rgba(11, 15, 12, 0.65);
+  border: 1px solid var(--line);
+}
+
+.ecocube-controls-card h3 {
+  margin-top: 0.3rem;
+  color: var(--brand-300);
+}
+
+.cube-face-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.45rem;
+  margin-block: 1rem;
+}
+
+.cube-face-btn {
+  padding: 0.42rem 0.6rem;
+  border-radius: 0.45rem;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.cube-face-btn.is-active,
+.cube-face-btn:hover {
+  background: rgba(212, 255, 89, 0.16);
+  border-color: var(--brand-300);
+  color: var(--brand-300);
+}
+
+.cube-action-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.btn-cube-explode,
+.btn-cube-spin {
+  padding: 0.58rem 0.85rem;
+  border-radius: 0.55rem;
+  border: 1px solid var(--line-strong);
+  background: rgba(212, 255, 89, 0.12);
+  color: var(--brand-300);
+  font-family: var(--mono);
+  font-size: 0.73rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.btn-cube-explode[aria-pressed="true"] {
+  background: rgba(255, 140, 97, 0.22);
+  border-color: var(--warm);
+  color: var(--warm);
+}
+
+@media (max-width: 980px) {
+  .vr-worlds-selector,
+  .volumetric-3d-showcase {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .cube-face-buttons,
+  .cube-action-row {
+    grid-template-columns: 1fr;
+  }
+}

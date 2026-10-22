@@ -158,6 +158,7 @@ const translations = {
     "biome.terracota": "Solar",
     "biome.micelio": "Micelio",
     "nav.aria": "Navegación principal",
+    "nav.vr": "VR 360°",
     "nav.cycle": "Fotosíntesis Urbana",
     "nav.alchemy": "Terrario & Alquimia",
     "nav.why": "Manifiesto",
@@ -174,6 +175,7 @@ const translations = {
     "hero.lead":
       "EcoCommute convierte el gris del asfalto limeño en un ecosistema vivo: compara tu ruta en bici, a pie o en auto con OSRM, explica la decisión con Google Gemini 1.5 Flash y transforma el humo evitado en biomasa digital, equivalentes de reciclaje PET y recompensas reales.",
     "hero.flora_tag": "ÍNDICE DE CLOROFILA DE TU SESIÓN EN VIVO",
+    "hero.btn_vr": "Entrar a VR 360°",
     "hero.btn_simulator": "Abrir Terrario & Alquimia CO₂",
     "hero.btn_cycle": "Explorar Capas 3D",
     "hero.btn_screens": "Ver las pantallas →",
@@ -210,6 +212,39 @@ const translations = {
     "sim.gemini_miraflores":
       "«Por la ciclovía de Av. Arequipa llegas en 14 min sin congestión vehicular, ahorras 638 g de CO₂ frente al auto particular (152 g/km) y sumas puntos para el ranking de Miraflores.»",
     "sim.btn_recycle_trip": "Sembrar y reciclar este viaje en el contador global",
+
+    // VR 360° & Interactive 3D EcoCube
+    "vr.title": "Pedalea en primera persona por el bioma circular de Lima en Realidad Virtual",
+    "vr.intro":
+      "Arrastra con el mouse para girar tu cabeza 360°, usa las teclas WASD/Flechas o activa el Modo Visor Estereoscópico (Doble Lente SBS / Meta Quest / Google Cardboard) mientras atraviesas anillos de captura de CO₂ (-152 g/km).",
+    "vr.status_ready": "WEBXR & 360° POV ACTIVO // ARRASTRA PARA MIRAR",
+    "vr.hud_speed": "VELOCIDAD:",
+    "vr.hud_heading": "RUMBO 360°:",
+    "vr.hud_rings": "ANILLOS CO₂ CAPTURADOS:",
+    "vr.hint_drag":
+      "🖱️ ARRASTRA EN 360° PARA MIRAR ALREDEDOR · HAZ CLIC EN LOS CRISTALES 3D · ⌨️ WASD / FLECHAS",
+    "vr.world1": "🌲 Bosque El Olivar (San Isidro)",
+    "vr.world2": "🌊 Malecón Costero (Miraflores)",
+    "vr.world3": "⚡ Túnel Botánico Av. Arequipa",
+    "vr.world4": "🎓 Corredor UPC Monterrico",
+    "vr.pedal_cadence": "CADENCIA DE PEDALEO VR",
+    "vr.btn_stereo": "Modo Visor Estereoscópico (Doble Lente SBS)",
+    "vr.btn_boost": "Impulso Solar (+Velocidad)",
+    "vr.btn_gyro": "Giroscopio 360°",
+    "vr.btn_fullscreen": "Inmersión Total VR / WebXR",
+    "cube.f1": "Captura de CO₂",
+    "cube.f2": "Ruteo Abierto",
+    "cube.f3": "1.5 Flash",
+    "cube.f4": "82.8g / Botella",
+    "cube.f5": "Bioma Lima",
+    "cube.f6": "Tests Spring",
+    "cube.hint": "✋ ARRASTRA EL CUBO 3D EN CUALQUIER DIRECCIÓN",
+    "cube.kicker": "OBJETO VOLUMÉTRICO 3D MANIPULABLE EN TIEMPO REAL",
+    "cube.title": "Biocubo Holográfico de Telemetría Circular",
+    "cube.desc":
+      "Gira libremente el prisma 3D con el puntero, enfoca cualquiera de sus 6 caras técnicas o activa la vista explosionada para abrir el cristal de clorofila interior.",
+    "cube.btn_explode": "Explotar / Expandir Caras en 3D",
+    "cube.btn_spin": "Órbita Automática 3D",
 
     // Circular Scrollytelling
     "cycle.title": "Cómo transmutamos el humo urbano en vida ecológica",
@@ -384,6 +419,7 @@ const translations = {
     "biome.terracota": "Solar Clay",
     "biome.micelio": "Mycelium",
     "nav.aria": "Main navigation",
+    "nav.vr": "VR 360°",
     "nav.cycle": "Urban Photosynthesis",
     "nav.alchemy": "Terrarium & Alchemy",
     "nav.why": "Manifesto",
@@ -400,6 +436,7 @@ const translations = {
     "hero.lead":
       "EcoCommute turns Lima's asphalt gray into a living ecosystem: it compares your bike, walk, or car route via OSRM, explains the choice with Google Gemini 1.5 Flash, and transforms avoided exhaust into digital biomass, PET recycling equivalents, and real rewards.",
     "hero.flora_tag": "LIVE SESSION CHLOROPHYLL INDEX",
+    "hero.btn_vr": "Enter 360° VR",
     "hero.btn_simulator": "Open Terrarium & CO₂ Alchemy",
     "hero.btn_cycle": "Explore 3D Strata",
     "hero.btn_screens": "View Screenshots →",
@@ -436,6 +473,39 @@ const translations = {
     "sim.gemini_miraflores":
       "“Taking the Av. Arequipa protected bike lane gets you there in 14 min bypassing rush-hour traffic, avoiding 638 g of CO₂ vs. driving (152 g/km) and earning Miraflores leaderboard points.”",
     "sim.btn_recycle_trip": "Plant & recycle this trip into global counter",
+
+    // VR 360° & Interactive 3D EcoCube
+    "vr.title": "Ride first-person through Lima's circular biome in Virtual Reality",
+    "vr.intro":
+      "Drag with your mouse to look around 360°, steer with WASD/Arrow keys, or activate Stereoscopic Headset Mode (Side-by-Side Dual Lens / Meta Quest / Google Cardboard) while passing through CO₂ capture rings (-152 g/km).",
+    "vr.status_ready": "WEBXR & 360° POV ACTIVE // DRAG TO LOOK AROUND",
+    "vr.hud_speed": "SPEED:",
+    "vr.hud_heading": "360° HEADING:",
+    "vr.hud_rings": "CAPTURED CO₂ RINGS:",
+    "vr.hint_drag":
+      "🖱️ DRAG 360° TO LOOK AROUND · CLICK 3D CRYSTALS TO HARVEST · ⌨️ WASD / ARROWS",
+    "vr.world1": "🌲 El Olivar Forest (San Isidro)",
+    "vr.world2": "🌊 Coastal Malecón (Miraflores)",
+    "vr.world3": "⚡ Av. Arequipa Botanical Tunnel",
+    "vr.world4": "🎓 UPC Monterrico Corridor",
+    "vr.pedal_cadence": "VR PEDAL CADENCE",
+    "vr.btn_stereo": "Stereoscopic Headset Mode (Dual SBS Lens)",
+    "vr.btn_boost": "Solar Boost (+Speed)",
+    "vr.btn_gyro": "360° Gyroscope",
+    "vr.btn_fullscreen": "Full Immersion VR / WebXR",
+    "cube.f1": "CO₂ Capture",
+    "cube.f2": "Open Routing",
+    "cube.f3": "1.5 Flash",
+    "cube.f4": "82.8g / Bottle",
+    "cube.f5": "Lima Biome",
+    "cube.f6": "Spring Tests",
+    "cube.hint": "✋ DRAG THE 3D CUBE IN ANY DIRECTION",
+    "cube.kicker": "REAL-TIME MANIPULABLE 3D VOLUMETRIC ARTIFACT",
+    "cube.title": "Holographic Circular Telemetry Biocube",
+    "cube.desc":
+      "Freely rotate the 3D prism with your pointer, focus any of its 6 technical faces, or trigger the exploded view to reveal the inner chlorophyll crystal.",
+    "cube.btn_explode": "Explode / Expand Faces in 3D",
+    "cube.btn_spin": "3D Auto-Orbit",
 
     // Circular Scrollytelling
     "cycle.title": "How we transmute urban exhaust into ecological life",
@@ -1646,6 +1716,670 @@ function checkBackendHealth() {
     .catch(() => {});
 }
 
+// ==================== SIMULADOR DE REALIDAD VIRTUAL 360° & WEBXR ESTEREOSCÓPICO ====================
+const VR_WORLDS = {
+  olivar: {
+    labelEs: "BOSQUE EL OLIVAR · SAN ISIDRO",
+    labelEn: "EL OLIVAR FOREST · SAN ISIDRO",
+    skyTop: "#06110b",
+    skyMid: "#0d2417",
+    ground: "#08140d",
+    gridColor: "rgba(212, 255, 89, 0.25)",
+    treeCrown: "#8ce868",
+    crystalColor: "#d4ff59",
+    accentColor: "#ff8c61"
+  },
+  malecon: {
+    labelEs: "MALECÓN COSTERO · MIRAFLORES",
+    labelEn: "COASTAL MALECÓN · MIRAFLORES",
+    skyTop: "#05101a",
+    skyMid: "#0c2536",
+    ground: "#07141c",
+    gridColor: "rgba(125, 226, 209, 0.26)",
+    treeCrown: "#7de2d1",
+    crystalColor: "#ffd166",
+    accentColor: "#ff8c61"
+  },
+  arequipa: {
+    labelEs: "TÚNEL BOTÁNICO · AV. AREQUIPA",
+    labelEn: "BOTANICAL TUNNEL · AV. AREQUIPA",
+    skyTop: "#110d08",
+    skyMid: "#24190d",
+    ground: "#120d08",
+    gridColor: "rgba(255, 140, 97, 0.26)",
+    treeCrown: "#d4ff59",
+    crystalColor: "#ff8c61",
+    accentColor: "#7de2d1"
+  },
+  upc: {
+    labelEs: "CORREDOR UNIVERSITARIO · UPC MONTERRICO",
+    labelEn: "CAMPUS CORRIDOR · UPC MONTERRICO",
+    skyTop: "#080c17",
+    skyMid: "#131c33",
+    ground: "#080f18",
+    gridColor: "rgba(199, 125, 255, 0.26)",
+    treeCrown: "#7de2d1",
+    crystalColor: "#d4ff59",
+    accentColor: "#c77dff"
+  }
+};
+
+function setupVR360Portal() {
+  const vrSection = document.getElementById("vr-portal");
+  const visorShell = document.getElementById("vr-visor-shell");
+  const canvas = document.getElementById("vr-corridor-canvas");
+  const statusEl = document.getElementById("vr-xr-status");
+  const worldLabelEl = document.getElementById("vr-active-world-label");
+  const speedValEl = document.getElementById("vr-hud-speed-val");
+  const yawValEl = document.getElementById("vr-hud-yaw-val");
+  const ringsValEl = document.getElementById("vr-hud-rings-val");
+  const speedRange = document.getElementById("vr-speed-range");
+  const stereoBtn = document.getElementById("vr-stereo-btn");
+  const boostBtn = document.getElementById("vr-boost-btn");
+  const gyroBtn = document.getElementById("vr-gyro-btn");
+  const fullscreenBtn = document.getElementById("vr-fullscreen-btn");
+  const worldBtns = document.querySelectorAll(".vr-world-btn");
+
+  if (!canvas || !vrSection || !visorShell) return;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+
+  let activeWorldKey = "olivar";
+  let isStereoSBS = false;
+  let speedKmh = 22;
+  let boostTimer = 0;
+  let yawDeg = 0; // Rotación horizontal 360° (-180 a 180)
+  let pitchDeg = 0; // Inclinación vertical (-35 a 35)
+  let playerX = 0; // Posición lateral en la ciclovía (-180 a 180)
+  let capturedRings = 0;
+  let captureFlash = 0;
+  let isDragging = false;
+  let lastPointerX = 0;
+  let lastPointerY = 0;
+
+  // Árboles 3D y cristales/anillos de CO₂ en el corredor profundo (z: 60 .. 1800)
+  const trees3D = Array.from({ length: 34 }, (_, i) => ({
+    x: (i % 2 === 0 ? -1 : 1) * (175 + (i % 4) * 75),
+    z: (i * 55) % 1800 + 60,
+    height: 115 + (i % 3) * 35,
+    canopyRadius: 38 + (i % 3) * 14
+  }));
+
+  const rings3D = Array.from({ length: 8 }, (_, i) => ({
+    x: Math.sin(i * 1.4) * 115,
+    y: -36 - (i % 2) * 18,
+    z: i * 225 + 180,
+    radius: 42,
+    rotAngle: i * 0.6,
+    screenX: 0,
+    screenY: 0,
+    screenR: 0
+  }));
+
+  // Estrellas / esporas en la bóveda celeste 360°
+  const skySpores = Array.from({ length: 64 }, (_, i) => ({
+    az: (i * 360) / 64,
+    el: 8 + (i % 7) * 9,
+    size: 1.2 + (i % 3) * 0.9
+  }));
+
+  // Comprobar soporte nativo WebXR (Meta Quest / Visores XR)
+  if (navigator.xr && typeof navigator.xr.isSessionSupported === "function") {
+    navigator.xr
+      .isSessionSupported("immersive-vr")
+      .then((supported) => {
+        if (supported && statusEl) {
+          statusEl.textContent = "WEBXR HEADSET READY // IMMERSIVE-VR SUPPORTED";
+        }
+      })
+      .catch(() => {});
+  }
+
+  function updateHudReadout() {
+    const effectiveSpeed = Math.round(speedKmh + (boostTimer > 0 ? 18 : 0));
+    if (speedValEl) speedValEl.textContent = `${effectiveSpeed} km/h`;
+    const normYaw = ((Math.round(yawDeg) % 360) + 360) % 360;
+    const dirs = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
+    const cardinal = dirs[Math.round(normYaw / 45) % 8];
+    if (yawValEl) {
+      yawValEl.textContent = `${String(normYaw).padStart(3, "0")}° ${cardinal}`;
+    }
+    if (ringsValEl) {
+      ringsValEl.textContent = `${capturedRings} (-${capturedRings * 152} g)`;
+    }
+  }
+
+  function collectRing() {
+    capturedRings += 1;
+    captureFlash = 1;
+    sessionRecycledGrams += 152;
+    sessionSprouts += 1;
+    updateSessionFloraBanner();
+    updateHudReadout();
+  }
+
+  // Renderizado de un ojo (soporta vista única o doble lente estereoscópico SBS)
+  function renderEyeViewport(vx, vy, vw, vh, eyeOffsetX) {
+    const world = VR_WORLDS[activeWorldKey] || VR_WORLDS.olivar;
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(vx, vy, vw, vh);
+    ctx.clip();
+
+    const horizonY = vy + vh * 0.52 + pitchDeg * 3.8;
+    const vanishX = vx + vw * 0.5 - yawDeg * 4.5 + eyeOffsetX * 0.35;
+    const fov = 340;
+
+    // 1. Bóveda celeste 360° con gradiente atmosférico
+    const skyGrad = ctx.createLinearGradient(vx, vy, vx, Math.max(vy + 20, horizonY));
+    skyGrad.addColorStop(0, world.skyTop);
+    skyGrad.addColorStop(1, world.skyMid);
+    ctx.fillStyle = skyGrad;
+    ctx.fillRect(vx, vy, vw, Math.max(0, horizonY - vy));
+
+    // Esporas estelares que giran con el rumbo 360° (yaw / pitch)
+    ctx.fillStyle = world.crystalColor;
+    for (const sp of skySpores) {
+      let deltaAz = ((sp.az - yawDeg + 540) % 360) - 180;
+      if (Math.abs(deltaAz) < 95) {
+        const sx = vx + vw * 0.5 + deltaAz * (vw / 110);
+        const sy = horizonY - sp.el * 3.2;
+        if (sy > vy && sy < horizonY) {
+          ctx.globalAlpha = 0.45;
+          ctx.beginPath();
+          ctx.arc(sx, sy, sp.size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+    }
+    ctx.globalAlpha = 1;
+
+    // Silueta de cerros / lomas costeras de Lima en el horizonte 360°
+    ctx.beginPath();
+    ctx.moveTo(vx, horizonY);
+    for (let x = 0; x <= vw; x += 28) {
+      const worldAngle = (x - vw * 0.5) * 0.25 + yawDeg * 2.2;
+      const hillH = Math.sin(worldAngle * 0.04) * 18 + Math.cos(worldAngle * 0.09) * 11 + 22;
+      ctx.lineTo(vx + x, horizonY - hillH);
+    }
+    ctx.lineTo(vx + vw, horizonY);
+    ctx.closePath();
+    ctx.fillStyle = "rgba(12, 28, 19, 0.85)";
+    ctx.fill();
+
+    // 2. Suelo del corredor ecológico + grilla de perspectiva 3D
+    ctx.fillStyle = world.ground;
+    ctx.fillRect(vx, horizonY, vw, vh - (horizonY - vy));
+
+    ctx.strokeStyle = world.gridColor;
+    ctx.lineWidth = 1;
+    // Líneas longitudinales de perspectiva hacia el punto de fuga
+    for (let lane = -6; lane <= 6; lane++) {
+      const bottomX = vanishX + (lane * 145 - playerX - eyeOffsetX) * 2.4;
+      ctx.beginPath();
+      ctx.moveTo(vanishX + lane * 6, horizonY);
+      ctx.lineTo(bottomX, vy + vh);
+      ctx.stroke();
+    }
+
+    // Bordes luminosos de la ciclovía central
+    ctx.strokeStyle = world.crystalColor;
+    ctx.lineWidth = 2;
+    [-110, 110].forEach((edgeX) => {
+      ctx.beginPath();
+      ctx.moveTo(vanishX + (edgeX - playerX) * 0.08, horizonY);
+      ctx.lineTo(vanishX + (edgeX - playerX - eyeOffsetX) * 2.2, vy + vh);
+      ctx.stroke();
+    });
+
+    // 3. Ordenar objetos 3D (árboles y octaedros/anillos CO₂) por profundidad Z (Pintor de atrás hacia adelante)
+    const renderQueue = [];
+    for (const t of trees3D) {
+      renderQueue.push({ type: "tree", z: t.z, obj: t });
+    }
+    for (const r of rings3D) {
+      renderQueue.push({ type: "ring", z: r.z, obj: r });
+    }
+    renderQueue.sort((a, b) => b.z - a.z);
+
+    for (const item of renderQueue) {
+      const z = item.z;
+      if (z < 25) continue;
+      const scale = fov / z;
+
+      if (item.type === "tree") {
+        const t = item.obj;
+        const relX = t.x - playerX - eyeOffsetX;
+        const sx = vanishX + relX * scale;
+        const syGround = horizonY + 88 * scale;
+        const trunkTopY = syGround - t.height * scale;
+        const crownR = t.canopyRadius * scale;
+
+        if (sx < vx - 120 || sx > vx + vw + 120) continue;
+
+        // Tronco 3D
+        ctx.strokeStyle = "#8a5a36";
+        ctx.lineWidth = Math.max(1.5, 8 * scale);
+        ctx.beginPath();
+        ctx.moveTo(sx, syGround);
+        ctx.lineTo(sx, trunkTopY);
+        ctx.stroke();
+
+        // Dosel botánico 3D en capas
+        ctx.fillStyle = world.treeCrown;
+        ctx.globalAlpha = Math.min(0.9, 1400 / (z + 300));
+        ctx.beginPath();
+        ctx.arc(sx, trunkTopY, crownR, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.strokeStyle = world.crystalColor;
+        ctx.lineWidth = Math.max(0.8, 1.8 * scale);
+        ctx.stroke();
+        ctx.globalAlpha = 1;
+      } else if (item.type === "ring") {
+        const r = item.obj;
+        const relX = r.x - playerX - eyeOffsetX;
+        const sx = vanishX + relX * scale;
+        const sy = horizonY + (88 + r.y) * scale;
+        const sr = Math.max(4, r.radius * scale);
+
+        if (eyeOffsetX <= 0) {
+          r.screenX = sx;
+          r.screenY = sy;
+          r.screenR = sr;
+        }
+
+        if (sx < vx - 100 || sx > vx + vw + 100) continue;
+
+        ctx.save();
+        ctx.translate(sx, sy);
+
+        // Anillo exterior de captura de CO₂
+        ctx.strokeStyle = world.crystalColor;
+        ctx.lineWidth = Math.max(1.5, 4.5 * scale);
+        ctx.beginPath();
+        ctx.arc(0, 0, sr, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // Octaedro 3D wireframe giratorio en el centro del anillo
+        const octR = sr * 0.58;
+        const c = Math.cos(r.rotAngle);
+        const s = Math.sin(r.rotAngle);
+        const vTop = { x: 0, y: -octR };
+        const vBot = { x: 0, y: octR };
+        const v1 = { x: c * octR, y: s * octR * 0.35 };
+        const v2 = { x: -s * octR, y: c * octR * 0.35 };
+        const v3 = { x: -c * octR, y: -s * octR * 0.35 };
+        const v4 = { x: s * octR, y: -c * octR * 0.35 };
+
+        ctx.strokeStyle = world.accentColor;
+        ctx.lineWidth = Math.max(1, 2.2 * scale);
+        ctx.beginPath();
+        [v1, v2, v3, v4].forEach((v, idx, arr) => {
+          const next = arr[(idx + 1) % arr.length];
+          ctx.moveTo(vTop.x, vTop.y);
+          ctx.lineTo(v.x, v.y);
+          ctx.moveTo(vBot.x, vBot.y);
+          ctx.lineTo(v.x, v.y);
+          ctx.moveTo(v.x, v.y);
+          ctx.lineTo(next.x, next.y);
+        });
+        ctx.stroke();
+
+        if (z < 650) {
+          ctx.fillStyle = "#f2f7ec";
+          ctx.font = `600 ${Math.max(9, Math.round(12 * scale))}px "JetBrains Mono", monospace`;
+          ctx.textAlign = "center";
+          ctx.fillText("-152g CO₂", 0, -sr - 6 * scale);
+        }
+        ctx.restore();
+      }
+    }
+
+    // 4. Manubrio Holográfico de Bicicleta en Primera Persona (Cockpit POV)
+    const barCenterX = vx + vw * 0.5 - (yawDeg * 0.6);
+    const barBaseY = vy + vh;
+    ctx.strokeStyle = "rgba(212, 255, 89, 0.55)";
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(barCenterX - 95, barBaseY - 12);
+    ctx.quadraticCurveTo(barCenterX, barBaseY - 46, barCenterX + 95, barBaseY - 12);
+    ctx.stroke();
+
+    // Destello verde al capturar un anillo de CO₂
+    if (captureFlash > 0.02) {
+      ctx.fillStyle = `rgba(212, 255, 89, ${captureFlash * 0.26})`;
+      ctx.fillRect(vx, vy, vw, vh);
+    }
+
+    ctx.restore();
+  }
+
+  let rafId = null;
+  function stepVR() {
+    const dtSpeed = (speedKmh + (boostTimer > 0 ? 18 : 0)) * 0.42;
+    if (boostTimer > 0) {
+      boostTimer -= 1;
+      if (boostTimer === 0) updateHudReadout();
+    }
+    if (captureFlash > 0) {
+      captureFlash *= 0.88;
+    }
+
+    // Avanzar árboles en Z hacia la cámara
+    for (const t of trees3D) {
+      t.z -= dtSpeed;
+      if (t.z < 30) {
+        t.z += 1780;
+      }
+    }
+
+    // Avanzar anillos/cristales 3D y detectar captura al atravesarlos
+    for (const r of rings3D) {
+      r.z -= dtSpeed;
+      r.rotAngle += 0.045;
+      if (r.z < 95 && r.z > 35 && Math.abs(r.x - playerX - yawDeg * 2.5) < 95) {
+        collectRing();
+        r.z += 1750;
+        r.x = (Math.random() - 0.5) * 210;
+      } else if (r.z < 28) {
+        r.z += 1750;
+        r.x = (Math.random() - 0.5) * 210;
+      }
+    }
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if (isStereoSBS) {
+      const halfW = canvas.width / 2;
+      renderEyeViewport(0, 0, halfW, canvas.height, -18);
+      renderEyeViewport(halfW, 0, halfW, canvas.height, 18);
+    } else {
+      renderEyeViewport(0, 0, canvas.width, canvas.height, 0);
+    }
+
+    rafId = requestAnimationFrame(stepVR);
+  }
+
+  function startVR() {
+    if (rafId === null) {
+      rafId = requestAnimationFrame(stepVR);
+    }
+  }
+
+  function stopVR() {
+    if (rafId !== null) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+  }
+
+  // Control 360° por arrastre de puntero / touch + clic para cosechar cristales 3D
+  canvas.addEventListener("pointerdown", (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const cx = ((e.clientX - rect.left) / rect.width) * canvas.width;
+    const cy = ((e.clientY - rect.top) / rect.height) * canvas.height;
+
+    // Verificar si el usuario hizo clic directamente sobre un octaedro/anillo 3D
+    for (const r of rings3D) {
+      const dist = Math.hypot(cx - r.screenX, cy - r.screenY);
+      if (dist < Math.max(28, r.screenR * 1.25)) {
+        collectRing();
+        r.z += 1650;
+        if (typeof spawnGlobalPollenBurst === "function") {
+          spawnGlobalPollenBurst(e.clientX, e.clientY, 20);
+        }
+        return;
+      }
+    }
+
+    isDragging = true;
+    lastPointerX = e.clientX;
+    lastPointerY = e.clientY;
+    canvas.setPointerCapture?.(e.pointerId);
+  });
+
+  canvas.addEventListener("pointermove", (e) => {
+    if (!isDragging) return;
+    const dx = e.clientX - lastPointerX;
+    const dy = e.clientY - lastPointerY;
+    lastPointerX = e.clientX;
+    lastPointerY = e.clientY;
+
+    yawDeg -= dx * 0.35;
+    pitchDeg = Math.max(-32, Math.min(32, pitchDeg - dy * 0.22));
+    updateHudReadout();
+  });
+
+  const endDrag = () => {
+    isDragging = false;
+  };
+  canvas.addEventListener("pointerup", endDrag);
+  canvas.addEventListener("pointercancel", endDrag);
+
+  // Teclado WASD / Flechas cuando el canvas o visor tiene foco
+  canvas.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft" || e.key === "a" || e.key === "A") {
+      e.preventDefault();
+      playerX = Math.max(-165, playerX - 18);
+      yawDeg -= 4;
+      updateHudReadout();
+    } else if (e.key === "ArrowRight" || e.key === "d" || e.key === "D") {
+      e.preventDefault();
+      playerX = Math.min(165, playerX + 18);
+      yawDeg += 4;
+      updateHudReadout();
+    } else if (e.key === "ArrowUp" || e.key === "w" || e.key === "W") {
+      e.preventDefault();
+      pitchDeg = Math.min(28, pitchDeg + 3);
+    } else if (e.key === "ArrowDown" || e.key === "s" || e.key === "S") {
+      e.preventDefault();
+      pitchDeg = Math.max(-28, pitchDeg - 3);
+    }
+  });
+
+  // Selector de mundos VR de Lima
+  worldBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const key = btn.getAttribute("data-vr-world") || "olivar";
+      if (!VR_WORLDS[key]) return;
+      activeWorldKey = key;
+      worldBtns.forEach((b) => b.classList.toggle("is-active", b === btn));
+      if (worldLabelEl) {
+        const isEn = currentLang === "en_US";
+        worldLabelEl.textContent = isEn ? VR_WORLDS[key].labelEn : VR_WORLDS[key].labelEs;
+      }
+    });
+  });
+
+  if (speedRange) {
+    speedRange.addEventListener("input", (e) => {
+      speedKmh = Number(e.target.value) || 22;
+      updateHudReadout();
+    });
+  }
+
+  // Modo Visor Estereoscópico SBS (Doble Lente VR)
+  if (stereoBtn) {
+    stereoBtn.addEventListener("click", () => {
+      isStereoSBS = !isStereoSBS;
+      visorShell.setAttribute("data-stereo", isStereoSBS ? "true" : "false");
+      stereoBtn.setAttribute("aria-pressed", isStereoSBS ? "true" : "false");
+    });
+  }
+
+  // Impulso Solar (+Velocidad y cosecha inmediata)
+  if (boostBtn) {
+    boostBtn.addEventListener("click", (e) => {
+      boostTimer = 110;
+      collectRing();
+      if (typeof spawnGlobalPollenBurst === "function") {
+        const rect = e.currentTarget.getBoundingClientRect();
+        spawnGlobalPollenBurst(rect.left + rect.width / 2, rect.top, 24);
+      }
+    });
+  }
+
+  // Giroscopio 360° (DeviceOrientation para móviles y cascos Cardboard)
+  if (gyroBtn) {
+    let gyroEnabled = false;
+    gyroBtn.addEventListener("click", async () => {
+      if (
+        typeof DeviceOrientationEvent !== "undefined" &&
+        typeof DeviceOrientationEvent.requestPermission === "function"
+      ) {
+        try {
+          const perm = await DeviceOrientationEvent.requestPermission();
+          if (perm !== "granted") return;
+        } catch (_) {}
+      }
+      gyroEnabled = !gyroEnabled;
+      gyroBtn.setAttribute("aria-pressed", gyroEnabled ? "true" : "false");
+      if (gyroEnabled) {
+        window.addEventListener(
+          "deviceorientation",
+          (ev) => {
+            if (!gyroEnabled) return;
+            if (typeof ev.alpha === "number") yawDeg = ev.alpha;
+            if (typeof ev.beta === "number") {
+              pitchDeg = Math.max(-30, Math.min(30, ev.beta - 45));
+            }
+            updateHudReadout();
+          },
+          { passive: true }
+        );
+      }
+    });
+  }
+
+  // Inmersión Pantalla Completa / WebXR
+  if (fullscreenBtn) {
+    fullscreenBtn.addEventListener("click", () => {
+      if (!document.fullscreenElement && visorShell.requestFullscreen) {
+        visorShell.requestFullscreen().catch(() => {});
+      } else if (document.exitFullscreen) {
+        document.exitFullscreen().catch(() => {});
+      }
+    });
+  }
+
+  // Pausar renderizado 3D cuando la sección VR está fuera de pantalla (efficient-background-processing)
+  vrSection.addEventListener("contentvisibilityautostatechange", (event) => {
+    if (event.skipped) {
+      stopVR();
+    } else {
+      startVR();
+    }
+  });
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            startVR();
+          } else {
+            stopVR();
+          }
+        });
+      },
+      { rootMargin: "200px" }
+    );
+    observer.observe(vrSection);
+  } else {
+    startVR();
+  }
+}
+
+// ==================== ARTEFACTO 3D INTERACTIVO: BIOCUBO HOLOGRÁFICO DE 6 CARAS ====================
+function setupInteractive3DEcoCube() {
+  const dragZone = document.getElementById("ecocube-drag-zone");
+  const cubeScene = document.getElementById("ecocube-scene");
+  const faceBtns = document.querySelectorAll(".cube-face-btn");
+  const explodeBtn = document.getElementById("cube-explode-btn");
+  const spinBtn = document.getElementById("cube-autospin-btn");
+
+  if (!dragZone || !cubeScene) return;
+
+  let rotX = -18;
+  let rotY = 28;
+  let isDraggingCube = false;
+  let startX = 0;
+  let startY = 0;
+  let autoSpin = true;
+
+  function applyCubeTransform() {
+    cubeScene.style.setProperty("--cube-rx", `${rotX.toFixed(1)}deg`);
+    cubeScene.style.setProperty("--cube-ry", `${rotY.toFixed(1)}deg`);
+  }
+
+  dragZone.addEventListener("pointerdown", (e) => {
+    isDraggingCube = true;
+    autoSpin = false;
+    if (spinBtn) spinBtn.setAttribute("aria-pressed", "false");
+    startX = e.clientX;
+    startY = e.clientY;
+    dragZone.setPointerCapture?.(e.pointerId);
+  });
+
+  dragZone.addEventListener("pointermove", (e) => {
+    if (!isDraggingCube) return;
+    const dx = e.clientX - startX;
+    const dy = e.clientY - startY;
+    startX = e.clientX;
+    startY = e.clientY;
+
+    rotY += dx * 0.65;
+    rotX = Math.max(-85, Math.min(85, rotX - dy * 0.65));
+    applyCubeTransform();
+  });
+
+  const stopCubeDrag = () => {
+    isDraggingCube = false;
+  };
+  dragZone.addEventListener("pointerup", stopCubeDrag);
+  dragZone.addEventListener("pointercancel", stopCubeDrag);
+
+  faceBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      autoSpin = false;
+      if (spinBtn) spinBtn.setAttribute("aria-pressed", "false");
+      faceBtns.forEach((b) => b.classList.toggle("is-active", b === btn));
+      rotX = Number(btn.getAttribute("data-rot-x")) || -16;
+      rotY = Number(btn.getAttribute("data-rot-y")) || 24;
+      applyCubeTransform();
+    });
+  });
+
+  if (explodeBtn) {
+    explodeBtn.addEventListener("click", (e) => {
+      const currentlyExploded = cubeScene.getAttribute("data-exploded") === "true";
+      const nextState = !currentlyExploded;
+      cubeScene.setAttribute("data-exploded", nextState ? "true" : "false");
+      explodeBtn.setAttribute("aria-pressed", nextState ? "true" : "false");
+      if (nextState && typeof spawnGlobalPollenBurst === "function") {
+        const rect = e.currentTarget.getBoundingClientRect();
+        spawnGlobalPollenBurst(rect.left + rect.width / 2, rect.top, 22);
+      }
+    });
+  }
+
+  if (spinBtn) {
+    spinBtn.addEventListener("click", () => {
+      autoSpin = !autoSpin;
+      spinBtn.setAttribute("aria-pressed", autoSpin ? "true" : "false");
+    });
+  }
+
+  function spinTick() {
+    if (autoSpin && !isDraggingCube) {
+      rotY += 0.35;
+      applyCubeTransform();
+    }
+    requestAnimationFrame(spinTick);
+  }
+  requestAnimationFrame(spinTick);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   setupSiblingIndexFallback();
   setupBiomeSwitcher();
@@ -1653,6 +2387,8 @@ document.addEventListener("DOMContentLoaded", () => {
   setupSpatialDepthField();
   setup3DTiltCards();
   setupSimulator();
+  setupVR360Portal();
+  setupInteractive3DEcoCube();
   setupAlchemyLab();
   setupExplodedArchitectureStack();
   setupCircularScrollytelling();

@@ -21,7 +21,7 @@
       type="image/svg+xml"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230b0f0c'/%3E%3Cpath d='M8 24C8 14 16 7 25 7C25 16 18 24 8 24Z' fill='none' stroke='%23d4ff59' stroke-width='2.2'/%3E%3Cpath d='M8 24L19 13' stroke='%23ff8c61' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E"
     />
-    <link rel="stylesheet" href="./styles.css?v=20261022-v4" />
+    <link rel="stylesheet" href="./styles.css?v=20261022-v5" />
   </head>
   <body>
     <!-- Máscaras SVG para Shaped Cutouts en tarjetas sin recortar texto (shaped-cutouts) -->
@@ -218,6 +218,7 @@
 
         <div class="topbar-right">
           <nav class="nav" role="navigation" aria-label="Navegación principal" data-i18n-aria="nav.aria">
+            <a href="#vr-portal" data-i18n="nav.vr">VR 360°</a>
             <a href="#ciclo-circular" data-i18n="nav.cycle">Fotosíntesis Urbana</a>
             <a href="#alquimia" data-i18n="nav.alchemy">Terrario & Alquimia</a>
             <a href="#solucion" data-i18n="nav.why">Manifiesto</a>
@@ -307,6 +308,7 @@
             </div>
 
             <div class="hero-actions">
+              <a class="button vr-cta-btn spring-btn" href="#vr-portal" role="button"><span aria-hidden="true">🥽</span> <span data-i18n="hero.btn_vr">Entrar a VR 360°</span></a>
               <a class="button primary spring-btn" href="#alquimia" role="button">
                 <span data-i18n="hero.btn_simulator">Abrir Terrario & Alquimia CO₂</span>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -548,6 +550,195 @@
           <span>RUTEO ABIERTO OSRM + GOOGLE GEMINI 1.5 FLASH</span>
         </div>
       </div>
+
+      <!-- ==================== SECCIÓN VR: PORTAL DE REALIDAD VIRTUAL 360° & WEBXR EN PRIMERA PERSONA ==================== -->
+      <section id="vr-portal" class="section vr-portal-section deferred-section" aria-label="Simulador de Realidad Virtual 360 grados y WebXR de ciclovías en Lima">
+        <div class="container">
+          <div class="section-intro">
+            <div>
+              <span class="section-index mono-tag">00 / INMERSIÓN WEBXR & REALIDAD VIRTUAL ESTEREOSCÓPICA 360°</span>
+              <h2 data-i18n="vr.title">Pedalea en primera persona por el bioma circular de Lima en Realidad Virtual</h2>
+            </div>
+            <p class="intro-note" data-i18n="vr.intro">
+              Arrastra con el mouse para girar tu cabeza 360°, usa las teclas WASD/Flechas o activa el Modo Visor Estereoscópico (Doble Lente SBS / Meta Quest / Google Cardboard) mientras atraviesas anillos de captura de CO₂ (-152 g/km).
+            </p>
+          </div>
+
+          <div class="vr-cockpit-shell depth-3d-card" id="vr-visor-shell" data-stereo="false">
+            <!-- Barra Superior de Telemetría del Visor VR -->
+            <div class="vr-hud-topbar">
+              <div class="vr-hud-left">
+                <span class="vr-live-dot" aria-hidden="true"></span>
+                <span class="mono-tag" id="vr-xr-status" data-i18n="vr.status_ready">WEBXR & 360° POV ACTIVO // ARRASTRA PARA MIRAR</span>
+                <span class="vr-corridor-badge mono-tag" id="vr-active-world-label">BOSQUE EL OLIVAR · SAN ISIDRO</span>
+              </div>
+              <div class="vr-hud-metrics">
+                <span class="vr-metric-pill">
+                  <span data-i18n="vr.hud_speed">VELOCIDAD:</span>
+                  <strong class="mono-num" id="vr-hud-speed-val">22 km/h</strong>
+                </span>
+                <span class="vr-metric-pill">
+                  <span data-i18n="vr.hud_heading">RUMBO 360°:</span>
+                  <strong class="mono-num" id="vr-hud-yaw-val">000° N</strong>
+                </span>
+                <span class="vr-metric-pill highlight">
+                  <span data-i18n="vr.hud_rings">ANILLOS CO₂ CAPTURADOS:</span>
+                  <strong class="mono-num" id="vr-hud-rings-val">0 (-0 g)</strong>
+                </span>
+              </div>
+            </div>
+
+            <!-- Visor 3D en Primera Persona con Soporte Estereoscópico SBS (Ojo Izquierdo + Ojo Derecho) -->
+            <div class="vr-viewport-frame" id="vr-viewport-frame">
+              <canvas
+                id="vr-corridor-canvas"
+                width="1120"
+                height="520"
+                tabindex="0"
+                aria-label="Lienzo 3D de Realidad Virtual: arrastra con el puntero o usa flechas del teclado para explorar en 360 grados"
+              ></canvas>
+
+              <!-- Máscara de Lentes Estereoscópicos (visible cuando data-stereo="true") -->
+              <div class="vr-stereo-overlay" aria-hidden="true">
+                <div class="vr-eye-lens lens-left">
+                  <span class="lens-tag mono-tag">L-EYE // IPD -32mm</span>
+                </div>
+                <div class="vr-nose-bridge"></div>
+                <div class="vr-eye-lens lens-right">
+                  <span class="lens-tag mono-tag">R-EYE // IPD +32mm</span>
+                </div>
+              </div>
+
+              <!-- Retícula central de cabeza VR (Head-Gaze Reticle) -->
+              <div class="vr-gaze-reticle" aria-hidden="true">
+                <span class="reticle-cross"></span>
+              </div>
+
+              <!-- Instrucciones flotantes sobre el visor -->
+              <div class="vr-floating-hint mono-tag" id="vr-floating-hint" data-i18n="vr.hint_drag">
+                🖱️ ARRASTRA EN 360° PARA MIRAR ALREDEDOR · ⌨️ WASD / FLECHAS · PASA POR LOS ANILLOS VERDES PARA RECICLAR CO₂
+              </div>
+            </div>
+
+            <!-- Panel de Control del Visor VR (Mundos 3D, Modo Estereoscópico SBS, Giroscopio, Turbo y Fullscreen WebXR) -->
+            <div class="vr-cockpit-controls">
+              <div class="vr-worlds-selector" role="group" aria-label="Seleccionar corredor 3D de Lima en Realidad Virtual">
+                <button type="button" class="vr-world-btn spring-btn is-active" data-vr-world="olivar" data-i18n="vr.world1">
+                  🌲 Bosque El Olivar (San Isidro)
+                </button>
+                <button type="button" class="vr-world-btn spring-btn" data-vr-world="malecon" data-i18n="vr.world2">
+                  🌊 Malecón Costero (Miraflores)
+                </button>
+                <button type="button" class="vr-world-btn spring-btn" data-vr-world="arequipa" data-i18n="vr.world3">
+                  ⚡ Túnel Botánico Av. Arequipa
+                </button>
+                <button type="button" class="vr-world-btn spring-btn" data-vr-world="upc" data-i18n="vr.world4">
+                  🎓 Corredor UPC Monterrico
+                </button>
+              </div>
+
+              <div class="vr-action-bar">
+                <div class="vr-speed-slider-wrap">
+                  <label for="vr-speed-range" class="mono-tag" data-i18n="vr.pedal_cadence">CADENCIA DE PEDALEO VR</label>
+                  <input type="range" id="vr-speed-range" min="10" max="48" step="2" value="22" />
+                </div>
+
+                <div class="vr-hardware-buttons">
+                  <button type="button" id="vr-stereo-btn" class="btn-vr-action spring-btn" aria-pressed="false">
+                    <span aria-hidden="true">🥽</span>
+                    <span data-i18n="vr.btn_stereo">Modo Visor Estereoscópico (Doble Lente SBS)</span>
+                  </button>
+                  <button type="button" id="vr-boost-btn" class="btn-vr-action spring-btn">
+                    <span aria-hidden="true">⚡</span>
+                    <span data-i18n="vr.btn_boost">Impulso Solar (+Velocidad)</span>
+                  </button>
+                  <button type="button" id="vr-gyro-btn" class="btn-vr-action spring-btn">
+                    <span aria-hidden="true">🧭</span>
+                    <span data-i18n="vr.btn_gyro">Giroscopio 360°</span>
+                  </button>
+                  <button type="button" id="vr-fullscreen-btn" class="btn-vr-action primary-vr spring-btn">
+                    <span aria-hidden="true">⛶</span>
+                    <span data-i18n="vr.btn_fullscreen">Inmersión Total VR / WebXR</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ARTEFACTO VOLUMÉTRICO 3D INTERACTIVO: BIOCUBO HOLOGRÁFICO DE 6 CARAS + NÚCLEO CRISTALINO -->
+          <div class="volumetric-3d-showcase" id="interactive-3d-ecocube-stage">
+            <div class="ecocube-viewport" id="ecocube-drag-zone" tabindex="0" aria-label="Artefacto 3D interactivo: arrastra con el mouse o dedo para rotar el Biocubo en 360 grados">
+              <div class="ecocube-orbit-rings" aria-hidden="true"></div>
+              <div class="ecocube-scene" id="ecocube-scene" data-exploded="false">
+                <!-- Núcleo interno levitante en 3D -->
+                <div class="ecocube-inner-core" aria-hidden="true">
+                  <span class="core-seed-icon">🌿</span>
+                </div>
+                <!-- 6 Caras Físicas en el Espacio 3D (translateZ ±92px / ±142px cuando explota) -->
+                <div class="cube-face face-front" data-face="front">
+                  <span class="mono-tag">CARA 01 // Z+</span>
+                  <strong class="mono-num">152 g/km</strong>
+                  <small data-i18n="cube.f1">Captura de CO₂</small>
+                </div>
+                <div class="cube-face face-back" data-face="back">
+                  <span class="mono-tag">CARA 02 // Z-</span>
+                  <strong class="mono-num">OSRM 3D</strong>
+                  <small data-i18n="cube.f2">Ruteo Abierto</small>
+                </div>
+                <div class="cube-face face-right" data-face="right">
+                  <span class="mono-tag">CARA 03 // X+</span>
+                  <strong class="mono-num">GEMINI IA</strong>
+                  <small data-i18n="cube.f3">1.5 Flash</small>
+                </div>
+                <div class="cube-face face-left" data-face="left">
+                  <span class="mono-tag">CARA 04 // X-</span>
+                  <strong class="mono-num">♳ PET-1</strong>
+                  <small data-i18n="cube.f4">82.8g / Botella</small>
+                </div>
+                <div class="cube-face face-top" data-face="top">
+                  <span class="mono-tag">CARA 05 // Y+</span>
+                  <strong class="mono-num">ODS 11.2</strong>
+                  <small data-i18n="cube.f5">Bioma Lima</small>
+                </div>
+                <div class="cube-face face-bottom" data-face="bottom">
+                  <span class="mono-tag">CARA 06 // Y-</span>
+                  <strong class="mono-num">28 / 28</strong>
+                  <small data-i18n="cube.f6">Tests Spring</small>
+                </div>
+              </div>
+              <span class="ecocube-drag-hint mono-tag" data-i18n="cube.hint">✋ ARRASTRA EL CUBO 3D EN CUALQUIER DIRECCIÓN</span>
+            </div>
+
+            <div class="ecocube-controls-card depth-3d-card" data-tilt-3d>
+              <span class="mono-tag z-float-mid" data-i18n="cube.kicker">OBJETO VOLUMÉTRICO 3D MANIPULABLE EN TIEMPO REAL</span>
+              <h3 class="z-float-mid" data-i18n="cube.title">Biocubo Holográfico de Telemetría Circular</h3>
+              <p class="z-float-mid" data-i18n="cube.desc">
+                Gira libremente el prisma 3D con el puntero, enfoca cualquiera de sus 6 caras técnicas o activa la vista explosionada para abrir el cristal de clorofila interior.
+              </p>
+
+              <div class="cube-face-buttons z-float-mid" role="group" aria-label="Enfocar cara del Biocubo 3D">
+                <button type="button" class="cube-face-btn is-active" data-rot-x="-16" data-rot-y="24">01 · CO₂ (152g)</button>
+                <button type="button" class="cube-face-btn" data-rot-x="-14" data-rot-y="-156">02 · OSRM 3D</button>
+                <button type="button" class="cube-face-btn" data-rot-x="-14" data-rot-y="-66">03 · Gemini IA</button>
+                <button type="button" class="cube-face-btn" data-rot-x="-14" data-rot-y="114">04 · PET-1</button>
+                <button type="button" class="cube-face-btn" data-rot-x="-78" data-rot-y="20">05 · ODS 11.2</button>
+                <button type="button" class="cube-face-btn" data-rot-x="78" data-rot-y="-20">06 · 28 Tests</button>
+              </div>
+
+              <div class="cube-action-row z-float-high">
+                <button type="button" id="cube-explode-btn" class="btn-cube-explode spring-btn" aria-pressed="false">
+                  <span aria-hidden="true">💥</span>
+                  <span data-i18n="cube.btn_explode">Explotar / Expandir Caras en 3D</span>
+                </button>
+                <button type="button" id="cube-autospin-btn" class="btn-cube-spin spring-btn" aria-pressed="true">
+                  <span aria-hidden="true">🔄</span>
+                  <span data-i18n="cube.btn_spin">Órbita Automática 3D</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <!-- ==================== SECCIÓN 01: SCROLLYTELLING DEL REACTOR DE FOTOSÍNTESIS URBANA ==================== -->
       <section id="ciclo-circular" class="section scrolly-section">
@@ -1424,6 +1615,6 @@
       </div>
     </dialog>
 
-    <script src="./i18n.js?v=20261022-v4" defer></script>
+    <script src="./i18n.js?v=20261022-v5" defer></script>
   </body>
 </html>
