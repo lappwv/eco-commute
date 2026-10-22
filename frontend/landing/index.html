@@ -1,27 +1,27 @@
 <!doctype html>
-<html lang="es" data-theme="dark">
+<html lang="es" data-theme="dark" data-biome="amancaes">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="dark" />
-    <meta name="theme-color" content="#060913" />
-    <title data-i18n="page.title">EcoCommute — Metabolismo Urbano y Movilidad Circular en Lima</title>
+    <meta name="theme-color" content="#0b0f0c" />
+    <title data-i18n="page.title">EcoCommute — Terrario Urbano 3D y Movilidad Circular en Lima</title>
     <meta
       name="description"
-      content="EcoCommute transforma el tráfico de Lima en impacto circular: compara rutas con OSRM y Google Gemini 1.5 Flash, recicla tu huella de CO2 en equivalentes reales (PET, aluminio, árboles) y gana puntos verdes. Proyecto UPC, ODS 11.2."
+      content="EcoCommute transforma el tráfico de Lima en un ecosistema circular: compara rutas con OSRM y Google Gemini 1.5 Flash, recicla tu huella de CO2 en equivalentes reales (PET, aluminio, árboles) y cultiva el terrario urbano. Proyecto UPC, ODS 11.2."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,600;0,700;0,800;1,600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,600;0,700;0,800;1,600&display=swap"
       rel="stylesheet"
     />
     <link
       rel="icon"
       type="image/svg+xml"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23060913'/%3E%3Ccircle cx='16' cy='16' r='10' fill='none' stroke='%2310b981' stroke-width='2.5' stroke-dasharray='16 5'/%3E%3Cpath d='M11 17.5L14.5 21L21.5 12.5' fill='none' stroke='%2334d399' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230b0f0c'/%3E%3Cpath d='M8 24C8 14 16 7 25 7C25 16 18 24 8 24Z' fill='none' stroke='%23d4ff59' stroke-width='2.2'/%3E%3Cpath d='M8 24L19 13' stroke='%23ff8c61' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E"
     />
-    <link rel="stylesheet" href="./styles.css?v=20261022-v3" />
+    <link rel="stylesheet" href="./styles.css?v=20261022-v4" />
   </head>
   <body>
     <!-- Máscaras SVG para Shaped Cutouts en tarjetas sin recortar texto (shaped-cutouts) -->
@@ -31,50 +31,143 @@
           <rect width="1" height="1" fill="white" />
           <circle cx="1" cy="0.5" r="0.34" fill="black" />
         </mask>
+        <mask id="leaf-medal-mask" maskContentUnits="objectBoundingBox">
+          <path
+            d="M 0.5 0.02 C 0.82 0.08, 0.98 0.35, 0.94 0.68 C 0.9 0.92, 0.68 0.98, 0.5 0.98 C 0.32 0.98, 0.1 0.92, 0.06 0.68 C 0.02 0.35, 0.18 0.08, 0.5 0.02 Z"
+            fill="white"
+          />
+        </mask>
       </defs>
     </svg>
 
     <!-- Barra de progreso de lectura impulsada por CSS Scroll-Driven Animations -->
     <div id="scroll-progress" class="scroll-progress" aria-hidden="true"></div>
 
-    <!-- Riel arquitectónico lateral con rueda de reciclaje cinética vinculada al scroll -->
+    <!-- Riel botánico-arquitectónico lateral con rueda de reciclaje cinética vinculada al scroll -->
     <aside class="blueprint-rail" aria-hidden="true">
-      <div class="rail-top mono-tag">12°04'S 77°02'W</div>
+      <div class="rail-top mono-tag">12°04'S · BIOMA LIMA</div>
       <div class="rail-wheel-wrap">
         <svg class="scroll-recycle-wheel" viewBox="0 0 100 100" fill="none">
-          <circle cx="50" cy="50" r="42" stroke="rgba(52,211,153,0.22)" stroke-width="1.5" stroke-dasharray="6 4" />
-          <path d="M50 14 L56 22 L44 22 Z" fill="#34d399" />
-          <path d="M81 68 L71 70 L77 60 Z" fill="#10b981" />
-          <path d="M19 68 L23 60 L29 70 Z" fill="#f0b429" />
-          <circle cx="50" cy="50" r="16" stroke="rgba(240,180,41,0.4)" stroke-width="1.5" />
+          <circle cx="50" cy="50" r="42" stroke="rgba(212,255,89,0.28)" stroke-width="1.5" stroke-dasharray="6 4" />
+          <!-- Hojas botánicas rotatorias en el riel -->
+          <path d="M50 10 C58 20, 58 30, 50 38 C42 30, 42 20, 50 10 Z" fill="#d4ff59" opacity="0.85" />
+          <path d="M84 69 C72 74, 63 69, 59 59 C69 55, 79 60, 84 69 Z" fill="#7be082" opacity="0.85" />
+          <path d="M16 69 C21 60, 31 55, 41 59 C37 69, 28 74, 16 69 Z" fill="#ff8c61" opacity="0.85" />
+          <circle cx="50" cy="50" r="14" stroke="rgba(255,140,97,0.5)" stroke-width="1.5" />
+          <circle cx="50" cy="50" r="4" fill="#d4ff59" />
         </svg>
       </div>
-      <div class="rail-bottom mono-tag" id="rail-scroll-readout">CICLO · 00%</div>
+      <div class="rail-bottom mono-tag" id="rail-scroll-readout">FLORA · 00%</div>
     </aside>
 
-    <!-- Fondo arquitectónico con grano orgánico y cuadrícula cartográfica -->
+    <!-- Marco Ecológico Botánico en Parallax 3D (Helechos costeros, Flor de Amancaes y Lianas) -->
+    <div class="botanical-foreground-frame" aria-hidden="true">
+      <!-- Rama superior izquierda: Helecho de Lomas & Flor de Amancaes -->
+      <svg class="botanical-corner corner-top-left" viewBox="0 0 260 260" fill="none">
+        <g class="sway-branch-slow">
+          <path d="M-10 -10 Q 75 55, 165 42" stroke="rgba(123,224,130,0.35)" stroke-width="2" fill="none" />
+          <path d="M35 22 C 55 5, 80 12, 72 32 C 54 38, 42 30, 35 22 Z" fill="rgba(212,255,89,0.16)" stroke="rgba(212,255,89,0.45)" stroke-width="1.2" />
+          <path d="M78 36 C 102 18, 128 24, 118 46 C 98 52, 85 44, 78 36 Z" fill="rgba(123,224,130,0.14)" stroke="rgba(123,224,130,0.4)" stroke-width="1.2" />
+          <path d="M52 34 C 38 58, 48 84, 68 72 C 74 54, 62 42, 52 34 Z" fill="rgba(255,140,97,0.13)" stroke="rgba(255,140,97,0.38)" stroke-width="1.2" />
+          <path d="M122 42 C 145 28, 172 36, 162 56 C 142 62, 130 52, 122 42 Z" fill="rgba(212,255,89,0.18)" stroke="rgba(212,255,89,0.5)" stroke-width="1.2" />
+          <!-- Flor de Amancaes estilizada -->
+          <circle cx="165" cy="42" r="6" fill="#ff8c61" />
+          <circle cx="165" cy="42" r="13" stroke="rgba(212,255,89,0.45)" stroke-width="1" stroke-dasharray="3 3" />
+        </g>
+        <g class="sway-branch-alt">
+          <path d="M-5 30 Q 45 110, 32 195" stroke="rgba(123,224,130,0.25)" stroke-width="1.5" fill="none" />
+          <path d="M18 82 C 38 74, 52 90, 36 106 C 22 102, 18 92, 18 82 Z" fill="rgba(123,224,130,0.12)" stroke="rgba(123,224,130,0.35)" />
+          <path d="M26 132 C 46 124, 58 142, 42 156 C 28 152, 24 142, 26 132 Z" fill="rgba(212,255,89,0.12)" stroke="rgba(212,255,89,0.35)" />
+        </g>
+      </svg>
+
+      <!-- Rama superior derecha: Eucalipto & Esporas Bioluminiscentes -->
+      <svg class="botanical-corner corner-top-right" viewBox="0 0 260 260" fill="none">
+        <g class="sway-branch-slow">
+          <path d="M270 -10 Q 180 65, 95 48" stroke="rgba(212,255,89,0.3)" stroke-width="1.8" fill="none" />
+          <path d="M210 28 C 185 12, 162 22, 174 42 C 192 48, 204 38, 210 28 Z" fill="rgba(123,224,130,0.15)" stroke="rgba(123,224,130,0.42)" stroke-width="1.2" />
+          <path d="M158 44 C 134 28, 110 38, 122 58 C 140 64, 152 54, 158 44 Z" fill="rgba(255,140,97,0.14)" stroke="rgba(255,140,97,0.4)" stroke-width="1.2" />
+          <circle cx="95" cy="48" r="5" fill="#d4ff59" />
+          <circle cx="135" cy="78" r="3" fill="#ff8c61" opacity="0.7" />
+          <circle cx="205" cy="88" r="3.5" fill="#7de2d1" opacity="0.7" />
+        </g>
+      </svg>
+
+      <!-- Raíces de micelio y brotes inferiores -->
+      <svg class="botanical-corner corner-bottom-right" viewBox="0 0 240 200" fill="none">
+        <g class="sway-branch-alt">
+          <path d="M245 205 Q 165 140, 85 168" stroke="rgba(123,224,130,0.28)" stroke-width="1.8" fill="none" />
+          <path d="M180 162 C 160 138, 132 146, 146 172 C 164 176, 174 170, 180 162 Z" fill="rgba(212,255,89,0.14)" stroke="rgba(212,255,89,0.38)" stroke-width="1.2" />
+          <path d="M128 164 C 108 142, 82 152, 96 176 C 112 180, 122 172, 128 164 Z" fill="rgba(125,226,209,0.14)" stroke="rgba(125,226,209,0.38)" stroke-width="1.2" />
+        </g>
+      </svg>
+    </div>
+
+    <!-- Fondo 3D con malla topográfica interactiva, esporas bioluminiscentes y piso de perspectiva -->
     <div class="ambient-canvas" aria-hidden="true">
+      <canvas id="spatial-depth-canvas"></canvas>
       <div class="ambient-glow ambient-glow-primary"></div>
       <div class="ambient-glow ambient-glow-secondary"></div>
+      <div class="ambient-glow ambient-glow-terracotta"></div>
+      <div class="perspective-floor-grid"></div>
       <div class="architectural-grid"></div>
       <div class="grain-overlay"></div>
     </div>
 
+    <!-- Retícula espacial interactiva de polinización (solo punteros finos) -->
+    <div id="spatial-cursor-hud" class="spatial-cursor-hud" aria-hidden="true">
+      <div class="cursor-ring">
+        <span class="cursor-leaf-dot"></span>
+      </div>
+      <span class="cursor-telemetry mono-tag" id="cursor-coords-readout">BIOMA // -12.09°S · Z:+36mm</span>
+    </div>
+
     <a href="#inicio" class="skip-link" data-i18n="nav.skip">Saltar al contenido principal</a>
 
-    <!-- Barra superior de telemetría en vivo -->
-    <div class="SystemStatusBar" role="region" aria-label="Estado del despliegue y arquitectura">
+    <!-- Barra superior de telemetría en vivo + Selector de Bioma / Paleta Ecológica -->
+    <div class="SystemStatusBar" role="region" aria-label="Estado del despliegue, bioma y arquitectura">
       <div class="container status-inner">
         <div class="status-left">
           <span class="status-dot" id="api-status-dot" aria-hidden="true"></span>
-          <span class="mono-tag" data-i18n="topbar.badge">METABOLISMO URBANO · LIMA METROPOLITANA</span>
+          <span class="mono-tag" data-i18n="topbar.badge">TERRARIO URBANO 3D · LIMA METROPOLITANA</span>
           <span class="status-divider" aria-hidden="true">/</span>
           <span class="status-copy" data-i18n="topbar.spec">Spring Boot 3.3 · OSRM · Gemini 1.5 Flash · 25 endpoints activos</span>
         </div>
         <div class="status-right">
-          <span class="mono-tag recycle-counter-pill">
-            <span aria-hidden="true">♻</span>
-            <span data-i18n="topbar.recycled_label">CO₂ RECICLADO EN SESIÓN:</span>
+          <!-- Selector interactivo de Paleta / Bioma Ecológico -->
+          <div class="biome-switcher" id="biome-switcher" role="group" aria-label="Selector de atmósfera ecológica">
+            <button
+              type="button"
+              class="biome-chip is-active"
+              data-biome-target="amancaes"
+              title="Bioma Lomas de Amancaes (Musgo Ácido, Humus & Terracota)"
+            >
+              <span aria-hidden="true">🌿</span>
+              <span data-i18n="biome.amancaes">Amancaes</span>
+            </button>
+            <button
+              type="button"
+              class="biome-chip"
+              data-biome-target="terracota"
+              title="Bioma Arcilla Solar Costera (Terracota, Ámbar & Salvia)"
+            >
+              <span aria-hidden="true">🌅</span>
+              <span data-i18n="biome.terracota">Solar</span>
+            </button>
+            <button
+              type="button"
+              class="biome-chip"
+              data-biome-target="micelio"
+              title="Bioma Micelio Bioluminiscente (Garúa Cian, Orquídea & Liquen)"
+            >
+              <span aria-hidden="true">🍄</span>
+              <span data-i18n="biome.micelio">Micelio</span>
+            </button>
+          </div>
+
+          <span class="mono-tag recycle-counter-pill" id="global-counter-pill" title="Haz clic para liberar esporas en el lienzo 3D">
+            <span aria-hidden="true">🌱</span>
+            <span data-i18n="topbar.recycled_label">CO₂ RECICLADO:</span>
             <strong id="session-recycled-co2" class="mono-num">1,920 g</strong>
           </span>
           <span class="status-divider" aria-hidden="true">·</span>
@@ -109,29 +202,40 @@
           <span class="brand-mark" aria-hidden="true">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
               <path
-                d="M12 3a9 9 0 0 1 7.79 4.5M19.79 16.5A9 9 0 0 1 6 18.7M4.21 16.5A9 9 0 0 1 12 3"
+                d="M5 19C5 10.5 11.5 4 20 4C20 12.5 13.5 19 5 19Z"
                 stroke="currentColor"
                 stroke-width="2"
                 stroke-linecap="round"
+                stroke-linejoin="round"
               />
-              <circle cx="12" cy="12" r="3.2" fill="#10b981" />
+              <path d="M5 19L14.5 9.5" stroke="#ff8c61" stroke-width="1.8" stroke-linecap="round" />
+              <circle cx="15.5" cy="8.5" r="2.2" fill="currentColor" />
             </svg>
           </span>
           <span class="brand-text">EcoCommute</span>
-          <span class="brand-tag">CIRCULAR · LIMA</span>
+          <span class="brand-tag">BIOMA · 3D</span>
         </a>
 
         <div class="topbar-right">
           <nav class="nav" role="navigation" aria-label="Navegación principal" data-i18n-aria="nav.aria">
-            <a href="#ciclo-circular" data-i18n="nav.cycle">Ciclo Circular</a>
-            <a href="#alquimia" data-i18n="nav.alchemy">Reciclaje CO₂</a>
+            <a href="#ciclo-circular" data-i18n="nav.cycle">Fotosíntesis Urbana</a>
+            <a href="#alquimia" data-i18n="nav.alchemy">Terrario & Alquimia</a>
             <a href="#solucion" data-i18n="nav.why">Manifiesto</a>
-            <a href="#funciones" data-i18n="nav.features">Arquitectura</a>
+            <a href="#funciones" data-i18n="nav.features">Capas 3D</a>
             <a href="#demo" data-i18n="nav.screens">Interfaz</a>
             <a href="#equipo" data-i18n="nav.team">Equipo</a>
           </nav>
 
           <div class="topbar-controls">
+            <button
+              type="button"
+              id="pollinate-burst-btn"
+              class="btn-ecological-burst spring-btn"
+              title="Liberar ráfaga de polinización y hojas en 3D"
+            >
+              <span aria-hidden="true">🍃</span>
+              <span data-i18n="nav.pollinate">Polinizar</span>
+            </button>
             <button
               type="button"
               id="lang-toggle"
@@ -162,7 +266,7 @@
     </header>
 
     <main role="main">
-      <!-- ==================== HERO ASIMÉTRICO + REACTOR DE RUTA ==================== -->
+      <!-- ==================== HERO ESPACIAL 3D + CONSOLA HOLOGRÁFICA DE RUTA ==================== -->
       <section id="inicio" class="hero-section">
         <div class="container hero-grid">
           <div class="hero-copy">
@@ -172,8 +276,8 @@
             </div>
 
             <div class="hero-stamp-row" aria-hidden="true">
-              <span class="mono-tag stamp-code">[EXP-2026-UPC]</span>
-              <span class="mono-tag stamp-code">[RECICLAJE DE EMISIONES URBANAS]</span>
+              <span class="mono-tag stamp-code weathered-specimen-tag">🌿 HERBARIO URBANO // EXP-2026-UPC</span>
+              <span class="mono-tag stamp-code">[FOTOSÍNTESIS DE DATOS & RECICLAJE CO₂]</span>
             </div>
 
             <h1 class="hero-headline">
@@ -182,51 +286,73 @@
             </h1>
 
             <p class="lead" data-i18n="hero.lead">
-              EcoCommute trata cada kilómetro en Lima como materia prima circular: compara tu ruta en bici, a pie o en auto con OSRM, explica la decisión con Google Gemini 1.5 Flash y transforma el humo evitado en puntos verdes, equivalentes de reciclaje PET y recompensas reales.
+              EcoCommute convierte el gris del asfalto limeño en un ecosistema vivo: compara tu ruta en bici, a pie o en auto con OSRM, explica la decisión con Google Gemini 1.5 Flash y transforma el humo evitado en biomasa digital, equivalentes de reciclaje PET y recompensas reales.
             </p>
+
+            <!-- Adorno ecológico interactivo: Indicador de Flora Viva de Sesión -->
+            <div class="ecological-vine-banner" id="hero-flora-banner">
+              <div class="vine-icon-wrap" aria-hidden="true">
+                <svg width="34" height="34" viewBox="0 0 36 36" fill="none">
+                  <circle cx="18" cy="18" r="16" stroke="rgba(212,255,89,0.35)" stroke-dasharray="4 3" />
+                  <path d="M10 25C10 15 17 9 26 9C26 18 20 25 10 25Z" fill="rgba(212,255,89,0.2)" stroke="#d4ff59" stroke-width="1.8" />
+                  <path d="M10 25L21 14" stroke="#ff8c61" stroke-width="1.6" stroke-linecap="round" />
+                </svg>
+              </div>
+              <div class="vine-banner-text">
+                <span class="mono-tag" data-i18n="hero.flora_tag">ÍNDICE DE CLOROFILA DE TU SESIÓN EN VIVO</span>
+                <p id="session-flora-status" data-i18n="hero.flora_desc">
+                  Has germinado <strong>12 brotes de Amancaes</strong> y evitado <strong>1,920 g de CO₂</strong> equivalentes a <strong>23 botellas PET</strong>.
+                </p>
+              </div>
+            </div>
 
             <div class="hero-actions">
               <a class="button primary spring-btn" href="#alquimia" role="button">
-                <span data-i18n="hero.btn_simulator">Abrir Laboratorio de Reciclaje CO₂</span>
+                <span data-i18n="hero.btn_simulator">Abrir Terrario & Alquimia CO₂</span>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </a>
-              <a class="button secondary spring-btn" href="#ciclo-circular" role="button" data-i18n="hero.btn_cycle">
-                Ver el Ciclo Circular
+              <a class="button secondary spring-btn" href="#funciones" role="button" data-i18n="hero.btn_cycle">
+                Explorar Capas 3D
               </a>
               <a class="text-link" href="#demo" data-i18n="hero.btn_screens">
                 Ver las pantallas &rarr;
               </a>
             </div>
 
-            <!-- Telemetría verificada del proyecto con marcas de corte arquitectónicas -->
+            <!-- Telemetría verificada del proyecto con profundidad 3D -->
             <dl class="hero-metrics" aria-label="Métricas técnicas del proyecto">
-              <div class="metric-item">
-                <span class="crosshair" aria-hidden="true">+</span>
+              <div class="metric-item depth-layer-item" data-tilt-3d>
+                <span class="crosshair" aria-hidden="true">✿</span>
                 <dt data-i18n="hero.stat1_label">Emisión evitada vs. auto</dt>
                 <dd><span class="mono-num">152</span> <small>g CO₂/km</small></dd>
               </div>
-              <div class="metric-item">
-                <span class="crosshair" aria-hidden="true">+</span>
+              <div class="metric-item depth-layer-item" data-tilt-3d>
+                <span class="crosshair" aria-hidden="true">♻</span>
                 <dt data-i18n="hero.stat2_label">Equivalencia circular</dt>
                 <dd><span class="mono-num">1.84</span> <small data-i18n="hero.stat2_unit">botellas PET/km</small></dd>
               </div>
-              <div class="metric-item">
-                <span class="crosshair" aria-hidden="true">+</span>
+              <div class="metric-item depth-layer-item" data-tilt-3d>
+                <span class="crosshair" aria-hidden="true">✦</span>
                 <dt data-i18n="hero.stat3_label">Backend verificado</dt>
                 <dd><span class="mono-num">28/28</span> <small data-i18n="hero.stat3_unit">tests en verde</small></dd>
               </div>
             </dl>
           </div>
 
-          <!-- Panel de Instrumentación & Telemetría Circular en Vivo -->
-          <aside class="hero-telemetry-card" id="simulador" aria-label="Simulador interactivo de ruta e impacto de CO₂ en Lima">
-            <div class="card-corner-badge" aria-hidden="true">OSRM // GEMINI-1.5-FLASH</div>
+          <!-- Panel Holográfico 3D de Instrumentación & Telemetría Circular en Vivo -->
+          <aside
+            class="hero-telemetry-card depth-3d-card"
+            id="simulador"
+            data-tilt-3d
+            aria-label="Simulador interactivo 3D de ruta e impacto de CO₂ en Lima"
+          >
+            <div class="card-corner-badge z-float-high" aria-hidden="true">OSRM // GEMINI-1.5-FLASH // 3D</div>
 
-            <div class="telemetry-header">
+            <div class="telemetry-header z-float-mid">
               <div class="telemetry-title-group">
-                <span class="note-label" data-i18n="hero.card_label">TELEMETRÍA DE VIAJE · DEMO INTERACTIVA</span>
+                <span class="note-label" data-i18n="hero.card_label">BIORREACTOR DE RUTA 3D · DEMO INTERACTIVA</span>
                 <p class="note-route" id="sim-route-title" tabindex="-1" data-i18n="hero.card_route">
                   Miraflores → San Isidro, 4.2 km
                 </p>
@@ -235,7 +361,7 @@
             </div>
 
             <!-- Selector de corredores reales de Lima -->
-            <div class="corridor-pills" role="group" aria-label="Corredores urbanos de Lima">
+            <div class="corridor-pills z-float-mid" role="group" aria-label="Corredores urbanos de Lima">
               <button type="button" class="corridor-btn spring-btn is-active" data-corridor="miraflores" data-i18n="sim.route1">
                 Miraflores → San Isidro
               </button>
@@ -250,57 +376,100 @@
               </button>
             </div>
 
-            <!-- Visualización vectorial topográfica con pulso de partículas en vivo -->
-            <div class="route-visualizer" aria-hidden="true">
-              <svg class="route-svg" viewBox="0 0 420 126" fill="none">
-                <defs>
-                  <linearGradient id="emeraldRouteGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="#34d399" />
-                    <stop offset="50%" stop-color="#10b981" />
-                    <stop offset="100%" stop-color="#f0b429" />
-                  </linearGradient>
-                  <filter id="glowFilter" x="-20%" y="-20%" width="140%" height="140%">
-                    <feGaussianBlur stdDeviation="3.5" result="blur" />
-                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                  </filter>
-                </defs>
-                <!-- Curvas de nivel topográficas de Lima -->
-                <path d="M-10 25 Q 110 5, 220 35 T 430 18" stroke="rgba(52,211,153,0.06)" stroke-width="1" fill="none" />
-                <path d="M-10 65 Q 140 45, 260 75 T 430 58" stroke="rgba(52,211,153,0.06)" stroke-width="1" fill="none" />
-                <path d="M-10 105 Q 160 85, 290 110 T 430 95" stroke="rgba(52,211,153,0.06)" stroke-width="1" fill="none" />
+            <!-- Controles de Cámara 3D para el Mapa Multicapa -->
+            <div class="holo-camera-bar z-float-mid" role="group" aria-label="Perspectiva de cámara 3D del mapa">
+              <span class="mono-tag" data-i18n="sim.cam_label">CÁMARA ESPACIAL:</span>
+              <div class="cam-btn-group">
+                <button type="button" class="cam-angle-btn is-active" data-cam="iso" data-i18n="sim.cam_iso">
+                  Isométrica 3D
+                </button>
+                <button type="button" class="cam-angle-btn" data-cam="orbital" data-i18n="sim.cam_orbit">
+                  Vuelo de Ave
+                </button>
+                <button type="button" class="cam-angle-btn" data-cam="flat" data-i18n="sim.cam_flat">
+                  Cenital 2D
+                </button>
+              </div>
+            </div>
 
-                <!-- Ruta en auto (referencia de combustión punteada) -->
-                <path
-                  id="svg-car-path"
-                  d="M 38 88 C 120 92, 165 25, 250 42 C 310 52, 345 30, 382 34"
-                  stroke="rgba(248, 113, 113, 0.38)"
-                  stroke-width="2"
-                  stroke-dasharray="4 5"
-                />
-                <!-- Ciclovía / Ruta OSRM sostenible con animación de flujo -->
-                <path
-                  id="svg-eco-path"
-                  class="animated-eco-stroke"
-                  d="M 38 88 C 110 82, 155 58, 225 56 C 295 54, 330 38, 382 34"
-                  stroke="url(#emeraldRouteGrad)"
-                  stroke-width="3.5"
-                  stroke-linecap="round"
-                  filter="url(#glowFilter)"
-                />
-                <!-- Nodos Origen / Destino -->
-                <circle cx="38" cy="88" r="6" fill="#060913" stroke="#34d399" stroke-width="3" />
-                <circle cx="382" cy="34" r="7" fill="#10b981" stroke="#060913" stroke-width="2" />
-              </svg>
-              <div class="route-overlay-badges">
-                <span class="mini-tag"><strong id="sim-bike-time">14 min</strong> <span data-i18n="sim.by_bike">en bici</span></span>
-                <span class="mini-tag muted"><span id="sim-car-time">22 min</span> <span data-i18n="sim.by_car_traffic">en auto (tráfico hora punta)</span></span>
+            <!-- Escenario 3D Multicapa con 3 Planos Físicos en el Eje Z -->
+            <div class="route-visualizer-3d-stage" id="holo-map-stage" data-cam-mode="iso">
+              <div class="route-visualizer-3d-layers">
+                <!-- PLANO Z-0 (Subsuelo Topográfico y Raíces): translateZ(-26px) -->
+                <div class="holo-plane holo-plane-subsoil" aria-hidden="true">
+                  <svg viewBox="0 0 420 136" fill="none">
+                    <path d="M-10 22 Q 110 4, 220 32 T 430 16" stroke="rgba(212,255,89,0.14)" stroke-width="1" />
+                    <path d="M-10 58 Q 140 38, 260 68 T 430 52" stroke="rgba(123,224,130,0.14)" stroke-width="1" />
+                    <path d="M-10 95 Q 160 78, 290 105 T 430 88" stroke="rgba(255,140,97,0.12)" stroke-width="1" />
+                    <circle cx="115" cy="70" r="38" stroke="rgba(212,255,89,0.08)" stroke-dasharray="3 3" />
+                    <circle cx="295" cy="54" r="46" stroke="rgba(255,140,97,0.08)" stroke-dasharray="4 4" />
+                  </svg>
+                </div>
+
+                <!-- PLANO Z-1 (Vectores de Ruta OSRM + Corredor Botánico): translateZ(0px) -->
+                <div class="holo-plane holo-plane-vectors" aria-hidden="true">
+                  <svg class="route-svg" viewBox="0 0 420 136" fill="none">
+                    <defs>
+                      <linearGradient id="emeraldRouteGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#d4ff59" />
+                        <stop offset="52%" stop-color="#7be082" />
+                        <stop offset="100%" stop-color="#ff8c61" />
+                      </linearGradient>
+                      <filter id="glowFilter" x="-20%" y="-20%" width="140%" height="140%">
+                        <feGaussianBlur stdDeviation="3.5" result="blur" />
+                        <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                      </filter>
+                    </defs>
+                    <!-- Ruta en auto (referencia de combustión punteada) -->
+                    <path
+                      id="svg-car-path"
+                      d="M 38 94 C 120 98, 165 28, 250 45 C 310 55, 345 32, 382 36"
+                      stroke="rgba(255, 107, 107, 0.45)"
+                      stroke-width="2"
+                      stroke-dasharray="4 5"
+                    />
+                    <!-- Ciclovía / Corredor Verde OSRM con brotes botánicos -->
+                    <path
+                      id="svg-eco-path"
+                      class="animated-eco-stroke"
+                      d="M 38 94 C 110 86, 155 60, 225 58 C 295 56, 330 40, 382 36"
+                      stroke="url(#emeraldRouteGrad)"
+                      stroke-width="4"
+                      stroke-linecap="round"
+                      filter="url(#glowFilter)"
+                    />
+                    <!-- Hojas decorativas que brotan a lo largo de la ciclovía -->
+                    <path d="M135 72 C142 60, 154 62, 148 74 Z" fill="#d4ff59" opacity="0.85" />
+                    <path d="M225 58 C232 45, 245 48, 238 60 Z" fill="#7be082" opacity="0.85" />
+                    <path d="M312 46 C320 34, 332 37, 325 48 Z" fill="#ff8c61" opacity="0.85" />
+                    <!-- Nodos Origen / Destino -->
+                    <circle cx="38" cy="94" r="6.5" fill="#0b0f0c" stroke="#d4ff59" stroke-width="3" />
+                    <circle cx="382" cy="36" r="7.5" fill="#7be082" stroke="#0b0f0c" stroke-width="2" />
+                  </svg>
+                </div>
+
+                <!-- PLANO Z-2 (Etiquetas Holográficas Levitantes): translateZ(38px) -->
+                <div class="holo-plane holo-plane-hud">
+                  <div class="levitating-node node-origin">
+                    <span class="node-pulse"></span>
+                    <span class="mono-tag" id="holo-origin-tag">ORIGEN // MIRAFLORES</span>
+                  </div>
+                  <div class="levitating-node node-dest">
+                    <span class="node-pulse dest"></span>
+                    <span class="mono-tag" id="holo-dest-tag">META // SAN ISIDRO</span>
+                  </div>
+                  <div class="route-overlay-badges">
+                    <span class="mini-tag"><strong id="sim-bike-time">14 min</strong> <span data-i18n="sim.by_bike">en bici</span></span>
+                    <span class="mini-tag muted"><span id="sim-car-time">22 min</span> <span data-i18n="sim.by_car_traffic">en auto (hora punta)</span></span>
+                  </div>
+                </div>
               </div>
             </div>
 
             <!-- Control deslizante de distancia personalizada -->
-            <div class="distance-control">
+            <div class="distance-control z-float-mid">
               <div class="distance-label-row">
-                <label for="sim-distance-range" data-i18n="sim.adjust_distance">Ajustar distancia del trayecto</label>
+                <label for="sim-distance-range" data-i18n="sim.adjust_distance">Ajustar distancia del corredor ecológico</label>
                 <output for="sim-distance-range" id="sim-distance-output" class="mono-num">4.2 km</output>
               </div>
               <input
@@ -315,7 +484,7 @@
             </div>
 
             <!-- Comparativa determinística + Equivalencia de Reciclaje PET -->
-            <ul class="note-figures">
+            <ul class="note-figures z-float-mid">
               <li>
                 <span data-i18n="hero.car">En auto (combustión)</span>
                 <strong class="val-danger" id="sim-car-co2" data-i18n="hero.car_val">640 g de CO₂</strong>
@@ -335,7 +504,7 @@
             </ul>
 
             <!-- Insight generado por Gemini 1.5 Flash -->
-            <div class="gemini-insight-box">
+            <div class="gemini-insight-box z-float-mid">
               <div class="gemini-insight-head">
                 <span class="gemini-sparkle" aria-hidden="true">✦</span>
                 <span class="mono-tag" data-i18n="sim.gemini_tag">GEMINI 1.5 FLASH · EXPLICACIÓN CONTEXTUAL</span>
@@ -345,10 +514,10 @@
               </p>
             </div>
 
-            <div class="telemetry-card-actions">
+            <div class="telemetry-card-actions z-float-high">
               <button type="button" id="recycle-trip-btn" class="btn-recycle-action spring-btn">
-                <span class="recycle-spin-icon" aria-hidden="true">♻</span>
-                <span data-i18n="sim.btn_recycle_trip">Reciclar este viaje en el contador global</span>
+                <span class="recycle-spin-icon" aria-hidden="true">🌱</span>
+                <span data-i18n="sim.btn_recycle_trip">Sembrar y reciclar este viaje en el contador global</span>
               </button>
             </div>
 
@@ -359,121 +528,148 @@
         </div>
       </section>
 
-      <!-- ==================== CINTA TRANSPORTADORA CINÉTICA (MARQUEE DE RECICLAJE) ==================== -->
+      <!-- ==================== CINTA TRANSPORTADORA BOTÁNICA (MARQUEE DE RECICLAJE) ==================== -->
       <div class="kinetic-ticker-band" aria-hidden="true">
         <div class="ticker-track">
-          <span>♻ 152 G CO₂/KM RECUPERADOS DEL AIRE DE LIMA</span>
-          <span class="ticker-sep">◆</span>
-          <span>1 VIAJE EN BICI (4.2 KM) = 8 BOTELLAS PET RECICLADAS EN HUELLA DE CARBONO</span>
-          <span class="ticker-sep">◆</span>
-          <span>ECONOMÍA CIRCULAR DE MOVILIDAD · ODS 11 META 11.2</span>
-          <span class="ticker-sep">◆</span>
+          <span>🌿 152 G CO₂/KM CAPTURADOS ANTES DE ENTRAR AL CIELO DE LIMA</span>
+          <span class="ticker-sep">✿</span>
+          <span>1 VIAJE EN BICI (4.2 KM) = 8 BOTELLAS PET RECICLADAS + BROTES EN EL TERRARIO</span>
+          <span class="ticker-sep">✿</span>
+          <span>METABOLISMO URBANO & BIOMA CIRCULAR · ODS 11 META 11.2</span>
+          <span class="ticker-sep">✿</span>
           <span>RUTEO ABIERTO OSRM + GOOGLE GEMINI 1.5 FLASH</span>
-          <span class="ticker-sep">◆</span>
-          <span>♻ 152 G CO₂/KM RECUPERADOS DEL AIRE DE LIMA</span>
-          <span class="ticker-sep">◆</span>
-          <span>1 VIAJE EN BICI (4.2 KM) = 8 BOTELLAS PET RECICLADAS EN HUELLA DE CARBONO</span>
-          <span class="ticker-sep">◆</span>
-          <span>ECONOMÍA CIRCULAR DE MOVILIDAD · ODS 11 META 11.2</span>
-          <span class="ticker-sep">◆</span>
+          <span class="ticker-sep">✿</span>
+          <span>🌿 152 G CO₂/KM CAPTURADOS ANTES DE ENTRAR AL CIELO DE LIMA</span>
+          <span class="ticker-sep">✿</span>
+          <span>1 VIAJE EN BICI (4.2 KM) = 8 BOTELLAS PET RECICLADAS + BROTES EN EL TERRARIO</span>
+          <span class="ticker-sep">✿</span>
+          <span>METABOLISMO URBANO & BIOMA CIRCULAR · ODS 11 META 11.2</span>
+          <span class="ticker-sep">✿</span>
           <span>RUTEO ABIERTO OSRM + GOOGLE GEMINI 1.5 FLASH</span>
         </div>
       </div>
 
-      <!-- ==================== SECCIÓN 01: SCROLLYTELLING DEL CICLO DE RECICLAJE URBANO ==================== -->
+      <!-- ==================== SECCIÓN 01: SCROLLYTELLING DEL REACTOR DE FOTOSÍNTESIS URBANA ==================== -->
       <section id="ciclo-circular" class="section scrolly-section">
         <div class="container">
           <div class="section-intro">
             <div>
-              <span class="section-index mono-tag">01 / METABOLISMO CIRCULAR DE LA CIUDAD</span>
-              <h2 data-i18n="cycle.title">Cómo reciclamos un viaje urbano en valor ecológico</h2>
+              <span class="section-index mono-tag">01 / FOTOSÍNTESIS DE DATOS & METABOLISMO CIRCULAR</span>
+              <h2 data-i18n="cycle.title">Cómo transmutamos el humo urbano en vida ecológica</h2>
             </div>
             <p class="intro-note" data-i18n="cycle.intro">
-              Reciclar no es solo separar plástico o vidrio: es evitar que el carbono fósil entre a la atmósfera de Lima y reintroducir esa energía en la comunidad.
+              Reciclar en la ciudad no es solo separar plástico o vidrio: es impedir que el carbono fósil entre a la atmósfera de Lima y transformarlo en energía comunitaria.
             </p>
           </div>
 
           <div class="scrolly-layout">
-            <!-- Reactor Circular Sticky con Canvas de Partículas en Vivo -->
-            <div class="scrolly-sticky-stage" id="reactor-canvas-container">
-              <canvas id="circular-particles-canvas" width="520" height="440" aria-hidden="true"></canvas>
+            <!-- Reactor Circular Sticky con Canvas de Partículas Interactivo y Modos Físicos -->
+            <div class="scrolly-sticky-stage depth-3d-card" id="reactor-canvas-container" data-tilt-3d>
+              <canvas
+                id="circular-particles-canvas"
+                width="540"
+                height="460"
+                aria-label="Reactor interactivo de esporas y reciclaje de CO2: mueve el cursor o haz clic para purificar partículas"
+              ></canvas>
 
-              <div class="reactor-wheel-overlay" aria-hidden="true">
+              <div class="reactor-wheel-overlay z-float-mid" aria-hidden="true">
                 <svg class="mobius-reactor-svg" viewBox="0 0 320 320" fill="none">
-                  <circle cx="160" cy="160" r="132" stroke="rgba(52,211,153,0.16)" stroke-width="1.5" stroke-dasharray="8 6" class="orbit-ring-slow" />
-                  <circle cx="160" cy="160" r="98" stroke="rgba(240,180,41,0.22)" stroke-width="1.5" stroke-dasharray="18 10" class="orbit-ring-reverse" />
-                  <circle cx="160" cy="160" r="64" stroke="rgba(56,189,248,0.25)" stroke-width="2" />
+                  <circle cx="160" cy="160" r="134" stroke="rgba(212,255,89,0.22)" stroke-width="1.5" stroke-dasharray="8 6" class="orbit-ring-slow" />
+                  <circle cx="160" cy="160" r="98" stroke="rgba(255,140,97,0.26)" stroke-width="1.5" stroke-dasharray="18 10" class="orbit-ring-reverse" />
+                  <circle cx="160" cy="160" r="66" stroke="rgba(125,226,209,0.3)" stroke-width="2" />
 
-                  <!-- Triángulo de Reciclaje Möbius Estilizado -->
+                  <!-- Corona Botánica de Hojas & Triángulo Möbius -->
                   <g class="mobius-arrows">
-                    <path d="M160 44 L196 104 L124 104 Z" stroke="#34d399" stroke-width="2" fill="rgba(16,185,129,0.08)" />
-                    <path d="M260 218 L190 218 L225 156 Z" stroke="#10b981" stroke-width="2" fill="rgba(16,185,129,0.08)" />
-                    <path d="M60 218 L95 156 L130 218 Z" stroke="#f0b429" stroke-width="2" fill="rgba(240,180,41,0.08)" />
+                    <path d="M160 28 C174 52, 174 76, 160 94 C146 76, 146 52, 160 28 Z" stroke="#d4ff59" stroke-width="2" fill="rgba(212,255,89,0.12)" />
+                    <path d="M272 222 C244 232, 222 218, 214 192 C238 184, 260 198, 272 222 Z" stroke="#7be082" stroke-width="2" fill="rgba(123,224,130,0.12)" />
+                    <path d="M48 222 C60 198, 82 184, 106 192 C98 218, 76 232, 48 222 Z" stroke="#ff8c61" stroke-width="2" fill="rgba(255,140,97,0.12)" />
                   </g>
                 </svg>
 
-                <div class="reactor-center-readout" id="animated-stage-cards">
+                <div class="reactor-center-readout z-float-high" id="animated-stage-cards">
                   <div class="stage-indicator is-active" data-stage-panel="1">
                     <span class="mono-tag">FASE 01 // CAPTURA</span>
                     <strong class="mono-num">-152 g/km</strong>
                     <small data-i18n="cycle.badge1">Intercepción de combustión</small>
                   </div>
                   <div class="stage-indicator" data-stage-panel="2">
-                    <span class="mono-tag">FASE 02 // PROCESAMIENTO</span>
+                    <span class="mono-tag">FASE 02 // FOTOSÍNTESIS IA</span>
                     <strong class="mono-num">OSRM + IA</strong>
                     <small data-i18n="cycle.badge2">Conversión en puntos verdes</small>
                   </div>
                   <div class="stage-indicator" data-stage-panel="3">
-                    <span class="mono-tag">FASE 03 // REINTEGRACIÓN</span>
+                    <span class="mono-tag">FASE 03 // FLORACIÓN</span>
                     <strong class="mono-num">ODS 11.2</strong>
-                    <small data-i18n="cycle.badge3">Recompensas y hábito circular</small>
+                    <small data-i18n="cycle.badge3">Recompensas y bioma circular</small>
                   </div>
                 </div>
+              </div>
+
+              <!-- Controles Interactivos del Reactor de Esporas -->
+              <div class="reactor-interactive-hud z-float-high">
+                <div class="reactor-modes" role="group" aria-label="Modo físico del reactor">
+                  <button type="button" class="reactor-mode-btn is-active" data-reactor-mode="orbit" data-i18n="cycle.mode_orbit">
+                    🌿 Órbita Clorofila
+                  </button>
+                  <button type="button" class="reactor-mode-btn" data-reactor-mode="vortex" data-i18n="cycle.mode_vortex">
+                    🌀 Vórtice Polinizador
+                  </button>
+                  <button type="button" class="reactor-mode-btn" data-reactor-mode="mycelium" data-i18n="cycle.mode_mycelium">
+                    🍄 Red de Micelio
+                  </button>
+                </div>
+                <button type="button" id="reactor-pulse-btn" class="btn-reactor-pulse spring-btn">
+                  <span aria-hidden="true">⚡</span>
+                  <span data-i18n="cycle.btn_pulse">Inyectar Pulso de Fotosíntesis (+152 g CO₂)</span>
+                </button>
               </div>
             </div>
 
             <!-- Columna de pasos disparados por scroll (tracked steps) -->
             <div class="scrolly-steps" id="tracked-cycle-steps">
-              <article class="cycle-step-card" data-step-index="0">
-                <div class="step-num-row">
+              <article class="cycle-step-card depth-3d-card" data-step-index="0" data-tilt-3d>
+                <div class="step-botanical-watermark" aria-hidden="true">🌿</div>
+                <div class="step-num-row z-float-mid">
                   <span class="step-index mono-num">01</span>
                   <span class="mono-tag" data-i18n="cycle.s1_tag">INTERCEPCIÓN EN EL ORIGEN</span>
                 </div>
-                <h3 data-i18n="cycle.s1_title">Sustituir combustión por tracción limpia antes de girar la llave</h3>
-                <p data-i18n="cycle.s1_desc">
+                <h3 class="z-float-mid" data-i18n="cycle.s1_title">Sustituir combustión por tracción limpia antes de girar la llave</h3>
+                <p class="z-float-mid" data-i18n="cycle.s1_desc">
                   Un automóvil promedio en el tráfico de Lima emite 152 gramos de CO₂ por cada kilómetro. Cuando eliges bicicleta o caminata en EcoCommute, ese carbono se «recicla» preventivamente: nunca llega al aire de tu distrito.
                 </p>
-                <div class="step-telemetry-bar">
+                <div class="step-telemetry-bar z-float-high">
                   <span class="mono-tag">FACTOR DETERMINÍSTICO</span>
                   <strong class="mono-num">EmissionFactor = 152.0 g/km</strong>
                 </div>
               </article>
 
-              <article class="cycle-step-card" data-step-index="1">
-                <div class="step-num-row">
+              <article class="cycle-step-card depth-3d-card" data-step-index="1" data-tilt-3d>
+                <div class="step-botanical-watermark" aria-hidden="true">✿</div>
+                <div class="step-num-row z-float-mid">
                   <span class="step-index mono-num">02</span>
                   <span class="mono-tag" data-i18n="cycle.s2_tag">REFINACIÓN CON OSRM + GEMINI 1.5 FLASH</span>
                 </div>
-                <h3 data-i18n="cycle.s2_title">Los datos geográficos crudos se transforman en inteligencia accionable</h3>
-                <p data-i18n="cycle.s2_desc">
+                <h3 class="z-float-mid" data-i18n="cycle.s2_title">Los datos geográficos crudos se transforman en inteligencia accionable</h3>
+                <p class="z-float-mid" data-i18n="cycle.s2_desc">
                   Nuestro backend en Spring Boot procesa las coordenadas de forma efímera sobre OpenStreetMap (OSRM), valida el ahorro con CarbonService y utiliza Google Gemini 1.5 Flash para explicarte por qué esa ruta ciclista o peatonal optimiza tu tiempo y tu salud.
                 </p>
-                <div class="step-telemetry-bar">
+                <div class="step-telemetry-bar z-float-high">
                   <span class="mono-tag">MOTOR DE VALIDACIÓN</span>
                   <strong class="mono-num">CarbonService + AiRouteAdvisorService</strong>
                 </div>
               </article>
 
-              <article class="cycle-step-card" data-step-index="2">
-                <div class="step-num-row">
+              <article class="cycle-step-card depth-3d-card" data-step-index="2" data-tilt-3d>
+                <div class="step-botanical-watermark" aria-hidden="true">🌳</div>
+                <div class="step-num-row z-float-mid">
                   <span class="step-index mono-num">03</span>
                   <span class="mono-tag" data-i18n="cycle.s3_tag">ECONOMÍA CIRCULAR DISTRITAL</span>
                 </div>
-                <h3 data-i18n="cycle.s3_title">El carbono evitado regresa a ti como puntos, medallas y beneficios</h3>
-                <p data-i18n="cycle.s3_desc">
+                <h3 class="z-float-mid" data-i18n="cycle.s3_title">El carbono evitado regresa a ti como puntos, medallas y bosque urbano</h3>
+                <p class="z-float-mid" data-i18n="cycle.s3_desc">
                   Cada gramo ahorrado alimenta tu cuenta de Puntos Verdes, desbloquea medallas automáticas al superar hitos y posiciona a tu distrito (Miraflores, San Isidro, Surco, Barranco, Jesús María) en el ranking metropolitano sostenible.
                 </p>
-                <div class="step-telemetry-bar">
+                <div class="step-telemetry-bar z-float-high">
                   <span class="mono-tag">IMPACTO COMUNITARIO</span>
                   <strong class="mono-num">GamificationController + RewardService</strong>
                 </div>
@@ -483,34 +679,42 @@
         </div>
       </section>
 
-      <!-- ==================== SECCIÓN 02: LABORATORIO DE ALQUIMIA & EQUIVALENCIA DE RECICLAJE ==================== -->
+      <!-- Separador ornamental botánico -->
+      <div class="botanical-section-divider" aria-hidden="true">
+        <span class="divider-line"></span>
+        <span class="divider-flora-icon">🌿 ✿ 🌱</span>
+        <span class="divider-line"></span>
+      </div>
+
+      <!-- ==================== SECCIÓN 02: TERRARIO INTERACTIVO & LABORATORIO DE ALQUIMIA DE RECICLAJE ==================== -->
       <section id="alquimia" class="section alt deferred-section">
         <div class="container">
           <div class="section-intro">
             <div>
-              <span class="section-index mono-tag">02 / CONVERSOR TANGIBLE DE RECICLAJE</span>
-              <h2 data-i18n="alchemy.title">¿A cuánto reciclaje físico equivale dejar el auto en Lima?</h2>
+              <span class="section-index mono-tag">02 / TERRARIO VIVO & CONVERSOR DE RECICLAJE</span>
+              <h2 data-i18n="alchemy.title">¿A cuánto reciclaje físico y biomasa equivale dejar el auto en Lima?</h2>
             </div>
             <p class="intro-note" data-i18n="alchemy.intro">
-              Un gramo de CO₂ es abstracto; una botella PET reciclada o una lata de aluminio recuperada se pueden tocar. Mueve la frecuencia semanal y observa la equivalencia material exacta.
+              Un gramo de CO₂ es invisible; una botella PET reciclada, una lata de aluminio recuperada o una flor de Amancaes brotando en nuestro domo se pueden ver y tocar.
             </p>
           </div>
 
           <div class="alchemy-workbench">
-            <div class="alchemy-controls-panel">
-              <div class="alchemy-preset-row" role="group" aria-label="Perfiles de viajero en Lima">
+            <!-- Panel Izquierdo: Controles + Domo de Terrario Botánico Interactivo -->
+            <div class="alchemy-controls-panel depth-3d-card" data-tilt-3d>
+              <div class="alchemy-preset-row z-float-mid" role="group" aria-label="Perfiles de viajero en Lima">
                 <button type="button" class="alchemy-preset spring-btn is-active" data-trips="6" data-km="4.2" data-i18n="alchemy.p1">
-                  Ciclista casual (3 días/sem)
+                  🌱 Brote Urbano (3 días/sem)
                 </button>
                 <button type="button" class="alchemy-preset spring-btn" data-trips="10" data-km="5.8" data-i18n="alchemy.p2">
-                  Commuter UPC (5 días/sem)
+                  🌿 Commuter UPC (5 días/sem)
                 </button>
                 <button type="button" class="alchemy-preset spring-btn" data-trips="14" data-km="7.5" data-i18n="alchemy.p3">
-                  Guardián del Aire (7 días/sem)
+                  🌳 Guardián del Bosque (7 días/sem)
                 </button>
               </div>
 
-              <div class="alchemy-sliders">
+              <div class="alchemy-sliders z-float-mid">
                 <div class="slider-group">
                   <div class="distance-label-row">
                     <label for="alchemy-trips-range" data-i18n="alchemy.slider_trips">Viajes sostenibles por semana</label>
@@ -528,7 +732,29 @@
                 </div>
               </div>
 
-              <div class="alchemy-total-readout">
+              <!-- Domo Geodésico de Terrario Botánico que crece en vivo según el ahorro -->
+              <div class="living-terrarium-box z-float-high">
+                <div class="terrarium-head">
+                  <span class="mono-tag" data-i18n="alchemy.terrarium_label">DOMO BIOMECÁNICO · GERMINACIÓN EN VIVO</span>
+                  <span class="mono-tag val-emerald" id="terrarium-stage-label">ETAPA: BOSQUE DE LOMAS</span>
+                </div>
+                <svg id="living-terrarium-svg" class="living-terrarium-svg" viewBox="0 0 360 155" fill="none" aria-label="Terrario botánico interactivo que germina plantas según el ahorro de CO2">
+                  <!-- Cúpula de cristal geodésica -->
+                  <path d="M 24 140 A 156 125 0 0 1 336 140 Z" fill="rgba(212,255,89,0.03)" stroke="rgba(212,255,89,0.28)" stroke-width="1.5" stroke-dasharray="5 3" />
+                  <!-- Suelo de humus andino -->
+                  <ellipse cx="180" cy="140" rx="156" ry="10" fill="rgba(255,140,97,0.16)" stroke="rgba(255,140,97,0.35)" stroke-width="1.2" />
+                  <!-- Grupo dinámico de plantas, árboles y flores generadas por JS -->
+                  <g id="terrarium-flora-group"></g>
+                </svg>
+                <div class="terrarium-actions">
+                  <button type="button" id="plant-seed-btn" class="btn-plant-seed spring-btn">
+                    <span aria-hidden="true">✿</span>
+                    <span data-i18n="alchemy.btn_plant">Plantar Semilla de Amancaes en el Terrario</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="alchemy-total-readout z-float-mid">
                 <span class="mono-tag" data-i18n="alchemy.annual_saved_label">CARBONO ANUAL QUE NO ENTRARÁ AL AIRE DE LIMA</span>
                 <div class="alchemy-big-number">
                   <strong class="mono-num" id="alchemy-annual-kg">199.2</strong>
@@ -540,64 +766,64 @@
               </div>
             </div>
 
-            <!-- 4 Tarjetas de Equivalencia Material con Tickets Perforados (shaped-cutouts) -->
+            <!-- 4 Tarjetas de Equivalencia Material con Tickets Perforados (shaped-cutouts) y Profundidad 3D -->
             <div class="alchemy-cards-grid" id="stagger-alchemy-grid">
-              <div class="unified-cutout-card">
+              <div class="unified-cutout-card depth-3d-card" data-tilt-3d data-material="pet">
                 <div class="cutout-card-body">
-                  <div class="cutout-top">
-                    <span class="mono-tag">MATERIA 01 // POLIETILENO (PET)</span>
+                  <div class="cutout-top z-float-mid">
+                    <span class="mono-tag weathered-specimen-tag">MATERIA 01 // POLIETILENO (PET)</span>
                     <span class="recycle-code">♳ PET-1</span>
                   </div>
-                  <strong class="mono-num cutout-figure" id="eq-pet-bottles">2,406</strong>
-                  <h3 data-i18n="alchemy.card1_title">Botellas plásticas PET recicladas</h3>
-                  <p data-i18n="alchemy.card1_desc">
+                  <strong class="mono-num cutout-figure z-float-high" id="eq-pet-bottles">2,406</strong>
+                  <h3 class="z-float-mid" data-i18n="alchemy.card1_title">Botellas plásticas PET recicladas</h3>
+                  <p class="z-float-mid" data-i18n="alchemy.card1_desc">
                     Equivalente en huella de carbono evitada al reciclar botellas de 500 ml (82.8 g CO₂ evitados por envase recuperado).
                   </p>
-                  <div class="visual-token-grid" id="pet-token-visualizer" aria-hidden="true"></div>
+                  <div class="visual-token-grid z-float-high" id="pet-token-visualizer" aria-hidden="true"></div>
                 </div>
                 <div class="cutout-card-accent" aria-hidden="true"></div>
               </div>
 
-              <div class="unified-cutout-card">
+              <div class="unified-cutout-card depth-3d-card" data-tilt-3d data-material="alu">
                 <div class="cutout-card-body">
-                  <div class="cutout-top">
-                    <span class="mono-tag">MATERIA 02 // ALUMINIO CIRCULAR</span>
+                  <div class="cutout-top z-float-mid">
+                    <span class="mono-tag weathered-specimen-tag">MATERIA 02 // ALUMINIO CIRCULAR</span>
                     <span class="recycle-code">♵ ALU-41</span>
                   </div>
-                  <strong class="mono-num cutout-figure" id="eq-alu-cans">1,172</strong>
-                  <h3 data-i18n="alchemy.card2_title">Latas de aluminio fundidas en frío</h3>
-                  <p data-i18n="alchemy.card2_desc">
+                  <strong class="mono-num cutout-figure z-float-high" id="eq-alu-cans">1,172</strong>
+                  <h3 class="z-float-mid" data-i18n="alchemy.card2_title">Latas de aluminio fundidas en frío</h3>
+                  <p class="z-float-mid" data-i18n="alchemy.card2_desc">
                     Ahorro energético equivalente a recuperar latas de bebidas frente a producir aluminio primario desde bauxita (170 g CO₂/lata).
                   </p>
                 </div>
                 <div class="cutout-card-accent" aria-hidden="true"></div>
               </div>
 
-              <div class="unified-cutout-card">
+              <div class="unified-cutout-card depth-3d-card" data-tilt-3d data-material="trees">
                 <div class="cutout-card-body">
-                  <div class="cutout-top">
-                    <span class="mono-tag">MATERIA 03 // BIOMASA URBANA</span>
+                  <div class="cutout-top z-float-mid">
+                    <span class="mono-tag weathered-specimen-tag">MATERIA 03 // BIOMASA URBANA</span>
                     <span class="recycle-code">🌳 BIO-CO₂</span>
                   </div>
-                  <strong class="mono-num cutout-figure" id="eq-trees">9.5</strong>
-                  <h3 data-i18n="alchemy.card3_title">Árboles adultos absorbiendo 1 año</h3>
-                  <p data-i18n="alchemy.card3_desc">
+                  <strong class="mono-num cutout-figure z-float-high" id="eq-trees">9.5</strong>
+                  <h3 class="z-float-mid" data-i18n="alchemy.card3_title">Árboles adultos absorbiendo 1 año</h3>
+                  <p class="z-float-mid" data-i18n="alchemy.card3_desc">
                     Cantidad de árboles urbanos maduros trabajando durante 365 días para fijar el mismo volumen de carbono (21 kg CO₂/año).
                   </p>
                 </div>
                 <div class="cutout-card-accent" aria-hidden="true"></div>
               </div>
 
-              <div class="unified-cutout-card">
+              <div class="unified-cutout-card depth-3d-card" data-tilt-3d data-material="pts">
                 <div class="cutout-card-body">
-                  <div class="cutout-top">
-                    <span class="mono-tag">MATERIA 04 // RECOMPENSA VERDE</span>
+                  <div class="cutout-top z-float-mid">
+                    <span class="mono-tag weathered-specimen-tag">MATERIA 04 // RECOMPENSA VERDE</span>
                     <span class="recycle-code">✦ ECO-PTS</span>
                   </div>
-                  <strong class="mono-num cutout-figure val-warm" id="eq-green-points">+4,680</strong>
-                  <h3 data-i18n="alchemy.card4_title">Puntos Verdes canjeables en catálogo</h3>
-                  <p data-i18n="alchemy.card4_desc">
-                    Saldo acumulado en tu perfil de EcoCommute para desbloquear mantenimientos de bici, café aliado y accesorios reciclados.
+                  <strong class="mono-num cutout-figure val-warm z-float-high" id="eq-green-points">+4,680</strong>
+                  <h3 class="z-float-mid" data-i18n="alchemy.card4_title">Puntos Verdes canjeables en catálogo</h3>
+                  <p class="z-float-mid" data-i18n="alchemy.card4_desc">
+                    Saldo acumulado en tu perfil de EcoCommute para desbloquear mantenimientos de bici, café orgánico aliado y accesorios reciclados.
                   </p>
                 </div>
                 <div class="cutout-card-accent" aria-hidden="true"></div>
@@ -611,11 +837,17 @@
       <section id="solucion" class="section editorial-section deferred-section">
         <div class="container editorial-grid">
           <div class="editorial-sidebar">
-            <span class="section-index mono-tag">03 / MANIFIESTO URBANO</span>
+            <span class="section-index mono-tag">03 / MANIFIESTO BIOMECÁNICO</span>
             <h2 data-i18n="story.title">Por qué existe</h2>
             <p class="sidebar-caption" data-i18n="story.sidebar_note">
               Lima pierde más de 150 horas al año por ciudadano en congestión vehicular, mientras las emisiones de transporte urbano siguen siendo invisibles en las apps tradicionales.
             </p>
+            <!-- Sello botánico decorativo con máscara de hoja -->
+            <div class="botanical-seal-badge" aria-hidden="true">
+              <div class="seal-leaf-masked">
+                <span>ODS 11.2 · LIMA VIVA</span>
+              </div>
+            </div>
           </div>
 
           <div class="story">
@@ -629,13 +861,13 @@
             </p>
 
             <div class="comparison-strip" aria-label="Comparación entre mapas convencionales y EcoCommute">
-              <div class="compare-col compare-legacy">
-                <span class="compare-tag" data-i18n="story.comp_old_tag">Apps de mapas tradicionales (Modelo Lineal)</span>
-                <p data-i18n="story.comp_old_desc">Solo muestran minutos estimados y congestión. El impacto de carbono es invisible y el viaje termina en humo sin retorno.</p>
+              <div class="compare-col compare-legacy depth-3d-card" data-tilt-3d>
+                <span class="compare-tag z-float-mid" data-i18n="story.comp_old_tag">Apps de mapas tradicionales (Modelo Extractivo Lineal)</span>
+                <p class="z-float-mid" data-i18n="story.comp_old_desc">Solo muestran minutos estimados y congestión. El impacto de carbono es invisible y el viaje termina en humo sin retorno.</p>
               </div>
-              <div class="compare-col compare-eco">
-                <span class="compare-tag" data-i18n="story.comp_new_tag">Enfoque EcoCommute (Modelo Circular)</span>
-                <p data-i18n="story.comp_new_desc">Contrasta gramos de CO₂ antes de salir, explica por qué te conviene la ruta con IA y recicla tu constancia en puntos y comunidad.</p>
+              <div class="compare-col compare-eco depth-3d-card" data-tilt-3d>
+                <span class="compare-tag z-float-mid" data-i18n="story.comp_new_tag">Enfoque EcoCommute (Bioma Circular Regenerativo)</span>
+                <p class="z-float-mid" data-i18n="story.comp_new_desc">Contrasta gramos de CO₂ antes de salir, explica por qué te conviene la ruta con IA y recicla tu constancia en puntos y comunidad.</p>
               </div>
             </div>
 
@@ -649,22 +881,115 @@
         </div>
       </section>
 
-      <!-- ==================== SECCIÓN 04: ARQUITECTURA & FUNCIONES (BENTO GRID) ==================== -->
+      <!-- ==================== SECCIÓN 04: MESA HOLOGRÁFICA 3D DE CAPAS EXPLOTADAS & BENTO GRID ==================== -->
       <section id="funciones" class="section alt deferred-section">
         <div class="container">
           <div class="section-intro">
             <div>
-              <span class="section-index mono-tag">04 / ARQUITECTURA EN PRODUCCIÓN</span>
-              <h2 data-i18n="feat.title">Qué hace hoy</h2>
+              <span class="section-index mono-tag">04 / ESTRATIGRAFÍA 3D & ARQUITECTURA EN PRODUCCIÓN</span>
+              <h2 data-i18n="feat.title">Qué hace hoy (y cómo late por dentro)</h2>
             </div>
             <p class="intro-note" data-i18n="feat.intro">
-              Todo lo de abajo está implementado en el backend (Spring Boot) y cubierto por 28 tests automáticos que corren en cada Pull Request.
+              Despliega las 4 capas del ecosistema en el espacio 3D o explora los módulos en producción respaldados por 28 tests automáticos.
             </p>
           </div>
 
+          <!-- NUEVO MÓDULO INTERACTIVO DE OTRO MUNDO: Estratigrafía 3D Explotada (Exploded View 3D Stack) -->
+          <div class="exploded-architecture-workbench" id="exploded-architecture-stage">
+            <div class="exploded-3d-viewport">
+              <div class="exploded-ambient-rings" aria-hidden="true"></div>
+              <div class="iso-stack-scene" id="iso-stack-scene">
+                <!-- CAPA 04: Dosel Botánico / Frontend React + Leaflet -->
+                <div class="iso-slab is-selected" data-slab-layer="4" tabindex="0" role="button" aria-label="Capa 04: Dosel Visual React 18, Vite y Leaflet OSRM">
+                  <div class="slab-glass">
+                    <span class="slab-num mono-num">CAPA 04 // Z+120</span>
+                    <strong class="slab-title">Dosel Visual · React 18 + Leaflet</strong>
+                    <span class="slab-chip">Vite · Tailwind · i18n</span>
+                  </div>
+                </div>
+                <!-- CAPA 03: Clorofila Cognitiva / Gemini 1.5 Flash + CarbonService -->
+                <div class="iso-slab" data-slab-layer="3" tabindex="0" role="button" aria-label="Capa 03: Clorofila Cognitiva Google Gemini 1.5 Flash y CarbonService">
+                  <div class="slab-glass">
+                    <span class="slab-num mono-num">CAPA 03 // Z+80</span>
+                    <strong class="slab-title">Clorofila IA · Gemini 1.5 Flash</strong>
+                    <span class="slab-chip">152 g CO₂/km · OSRM</span>
+                  </div>
+                </div>
+                <!-- CAPA 02: Tallo Transaccional / Spring Boot 3.2 REST + JWT -->
+                <div class="iso-slab" data-slab-layer="2" tabindex="0" role="button" aria-label="Capa 02: Tallo Transaccional Spring Boot 3.2 y 25 Endpoints REST">
+                  <div class="slab-glass">
+                    <span class="slab-num mono-num">CAPA 02 // Z+40</span>
+                    <strong class="slab-title">Tallo REST · Spring Boot 3.2</strong>
+                    <span class="slab-chip">25 Rutas · JWT Stateless</span>
+                  </div>
+                </div>
+                <!-- CAPA 01: Raíz & Suelo / PostgreSQL + Liquibase + @Version -->
+                <div class="iso-slab" data-slab-layer="1" tabindex="0" role="button" aria-label="Capa 01: Raíz de Datos PostgreSQL y Optimistic Locking">
+                  <div class="slab-glass">
+                    <span class="slab-num mono-num">CAPA 01 // Z+00</span>
+                    <strong class="slab-title">Raíz de Datos · PostgreSQL 16</strong>
+                    <span class="slab-chip">Liquibase · @Version Lock</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Panel de Control Espacial de las Capas 3D -->
+            <div class="exploded-controls-panel depth-3d-card" data-tilt-3d>
+              <div class="exploded-header z-float-mid">
+                <span class="mono-tag" data-i18n="stack.kicker">INSPECTOR ESTRATIGRÁFICO 3D INTERACTIVO</span>
+                <h3 id="slab-detail-title" data-i18n="stack.layer4_title">Capa 04: Dosel de Interacción (React 18 + Leaflet)</h3>
+                <p id="slab-detail-desc" data-i18n="stack.layer4_desc">
+                  Renderiza la cartografía abierta de Lima sobre OpenStreetMap, traza corredores ciclistas y peatonales sin rastreo invasivo y traduce instantáneamente entre Español e Inglés.
+                </p>
+              </div>
+
+              <div class="slab-selector-pills z-float-mid" role="group" aria-label="Seleccionar estrato arquitectónico">
+                <button type="button" class="slab-pill is-active" data-select-slab="4">04 · Dosel UI</button>
+                <button type="button" class="slab-pill" data-select-slab="3">03 · Gemini IA</button>
+                <button type="button" class="slab-pill" data-select-slab="2">02 · Spring REST</button>
+                <button type="button" class="slab-pill" data-select-slab="1">01 · Raíz SQL</button>
+              </div>
+
+              <div class="exploded-sliders z-float-mid">
+                <div class="slider-group">
+                  <div class="distance-label-row">
+                    <label for="stack-explosion-range" data-i18n="stack.slider_z">Separación Espacial Eje-Z (Exploded View)</label>
+                    <output for="stack-explosion-range" id="stack-explosion-out" class="mono-num">100%</output>
+                  </div>
+                  <input type="range" id="stack-explosion-range" min="25" max="165" step="5" value="100" />
+                </div>
+
+                <div class="slider-group">
+                  <div class="distance-label-row">
+                    <label for="stack-angle-range" data-i18n="stack.slider_rot">Rotación Azimutal de Cámara 3D</label>
+                    <output for="stack-angle-range" id="stack-angle-out" class="mono-num">-32°</output>
+                  </div>
+                  <input type="range" id="stack-angle-range" min="-65" max="25" step="1" value="-32" />
+                </div>
+              </div>
+
+              <div class="slab-xray-meta z-float-high">
+                <div>
+                  <span class="mono-tag">ARTEFACTO / CLASE CLAVE</span>
+                  <strong class="mono-num" id="slab-detail-artifact">RoutePlannerView.tsx + MapCanvas</strong>
+                </div>
+                <div>
+                  <span class="mono-tag">GARANTÍA DE INGENIERÍA</span>
+                  <strong class="mono-num" id="slab-detail-sla">60 FPS · WCAG AA · Sin telemetría oculta</strong>
+                </div>
+              </div>
+
+              <button type="button" id="trigger-packet-btn" class="btn-packet-pulse spring-btn z-float-high">
+                <span aria-hidden="true">⚡</span>
+                <span data-i18n="stack.btn_pulse">Transmitir Pulso de Savia por las 4 Capas 3D</span>
+              </button>
+            </div>
+          </div>
+
           <div class="bento-grid feature-list" id="stagger-bento-grid">
-            <article class="feature feature-lead bento-card" data-spotlight>
-              <div class="bento-lead-content">
+            <article class="feature feature-lead bento-card depth-3d-card" data-spotlight data-tilt-3d>
+              <div class="bento-lead-content z-float-mid">
                 <div class="bento-meta">
                   <span class="mono-tag">OSRM + GEMINI 1.5 FLASH</span>
                   <span class="endpoint-chip">POST /api/v1/routes/recommend</span>
@@ -674,7 +999,7 @@
                   Introduces el origen y el destino y la app arma alternativas con OSRM: qué tan lejos es, cuánto tarda cada medio de transporte y qué te conviene según tu historial. La recomendación asistida por Inteligencia Artificial (Google Gemini 1.5 Flash) explica en lenguaje simple por qué sugiere esa ruta.
                 </p>
               </div>
-              <div class="bento-lead-visual" aria-hidden="true">
+              <div class="bento-lead-visual z-float-high" aria-hidden="true">
                 <div class="terminal-window">
                   <div class="terminal-bar">
                     <span class="dot"></span><span class="dot"></span><span class="dot"></span>
@@ -689,16 +1014,16 @@
               </div>
             </article>
 
-            <article class="feature bento-card" data-spotlight>
-              <div class="bento-meta">
+            <article class="feature bento-card depth-3d-card" data-spotlight data-tilt-3d>
+              <div class="bento-meta z-float-mid">
                 <span class="mono-tag">CARBON ENGINE</span>
                 <span class="endpoint-chip">POST /api/v1/trips</span>
               </div>
-              <h3 data-i18n="feat.trips_title">Viajes y cálculo de CO₂</h3>
-              <p data-i18n="feat.trips_desc">
+              <h3 class="z-float-mid" data-i18n="feat.trips_title">Viajes y cálculo de CO₂</h3>
+              <p class="z-float-mid" data-i18n="feat.trips_desc">
                 Registras el viaje y la app calcula el CO₂ ahorrado frente al auto (152 g CO₂/km ahorrados) y los puntos verdes que ganas.
               </p>
-              <div class="bento-micro-viz" aria-hidden="true">
+              <div class="bento-micro-viz z-float-high" aria-hidden="true">
                 <div class="emission-bars">
                   <div class="e-row">
                     <span>Auto</span>
@@ -714,16 +1039,16 @@
               </div>
             </article>
 
-            <article class="feature bento-card" data-spotlight>
-              <div class="bento-meta">
+            <article class="feature bento-card depth-3d-card" data-spotlight data-tilt-3d>
+              <div class="bento-meta z-float-mid">
                 <span class="mono-tag">TELEMETRÍA PERSONAL</span>
                 <span class="endpoint-chip">GET /api/v1/dashboard</span>
               </div>
-              <h3 data-i18n="feat.dash_title">Dashboard de impacto</h3>
-              <p data-i18n="feat.dash_desc">
+              <h3 class="z-float-mid" data-i18n="feat.dash_title">Dashboard de impacto</h3>
+              <p class="z-float-mid" data-i18n="feat.dash_desc">
                 CO₂ acumulado, distancia recorrida, evolución semanal, árboles equivalentes salvados e historial de viajes en gráficos legibles.
               </p>
-              <div class="bento-micro-viz" aria-hidden="true">
+              <div class="bento-micro-viz z-float-high" aria-hidden="true">
                 <div class="mini-bars-chart">
                   <span style="height: 38%"><i>L</i></span>
                   <span style="height: 62%"><i>M</i></span>
@@ -736,16 +1061,16 @@
               </div>
             </article>
 
-            <article class="feature bento-card" data-spotlight>
-              <div class="bento-meta">
+            <article class="feature bento-card depth-3d-card" data-spotlight data-tilt-3d>
+              <div class="bento-meta z-float-mid">
                 <span class="mono-tag">COMUNIDAD URBANA</span>
                 <span class="endpoint-chip">GET /api/v1/leaderboard</span>
               </div>
-              <h3 data-i18n="feat.rank_title">Ranking distrital</h3>
-              <p data-i18n="feat.rank_desc">
+              <h3 class="z-float-mid" data-i18n="feat.rank_title">Ranking distrital</h3>
+              <p class="z-float-mid" data-i18n="feat.rank_desc">
                 Compara tu impacto ecológico con ciclistas y peatones de tu distrito en Lima para fortalecer la comunidad activa.
               </p>
-              <div class="bento-micro-viz" aria-hidden="true">
+              <div class="bento-micro-viz z-float-high" aria-hidden="true">
                 <div class="mini-leaderboard">
                   <div class="lb-row"><span class="lb-pos">#1</span><span>Miraflores</span><span class="mono-num">142.8 kg</span></div>
                   <div class="lb-row"><span class="lb-pos">#2</span><span>San Isidro</span><span class="mono-num">118.4 kg</span></div>
@@ -754,34 +1079,34 @@
               </div>
             </article>
 
-            <article class="feature bento-card" data-spotlight>
-              <div class="bento-meta">
+            <article class="feature bento-card depth-3d-card" data-spotlight data-tilt-3d>
+              <div class="bento-meta z-float-mid">
                 <span class="mono-tag">ECONOMÍA DE RECOMPENSAS</span>
                 <span class="endpoint-chip">POST /api/v1/rewards/redeem</span>
               </div>
-              <h3 data-i18n="feat.badges_title">Medallas y recompensas</h3>
-              <p data-i18n="feat.badges_desc">
+              <h3 class="z-float-mid" data-i18n="feat.badges_title">Medallas y recompensas</h3>
+              <p class="z-float-mid" data-i18n="feat.badges_desc">
                 Las medallas se desbloquean automáticamente al alcanzar hitos ecológicos; los puntos se canjean por recompensas sostenibles.
               </p>
-              <div class="bento-micro-viz" aria-hidden="true">
+              <div class="bento-micro-viz z-float-high" aria-hidden="true">
                 <div class="badge-chips-demo">
-                  <span class="demo-medal">★ Ciclista Urbano</span>
-                  <span class="demo-medal">★ Guardián del Aire</span>
-                  <span class="demo-medal">★ Racha 7 días</span>
+                  <span class="demo-medal">🌿 Ciclista Urbano</span>
+                  <span class="demo-medal">✿ Guardián del Aire</span>
+                  <span class="demo-medal">🌳 Racha 7 días</span>
                 </div>
               </div>
             </article>
 
-            <article class="feature bento-card" data-spotlight>
-              <div class="bento-meta">
+            <article class="feature bento-card depth-3d-card" data-spotlight data-tilt-3d>
+              <div class="bento-meta z-float-mid">
                 <span class="mono-tag">HÁBITOS SOSTENIBLES</span>
                 <span class="endpoint-chip">GET /api/v1/challenges</span>
               </div>
-              <h3 data-i18n="feat.challenges_title">Retos semanales</h3>
-              <p data-i18n="feat.challenges_desc">
+              <h3 class="z-float-mid" data-i18n="feat.challenges_title">Retos semanales</h3>
+              <p class="z-float-mid" data-i18n="feat.challenges_desc">
                 Desafíos mensuales y metas sostenibles administradas dinámicamente desde el panel de gestión para sostener el hábito.
               </p>
-              <div class="bento-micro-viz" aria-hidden="true">
+              <div class="bento-micro-viz z-float-high" aria-hidden="true">
                 <div class="challenge-progress-demo">
                   <div class="cp-top">
                     <span>Meta: 25 km sin emisiones</span>
@@ -794,13 +1119,13 @@
           </div>
 
           <!-- Tarjeta distintiva de ODS 11 e Inteligencia Artificial -->
-          <div class="ods-card" role="region" aria-label="Alineación con ODS 11 e Inteligencia Artificial">
-            <div class="ods-card-content">
+          <div class="ods-card depth-3d-card" data-tilt-3d role="region" aria-label="Alineación con ODS 11 e Inteligencia Artificial">
+            <div class="ods-card-content z-float-mid">
               <h3 data-i18n="ods.title">Alineados con el ODS 11 (Meta 11.2) e Inteligencia Artificial</h3>
               <p data-i18n="ods.desc">
                 EcoCommute responde de manera directa al Objetivo de Desarrollo Sostenible 11 de la ONU (Meta 11.2: Proporcionar acceso a sistemas de transporte seguros, asequibles, accesibles y sostenibles para todos). Además, optimizamos la toma de decisiones con Google Gemini 1.5 Flash para brindar explicaciones contextuales.
               </p>
-              <div class="ods-card-badges">
+              <div class="ods-card-badges z-float-high">
                 <span class="badge-pill badge-ods" data-i18n="ods.badge_ods">ODS 11 · Meta 11.2: Movilidad Sostenible</span>
                 <span class="badge-pill badge-ai" data-i18n="ods.badge_ai">Optimización con IA · Google Gemini 1.5 Flash</span>
                 <span class="badge-pill badge-osrm" data-i18n="ods.badge_osrm">Ruteo Open Source OSRM</span>
@@ -811,12 +1136,12 @@
         </div>
       </section>
 
-      <!-- ==================== SECCIÓN 05: INTERFAZ & PANTALLAS ==================== -->
+      <!-- ==================== SECCIÓN 05: INTERFAZ & PANTALLAS EN PROFUNDIDAD 3D ==================== -->
       <section id="demo" class="section deferred-section">
         <div class="container">
           <div class="section-intro">
             <div>
-              <span class="section-index mono-tag">05 / INTERFAZ DE PRODUCTO</span>
+              <span class="section-index mono-tag">05 / VENTANAS AL ECOSISTEMA</span>
               <h2 data-i18n="demo.title">Cómo se ve</h2>
             </div>
             <div class="showcase-tabs" role="tablist" aria-label="Selector de vista de pantallas">
@@ -828,7 +1153,7 @@
                 data-view="both"
                 data-i18n="demo.tab_all"
               >
-                Vista comparativa
+                Vista comparativa 3D
               </button>
               <button
                 type="button"
@@ -854,13 +1179,13 @@
           </div>
 
           <div class="preview-grid" id="showcase-grid" data-mode="both">
-            <figure class="preview-card preview-app" id="preview-card-routes">
-              <div class="window-chrome" aria-hidden="true">
+            <figure class="preview-card preview-app depth-3d-card" id="preview-card-routes" data-tilt-3d>
+              <div class="window-chrome z-float-mid" aria-hidden="true">
                 <div class="window-dots"><span></span><span></span><span></span></div>
                 <div class="window-url">ecocommute.org/rutas · Lima Metropolitana</div>
                 <span class="window-badge">OSRM + Gemini</span>
               </div>
-              <div class="preview-img-wrap">
+              <div class="preview-img-wrap z-float-high">
                 <img
                   src="./media/app-mockups.png"
                   alt="Vista de rutas sostenibles de EcoCommute sobre el mapa de Lima"
@@ -870,7 +1195,7 @@
                   height="912"
                 />
               </div>
-              <figcaption>
+              <figcaption class="z-float-mid">
                 <span class="caption-tag mono-tag">VISTA 01 · PLANIFICADOR</span>
                 <p data-i18n="demo.cap1">
                   Planificación de rutas sostenibles con ubicación, medios de transporte, alternativas y optimización asistida por Google Gemini.
@@ -879,13 +1204,13 @@
             </figure>
 
             <div class="preview-stack" id="preview-card-dashboard">
-              <figure class="preview-card">
-                <div class="window-chrome" aria-hidden="true">
+              <figure class="preview-card depth-3d-card" data-tilt-3d>
+                <div class="window-chrome z-float-mid" aria-hidden="true">
                   <div class="window-dots"><span></span><span></span><span></span></div>
                   <div class="window-url">ecocommute.org/impacto · Dashboard</div>
                   <span class="window-badge">KPIs + Medallas</span>
                 </div>
-                <div class="preview-img-wrap">
+                <div class="preview-img-wrap z-float-high">
                   <img
                     src="./media/dashboard-mockup.png"
                     alt="Dashboard oscuro de impacto sostenible de EcoCommute"
@@ -895,7 +1220,7 @@
                     height="800"
                   />
                 </div>
-                <figcaption>
+                <figcaption class="z-float-mid">
                   <span class="caption-tag mono-tag">VISTA 02 · ANALÍTICA DE IMPACTO</span>
                   <p data-i18n="demo.cap2">
                     Dashboard de impacto con CO₂ ahorrado, viajes, árboles equivalentes, medallas e historial.
@@ -912,7 +1237,7 @@
         <div class="container">
           <div class="impact-line">
             <div>
-              <span class="section-index mono-tag">06 / COMPROMISO URBANO</span>
+              <span class="section-index mono-tag">06 / COMPROMISO BIORREGIONAL</span>
               <h2 data-i18n="impact.title">Estamos alineados con la Meta 11.2 del ODS 11</h2>
             </div>
             <div>
@@ -920,17 +1245,17 @@
                 Transporte seguro, accesible, asequible y sostenible para todas las personas. El usuario transforma su huella de carbono en progreso visible, y la gamificación (retos, medallas y rankings) está para sostener el hábito más allá de la primera semana.
               </p>
               <div class="impact-pillars">
-                <div class="pillar-item">
-                  <strong class="mono-num">0 g</strong>
-                  <span data-i18n="impact.p1">Emisiones directas en bicicleta o caminata</span>
+                <div class="pillar-item depth-3d-card" data-tilt-3d>
+                  <strong class="mono-num z-float-high">0 g</strong>
+                  <span class="z-float-mid" data-i18n="impact.p1">Emisiones directas en bicicleta o caminata</span>
                 </div>
-                <div class="pillar-item">
-                  <strong class="mono-num">Ley 29733</strong>
-                  <span data-i18n="impact.p2">Privacidad por diseño sin rastreo en segundo plano</span>
+                <div class="pillar-item depth-3d-card" data-tilt-3d>
+                  <strong class="mono-num z-float-high">Ley 29733</strong>
+                  <span class="z-float-mid" data-i18n="impact.p2">Privacidad por diseño sin rastreo en segundo plano</span>
                 </div>
-                <div class="pillar-item">
-                  <strong class="mono-num">Open Source</strong>
-                  <span data-i18n="impact.p3">Cartografía abierta sobre OpenStreetMap</span>
+                <div class="pillar-item depth-3d-card" data-tilt-3d>
+                  <strong class="mono-num z-float-high">Open Source</strong>
+                  <span class="z-float-mid" data-i18n="impact.p3">Cartografía abierta sobre OpenStreetMap</span>
                 </div>
               </div>
             </div>
@@ -943,7 +1268,7 @@
         <div class="container">
           <div class="section-intro">
             <div>
-              <span class="section-index mono-tag">07 / CRÉDITOS DE INGENIERÍA</span>
+              <span class="section-index mono-tag">07 / ARQUITECTOS DEL TERRARIO</span>
               <h2 data-i18n="team.title">Quiénes lo hacemos</h2>
             </div>
             <p class="intro-note" data-i18n="team.intro">
@@ -952,53 +1277,53 @@
           </div>
 
           <ul class="team-list" id="stagger-team-list">
-            <li class="team-card">
-              <div class="team-card-top">
+            <li class="team-card depth-3d-card" data-tilt-3d>
+              <div class="team-card-top z-float-mid">
                 <span class="team-avatar" aria-hidden="true">RC</span>
                 <span class="mono-tag">feature/auth · main</span>
               </div>
-              <strong>Rodrigo Condor</strong>
-              <span class="team-role" data-i18n="team.member1_role">IA y recomendaciones de ruta</span>
+              <strong class="z-float-high">Rodrigo Condor</strong>
+              <span class="team-role z-float-mid" data-i18n="team.member1_role">IA y recomendaciones de ruta</span>
             </li>
-            <li class="team-card">
-              <div class="team-card-top">
+            <li class="team-card depth-3d-card" data-tilt-3d>
+              <div class="team-card-top z-float-mid">
                 <span class="team-avatar" aria-hidden="true">DA</span>
                 <span class="mono-tag">feature/rewards</span>
               </div>
-              <strong>Diego Avalos</strong>
-              <span class="team-role" data-i18n="team.member2_role">Rutas, dashboard y medallas</span>
+              <strong class="z-float-high">Diego Avalos</strong>
+              <span class="team-role z-float-mid" data-i18n="team.member2_role">Rutas, dashboard y medallas</span>
             </li>
-            <li class="team-card">
-              <div class="team-card-top">
+            <li class="team-card depth-3d-card" data-tilt-3d>
+              <div class="team-card-top z-float-mid">
                 <span class="team-avatar" aria-hidden="true">OA</span>
                 <span class="mono-tag">feature/stats-badges</span>
               </div>
-              <strong>Odar Alcocer</strong>
-              <span class="team-role" data-i18n="team.member3_role">Entidades, viajes y cálculo de CO₂</span>
+              <strong class="z-float-high">Odar Alcocer</strong>
+              <span class="team-role z-float-mid" data-i18n="team.member3_role">Entidades, viajes y cálculo de CO₂</span>
             </li>
-            <li class="team-card">
-              <div class="team-card-top">
+            <li class="team-card depth-3d-card" data-tilt-3d>
+              <div class="team-card-top z-float-mid">
                 <span class="team-avatar" aria-hidden="true">PE</span>
                 <span class="mono-tag">feature/challenges-leaderboard</span>
               </div>
-              <strong>Paulo Espinoza</strong>
-              <span class="team-role" data-i18n="team.member4_role">Puntos verdes y ranking</span>
+              <strong class="z-float-high">Paulo Espinoza</strong>
+              <span class="team-role z-float-mid" data-i18n="team.member4_role">Puntos verdes y ranking</span>
             </li>
-            <li class="team-card">
-              <div class="team-card-top">
+            <li class="team-card depth-3d-card" data-tilt-3d>
+              <div class="team-card-top z-float-mid">
                 <span class="team-avatar" aria-hidden="true">JR</span>
                 <span class="mono-tag">feature/trips</span>
               </div>
-              <strong>Jeampiero Ramos</strong>
-              <span class="team-role" data-i18n="team.member5_role">Seguridad, JWT y registro</span>
+              <strong class="z-float-high">Jeampiero Ramos</strong>
+              <span class="team-role z-float-mid" data-i18n="team.member5_role">Seguridad, JWT y registro</span>
             </li>
-            <li class="team-card">
-              <div class="team-card-top">
+            <li class="team-card depth-3d-card" data-tilt-3d>
+              <div class="team-card-top z-float-mid">
                 <span class="team-avatar" aria-hidden="true">MM</span>
                 <span class="mono-tag">feature/dashboard-ia</span>
               </div>
-              <strong>Matías Mariños</strong>
-              <span class="team-role" data-i18n="team.member6_role">Documentación, evidencias y landing</span>
+              <strong class="z-float-high">Matías Mariños</strong>
+              <span class="team-role z-float-mid" data-i18n="team.member6_role">Documentación, evidencias y landing</span>
             </li>
           </ul>
         </div>
@@ -1099,6 +1424,6 @@
       </div>
     </dialog>
 
-    <script src="./i18n.js?v=20261022-v3" defer></script>
+    <script src="./i18n.js?v=20261022-v4" defer></script>
   </body>
 </html>
