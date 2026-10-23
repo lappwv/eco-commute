@@ -21,7 +21,7 @@
       type="image/svg+xml"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2318191B'/%3E%3Ccircle cx='9.5' cy='21' r='4.5' fill='none' stroke='%23F3EFE6' stroke-width='2.2'/%3E%3Ccircle cx='22.5' cy='21' r='4.5' fill='none' stroke='%23F3EFE6' stroke-width='2.2'/%3E%3Cpath d='M9.5 21L14 12H20L16 21M14 12L12 9H9.5M19 12L22.5 21' fill='none' stroke='%23D84A27' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"
     />
-    <link rel="stylesheet" href="./styles.css?v=20261023-v7" />
+    <link rel="stylesheet" href="./styles.css?v=20261023-v8" />
   </head>
   <body>
     <!-- Máscara SVG para Boletos de Transporte Perforados sin recortar texto (shaped-cutouts) -->
@@ -189,21 +189,46 @@
             </div>
 
             <h1 class="hero-headline">
-              <span data-i18n="hero.title">Antes de encender el auto en el tráfico de Lima, </span>
+              <span data-i18n="hero.title">Antes de encender el auto en Lima, </span>
               <em data-i18n="hero.title_em">mira lo que ahorras cambiando de vehículo.</em>
             </h1>
 
             <p class="lead" data-i18n="hero.lead">
-              EcoCommute compara en segundos tu trayecto en bicicleta, scooter, transporte público o caminata frente al automóvil particular usando OSRM y Google Gemini 1.5 Flash: calcula el tiempo real en hora punta, los gramos de CO₂ que evitas emitir y los puntos canjeables que ganas en tu distrito.
+              Compara bici, scooter, bus o caminata con OSRM + Gemini 1.5 Flash: mide tu ahorro de CO₂ en vivo y canjea puntos verdes.
             </p>
+
+            <!-- Elementos Decorativos de la App: Insignias, Racha y Recompensas -->
+            <div class="hero-app-decor-row" aria-label="Elementos decorativos de la aplicación EcoCommute">
+              <div class="app-decor-pill">
+                <span class="app-decor-icon" aria-hidden="true">🏅</span>
+                <div>
+                  <small class="mono-tag" data-i18n="decor.badge_lbl">MEDALLA ACTIVA</small>
+                  <strong data-i18n="decor.badge_val">Ciclista Arequipa</strong>
+                </div>
+              </div>
+              <div class="app-decor-pill">
+                <span class="app-decor-icon" aria-hidden="true">🔥</span>
+                <div>
+                  <small class="mono-tag" data-i18n="decor.streak_lbl">RACHA SIN AUTO</small>
+                  <strong class="mono-num" data-i18n="decor.streak_val">7 días seguidos</strong>
+                </div>
+              </div>
+              <div class="app-decor-pill">
+                <span class="app-decor-icon" aria-hidden="true">🎁</span>
+                <div>
+                  <small class="mono-tag" data-i18n="decor.reward_lbl">CANJE DISPONIBLE</small>
+                  <strong data-i18n="decor.reward_val">Café & Taller Bici</strong>
+                </div>
+              </div>
+            </div>
 
             <!-- Resumen de viajes registrados en la sesión -->
             <div class="transit-session-banner" id="hero-flora-banner">
               <div class="transit-badge-code mono-tag">BOLETO ACTIVO</div>
               <div class="vine-banner-text">
-                <span class="mono-tag" data-i18n="hero.flora_tag">BITÁCORA DE DESPLAZAMIENTO DE TU SESIÓN</span>
+                <span class="mono-tag" data-i18n="hero.flora_tag">BITÁCORA DE TU SESIÓN</span>
                 <p id="session-flora-status" data-i18n="hero.flora_desc">
-                  Has registrado <strong>12 tramos sin auto</strong> y evitado <strong>1,920 g de CO₂</strong> (equivalentes a <strong>23 botellas PET</strong>).
+                  <strong>12 viajes sin auto</strong> · <strong>1,920 g CO₂ evitados</strong> · <strong>♻ 23 PET</strong>
                 </p>
               </div>
             </div>
@@ -447,12 +472,14 @@
         <div class="container">
           <div class="section-intro">
             <div>
-              <span class="section-index mono-tag">00 / SIMULADOR VR EN PRIMERA PERSONA (POV 360°)</span>
-              <h2 data-i18n="vr.title">Así se ve tu viaje por Lima en bicicleta, a pie o en auto (y lo que ahorras en cada tramo)</h2>
+              <span class="section-index mono-tag">00 / SIMULADOR VR 3D REALISTA (POV 360°)</span>
+              <h2 data-i18n="vr.title">Vive tu viaje en VR: en bici, a pie, scooter o auto</h2>
             </div>
-            <p class="intro-note" data-i18n="vr.intro">
-              Cambia de vehículo en tiempo real dentro del visor VR, arrastra con el mouse para mirar en 360° o activa el Modo Gafas Estereoscópicas (Doble Lente) para comparar cómo fluyes por la ciclovía o la vereda frente al tráfico vehicular.
-            </p>
+            <div class="street-signs-cluster" aria-hidden="true">
+              <span class="street-sign sign-green">🚲 CICLOVÍA AV. AREQUIPA</span>
+              <span class="street-sign sign-amber">⚡ +3.57 PTS / KM</span>
+              <span class="street-sign sign-dark">🥽 VISTA 360° REALISTA</span>
+            </div>
           </div>
 
           <div class="vr-commute-card depth-3d-card" id="vr-commute-shell" data-stereo="false">
@@ -489,14 +516,14 @@
               </div>
             </div>
 
-            <!-- Visor 3D POV con Cabina del Vehículo + Tarjetas Flotantes de Ahorro -->
+            <!-- Visor 3D POV con Cabina Realista del Vehículo + Tarjetas Flotantes de Ahorro -->
             <div class="vr-commute-viewport" id="vr-commute-viewport">
               <canvas
                 id="vr-commute-canvas"
                 width="1120"
-                height="460"
+                height="480"
                 tabindex="0"
-                aria-label="Visor de Realidad Virtual: arrastra hacia los lados para mirar en 360 grados mientras avanzas en bicicleta, a pie, scooter o auto"
+                aria-label="Visor de Realidad Virtual 3D realista: arrastra hacia los lados para mirar en 360 grados mientras avanzas en bicicleta, a pie, scooter o auto"
               ></canvas>
 
               <!-- División Estereoscópica de Lentes VR (cuando Gafas VR está activo) -->
@@ -509,7 +536,7 @@
               <!-- HUD Flotante Superior: Telemetría de Ahorro del Viaje Actual -->
               <div class="vr-savings-hud">
                 <div class="vr-hud-box">
-                  <span class="mono-tag" data-i18n="vr.hud_co2_label">CO₂ FRENTE AL AUTO (4.2 KM)</span>
+                  <span class="mono-tag" data-i18n="vr.hud_co2_label">CO₂ FRENTE AL AUTO</span>
                   <strong class="mono-num" id="vr-hud-co2">-638 g CO₂ ahorrados</strong>
                 </div>
                 <div class="vr-hud-box">
@@ -521,7 +548,7 @@
                   <strong class="mono-num" id="vr-hud-money">S/ 8.50 ahorrados · 115 kcal</strong>
                 </div>
                 <div class="vr-hud-box highlight">
-                  <span class="mono-tag" data-i18n="vr.hud_pts_label">RECOMPENSA ECOCOMMUTE</span>
+                  <span class="mono-tag" data-i18n="vr.hud_pts_label">RECOMPENSA APP</span>
                   <strong class="mono-num" id="vr-hud-pts">+15 pts · ♻ 8 PET</strong>
                 </div>
               </div>
@@ -529,14 +556,101 @@
               <!-- Instrucción inferior dentro del visor -->
               <div class="vr-bottom-caption">
                 <span class="mono-tag" id="vr-pov-caption">
-                  🚲 VISTA CICLISTA: Avanzas libre por la ciclovía segregada de Av. Arequipa mientras a la derecha la fila de autos permanece detenida.
+                  🚲 CICLOVÍA AV. AREQUIPA: Avanzas a 18 km/h con GPS en el manubrio mientras el tráfico de autos se detiene a tu derecha.
                 </span>
-                <span class="mono-tag vr-drag-pill" data-i18n="vr.drag_pill">🖱️ ARRASTRA EN 360° PARA MIRAR ALREDEDOR · ⌨️ FLECHAS / WASD</span>
+                <span class="mono-tag vr-drag-pill" data-i18n="vr.drag_pill">🖱️ ARRASTRA EN 360° · ⌨️ WASD / FLECHAS</span>
+              </div>
+            </div>
+
+            <!-- Vitrina Decorativa de Elementos de la Aplicación EcoCommute (Medallas, Racha y Recompensas) -->
+            <div class="app-decor-showcase-grid" aria-label="Insignias, racha y recompensas de la aplicación EcoCommute">
+              <!-- Bloque Decorativo 1: Medallas Desbloqueables en la App -->
+              <div class="app-widget-card">
+                <div class="app-widget-head">
+                  <span class="mono-tag" data-i18n="decor.medals_title">🏅 MEDALLAS DE LA APP</span>
+                  <span class="widget-pill mono-num">5 / 12</span>
+                </div>
+                <div class="medals-visual-strip">
+                  <div class="medal-hex is-unlocked" title="Primer Pedalazo — 1er viaje en bici">
+                    <span class="medal-emoji">🚲</span>
+                    <small data-i18n="decor.m1">1er Pedal</small>
+                  </div>
+                  <div class="medal-hex is-unlocked" title="Guardián Urbano — 10 kg CO2 evitados">
+                    <span class="medal-emoji">🌿</span>
+                    <small data-i18n="decor.m2">-10kg CO₂</small>
+                  </div>
+                  <div class="medal-hex is-unlocked" title="Racha Imparable — 7 días sin auto">
+                    <span class="medal-emoji">⚡</span>
+                    <small data-i18n="decor.m3">Racha 7D</small>
+                  </div>
+                  <div class="medal-hex is-unlocked" title="Reciclador Vial — 100 botellas PET equivalentes">
+                    <span class="medal-emoji">♻️</span>
+                    <small data-i18n="decor.m4">100 PET</small>
+                  </div>
+                  <div class="medal-hex is-locked" title="Leyenda de Lima — 500 km sostenibles">
+                    <span class="medal-emoji">🏆</span>
+                    <small data-i18n="decor.m5">500 km</small>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Bloque Decorativo 2: Racha Semanal & Meta Activa de la App -->
+              <div class="app-widget-card">
+                <div class="app-widget-head">
+                  <span class="mono-tag" data-i18n="decor.streak_title">🔥 RACHA SEMANAL EN LA APP</span>
+                  <span class="widget-pill eco mono-num">84% META</span>
+                </div>
+                <div class="streak-days-visual" aria-hidden="true">
+                  <span class="day-bubble done">L<i>✓</i></span>
+                  <span class="day-bubble done">M<i>✓</i></span>
+                  <span class="day-bubble done">X<i>✓</i></span>
+                  <span class="day-bubble done">J<i>✓</i></span>
+                  <span class="day-bubble done">V<i>✓</i></span>
+                  <span class="day-bubble active">S<i>🚲</i></span>
+                  <span class="day-bubble">D<i>·</i></span>
+                </div>
+              </div>
+
+              <!-- Bloque Decorativo 3: Vales y Recompensas Canjeables con Puntos Verdes -->
+              <div class="app-widget-card">
+                <div class="app-widget-head">
+                  <span class="mono-tag" data-i18n="decor.rewards_title">🎁 TIENDA DE PUNTOS VERDES</span>
+                  <span class="widget-pill warm mono-num">1,240 PTS</span>
+                </div>
+                <div class="rewards-mini-tickets">
+                  <div class="mini-reward-ticket">
+                    <span>☕</span>
+                    <strong data-i18n="decor.r1">Café Aliado</strong>
+                    <em class="mono-num">150 pts</em>
+                  </div>
+                  <div class="mini-reward-ticket">
+                    <span>🔧</span>
+                    <strong data-i18n="decor.r2">Taller Bici</strong>
+                    <em class="mono-num">400 pts</em>
+                  </div>
+                  <div class="mini-reward-ticket">
+                    <span>🔦</span>
+                    <strong data-i18n="decor.r3">Kit LED Vial</strong>
+                    <em class="mono-num">550 pts</em>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
+
+      <!-- Separador Decorativo de Ciclovía con Vehículos en Movimiento -->
+      <div class="road-decor-divider" aria-hidden="true">
+        <div class="road-decor-line"></div>
+        <div class="road-decor-badges">
+          <span class="road-sign-chip">🚲 CICLOVÍA PREFERENCIAL</span>
+          <span class="road-moving-icon">🛴</span>
+          <span class="road-sign-chip">🌱 ZONA DE BAJAS EMISIONES · LIMA</span>
+          <span class="road-moving-icon">🚲</span>
+          <span class="road-sign-chip">🚌 CORREDOR INTEGRADO</span>
+        </div>
+      </div>
 
       <!-- ==================== SECCIÓN 01: GARAJE & COMPARADOR VEHICULAR 3D DE LIMA ==================== -->
       <section id="vehiculos" class="section deferred-section" aria-label="Comparador interactivo 3D de vehículos y ocupación vial en Lima">
@@ -544,11 +658,13 @@
           <div class="section-intro">
             <div>
               <span class="section-index mono-tag">01 / FLOTA URBANA & COMPARADOR MODAL 3D</span>
-              <h2 data-i18n="veh.title">Compara cada vehículo en las calles de Lima: espacio vial, velocidad y emisiones</h2>
+              <h2 data-i18n="veh.title">Compara cada vehículo en 3D: espacio, velocidad y CO₂</h2>
             </div>
-            <p class="intro-note" data-i18n="veh.intro">
-              Selecciona un medio de transporte o gira la plataforma 3D con el mouse para inspeccionar cuánto espacio ocupa en la pista, a qué velocidad avanza en hora punta y cuánto carbono emite por kilómetro.
-            </p>
+            <div class="street-signs-cluster" aria-hidden="true">
+              <span class="street-sign sign-green">🚲 1.5 m² / VIAJERO</span>
+              <span class="street-sign sign-amber">🚌 1 BUS = 35 AUTOS</span>
+              <span class="street-sign sign-rust">🚗 152g CO₂ / KM</span>
+            </div>
           </div>
 
           <div class="vehicle-studio-layout">
@@ -595,14 +711,14 @@
                   </div>
                 </div>
                 <div class="turntable-drag-hint mono-tag" data-i18n="veh.drag_hint">
-                  ↔ ARRASTRA CON EL MOUSE PARA ROTAR EL VEHÍCULO EN 3D · HAZ CLIC EN CUALQUIER MODO ABAJO
+                  ↔ ARRASTRA PARA ROTAR EN 3D · ELIGE UN VEHÍCULO
                 </div>
               </div>
 
               <!-- Simulador en Vivo de Flujo Vial en 1 Cuadra de Lima (<canvas> con pausa off-screen) -->
               <div class="lane-flow-simulator">
                 <div class="lane-flow-header">
-                  <span class="mono-tag" data-i18n="veh.lane_sim_title">FLUJO EN VIVO: ¿CÓMO SE MUEVEN 30 PERSONAS EN 1 CUADRA DE AV. JAVIER PRADO?</span>
+                  <span class="mono-tag" data-i18n="veh.lane_sim_title">FLUJO EN VIVO · 30 VIAJEROS EN AV. JAVIER PRADO</span>
                   <strong class="mono-num" id="veh-lane-summary">30 ciclistas = 0 g CO₂ · Fluidez continua</strong>
                 </div>
                 <canvas
@@ -614,63 +730,83 @@
               </div>
             </div>
 
-            <!-- Columna Derecha: Selector de los 4 Medios de Transporte y Ficha Técnica -->
+            <!-- Columna Derecha: Selector Visual de los 4 Medios de Transporte con Chips Decorativos -->
             <div class="vehicle-selector-column">
-              <div class="vehicle-cards-stack" role=" radiogroup" aria-label="Seleccionar medio de transporte">
+              <div class="vehicle-cards-stack" role="radiogroup" aria-label="Seleccionar medio de transporte">
                 <button type="button" class="vehicle-option-card is-active spring-btn" data-vehicle="bike">
                   <div class="veh-opt-head">
                     <span class="veh-opt-icon" aria-hidden="true">🚲</span>
                     <div>
-                      <span class="mono-tag">MODO RECOMENDADO · 0 EMISIONES</span>
-                      <h3 data-i18n="veh.mode_bike">Bicicleta Urbana / Ciclovía</h3>
+                      <span class="mono-tag">CICLOVÍA SEGREGADA</span>
+                      <h3 data-i18n="veh.mode_bike">Bicicleta Urbana</h3>
                     </div>
                     <strong class="mono-num veh-opt-co2 eco">0 g/km</strong>
                   </div>
                   <p data-i18n="veh.mode_bike_desc">
-                    Evita los cuellos de botella de Av. Arequipa, Salaverry y Primavera. Ocupa 12 veces menos espacio vial que un automóvil y genera el máximo de Puntos Verdes.
+                    Av. Arequipa, Salaverry y Primavera sin tráfico · 12× menos espacio vial.
                   </p>
+                  <div class="veh-mini-badges" aria-hidden="true">
+                    <span>⚡ 18 km/h</span>
+                    <span>📐 1.5 m²</span>
+                    <span class="chip-pts">✦ +15 pts</span>
+                  </div>
                 </button>
 
                 <button type="button" class="vehicle-option-card spring-btn" data-vehicle="scooter">
                   <div class="veh-opt-head">
                     <span class="veh-opt-icon" aria-hidden="true">🛴</span>
                     <div>
-                      <span class="mono-tag">MICROMOVILIDAD ELÉCTRICA · INTERMODAL</span>
-                      <h3 data-i18n="veh.mode_scooter">Scooter Eléctrico / Patinete</h3>
+                      <span class="mono-tag">ÚLTIMA MILLA ELÉCTRICA</span>
+                      <h3 data-i18n="veh.mode_scooter">Scooter Eléctrico</h3>
                     </div>
                     <strong class="mono-num veh-opt-co2 eco">0 g/km*</strong>
                   </div>
                   <p data-i18n="veh.mode_scooter_desc">
-                    Ideal para conectar el último kilómetro entre estaciones del Metropolitano o Línea 1 del Metro y el campus universitario sin esfuerzo físico en pendientes.
+                    Conecta estaciones del Metropolitano y Línea 1 del Metro sin esfuerzo en cuestas.
                   </p>
+                  <div class="veh-mini-badges" aria-hidden="true">
+                    <span>⚡ 20 km/h</span>
+                    <span>📐 1.2 m²</span>
+                    <span class="chip-pts">✦ +14 pts</span>
+                  </div>
                 </button>
 
                 <button type="button" class="vehicle-option-card spring-btn" data-vehicle="transit">
                   <div class="veh-opt-head">
                     <span class="veh-opt-icon" aria-hidden="true">🚌</span>
                     <div>
-                      <span class="mono-tag">CORREDOR SEGREGADO & METRO LÍNEA 1</span>
-                      <h3 data-i18n="veh.mode_transit">Transporte Masivo (Bus / Tren)</h3>
+                      <span class="mono-tag">CORREDOR & METRO LÍNEA 1</span>
+                      <h3 data-i18n="veh.mode_transit">Transporte Masivo</h3>
                     </div>
                     <strong class="mono-num veh-opt-co2 mid">38 g/km</strong>
                   </div>
                   <p data-i18n="veh.mode_transit_desc">
-                    En tramos largos interdistritales, compartir unidad reduce un 75% la huella por pasajero frente al auto individual y libera decenas de metros de calzada.
+                    Reduce 75% las emisiones por pasajero en tramos largos interdistritales.
                   </p>
+                  <div class="veh-mini-badges" aria-hidden="true">
+                    <span>⚡ 24 km/h</span>
+                    <span>📐 0.8 m²</span>
+                    <span class="chip-pts">✦ +10 pts</span>
+                  </div>
                 </button>
 
                 <button type="button" class="vehicle-option-card spring-btn" data-vehicle="car">
                   <div class="veh-opt-head">
                     <span class="veh-opt-icon" aria-hidden="true">🚗</span>
                     <div>
-                      <span class="mono-tag">LÍNEA BASE DE REFERENCIA (COMBUSTIÓN)</span>
-                      <h3 data-i18n="veh.mode_car">Automóvil Particular en Tráfico</h3>
+                      <span class="mono-tag">LÍNEA BASE COMBUSTIÓN</span>
+                      <h3 data-i18n="veh.mode_car">Auto en Hora Punta</h3>
                     </div>
                     <strong class="mono-num veh-opt-co2 danger">152 g/km</strong>
                   </div>
                   <p data-i18n="veh.mode_car_desc">
-                    Con una ocupación media de 1.2 personas por vehículo en Lima, consume 18 m² de vía pública, avanza a 12 km/h en hora punta y emite 152 g de CO₂ cada kilómetro.
+                    Ocupación media de 1.2 personas, consume 18 m² y avanza a 12 km/h en congestión.
                   </p>
+                  <div class="veh-mini-badges" aria-hidden="true">
+                    <span>🐢 12 km/h</span>
+                    <span>📐 18.0 m²</span>
+                    <span class="chip-danger">0 pts</span>
+                  </div>
                 </button>
               </div>
             </div>
@@ -684,11 +820,13 @@
           <div class="section-intro">
             <div>
               <span class="section-index mono-tag">02 / BOLETO DE CAMBIO MODAL & IMPACTO ANUAL</span>
-              <h2 data-i18n="alchemy.title">¿Cuánto ahorras al año dejando el auto estacionado algunos días por semana?</h2>
+              <h2 data-i18n="alchemy.title">Tu boleto de ahorro anual sin auto</h2>
             </div>
-            <p class="intro-note" data-i18n="alchemy.intro">
-              Ajusta tus viajes por semana y la distancia de tu ruta habitual en Lima para emitir tu boleto de impacto anual en carbono evitado, reciclaje equivalente y puntos canjeables.
-            </p>
+            <div class="street-signs-cluster" aria-hidden="true">
+              <span class="street-sign sign-green">♳ 82.8g CO₂ / PET</span>
+              <span class="street-sign sign-amber">🌳 21 kg CO₂ / ÁRBOL</span>
+              <span class="street-sign sign-dark">🎟️ BOLETO TROQUELADO</span>
+            </div>
           </div>
 
           <div class="alchemy-workbench">
@@ -743,7 +881,7 @@
                   <span>kg CO₂ / año</span>
                 </div>
                 <p class="alchemy-formula mono-tag">
-                  FÓRMULA: VIAJES × KM × 152g CO₂/km × 52 SEMANAS
+                  VIAJES × KM × 152g CO₂/km × 52 SEMANAS
                 </p>
               </div>
             </div>
@@ -753,13 +891,13 @@
               <div class="unified-cutout-card depth-3d-card" data-tilt-3d data-material="pet">
                 <div class="cutout-card-body">
                   <div class="cutout-top z-float-mid">
-                    <span class="mono-tag weathered-specimen-tag">BOLETO 01 // EQUIVALENCIA PET</span>
+                    <span class="mono-tag weathered-specimen-tag">BOLETO 01 // PET</span>
                     <span class="recycle-code">♳ PET-1</span>
                   </div>
                   <strong class="mono-num cutout-figure z-float-high" id="eq-pet-bottles">2,406</strong>
-                  <h3 class="z-float-mid" data-i18n="alchemy.card1_title">Botellas plásticas PET recicladas</h3>
+                  <h3 class="z-float-mid" data-i18n="alchemy.card1_title">Botellas PET recicladas</h3>
                   <p class="z-float-mid" data-i18n="alchemy.card1_desc">
-                    Equivalente en huella de carbono evitada al recuperar botellas de 500 ml (82.8 g CO₂ evitados por envase).
+                    82.8 g CO₂ ahorrados por envase de 500 ml.
                   </p>
                   <div class="visual-token-grid z-float-high" id="pet-token-visualizer" aria-hidden="true"></div>
                 </div>
@@ -769,14 +907,17 @@
               <div class="unified-cutout-card depth-3d-card" data-tilt-3d data-material="alu">
                 <div class="cutout-card-body">
                   <div class="cutout-top z-float-mid">
-                    <span class="mono-tag weathered-specimen-tag">BOLETO 02 // ENERGÍA METALÚRGICA</span>
+                    <span class="mono-tag weathered-specimen-tag">BOLETO 02 // ALUMINIO</span>
                     <span class="recycle-code">♵ ALU-41</span>
                   </div>
                   <strong class="mono-num cutout-figure z-float-high" id="eq-alu-cans">1,172</strong>
-                  <h3 class="z-float-mid" data-i18n="alchemy.card2_title">Latas de aluminio recuperadas</h3>
+                  <h3 class="z-float-mid" data-i18n="alchemy.card2_title">Latas recuperadas</h3>
                   <p class="z-float-mid" data-i18n="alchemy.card2_desc">
-                    Ahorro energético equivalente a reciclar latas frente a fundir aluminio primario desde cero (170 g CO₂/lata).
+                    170 g CO₂ evitados frente a bauxita virgen.
                   </p>
+                  <div class="ticket-icon-row z-float-high" aria-hidden="true">
+                    <span>🥫</span><span>🥫</span><span>🥫</span><span>🥫</span><span>🥫</span><span>♻️</span>
+                  </div>
                 </div>
                 <div class="cutout-card-accent" aria-hidden="true"></div>
               </div>
@@ -784,14 +925,17 @@
               <div class="unified-cutout-card depth-3d-card" data-tilt-3d data-material="trees">
                 <div class="cutout-card-body">
                   <div class="cutout-top z-float-mid">
-                    <span class="mono-tag weathered-specimen-tag">BOLETO 03 // CAPTURA ARBÓREA</span>
+                    <span class="mono-tag weathered-specimen-tag">BOLETO 03 // FLORA</span>
                     <span class="recycle-code">🌳 BIO-CO₂</span>
                   </div>
                   <strong class="mono-num cutout-figure z-float-high" id="eq-trees">9.5</strong>
-                  <h3 class="z-float-mid" data-i18n="alchemy.card3_title">Árboles urbanos absorbiendo 1 año</h3>
+                  <h3 class="z-float-mid" data-i18n="alchemy.card3_title">Árboles urbanos / año</h3>
                   <p class="z-float-mid" data-i18n="alchemy.card3_desc">
-                    Cantidad de árboles adultos trabajando durante 365 días para fijar el mismo volumen de CO₂ vehicular (21 kg/año).
+                    Absorción anual equivalente (21 kg CO₂/árbol).
                   </p>
+                  <div class="ticket-icon-row z-float-high" aria-hidden="true">
+                    <span>🌳</span><span>🌲</span><span>🌳</span><span>🌲</span><span>🌿</span>
+                  </div>
                 </div>
                 <div class="cutout-card-accent" aria-hidden="true"></div>
               </div>
@@ -799,14 +943,17 @@
               <div class="unified-cutout-card depth-3d-card" data-tilt-3d data-material="pts">
                 <div class="cutout-card-body">
                   <div class="cutout-top z-float-mid">
-                    <span class="mono-tag weathered-specimen-tag">BOLETO 04 // SALDO DE VIAJERO</span>
+                    <span class="mono-tag weathered-specimen-tag">BOLETO 04 // SALDO APP</span>
                     <span class="recycle-code">✦ ECO-PTS</span>
                   </div>
                   <strong class="mono-num cutout-figure val-warm z-float-high" id="eq-green-points">+4,680</strong>
                   <h3 class="z-float-mid" data-i18n="alchemy.card4_title">Puntos Verdes canjeables</h3>
                   <p class="z-float-mid" data-i18n="alchemy.card4_desc">
-                    Puntos acumulados en tu cuenta de EcoCommute para mantenimiento de bicicleta, accesorios viales y comercios aliados.
+                    Canjeables en talleres de bici y cafés aliados.
                   </p>
+                  <div class="ticket-icon-row z-float-high" aria-hidden="true">
+                    <span>☕</span><span>🔧</span><span>🔦</span><span>🎒</span><span>🏅</span>
+                  </div>
                 </div>
                 <div class="cutout-card-accent" aria-hidden="true"></div>
               </div>
@@ -822,28 +969,32 @@
             <span class="section-index mono-tag">03 / DIAGNÓSTICO VIAL DE LIMA</span>
             <h2 data-i18n="story.title">Por qué existe</h2>
             <p class="sidebar-caption" data-i18n="story.sidebar_note">
-              Un ciudadano en Lima pierde más de 150 horas al año en congestión vehicular, mientras las emisiones del transporte siguen fuera del radar en las apps de mapas habituales.
+              +150 horas perdidas al año en tráfico en Lima mientras el CO₂ vehicular queda oculto en los mapas tradicionales.
             </p>
+            <div class="sidebar-decor-signs" aria-hidden="true">
+              <span class="street-sign sign-rust">🚗 150 H/AÑO EN TRÁFICO</span>
+              <span class="street-sign sign-green">🚲 +32% MÁS RÁPIDO EN HORA PUNTA</span>
+            </div>
           </div>
 
           <div class="story">
             <p class="story-lead" data-i18n="story.p1">
-              En Lima la decisión de cómo movernos se toma por rapidez, costo o costumbre. Nadie ve cuánto CO₂ produce el trayecto que acaba de elegir, y las herramientas de mapas simplemente comparten tiempo y tráfico: el impacto ambiental queda fuera de la pantalla.
+              Los mapas habituales solo muestran tráfico y minutos, dejando invisible la huella ambiental de cada viaje.
             </p>
             <p class="story-body">
-              <span data-i18n="story.p2_pre">Lo que falta no es otro mapa. Falta ver el costo ambiental de la decisión </span>
+              <span data-i18n="story.p2_pre">EcoCommute muestra el ahorro de CO₂ </span>
               <span class="underline" data-i18n="story.p2_under">antes</span>
-              <span data-i18n="story.p2_post"> de tomarla, y algo que te haga querer repetir la alternativa buena la semana siguiente. Eso es lo que intentamos construir.</span>
+              <span data-i18n="story.p2_post"> de salir y premia cada kilómetro recorrido sin auto.</span>
             </p>
 
             <div class="comparison-strip" aria-label="Comparación entre navegadores tradicionales y EcoCommute">
               <div class="compare-col compare-legacy depth-3d-card" data-tilt-3d>
-                <span class="compare-tag z-float-mid" data-i18n="story.comp_old_tag">Navegadores de tráfico tradicionales</span>
-                <p class="z-float-mid" data-i18n="story.comp_old_desc">Optimizan únicamente para el automóvil, ocultan la huella de carbono por kilómetro y no premian el cambio hacia modos limpios.</p>
+                <span class="compare-tag z-float-mid" data-i18n="story.comp_old_tag"> ❌ Apps de mapas tradicionales</span>
+                <p class="z-float-mid" data-i18n="story.comp_old_desc">Priorizan el auto, ocultan los gramos de CO₂/km y no premian el cambio modal.</p>
               </div>
               <div class="compare-col compare-eco depth-3d-card" data-tilt-3d>
-                <span class="compare-tag z-float-mid" data-i18n="story.comp_new_tag">Enfoque de movilidad EcoCommute</span>
-                <p class="z-float-mid" data-i18n="story.comp_new_desc">Compara tiempos reales en bici, a pie o transporte público, cuantifica los gramos de CO₂ evitados antes de salir y convierte cada viaje en puntos.</p>
+                <span class="compare-tag z-float-mid" data-i18n="story.comp_new_tag"> ✅ Enfoque EcoCommute</span>
+                <p class="z-float-mid" data-i18n="story.comp_new_desc">Ruteo OSRM + Gemini 1.5 Flash, cálculo exacto de CO₂ evitado y Puntos Verdes canjeables.</p>
               </div>
             </div>
 
@@ -851,7 +1002,7 @@
               <p data-i18n="story.quote">
                 «Si el ahorro de CO₂ se ve igual de concreto que los minutos del viaje, la gente lo considera.»
               </p>
-              <footer data-i18n="story.quote_author">— El equipo EcoCommute, probando la app con usuarios en Lima</footer>
+              <footer data-i18n="story.quote_author">— Equipo EcoCommute · UPC</footer>
             </blockquote>
           </div>
         </div>
@@ -863,11 +1014,13 @@
           <div class="section-intro">
             <div>
               <span class="section-index mono-tag">04 / ARQUITECTURA DE TRANSPORTE EN PRODUCCIÓN</span>
-              <h2 data-i18n="feat.title">Qué hace hoy la plataforma</h2>
+              <h2 data-i18n="feat.title">Módulos activos en la app</h2>
             </div>
-            <p class="intro-note" data-i18n="feat.intro">
-              Seis módulos operativos en producción sobre Spring Boot 3.3, PostgreSQL, OSRM y Google Gemini 1.5 Flash, respaldados por 28 tests automatizados.
-            </p>
+            <div class="street-signs-cluster" aria-hidden="true">
+              <span class="street-sign sign-dark">⚙️ SPRING BOOT 3.3</span>
+              <span class="street-sign sign-green">🧪 28/28 TESTS</span>
+              <span class="street-sign sign-amber">✦ GEMINI 1.5 FLASH</span>
+            </div>
           </div>
 
           <div class="bento-grid feature-list" id="stagger-bento-grid">
@@ -879,7 +1032,7 @@
                 </div>
                 <h3 data-i18n="feat.routes_title">Rutas sostenibles y Google Gemini</h3>
                 <p data-i18n="feat.routes_desc">
-                  Introduces el origen y el destino y la app arma alternativas con OSRM: qué tan lejos es, cuánto tarda cada medio de transporte y qué te conviene según tu historial. La recomendación asistida por Inteligencia Artificial (Google Gemini 1.5 Flash) explica en lenguaje simple por qué sugiere esa ruta.
+                  Trazado multimodal con OSRM y copiloto IA (Google Gemini 1.5 Flash) que recomienda la vía más rápida y limpia.
                 </p>
               </div>
               <div class="bento-lead-visual z-float-high" aria-hidden="true">
@@ -904,7 +1057,7 @@
               </div>
               <h3 class="z-float-mid" data-i18n="feat.trips_title">Viajes y cálculo de CO₂</h3>
               <p class="z-float-mid" data-i18n="feat.trips_desc">
-                Registras el viaje y la app calcula el CO₂ ahorrado frente al auto (152 g CO₂/km ahorrados) y los puntos verdes que ganas.
+                Cuantifica el CO₂ evitado frente al auto (152 g/km) y acredita Puntos Verdes al instante.
               </p>
               <div class="bento-micro-viz z-float-high" aria-hidden="true">
                 <div class="emission-bars">
@@ -934,7 +1087,7 @@
               </div>
               <h3 class="z-float-mid" data-i18n="feat.dash_title">Dashboard de impacto</h3>
               <p class="z-float-mid" data-i18n="feat.dash_desc">
-                CO₂ acumulado, distancia recorrida, evolución semanal, árboles equivalentes salvados e historial de viajes en gráficos legibles.
+                Métricas semanales de CO₂ ahorrado, kilómetros limpios y árboles equivalentes.
               </p>
               <div class="bento-micro-viz z-float-high" aria-hidden="true">
                 <div class="mini-bars-chart">
@@ -956,7 +1109,7 @@
               </div>
               <h3 class="z-float-mid" data-i18n="feat.rank_title">Ranking distrital</h3>
               <p class="z-float-mid" data-i18n="feat.rank_desc">
-                Compara tu impacto ecológico con ciclistas y peatones de tu distrito en Lima para fortalecer la comunidad activa.
+                Tabla de posiciones en vivo entre ciclistas y peatones de cada distrito limeño.
               </p>
               <div class="bento-micro-viz z-float-high" aria-hidden="true">
                 <div class="mini-leaderboard">
@@ -974,7 +1127,7 @@
               </div>
               <h3 class="z-float-mid" data-i18n="feat.badges_title">Medallas y recompensas</h3>
               <p class="z-float-mid" data-i18n="feat.badges_desc">
-                Las medallas se desbloquean automáticamente al alcanzar hitos ecológicos; los puntos se canjean por recompensas sostenibles.
+                Insignias automáticas por hitos y catálogo de recompensas con bloqueo pesimista.
               </p>
               <div class="bento-micro-viz z-float-high" aria-hidden="true">
                 <div class="badge-chips-demo">
@@ -992,7 +1145,7 @@
               </div>
               <h3 class="z-float-mid" data-i18n="feat.challenges_title">Retos semanales</h3>
               <p class="z-float-mid" data-i18n="feat.challenges_desc">
-                Desafíos mensuales y metas sostenibles administradas dinámicamente desde el panel de gestión para sostener el hábito.
+                Metas comunitarias semanales que multiplican tus Puntos Verdes.
               </p>
               <div class="bento-micro-viz z-float-high" aria-hidden="true">
                 <div class="challenge-progress-demo">
@@ -1009,9 +1162,9 @@
           <!-- Tarjeta de Alineación con ODS 11 (Meta 11.2) e Inteligencia Artificial -->
           <div class="ods-card depth-3d-card" data-tilt-3d role="region" aria-label="Alineación con ODS 11 e Inteligencia Artificial">
             <div class="ods-card-content z-float-mid">
-              <h3 data-i18n="ods.title">Alineados con el ODS 11 (Meta 11.2) e Inteligencia Artificial</h3>
+              <h3 data-i18n="ods.title">ODS 11 (Meta 11.2) + Google Gemini 1.5 Flash</h3>
               <p data-i18n="ods.desc">
-                EcoCommute responde de manera directa al Objetivo de Desarrollo Sostenible 11 de la ONU (Meta 11.2: Proporcionar acceso a sistemas de transporte seguros, asequibles, accesibles y sostenibles para todos). Además, optimizamos la toma de decisiones con Google Gemini 1.5 Flash para brindar explicaciones contextuales.
+                Acceso a transporte seguro, asequible y sostenible en Lima con recomendaciones explicables por IA y ruteo abierto OSRM.
               </p>
               <div class="ods-card-badges z-float-high">
                 <span class="badge-pill badge-ods" data-i18n="ods.badge_ods">ODS 11 · Meta 11.2: Movilidad Sostenible</span>
@@ -1030,7 +1183,7 @@
           <div class="section-intro">
             <div>
               <span class="section-index mono-tag">05 / INTERFAZ DEL PRODUCTO</span>
-              <h2 data-i18n="demo.title">Cómo se ve</h2>
+              <h2 data-i18n="demo.title">Pantallas de la aplicación</h2>
             </div>
             <div class="showcase-tabs" role="tablist" aria-label="Selector de vista de pantallas">
               <button
@@ -1086,7 +1239,7 @@
               <figcaption class="z-float-mid">
                 <span class="caption-tag mono-tag">VISTA 01 · PLANIFICADOR</span>
                 <p data-i18n="demo.cap1">
-                  Planificación de rutas sostenibles con ubicación, medios de transporte, alternativas y optimización asistida por Google Gemini.
+                  Comparador multimodal OSRM con sugerencias de Google Gemini 1.5 Flash.
                 </p>
               </figcaption>
             </figure>
@@ -1111,7 +1264,7 @@
                 <figcaption class="z-float-mid">
                   <span class="caption-tag mono-tag">VISTA 02 · ANALÍTICA DE IMPACTO</span>
                   <p data-i18n="demo.cap2">
-                    Dashboard de impacto con CO₂ ahorrado, viajes, árboles equivalentes, medallas e historial.
+                    CO₂ evitado, árboles equivalentes, medallas y bitácora semanal.
                   </p>
                 </figcaption>
               </figure>
@@ -1126,24 +1279,24 @@
           <div class="impact-line">
             <div>
               <span class="section-index mono-tag">06 / MOVILIDAD SOSTENIBLE ONU</span>
-              <h2 data-i18n="impact.title">Estamos alineados con la Meta 11.2 del ODS 11</h2>
+              <h2 data-i18n="impact.title">Meta 11.2 del ODS 11</h2>
             </div>
             <div>
               <p data-i18n="impact.desc">
-                Transporte seguro, accesible, asequible y sostenible para todas las personas. El usuario transforma su huella de carbono en progreso visible, y la gamificación (retos, medallas y rankings) está para sostener el hábito más allá de la primera semana.
+                Movilidad segura, limpia y premiada con gamificación sin rastreo invasivo.
               </p>
               <div class="impact-pillars">
                 <div class="pillar-item depth-3d-card" data-tilt-3d>
                   <strong class="mono-num z-float-high">0 g</strong>
-                  <span class="z-float-mid" data-i18n="impact.p1">Emisiones directas en bicicleta o caminata</span>
+                  <span class="z-float-mid" data-i18n="impact.p1">Emisiones directas en bici o a pie</span>
                 </div>
                 <div class="pillar-item depth-3d-card" data-tilt-3d>
                   <strong class="mono-num z-float-high">Ley 29733</strong>
-                  <span class="z-float-mid" data-i18n="impact.p2">Privacidad por diseño sin rastreo en segundo plano</span>
+                  <span class="z-float-mid" data-i18n="impact.p2">Privacidad sin rastreo en 2do plano</span>
                 </div>
                 <div class="pillar-item depth-3d-card" data-tilt-3d>
                   <strong class="mono-num z-float-high">Open Source</strong>
-                  <span class="z-float-mid" data-i18n="impact.p3">Cartografía abierta sobre OpenStreetMap</span>
+                  <span class="z-float-mid" data-i18n="impact.p3">Cartografía abierta OpenStreetMap</span>
                 </div>
               </div>
             </div>
@@ -1160,7 +1313,7 @@
               <h2 data-i18n="team.title">Quiénes lo hacemos</h2>
             </div>
             <p class="intro-note" data-i18n="team.intro">
-              Seis estudiantes de Ingeniería de Sistemas de la UPC, NRC 8247, Ciclo 2026-2. Cada quien una parte del producto; todo el proceso en el repositorio.
+              Ingeniería de Sistemas UPC · NRC 8247 · Ciclo 2026-2.
             </p>
           </div>
 
@@ -1224,7 +1377,7 @@
             <span class="section-index mono-tag">08 / CONTACTO DIRECTO</span>
             <h2 data-i18n="contact.title">Pruébalo y cuéntanos</h2>
             <p class="intro-note" data-i18n="contact.intro">
-              Si algo no te convence o tienes una idea para Lima, escríbenos: leemos todo.
+              ¿Ideas para las ciclovías de Lima? Escríbenos directo.
             </p>
             <ul class="contact-links">
               <li>
@@ -1312,6 +1465,6 @@
       </div>
     </dialog>
 
-    <script src="./i18n.js?v=20261023-v7" defer></script>
+    <script src="./i18n.js?v=20261023-v8" defer></script>
   </body>
 </html>

@@ -2346,6 +2346,356 @@ blockquote footer {
   margin-top: 1.25rem;
 }
 
+/* ==================== ELEMENTOS DECORATIVOS DE LA APP ECOCOMMUTE ==================== */
+.hero-app-decor-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.65rem;
+  margin-bottom: 1.2rem;
+}
+
+.app-decor-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.55rem 0.7rem;
+  background: var(--surface-card);
+  border: 1.5px solid var(--line-strong);
+  border-radius: 10px;
+  box-shadow: 2px 2px 0px var(--line-strong);
+}
+
+.app-decor-icon {
+  font-size: 1.35rem;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: var(--surface-alt);
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.app-decor-pill small {
+  display: block;
+  font-size: 0.6rem;
+  color: var(--ink-muted);
+  line-height: 1.1;
+}
+
+.app-decor-pill strong {
+  font-size: 0.82rem;
+  color: var(--ink);
+  display: block;
+  margin-top: 0.12rem;
+}
+
+/* Señales viales decorativas estilo Lima / Ciclovía */
+.street-signs-cluster,
+.sidebar-decor-signs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.sidebar-decor-signs {
+  margin-top: 1rem;
+}
+
+.street-sign {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.36rem 0.72rem;
+  border-radius: 6px;
+  border: 1.5px solid var(--ink);
+  box-shadow: 2px 2px 0px var(--ink);
+  letter-spacing: 0.04em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.street-sign.sign-green {
+  background: var(--eco-olive-bg);
+  color: var(--eco-olive);
+  border-color: var(--eco-olive);
+}
+
+.street-sign.sign-amber {
+  background: rgba(200, 138, 27, 0.18);
+  color: var(--ink);
+  border-color: var(--transit-ochre);
+}
+
+.street-sign.sign-dark {
+  background: var(--ink);
+  color: var(--surface);
+}
+
+.street-sign.sign-rust {
+  background: var(--danger-rust-bg);
+  color: var(--danger-rust);
+  border-color: var(--danger-rust);
+}
+
+/* Vitrina Decorativa de Medallas, Racha y Recompensas bajo el Visor VR */
+.app-decor-showcase-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr 1fr;
+  gap: 0.9rem;
+  margin-top: 0.25rem;
+}
+
+.app-widget-card {
+  background: var(--surface);
+  border: 1.5px solid var(--line-strong);
+  border-radius: 10px;
+  padding: 0.8rem 0.95rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.65rem;
+}
+
+.app-widget-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.widget-pill {
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.14rem 0.5rem;
+  border-radius: 999px;
+  background: var(--surface-card);
+  border: 1px solid var(--line-strong);
+}
+
+.widget-pill.eco {
+  background: var(--eco-olive-bg);
+  color: var(--eco-olive);
+  border-color: var(--eco-olive);
+}
+
+.widget-pill.warm {
+  background: var(--danger-rust-bg);
+  color: var(--signal-vermilion);
+  border-color: var(--signal-vermilion);
+}
+
+.medals-visual-strip {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.4rem;
+}
+
+.medal-hex {
+  background: var(--surface-card);
+  border: 1.5px solid var(--line-strong);
+  border-radius: 8px;
+  padding: 0.4rem 0.25rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.18rem;
+  box-shadow: 2px 2px 0px rgba(24, 25, 27, 0.08);
+  transition: transform 0.2s ease;
+}
+
+.medal-hex:hover {
+  transform: translateY(-2px);
+}
+
+.medal-hex.is-unlocked {
+  border-color: var(--eco-olive);
+  background: var(--eco-olive-bg);
+}
+
+.medal-hex.is-locked {
+  opacity: 0.52;
+  border-style: dashed;
+}
+
+.medal-emoji {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.medal-hex small {
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.streak-days-visual {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.32rem;
+}
+
+.day-bubble {
+  background: var(--surface-card);
+  border: 1.5px solid var(--line-strong);
+  border-radius: 8px;
+  padding: 0.35rem 0.15rem;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+}
+
+.day-bubble i {
+  font-style: normal;
+  font-size: 0.72rem;
+}
+
+.day-bubble.done {
+  background: var(--eco-olive);
+  color: #ffffff;
+  border-color: var(--ink);
+}
+
+.day-bubble.active {
+  background: var(--signal-vermilion);
+  color: #ffffff;
+  border-color: var(--ink);
+}
+
+.rewards-mini-tickets {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.4rem;
+}
+
+.mini-reward-ticket {
+  background: var(--surface-card);
+  border: 1.5px dashed var(--line-strong);
+  border-radius: 8px;
+  padding: 0.38rem 0.45rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.12rem;
+}
+
+.mini-reward-ticket span {
+  font-size: 1.1rem;
+}
+
+.mini-reward-ticket strong {
+  font-size: 0.68rem;
+  color: var(--ink);
+}
+
+.mini-reward-ticket em {
+  font-style: normal;
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--signal-vermilion);
+}
+
+/* Separador vial decorativo entre secciones */
+.road-decor-divider {
+  position: relative;
+  padding: 0.85rem 0;
+  background: var(--ink);
+  color: var(--surface);
+  overflow: hidden;
+  border-bottom: 1.5px solid var(--line-strong);
+}
+
+.road-decor-line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: repeating-linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.28) 0 18px,
+    transparent 18px 34px
+  );
+  transform: translateY(-50%);
+}
+
+.road-decor-badges {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.road-sign-chip {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.22rem 0.65rem;
+  border-radius: 999px;
+  background: #24282e;
+  color: #f3efe6;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.road-moving-icon {
+  font-size: 1.15rem;
+  background: var(--eco-olive);
+  padding: 0.12rem 0.45rem;
+  border-radius: 999px;
+}
+
+/* Chips visuales en tarjetas de vehículos y boletos */
+.veh-mini-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.55rem;
+}
+
+.veh-mini-badges span {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.16rem 0.48rem;
+  border-radius: 5px;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  color: var(--ink);
+}
+
+.veh-mini-badges .chip-pts {
+  background: var(--eco-olive-bg);
+  color: var(--eco-olive);
+  border-color: var(--eco-olive);
+}
+
+.veh-mini-badges .chip-danger {
+  background: var(--danger-rust-bg);
+  color: var(--danger-rust);
+  border-color: var(--danger-rust);
+}
+
+.ticket-icon-row {
+  display: flex;
+  gap: 0.35rem;
+  margin-top: 0.55rem;
+  font-size: 1.05rem;
+}
+
 /* ==================== RESPONSIVE ==================== */
 @media (max-width: 980px) {
   .hero-grid,
@@ -2353,7 +2703,8 @@ blockquote footer {
   .alchemy-workbench,
   .editorial-grid,
   .impact-line,
-  .preview-grid {
+  .preview-grid,
+  .app-decor-showcase-grid {
     grid-template-columns: 1fr;
   }
 
@@ -2382,6 +2733,7 @@ blockquote footer {
 
   .vr-savings-hud,
   .hero-metrics,
+  .hero-app-decor-row,
   .alchemy-cards-grid,
   .comparison-strip,
   .impact-pillars,
