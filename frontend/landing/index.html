@@ -21,7 +21,7 @@
       type="image/svg+xml"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2318191B'/%3E%3Ccircle cx='9.5' cy='21' r='4.5' fill='none' stroke='%23F3EFE6' stroke-width='2.2'/%3E%3Ccircle cx='22.5' cy='21' r='4.5' fill='none' stroke='%23F3EFE6' stroke-width='2.2'/%3E%3Cpath d='M9.5 21L14 12H20L16 21M14 12L12 9H9.5M19 12L22.5 21' fill='none' stroke='%23D84A27' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"
     />
-    <link rel="stylesheet" href="./styles.css?v=20261023-v6" />
+    <link rel="stylesheet" href="./styles.css?v=20261023-v7" />
   </head>
   <body>
     <!-- Máscara SVG para Boletos de Transporte Perforados sin recortar texto (shaped-cutouts) -->
@@ -134,6 +134,7 @@
 
         <div class="topbar-right">
           <nav class="nav" role="navigation" aria-label="Navegación principal" data-i18n-aria="nav.aria">
+            <a href="#modo-vr" data-i18n="nav.vr">Viaje en VR</a>
             <a href="#vehiculos" data-i18n="nav.vehicles">Vehículos 3D</a>
             <a href="#alquimia" data-i18n="nav.alchemy">Boleto & Ahorro</a>
             <a href="#solucion" data-i18n="nav.why">El Tráfico</a>
@@ -208,17 +209,15 @@
             </div>
 
             <div class="hero-actions">
-              <a class="button primary spring-btn" href="#vehiculos" role="button">
-                <span data-i18n="hero.btn_vehicles">Explorar Comparador de Vehículos 3D</span>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+              <a class="button primary spring-btn" href="#modo-vr" role="button">
+                <span aria-hidden="true">🥽</span>
+                <span data-i18n="hero.btn_vr">Modo VR: Viaje en Bici, A Pie o Auto</span>
               </a>
-              <a class="button secondary spring-btn" href="#alquimia" role="button" data-i18n="hero.btn_simulator">
-                Calcular Boleto de Ahorro Anual
+              <a class="button secondary spring-btn" href="#vehiculos" role="button">
+                <span data-i18n="hero.btn_vehicles">Comparador de Vehículos 3D</span>
               </a>
-              <a class="text-link" href="#demo" data-i18n="hero.btn_screens">
-                Ver las pantallas &rarr;
+              <a class="text-link" href="#alquimia" data-i18n="hero.btn_simulator">
+                Calcular Boleto Anual &rarr;
               </a>
             </div>
 
@@ -442,6 +441,102 @@
           <span>🚗 AUTO EN HORA PUNTA LIMEÑA · 152 G CO₂/KM · 150 HORAS PERDIDAS AL AÑO</span>
         </div>
       </div>
+
+      <!-- ==================== SECCIÓN VR: MODO REALIDAD VIRTUAL DE VIAJE (EN BICI, A PIE, SCOOTER O AUTO) ==================== -->
+      <section id="modo-vr" class="section alt deferred-section" aria-label="Simulador en Realidad Virtual de viaje en bicicleta, a pie, scooter o auto y ahorro en vivo">
+        <div class="container">
+          <div class="section-intro">
+            <div>
+              <span class="section-index mono-tag">00 / SIMULADOR VR EN PRIMERA PERSONA (POV 360°)</span>
+              <h2 data-i18n="vr.title">Así se ve tu viaje por Lima en bicicleta, a pie o en auto (y lo que ahorras en cada tramo)</h2>
+            </div>
+            <p class="intro-note" data-i18n="vr.intro">
+              Cambia de vehículo en tiempo real dentro del visor VR, arrastra con el mouse para mirar en 360° o activa el Modo Gafas Estereoscópicas (Doble Lente) para comparar cómo fluyes por la ciclovía o la vereda frente al tráfico vehicular.
+            </p>
+          </div>
+
+          <div class="vr-commute-card depth-3d-card" id="vr-commute-shell" data-stereo="false">
+            <!-- Barra Superior: Selector de Modo de Viaje en Primera Persona + Controles de Casco VR -->
+            <div class="vr-commute-toolbar">
+              <div class="vr-mode-tabs" role="group" aria-label="Modo de transporte en Realidad Virtual">
+                <button type="button" class="vr-pov-btn spring-btn is-active" data-vr-pov="bike">
+                  <span aria-hidden="true">🚲</span>
+                  <span data-i18n="vr.mode_bike">En Bicicleta (Ciclovía)</span>
+                </button>
+                <button type="button" class="vr-pov-btn spring-btn" data-vr-pov="walk">
+                  <span aria-hidden="true">🚶</span>
+                  <span data-i18n="vr.mode_walk">A Pie (Vereda Arbolada)</span>
+                </button>
+                <button type="button" class="vr-pov-btn spring-btn" data-vr-pov="scooter">
+                  <span aria-hidden="true">🛴</span>
+                  <span data-i18n="vr.mode_scooter">En Scooter Eléctrico</span>
+                </button>
+                <button type="button" class="vr-pov-btn spring-btn" data-vr-pov="car">
+                  <span aria-hidden="true">🚗</span>
+                  <span data-i18n="vr.mode_car">En Auto (Tráfico Hora Punta)</span>
+                </button>
+              </div>
+
+              <div class="vr-headset-actions">
+                <button type="button" id="vr-stereo-toggle" class="btn-vr-tool spring-btn" aria-pressed="false">
+                  <span aria-hidden="true">🥽</span>
+                  <span data-i18n="vr.btn_stereo">Gafas VR (Doble Lente)</span>
+                </button>
+                <button type="button" id="vr-fullscreen-toggle" class="btn-vr-tool spring-btn">
+                  <span aria-hidden="true">⛶</span>
+                  <span data-i18n="vr.btn_fullscreen">Pantalla Completa</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Visor 3D POV con Cabina del Vehículo + Tarjetas Flotantes de Ahorro -->
+            <div class="vr-commute-viewport" id="vr-commute-viewport">
+              <canvas
+                id="vr-commute-canvas"
+                width="1120"
+                height="460"
+                tabindex="0"
+                aria-label="Visor de Realidad Virtual: arrastra hacia los lados para mirar en 360 grados mientras avanzas en bicicleta, a pie, scooter o auto"
+              ></canvas>
+
+              <!-- División Estereoscópica de Lentes VR (cuando Gafas VR está activo) -->
+              <div class="vr-stereo-mask" aria-hidden="true">
+                <div class="vr-lens-frame"><span class="mono-tag">OJO IZQ · VR</span></div>
+                <div class="vr-lens-divider"></div>
+                <div class="vr-lens-frame"><span class="mono-tag">OJO DER · VR</span></div>
+              </div>
+
+              <!-- HUD Flotante Superior: Telemetría de Ahorro del Viaje Actual -->
+              <div class="vr-savings-hud">
+                <div class="vr-hud-box">
+                  <span class="mono-tag" data-i18n="vr.hud_co2_label">CO₂ FRENTE AL AUTO (4.2 KM)</span>
+                  <strong class="mono-num" id="vr-hud-co2">-638 g CO₂ ahorrados</strong>
+                </div>
+                <div class="vr-hud-box">
+                  <span class="mono-tag" data-i18n="vr.hud_time_label">TIEMPO & VELOCIDAD</span>
+                  <strong class="mono-num" id="vr-hud-time">14 min · 18 km/h (-8 min)</strong>
+                </div>
+                <div class="vr-hud-box">
+                  <span class="mono-tag" data-i18n="vr.hud_money_label">AHORRO & SALUD</span>
+                  <strong class="mono-num" id="vr-hud-money">S/ 8.50 ahorrados · 115 kcal</strong>
+                </div>
+                <div class="vr-hud-box highlight">
+                  <span class="mono-tag" data-i18n="vr.hud_pts_label">RECOMPENSA ECOCOMMUTE</span>
+                  <strong class="mono-num" id="vr-hud-pts">+15 pts · ♻ 8 PET</strong>
+                </div>
+              </div>
+
+              <!-- Instrucción inferior dentro del visor -->
+              <div class="vr-bottom-caption">
+                <span class="mono-tag" id="vr-pov-caption">
+                  🚲 VISTA CICLISTA: Avanzas libre por la ciclovía segregada de Av. Arequipa mientras a la derecha la fila de autos permanece detenida.
+                </span>
+                <span class="mono-tag vr-drag-pill" data-i18n="vr.drag_pill">🖱️ ARRASTRA EN 360° PARA MIRAR ALREDEDOR · ⌨️ FLECHAS / WASD</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <!-- ==================== SECCIÓN 01: GARAJE & COMPARADOR VEHICULAR 3D DE LIMA ==================== -->
       <section id="vehiculos" class="section deferred-section" aria-label="Comparador interactivo 3D de vehículos y ocupación vial en Lima">
@@ -1217,6 +1312,6 @@
       </div>
     </dialog>
 
-    <script src="./i18n.js?v=20261023-v6" defer></script>
+    <script src="./i18n.js?v=20261023-v7" defer></script>
   </body>
 </html>
