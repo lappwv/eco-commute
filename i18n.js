@@ -217,6 +217,7 @@ const translations = {
     "biome.asfalto": "Asfalto",
     "biome.ferroviario": "Ferroviario",
     "nav.aria": "Navegación principal",
+    "nav.vr": "Viaje en VR",
     "nav.vehicles": "Vehículos 3D",
     "nav.alchemy": "Boleto & Ahorro",
     "nav.why": "El Tráfico",
@@ -232,8 +233,9 @@ const translations = {
     "hero.lead":
       "EcoCommute compara en segundos tu trayecto en bicicleta, scooter, transporte público o caminata frente al automóvil particular usando OSRM y Google Gemini 1.5 Flash: calcula el tiempo real en hora punta, los gramos de CO₂ que evitas emitir y los puntos canjeables que ganas en tu distrito.",
     "hero.flora_tag": "BITÁCORA DE DESPLAZAMIENTO DE TU SESIÓN",
-    "hero.btn_vehicles": "Explorar Comparador de Vehículos 3D",
-    "hero.btn_simulator": "Calcular Boleto de Ahorro Anual",
+    "hero.btn_vr": "Modo VR: Viaje en Bici, A Pie o Auto",
+    "hero.btn_vehicles": "Comparador de Vehículos 3D",
+    "hero.btn_simulator": "Calcular Boleto Anual →",
     "hero.btn_screens": "Ver las pantallas →",
     "hero.stat1_label": "Emisión media en auto",
     "hero.stat2_label": "Ciclovía / Caminata",
@@ -268,6 +270,22 @@ const translations = {
     "sim.gemini_miraflores":
       "«Por la ciclovía de Av. Arequipa llegas en 14 min sin congestión vehicular, ahorras 638 g de CO₂ frente al auto particular (152 g/km) y sumas puntos para el ranking de Miraflores.»",
     "sim.btn_recycle_trip": "Registrar este viaje sin auto en mi bitácora",
+
+    // VR First-Person Commute Mode
+    "vr.title": "Así se ve tu viaje por Lima en bicicleta, a pie o en auto (y lo que ahorras en cada tramo)",
+    "vr.intro":
+      "Cambia de vehículo en tiempo real dentro del visor VR, arrastra con el mouse para mirar en 360° o activa el Modo Gafas Estereoscópicas (Doble Lente) para comparar cómo fluyes por la ciclovía o la vereda frente al tráfico vehicular.",
+    "vr.mode_bike": "En Bicicleta (Ciclovía)",
+    "vr.mode_walk": "A Pie (Vereda Arbolada)",
+    "vr.mode_scooter": "En Scooter Eléctrico",
+    "vr.mode_car": "En Auto (Tráfico Hora Punta)",
+    "vr.btn_stereo": "Gafas VR (Doble Lente)",
+    "vr.btn_fullscreen": "Pantalla Completa",
+    "vr.hud_co2_label": "IMPACTO DE CO₂ EN EL TRAMO",
+    "vr.hud_time_label": "TIEMPO & VELOCIDAD",
+    "vr.hud_money_label": "AHORRO ECONÓMICO & SALUD",
+    "vr.hud_pts_label": "RECOMPENSA ECOCOMMUTE",
+    "vr.drag_pill": "🖱️ ARRASTRA EN 360° PARA MIRAR ALREDEDOR · ⌨️ FLECHAS / WASD",
 
     // Vehicles 3D Section
     "veh.title": "Compara cada vehículo en las calles de Lima: espacio vial, velocidad y emisiones",
@@ -430,6 +448,7 @@ const translations = {
     "biome.asfalto": "Night Tarmac",
     "biome.ferroviario": "Rail Cobalt",
     "nav.aria": "Main navigation",
+    "nav.vr": "VR Commute",
     "nav.vehicles": "3D Vehicles",
     "nav.alchemy": "Transit Pass & Savings",
     "nav.why": "Lima Traffic",
@@ -445,8 +464,9 @@ const translations = {
     "hero.lead":
       "EcoCommute compares your bicycle, e-scooter, public transit, or walking commute against driving in seconds using OSRM and Google Gemini 1.5 Flash: see rush-hour travel times, avoided CO₂ emissions, and redeemable Green Points across Lima districts.",
     "hero.flora_tag": "ACTIVE SESSION COMMUTE LOGBOOK",
-    "hero.btn_vehicles": "Explore 3D Vehicle Comparator",
-    "hero.btn_simulator": "Calculate Annual Transit Savings",
+    "hero.btn_vr": "VR Mode: Ride by Bike, Foot, or Car",
+    "hero.btn_vehicles": "3D Vehicle Comparator",
+    "hero.btn_simulator": "Calculate Annual Savings →",
     "hero.btn_screens": "View Screenshots →",
     "hero.stat1_label": "Average car emission",
     "hero.stat2_label": "Bike lane / Walking",
@@ -481,6 +501,22 @@ const translations = {
     "sim.gemini_miraflores":
       "“Taking the Av. Arequipa protected bike lane gets you there in 14 min bypassing rush-hour traffic, avoiding 638 g of CO₂ vs. driving (152 g/km) and earning Miraflores leaderboard points.”",
     "sim.btn_recycle_trip": "Log this car-free commute into my session",
+
+    // VR First-Person Commute Mode
+    "vr.title": "See how your Lima commute looks by bike, on foot, or by car (and what you save each trip)",
+    "vr.intro":
+      "Switch transport modes live inside the VR viewport, drag with your mouse to look around 360°, or enable Stereoscopic VR Glasses Mode (Dual Lens) to compare gliding down the bike lane or sidewalk vs. rush-hour gridlock.",
+    "vr.mode_bike": "By Bicycle (Bike Lane)",
+    "vr.mode_walk": "On Foot (Shaded Sidewalk)",
+    "vr.mode_scooter": "By Electric Scooter",
+    "vr.mode_car": "By Car (Rush-Hour Gridlock)",
+    "vr.btn_stereo": "VR Glasses (Dual Lens)",
+    "vr.btn_fullscreen": "Fullscreen",
+    "vr.hud_co2_label": "TRIP CO₂ IMPACT",
+    "vr.hud_time_label": "TIME & SPEED",
+    "vr.hud_money_label": "SAVINGS & HEALTH",
+    "vr.hud_pts_label": "ECOCOMMUTE REWARD",
+    "vr.drag_pill": "🖱️ DRAG 360° TO LOOK AROUND · ⌨️ ARROWS / WASD",
 
     // Vehicles 3D Section
     "veh.title": "Compare every vehicle on Lima's streets: road footprint, rush-hour speed, and emissions",
@@ -819,6 +855,9 @@ function applyTranslations(lang) {
   renderSimulatorMetrics();
   renderVehicleStage();
   renderAlchemyLab();
+  if (typeof renderVRCommuteHud === "function") {
+    renderVRCommuteHud();
+  }
 }
 
 function setupLanguageToggle() {
@@ -1247,12 +1286,537 @@ function checkBackendHealth() {
     .catch(() => {});
 }
 
+// ==================== SIMULADOR VR EN PRIMERA PERSONA (EN BICI, A PIE, SCOOTER, AUTO) ====================
+const VR_POV_MODES = {
+  bike: {
+    speedFactor: 4.4,
+    laneOffset: -68,
+    stepBob: 0.25,
+    gateTags: ["-152g CO₂/km", "S/ 8.50 AHORRO", "+15 PUNTOS", "♻ 8 BOTELLAS PET"],
+    es: {
+      co2: "-638 g CO₂ ahorrados",
+      time: "14 min · 18 km/h (-8 min)",
+      money: "S/ 8.50 ahorrados · 115 kcal",
+      pts: "+15 pts · ♻ 8 PET",
+      caption:
+        "🚲 VISTA CICLISTA: Avanzas fluido por la ciclovía segregada de Av. Arequipa mientras a la derecha la fila de autos permanece detenida."
+    },
+    en: {
+      co2: "-638 g CO₂ saved",
+      time: "14 min · 18 km/h (-8 min)",
+      money: "S/ 8.50 saved · 115 kcal",
+      pts: "+15 pts · ♻ 8 PET",
+      caption:
+        "🚲 CYCLIST POV: Gliding smoothly down the Av. Arequipa protected bike lane while rush-hour cars sit bumper-to-bumper on the right."
+    }
+  },
+  walk: {
+    speedFactor: 1.85,
+    laneOffset: -135,
+    stepBob: 1.0,
+    gateTags: ["0g EMISIÓN", "+145 KCAL SALUD", "S/ 0.00 COSTO", "+9 PUNTOS VERDES"],
+    es: {
+      co2: "-274 g CO₂ (tramo 1.8 km)",
+      time: "21 min · 5 km/h (paseo activo)",
+      money: "S/ 0.00 gasto · +145 kcal",
+      pts: "+9 pts · ♻ 3 PET",
+      caption:
+        "🚶 VISTA PEATÓN: Caminas bajo los árboles de la vereda peatonal sin estrés de semáforos ni gasto de combustible."
+    },
+    en: {
+      co2: "-274 g CO₂ (1.8 km walk)",
+      time: "21 min · 5 km/h (active walk)",
+      money: "S/ 0.00 cost · +145 kcal",
+      pts: "+9 pts · ♻ 3 PET",
+      caption:
+        "🚶 PEDESTRIAN POV: Walking along a tree-shaded Lima sidewalk with zero fuel cost and active cardiovascular benefit."
+    }
+  },
+  scooter: {
+    speedFactor: 4.9,
+    laneOffset: -68,
+    stepBob: 0.1,
+    gateTags: ["0g ESCAPE", "-10 MIN TRÁFICO", "CONEXIÓN METRO", "+14 PUNTOS"],
+    es: {
+      co2: "-638 g CO₂ de escape",
+      time: "12 min · 20 km/h (-10 min)",
+      money: "S/ 7.80 ahorrados en taxi",
+      pts: "+14 pts · ♻ 8 PET",
+      caption:
+        "🛴 VISTA SCOOTER: Conectas rápidamente desde la estación del Metropolitano / Metro hasta tu destino sin esfuerzo en pendientes."
+    },
+    en: {
+      co2: "-638 g tailpipe CO₂",
+      time: "12 min · 20 km/h (-10 min)",
+      money: "S/ 7.80 saved vs. taxi",
+      pts: "+14 pts · ♻ 8 PET",
+      caption:
+        "🛴 E-SCOOTER POV: Bridging the last mile from the Metropolitano / Metro station effortlessly at 20 km/h."
+    }
+  },
+  car: {
+    speedFactor: 0.85,
+    laneOffset: 82,
+    stepBob: 0.05,
+    gateTags: ["+152g CO₂/km", "TRÁFICO 11 km/h", "-S/ 8.50 GASTO", "0 PUNTOS"],
+    es: {
+      co2: "+638 g CO₂ emitidos",
+      time: "22 min · 11 km/h (hora punta)",
+      money: "S/ 8.50 gastados en combustible",
+      pts: "0 pts · Sin ahorro circular",
+      caption:
+        "🚗 VISTA EN AUTO: Atrapado en la congestión de hora punta detrás de otros vehículos mientras la ciclovía a tu izquierda avanza libre."
+    },
+    en: {
+      co2: "+638 g CO₂ emitted",
+      time: "22 min · 11 km/h (gridlock)",
+      money: "S/ 8.50 spent on fuel",
+      pts: "0 pts · Zero circular savings",
+      caption:
+        "🚗 CAR CABIN POV: Stuck in bumper-to-bumper rush-hour traffic while cyclists on your left glide past freely."
+    }
+  }
+};
+
+let currentVRPov = "bike";
+
+function renderVRCommuteHud() {
+  const isEn = currentLang === "en_US";
+  const shell = document.getElementById("vr-commute-shell");
+  const co2El = document.getElementById("vr-hud-co2");
+  const timeEl = document.getElementById("vr-hud-time");
+  const moneyEl = document.getElementById("vr-hud-money");
+  const ptsEl = document.getElementById("vr-hud-pts");
+  const captionEl = document.getElementById("vr-pov-caption");
+
+  const modeData = VR_POV_MODES[currentVRPov] || VR_POV_MODES.bike;
+  const copy = isEn ? modeData.en : modeData.es;
+
+  if (shell) shell.setAttribute("data-pov-mode", currentVRPov);
+  if (co2El) co2El.textContent = copy.co2;
+  if (timeEl) timeEl.textContent = copy.time;
+  if (moneyEl) moneyEl.textContent = copy.money;
+  if (ptsEl) ptsEl.textContent = copy.pts;
+  if (captionEl) captionEl.textContent = copy.caption;
+}
+
+function setupVRCommuteSimulator() {
+  const vrSection = document.getElementById("modo-vr");
+  const shell = document.getElementById("vr-commute-shell");
+  const canvas = document.getElementById("vr-commute-canvas");
+  const povBtns = document.querySelectorAll(".vr-pov-btn");
+  const stereoBtn = document.getElementById("vr-stereo-toggle");
+  const fullscreenBtn = document.getElementById("vr-fullscreen-toggle");
+
+  if (!vrSection || !shell || !canvas) return;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+
+  let isStereo = false;
+  let yawDeg = 0;
+  let pitchDeg = 0;
+  let camLaneX = VR_POV_MODES.bike.laneOffset;
+  let stepPhase = 0;
+  let isDragging = false;
+  let lastX = 0;
+  let lastY = 0;
+
+  // Árboles urbanos a lo largo de la berma y la vereda (z: 40 .. 1600)
+  const trees = Array.from({ length: 28 }, (_, i) => ({
+    x: i % 2 === 0 ? -195 : -12,
+    z: i * 58 + 50,
+    h: 115 + (i % 3) * 24,
+    r: 36 + (i % 3) * 10
+  }));
+
+  // Fila de autos en el carril derecho (x: 55 y 145)
+  const trafficCars = Array.from({ length: 12 }, (_, i) => ({
+    x: i % 2 === 0 ? 64 : 148,
+    z: i * 130 + 110,
+    color: i % 3 === 0 ? "#b83227" : i % 2 === 0 ? "#4a4e54" : "#2b5b6c"
+  }));
+
+  // Portales / arcos 3D flotantes que muestran el ahorro al pasar
+  const savingsGates = Array.from({ length: 4 }, (_, i) => ({
+    z: i * 390 + 220,
+    tagIdx: i % 4
+  }));
+
+  povBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const mode = btn.getAttribute("data-vr-pov") || "bike";
+      if (!VR_POV_MODES[mode]) return;
+      currentVRPov = mode;
+      povBtns.forEach((b) => b.classList.toggle("is-active", b === btn));
+      renderVRCommuteHud();
+    });
+  });
+
+  if (stereoBtn) {
+    stereoBtn.addEventListener("click", () => {
+      isStereo = !isStereo;
+      shell.setAttribute("data-stereo", isStereo ? "true" : "false");
+      stereoBtn.setAttribute("aria-pressed", isStereo ? "true" : "false");
+    });
+  }
+
+  if (fullscreenBtn) {
+    fullscreenBtn.addEventListener("click", () => {
+      if (!document.fullscreenElement && shell.requestFullscreen) {
+        shell.requestFullscreen().catch(() => {});
+      } else if (document.exitFullscreen) {
+        document.exitFullscreen().catch(() => {});
+      }
+    });
+  }
+
+  canvas.addEventListener("pointerdown", (e) => {
+    isDragging = true;
+    lastX = e.clientX;
+    lastY = e.clientY;
+    canvas.setPointerCapture?.(e.pointerId);
+  });
+
+  canvas.addEventListener("pointermove", (e) => {
+    if (!isDragging) return;
+    const dx = e.clientX - lastX;
+    const dy = e.clientY - lastY;
+    lastX = e.clientX;
+    lastY = e.clientY;
+
+    yawDeg = Math.max(-55, Math.min(55, yawDeg - dx * 0.28));
+    pitchDeg = Math.max(-24, Math.min(24, pitchDeg - dy * 0.2));
+  });
+
+  const stopDrag = () => {
+    isDragging = false;
+  };
+  canvas.addEventListener("pointerup", stopDrag);
+  canvas.addEventListener("pointercancel", stopDrag);
+
+  canvas.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft" || e.key === "a" || e.key === "A") {
+      e.preventDefault();
+      yawDeg = Math.max(-55, yawDeg - 4);
+    } else if (e.key === "ArrowRight" || e.key === "d" || e.key === "D") {
+      e.preventDefault();
+      yawDeg = Math.min(55, yawDeg + 4);
+    } else if (e.key === "ArrowUp" || e.key === "w" || e.key === "W") {
+      e.preventDefault();
+      pitchDeg = Math.min(22, pitchDeg + 3);
+    } else if (e.key === "ArrowDown" || e.key === "s" || e.key === "S") {
+      e.preventDefault();
+      pitchDeg = Math.max(-22, pitchDeg - 3);
+    }
+  });
+
+  function renderEye(vx, vy, vw, vh, eyeOffset) {
+    const modeSpec = VR_POV_MODES[currentVRPov] || VR_POV_MODES.bike;
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(vx, vy, vw, vh);
+    ctx.clip();
+
+    const bobY = Math.sin(stepPhase) * 4.5 * modeSpec.stepBob;
+    const horizonY = vy + vh * 0.48 + pitchDeg * 3.2 + bobY;
+    const vanishX = vx + vw * 0.5 - yawDeg * 4.2 + eyeOffset * 0.3;
+    const fov = 320;
+
+    // 1. Cielo cálido de Lima (tono crema-celeste cartográfico)
+    const skyGrad = ctx.createLinearGradient(vx, vy, vx, Math.max(vy + 10, horizonY));
+    skyGrad.addColorStop(0, "#d7e2e8");
+    skyGrad.addColorStop(1, "#f3efe6");
+    ctx.fillStyle = skyGrad;
+    ctx.fillRect(vx, vy, vw, Math.max(0, horizonY - vy));
+
+    // Silueta urbana de edificios de Miraflores / San Isidro en el horizonte
+    ctx.fillStyle = "#c9c2b4";
+    for (let b = -6; b <= 6; b++) {
+      const bx = vanishX + b * 68;
+      const bw = 46;
+      const bh = 26 + ((Math.abs(b * 17) % 4) * 14);
+      ctx.fillRect(bx - bw / 2, horizonY - bh, bw, bh);
+    }
+
+    // 2. Superficie vial en perspectiva (Vereda peatonal + Ciclovía verde + Calzada de autos)
+    ctx.fillStyle = "#2b2e33";
+    ctx.fillRect(vx, horizonY, vw, vh - (horizonY - vy));
+
+    function drawLanePolygon(worldXLeft, worldXRight, color) {
+      const topL = vanishX + (worldXLeft - camLaneX) * 0.08;
+      const topR = vanishX + (worldXRight - camLaneX) * 0.08;
+      const botL = vanishX + (worldXLeft - camLaneX - eyeOffset) * 2.45;
+      const botR = vanishX + (worldXRight - camLaneX - eyeOffset) * 2.45;
+
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      ctx.moveTo(topL, horizonY);
+      ctx.lineTo(topR, horizonY);
+      ctx.lineTo(botR, vy + vh);
+      ctx.lineTo(botL, vy + vh);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    // Vereda peatonal arbolada (izquierda: -185 a -105)
+    drawLanePolygon(-185, -105, "#cfc6b4");
+    // Ciclovía segregada sostenible (centro-izquierda: -102 a -32)
+    drawLanePolygon(-102, -32, "#286646");
+    // Berma divisoria (-32 a -8)
+    drawLanePolygon(-32, -8, "#9c9484");
+    // Calzada de automóviles en congestión (-8 a 195)
+    drawLanePolygon(-8, 195, "#25282c");
+
+    // 3. Ordenar objetos 3D por profundidad Z (árboles, autos en tráfico y arcos de ahorro)
+    const sceneItems = [];
+    for (const t of trees) sceneItems.push({ type: "tree", z: t.z, obj: t });
+    for (const c of trafficCars) sceneItems.push({ type: "car", z: c.z, obj: c });
+    for (const g of savingsGates) sceneItems.push({ type: "gate", z: g.z, obj: g });
+    sceneItems.sort((a, b) => b.z - a.z);
+
+    for (const item of sceneItems) {
+      const z = item.z;
+      if (z < 24) continue;
+      const scale = fov / z;
+
+      if (item.type === "tree") {
+        const t = item.obj;
+        const sx = vanishX + (t.x - camLaneX - eyeOffset) * scale;
+        const syGround = horizonY + 86 * scale;
+        const syTop = syGround - t.h * scale;
+        const sr = t.r * scale;
+
+        ctx.strokeStyle = "#5c432d";
+        ctx.lineWidth = Math.max(1.5, 7 * scale);
+        ctx.beginPath();
+        ctx.moveTo(sx, syGround);
+        ctx.lineTo(sx, syTop);
+        ctx.stroke();
+
+        ctx.fillStyle = "#3b7a57";
+        ctx.beginPath();
+        ctx.arc(sx, syTop, sr, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = "#18191b";
+        ctx.lineWidth = Math.max(0.8, 1.5 * scale);
+        ctx.stroke();
+      } else if (item.type === "car") {
+        const c = item.obj;
+        const sx = vanishX + (c.x - camLaneX - eyeOffset) * scale;
+        const syGround = horizonY + 86 * scale;
+        const carW = 54 * scale;
+        const carH = 32 * scale;
+
+        // Chasis trasero del auto en el tráfico
+        ctx.fillStyle = c.color;
+        ctx.strokeStyle = "#18191b";
+        ctx.lineWidth = Math.max(1, 2 * scale);
+        ctx.beginPath();
+        ctx.roundRect(sx - carW / 2, syGround - carH, carW, carH, Math.max(2, 5 * scale));
+        ctx.fill();
+        ctx.stroke();
+
+        // Luces de freno rojas encendidas (hora punta)
+        ctx.fillStyle = "#ff3b30";
+        const lightW = Math.max(3, 10 * scale);
+        const lightH = Math.max(2, 5 * scale);
+        ctx.fillRect(sx - carW * 0.42, syGround - carH * 0.58, lightW, lightH);
+        ctx.fillRect(sx + carW * 0.42 - lightW, syGround - carH * 0.58, lightW, lightH);
+      } else if (item.type === "gate") {
+        const g = item.obj;
+        const gateCenterWorldX = currentVRPov === "car" ? 82 : currentVRPov === "walk" ? -138 : -68;
+        const sx = vanishX + (gateCenterWorldX - camLaneX - eyeOffset) * scale;
+        const sy = horizonY + 26 * scale;
+        const boxW = 148 * scale;
+        const boxH = 34 * scale;
+
+        if (z < 950) {
+          const isCarMode = currentVRPov === "car";
+          ctx.fillStyle = isCarMode ? "#b83227" : "#286646";
+          ctx.strokeStyle = "#faf7f0";
+          ctx.lineWidth = Math.max(1, 2 * scale);
+          ctx.beginPath();
+          ctx.roundRect(sx - boxW / 2, sy - boxH / 2, boxW, boxH, Math.max(3, 6 * scale));
+          ctx.fill();
+          ctx.stroke();
+
+          ctx.fillStyle = "#faf7f0";
+          ctx.font = `700 ${Math.max(8, Math.round(13 * scale))}px "JetBrains Mono", monospace`;
+          ctx.textAlign = "center";
+          const label = modeSpec.gateTags[g.tagIdx % modeSpec.gateTags.length];
+          ctx.fillText(label, sx, sy + 4 * scale);
+        }
+      }
+    }
+
+    // 4. Cabina en Primera Persona (POV Cockpit) según el vehículo elegido
+    const cx = vx + vw * 0.5;
+    const botY = vy + vh;
+
+    if (currentVRPov === "bike") {
+      // Manubrio de bicicleta urbana + ciclocomputador central
+      ctx.strokeStyle = "#18191b";
+      ctx.lineWidth = 8;
+      ctx.lineCap = "round";
+      ctx.beginPath();
+      ctx.moveTo(cx - 135, botY - 18);
+      ctx.quadraticCurveTo(cx, botY - 62, cx + 135, botY - 18);
+      ctx.stroke();
+
+      // Puños bermellón
+      ctx.strokeStyle = "#d84a27";
+      ctx.lineWidth = 11;
+      ctx.beginPath();
+      ctx.moveTo(cx - 145, botY - 14);
+      ctx.lineTo(cx - 105, botY - 28);
+      ctx.moveTo(cx + 145, botY - 14);
+      ctx.lineTo(cx + 105, botY - 28);
+      ctx.stroke();
+
+      // Ciclocomputador en la potencia
+      ctx.fillStyle = "#18191b";
+      ctx.strokeStyle = "#faf7f0";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.roundRect(cx - 44, botY - 72, 88, 34, 6);
+      ctx.fill();
+      ctx.stroke();
+      ctx.fillStyle = "#8ce868";
+      ctx.font = '700 11px "JetBrains Mono", monospace';
+      ctx.textAlign = "center";
+      ctx.fillText("18 km/h · 0g", cx, botY - 51);
+    } else if (currentVRPov === "scooter") {
+      // Mástil T-Bar de scooter eléctrico con display LED
+      ctx.strokeStyle = "#1f5666";
+      ctx.lineWidth = 9;
+      ctx.beginPath();
+      ctx.moveTo(cx - 95, botY - 46);
+      ctx.lineTo(cx + 95, botY - 46);
+      ctx.moveTo(cx, botY - 46);
+      ctx.lineTo(cx, botY);
+      ctx.stroke();
+
+      ctx.fillStyle = "#18191b";
+      ctx.beginPath();
+      ctx.roundRect(cx - 38, botY - 68, 76, 30, 6);
+      ctx.fill();
+      ctx.fillStyle = "#faf7f0";
+      ctx.font = '700 11px "JetBrains Mono", monospace';
+      ctx.textAlign = "center";
+      ctx.fillText("20 km/h ⚡", cx, botY - 49);
+    } else if (currentVRPov === "car") {
+      // Tablero interior de automóvil y volante atrapado en congestión
+      ctx.fillStyle = "#18191b";
+      ctx.fillRect(vx, botY - 58, vw, 58);
+
+      ctx.strokeStyle = "#43474d";
+      ctx.lineWidth = 9;
+      ctx.beginPath();
+      ctx.arc(cx - 70, botY - 12, 54, Math.PI * 1.1, Math.PI * 1.9);
+      ctx.stroke();
+
+      ctx.fillStyle = "#b83227";
+      ctx.font = '700 11px "JetBrains Mono", monospace';
+      ctx.textAlign = "center";
+      ctx.fillText("CONGESTIÓN HORA PUNTA · 152 g CO₂/km", cx + 50, botY - 26);
+    }
+
+    ctx.restore();
+  }
+
+  let rafId = null;
+
+  function stepVRScene() {
+    const modeSpec = VR_POV_MODES[currentVRPov] || VR_POV_MODES.bike;
+    camLaneX += (modeSpec.laneOffset - camLaneX) * 0.08;
+    stepPhase += 0.12;
+
+    for (const t of trees) {
+      t.z -= modeSpec.speedFactor;
+      if (t.z < 26) t.z += 1580;
+    }
+
+    // Los autos en tráfico avanzan lento; si vas en bici/scooter/a pie los adelantas claramente
+    const relCarSpeed = modeSpec.speedFactor - 0.75;
+    for (const c of trafficCars) {
+      c.z -= relCarSpeed;
+      if (c.z < 34) c.z += 1520;
+      if (c.z > 1580) c.z -= 1520;
+    }
+
+    for (const g of savingsGates) {
+      g.z -= modeSpec.speedFactor;
+      if (g.z < 30) {
+        g.z += 1560;
+        if (currentVRPov !== "car") {
+          sessionRecycledGrams += 38;
+          updateSessionFloraBanner();
+        }
+      }
+    }
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if (isStereo) {
+      const halfW = canvas.width / 2;
+      renderEye(0, 0, halfW, canvas.height, -16);
+      renderEye(halfW, 0, halfW, canvas.height, 16);
+    } else {
+      renderEye(0, 0, canvas.width, canvas.height, 0);
+    }
+
+    rafId = requestAnimationFrame(stepVRScene);
+  }
+
+  function startVR() {
+    if (rafId === null) {
+      rafId = requestAnimationFrame(stepVRScene);
+    }
+  }
+
+  function stopVR() {
+    if (rafId !== null) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+  }
+
+  // Pausar renderizado cuando la sección VR está fuera del viewport (efficient-background-processing)
+  vrSection.addEventListener("contentvisibilityautostatechange", (event) => {
+    if (event.skipped) {
+      stopVR();
+    } else {
+      startVR();
+    }
+  });
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            startVR();
+          } else {
+            stopVR();
+          }
+        });
+      },
+      { rootMargin: "200px" }
+    );
+    observer.observe(vrSection);
+  } else {
+    startVR();
+  }
+
+  renderVRCommuteHud();
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   setupSiblingIndexFallback();
   setupBiomeSwitcher();
   setupLanguageToggle();
   setup3DTiltCards();
   setupSimulator();
+  setupVRCommuteSimulator();
   setupVehicle3DStudio();
   setupAlchemyLab();
   setupShowcaseTabs();
