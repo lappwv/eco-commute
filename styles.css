@@ -1,103 +1,113 @@
 /* ==========================================================================
-   EcoCommute — Cartografía Vial, Vehículos Urbanos & Cambio Modal en Lima
-   Paleta Editorial No-Convencional (Caliza Vial, Bermellón de Señalización,
-   Asfalto Mate y Ocre Metropolitano) — Sin estéticas genéricas de IA.
+   EcoCommute — Paleta Original Eco / Botánica (Lomas de Amancaes, Esmeralda
+   Clásico & Sol Costero) + Diseño Gamificado, Divertido y Amigable
    ========================================================================== */
 
 :root,
+html[data-biome="amancaes"],
 html[data-biome="caliza"] {
-  --surface: #f3efe6;
-  --surface-alt: #e8e1d3;
-  --surface-card: #faf7f0;
-  --surface-elevated: #ffffff;
-  --ink: #18191b;
-  --ink-secondary: #43474d;
-  --ink-muted: #686d75;
+  color-scheme: dark;
 
-  --signal-vermilion: #d84a27;
-  --signal-vermilion-hover: #bd3b1b;
-  --transit-ochre: #c88a1b;
-  --transit-petrol: #1f5666;
-  --eco-olive: #286646;
-  --eco-olive-bg: #dfece3;
-  --danger-rust: #b83227;
-  --danger-rust-bg: #f6e0dc;
+  --surface: #0b0f0c;
+  --surface-alt: #111813;
+  --surface-card: #162019;
+  --surface-elevated: #1c2920;
+  --ink: #f4f1e6;
+  --ink-secondary: #c7c5b4;
+  --ink-muted: #8e9485;
 
-  --brand-500: #d84a27;
-  --brand-400: #286646;
-  --brand-300: #1f5666;
+  --signal-vermilion: #8ce868;
+  --signal-vermilion-hover: #d4ff59;
+  --transit-ochre: #ffd166;
+  --transit-petrol: #7de2d1;
+  --eco-olive: #8ce868;
+  --eco-olive-bg: rgba(140, 232, 104, 0.16);
+  --danger-rust: #ff8c61;
+  --danger-rust-bg: rgba(255, 140, 97, 0.16);
 
-  --line: rgba(24, 25, 27, 0.15);
-  --line-strong: rgba(24, 25, 27, 0.32);
-  --card-shadow: 0 10px 28px -10px rgba(24, 25, 27, 0.1), 4px 4px 0px rgba(24, 25, 27, 0.07);
-  --card-shadow-hover: 0 18px 36px -12px rgba(24, 25, 27, 0.16), 6px 6px 0px rgba(24, 25, 27, 0.12);
-  --topbar-bg: rgba(243, 239, 230, 0.9);
-  --statusbar-bg: #18191b;
-  --statusbar-ink: #f3efe6;
+  --brand-50: #f7ffe0;
+  --brand-300: #d4ff59;
+  --brand-400: #8ce868;
+  --brand-500: #52b788;
+  --brand-700: #2d6a4f;
+
+  --line: rgba(212, 255, 89, 0.14);
+  --line-strong: rgba(140, 232, 104, 0.34);
+  --card-shadow: 0 14px 32px -10px rgba(0, 0, 0, 0.48), 0 4px 0px rgba(140, 232, 104, 0.18);
+  --card-shadow-hover: 0 20px 40px -12px rgba(0, 0, 0, 0.6), 0 6px 0px rgba(212, 255, 89, 0.32);
+  --topbar-bg: rgba(11, 15, 12, 0.88);
+  --statusbar-bg: #070b08;
+  --statusbar-ink: #f4f1e6;
 }
 
-/* Paleta 2: Asfalto Nocturno & Ámbar Halógeno (Tablero Nocturno de Conducción) */
+/* Paleta 2: Esmeralda Clásico EcoCommute (Verde Esmeralda, Turquesa & Dorado) */
+html[data-biome="esmeralda"],
 html[data-biome="asfalto"] {
-  --surface: #17191c;
-  --surface-alt: #1f2227;
-  --surface-card: #24282e;
-  --surface-elevated: #2c3138;
-  --ink: #f2ede2;
-  --ink-secondary: #c5bfb2;
-  --ink-muted: #8f8a7e;
+  color-scheme: dark;
 
-  --signal-vermilion: #e05a36;
-  --signal-vermilion-hover: #f06b47;
-  --transit-ochre: #e59a23;
-  --transit-petrol: #67b0c4;
-  --eco-olive: #58a878;
-  --eco-olive-bg: rgba(88, 168, 120, 0.16);
-  --danger-rust: #e86b58;
-  --danger-rust-bg: rgba(232, 107, 88, 0.16);
+  --surface: #060913;
+  --surface-alt: #0b101b;
+  --surface-card: #0f1624;
+  --surface-elevated: #131c2e;
+  --ink: #f4f1ea;
+  --ink-secondary: #cbd5e1;
+  --ink-muted: #94a3b8;
 
-  --brand-500: #e05a36;
-  --brand-400: #58a878;
-  --brand-300: #e59a23;
+  --signal-vermilion: #34d399;
+  --signal-vermilion-hover: #6ee7b7;
+  --transit-ochre: #f0b429;
+  --transit-petrol: #38bdf8;
+  --eco-olive: #34d399;
+  --eco-olive-bg: rgba(52, 211, 153, 0.16);
+  --danger-rust: #f87171;
+  --danger-rust-bg: rgba(248, 113, 113, 0.16);
 
-  --line: rgba(242, 237, 226, 0.14);
-  --line-strong: rgba(242, 237, 226, 0.28);
-  --card-shadow: 0 14px 32px -10px rgba(0, 0, 0, 0.45), 4px 4px 0px rgba(0, 0, 0, 0.35);
-  --card-shadow-hover: 0 20px 40px -12px rgba(0, 0, 0, 0.55), 6px 6px 0px rgba(224, 90, 54, 0.28);
-  --topbar-bg: rgba(23, 25, 28, 0.9);
-  --statusbar-bg: #0f1113;
-  --statusbar-ink: #f2ede2;
+  --brand-300: #6ee7b7;
+  --brand-400: #34d399;
+  --brand-500: #10b981;
+
+  --line: rgba(52, 211, 153, 0.14);
+  --line-strong: rgba(52, 211, 153, 0.34);
+  --card-shadow: 0 14px 32px -10px rgba(0, 0, 0, 0.5), 0 4px 0px rgba(52, 211, 153, 0.2);
+  --card-shadow-hover: 0 20px 40px -12px rgba(0, 0, 0, 0.6), 0 6px 0px rgba(110, 231, 183, 0.34);
+  --topbar-bg: rgba(6, 9, 19, 0.88);
+  --statusbar-bg: #04060d;
+  --statusbar-ink: #f4f1ea;
 }
 
-/* Paleta 3: Cartografía Ferroviaria Suiza (Azul Cobalto, Arena & Naranja Internacional) */
+/* Paleta 3: Sol & Terracota Costera (Ámbar Solar, Coral & Verde Hoja) */
+html[data-biome="terracota"],
 html[data-biome="ferroviario"] {
-  --surface: #efece6;
-  --surface-alt: #e2ddd3;
-  --surface-card: #f8f6f1;
-  --surface-elevated: #ffffff;
-  --ink: #132232;
-  --ink-secondary: #394b5e;
-  --ink-muted: #627385;
+  color-scheme: dark;
 
-  --signal-vermilion: #d14324;
-  --signal-vermilion-hover: #b53418;
-  --transit-ochre: #c4821a;
-  --transit-petrol: #1b4d6b;
-  --eco-olive: #1f6357;
-  --eco-olive-bg: #dcece8;
-  --danger-rust: #b83227;
-  --danger-rust-bg: #f5dfdc;
+  --surface: #130c09;
+  --surface-alt: #1b120e;
+  --surface-card: #241813;
+  --surface-elevated: #2e1f18;
+  --ink: #fbf4eb;
+  --ink-secondary: #d8c7b8;
+  --ink-muted: #a38f7e;
 
-  --brand-500: #d14324;
-  --brand-400: #1f6357;
-  --brand-300: #1b4d6b;
+  --signal-vermilion: #ffd166;
+  --signal-vermilion-hover: #ffe08a;
+  --transit-ochre: #f4a261;
+  --transit-petrol: #4cc9f0;
+  --eco-olive: #90be6d;
+  --eco-olive-bg: rgba(144, 190, 109, 0.18);
+  --danger-rust: #ff595e;
+  --danger-rust-bg: rgba(255, 89, 94, 0.18);
 
-  --line: rgba(19, 34, 50, 0.15);
-  --line-strong: rgba(19, 34, 50, 0.32);
-  --card-shadow: 0 10px 28px -10px rgba(19, 34, 50, 0.1), 4px 4px 0px rgba(19, 34, 50, 0.08);
-  --card-shadow-hover: 0 18px 36px -12px rgba(19, 34, 50, 0.16), 6px 6px 0px rgba(19, 34, 50, 0.14);
-  --topbar-bg: rgba(239, 236, 230, 0.92);
-  --statusbar-bg: #132232;
-  --statusbar-ink: #efece6;
+  --brand-300: #ffd166;
+  --brand-400: #f4a261;
+  --brand-500: #e76f51;
+
+  --line: rgba(244, 162, 97, 0.15);
+  --line-strong: rgba(255, 209, 102, 0.36);
+  --card-shadow: 0 14px 32px -10px rgba(0, 0, 0, 0.5), 0 4px 0px rgba(255, 209, 102, 0.2);
+  --card-shadow-hover: 0 20px 40px -12px rgba(0, 0, 0, 0.6), 0 6px 0px rgba(255, 209, 102, 0.34);
+  --topbar-bg: rgba(19, 12, 9, 0.88);
+  --statusbar-bg: #0c0705;
+  --statusbar-ink: #fbf4eb;
 }
 
 :root {
@@ -357,26 +367,27 @@ h3 {
 
 .biome-chip.is-active {
   background: var(--signal-vermilion);
-  color: #ffffff;
+  color: #08140c;
+  font-weight: 800;
   opacity: 1;
 }
 
 .swatch-dot {
-  width: 8px;
-  height: 8px;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
   display: inline-block;
   border: 1px solid rgba(255, 255, 255, 0.6);
 }
 
 .swatch-caliza {
-  background: #f3efe6;
+  background: #8ce868;
 }
 .swatch-asfalto {
-  background: #e59a23;
+  background: #34d399;
 }
 .swatch-ferro {
-  background: #1b4d6b;
+  background: #ffd166;
 }
 
 .recycle-counter-pill {
@@ -569,18 +580,19 @@ h3 {
   align-items: center;
   gap: 0.9rem;
   padding: 0.85rem 1.1rem;
-  border-radius: 10px;
+  border-radius: 18px;
   background: var(--surface-card);
-  border: 1.5px solid var(--line-strong);
+  border: 2px solid var(--line-strong);
   box-shadow: var(--card-shadow);
   margin-bottom: 1.65rem;
 }
 
 .transit-badge-code {
-  background: var(--ink);
-  color: var(--surface);
-  padding: 0.45rem 0.65rem;
-  border-radius: 6px;
+  background: var(--signal-vermilion);
+  color: #07150c;
+  font-weight: 800;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
   white-space: nowrap;
 }
 
@@ -606,21 +618,21 @@ h3 {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.82rem 1.35rem;
-  border-radius: 8px;
+  padding: 0.85rem 1.45rem;
+  border-radius: 999px;
   font-family: var(--display);
-  font-weight: 700;
-  font-size: 0.95rem;
+  font-weight: 800;
+  font-size: 0.96rem;
   text-decoration: none;
   cursor: pointer;
-  border: 1.5px solid transparent;
+  border: 2px solid transparent;
 }
 
 .button.primary {
   background: var(--signal-vermilion);
-  color: #ffffff;
-  border-color: var(--ink);
-  box-shadow: 3px 3px 0px var(--ink);
+  color: #07150c;
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 5px 0px #245c3c, 0 10px 24px rgba(140, 232, 104, 0.28);
 }
 
 .button.primary:hover {
@@ -631,7 +643,7 @@ h3 {
   background: var(--surface-card);
   color: var(--ink);
   border-color: var(--line-strong);
-  box-shadow: 3px 3px 0px rgba(24, 25, 27, 0.08);
+  box-shadow: 0 4px 0px rgba(0, 0, 0, 0.35);
 }
 
 .text-link {
@@ -682,15 +694,19 @@ h3 {
   color: var(--ink-secondary);
 }
 
-/* ==================== TARJETA DE TABLERO VIAL 3D (HERO RIGHT) ==================== */
+/* ==================== TARJETA 3D AMIGABLE Y DIVERTIDA ==================== */
 .depth-3d-card {
   background: var(--surface-card);
-  border: 1.5px solid var(--line-strong);
-  border-radius: 14px;
+  border: 2px solid var(--line-strong);
+  border-radius: 22px;
   box-shadow: var(--card-shadow);
   transform-style: preserve-3d;
   transform: perspective(1100px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.depth-3d-card:hover {
+  box-shadow: var(--card-shadow-hover);
 }
 
 .hero-telemetry-card {
@@ -701,12 +717,13 @@ h3 {
 .card-corner-badge {
   display: inline-block;
   font-family: var(--mono);
-  font-size: 0.68rem;
-  font-weight: 700;
-  padding: 0.2rem 0.55rem;
-  border-radius: 4px;
-  background: var(--ink);
-  color: var(--surface);
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 0.28rem 0.75rem;
+  border-radius: 999px;
+  background: var(--eco-olive-bg);
+  color: var(--signal-vermilion);
+  border: 1.5px solid var(--line-strong);
   margin-bottom: 0.75rem;
 }
 
@@ -735,15 +752,15 @@ h3 {
 
 .telemetry-coords {
   background: var(--surface-alt);
-  padding: 0.22rem 0.5rem;
-  border-radius: 4px;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
   color: var(--ink-secondary);
 }
 
 .corridor-pills {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 0.45rem;
+  gap: 0.5rem;
   margin-bottom: 0.85rem;
 }
 
@@ -751,20 +768,22 @@ h3 {
   appearance: none;
   background: var(--surface);
   color: var(--ink-secondary);
-  border: 1px solid var(--line-strong);
-  border-radius: 6px;
-  padding: 0.48rem 0.65rem;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 12px;
+  padding: 0.52rem 0.75rem;
   font-family: var(--sans);
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-size: 0.82rem;
+  font-weight: 700;
   cursor: pointer;
   text-align: left;
+  transition: transform 0.15s ease, background-color 0.15s ease;
 }
 
 .corridor-btn.is-active {
-  background: var(--ink);
-  color: var(--surface);
-  border-color: var(--ink);
+  background: var(--signal-vermilion);
+  color: #07150c;
+  border-color: var(--signal-vermilion);
+  font-weight: 800;
 }
 
 .holo-camera-bar {
@@ -777,7 +796,7 @@ h3 {
 
 .cam-btn-group {
   display: inline-flex;
-  gap: 0.3rem;
+  gap: 0.35rem;
 }
 
 .cam-angle-btn {
@@ -785,18 +804,19 @@ h3 {
   background: var(--surface);
   color: var(--ink-secondary);
   border: 1px solid var(--line);
-  border-radius: 5px;
-  padding: 0.22rem 0.55rem;
+  border-radius: 999px;
+  padding: 0.24rem 0.65rem;
   font-family: var(--mono);
   font-size: 0.68rem;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
 }
 
 .cam-angle-btn.is-active {
   background: var(--signal-vermilion);
-  color: #ffffff;
+  color: #07150c;
   border-color: var(--signal-vermilion);
+  font-weight: 800;
 }
 
 /* Escenario 3D del Plano Vial en el Hero */
@@ -980,25 +1000,26 @@ input[type="range"] {
 .btn-recycle-action {
   width: 100%;
   appearance: none;
-  background: var(--ink);
-  color: var(--surface);
-  border: 1.5px solid var(--ink);
-  border-radius: 8px;
-  padding: 0.75rem 1rem;
+  background: var(--signal-vermilion);
+  color: #07150c;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  padding: 0.85rem 1.2rem;
   font-family: var(--display);
-  font-weight: 700;
-  font-size: 0.9rem;
+  font-weight: 800;
+  font-size: 0.94rem;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  box-shadow: 0 5px 0px #245c3c, 0 10px 24px rgba(140, 232, 104, 0.25);
 }
 
 .btn-recycle-action:hover {
-  background: var(--signal-vermilion);
-  border-color: var(--signal-vermilion);
-  color: #ffffff;
+  background: var(--signal-vermilion-hover);
+  border-color: rgba(255, 255, 255, 0.45);
+  color: #07150c;
 }
 
 .note-foot {
@@ -1009,14 +1030,14 @@ input[type="range"] {
 
 /* ==================== CINTA VIAL DE TRANSPORTE ==================== */
 .kinetic-ticker-band {
-  background: var(--ink);
-  color: var(--surface);
+  background: var(--surface-elevated);
+  color: var(--ink);
   padding: 0.65rem 0;
   overflow: hidden;
   border-block: 1.5px solid var(--line-strong);
   font-family: var(--mono);
   font-size: 0.76rem;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.05em;
 }
 
@@ -1086,7 +1107,7 @@ input[type="range"] {
 
 /* ==================== SECCIÓN 00: MODO REALIDAD VIRTUAL DE VIAJE (POV EN BICI, A PIE, SCOOTER, AUTO) ==================== */
 .vr-commute-card {
-  padding: 1.25rem;
+  padding: 1.35rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -1104,7 +1125,7 @@ input[type="range"] {
 .vr-mode-tabs {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.45rem;
+  gap: 0.5rem;
 }
 
 .vr-pov-btn {
@@ -1112,11 +1133,11 @@ input[type="range"] {
   background: var(--surface);
   color: var(--ink-secondary);
   border: 1.5px solid var(--line-strong);
-  border-radius: 8px;
-  padding: 0.52rem 0.9rem;
+  border-radius: 999px;
+  padding: 0.56rem 1.05rem;
   font-family: var(--display);
-  font-size: 0.85rem;
-  font-weight: 700;
+  font-size: 0.86rem;
+  font-weight: 800;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -1125,24 +1146,24 @@ input[type="range"] {
 
 .vr-pov-btn.is-active {
   background: var(--signal-vermilion);
-  color: #ffffff;
-  border-color: var(--ink);
-  box-shadow: 3px 3px 0px var(--ink);
+  color: #07150c;
+  border-color: var(--signal-vermilion);
+  box-shadow: 0 4px 0px #245c3c, 0 8px 18px rgba(140, 232, 104, 0.25);
 }
 
 .vr-headset-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.45rem;
+  gap: 0.5rem;
 }
 
 .btn-vr-tool {
   appearance: none;
-  background: var(--ink);
-  color: var(--surface);
-  border: 1.5px solid var(--ink);
-  border-radius: 8px;
-  padding: 0.48rem 0.82rem;
+  background: var(--surface-elevated);
+  color: var(--ink);
+  border: 1.5px solid var(--line-strong);
+  border-radius: 999px;
+  padding: 0.5rem 0.92rem;
   font-family: var(--mono);
   font-size: 0.74rem;
   font-weight: 700;
@@ -1153,15 +1174,16 @@ input[type="range"] {
 }
 
 .btn-vr-tool[aria-pressed="true"] {
-  background: var(--eco-olive);
-  border-color: var(--ink);
-  color: #ffffff;
+  background: var(--transit-ochre);
+  border-color: var(--transit-ochre);
+  color: #07150c;
+  font-weight: 800;
 }
 
 .vr-commute-viewport {
   position: relative;
-  border-radius: 12px;
-  border: 2px solid var(--ink);
+  border-radius: 18px;
+  border: 2px solid var(--line-strong);
   overflow: hidden;
   background: #1c2226;
   cursor: grab;
@@ -1193,17 +1215,17 @@ input[type="range"] {
 }
 
 .vr-lens-frame {
-  border: 14px solid rgba(24, 25, 27, 0.85);
+  border: 14px solid rgba(11, 15, 12, 0.85);
   border-radius: 38px;
   padding: 0.65rem 1rem;
   display: flex;
   align-items: flex-start;
   justify-content: flex-end;
-  color: #f3efe6;
+  color: #f4f7f4;
 }
 
 .vr-lens-divider {
-  background: #18191b;
+  background: #0b0f0c;
 }
 
 /* HUD de Ahorro del Viaje en el Visor VR */
@@ -1220,42 +1242,43 @@ input[type="range"] {
 }
 
 .vr-hud-box {
-  background: rgba(250, 247, 240, 0.94);
-  color: #18191b;
-  border: 1.5px solid #18191b;
-  border-radius: 8px;
-  padding: 0.5rem 0.7rem;
-  box-shadow: 3px 3px 0px rgba(24, 25, 27, 0.35);
+  background: rgba(11, 18, 14, 0.86);
+  backdrop-filter: blur(8px);
+  color: #f4f7f4;
+  border: 1.5px solid rgba(140, 232, 104, 0.35);
+  border-radius: 14px;
+  padding: 0.55rem 0.78rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
 }
 
 .vr-hud-box span {
   display: block;
   font-size: 0.63rem;
-  color: #4a4e54;
+  color: #a6b8ab;
   margin-bottom: 0.12rem;
 }
 
 .vr-hud-box strong {
-  font-size: 0.88rem;
-  color: #18191b;
+  font-size: 0.9rem;
+  color: #f4f7f4;
 }
 
 .vr-hud-box.highlight {
-  background: #dfece3;
-  border-color: #286646;
+  background: rgba(20, 48, 32, 0.92);
+  border-color: #8ce868;
 }
 
 .vr-hud-box.highlight strong {
-  color: #286646;
+  color: #8ce868;
 }
 
 .vr-commute-card[data-pov-mode="car"] .vr-hud-box.highlight {
-  background: #f6e0dc;
-  border-color: #b83227;
+  background: rgba(58, 22, 18, 0.92);
+  border-color: #ff8c61;
 }
 
 .vr-commute-card[data-pov-mode="car"] .vr-hud-box.highlight strong {
-  color: #b83227;
+  color: #ff8c61;
 }
 
 .vr-bottom-caption {
@@ -1268,19 +1291,22 @@ input[type="range"] {
   justify-content: space-between;
   align-items: center;
   gap: 0.5rem;
-  background: rgba(24, 25, 27, 0.88);
-  color: #f3efe6;
-  padding: 0.45rem 0.8rem;
-  border-radius: 8px;
+  background: rgba(11, 18, 14, 0.88);
+  backdrop-filter: blur(8px);
+  color: #f4f7f4;
+  padding: 0.48rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid rgba(140, 232, 104, 0.3);
   pointer-events: none;
   z-index: 5;
 }
 
 .vr-drag-pill {
   background: var(--signal-vermilion);
-  color: #ffffff;
-  padding: 0.18rem 0.55rem;
-  border-radius: 4px;
+  color: #07150c;
+  font-weight: 800;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
 }
 
 /* ==================== SECCIÓN 01: GARAJE & COMPARADOR VEHICULAR 3D ==================== */
@@ -1365,9 +1391,9 @@ input[type="range"] {
   justify-content: space-between;
   padding: 1rem 1.2rem;
   background: var(--surface-card);
-  border: 1.5px solid var(--ink);
-  border-radius: 12px;
-  box-shadow: 8px 12px 0px rgba(24, 25, 27, 0.12);
+  border: 2px solid var(--line-strong);
+  border-radius: 18px;
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.42);
 }
 
 .veh-layer-chassis {
@@ -1427,7 +1453,7 @@ input[type="range"] {
 .lane-flow-simulator {
   background: var(--surface);
   border: 1.5px solid var(--line-strong);
-  border-radius: 10px;
+  border-radius: 14px;
   padding: 0.75rem 0.9rem;
 }
 
@@ -1445,7 +1471,7 @@ input[type="range"] {
   width: 100%;
   height: 116px;
   display: block;
-  border-radius: 6px;
+  border-radius: 10px;
   background: #1e2124;
   border: 1px solid var(--line-strong);
 }
@@ -1463,8 +1489,8 @@ input[type="range"] {
   width: 100%;
   text-align: left;
   background: var(--surface-card);
-  border: 1.5px solid var(--line-strong);
-  border-radius: 12px;
+  border: 2px solid var(--line-strong);
+  border-radius: 18px;
   padding: 1.05rem 1.2rem;
   cursor: pointer;
   box-shadow: var(--card-shadow);
@@ -1472,7 +1498,7 @@ input[type="range"] {
 
 .vehicle-option-card.is-active {
   border-color: var(--signal-vermilion);
-  box-shadow: 5px 5px 0px var(--signal-vermilion);
+  box-shadow: 0 0 0 2px var(--signal-vermilion), 0 12px 28px rgba(140, 232, 104, 0.2);
   background: var(--surface-elevated);
 }
 
@@ -1485,14 +1511,14 @@ input[type="range"] {
 }
 
 .veh-opt-icon {
-  font-size: 1.55rem;
-  width: 42px;
-  height: 42px;
-  border-radius: 8px;
+  font-size: 1.65rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
   background: var(--surface-alt);
   display: grid;
   place-items: center;
-  border: 1px solid var(--line);
+  border: 1.5px solid var(--line-strong);
 }
 
 .veh-opt-head h3 {
@@ -1502,8 +1528,8 @@ input[type="range"] {
 
 .veh-opt-co2 {
   font-size: 0.82rem;
-  padding: 0.22rem 0.55rem;
-  border-radius: 6px;
+  padding: 0.22rem 0.65rem;
+  border-radius: 999px;
 }
 
 .veh-opt-co2.eco {
@@ -1512,7 +1538,7 @@ input[type="range"] {
 }
 
 .veh-opt-co2.mid {
-  background: rgba(200, 138, 27, 0.16);
+  background: rgba(255, 209, 102, 0.16);
   color: var(--transit-ochre);
 }
 
@@ -1543,7 +1569,7 @@ input[type="range"] {
 .alchemy-preset-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.45rem;
+  gap: 0.5rem;
   margin-bottom: 1.25rem;
 }
 
@@ -1551,19 +1577,20 @@ input[type="range"] {
   appearance: none;
   background: var(--surface);
   color: var(--ink-secondary);
-  border: 1px solid var(--line-strong);
-  border-radius: 6px;
-  padding: 0.45rem 0.7rem;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 999px;
+  padding: 0.5rem 0.9rem;
   font-family: var(--sans);
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-size: 0.82rem;
+  font-weight: 700;
   cursor: pointer;
 }
 
 .alchemy-preset.is-active {
-  background: var(--ink);
-  color: var(--surface);
-  border-color: var(--ink);
+  background: var(--signal-vermilion);
+  color: #07150c;
+  border-color: var(--signal-vermilion);
+  font-weight: 800;
 }
 
 .alchemy-sliders {
@@ -1582,9 +1609,9 @@ input[type="range"] {
 
 .savings-pill {
   background: var(--surface);
-  border: 1px solid var(--line-strong);
-  border-radius: 8px;
-  padding: 0.75rem 0.9rem;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 14px;
+  padding: 0.85rem 1rem;
 }
 
 .savings-pill span {
@@ -1599,10 +1626,11 @@ input[type="range"] {
 }
 
 .alchemy-total-readout {
-  background: var(--ink);
-  color: var(--surface);
-  padding: 1.15rem 1.25rem;
-  border-radius: 10px;
+  background: var(--surface-elevated);
+  color: var(--ink);
+  border: 2px solid var(--line-strong);
+  padding: 1.2rem 1.35rem;
+  border-radius: 18px;
 }
 
 .alchemy-big-number {
@@ -1619,7 +1647,8 @@ input[type="range"] {
 
 .alchemy-formula {
   margin: 0;
-  opacity: 0.75;
+  opacity: 0.85;
+  color: var(--ink-secondary);
 }
 
 /* Boletos con Perforación Lateral (shaped-cutouts) */
@@ -1840,53 +1869,54 @@ blockquote footer {
   color: var(--ink-secondary);
 }
 
-.terminal-window {
-  background: #18191b;
-  color: #f3efe6;
-  border-radius: 10px;
-  overflow: hidden;
-  border: 1.5px solid var(--line-strong);
+/* Chat amigable de EcoBot (reemplaza la ventana técnica de código) */
+.ai-chat-mascot-box {
+  background: var(--surface);
+  border: 2px solid var(--line-strong);
+  border-radius: 18px;
+  padding: 0.95rem 1.05rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
-.terminal-bar {
-  background: #232529;
-  padding: 0.45rem 0.75rem;
+.ai-chat-head {
   display: flex;
   align-items: center;
-  gap: 0.35rem;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--signal-vermilion);
+  border-bottom: 1px dashed var(--line-strong);
+  padding-bottom: 0.45rem;
 }
 
-.terminal-bar .dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #555960;
+.ai-chat-bubble-user {
+  align-self: flex-end;
+  background: var(--surface-elevated);
+  color: var(--ink);
+  border: 1px solid var(--line-strong);
+  border-radius: 14px 14px 4px 14px;
+  padding: 0.52rem 0.8rem;
+  font-size: 0.82rem;
+  max-width: 90%;
 }
 
-.terminal-title {
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  color: #c5bfb2;
-  margin-left: 0.35rem;
+.ai-chat-bubble-bot {
+  align-self: flex-start;
+  background: var(--eco-olive-bg);
+  color: var(--ink);
+  border: 1.5px solid var(--signal-vermilion);
+  border-radius: 14px 14px 14px 4px;
+  padding: 0.65rem 0.85rem;
+  font-size: 0.84rem;
+  line-height: 1.45;
 }
 
-.terminal-code {
-  margin: 0;
-  padding: 0.9rem;
-  font-family: var(--mono);
-  font-size: 0.76rem;
-  line-height: 1.55;
-  overflow-x: auto;
-}
-
-.c-key {
-  color: #e59a23;
-}
-.c-str {
-  color: #8ce868;
-}
-.c-num {
-  color: #ff8c61;
+.ai-chat-bubble-bot strong {
+  color: var(--signal-vermilion);
 }
 
 .emission-bars {
@@ -1937,7 +1967,7 @@ blockquote footer {
 .mini-bars-chart span {
   background: var(--surface-alt);
   border: 1px solid var(--line-strong);
-  border-radius: 4px 4px 0 0;
+  border-radius: 6px 6px 0 0;
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -1945,7 +1975,8 @@ blockquote footer {
 
 .mini-bars-chart span.is-peak {
   background: var(--signal-vermilion);
-  color: #fff;
+  color: #07150c;
+  font-weight: 800;
 }
 
 .mini-bars-chart i {
@@ -2206,14 +2237,15 @@ blockquote footer {
 }
 
 .team-avatar {
-  width: 38px;
-  height: 38px;
-  border-radius: 8px;
-  background: var(--ink);
-  color: var(--surface);
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: var(--eco-olive-bg);
+  color: var(--signal-vermilion);
+  border: 1.5px solid var(--line-strong);
   font-family: var(--mono);
-  font-weight: 700;
-  font-size: 0.82rem;
+  font-weight: 800;
+  font-size: 1.15rem;
   display: grid;
   place-items: center;
 }
@@ -2245,8 +2277,8 @@ blockquote footer {
   gap: 0.25rem;
   padding: 1rem 1.15rem;
   background: var(--surface-card);
-  border: 1.5px solid var(--line-strong);
-  border-radius: 10px;
+  border: 2px solid var(--line-strong);
+  border-radius: 16px;
   color: var(--ink);
   text-decoration: none;
   font-weight: 700;
@@ -2298,19 +2330,19 @@ blockquote footer {
 .modal {
   border: none;
   padding: 0;
-  border-radius: 14px;
+  border-radius: 22px;
   background: var(--surface-card);
   color: var(--ink);
   max-width: 580px;
   width: calc(100% - 2rem);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
-  border: 2px solid var(--ink);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+  border: 2px solid var(--line-strong);
   overscroll-behavior: contain;
 }
 
 .modal::backdrop {
-  background: rgba(24, 25, 27, 0.55);
-  backdrop-filter: blur(4px);
+  background: rgba(11, 15, 12, 0.65);
+  backdrop-filter: blur(5px);
 }
 
 .modal-card {
@@ -2327,12 +2359,12 @@ blockquote footer {
 
 .modal-close-btn {
   appearance: none;
-  border: 1px solid var(--line-strong);
+  border: 1.5px solid var(--line-strong);
   background: var(--surface);
   color: var(--ink);
-  width: 34px;
-  height: 34px;
-  border-radius: 6px;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
   font-size: 1.25rem;
   cursor: pointer;
 }
@@ -2358,20 +2390,20 @@ blockquote footer {
   display: flex;
   align-items: center;
   gap: 0.55rem;
-  padding: 0.55rem 0.7rem;
+  padding: 0.58rem 0.78rem;
   background: var(--surface-card);
-  border: 1.5px solid var(--line-strong);
-  border-radius: 10px;
-  box-shadow: 2px 2px 0px var(--line-strong);
+  border: 2px solid var(--line-strong);
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
 }
 
 .app-decor-icon {
-  font-size: 1.35rem;
-  width: 34px;
-  height: 34px;
-  border-radius: 8px;
+  font-size: 1.4rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
   background: var(--surface-alt);
-  border: 1px solid var(--line);
+  border: 1px solid var(--line-strong);
   display: grid;
   place-items: center;
   flex-shrink: 0;
@@ -2385,7 +2417,7 @@ blockquote footer {
 }
 
 .app-decor-pill strong {
-  font-size: 0.82rem;
+  font-size: 0.84rem;
   color: var(--ink);
   display: block;
   margin-top: 0.12rem;
@@ -2406,13 +2438,13 @@ blockquote footer {
 
 .street-sign {
   font-family: var(--mono);
-  font-size: 0.72rem;
-  font-weight: 700;
-  padding: 0.36rem 0.72rem;
-  border-radius: 6px;
-  border: 1.5px solid var(--ink);
-  box-shadow: 2px 2px 0px var(--ink);
-  letter-spacing: 0.04em;
+  font-size: 0.74rem;
+  font-weight: 800;
+  padding: 0.38rem 0.82rem;
+  border-radius: 999px;
+  border: 1.5px solid var(--line-strong);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  letter-spacing: 0.03em;
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
@@ -2420,19 +2452,20 @@ blockquote footer {
 
 .street-sign.sign-green {
   background: var(--eco-olive-bg);
-  color: var(--eco-olive);
-  border-color: var(--eco-olive);
+  color: var(--signal-vermilion);
+  border-color: var(--signal-vermilion);
 }
 
 .street-sign.sign-amber {
-  background: rgba(200, 138, 27, 0.18);
-  color: var(--ink);
+  background: rgba(255, 209, 102, 0.16);
+  color: var(--transit-ochre);
   border-color: var(--transit-ochre);
 }
 
 .street-sign.sign-dark {
-  background: var(--ink);
-  color: var(--surface);
+  background: var(--surface-elevated);
+  color: var(--ink);
+  border-color: var(--line-strong);
 }
 
 .street-sign.sign-rust {
@@ -2452,8 +2485,8 @@ blockquote footer {
 .app-widget-card {
   background: var(--surface);
   border: 1.5px solid var(--line-strong);
-  border-radius: 10px;
-  padding: 0.8rem 0.95rem;
+  border-radius: 16px;
+  padding: 0.85rem 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -2469,8 +2502,8 @@ blockquote footer {
 
 .widget-pill {
   font-size: 0.68rem;
-  font-weight: 700;
-  padding: 0.14rem 0.5rem;
+  font-weight: 800;
+  padding: 0.16rem 0.55rem;
   border-radius: 999px;
   background: var(--surface-card);
   border: 1px solid var(--line-strong);
@@ -2478,14 +2511,14 @@ blockquote footer {
 
 .widget-pill.eco {
   background: var(--eco-olive-bg);
-  color: var(--eco-olive);
-  border-color: var(--eco-olive);
+  color: var(--signal-vermilion);
+  border-color: var(--signal-vermilion);
 }
 
 .widget-pill.warm {
-  background: var(--danger-rust-bg);
-  color: var(--signal-vermilion);
-  border-color: var(--signal-vermilion);
+  background: rgba(255, 209, 102, 0.18);
+  color: var(--transit-ochre);
+  border-color: var(--transit-ochre);
 }
 
 .medals-visual-strip {
@@ -2497,23 +2530,22 @@ blockquote footer {
 .medal-hex {
   background: var(--surface-card);
   border: 1.5px solid var(--line-strong);
-  border-radius: 8px;
-  padding: 0.4rem 0.25rem;
+  border-radius: 12px;
+  padding: 0.45rem 0.25rem;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.18rem;
-  box-shadow: 2px 2px 0px rgba(24, 25, 27, 0.08);
   transition: transform 0.2s ease;
 }
 
 .medal-hex:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px) scale(1.03);
 }
 
 .medal-hex.is-unlocked {
-  border-color: var(--eco-olive);
+  border-color: var(--signal-vermilion);
   background: var(--eco-olive-bg);
 }
 
@@ -2523,7 +2555,7 @@ blockquote footer {
 }
 
 .medal-emoji {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   line-height: 1;
 }
 
@@ -2543,8 +2575,8 @@ blockquote footer {
 .day-bubble {
   background: var(--surface-card);
   border: 1.5px solid var(--line-strong);
-  border-radius: 8px;
-  padding: 0.35rem 0.15rem;
+  border-radius: 10px;
+  padding: 0.38rem 0.15rem;
   text-align: center;
   font-family: var(--mono);
   font-size: 0.68rem;
@@ -2557,19 +2589,20 @@ blockquote footer {
 
 .day-bubble i {
   font-style: normal;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
 }
 
 .day-bubble.done {
-  background: var(--eco-olive);
-  color: #ffffff;
-  border-color: var(--ink);
+  background: var(--eco-olive-bg);
+  color: var(--signal-vermilion);
+  border-color: var(--signal-vermilion);
 }
 
 .day-bubble.active {
-  background: var(--signal-vermilion);
-  color: #ffffff;
-  border-color: var(--ink);
+  background: var(--transit-ochre);
+  color: #07150c;
+  border-color: var(--transit-ochre);
+  font-weight: 800;
 }
 
 .rewards-mini-tickets {
@@ -2581,8 +2614,8 @@ blockquote footer {
 .mini-reward-ticket {
   background: var(--surface-card);
   border: 1.5px dashed var(--line-strong);
-  border-radius: 8px;
-  padding: 0.38rem 0.45rem;
+  border-radius: 12px;
+  padding: 0.42rem 0.45rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2591,7 +2624,7 @@ blockquote footer {
 }
 
 .mini-reward-ticket span {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
 .mini-reward-ticket strong {
@@ -2601,19 +2634,19 @@ blockquote footer {
 
 .mini-reward-ticket em {
   font-style: normal;
-  font-size: 0.62rem;
-  font-weight: 700;
+  font-size: 0.64rem;
+  font-weight: 800;
   color: var(--signal-vermilion);
 }
 
 /* Separador vial decorativo entre secciones */
 .road-decor-divider {
   position: relative;
-  padding: 0.85rem 0;
-  background: var(--ink);
-  color: var(--surface);
+  padding: 0.9rem 0;
+  background: var(--surface-alt);
+  color: var(--ink);
   overflow: hidden;
-  border-bottom: 1.5px solid var(--line-strong);
+  border-bottom: 1.5px solid var(--line);
 }
 
 .road-decor-line {
@@ -2624,7 +2657,7 @@ blockquote footer {
   height: 2px;
   background: repeating-linear-gradient(
     to right,
-    rgba(255, 255, 255, 0.28) 0 18px,
+    rgba(140, 232, 104, 0.35) 0 18px,
     transparent 18px 34px
   );
   transform: translateY(-50%);
@@ -2642,19 +2675,20 @@ blockquote footer {
 
 .road-sign-chip {
   font-family: var(--mono);
-  font-size: 0.68rem;
-  font-weight: 700;
-  padding: 0.22rem 0.65rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 0.28rem 0.8rem;
   border-radius: 999px;
-  background: #24282e;
-  color: #f3efe6;
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: var(--surface-card);
+  color: var(--ink);
+  border: 1.5px solid var(--line-strong);
 }
 
 .road-moving-icon {
-  font-size: 1.15rem;
-  background: var(--eco-olive);
-  padding: 0.12rem 0.45rem;
+  font-size: 1.2rem;
+  background: var(--signal-vermilion);
+  color: #07150c;
+  padding: 0.16rem 0.55rem;
   border-radius: 999px;
 }
 
