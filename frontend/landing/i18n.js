@@ -1,87 +1,87 @@
 /**
- * EcoCommute Landing Page — Movilidad Urbana, Comparador Vehicular 3D,
- * Simulador de Carril Vial en Lima, Boleto de Cambio Modal & i18n (es_419 / en_US)
+ * EcoCommute Landing Page — Movilidad Urbana Divertida, Comparador Vehicular 3D,
+ * Paseo VR 3D Realista, Calculadora de Ahorro & i18n (es_419 / en_US)
  */
 
 const CORRIDORS = {
   miraflores: {
     km: 4.2,
-    coords: "-12.1219, -77.0297",
+    coords: "🚲 Ciclovía Arequipa",
     bikeMin: 14,
     carMin: 22,
-    originTag: "ORIGEN // MIRAFLORES",
-    destTag: "META // SAN ISIDRO",
+    originTag: "SALIDA · MIRAFLORES",
+    destTag: "LLEGADA · SAN ISIDRO",
     carPath: "M 38 94 C 120 98, 165 28, 250 45 C 310 55, 345 32, 382 36",
     ecoPath: "M 38 94 C 110 86, 155 60, 225 58 C 295 56, 330 40, 382 36",
     es: {
       routeTitle: "Miraflores → San Isidro",
       gemini:
-        "«Por la ciclovía de Av. Arequipa llegas en 14 min sin congestión vehicular, ahorras 638 g de CO₂ frente al auto particular (152 g/km) y sumas puntos para el ranking de Miraflores.»"
+        "«¡Ándate en bici por Av. Arequipa! 🚲 Llegas en 14 min sin comerte el tráfico, ahorras S/ 8.50 y sumas +15 Puntos Verdes.»"
     },
     en: {
       routeTitle: "Miraflores → San Isidro",
       gemini:
-        "“Taking the Av. Arequipa protected bike lane gets you there in 14 min bypassing rush-hour traffic, avoiding 638 g of CO₂ vs. driving (152 g/km) and earning Miraflores leaderboard points.”"
+        "“Hop on a bike down Av. Arequipa! 🚲 You'll get there in 14 min skipping traffic, save S/ 8.50, and score +15 Green Points.”"
     }
   },
   upc: {
     km: 5.8,
-    coords: "-12.1041, -76.9629",
+    coords: "🎓 Ruta Universitaria",
     bikeMin: 19,
     carMin: 31,
-    originTag: "ORIGEN // UPC MONTERRICO",
-    destTag: "META // SAN BORJA",
+    originTag: "SALIDA · UPC MONTERRICO",
+    destTag: "LLEGADA · SAN BORJA",
     carPath: "M 38 96 C 95 42, 190 98, 275 40 C 325 24, 355 50, 382 30",
     ecoPath: "M 38 96 C 115 76, 185 66, 260 50 C 315 38, 350 34, 382 30",
     es: {
       routeTitle: "UPC Monterrico → San Borja",
       gemini:
-        "«Conectando Av. Primavera con el eje ciclista de San Borja evitas el cuello de botella de Panamericana Sur, ahorras 882 g de CO₂ y desbloqueas progreso en el reto universitario.»"
+        "«¡Por la ciclovía de Av. Primavera te libras del tráfico de Surco! 🛴 Ahorras 12 minutos y ganas +21 Puntos Verdes para tu café.»"
     },
     en: {
       routeTitle: "UPC Monterrico → San Borja",
       gemini:
-        "“Connecting Av. Primavera to San Borja's cycling network avoids the Panamericana Sur bottleneck, saving 882 g of CO₂ and advancing your campus challenge.”"
+        "“Ride down Av. Primavera to skip the Surco traffic jam! 🛴 You save 12 minutes and earn +21 Green Points toward a free coffee.”"
     }
   },
   jesusmaria: {
     km: 3.6,
-    coords: "-12.0686, -77.0414",
+    coords: "🌳 Vía Arbolada",
     bikeMin: 12,
     carMin: 19,
-    originTag: "ORIGEN // JESÚS MARÍA",
-    destTag: "META // LINCE",
+    originTag: "SALIDA · JESÚS MARÍA",
+    destTag: "LLEGADA · LINCE",
     carPath: "M 38 46 C 110 24, 195 92, 280 76 C 330 66, 355 84, 382 70",
     ecoPath: "M 38 46 C 115 50, 195 56, 275 62 C 325 66, 355 68, 382 70",
     es: {
       routeTitle: "Jesús María → Lince",
       gemini:
-        "«El corredor de Av. Salaverry ofrece ciclovía segregada continua y pendiente plana: evitas 547 g de CO₂ y llegas 7 minutos antes que en auto particular.»"
+        "«Av. Salaverry está llenita de árboles y súper plana 🌿: llegas 7 minutos antes que en auto y sumas +13 Puntos Verdes.»"
     },
     en: {
       routeTitle: "Jesús María → Lince",
       gemini:
-        "“The Av. Salaverry corridor provides a continuous protected bike lane and flat terrain: you avoid 547 g of CO₂ and arrive 7 minutes faster than driving.”"
+        "“Av. Salaverry is flat and shaded by trees 🌿: you arrive 7 minutes faster than driving and score +13 Green Points.”"
     }
   },
   barranco: {
     km: 2.9,
-    coords: "-12.1497, -77.0219",
+    coords: "🌊 Ruta Malecón",
     bikeMin: 10,
     carMin: 16,
-    originTag: "ORIGEN // BARRANCO",
-    destTag: "META // MIRAFLORES",
+    originTag: "SALIDA · BARRANCO",
+    destTag: "LLEGADA · MIRAFLORES",
     carPath: "M 38 98 C 130 102, 210 78, 290 62 C 340 50, 360 36, 382 28",
     ecoPath: "M 38 98 C 105 70, 180 44, 265 36 C 325 30, 355 28, 382 28",
     es: {
       routeTitle: "Barranco → Miraflores",
       gemini:
-        "«Por la ciclovía costera del Malecón Paul Harris y Cisneros avanzas sin cruces semafóricos pesados, dejando de emitir 441 g de CO₂ en un trayecto corto.»"
+        "«¡Paseazo frente al mar por el Malecón! 🌊 Cero semáforos pesados, brisa fresca y +10 Puntos Verdes directos a tu cuenta.»"
     },
     en: {
       routeTitle: "Barranco → Miraflores",
       gemini:
-        "“Riding along the Malecón coastal bike path bypasses heavy intersections, avoiding 441 g of CO₂ on a quick coastal commute.”"
+        "“Cruise along the oceanfront Malecón bike path! 🌊 Zero heavy lights, ocean breeze, and +10 Green Points added to your balance.”"
     }
   }
 };
@@ -92,28 +92,28 @@ const VEHICLE_SPECS = {
     isDanger: false,
     speed: "18 km/h",
     space: "1.5 m²",
-    pts: "+15 pts / 4.2 km",
+    pts: "+15 pts / viaje",
     es: {
-      code: "MODO 01 // TRACCIÓN HUMANA · CICLOVÍA SEGREGADA",
-      chassis: "ESPACIO EN VÍA: 1.5 m² / VIAJERO · 0 COMBUSTIBLE",
-      laneSummary: "30 ciclistas = 0 g CO₂ · Fluidez continua (18 km/h)"
+      code: "🚲 EN BICICLETA · ¡RÁPIDO, DIVERTIDO Y SIN TRÁFICO!",
+      chassis: "ESPACIO QUE OCUPAS: 1.5 m² · CERO GASOLINA",
+      laneSummary: "30 ciclistas avanzan libres (0 g humo) vs. autos atorados"
     },
     en: {
-      code: "MODE 01 // HUMAN TRACTION · PROTECTED BIKE LANE",
-      chassis: "ROAD FOOTPRINT: 1.5 m² / RIDER · ZERO FUEL",
-      laneSummary: "30 cyclists = 0 g CO₂ · Continuous flow (18 km/h)"
+      code: "🚲 BY BICYCLE · FAST, FUN & TRAFFIC-FREE!",
+      chassis: "SPACE USED: 1.5 m² · ZERO GASOLINE",
+      laneSummary: "30 cyclists glide freely (0 g smoke) vs. stuck cars"
     },
     svg: `
       <svg class="veh-blueprint-svg" viewBox="0 0 320 110" fill="none" aria-hidden="true">
-        <line x1="16" y1="96" x2="304" y2="96" stroke="currentColor" stroke-opacity="0.25" stroke-width="2" stroke-dasharray="6 4" />
-        <circle cx="88" cy="68" r="24" stroke="#18191B" stroke-width="4" />
-        <circle cx="88" cy="68" r="4" fill="#D84A27" />
-        <circle cx="228" cy="68" r="24" stroke="#18191B" stroke-width="4" />
-        <circle cx="228" cy="68" r="4" fill="#D84A27" />
-        <path d="M88 68 L136 32 L202 32 L152 68 Z" stroke="#D84A27" stroke-width="4" stroke-linejoin="round" />
-        <path d="M136 32 L152 68 M124 22 L146 22 M202 32 L228 68 M194 18 L212 22" stroke="#18191B" stroke-width="3.5" stroke-linecap="round" />
-        <rect x="24" y="14" width="66" height="18" rx="4" fill="#286646" />
-        <text x="57" y="26" text-anchor="middle" fill="#FAF7F0" font-family="JetBrains Mono" font-size="9" font-weight="700">0g CO₂/km</text>
+        <line x1="16" y1="96" x2="304" y2="96" stroke="#8ce868" stroke-opacity="0.35" stroke-width="2" stroke-dasharray="6 4" />
+        <circle cx="88" cy="68" r="24" stroke="#f4f7f4" stroke-width="4" />
+        <circle cx="88" cy="68" r="5" fill="#ffd166" />
+        <circle cx="228" cy="68" r="24" stroke="#f4f7f4" stroke-width="4" />
+        <circle cx="228" cy="68" r="5" fill="#ffd166" />
+        <path d="M88 68 L136 32 L202 32 L152 68 Z" stroke="#8ce868" stroke-width="4.5" stroke-linejoin="round" />
+        <path d="M136 32 L152 68 M124 22 L146 22 M202 32 L228 68 M194 18 L212 22" stroke="#f4f7f4" stroke-width="3.5" stroke-linecap="round" />
+        <rect x="20" y="12" width="76" height="20" rx="10" fill="#8ce868" />
+        <text x="58" y="25" text-anchor="middle" fill="#07150c" font-family="JetBrains Mono" font-size="9" font-weight="800">🚲 +15 PTS</text>
       </svg>
     `
   },
@@ -122,55 +122,55 @@ const VEHICLE_SPECS = {
     isDanger: false,
     speed: "20 km/h",
     space: "1.2 m²",
-    pts: "+14 pts / 4.2 km",
+    pts: "+14 pts / viaje",
     es: {
-      code: "MODO 02 // MICROMOVILIDAD ELÉCTRICA · ÚLTIMA MILLA",
-      chassis: "ESPACIO EN VÍA: 1.2 m² / VIAJERO · INTERMODAL",
-      laneSummary: "30 scooters = 0 g CO₂ de escape · Ágil en interconexión"
+      code: "🛴 SCOOTER ELÉCTRICO · ÁGIL Y SIN SUDAR",
+      chassis: "ESPACIO QUE OCUPAS: 1.2 m² · CONECTA CON EL METRO",
+      laneSummary: "30 scooters = 0 g de humo · Ideal para llegar rapidito"
     },
     en: {
-      code: "MODE 02 // ELECTRIC MICROMOBILITY · LAST MILE",
-      chassis: "ROAD FOOTPRINT: 1.2 m² / RIDER · INTERMODAL",
-      laneSummary: "30 e-scooters = 0 g tailpipe CO₂ · Agile last-mile link"
+      code: "🛴 ELECTRIC SCOOTER · AGILE & EFFORTLESS",
+      chassis: "SPACE USED: 1.2 m² · CONNECTS WITH METRO",
+      laneSummary: "30 e-scooters = 0 g smoke · Great for quick trips"
     },
     svg: `
       <svg class="veh-blueprint-svg" viewBox="0 0 320 110" fill="none" aria-hidden="true">
-        <line x1="16" y1="96" x2="304" y2="96" stroke="currentColor" stroke-opacity="0.25" stroke-width="2" stroke-dasharray="6 4" />
-        <circle cx="96" cy="76" r="16" stroke="#18191B" stroke-width="4" />
-        <circle cx="220" cy="76" r="16" stroke="#18191B" stroke-width="4" />
-        <path d="M96 76 H196 L214 20 M198 20 H224" stroke="#1F5666" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
-        <rect x="118" y="68" width="64" height="8" rx="4" fill="#D84A27" />
-        <rect x="24" y="14" width="84" height="18" rx="4" fill="#1F5666" />
-        <text x="66" y="26" text-anchor="middle" fill="#FAF7F0" font-family="JetBrains Mono" font-size="9" font-weight="700">E-MICRO 20km/h</text>
+        <line x1="16" y1="96" x2="304" y2="96" stroke="#7de2d1" stroke-opacity="0.35" stroke-width="2" stroke-dasharray="6 4" />
+        <circle cx="96" cy="76" r="16" stroke="#f4f7f4" stroke-width="4" />
+        <circle cx="220" cy="76" r="16" stroke="#f4f7f4" stroke-width="4" />
+        <path d="M96 76 H196 L214 20 M198 20 H224" stroke="#7de2d1" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+        <rect x="118" y="68" width="64" height="8" rx="4" fill="#8ce868" />
+        <rect x="20" y="12" width="86" height="20" rx="10" fill="#7de2d1" />
+        <text x="63" y="25" text-anchor="middle" fill="#07150c" font-family="JetBrains Mono" font-size="9" font-weight="800">🛴 +14 PTS</text>
       </svg>
     `
   },
   transit: {
-    badge: "38 g CO₂ / km",
+    badge: "-75% CO₂ / km",
     isDanger: false,
     speed: "24 km/h",
     space: "0.8 m²",
-    pts: "+10 pts / 4.2 km",
+    pts: "+10 pts / viaje",
     es: {
-      code: "MODO 03 // CORREDOR SEGREGADO & METRO LÍNEA 1",
-      chassis: "ESPACIO EN VÍA: 0.8 m² / PASAJERO · ALTA CAPACIDAD",
-      laneSummary: "1 unidad masiva reemplaza hasta 35 autos particulares"
+      code: "🚌 BUS / TREN ELÉCTRICO · VIAJE COMPARTIDO",
+      chassis: "ESPACIO POR PASAJERO: 0.8 m² · REEMPLAZA 35 AUTOS",
+      laneSummary: "1 bus libera la pista de hasta 35 autos particulares"
     },
     en: {
-      code: "MODE 03 // DEDICATED BUS CORRIDOR & METRO LINE 1",
-      chassis: "ROAD FOOTPRINT: 0.8 m² / PASSENGER · HIGH CAPACITY",
-      laneSummary: "1 transit unit replaces up to 35 single-occupancy cars"
+      code: "🚌 BUS / ELECTRIC TRAIN · SHARED RIDE",
+      chassis: "SPACE PER RIDER: 0.8 m² · REPLACES 35 CARS",
+      laneSummary: "1 bus frees the road from up to 35 private cars"
     },
     svg: `
       <svg class="veh-blueprint-svg" viewBox="0 0 320 110" fill="none" aria-hidden="true">
-        <line x1="16" y1="96" x2="304" y2="96" stroke="currentColor" stroke-opacity="0.25" stroke-width="2" stroke-dasharray="6 4" />
-        <rect x="44" y="26" width="232" height="52" rx="8" fill="#FAF7F0" stroke="#18191B" stroke-width="3.5" />
-        <rect x="58" y="36" width="38" height="22" rx="3" fill="#1F5666" fill-opacity="0.25" stroke="#18191B" stroke-width="2" />
-        <rect x="106" y="36" width="38" height="22" rx="3" fill="#1F5666" fill-opacity="0.25" stroke="#18191B" stroke-width="2" />
-        <rect x="154" y="36" width="38" height="22" rx="3" fill="#1F5666" fill-opacity="0.25" stroke="#18191B" stroke-width="2" />
-        <rect x="202" y="36" width="56" height="22" rx="3" fill="#D84A27" fill-opacity="0.25" stroke="#18191B" stroke-width="2" />
-        <circle cx="92" cy="80" r="13" fill="#18191B" />
-        <circle cx="228" cy="80" r="13" fill="#18191B" />
+        <line x1="16" y1="96" x2="304" y2="96" stroke="#ffd166" stroke-opacity="0.35" stroke-width="2" stroke-dasharray="6 4" />
+        <rect x="44" y="26" width="232" height="52" rx="10" fill="#182820" stroke="#ffd166" stroke-width="3.5" />
+        <rect x="58" y="36" width="38" height="22" rx="4" fill="#7de2d1" fill-opacity="0.3" stroke="#7de2d1" stroke-width="2" />
+        <rect x="106" y="36" width="38" height="22" rx="4" fill="#7de2d1" fill-opacity="0.3" stroke="#7de2d1" stroke-width="2" />
+        <rect x="154" y="36" width="38" height="22" rx="4" fill="#7de2d1" fill-opacity="0.3" stroke="#7de2d1" stroke-width="2" />
+        <rect x="202" y="36" width="56" height="22" rx="4" fill="#8ce868" fill-opacity="0.35" stroke="#8ce868" stroke-width="2" />
+        <circle cx="92" cy="80" r="13" fill="#f4f7f4" />
+        <circle cx="228" cy="80" r="13" fill="#f4f7f4" />
       </svg>
     `
   },
@@ -179,27 +179,27 @@ const VEHICLE_SPECS = {
     isDanger: true,
     speed: "12 km/h",
     space: "18.0 m²",
-    pts: "0 pts (Línea Base)",
+    pts: "0 pts (Tráfico)",
     es: {
-      code: "MODO 04 // AUTOMÓVIL PARTICULAR EN HORA PUNTA",
-      chassis: "ESPACIO EN VÍA: 18.0 m² · OCUPACIÓN MEDIA: 1.2 PERSONAS",
-      laneSummary: "30 autos = 4,560 g CO₂/km · Congestión severa (12 km/h)"
+      code: "🚗 AUTO EN HORA PUNTA · LENTO Y CON HUMO",
+      chassis: "OCUPA 18 m² DE PISTA · GASTA GASOLINA EN EL TRÁFICO",
+      laneSummary: "30 autos = fila detenida a 12 km/h y mucho humo"
     },
     en: {
-      code: "MODE 04 // PRIVATE PASSENGER CAR IN RUSH HOUR",
-      chassis: "ROAD FOOTPRINT: 18.0 m² · AVG OCCUPANCY: 1.2 PEOPLE",
-      laneSummary: "30 cars = 4,560 g CO₂/km · Severe gridlock (12 km/h)"
+      code: "🚗 CAR IN RUSH HOUR · SLOW & SMOKY",
+      chassis: "TAKES 18 m² OF ROAD · BURNS GAS IN TRAFFIC",
+      laneSummary: "30 cars = gridlock at 12 km/h and heavy smoke"
     },
     svg: `
       <svg class="veh-blueprint-svg" viewBox="0 0 320 110" fill="none" aria-hidden="true">
-        <line x1="16" y1="96" x2="304" y2="96" stroke="currentColor" stroke-opacity="0.25" stroke-width="2" stroke-dasharray="6 4" />
-        <path d="M56 74 L74 42 H198 L226 56 L264 62 V78 H56 Z" fill="#F6E0DC" stroke="#B83227" stroke-width="3.5" stroke-linejoin="round" />
-        <circle cx="98" cy="78" r="15" fill="#18191B" />
-        <circle cx="222" cy="78" r="15" fill="#18191B" />
-        <circle cx="34" cy="68" r="7" fill="#B83227" fill-opacity="0.35" />
-        <circle cx="20" cy="62" r="10" fill="#B83227" fill-opacity="0.22" />
-        <rect x="92" y="14" width="136" height="18" rx="4" fill="#B83227" />
-        <text x="160" y="26" text-anchor="middle" fill="#FAF7F0" font-family="JetBrains Mono" font-size="9" font-weight="700">152 g CO₂/km · HORA PUNTA</text>
+        <line x1="16" y1="96" x2="304" y2="96" stroke="#ff8c61" stroke-opacity="0.35" stroke-width="2" stroke-dasharray="6 4" />
+        <path d="M56 74 L74 42 H198 L226 56 L264 62 V78 H56 Z" fill="#3a1c18" stroke="#ff8c61" stroke-width="3.5" stroke-linejoin="round" />
+        <circle cx="98" cy="78" r="15" fill="#f4f7f4" />
+        <circle cx="222" cy="78" r="15" fill="#f4f7f4" />
+        <circle cx="34" cy="68" r="7" fill="#ff8c61" fill-opacity="0.45" />
+        <circle cx="20" cy="62" r="10" fill="#ff8c61" fill-opacity="0.28" />
+        <rect x="86" y="12" width="148" height="20" rx="10" fill="#ff8c61" />
+        <text x="160" y="25" text-anchor="middle" fill="#07150c" font-family="JetBrains Mono" font-size="9" font-weight="800">🚗 152g CO₂ · TRÁFICO</text>
       </svg>
     `
   }
@@ -207,438 +207,434 @@ const VEHICLE_SPECS = {
 
 const translations = {
   es_419: {
-    "page.title": "EcoCommute — Movilidad Urbana, Vehículos y Cambio Modal en Lima",
+    "page.title": "EcoCommute — Muévete por Lima, Ahorra y Gana Premios Verdes",
     "nav.skip": "Saltar al contenido principal",
-    "topbar.badge": "RED DE MOVILIDAD SOSTENIBLE · LIMA METROPOLITANA",
-    "topbar.spec": "Spring Boot 3.3 · OSRM · Gemini 1.5 Flash · 25 endpoints",
-    "topbar.recycled_label": "CO₂ EVITADO HOY:",
-    "topbar.swagger": "Swagger OpenAPI",
-    "biome.caliza": "Caliza Vial",
-    "biome.asfalto": "Asfalto",
-    "biome.ferroviario": "Ferroviario",
+    "topbar.badge": "🌱 NIVEL 4: CICLISTA LIMEÑO",
+    "topbar.spec": "🔥 Racha activa de 7 días · ¡Suma puntos en cada viaje!",
+    "topbar.recycled_label": "CO₂ AHORRADO HOY:",
+    "biome.caliza": "🌿 Lomas",
+    "biome.asfalto": "💎 Esmeralda",
+    "biome.ferroviario": "☀️ Sol",
     "nav.aria": "Navegación principal",
-    "nav.vr": "Viaje en VR",
+    "nav.vr": "Paseo VR 3D",
     "nav.vehicles": "Vehículos 3D",
-    "nav.alchemy": "Boleto & Ahorro",
-    "nav.why": "El Tráfico",
-    "nav.features": "Plataforma",
+    "nav.alchemy": "Tu Ahorro",
+    "nav.why": "La Idea",
+    "nav.features": "En la App",
     "nav.screens": "Pantallas",
     "nav.team": "Equipo",
     "lang.toggle_label": "Cambiar idioma (Español / English)",
 
     // Hero & Decorative App Badges
-    "hero.kicker": "Lima · ODS 11 · Meta 11.2 · Ingeniería de Sistemas UPC",
-    "hero.title": "Antes de encender el auto en Lima, ",
-    "hero.title_em": "mira lo que ahorras cambiando de vehículo.",
+    "hero.kicker": "🚲 ¡Muévete por Lima, ahorra plata y gana premios reales!",
+    "hero.title": "Deja el tráfico atrás, ",
+    "hero.title_em": "pedalea o camina y gana premios en Lima.",
     "hero.lead":
-      "Compara bici, scooter, bus o caminata con OSRM + Gemini 1.5 Flash: mide tu ahorro de CO₂ en vivo y canjea puntos verdes.",
-    "decor.badge_lbl": "MEDALLA ACTIVA",
+      "Elige cómo moverte (bici, scooter, bus o a pie), mira cuánto dinero y CO₂ ahorras al instante y canjea tus puntos por cafés y descuentos.",
+    "decor.badge_lbl": "TU MEDALLA",
     "decor.badge_val": "Ciclista Arequipa",
-    "decor.streak_lbl": "RACHA SIN AUTO",
+    "decor.streak_lbl": "TU RACHA",
     "decor.streak_val": "7 días seguidos",
-    "decor.reward_lbl": "CANJE DISPONIBLE",
+    "decor.reward_lbl": "PREMIO LISTO",
     "decor.reward_val": "Café & Taller Bici",
-    "decor.medals_title": "🏅 MEDALLAS DE LA APP",
+    "decor.medals_title": "🏅 TUS MEDALLAS EN LA APP",
     "decor.m1": "1er Pedal",
     "decor.m2": "-10kg CO₂",
     "decor.m3": "Racha 7D",
     "decor.m4": "100 PET",
     "decor.m5": "500 km",
-    "decor.streak_title": "🔥 RACHA SEMANAL EN LA APP",
-    "decor.rewards_title": "🎁 TIENDA DE PUNTOS VERDES",
-    "decor.r1": "Café Aliado",
+    "decor.streak_title": "🔥 TU RACHA DE LA SEMANA",
+    "decor.rewards_title": "🎁 CANJEA TUS PUNTOS",
+    "decor.r1": "Café Gratis",
     "decor.r2": "Taller Bici",
-    "decor.r3": "Kit LED Vial",
+    "decor.r3": "Luces LED",
 
-    "hero.flora_tag": "BITÁCORA DE TU SESIÓN",
-    "hero.btn_vr": "Modo VR: Viaje en Bici, A Pie o Auto",
-    "hero.btn_vehicles": "Comparador de Vehículos 3D",
-    "hero.btn_simulator": "Calcular Boleto Anual →",
-    "hero.btn_screens": "Ver las pantallas →",
-    "hero.stat1_label": "Emisión media en auto",
-    "hero.stat2_label": "Ciclovía / Caminata",
-    "hero.stat2_unit": "g CO₂/km directo",
-    "hero.stat3_label": "Backend verificado",
-    "hero.stat3_unit": "tests en verde",
-    "hero.card_label": "TABLERO DE CORREDOR VIAL · SIMULADOR EN VIVO",
+    "hero.flora_tag": "MIS VIAJES DE HOY",
+    "hero.btn_vr": "¡Probar Paseo en Realidad Virtual!",
+    "hero.btn_vehicles": "Ver Vehículos en 3D",
+    "hero.btn_simulator": "Ver mi ahorro anual →",
+    "hero.btn_screens": "Ver pantallas →",
+    "hero.stat1_label": "Humo en el tráfico",
+    "hero.stat2_label": "Aire 100% limpio",
+    "hero.stat2_unit": "g de humo",
+    "hero.stat3_label": "Ganas por viajar",
+    "hero.stat3_unit": "puntos / ruta",
+    "hero.card_label": "🗺️ ¿A DÓNDE VAMOS HOY? · PRUEBA UNA RUTA",
     "hero.card_route": "Miraflores → San Isidro, 4.2 km",
-    "hero.car": "En automóvil particular (152 g/km)",
+    "hero.car": "Si vas en auto (humo emitido)",
     "hero.car_val": "638 g de CO₂",
-    "hero.bike": "En bicicleta / scooter / a pie",
-    "hero.bike_val": "0 g de CO₂",
-    "hero.points": "Recompensa por el viaje",
+    "hero.bike": "Si vas en bici, scooter o a pie",
+    "hero.bike_val": "0 g de CO₂ 🎉",
+    "hero.points": "Puntos que ganas hoy",
     "hero.points_val": "+15 puntos verdes",
-    "hero.card_foot": "Factores de emisión por vehículo validados en el backend.",
+    "hero.card_foot": "¡Cada viaje sin auto suma puntos para canjear en cafés y talleres de bici aliados!",
 
     // Simulator
     "sim.route1": "Miraflores → San Isidro",
     "sim.route2": "UPC Monterrico → San Borja",
     "sim.route3": "Jesús María → Lince",
     "sim.route4": "Barranco → Miraflores",
-    "sim.cam_label": "VISTA DEL CARRIL:",
-    "sim.cam_iso": "Isométrica 3D",
-    "sim.cam_orbit": "Rasante Vial",
-    "sim.cam_flat": "Plano 2D",
-    "sim.by_bike": "en bici",
-    "sim.by_car_traffic": "en auto (tráfico)",
-    "sim.adjust_distance": "Distancia del trayecto urbano",
-    "sim.pet_equiv_label": "Equivalencia en envases PET",
-    "sim.gemini_tag": "COPILOTO VIAL · GOOGLE GEMINI 1.5 FLASH",
+    "sim.cam_label": "ÁNGULO DEL MAPA:",
+    "sim.cam_iso": "Vista 3D",
+    "sim.cam_orbit": "Inclinada",
+    "sim.cam_flat": "Mapa 2D",
+    "sim.by_bike": "en bici 🚲",
+    "sim.by_car_traffic": "en auto 🚗",
+    "sim.adjust_distance": "¿Cuántos kilómetros vas a recorrer?",
+    "sim.pet_equiv_label": "Equivale a reciclar",
+    "sim.gemini_tag": "CONSEJO DE ECOBOT · TU COPILOTO",
     "sim.gemini_miraflores":
-      "«Por la ciclovía de Av. Arequipa llegas en 14 min sin congestión, ahorras 638 g de CO₂ y sumas +15 puntos.»",
-    "sim.btn_recycle_trip": "Registrar este viaje sin auto en mi bitácora",
+      "«¡Ándate en bici por Av. Arequipa! 🚲 Llegas en 14 min sin comerte el tráfico, ahorras S/ 8.50 y sumas +15 Puntos Verdes.»",
+    "sim.btn_recycle_trip": "¡Hice este viaje! Sumar mis Puntos Verdes",
 
     // VR First-Person Commute Mode
-    "vr.title": "Vive tu viaje en VR: en bici, a pie, scooter o auto",
+    "vr.title": "¡Súbete a la bici, camina o ve en scooter en Realidad Virtual!",
     "vr.mode_bike": "En Bicicleta (Ciclovía)",
     "vr.mode_walk": "A Pie (Vereda Arbolada)",
     "vr.mode_scooter": "En Scooter Eléctrico",
-    "vr.mode_car": "En Auto (Tráfico Hora Punta)",
+    "vr.mode_car": "En Auto (Atorado en Tráfico)",
     "vr.btn_stereo": "Gafas VR (Doble Lente)",
     "vr.btn_fullscreen": "Pantalla Completa",
-    "vr.hud_co2_label": "CO₂ FRENTE AL AUTO",
-    "vr.hud_time_label": "TIEMPO & VELOCIDAD",
-    "vr.hud_money_label": "AHORRO & SALUD",
-    "vr.hud_pts_label": "RECOMPENSA APP",
-    "vr.drag_pill": "🖱️ ARRASTRA EN 360° · ⌨️ WASD / FLECHAS",
+    "vr.hud_co2_label": "HUMO QUE EVITAS",
+    "vr.hud_time_label": "TIEMPO DE VIAJE",
+    "vr.hud_money_label": "PLATA Y SALUD",
+    "vr.hud_pts_label": "PREMIO DEL VIAJE",
+    "vr.drag_pill": "🖱️ GIRA EN 360° · ⌨️ FLECHAS",
 
     // Vehicles 3D Section
-    "veh.title": "Compara cada vehículo en 3D: espacio, velocidad y CO₂",
-    "veh.lbl_speed": "VELOCIDAD HORA PUNTA",
-    "veh.lbl_space": "OCUPACIÓN DE PISTA",
-    "veh.lbl_pts": "PUNTOS ECOCOMMUTE",
-    "veh.drag_hint": "↔ ARRASTRA PARA ROTAR EN 3D · ELIGE UN VEHÍCULO",
-    "veh.lane_sim_title": "FLUJO EN VIVO · 30 VIAJEROS EN AV. JAVIER PRADO",
-    "veh.mode_bike": "Bicicleta Urbana",
-    "veh.mode_bike_desc": "Av. Arequipa, Salaverry y Primavera sin tráfico · 12× menos espacio vial.",
+    "veh.title": "¿En qué te mueves hoy? Compara tus opciones en 3D",
+    "veh.lbl_speed": "TU VELOCIDAD",
+    "veh.lbl_space": "ESPACIO EN PISTA",
+    "veh.lbl_pts": "PUNTOS QUE GANAS",
+    "veh.drag_hint": "↔ ARRASTRA PARA GIRARLO EN 3D · TOCA OTRO VEHÍCULO",
+    "veh.lane_sim_title": "🚦 MIRA LA DIFERENCIA EN AV. JAVIER PRADO",
+    "veh.mode_bike": "Bicicleta",
+    "veh.mode_bike_desc": "Te olvidas de los embotellamientos, haces ejercicio y ganas el máximo de puntos.",
     "veh.mode_scooter": "Scooter Eléctrico",
-    "veh.mode_scooter_desc": "Conecta estaciones del Metropolitano y Línea 1 del Metro sin esfuerzo en cuestas.",
-    "veh.mode_transit": "Transporte Masivo",
-    "veh.mode_transit_desc": "Reduce 75% las emisiones por pasajero en tramos largos interdistritales.",
-    "veh.mode_car": "Auto en Hora Punta",
-    "veh.mode_car_desc": "Ocupación media de 1.2 personas, consume 18 m² y avanza a 12 km/h en congestión.",
+    "veh.mode_scooter_desc": "Perfecto para ir a clases o a la oficina rapidito por la ciclovía.",
+    "veh.mode_transit": "Bus / Tren Eléctrico",
+    "veh.mode_transit_desc": "Contamina 4 veces menos por persona que ir solo en auto y también suma puntos.",
+    "veh.mode_car": "Auto Particular",
+    "veh.mode_car_desc": "Te quedas atorado en el tráfico, gastas en gasolina y no suma Puntos Verdes.",
 
     // Calculator / Modal Shift Ticket
-    "alchemy.title": "Tu boleto de ahorro anual sin auto",
-    "alchemy.p1": "🚲 3 días en bici (6 viajes/sem)",
-    "alchemy.p2": "🎓 Commuter UPC (10 viajes/sem)",
-    "alchemy.p3": "⚡ Sin Auto 100% (14 viajes/sem)",
+    "alchemy.title": "Lo que ahorras en un año dejando el auto en casa",
+    "alchemy.p1": "🚲 3 días por semana",
+    "alchemy.p2": "🎓 Todos los días a la uni",
+    "alchemy.p3": "⚡ Fan total de la bici",
     "alchemy.slider_trips": "Viajes sin auto por semana",
-    "alchemy.slider_km": "Distancia media por trayecto",
-    "alchemy.fuel_label": "COMBUSTIBLE NO QUEMADO",
-    "alchemy.hours_label": "TIEMPO LIBRE DE CONGESTIÓN",
-    "alchemy.annual_saved_label": "EMISIONES DE ESCAPE EVITADAS AL AÑO",
-    "alchemy.card1_title": "Botellas PET recicladas",
-    "alchemy.card1_desc": "82.8 g CO₂ ahorrados por envase de 500 ml.",
-    "alchemy.card2_title": "Latas recuperadas",
-    "alchemy.card2_desc": "170 g CO₂ evitados frente a bauxita virgen.",
-    "alchemy.card3_title": "Árboles urbanos / año",
-    "alchemy.card3_desc": "Absorción anual equivalente (21 kg CO₂/árbol).",
-    "alchemy.card4_title": "Puntos Verdes canjeables",
-    "alchemy.card4_desc": "Canjeables en talleres de bici y cafés aliados.",
+    "alchemy.slider_km": "Kilómetros por cada viaje",
+    "alchemy.fuel_label": "⛽ GASOLINA QUE AHORRAS",
+    "alchemy.hours_label": "⏰ HORAS LIBRES SIN TRÁFICO",
+    "alchemy.annual_saved_label": "🌿 HUMO QUE LE AHORRAS A LIMA EN 1 AÑO",
+    "alchemy.card1_title": "Botellas recicladas",
+    "alchemy.card1_desc": "Equivale a reciclar miles de botellas plásticas al año.",
+    "alchemy.card2_title": "Latas reutilizadas",
+    "alchemy.card2_desc": "Toda la energía que ahorras con solo dejar el auto.",
+    "alchemy.card3_title": "Árboles respirando",
+    "alchemy.card3_desc": "Como plantar casi 10 árboles nuevos en tu distrito.",
+    "alchemy.card4_title": "Puntos para canjear",
+    "alchemy.card4_desc": "Úsalos por cafés gratis, mantenimiento de bici y más.",
 
     // Story
-    "story.title": "Por qué existe",
+    "story.title": "¿Cómo funciona?",
     "story.sidebar_note":
-      "+150 horas perdidas al año en tráfico en Lima mientras el CO₂ vehicular queda oculto en los mapas tradicionales.",
-    "story.p1": "Los mapas habituales solo muestran tráfico y minutos, dejando invisible la huella ambiental de cada viaje.",
-    "story.p2_pre": "EcoCommute muestra el ahorro de CO₂ ",
+      "Nada de menús complicados: eliges tu ruta, viajas sin auto y ganas premios reales.",
+    "story.p1": "Moverse por Lima no tiene por qué ser estresante. Convertimos tus viajes diarios en un juego donde tú ahorras y la ciudad respira mejor.",
+    "story.p2_pre": "Con EcoCommute ves tu ahorro ",
     "story.p2_under": "antes",
-    "story.p2_post": " de salir y premia cada kilómetro recorrido sin auto.",
-    "story.comp_old_tag": "❌ Apps de mapas tradicionales",
-    "story.comp_old_desc": "Priorizan el auto, ocultan los gramos de CO₂/km y no premian el cambio modal.",
-    "story.comp_new_tag": "✅ Enfoque EcoCommute",
-    "story.comp_new_desc": "Ruteo OSRM + Gemini 1.5 Flash, cálculo exacto de CO₂ evitado y Puntos Verdes canjeables.",
-    "story.quote": "«Si el ahorro de CO₂ se ve igual de concreto que los minutos del viaje, la gente lo considera.»",
+    "story.p2_post": " de salir de casa y recibes recompensas por cada kilómetro sin auto.",
+    "story.comp_old_tag": "😴 Apps de mapas de siempre",
+    "story.comp_old_desc": "Solo te mandan por el tráfico en auto y no te dan nada por cuidar el aire.",
+    "story.comp_new_tag": "🎉 Con EcoCommute",
+    "story.comp_new_desc": "Te muestra las mejores ciclovías, calcula tu ahorro y te regala Puntos Verdes.",
+    "story.quote": "«Cuando viajar en bici o caminar se siente como subir de nivel y ganar premios, dejar el auto es facilísimo.»",
     "story.quote_author": "— Equipo EcoCommute · UPC",
 
     // Features
-    "feat.title": "Módulos activos en la app",
-    "feat.routes_title": "Rutas sostenibles y Google Gemini",
+    "feat.title": "Fácil, divertida y hecha para tu día a día",
+    "feat.routes_title": "Rutas rápidas y consejos de EcoBot",
     "feat.routes_desc":
-      "Trazado multimodal con OSRM y copiloto IA (Google Gemini 1.5 Flash) que recomienda la vía más rápida y limpia.",
-    "feat.trips_title": "Viajes y cálculo de CO₂",
-    "feat.trips_desc": "Cuantifica el CO₂ evitado frente al auto (152 g/km) y acredita Puntos Verdes al instante.",
-    "feat.dash_title": "Dashboard de impacto",
-    "feat.dash_desc": "Métricas semanales de CO₂ ahorrado, kilómetros limpios y árboles equivalentes.",
-    "feat.rank_title": "Ranking distrital",
-    "feat.rank_desc": "Tabla de posiciones en vivo entre ciclistas y peatones de cada distrito limeño.",
-    "feat.badges_title": "Medallas y recompensas",
-    "feat.badges_desc": "Insignias automáticas por hitos y catálogo de recompensas con bloqueo pesimista.",
-    "feat.challenges_title": "Retos semanales",
-    "feat.challenges_desc": "Metas comunitarias semanales que multiplican tus Puntos Verdes.",
+      "Pregúntale cuál es el camino más fresco y seguro en bici, scooter o caminando y evita los embotellamientos.",
+    "feat.trips_title": "Registra tu viaje en un toque",
+    "feat.trips_desc": "Mira cuánto humo evitaste frente al auto y recibe tus monedas verdes al instante.",
+    "feat.dash_title": "Mira todo lo que vas logrando",
+    "feat.dash_desc": "Revisa tus kilómetros de la semana, el dinero ahorrado y los árboles que ayudaste a cuidar.",
+    "feat.rank_title": "Ranking entre distritos",
+    "feat.rank_desc": "Suma puntos con tus amigos para que tu distrito o universidad llegue al puesto #1.",
+    "feat.badges_title": "Medallas y premios reales",
+    "feat.badges_desc": "Colecciona medallas divertidas y cambia tus puntos por cafés, accesorios y descuentos.",
+    "feat.challenges_title": "Retos de la semana",
+    "feat.challenges_desc": "Completa misiones sencillas (como ir 3 días en bici) para duplicar tus Puntos Verdes.",
 
     // ODS
-    "ods.title": "ODS 11 (Meta 11.2) + Google Gemini 1.5 Flash",
+    "ods.title": "Una Lima más limpia y divertida para moverse (ODS 11.2)",
     "ods.desc":
-      "Acceso a transporte seguro, asequible y sostenible en Lima con recomendaciones explicables por IA y ruteo abierto OSRM.",
-    "ods.badge_ods": "ODS 11 · Meta 11.2: Movilidad Sostenible",
-    "ods.badge_ai": "Optimización con IA · Google Gemini 1.5 Flash",
-    "ods.badge_osrm": "Ruteo Open Source OSRM",
+      "Impulsamos el transporte sostenible en nuestra ciudad premiando a quienes eligen pedalear, caminar o usar transporte público.",
+    "ods.badge_ods": "🌱 ODS 11.2 · Ciudades Sostenibles",
+    "ods.badge_ai": "🤖 Rutas guiadas por EcoBot IA",
+    "ods.badge_osrm": "🚲 Ciclovías de Lima",
 
     // Demo
-    "demo.title": "Pantallas de la aplicación",
-    "demo.tab_all": "Vista comparativa",
-    "demo.tab_routes": "Planificador y Mapa",
-    "demo.tab_dash": "Dashboard de Impacto",
-    "demo.img1_alt": "Mockup interactivo de rutas sostenibles con mapas y alternativas en Lima",
-    "demo.cap1": "Comparador multimodal OSRM con sugerencias de Google Gemini 1.5 Flash.",
-    "demo.img2_alt": "Mockup del dashboard de impacto ecológico con CO2 y estadísticas",
-    "demo.cap2": "CO₂ evitado, árboles equivalentes, medallas y bitácora semanal.",
+    "demo.title": "Así de fácil se ve en tu pantalla",
+    "demo.tab_all": "Ver ambas",
+    "demo.tab_routes": "Mapa de Rutas",
+    "demo.tab_dash": "Mis Logros y Puntos",
+    "demo.img1_alt": "Vista del mapa de rutas sostenibles en Lima",
+    "demo.cap1": "Elige tu destino y compara cuánto ahorras yendo en bici, bus o caminando.",
+    "demo.img2_alt": "Vista de logros, medallas y puntos verdes",
+    "demo.cap2": "Revisa tus Puntos Verdes acumulados, tus medallas y tu racha semanal.",
 
     // Impact
-    "impact.title": "Meta 11.2 del ODS 11",
-    "impact.desc": "Movilidad segura, limpia y premiada con gamificación sin rastreo invasivo.",
-    "impact.p1": "Emisiones directas en bici o a pie",
-    "impact.p2": "Privacidad sin rastreo en 2do plano",
-    "impact.p3": "Cartografía abierta OpenStreetMap",
+    "impact.title": "Pequeños viajes, gran cambio",
+    "impact.desc": "Cada vez que dejas el auto, reduces el ruido y el humo en tu barrio mientras cuidas tu privacidad.",
+    "impact.p1": "Humo cuando vas en bici o a pie",
+    "impact.p2": "Privado: sin rastreo oculto",
+    "impact.p3": "Beneficios en locales aliados",
 
     // Team
-    "team.title": "Quiénes lo hacemos",
-    "team.intro": "Ingeniería de Sistemas UPC · NRC 8247 · Ciclo 2026-2.",
-    "team.member1_role": "IA y recomendaciones de ruta",
-    "team.member2_role": "Rutas, dashboard y medallas",
-    "team.member3_role": "Entidades, viajes y cálculo de CO₂",
-    "team.member4_role": "Puntos verdes y ranking",
-    "team.member5_role": "Seguridad, JWT y registro",
-    "team.member6_role": "Documentación, evidencias y landing",
+    "team.title": "Quiénes creamos la app",
+    "team.intro": "Estudiantes de Ingeniería de Sistemas en la UPC apasionados por una Lima con menos tráfico.",
+    "team.member1_role": "Copiloto EcoBot y rutas inteligentes",
+    "team.member2_role": "Mapa interactivo, progreso y medallas",
+    "team.member3_role": "Registro de viajes y calculadora de ahorro",
+    "team.member4_role": "Puntos verdes, retos y ranking distrital",
+    "team.member5_role": "Perfil de viajero y acceso seguro",
+    "team.member6_role": "Diseño visual, guía de uso y web",
 
     // Contact & Footer
-    "contact.title": "Pruébalo y cuéntanos",
-    "contact.intro": "¿Ideas para las ciclovías de Lima? Escríbenos directo.",
-    "contact.github": "Código en GitHub",
-    "contact.swagger": "API & Swagger en Render",
-    "contact.linkedin": "EcoCommute en LinkedIn",
-    "footer.academic": "EcoCommute · Trabajo Parcial de Aplicaciones Web (UPC 2026-2)",
-    "footer.terms": "Términos y Condiciones",
-    "footer.privacy": "Política de Privacidad",
-    "modal.title": "Términos de Servicio y Privacidad — EcoCommute",
+    "contact.title": "¿Te animas a pedalear con nosotros?",
+    "contact.intro": "Si tienes ideas de rutas, ciclovías o cafeterías aliadas en Lima, escríbenos.",
+    "contact.github": "💻 Proyecto en GitHub",
+    "contact.linkedin": "💼 EcoCommute en LinkedIn",
+    "footer.academic": "🚲 EcoCommute · Proyecto estudiantil UPC (Lima, 2026)",
+    "footer.terms": "Términos de Uso",
+    "footer.privacy": "Privacidad",
+    "modal.title": "Términos de Uso y Privacidad — EcoCommute",
     "modal.close": "Cerrar ventana modal",
-    "modal.intro": "Compromiso ético, legal y ambiental del proyecto EcoCommute:",
+    "modal.intro": "Así cuidamos tus datos mientras te mueves por Lima:",
     "modal.p1":
-      "<strong>Protección de Datos:</strong> Cumplimos estrictamente la Ley N° 29733 (Perú). Tus coordenadas se procesan de forma efímera para calcular rutas y ahorro de CO₂; no rastreamos en segundo plano ni comercializamos datos.",
+      "<strong>Tu privacidad primero:</strong> Cumplimos con la Ley N° 29733 (Perú). Solo usamos tu ruta para calcular cuánto CO₂ ahorraste y darte tus Puntos Verdes; nunca te rastreamos en segundo plano ni vendemos tus datos.",
     "modal.p2":
-      "<strong>Ruteo Abierto e IA:</strong> Empleamos OSRM sobre OpenStreetMap y Google Gemini 1.5 Flash para recomendaciones transparentes y sin sesgo comercial.",
+      "<strong>Rutas transparentes:</strong> Usamos mapas abiertos de OpenStreetMap y sugerencias de IA para recomendarte siempre el camino más seguro y limpio.",
     "modal.p3":
-      "<strong>Ética Profesional:</strong> El desarrollo se rige bajo los Códigos de Ética de Software ACM/IEEE y el Código Deontológico del Colegio de Ingenieros del Perú (CIP), priorizando el interés público y la movilidad sostenible.",
-    "modal.full_link": "Abrir página completa de Términos y Condiciones →"
+      "<strong>Compromiso con la ciudad:</strong> Somos un proyecto universitario pensado para que moverse sin auto en Lima sea seguro, divertido y premiado.",
+    "modal.full_link": "Ver página completa de Términos y Privacidad →"
   },
 
   en_US: {
-    "page.title": "EcoCommute — Urban Mobility, Vehicles & Modal Shift in Lima",
+    "page.title": "EcoCommute — Ride Around Lima, Save Money & Win Green Rewards",
     "nav.skip": "Skip to main content",
-    "topbar.badge": "SUSTAINABLE MOBILITY NETWORK · LIMA METROPOLITAN AREA",
-    "topbar.spec": "Spring Boot 3.3 · OSRM · Gemini 1.5 Flash · 25 endpoints",
-    "topbar.recycled_label": "CO₂ AVOIDED TODAY:",
-    "topbar.swagger": "Swagger OpenAPI",
-    "biome.caliza": "Road Limestone",
-    "biome.asfalto": "Night Tarmac",
-    "biome.ferroviario": "Rail Cobalt",
+    "topbar.badge": "🌱 LEVEL 4: LIMA CYCLIST",
+    "topbar.spec": "🔥 7-day active streak · Earn points on every ride!",
+    "topbar.recycled_label": "CO₂ SAVED TODAY:",
+    "biome.caliza": "🌿 Lomas",
+    "biome.asfalto": "💎 Emerald",
+    "biome.ferroviario": "☀️ Sunny",
     "nav.aria": "Main navigation",
-    "nav.vr": "VR Commute",
+    "nav.vr": "3D VR Ride",
     "nav.vehicles": "3D Vehicles",
-    "nav.alchemy": "Transit Pass & Savings",
-    "nav.why": "Lima Traffic",
-    "nav.features": "Platform",
-    "nav.screens": "Screenshots",
+    "nav.alchemy": "Your Savings",
+    "nav.why": "The Idea",
+    "nav.features": "In the App",
+    "nav.screens": "Screens",
     "nav.team": "Team",
     "lang.toggle_label": "Switch language (Español / English)",
 
     // Hero & Decorative App Badges
-    "hero.kicker": "Lima · SDG 11 · Target 11.2 · UPC Systems Engineering",
-    "hero.title": "Before starting your car in Lima, ",
-    "hero.title_em": "see what you save by switching vehicles.",
+    "hero.kicker": "🚲 Move around Lima, save cash, and win real rewards!",
+    "hero.title": "Leave traffic behind, ",
+    "hero.title_em": "bike or walk and win rewards in Lima.",
     "hero.lead":
-      "Compare bike, scooter, bus, or walking via OSRM + Gemini 1.5 Flash: track live CO₂ savings and redeem green points.",
-    "decor.badge_lbl": "ACTIVE BADGE",
+      "Pick how you move (bike, scooter, bus, or walking), see how much money and CO₂ you save right away, and trade points for free coffee and perks.",
+    "decor.badge_lbl": "YOUR BADGE",
     "decor.badge_val": "Arequipa Cyclist",
-    "decor.streak_lbl": "CAR-FREE STREAK",
-    "decor.streak_val": "7-day streak",
+    "decor.streak_lbl": "YOUR STREAK",
+    "decor.streak_val": "7 days in a row",
     "decor.reward_lbl": "REWARD READY",
     "decor.reward_val": "Café & Bike Tune-Up",
-    "decor.medals_title": "🏅 APP BADGE COLLECTION",
+    "decor.medals_title": "🏅 YOUR APP MEDALS",
     "decor.m1": "1st Ride",
     "decor.m2": "-10kg CO₂",
     "decor.m3": "7D Streak",
     "decor.m4": "100 PET",
     "decor.m5": "500 km",
-    "decor.streak_title": "🔥 WEEKLY APP STREAK",
-    "decor.rewards_title": "🎁 GREEN POINTS SHOP",
-    "decor.r1": "Partner Café",
+    "decor.streak_title": "🔥 YOUR WEEKLY STREAK",
+    "decor.rewards_title": "🎁 REDEEM YOUR POINTS",
+    "decor.r1": "Free Coffee",
     "decor.r2": "Bike Tune-Up",
-    "decor.r3": "LED Safety Kit",
+    "decor.r3": "LED Lights",
 
-    "hero.flora_tag": "ACTIVE SESSION LOGBOOK",
-    "hero.btn_vr": "VR Mode: Ride by Bike, Foot, or Car",
-    "hero.btn_vehicles": "3D Vehicle Comparator",
-    "hero.btn_simulator": "Calculate Annual Pass →",
-    "hero.btn_screens": "View Screenshots →",
-    "hero.stat1_label": "Average car emission",
-    "hero.stat2_label": "Bike lane / Walking",
-    "hero.stat2_unit": "g direct CO₂/km",
-    "hero.stat3_label": "Verified backend",
-    "hero.stat3_unit": "passing tests",
-    "hero.card_label": "TRANSIT CORRIDOR BOARD · LIVE SIMULATOR",
+    "hero.flora_tag": "MY RIDES TODAY",
+    "hero.btn_vr": "Try the 3D Virtual Reality Ride!",
+    "hero.btn_vehicles": "Explore Vehicles in 3D",
+    "hero.btn_simulator": "See my yearly savings →",
+    "hero.btn_screens": "See app screens →",
+    "hero.stat1_label": "Smoke in traffic",
+    "hero.stat2_label": "100% clean air",
+    "hero.stat2_unit": "g of smoke",
+    "hero.stat3_label": "You earn per trip",
+    "hero.stat3_unit": "points / ride",
+    "hero.card_label": "🗺️ WHERE ARE WE GOING TODAY? · TRY A ROUTE",
     "hero.card_route": "Miraflores → San Isidro, 4.2 km",
-    "hero.car": "By passenger car (152 g/km)",
+    "hero.car": "If you go by car (smoke emitted)",
     "hero.car_val": "638 g of CO₂",
-    "hero.bike": "By bicycle / scooter / walking",
-    "hero.bike_val": "0 g of CO₂",
-    "hero.points": "Commute reward",
+    "hero.bike": "If you bike, scooter, or walk",
+    "hero.bike_val": "0 g of CO₂ 🎉",
+    "hero.points": "Points you earn today",
     "hero.points_val": "+15 green points",
-    "hero.card_foot": "Vehicle emission factors are verified server-side.",
+    "hero.card_foot": "Every car-free ride adds points you can redeem at partner cafés and bike shops!",
 
     // Simulator
     "sim.route1": "Miraflores → San Isidro",
     "sim.route2": "UPC Monterrico → San Borja",
     "sim.route3": "Jesús María → Lince",
     "sim.route4": "Barranco → Miraflores",
-    "sim.cam_label": "LANE VIEW:",
-    "sim.cam_iso": "3D Isometric",
-    "sim.cam_orbit": "Road Level",
-    "sim.cam_flat": "2D Plan",
-    "sim.by_bike": "by bike",
-    "sim.by_car_traffic": "by car (traffic)",
-    "sim.adjust_distance": "Urban corridor distance",
-    "sim.pet_equiv_label": "Equivalent PET containers",
-    "sim.gemini_tag": "TRANSIT COPILOT · GOOGLE GEMINI 1.5 FLASH",
+    "sim.cam_label": "MAP ANGLE:",
+    "sim.cam_iso": "3D View",
+    "sim.cam_orbit": "Tilted",
+    "sim.cam_flat": "2D Map",
+    "sim.by_bike": "by bike 🚲",
+    "sim.by_car_traffic": "by car 🚗",
+    "sim.adjust_distance": "How many kilometers is your ride?",
+    "sim.pet_equiv_label": "Equals recycling",
+    "sim.gemini_tag": "ECOBOT TIP · YOUR ROUTE BUDDY",
     "sim.gemini_miraflores":
-      "“Taking the Av. Arequipa bike lane gets you there in 14 min bypassing gridlock, saving 638 g CO₂ and +15 pts.”",
-    "sim.btn_recycle_trip": "Log this car-free commute into my session",
+      "“Hop on a bike down Av. Arequipa! 🚲 You'll arrive in 14 min skipping traffic, save S/ 8.50, and score +15 Green Points.”",
+    "sim.btn_recycle_trip": "I did this ride! Add my Green Points",
 
     // VR First-Person Commute Mode
-    "vr.title": "Experience your commute in VR: bike, walk, scooter, or car",
+    "vr.title": "Hop on a bike, walk, or ride a scooter in Virtual Reality!",
     "vr.mode_bike": "By Bicycle (Bike Lane)",
-    "vr.mode_walk": "On Foot (Shaded Sidewalk)",
+    "vr.mode_walk": "On Foot (Tree-Lined Sidewalk)",
     "vr.mode_scooter": "By Electric Scooter",
-    "vr.mode_car": "By Car (Rush-Hour Gridlock)",
+    "vr.mode_car": "By Car (Stuck in Traffic)",
     "vr.btn_stereo": "VR Glasses (Dual Lens)",
     "vr.btn_fullscreen": "Fullscreen",
-    "vr.hud_co2_label": "CO₂ VS. CAR",
-    "vr.hud_time_label": "TIME & SPEED",
-    "vr.hud_money_label": "SAVINGS & HEALTH",
-    "vr.hud_pts_label": "APP REWARD",
-    "vr.drag_pill": "🖱️ DRAG 360° · ⌨️ WASD / ARROWS",
+    "vr.hud_co2_label": "SMOKE AVOIDED",
+    "vr.hud_time_label": "TRAVEL TIME",
+    "vr.hud_money_label": "CASH & HEALTH",
+    "vr.hud_pts_label": "RIDE REWARD",
+    "vr.drag_pill": "🖱️ SPIN 360° · ⌨️ ARROWS",
 
     // Vehicles 3D Section
-    "veh.title": "Compare every vehicle in 3D: space, speed, and CO₂",
-    "veh.lbl_speed": "RUSH-HOUR SPEED",
-    "veh.lbl_space": "ROAD FOOTPRINT",
-    "veh.lbl_pts": "ECOCOMMUTE POINTS",
-    "veh.drag_hint": "↔ DRAG TO ROTATE IN 3D · PICK A VEHICLE",
-    "veh.lane_sim_title": "LIVE FLOW · 30 COMMUTERS ON AV. JAVIER PRADO",
-    "veh.mode_bike": "Urban Bicycle",
-    "veh.mode_bike_desc": "Av. Arequipa, Salaverry & Primavera congestion-free · 12× less road space.",
+    "veh.title": "How are you riding today? Compare your options in 3D",
+    "veh.lbl_speed": "YOUR SPEED",
+    "veh.lbl_space": "ROAD SPACE",
+    "veh.lbl_pts": "POINTS YOU WIN",
+    "veh.drag_hint": "↔ DRAG TO SPIN IN 3D · TAP ANOTHER VEHICLE",
+    "veh.lane_sim_title": "🚦 SEE THE DIFFERENCE ON AV. JAVIER PRADO",
+    "veh.mode_bike": "Bicycle",
+    "veh.mode_bike_desc": "Skip traffic jams, get a great workout, and score the maximum points.",
     "veh.mode_scooter": "Electric Scooter",
-    "veh.mode_scooter_desc": "Bridges the last kilometer from Metropolitano & Metro Line 1 stations effortlessly.",
-    "veh.mode_transit": "Mass Transit",
-    "veh.mode_transit_desc": "Cuts per-passenger emissions by 75% on inter-district corridors.",
-    "veh.mode_car": "Car in Rush Hour",
-    "veh.mode_car_desc": "1.2 avg occupancy, consumes 18 m² of road, and crawls at 12 km/h in gridlock.",
+    "veh.mode_scooter_desc": "Great for cruising to class or work along the bike lane without breaking a sweat.",
+    "veh.mode_transit": "Bus / Electric Train",
+    "veh.mode_transit_desc": "Pollutes 4× less per person than driving solo and also earns points.",
+    "veh.mode_car": "Private Car",
+    "veh.mode_car_desc": "Stuck in rush-hour gridlock, spending money on gas, and earning 0 Green Points.",
 
     // Calculator / Modal Shift Ticket
-    "alchemy.title": "Your annual car-free savings pass",
-    "alchemy.p1": "🚲 3 days by bike (6 trips/wk)",
-    "alchemy.p2": "🎓 UPC Commuter (10 trips/wk)",
-    "alchemy.p3": "⚡ 100% Car-Free (14 trips/wk)",
-    "alchemy.slider_trips": "Car-free trips per week",
-    "alchemy.slider_km": "Average distance per trip",
-    "alchemy.fuel_label": "UNBURNED GASOLINE",
-    "alchemy.hours_label": "TRAFFIC HOURS SAVED",
-    "alchemy.annual_saved_label": "TAILPIPE EMISSIONS AVOIDED PER YEAR",
-    "alchemy.card1_title": "Recycled PET bottles",
-    "alchemy.card1_desc": "82.8 g CO₂ avoided per 500 ml bottle.",
-    "alchemy.card2_title": "Recovered cans",
-    "alchemy.card2_desc": "170 g CO₂ saved vs. primary aluminum.",
-    "alchemy.card3_title": "Urban trees / year",
-    "alchemy.card3_desc": "Annual tree absorption equivalent (21 kg/tree).",
-    "alchemy.card4_title": "Redeemable Green Points",
-    "alchemy.card4_desc": "Redeemable at partner bike shops and cafés.",
+    "alchemy.title": "What you save in a year by leaving the car at home",
+    "alchemy.p1": "🚲 3 days a week",
+    "alchemy.p2": "🎓 Daily campus ride",
+    "alchemy.p3": "⚡ Full bike fan",
+    "alchemy.slider_trips": "Car-free rides per week",
+    "alchemy.slider_km": "Kilometers per ride",
+    "alchemy.fuel_label": "⛽ GASOLINE YOU SAVE",
+    "alchemy.hours_label": "⏰ FREE HOURS OUT OF TRAFFIC",
+    "alchemy.annual_saved_label": "🌿 SMOKE YOU SPARE LIMA IN 1 YEAR",
+    "alchemy.card1_title": "Recycled bottles",
+    "alchemy.card1_desc": "Like keeping thousands of plastic bottles out of landfills.",
+    "alchemy.card2_title": "Reused cans",
+    "alchemy.card2_desc": "All the energy you save just by skipping the car.",
+    "alchemy.card3_title": "Breathing trees",
+    "alchemy.card3_desc": "Like planting nearly 10 new trees in your neighborhood.",
+    "alchemy.card4_title": "Redeemable points",
+    "alchemy.card4_desc": "Trade them for free coffees, bike tune-ups, and gear.",
 
     // Story
-    "story.title": "Why it exists",
+    "story.title": "How does it work?",
     "story.sidebar_note":
-      "+150 hours lost yearly in Lima traffic while vehicular CO₂ stays hidden in traditional map apps.",
-    "story.p1": "Conventional map apps only show traffic and minutes, hiding the carbon footprint of each trip.",
-    "story.p2_pre": "EcoCommute reveals your CO₂ savings ",
+      "No complicated menus: pick your route, ride car-free, and win real rewards.",
+    "story.p1": "Getting around Lima doesn't have to be stressful. We turn your daily rides into a game where you save cash and the city breathes cleaner air.",
+    "story.p2_pre": "With EcoCommute you see your savings ",
     "story.p2_under": "before",
-    "story.p2_post": " departure and rewards every car-free kilometer.",
-    "story.comp_old_tag": "❌ Traditional map apps",
-    "story.comp_old_desc": "Car-centric routing, hidden CO₂/km metrics, and zero modal-shift rewards.",
-    "story.comp_new_tag": "✅ EcoCommute approach",
-    "story.comp_new_desc": "OSRM + Gemini 1.5 Flash routing, exact CO₂ accounting, and redeemable Green Points.",
-    "story.quote": "“If carbon savings are presented as clearly as travel minutes, commuters genuinely take them into account.”",
+    "story.p2_post": " leaving home and earn rewards for every car-free kilometer.",
+    "story.comp_old_tag": "😴 Regular map apps",
+    "story.comp_old_desc": "Only send you into car traffic and give you nothing for keeping the air clean.",
+    "story.comp_new_tag": "🎉 With EcoCommute",
+    "story.comp_new_desc": "Shows you the best bike lanes, calculates your savings, and gifts you Green Points.",
+    "story.quote": "“When riding a bike or walking feels like leveling up and winning prizes, leaving the car at home is easy.”",
     "story.quote_author": "— EcoCommute Team · UPC",
 
     // Features
-    "feat.title": "Active platform modules",
-    "feat.routes_title": "Sustainable Routes & Google Gemini",
-    "feat.routes_desc": "Multimodal OSRM routing and AI copilot (Google Gemini 1.5 Flash) suggesting the cleanest path.",
-    "feat.trips_title": "Trips & CO₂ Accounting",
-    "feat.trips_desc": "Computes avoided CO₂ vs. driving (152 g/km) and credits Green Points instantly.",
-    "feat.dash_title": "Impact Dashboard",
-    "feat.dash_desc": "Weekly CO₂ saved, clean kilometers, and equivalent urban trees.",
-    "feat.rank_title": "District Leaderboard",
-    "feat.rank_desc": "Live rankings among cyclists and pedestrians across Lima districts.",
-    "feat.badges_title": "Badges & Rewards",
-    "feat.badges_desc": "Automatic milestone badges and pessimistic-locked reward redemptions.",
-    "feat.challenges_title": "Weekly Challenges",
-    "feat.challenges_desc": "Community weekly goals that multiply your Green Points.",
+    "feat.title": "Easy, fun, and built for your everyday rides",
+    "feat.routes_title": "Fast routes & tips from EcoBot",
+    "feat.routes_desc": "Ask for the safest, quickest path by bike, scooter, or foot and skip the gridlock.",
+    "feat.trips_title": "Log your ride in one tap",
+    "feat.trips_desc": "See how much smoke you avoided vs. driving and get your green coins right away.",
+    "feat.dash_title": "See everything you're achieving",
+    "feat.dash_desc": "Check your weekly kilometers, money saved, and the trees you helped protect.",
+    "feat.rank_title": "District leaderboard",
+    "feat.rank_desc": "Team up with friends so your district or university reaches #1.",
+    "feat.badges_title": "Medals & real rewards",
+    "feat.badges_desc": "Collect fun badges and trade your points for coffee, bike gear, and discounts.",
+    "feat.challenges_title": "Weekly quests",
+    "feat.challenges_desc": "Complete simple quests (like biking 3 days) to double your Green Points.",
 
     // ODS
-    "ods.title": "UN SDG 11 (Target 11.2) + Google Gemini 1.5 Flash",
+    "ods.title": "A cleaner, more fun Lima to get around (SDG 11.2)",
     "ods.desc":
-      "Safe, affordable, sustainable transport in Lima powered by explainable AI recommendations and open OSRM routing.",
-    "ods.badge_ods": "SDG 11 · Target 11.2: Sustainable Urban Mobility",
-    "ods.badge_ai": "AI-Powered Optimization · Google Gemini 1.5 Flash",
-    "ods.badge_osrm": "Open Source Routing Engine (OSRM)",
+      "We champion sustainable transport in our city by rewarding everyone who chooses to cycle, walk, or ride transit.",
+    "ods.badge_ods": "🌱 SDG 11.2 · Sustainable Cities",
+    "ods.badge_ai": "🤖 Routes guided by EcoBot AI",
+    "ods.badge_osrm": "🚲 Lima Bike Lanes",
 
     // Demo
-    "demo.title": "Application Screens",
-    "demo.tab_all": "Side-by-side view",
-    "demo.tab_routes": "Route Planner & Map",
-    "demo.tab_dash": "Impact Dashboard",
-    "demo.img1_alt": "Interactive mockup of sustainable route options across Lima map",
-    "demo.cap1": "Multimodal OSRM route planner with Google Gemini 1.5 Flash insights.",
-    "demo.img2_alt": "Impact dashboard mockup with CO2 metrics and user statistics",
-    "demo.cap2": "Saved CO₂, tree equivalents, unlocked badges, and weekly logbook.",
+    "demo.title": "How easy it looks on your screen",
+    "demo.tab_all": "See both",
+    "demo.tab_routes": "Route Map",
+    "demo.tab_dash": "My Achievements & Points",
+    "demo.img1_alt": "Interactive map of sustainable routes in Lima",
+    "demo.cap1": "Pick your destination and compare how much you save by bike, bus, or walking.",
+    "demo.img2_alt": "Achievements, medals, and green points screen",
+    "demo.cap2": "Check your collected Green Points, unlocked medals, and weekly streak.",
 
     // Impact
-    "impact.title": "UN SDG 11 Target 11.2",
-    "impact.desc": "Safe, clean mobility rewarded with gamification and privacy by design.",
-    "impact.p1": "Direct emissions when cycling or walking",
-    "impact.p2": "Zero background location tracking",
-    "impact.p3": "OpenStreetMap open cartography",
+    "impact.title": "Small rides, big change",
+    "impact.desc": "Every time you skip the car, you cut noise and smoke in your neighborhood while keeping your privacy safe.",
+    "impact.p1": "Smoke when biking or walking",
+    "impact.p2": "Private: no hidden tracking",
+    "impact.p3": "Perks at local partner spots",
 
     // Team
-    "team.title": "Development Team",
-    "team.intro": "Software Engineering at UPC · NRC 8247 · 2026-2.",
-    "team.member1_role": "AI & Route Recommendations",
-    "team.member2_role": "Routes, Dashboard & Badges",
-    "team.member3_role": "Entities, Commute Logs & CO₂ Math",
-    "team.member4_role": "Green Points & Leaderboard",
-    "team.member5_role": "Security, JWT & Authentication",
-    "team.member6_role": "Documentation, Evidence & Landing",
+    "team.title": "Who built the app",
+    "team.intro": "Systems Engineering students at UPC passionate about a traffic-free Lima.",
+    "team.member1_role": "EcoBot copilot & smart routes",
+    "team.member2_role": "Interactive map, progress & medals",
+    "team.member3_role": "Ride logging & savings calculator",
+    "team.member4_role": "Green points, quests & district ranking",
+    "team.member5_role": "Rider profile & secure sign-in",
+    "team.member6_role": "Visual design, user guide & web",
 
     // Contact & Footer
-    "contact.title": "Try it and Share Feedback",
-    "contact.intro": "Ideas for Lima's bike network? Drop us a line.",
-    "contact.github": "Code on GitHub",
-    "contact.swagger": "API & Swagger on Render",
-    "contact.linkedin": "EcoCommute on LinkedIn",
-    "footer.academic": "EcoCommute · Web Application Architecture Midterm Project (UPC 2026-2)",
-    "footer.terms": "Terms & Conditions",
-    "footer.privacy": "Privacy Policy",
-    "modal.title": "Terms of Service & Privacy — EcoCommute",
+    "contact.title": "Ready to ride with us?",
+    "contact.intro": "Have ideas for routes, bike lanes, or partner cafés in Lima? Drop us a line.",
+    "contact.github": "💻 Project on GitHub",
+    "contact.linkedin": "💼 EcoCommute on LinkedIn",
+    "footer.academic": "🚲 EcoCommute · UPC Student Project (Lima, 2026)",
+    "footer.terms": "Terms of Use",
+    "footer.privacy": "Privacy",
+    "modal.title": "Terms of Use & Privacy — EcoCommute",
     "modal.close": "Close modal window",
-    "modal.intro": "Ethical, legal, and environmental commitments of EcoCommute:",
+    "modal.intro": "How we protect your data while you ride around Lima:",
     "modal.p1":
-      "<strong>Data Privacy:</strong> We strictly follow Peru's Personal Data Protection Law (Law N° 29733) and GDPR principles. Geolocation coordinates are processed ephemerally; we never perform background tracking nor monetize personal telemetry.",
+      "<strong>Your privacy comes first:</strong> We follow Peru's Law N° 29733. We only use your route to calculate how much CO₂ you saved and give you Green Points; we never track you in the background or sell your data.",
     "modal.p2":
-      "<strong>Open Routing & AI:</strong> We rely on OSRM over OpenStreetMap and Google Gemini 1.5 Flash for unbiased, transparent routing recommendations.",
+      "<strong>Transparent routes:</strong> We use open OpenStreetMap data and AI tips to always suggest the safest, cleanest path.",
     "modal.p3":
-      "<strong>Professional Ethics:</strong> Development is guided by the ACM/IEEE Software Engineering Code of Ethics and the Deontological Code of the Colegio de Ingenieros del Perú (CIP), prioritizing public well-being and climate action.",
-    "modal.full_link": "Open full Terms & Conditions page →"
+      "<strong>Commitment to our city:</strong> We're a university project built to make car-free mobility in Lima safe, fun, and rewarding.",
+    "modal.full_link": "Open full Terms & Privacy page →"
   }
 };
 
@@ -663,9 +659,9 @@ function updateSessionFloraBanner() {
   }
   if (statusEl) {
     if (isEn) {
-      statusEl.innerHTML = `<strong>${sessionTripsCount} car-free trips</strong> · <strong>${sessionRecycledGrams.toLocaleString()} g CO₂ saved</strong> · <strong>♻ ${petEq} PET</strong>`;
+      statusEl.innerHTML = `<strong>${sessionTripsCount} car-free rides</strong> · <strong>${sessionRecycledGrams.toLocaleString()} g CO₂ saved</strong> · <strong>♻ ${petEq} PET bottles</strong>`;
     } else {
-      statusEl.innerHTML = `<strong>${sessionTripsCount} viajes sin auto</strong> · <strong>${sessionRecycledGrams.toLocaleString()} g CO₂ evitados</strong> · <strong>♻ ${petEq} PET</strong>`;
+      statusEl.innerHTML = `<strong>${sessionTripsCount} viajes sin auto</strong> · <strong>${sessionRecycledGrams.toLocaleString()} g CO₂ ahorrados</strong> · <strong>♻ ${petEq} botellas PET</strong>`;
     }
   }
 }
@@ -702,7 +698,7 @@ function renderSimulatorMetrics() {
   if (coordsEl) coordsEl.textContent = corridor.coords;
   if (distOutEl) distOutEl.textContent = `${km.toFixed(1)} km`;
   if (carCo2El) carCo2El.textContent = isEn ? `${carCo2Grams} g of CO₂` : `${carCo2Grams} g de CO₂`;
-  if (bikeCo2El) bikeCo2El.textContent = isEn ? "0 g of CO₂" : "0 g de CO₂";
+  if (bikeCo2El) bikeCo2El.textContent = isEn ? "0 g of CO₂ 🎉" : "0 g de CO₂ 🎉";
   if (petEquivEl) petEquivEl.textContent = isEn ? `♻ ${petBottles} PET bottles` : `♻ ${petBottles} botellas PET`;
   if (pointsEl) pointsEl.textContent = isEn ? `+${greenPoints} green points` : `+${greenPoints} puntos verdes`;
   if (bikeTimeEl) bikeTimeEl.textContent = `${bikeMin} min`;
@@ -765,7 +761,7 @@ function renderAlchemyLab() {
   const ptsEl = document.getElementById("eq-green-points");
   const tokenGrid = document.getElementById("pet-token-visualizer");
 
-  if (tripsOut) tripsOut.textContent = isEn ? `${alchemyTrips} trips/wk` : `${alchemyTrips} viajes/sem`;
+  if (tripsOut) tripsOut.textContent = isEn ? `${alchemyTrips} rides/wk` : `${alchemyTrips} viajes/sem`;
   if (kmOut) kmOut.textContent = `${alchemyKm.toFixed(1)} km`;
   if (annualKgEl) annualKgEl.textContent = annualKg;
   if (fuelEl) fuelEl.textContent = isEn ? `${fuelLiters} L / yr` : `${fuelLiters} L / año`;
@@ -848,20 +844,20 @@ function setupLanguageToggle() {
   });
 }
 
-// Selector de Paleta Cartográfica (Caliza Vial, Asfalto Nocturno, Ferroviario)
+// Selector de Paleta Original (Lomas de Amancaes, Esmeralda, Sol Terracota)
 function setupBiomeSwitcher() {
   const chips = document.querySelectorAll(".biome-chip");
-  const validPalettes = ["caliza", "asfalto", "ferroviario"];
-  let savedBiome = localStorage.getItem("ecocommute_biome") || "caliza";
+  const validPalettes = ["amancaes", "esmeralda", "terracota"];
+  let savedBiome = localStorage.getItem("ecocommute_biome") || "amancaes";
   if (!validPalettes.includes(savedBiome)) {
-    savedBiome = "caliza";
+    savedBiome = "amancaes";
   }
   document.documentElement.setAttribute("data-biome", savedBiome);
 
   chips.forEach((chip) => {
     chip.classList.toggle("is-active", chip.getAttribute("data-biome-target") === savedBiome);
     chip.addEventListener("click", () => {
-      const targetBiome = chip.getAttribute("data-biome-target") || "caliza";
+      const targetBiome = chip.getAttribute("data-biome-target") || "amancaes";
       chips.forEach((c) => c.classList.toggle("is-active", c === chip));
       localStorage.setItem("ecocommute_biome", targetBiome);
 
@@ -926,9 +922,22 @@ function setupSimulator() {
   if (recycleBtn) {
     recycleBtn.addEventListener("click", () => {
       const addedGrams = Math.round(currentKm * 152);
+      const earnedPts = Math.max(5, Math.round(currentKm * 3.57));
       sessionRecycledGrams += addedGrams;
       sessionTripsCount += 1;
       updateSessionFloraBanner();
+
+      const labelSpan = recycleBtn.querySelector("[data-i18n='sim.btn_recycle_trip']");
+      if (labelSpan) {
+        const isEn = currentLang === "en_US";
+        labelSpan.textContent = isEn
+          ? `🎉 Awesome! +${earnedPts} Green Points added!`
+          : `🎉 ¡Genial! Sumaste +${earnedPts} Puntos Verdes`;
+        setTimeout(() => {
+          const dict = translations[currentLang] || translations.es_419;
+          labelSpan.textContent = dict["sim.btn_recycle_trip"];
+        }, 2000);
+      }
     });
   }
 }
@@ -1265,14 +1274,14 @@ const VR_POV_MODES = {
     speedFactor: 4.4,
     laneOffset: -68,
     stepBob: 0.25,
-    gateTags: ["-152g CO₂/km", "S/ 8.50 AHORRO", "+15 PUNTOS", "♻ 8 BOTELLAS PET"],
+    gateTags: ["🪙 +15 PUNTOS", "💵 S/ 8.50 AHORRO", "🌱 -638g CO₂", "♻ 8 BOTELLAS"],
     es: {
       co2: "-638 g CO₂ ahorrados",
       time: "14 min · 18 km/h (-8 min)",
       money: "S/ 8.50 ahorrados · 115 kcal",
       pts: "+15 pts · ♻ 8 PET",
       caption:
-        "🚲 VISTA CICLISTA: Avanzas fluido por la ciclovía segregada de Av. Arequipa mientras a la derecha la fila de autos permanece detenida."
+        "🚲 VISTA CICLISTA: ¡Avanzas libre por la ciclovía verde de Av. Arequipa recogiendo monedas de Puntos Verdes mientras a la derecha el tráfico está detenido!"
     },
     en: {
       co2: "-638 g CO₂ saved",
@@ -1280,73 +1289,73 @@ const VR_POV_MODES = {
       money: "S/ 8.50 saved · 115 kcal",
       pts: "+15 pts · ♻ 8 PET",
       caption:
-        "🚲 CYCLIST POV: Gliding smoothly down the Av. Arequipa protected bike lane while rush-hour cars sit bumper-to-bumper on the right."
+        "🚲 CYCLIST POV: Gliding smoothly down the Av. Arequipa green bike lane collecting Green Point coins while rush-hour cars sit still on the right!"
     }
   },
   walk: {
     speedFactor: 1.85,
     laneOffset: -135,
     stepBob: 1.0,
-    gateTags: ["0g EMISIÓN", "+145 KCAL SALUD", "S/ 0.00 COSTO", "+9 PUNTOS VERDES"],
+    gateTags: ["🌱 0g HUMO", "❤️ +145 KCAL", "💵 S/ 0.00 GASTO", "🪙 +9 PUNTOS"],
     es: {
-      co2: "-274 g CO₂ (tramo 1.8 km)",
-      time: "21 min · 5 km/h (paseo activo)",
+      co2: "-274 g CO₂ (paseo 1.8 km)",
+      time: "21 min · 5 km/h (paseo fresco)",
       money: "S/ 0.00 gasto · +145 kcal",
       pts: "+9 pts · ♻ 3 PET",
       caption:
-        "🚶 VISTA PEATÓN: Caminas bajo los árboles de la vereda peatonal sin estrés de semáforos ni gasto de combustible."
+        "🚶 VISTA A PIE: Caminas relajado bajo los árboles de la vereda sin gastar un sol y sumando pasos para tus recompensas."
     },
     en: {
       co2: "-274 g CO₂ (1.8 km walk)",
-      time: "21 min · 5 km/h (active walk)",
+      time: "21 min · 5 km/h (fresh walk)",
       money: "S/ 0.00 cost · +145 kcal",
       pts: "+9 pts · ♻ 3 PET",
       caption:
-        "🚶 PEDESTRIAN POV: Walking along a tree-shaded Lima sidewalk with zero fuel cost and active cardiovascular benefit."
+        "🚶 WALKING POV: Strolling under the trees on a sunny sidewalk with zero fuel cost and earning rewards with every step."
     }
   },
   scooter: {
     speedFactor: 4.9,
     laneOffset: -68,
     stepBob: 0.1,
-    gateTags: ["0g ESCAPE", "-10 MIN TRÁFICO", "CONEXIÓN METRO", "+14 PUNTOS"],
+    gateTags: ["⚡ 0g HUMO", "🚀 -10 MIN TRÁFICO", "🚇 CONEXIÓN METRO", "🪙 +14 PUNTOS"],
     es: {
-      co2: "-638 g CO₂ de escape",
+      co2: "-638 g CO₂ ahorrados",
       time: "12 min · 20 km/h (-10 min)",
       money: "S/ 7.80 ahorrados en taxi",
       pts: "+14 pts · ♻ 8 PET",
       caption:
-        "🛴 VISTA SCOOTER: Conectas rápidamente desde la estación del Metropolitano / Metro hasta tu destino sin esfuerzo en pendientes."
+        "🛴 VISTA SCOOTER: Conectas súper rápido desde la estación del Metropolitano o Metro hasta tu destino sin sudar una gota."
     },
     en: {
-      co2: "-638 g tailpipe CO₂",
+      co2: "-638 g CO₂ saved",
       time: "12 min · 20 km/h (-10 min)",
       money: "S/ 7.80 saved vs. taxi",
       pts: "+14 pts · ♻ 8 PET",
       caption:
-        "🛴 E-SCOOTER POV: Bridging the last mile from the Metropolitano / Metro station effortlessly at 20 km/h."
+        "🛴 E-SCOOTER POV: Zipping effortlessly from the Metropolitano or Metro station to your destination at 20 km/h."
     }
   },
   car: {
     speedFactor: 0.85,
     laneOffset: 82,
     stepBob: 0.05,
-    gateTags: ["+152g CO₂/km", "TRÁFICO 11 km/h", "-S/ 8.50 GASTO", "0 PUNTOS"],
+    gateTags: ["💨 +638g CO₂", "🐢 TRÁFICO 11 km/h", "💸 -S/ 8.50 GASTO", "0 PUNTOS 😢"],
     es: {
       co2: "+638 g CO₂ emitidos",
       time: "22 min · 11 km/h (hora punta)",
-      money: "S/ 8.50 gastados en combustible",
-      pts: "0 pts · Sin ahorro circular",
+      money: "S/ 8.50 gastados en gasolina",
+      pts: "0 pts · Sin premio 😢",
       caption:
-        "🚗 VISTA EN AUTO: Atrapado en la congestión de hora punta detrás de otros vehículos mientras la ciclovía a tu izquierda avanza libre."
+        "🚗 VISTA EN AUTO: Atrapado en el tráfico de hora punta gastando gasolina mientras ves pasar a las bicis y scooters libres por la izquierda."
     },
     en: {
       co2: "+638 g CO₂ emitted",
       time: "22 min · 11 km/h (gridlock)",
-      money: "S/ 8.50 spent on fuel",
-      pts: "0 pts · Zero circular savings",
+      money: "S/ 8.50 spent on gas",
+      pts: "0 pts · No rewards 😢",
       caption:
-        "🚗 CAR CABIN POV: Stuck in bumper-to-bumper rush-hour traffic while cyclists on your left glide past freely."
+        "🚗 CAR POV: Stuck in bumper-to-bumper rush-hour traffic burning gas while cyclists and scooters breeze past on your left."
     }
   }
 };
@@ -1443,6 +1452,12 @@ function setupVRCommuteSimulator() {
     tagIdx: i % 4
   }));
 
+  // Monedas 3D coleccionables de Puntos Verdes flotando sobre la ruta sostenible
+  const ecoCoins = Array.from({ length: 8 }, (_, i) => ({
+    z: i * 195 + 110,
+    phase: i * 0.85
+  }));
+
   povBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
       const mode = btn.getAttribute("data-vr-pov") || "bike";
@@ -1532,25 +1547,25 @@ function setupVRCommuteSimulator() {
       return horizonY + (camHeight - wy) * (fov / wz);
     }
 
-    // 1. CIELO REALISTA DE LIMA + SOL + NUBES VOLUMÉTRICAS + SKYLINE
+    // 1. CIELO SOLEADO Y ALEGRE + SOL + NUBES + SKYLINE
     const skyH = Math.max(10, horizonY - vy);
     const skyGrad = ctx.createLinearGradient(vx, vy, vx, horizonY);
-    skyGrad.addColorStop(0, "#8faec2");
-    skyGrad.addColorStop(0.55, "#c8d6dc");
-    skyGrad.addColorStop(1, "#f2eadb");
+    skyGrad.addColorStop(0, "#3b82f6");
+    skyGrad.addColorStop(0.55, "#7dd3fc");
+    skyGrad.addColorStop(1, "#ecfccb");
     ctx.fillStyle = skyGrad;
     ctx.fillRect(vx, vy, vw, skyH);
 
-    // Halo solar de tarde limeña
+    // Sol radiante de mañana limeña
     const sunX = vanishX - 95;
-    const sunY = horizonY - 82;
-    const sunGrad = ctx.createRadialGradient(sunX, sunY, 6, sunX, sunY, 95);
-    sunGrad.addColorStop(0, "rgba(255, 246, 214, 0.92)");
-    sunGrad.addColorStop(0.35, "rgba(245, 205, 135, 0.35)");
-    sunGrad.addColorStop(1, "rgba(245, 205, 135, 0)");
+    const sunY = horizonY - 86;
+    const sunGrad = ctx.createRadialGradient(sunX, sunY, 8, sunX, sunY, 105);
+    sunGrad.addColorStop(0, "rgba(255, 250, 205, 0.98)");
+    sunGrad.addColorStop(0.38, "rgba(255, 209, 102, 0.45)");
+    sunGrad.addColorStop(1, "rgba(255, 209, 102, 0)");
     ctx.fillStyle = sunGrad;
     ctx.beginPath();
-    ctx.arc(sunX, sunY, 95, 0, Math.PI * 2);
+    ctx.arc(sunX, sunY, 105, 0, Math.PI * 2);
     ctx.fill();
 
     // Silueta de torres de San Isidro / Miraflores en el horizonte
@@ -1658,12 +1673,13 @@ function setupVRCommuteSimulator() {
       }
     }
 
-    // 3. ORDENAR OBJETOS 3D POR PROFUNDIDAD Z (Edificios, Árboles/Farolas, Autos, Ciclistas y Pórticos)
+    // 3. ORDENAR OBJETOS 3D POR PROFUNDIDAD Z (Edificios, Árboles/Farolas, Autos, Ciclistas, Monedas y Pórticos)
     const sceneItems = [];
     for (const b of buildings) sceneItems.push({ type: "building", z: b.z, obj: b });
     for (const t of trees) sceneItems.push({ type: "tree", z: t.z, obj: t });
     for (const c of trafficCars) sceneItems.push({ type: "car", z: c.z, obj: c });
     for (const cy of fellowCyclists) sceneItems.push({ type: "cyclist", z: cy.z, obj: cy });
+    for (const coin of ecoCoins) sceneItems.push({ type: "coin", z: coin.z, obj: coin });
     for (const g of savingsGates) sceneItems.push({ type: "gate", z: g.z, obj: g });
     sceneItems.sort((a, b) => b.z - a.z);
 
@@ -1915,6 +1931,39 @@ function setupVRCommuteSimulator() {
             Math.PI * 2
           );
           ctx.fill();
+        }
+      } else if (item.type === "coin") {
+        const coin = item.obj;
+        if (z > 980 || z < 36) continue;
+        const coinWorldX = currentVRPov === "walk" ? -135 : -68;
+        const floatY = 34 + Math.sin(stepPhase * 1.6 + coin.phase) * 7;
+        const sx = projectX(coinWorldX, z);
+        const sy = projectY(floatY, z);
+        const syGround = projectY(0, z);
+        const r = Math.max(4, 18 * scale);
+        const spinX = Math.max(0.28, Math.abs(Math.cos(stepPhase * 1.2 + coin.phase)));
+
+        // Sombra brillante bajo la moneda verde/dorada
+        ctx.fillStyle = "rgba(140, 232, 104, 0.28)";
+        ctx.beginPath();
+        ctx.ellipse(sx, syGround, r * 0.75, Math.max(1.5, r * 0.22), 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Moneda 3D giratoria (Dorado + Verde Lima EcoCommute)
+        ctx.fillStyle = "#ffd166";
+        ctx.strokeStyle = "#8ce868";
+        ctx.lineWidth = Math.max(1.2, 2.6 * scale);
+        ctx.beginPath();
+        ctx.ellipse(sx, sy, r * spinX, r, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+
+        // Estrella / símbolo central de punto verde
+        if (spinX > 0.45 && z < 650) {
+          ctx.fillStyle = "#0b1a10";
+          ctx.font = `800 ${Math.max(7, Math.round(12 * scale))}px "Plus Jakarta Sans", sans-serif`;
+          ctx.textAlign = "center";
+          ctx.fillText("★", sx, sy + 4 * scale);
         }
       } else if (item.type === "gate") {
         const g = item.obj;
@@ -2206,6 +2255,13 @@ function setupVRCommuteSimulator() {
       c.z -= relCarSpeed;
       if (c.z < 36) c.z += 1580;
       if (c.z > 1620) c.z -= 1580;
+    }
+
+    for (const coin of ecoCoins) {
+      coin.z -= modeSpec.speedFactor * 5.2;
+      if (coin.z < 30) {
+        coin.z += 1560;
+      }
     }
 
     for (const g of savingsGates) {
