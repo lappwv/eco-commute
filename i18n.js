@@ -6,82 +6,135 @@
 const CORRIDORS = {
   miraflores: {
     km: 4.2,
-    coords: "🚲 Ciclovía Arequipa",
+    coords: "Ciclovía Av. Arequipa · 4.2 km",
     bikeMin: 14,
     carMin: 22,
-    originTag: "SALIDA · MIRAFLORES",
-    destTag: "LLEGADA · SAN ISIDRO",
-    carPath: "M 38 94 C 120 98, 165 28, 250 45 C 310 55, 345 32, 382 36",
-    ecoPath: "M 38 94 C 110 86, 155 60, 225 58 C 295 56, 330 40, 382 36",
+    moneySaved: "S/ 8.50",
+    originTag: "Óvalo Miraflores",
+    destTag: "San Isidro (C. Financiero)",
+    ecoLatLngs: [
+      [-12.1191, -77.0290],
+      [-12.1135, -77.0305],
+      [-12.1078, -77.0315],
+      [-12.1012, -77.0329],
+      [-12.0955, -77.0342],
+      [-12.0958, -77.0268]
+    ],
+    carLatLngs: [
+      [-12.1191, -77.0290],
+      [-12.1185, -77.0228],
+      [-12.1095, -77.0235],
+      [-12.1005, -77.0242],
+      [-12.0958, -77.0268]
+    ],
     es: {
       routeTitle: "Miraflores → San Isidro",
       gemini:
-        "«¡Ándate en bici por Av. Arequipa! 🚲 Llegas en 14 min sin comerte el tráfico, ahorras S/ 8.50 y sumas +15 Puntos Verdes.»"
+        "Recorrido real por la berma central de Av. Arequipa desde el Óvalo de Miraflores hasta el centro financiero de San Isidro."
     },
     en: {
       routeTitle: "Miraflores → San Isidro",
       gemini:
-        "“Hop on a bike down Av. Arequipa! 🚲 You'll get there in 14 min skipping traffic, save S/ 8.50, and score +15 Green Points.”"
+        "Direct ride along the Av. Arequipa central bike lane from Óvalo Miraflores to the San Isidro financial district."
     }
   },
   upc: {
     km: 5.8,
-    coords: "🎓 Ruta Universitaria",
+    coords: "Ciclovía Av. Primavera · 5.8 km",
     bikeMin: 19,
     carMin: 31,
-    originTag: "SALIDA · UPC MONTERRICO",
-    destTag: "LLEGADA · SAN BORJA",
-    carPath: "M 38 96 C 95 42, 190 98, 275 40 C 325 24, 355 50, 382 30",
-    ecoPath: "M 38 96 C 115 76, 185 66, 260 50 C 315 38, 350 34, 382 30",
+    moneySaved: "S/ 10.20",
+    originTag: "UPC Monterrico",
+    destTag: "San Borja Sur",
+    ecoLatLngs: [
+      [-12.1041, -76.9631],
+      [-12.1068, -76.9735],
+      [-12.1088, -76.9825],
+      [-12.1103, -76.9918],
+      [-12.1112, -77.0012],
+      [-12.1038, -77.0022]
+    ],
+    carLatLngs: [
+      [-12.1041, -76.9631],
+      [-12.0985, -76.9742],
+      [-12.0965, -76.9865],
+      [-12.1010, -76.9968],
+      [-12.1038, -77.0022]
+    ],
     es: {
-      routeTitle: "UPC Monterrico → San Borja",
+      routeTitle: "Monterrico → San Borja",
       gemini:
-        "«¡Por la ciclovía de Av. Primavera te libras del tráfico de Surco! 🛴 Ahorras 12 minutos y ganas +21 Puntos Verdes para tu café.»"
+        "Conexión universitaria por el eje Av. Primavera – Angamos evitando el tráfico pesado del Trébol de Javier Prado."
     },
     en: {
-      routeTitle: "UPC Monterrico → San Borja",
+      routeTitle: "Monterrico → San Borja",
       gemini:
-        "“Ride down Av. Primavera to skip the Surco traffic jam! 🛴 You save 12 minutes and earn +21 Green Points toward a free coffee.”"
+        "University corridor along Av. Primavera – Angamos bypassing heavy traffic at the Javier Prado interchange."
     }
   },
   jesusmaria: {
     km: 3.6,
-    coords: "🌳 Vía Arbolada",
+    coords: "Ciclovía Av. Salaverry · 3.6 km",
     bikeMin: 12,
     carMin: 19,
-    originTag: "SALIDA · JESÚS MARÍA",
-    destTag: "LLEGADA · LINCE",
-    carPath: "M 38 46 C 110 24, 195 92, 280 76 C 330 66, 355 84, 382 70",
-    ecoPath: "M 38 46 C 115 50, 195 56, 275 62 C 325 66, 355 68, 382 70",
+    moneySaved: "S/ 7.00",
+    originTag: "Campo de Marte",
+    destTag: "Parque Castilla (Lince)",
+    ecoLatLngs: [
+      [-12.0686, -77.0416],
+      [-12.0748, -77.0442],
+      [-12.0812, -77.0472],
+      [-12.0865, -77.0496],
+      [-12.0878, -77.0415]
+    ],
+    carLatLngs: [
+      [-12.0686, -77.0416],
+      [-12.0715, -77.0365],
+      [-12.0795, -77.0372],
+      [-12.0878, -77.0415]
+    ],
     es: {
       routeTitle: "Jesús María → Lince",
       gemini:
-        "«Av. Salaverry está llenita de árboles y súper plana 🌿: llegas 7 minutos antes que en auto y sumas +13 Puntos Verdes.»"
+        "Ruta arbolada por toda la Av. Salaverry desde el Campo de Marte hasta el Parque Mariscal Castilla en Lince."
     },
     en: {
       routeTitle: "Jesús María → Lince",
       gemini:
-        "“Av. Salaverry is flat and shaded by trees 🌿: you arrive 7 minutes faster than driving and score +13 Green Points.”"
+        "Tree-lined route along Av. Salaverry from Campo de Marte to Parque Mariscal Castilla in Lince."
     }
   },
   barranco: {
     km: 2.9,
-    coords: "🌊 Ruta Malecón",
+    coords: "Malecón Costero · 2.9 km",
     bikeMin: 10,
     carMin: 16,
-    originTag: "SALIDA · BARRANCO",
-    destTag: "LLEGADA · MIRAFLORES",
-    carPath: "M 38 98 C 130 102, 210 78, 290 62 C 340 50, 360 36, 382 28",
-    ecoPath: "M 38 98 C 105 70, 180 44, 265 36 C 325 30, 355 28, 382 28",
+    moneySaved: "S/ 6.50",
+    originTag: "Plaza de Barranco",
+    destTag: "Parque del Amor",
+    ecoLatLngs: [
+      [-12.1492, -77.0218],
+      [-12.1435, -77.0232],
+      [-12.1380, -77.0258],
+      [-12.1322, -77.0308],
+      [-12.1268, -77.0360]
+    ],
+    carLatLngs: [
+      [-12.1492, -77.0218],
+      [-12.1420, -77.0205],
+      [-12.1335, -77.0228],
+      [-12.1258, -77.0285],
+      [-12.1268, -77.0360]
+    ],
     es: {
       routeTitle: "Barranco → Miraflores",
       gemini:
-        "«¡Paseazo frente al mar por el Malecón! 🌊 Cero semáforos pesados, brisa fresca y +10 Puntos Verdes directos a tu cuenta.»"
+        "Ciclovía panorámica frente al mar desde la Plaza de Barranco por el Malecón Paul Harris y Cisneros hasta Miraflores."
     },
     en: {
       routeTitle: "Barranco → Miraflores",
       gemini:
-        "“Cruise along the oceanfront Malecón bike path! 🌊 Zero heavy lights, ocean breeze, and +10 Green Points added to your balance.”"
+        "Scenic oceanfront bike lane from Plaza de Barranco along Malecón Paul Harris and Cisneros to Miraflores."
     }
   }
 };
@@ -94,56 +147,34 @@ const VEHICLE_SPECS = {
     space: "1.5 m²",
     pts: "+15 pts / viaje",
     es: {
-      code: "🚲 EN BICICLETA · ¡RÁPIDO, DIVERTIDO Y SIN TRÁFICO!",
-      chassis: "ESPACIO QUE OCUPAS: 1.5 m² · CERO GASOLINA",
-      laneSummary: "30 ciclistas avanzan libres (0 g humo) vs. autos atorados"
+      code: "Bicicleta urbana · Rápida y libre de tráfico",
+      chassis: "Espacio: 1.5 m² · Cero combustible",
+      laneSummary: "30 ciclistas avanzan fluidos vs. tráfico detenido"
     },
     en: {
-      code: "🚲 BY BICYCLE · FAST, FUN & TRAFFIC-FREE!",
-      chassis: "SPACE USED: 1.5 m² · ZERO GASOLINE",
-      laneSummary: "30 cyclists glide freely (0 g smoke) vs. stuck cars"
+      code: "Urban bicycle · Fast & traffic-free",
+      chassis: "Space: 1.5 m² · Zero fuel",
+      laneSummary: "30 cyclists glide freely vs. stuck cars"
     },
-    svg: `
-      <svg class="veh-blueprint-svg" viewBox="0 0 320 110" fill="none" aria-hidden="true">
-        <line x1="16" y1="96" x2="304" y2="96" stroke="#8ce868" stroke-opacity="0.35" stroke-width="2" stroke-dasharray="6 4" />
-        <circle cx="88" cy="68" r="24" stroke="#f4f7f4" stroke-width="4" />
-        <circle cx="88" cy="68" r="5" fill="#ffd166" />
-        <circle cx="228" cy="68" r="24" stroke="#f4f7f4" stroke-width="4" />
-        <circle cx="228" cy="68" r="5" fill="#ffd166" />
-        <path d="M88 68 L136 32 L202 32 L152 68 Z" stroke="#8ce868" stroke-width="4.5" stroke-linejoin="round" />
-        <path d="M136 32 L152 68 M124 22 L146 22 M202 32 L228 68 M194 18 L212 22" stroke="#f4f7f4" stroke-width="3.5" stroke-linecap="round" />
-        <rect x="20" y="12" width="76" height="20" rx="10" fill="#8ce868" />
-        <text x="58" y="25" text-anchor="middle" fill="#07150c" font-family="JetBrains Mono" font-size="9" font-weight="800">🚲 +15 PTS</text>
-      </svg>
-    `
+    svg: `<img class="veh-stage-render-img" src="./media/veh-bike.jpg" alt="Bicicleta urbana sostenible" />`
   },
   scooter: {
-    badge: "0 g CO₂ / km*",
+    badge: "0 g CO₂ / km",
     isDanger: false,
     speed: "20 km/h",
     space: "1.2 m²",
     pts: "+14 pts / viaje",
     es: {
-      code: "🛴 SCOOTER ELÉCTRICO · ÁGIL Y SIN SUDAR",
-      chassis: "ESPACIO QUE OCUPAS: 1.2 m² · CONECTA CON EL METRO",
-      laneSummary: "30 scooters = 0 g de humo · Ideal para llegar rapidito"
+      code: "Scooter eléctrico · Ágil para última milla",
+      chassis: "Espacio: 1.2 m² · Conecta con el Metro",
+      laneSummary: "30 scooters = 0 g de humo · Ideal para tramos medios"
     },
     en: {
-      code: "🛴 ELECTRIC SCOOTER · AGILE & EFFORTLESS",
-      chassis: "SPACE USED: 1.2 m² · CONNECTS WITH METRO",
-      laneSummary: "30 e-scooters = 0 g smoke · Great for quick trips"
+      code: "Electric scooter · Agile last-mile ride",
+      chassis: "Space: 1.2 m² · Connects with Metro",
+      laneSummary: "30 e-scooters = 0 g smoke · Ideal for mid-range trips"
     },
-    svg: `
-      <svg class="veh-blueprint-svg" viewBox="0 0 320 110" fill="none" aria-hidden="true">
-        <line x1="16" y1="96" x2="304" y2="96" stroke="#7de2d1" stroke-opacity="0.35" stroke-width="2" stroke-dasharray="6 4" />
-        <circle cx="96" cy="76" r="16" stroke="#f4f7f4" stroke-width="4" />
-        <circle cx="220" cy="76" r="16" stroke="#f4f7f4" stroke-width="4" />
-        <path d="M96 76 H196 L214 20 M198 20 H224" stroke="#7de2d1" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
-        <rect x="118" y="68" width="64" height="8" rx="4" fill="#8ce868" />
-        <rect x="20" y="12" width="86" height="20" rx="10" fill="#7de2d1" />
-        <text x="63" y="25" text-anchor="middle" fill="#07150c" font-family="JetBrains Mono" font-size="9" font-weight="800">🛴 +14 PTS</text>
-      </svg>
-    `
+    svg: `<img class="veh-stage-render-img" src="./media/veh-scooter.jpg" alt="Scooter eléctrico urbano" />`
   },
   transit: {
     badge: "-75% CO₂ / km",
@@ -152,27 +183,16 @@ const VEHICLE_SPECS = {
     space: "0.8 m²",
     pts: "+10 pts / viaje",
     es: {
-      code: "🚌 BUS / TREN ELÉCTRICO · VIAJE COMPARTIDO",
-      chassis: "ESPACIO POR PASAJERO: 0.8 m² · REEMPLAZA 35 AUTOS",
-      laneSummary: "1 bus libera la pista de hasta 35 autos particulares"
+      code: "Bus / Tren eléctrico · Corredor segregado",
+      chassis: "Espacio por pasajero: 0.8 m² · Reemplaza 35 autos",
+      laneSummary: "1 bus libera la avenida de hasta 35 autos particulares"
     },
     en: {
-      code: "🚌 BUS / ELECTRIC TRAIN · SHARED RIDE",
-      chassis: "SPACE PER RIDER: 0.8 m² · REPLACES 35 CARS",
-      laneSummary: "1 bus frees the road from up to 35 private cars"
+      code: "Bus / Electric train · Dedicated lane",
+      chassis: "Space per rider: 0.8 m² · Replaces 35 cars",
+      laneSummary: "1 bus frees the avenue from up to 35 private cars"
     },
-    svg: `
-      <svg class="veh-blueprint-svg" viewBox="0 0 320 110" fill="none" aria-hidden="true">
-        <line x1="16" y1="96" x2="304" y2="96" stroke="#ffd166" stroke-opacity="0.35" stroke-width="2" stroke-dasharray="6 4" />
-        <rect x="44" y="26" width="232" height="52" rx="10" fill="#182820" stroke="#ffd166" stroke-width="3.5" />
-        <rect x="58" y="36" width="38" height="22" rx="4" fill="#7de2d1" fill-opacity="0.3" stroke="#7de2d1" stroke-width="2" />
-        <rect x="106" y="36" width="38" height="22" rx="4" fill="#7de2d1" fill-opacity="0.3" stroke="#7de2d1" stroke-width="2" />
-        <rect x="154" y="36" width="38" height="22" rx="4" fill="#7de2d1" fill-opacity="0.3" stroke="#7de2d1" stroke-width="2" />
-        <rect x="202" y="36" width="56" height="22" rx="4" fill="#8ce868" fill-opacity="0.35" stroke="#8ce868" stroke-width="2" />
-        <circle cx="92" cy="80" r="13" fill="#f4f7f4" />
-        <circle cx="228" cy="80" r="13" fill="#f4f7f4" />
-      </svg>
-    `
+    svg: `<img class="veh-stage-render-img" src="./media/veh-transit.jpg" alt="Bus y Tren eléctrico de Lima" />`
   },
   car: {
     badge: "152 g CO₂ / km",
@@ -181,27 +201,16 @@ const VEHICLE_SPECS = {
     space: "18.0 m²",
     pts: "0 pts (Tráfico)",
     es: {
-      code: "🚗 AUTO EN HORA PUNTA · LENTO Y CON HUMO",
-      chassis: "OCUPA 18 m² DE PISTA · GASTA GASOLINA EN EL TRÁFICO",
-      laneSummary: "30 autos = fila detenida a 12 km/h y mucho humo"
+      code: "Auto en hora punta · Congestión y emisiones",
+      chassis: "Ocupa 18 m² de vía · Consumo elevado en tráfico",
+      laneSummary: "30 autos = fila detenida a 12 km/h en hora punta"
     },
     en: {
-      code: "🚗 CAR IN RUSH HOUR · SLOW & SMOKY",
-      chassis: "TAKES 18 m² OF ROAD · BURNS GAS IN TRAFFIC",
-      laneSummary: "30 cars = gridlock at 12 km/h and heavy smoke"
+      code: "Car in rush hour · Congestion & emissions",
+      chassis: "Takes 18 m² of road · High fuel burn in traffic",
+      laneSummary: "30 cars = gridlock at 12 km/h in rush hour"
     },
-    svg: `
-      <svg class="veh-blueprint-svg" viewBox="0 0 320 110" fill="none" aria-hidden="true">
-        <line x1="16" y1="96" x2="304" y2="96" stroke="#ff8c61" stroke-opacity="0.35" stroke-width="2" stroke-dasharray="6 4" />
-        <path d="M56 74 L74 42 H198 L226 56 L264 62 V78 H56 Z" fill="#3a1c18" stroke="#ff8c61" stroke-width="3.5" stroke-linejoin="round" />
-        <circle cx="98" cy="78" r="15" fill="#f4f7f4" />
-        <circle cx="222" cy="78" r="15" fill="#f4f7f4" />
-        <circle cx="34" cy="68" r="7" fill="#ff8c61" fill-opacity="0.45" />
-        <circle cx="20" cy="62" r="10" fill="#ff8c61" fill-opacity="0.28" />
-        <rect x="86" y="12" width="148" height="20" rx="10" fill="#ff8c61" />
-        <text x="160" y="25" text-anchor="middle" fill="#07150c" font-family="JetBrains Mono" font-size="9" font-weight="800">🚗 152g CO₂ · TRÁFICO</text>
-      </svg>
-    `
+    svg: `<img class="veh-stage-render-img" src="./media/veh-car.jpg" alt="Auto en tráfico de hora punta" />`
   }
 };
 
@@ -209,24 +218,23 @@ const translations = {
   es_419: {
     "page.title": "EcoCommute — Muévete por Lima, Ahorra y Gana Premios Verdes",
     "nav.skip": "Saltar al contenido principal",
-    "topbar.badge": "🌱 NIVEL 4: CICLISTA LIMEÑO",
-    "topbar.spec": "🔥 Racha activa de 7 días · ¡Suma puntos en cada viaje!",
-    "topbar.recycled_label": "CO₂ AHORRADO HOY:",
-    "biome.caliza": "🌿 Lomas",
-    "biome.asfalto": "💎 Esmeralda",
-    "biome.ferroviario": "☀️ Sol",
+    "topbar.badge": "[LVL.04 // CICLISTA_LIMEÑO]",
+    "topbar.spec": "[RACHA: 07D_ACTIVA] // SUMA PUNTOS EN CADA VIAJE",
+    "topbar.recycled_label": "HOY:",
+    "theme.light": "[CLARO]",
+    "theme.dark": "[OSCURO]",
     "nav.aria": "Navegación principal",
-    "nav.vr": "Paseo VR 3D",
-    "nav.vehicles": "Vehículos 3D",
-    "nav.alchemy": "Tu Ahorro",
-    "nav.why": "La Idea",
-    "nav.features": "En la App",
-    "nav.screens": "Pantallas",
-    "nav.team": "Equipo",
+    "nav.vr": "01. VR_3D",
+    "nav.vehicles": "02. FLOTA",
+    "nav.alchemy": "03. AHORRO",
+    "nav.why": "04. SISTEMA",
+    "nav.features": "05. APP",
+    "nav.screens": "06. UI_VIEW",
+    "nav.team": "07. CREW",
     "lang.toggle_label": "Cambiar idioma (Español / English)",
 
     // Hero & Decorative App Badges
-    "hero.kicker": "🚲 ¡Muévete por Lima, ahorra plata y gana premios reales!",
+    "hero.kicker": "[SYS.TELEMETRY // MOVILIDAD URBANA LIMA]",
     "hero.title": "Deja el tráfico atrás, ",
     "hero.title_em": "pedalea o camina y gana premios en Lima.",
     "hero.lead":
@@ -237,14 +245,14 @@ const translations = {
     "decor.streak_val": "7 días seguidos",
     "decor.reward_lbl": "PREMIO LISTO",
     "decor.reward_val": "Café & Taller Bici",
-    "decor.medals_title": "🏅 TUS MEDALLAS EN LA APP",
+    "decor.medals_title": "[MEDALLAS // DESBLOQUEADAS]",
     "decor.m1": "1er Pedal",
     "decor.m2": "-10kg CO₂",
     "decor.m3": "Racha 7D",
     "decor.m4": "100 PET",
     "decor.m5": "500 km",
-    "decor.streak_title": "🔥 TU RACHA DE LA SEMANA",
-    "decor.rewards_title": "🎁 CANJEA TUS PUNTOS",
+    "decor.streak_title": "[RACHA_SEMANAL // MATRIZ]",
+    "decor.rewards_title": "[CANJE_DE_PUNTOS]",
     "decor.r1": "Café Gratis",
     "decor.r2": "Taller Bici",
     "decor.r3": "Luces LED",
@@ -252,40 +260,40 @@ const translations = {
     "hero.flora_tag": "MIS VIAJES DE HOY",
     "hero.btn_vr": "¡Probar Paseo en Realidad Virtual!",
     "hero.btn_vehicles": "Ver Vehículos en 3D",
-    "hero.btn_simulator": "Ver mi ahorro anual →",
-    "hero.btn_screens": "Ver pantallas →",
+    "hero.btn_simulator": "[VER AHORRO ANUAL →]",
+    "hero.btn_screens": "[VER PANTALLAS →]",
     "hero.stat1_label": "Humo en el tráfico",
     "hero.stat2_label": "Aire 100% limpio",
     "hero.stat2_unit": "g de humo",
     "hero.stat3_label": "Ganas por viajar",
-    "hero.stat3_unit": "puntos / ruta",
-    "hero.card_label": "🗺️ ¿A DÓNDE VAMOS HOY? · PRUEBA UNA RUTA",
+    "hero.stat3_unit": "PTS / ruta",
+    "hero.card_label": "[SELECTOR DE CORREDOR // PRUEBA UNA RUTA]",
     "hero.card_route": "Miraflores → San Isidro, 4.2 km",
     "hero.car": "Si vas en auto (humo emitido)",
     "hero.car_val": "638 g de CO₂",
     "hero.bike": "Si vas en bici, scooter o a pie",
-    "hero.bike_val": "0 g de CO₂ 🎉",
+    "hero.bike_val": "0 g de CO₂",
     "hero.points": "Puntos que ganas hoy",
-    "hero.points_val": "+15 puntos verdes",
-    "hero.card_foot": "¡Cada viaje sin auto suma puntos para canjear en cafés y talleres de bici aliados!",
+    "hero.points_val": "+15 PTS",
+    "hero.card_foot": "[INFO] CADA VIAJE SIN AUTO SUMA PUNTOS CANJEABLES EN CAFÉS Y TALLERES ALIADOS.",
 
     // Simulator
     "sim.route1": "Miraflores → San Isidro",
     "sim.route2": "UPC Monterrico → San Borja",
     "sim.route3": "Jesús María → Lince",
     "sim.route4": "Barranco → Miraflores",
-    "sim.cam_label": "ÁNGULO DEL MAPA:",
-    "sim.cam_iso": "Vista 3D",
-    "sim.cam_orbit": "Inclinada",
-    "sim.cam_flat": "Mapa 2D",
-    "sim.by_bike": "en bici 🚲",
-    "sim.by_car_traffic": "en auto 🚗",
-    "sim.adjust_distance": "¿Cuántos kilómetros vas a recorrer?",
+    "sim.cam_label": "PROYECCIÓN:",
+    "sim.cam_iso": "[ISO_3D]",
+    "sim.cam_orbit": "[ORBITAL]",
+    "sim.cam_flat": "[PLANO_2D]",
+    "sim.by_bike": "[BICI]",
+    "sim.by_car_traffic": "[AUTO]",
+    "sim.adjust_distance": "DISTANCIA_OBJETIVO (FADER):",
     "sim.pet_equiv_label": "Equivale a reciclar",
-    "sim.gemini_tag": "CONSEJO DE ECOBOT · TU COPILOTO",
+    "sim.gemini_tag": "> ECOBOT_LOG // COPILOTO DE RUTA",
     "sim.gemini_miraflores":
-      "«¡Ándate en bici por Av. Arequipa! 🚲 Llegas en 14 min sin comerte el tráfico, ahorras S/ 8.50 y sumas +15 Puntos Verdes.»",
-    "sim.btn_recycle_trip": "¡Hice este viaje! Sumar mis Puntos Verdes",
+      "> ECOBOT_LOG: Ruta Av. Arequipa optimizada. Tiempo: 14 min (-8 min vs. auto). Ahorro: S/ 8.50. Recompensa: +15 PTS.",
+    "sim.btn_recycle_trip": "Registrar este recorrido",
 
     // VR First-Person Commute Mode
     "vr.title": "¡Súbete a la bici, camina o ve en scooter en Realidad Virtual!",
@@ -299,15 +307,15 @@ const translations = {
     "vr.hud_time_label": "TIEMPO DE VIAJE",
     "vr.hud_money_label": "PLATA Y SALUD",
     "vr.hud_pts_label": "PREMIO DEL VIAJE",
-    "vr.drag_pill": "🖱️ GIRA EN 360° · ⌨️ FLECHAS",
+    "vr.drag_pill": "[DRAG 360° // FLECHAS]",
 
     // Vehicles 3D Section
     "veh.title": "¿En qué te mueves hoy? Compara tus opciones en 3D",
     "veh.lbl_speed": "TU VELOCIDAD",
     "veh.lbl_space": "ESPACIO EN PISTA",
     "veh.lbl_pts": "PUNTOS QUE GANAS",
-    "veh.drag_hint": "↔ ARRASTRA PARA GIRARLO EN 3D · TOCA OTRO VEHÍCULO",
-    "veh.lane_sim_title": "🚦 MIRA LA DIFERENCIA EN AV. JAVIER PRADO",
+    "veh.drag_hint": "[↔ ARRASTRA PARA ROTAR EN 3D // SELECCIONA UNIDAD]",
+    "veh.lane_sim_title": "[SIM_FLUJO // AV. JAVIER PRADO]",
     "veh.mode_bike": "Bicicleta",
     "veh.mode_bike_desc": "Te olvidas de los embotellamientos, haces ejercicio y ganas el máximo de puntos.",
     "veh.mode_scooter": "Scooter Eléctrico",
@@ -319,14 +327,14 @@ const translations = {
 
     // Calculator / Modal Shift Ticket
     "alchemy.title": "Lo que ahorras en un año dejando el auto en casa",
-    "alchemy.p1": "🚲 3 días por semana",
-    "alchemy.p2": "🎓 Todos los días a la uni",
-    "alchemy.p3": "⚡ Fan total de la bici",
+    "alchemy.p1": "[01] 3 días / semana",
+    "alchemy.p2": "[02] Diario a la uni",
+    "alchemy.p3": "[03] Full conmutación",
     "alchemy.slider_trips": "Viajes sin auto por semana",
     "alchemy.slider_km": "Kilómetros por cada viaje",
-    "alchemy.fuel_label": "⛽ GASOLINA QUE AHORRAS",
-    "alchemy.hours_label": "⏰ HORAS LIBRES SIN TRÁFICO",
-    "alchemy.annual_saved_label": "🌿 HUMO QUE LE AHORRAS A LIMA EN 1 AÑO",
+    "alchemy.fuel_label": "[GASOLINA AHORRADA]",
+    "alchemy.hours_label": "[TIEMPO RECUPERADO]",
+    "alchemy.annual_saved_label": "[EMISIONES EVITADAS EN 1 AÑO]",
     "alchemy.card1_title": "Botellas recicladas",
     "alchemy.card1_desc": "Equivale a reciclar miles de botellas plásticas al año.",
     "alchemy.card2_title": "Latas reutilizadas",
@@ -344,12 +352,12 @@ const translations = {
     "story.p2_pre": "Con EcoCommute ves tu ahorro ",
     "story.p2_under": "antes",
     "story.p2_post": " de salir de casa y recibes recompensas por cada kilómetro sin auto.",
-    "story.comp_old_tag": "😴 Apps de mapas de siempre",
+    "story.comp_old_tag": "[SISTEMA_CONVENCIONAL // MAPAS TRADICIONALES]",
     "story.comp_old_desc": "Solo te mandan por el tráfico en auto y no te dan nada por cuidar el aire.",
-    "story.comp_new_tag": "🎉 Con EcoCommute",
+    "story.comp_new_tag": "[ECOCOMMUTE_OS // MOVILIDAD PREMIADA]",
     "story.comp_new_desc": "Te muestra las mejores ciclovías, calcula tu ahorro y te regala Puntos Verdes.",
     "story.quote": "«Cuando viajar en bici o caminar se siente como subir de nivel y ganar premios, dejar el auto es facilísimo.»",
-    "story.quote_author": "— Equipo EcoCommute · UPC",
+    "story.quote_author": "— EQUIPO ECOCOMMUTE // UPC",
 
     // Features
     "feat.title": "Fácil, divertida y hecha para tu día a día",
@@ -371,15 +379,15 @@ const translations = {
     "ods.title": "Una Lima más limpia y divertida para moverse (ODS 11.2)",
     "ods.desc":
       "Impulsamos el transporte sostenible en nuestra ciudad premiando a quienes eligen pedalear, caminar o usar transporte público.",
-    "ods.badge_ods": "🌱 ODS 11.2 · Ciudades Sostenibles",
-    "ods.badge_ai": "🤖 Rutas guiadas por EcoBot IA",
-    "ods.badge_osrm": "🚲 Ciclovías de Lima",
+    "ods.badge_ods": "[ODS 11.2 // CIUDADES SOSTENIBLES]",
+    "ods.badge_ai": "[ECOBOT_AI // RUTAS OPTIMIZADAS]",
+    "ods.badge_osrm": "[OSRM // CICLOVÍAS LIMA]",
 
     // Demo
     "demo.title": "Así de fácil se ve en tu pantalla",
-    "demo.tab_all": "Ver ambas",
-    "demo.tab_routes": "Mapa de Rutas",
-    "demo.tab_dash": "Mis Logros y Puntos",
+    "demo.tab_all": "[VER AMBAS]",
+    "demo.tab_routes": "[MAPA DE RUTAS]",
+    "demo.tab_dash": "[LOGROS Y PUNTOS]",
     "demo.img1_alt": "Vista del mapa de rutas sostenibles en Lima",
     "demo.cap1": "Elige tu destino y compara cuánto ahorras yendo en bici, bus o caminando.",
     "demo.img2_alt": "Vista de logros, medallas y puntos verdes",
@@ -405,9 +413,9 @@ const translations = {
     // Contact & Footer
     "contact.title": "¿Te animas a pedalear con nosotros?",
     "contact.intro": "Si tienes ideas de rutas, ciclovías o cafeterías aliadas en Lima, escríbenos.",
-    "contact.github": "💻 Proyecto en GitHub",
-    "contact.linkedin": "💼 EcoCommute en LinkedIn",
-    "footer.academic": "🚲 EcoCommute · Proyecto estudiantil UPC (Lima, 2026)",
+    "contact.github": "[GIT] Proyecto en GitHub",
+    "contact.linkedin": "[IN] EcoCommute en LinkedIn",
+    "footer.academic": "[ECOCOMMUTE // PROYECTO ESTUDIANTIL UPC · LIMA 2026]",
     "footer.terms": "Términos de Uso",
     "footer.privacy": "Privacidad",
     "modal.title": "Términos de Uso y Privacidad — EcoCommute",
@@ -425,24 +433,23 @@ const translations = {
   en_US: {
     "page.title": "EcoCommute — Ride Around Lima, Save Money & Win Green Rewards",
     "nav.skip": "Skip to main content",
-    "topbar.badge": "🌱 LEVEL 4: LIMA CYCLIST",
-    "topbar.spec": "🔥 7-day active streak · Earn points on every ride!",
-    "topbar.recycled_label": "CO₂ SAVED TODAY:",
-    "biome.caliza": "🌿 Lomas",
-    "biome.asfalto": "💎 Emerald",
-    "biome.ferroviario": "☀️ Sunny",
+    "topbar.badge": "[LVL.04 // LIMA_CYCLIST]",
+    "topbar.spec": "[STREAK: 07D_ACTIVE] // EARN POINTS ON EVERY RIDE",
+    "topbar.recycled_label": "TODAY:",
+    "theme.light": "[LIGHT]",
+    "theme.dark": "[DARK]",
     "nav.aria": "Main navigation",
-    "nav.vr": "3D VR Ride",
-    "nav.vehicles": "3D Vehicles",
-    "nav.alchemy": "Your Savings",
-    "nav.why": "The Idea",
-    "nav.features": "In the App",
-    "nav.screens": "Screens",
-    "nav.team": "Team",
+    "nav.vr": "01. VR_3D",
+    "nav.vehicles": "02. FLEET",
+    "nav.alchemy": "03. SAVINGS",
+    "nav.why": "04. SYSTEM",
+    "nav.features": "05. APP",
+    "nav.screens": "06. UI_VIEW",
+    "nav.team": "07. CREW",
     "lang.toggle_label": "Switch language (Español / English)",
 
     // Hero & Decorative App Badges
-    "hero.kicker": "🚲 Move around Lima, save cash, and win real rewards!",
+    "hero.kicker": "[SYS.TELEMETRY // URBAN MOBILITY LIMA]",
     "hero.title": "Leave traffic behind, ",
     "hero.title_em": "bike or walk and win rewards in Lima.",
     "hero.lead":
@@ -453,14 +460,14 @@ const translations = {
     "decor.streak_val": "7 days in a row",
     "decor.reward_lbl": "REWARD READY",
     "decor.reward_val": "Café & Bike Tune-Up",
-    "decor.medals_title": "🏅 YOUR APP MEDALS",
+    "decor.medals_title": "[MEDALS // UNLOCKED]",
     "decor.m1": "1st Ride",
     "decor.m2": "-10kg CO₂",
     "decor.m3": "7D Streak",
     "decor.m4": "100 PET",
     "decor.m5": "500 km",
-    "decor.streak_title": "🔥 YOUR WEEKLY STREAK",
-    "decor.rewards_title": "🎁 REDEEM YOUR POINTS",
+    "decor.streak_title": "[WEEKLY_STREAK // MATRIX]",
+    "decor.rewards_title": "[REDEEM_POINTS]",
     "decor.r1": "Free Coffee",
     "decor.r2": "Bike Tune-Up",
     "decor.r3": "LED Lights",
@@ -468,39 +475,39 @@ const translations = {
     "hero.flora_tag": "MY RIDES TODAY",
     "hero.btn_vr": "Try the 3D Virtual Reality Ride!",
     "hero.btn_vehicles": "Explore Vehicles in 3D",
-    "hero.btn_simulator": "See my yearly savings →",
-    "hero.btn_screens": "See app screens →",
+    "hero.btn_simulator": "[SEE YEARLY SAVINGS →]",
+    "hero.btn_screens": "[SEE APP SCREENS →]",
     "hero.stat1_label": "Smoke in traffic",
     "hero.stat2_label": "100% clean air",
     "hero.stat2_unit": "g of smoke",
     "hero.stat3_label": "You earn per trip",
-    "hero.stat3_unit": "points / ride",
-    "hero.card_label": "🗺️ WHERE ARE WE GOING TODAY? · TRY A ROUTE",
+    "hero.stat3_unit": "PTS / ride",
+    "hero.card_label": "[CORRIDOR SELECTOR // TEST A ROUTE]",
     "hero.card_route": "Miraflores → San Isidro, 4.2 km",
     "hero.car": "If you go by car (smoke emitted)",
     "hero.car_val": "638 g of CO₂",
     "hero.bike": "If you bike, scooter, or walk",
-    "hero.bike_val": "0 g of CO₂ 🎉",
+    "hero.bike_val": "0 g of CO₂",
     "hero.points": "Points you earn today",
-    "hero.points_val": "+15 green points",
-    "hero.card_foot": "Every car-free ride adds points you can redeem at partner cafés and bike shops!",
+    "hero.points_val": "+15 PTS",
+    "hero.card_foot": "[INFO] EVERY CAR-FREE RIDE ADDS POINTS REDEEMABLE AT PARTNER CAFÉS AND BIKE SHOPS.",
 
     // Simulator
     "sim.route1": "Miraflores → San Isidro",
     "sim.route2": "UPC Monterrico → San Borja",
     "sim.route3": "Jesús María → Lince",
     "sim.route4": "Barranco → Miraflores",
-    "sim.cam_label": "MAP ANGLE:",
-    "sim.cam_iso": "3D View",
-    "sim.cam_orbit": "Tilted",
-    "sim.cam_flat": "2D Map",
-    "sim.by_bike": "by bike 🚲",
-    "sim.by_car_traffic": "by car 🚗",
-    "sim.adjust_distance": "How many kilometers is your ride?",
+    "sim.cam_label": "PROJECTION:",
+    "sim.cam_iso": "[ISO_3D]",
+    "sim.cam_orbit": "[ORBITAL]",
+    "sim.cam_flat": "[FLAT_2D]",
+    "sim.by_bike": "[BIKE]",
+    "sim.by_car_traffic": "[CAR]",
+    "sim.adjust_distance": "TARGET_DISTANCE (FADER):",
     "sim.pet_equiv_label": "Equals recycling",
-    "sim.gemini_tag": "ECOBOT TIP · YOUR ROUTE BUDDY",
+    "sim.gemini_tag": "> ECOBOT_LOG // ROUTE COPILOT",
     "sim.gemini_miraflores":
-      "“Hop on a bike down Av. Arequipa! 🚲 You'll arrive in 14 min skipping traffic, save S/ 8.50, and score +15 Green Points.”",
+      "> ECOBOT_LOG: Av. Arequipa bike lane optimized. Time: 14 min (-8 min vs. car). Saved: S/ 8.50. Reward: +15 PTS.",
     "sim.btn_recycle_trip": "I did this ride! Add my Green Points",
 
     // VR First-Person Commute Mode
@@ -515,15 +522,15 @@ const translations = {
     "vr.hud_time_label": "TRAVEL TIME",
     "vr.hud_money_label": "CASH & HEALTH",
     "vr.hud_pts_label": "RIDE REWARD",
-    "vr.drag_pill": "🖱️ SPIN 360° · ⌨️ ARROWS",
+    "vr.drag_pill": "[DRAG 360° // ARROWS]",
 
     // Vehicles 3D Section
     "veh.title": "How are you riding today? Compare your options in 3D",
     "veh.lbl_speed": "YOUR SPEED",
     "veh.lbl_space": "ROAD SPACE",
     "veh.lbl_pts": "POINTS YOU WIN",
-    "veh.drag_hint": "↔ DRAG TO SPIN IN 3D · TAP ANOTHER VEHICLE",
-    "veh.lane_sim_title": "🚦 SEE THE DIFFERENCE ON AV. JAVIER PRADO",
+    "veh.drag_hint": "[↔ DRAG TO SPIN IN 3D // SELECT UNIT]",
+    "veh.lane_sim_title": "[FLOW_SIM // AV. JAVIER PRADO]",
     "veh.mode_bike": "Bicycle",
     "veh.mode_bike_desc": "Skip traffic jams, get a great workout, and score the maximum points.",
     "veh.mode_scooter": "Electric Scooter",
@@ -535,14 +542,14 @@ const translations = {
 
     // Calculator / Modal Shift Ticket
     "alchemy.title": "What you save in a year by leaving the car at home",
-    "alchemy.p1": "🚲 3 days a week",
-    "alchemy.p2": "🎓 Daily campus ride",
-    "alchemy.p3": "⚡ Full bike fan",
+    "alchemy.p1": "[01] 3 days / week",
+    "alchemy.p2": "[02] Daily campus ride",
+    "alchemy.p3": "[03] Full commuter",
     "alchemy.slider_trips": "Car-free rides per week",
     "alchemy.slider_km": "Kilometers per ride",
-    "alchemy.fuel_label": "⛽ GASOLINE YOU SAVE",
-    "alchemy.hours_label": "⏰ FREE HOURS OUT OF TRAFFIC",
-    "alchemy.annual_saved_label": "🌿 SMOKE YOU SPARE LIMA IN 1 YEAR",
+    "alchemy.fuel_label": "[GASOLINE SAVED]",
+    "alchemy.hours_label": "[TIME RECOVERED]",
+    "alchemy.annual_saved_label": "[EMISSIONS AVOIDED IN 1 YEAR]",
     "alchemy.card1_title": "Recycled bottles",
     "alchemy.card1_desc": "Like keeping thousands of plastic bottles out of landfills.",
     "alchemy.card2_title": "Reused cans",
@@ -560,12 +567,12 @@ const translations = {
     "story.p2_pre": "With EcoCommute you see your savings ",
     "story.p2_under": "before",
     "story.p2_post": " leaving home and earn rewards for every car-free kilometer.",
-    "story.comp_old_tag": "😴 Regular map apps",
+    "story.comp_old_tag": "[LEGACY_SYSTEM // TRADITIONAL MAPS]",
     "story.comp_old_desc": "Only send you into car traffic and give you nothing for keeping the air clean.",
-    "story.comp_new_tag": "🎉 With EcoCommute",
+    "story.comp_new_tag": "[ECOCOMMUTE_OS // REWARDED MOBILITY]",
     "story.comp_new_desc": "Shows you the best bike lanes, calculates your savings, and gifts you Green Points.",
     "story.quote": "“When riding a bike or walking feels like leveling up and winning prizes, leaving the car at home is easy.”",
-    "story.quote_author": "— EcoCommute Team · UPC",
+    "story.quote_author": "— ECOCOMMUTE TEAM // UPC",
 
     // Features
     "feat.title": "Easy, fun, and built for your everyday rides",
@@ -586,15 +593,15 @@ const translations = {
     "ods.title": "A cleaner, more fun Lima to get around (SDG 11.2)",
     "ods.desc":
       "We champion sustainable transport in our city by rewarding everyone who chooses to cycle, walk, or ride transit.",
-    "ods.badge_ods": "🌱 SDG 11.2 · Sustainable Cities",
-    "ods.badge_ai": "🤖 Routes guided by EcoBot AI",
-    "ods.badge_osrm": "🚲 Lima Bike Lanes",
+    "ods.badge_ods": "[SDG 11.2 // SUSTAINABLE CITIES]",
+    "ods.badge_ai": "[ECOBOT_AI // OPTIMIZED ROUTES]",
+    "ods.badge_osrm": "[OSRM // LIMA BIKE LANES]",
 
     // Demo
     "demo.title": "How easy it looks on your screen",
-    "demo.tab_all": "See both",
-    "demo.tab_routes": "Route Map",
-    "demo.tab_dash": "My Achievements & Points",
+    "demo.tab_all": "[SEE BOTH]",
+    "demo.tab_routes": "[ROUTE MAP]",
+    "demo.tab_dash": "[ACHIEVEMENTS & PTS]",
     "demo.img1_alt": "Interactive map of sustainable routes in Lima",
     "demo.cap1": "Pick your destination and compare how much you save by bike, bus, or walking.",
     "demo.img2_alt": "Achievements, medals, and green points screen",
@@ -620,9 +627,9 @@ const translations = {
     // Contact & Footer
     "contact.title": "Ready to ride with us?",
     "contact.intro": "Have ideas for routes, bike lanes, or partner cafés in Lima? Drop us a line.",
-    "contact.github": "💻 Project on GitHub",
-    "contact.linkedin": "💼 EcoCommute on LinkedIn",
-    "footer.academic": "🚲 EcoCommute · UPC Student Project (Lima, 2026)",
+    "contact.github": "[GIT] Project on GitHub",
+    "contact.linkedin": "[IN] EcoCommute on LinkedIn",
+    "footer.academic": "[ECOCOMMUTE // UPC STUDENT PROJECT · LIMA 2026]",
     "footer.terms": "Terms of Use",
     "footer.privacy": "Privacy",
     "modal.title": "Terms of Use & Privacy — EcoCommute",
@@ -638,7 +645,7 @@ const translations = {
   }
 };
 
-let currentLang = localStorage.getItem("ecocommute_lang") || "es_419";
+let currentLang = "es_419";
 let currentCorridor = "miraflores";
 let currentKm = 4.2;
 let sessionRecycledGrams = 1920;
@@ -647,6 +654,129 @@ let sessionTripsCount = 12;
 let currentVehicleKey = "bike";
 let alchemyTrips = 6;
 let alchemyKm = 4.2;
+
+let limaMapInstance = null;
+let limaTileLayer = null;
+let limaRouteLayerGroup = null;
+
+function updateLimaMapTiles() {
+  if (!limaMapInstance || typeof window.L === "undefined") return;
+  const tileUrl = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
+
+  if (!limaTileLayer) {
+    limaTileLayer = window.L.tileLayer(tileUrl, {
+      attribution: "&copy; OpenStreetMap",
+      maxZoom: 19
+    }).addTo(limaMapInstance);
+  }
+}
+
+function renderLimaMapRoute() {
+  if (!limaMapInstance || !limaRouteLayerGroup || typeof window.L === "undefined") return;
+  const L = window.L;
+  const corridor = CORRIDORS[currentCorridor] || CORRIDORS.miraflores;
+  limaRouteLayerGroup.clearLayers();
+
+  // Ruta congestionada en auto (línea punteada naranja)
+  if (corridor.carLatLngs) {
+    L.polyline(corridor.carLatLngs, {
+      color: "#EA580C",
+      weight: 3.5,
+      opacity: 0.78,
+      dashArray: "6, 8",
+      lineCap: "round"
+    }).addTo(limaRouteLayerGroup);
+  }
+
+  // Halo suave + Ruta real por ciclovía (línea verde sólida)
+  if (corridor.ecoLatLngs) {
+    L.polyline(corridor.ecoLatLngs, {
+      color: "#22C55E",
+      weight: 10,
+      opacity: 0.22,
+      lineCap: "round",
+      lineJoin: "round"
+    }).addTo(limaRouteLayerGroup);
+
+    const ecoLine = L.polyline(corridor.ecoLatLngs, {
+      color: "#15803D",
+      weight: 4.5,
+      opacity: 0.98,
+      lineCap: "round",
+      lineJoin: "round"
+    }).addTo(limaRouteLayerGroup);
+
+    const startPt = corridor.ecoLatLngs[0];
+    const endPt = corridor.ecoLatLngs[corridor.ecoLatLngs.length - 1];
+
+    // Marcadores circulares exactos sobre las coordenadas de inicio y fin
+    L.circleMarker(startPt, {
+      radius: 7,
+      fillColor: "#15803D",
+      color: "#FFFFFF",
+      weight: 2.5,
+      fillOpacity: 1
+    }).addTo(limaRouteLayerGroup);
+
+    L.circleMarker(endPt, {
+      radius: 7,
+      fillColor: "#111613",
+      color: "#FFFFFF",
+      weight: 2.5,
+      fillOpacity: 1
+    }).addTo(limaRouteLayerGroup);
+
+    // Etiquetas flotantes de Origen y Destino
+    const startIcon = L.divIcon({
+      className: "lima-pin-wrap",
+      html: `<div class="lima-pin-badge origin"><span class="lima-pin-dot"></span>${corridor.originTag}</div>`,
+      iconSize: [0, 0]
+    });
+
+    const endIcon = L.divIcon({
+      className: "lima-pin-wrap",
+      html: `<div class="lima-pin-badge dest"><span class="lima-pin-dot"></span>${corridor.destTag}</div>`,
+      iconSize: [0, 0]
+    });
+
+    L.marker(startPt, { icon: startIcon, interactive: false }).addTo(limaRouteLayerGroup);
+    L.marker(endPt, { icon: endIcon, interactive: false }).addTo(limaRouteLayerGroup);
+
+    limaMapInstance.fitBounds(ecoLine.getBounds(), {
+      paddingTopLeft: [42, 46],
+      paddingBottomRight: [42, 54],
+      maxZoom: 15,
+      animate: true,
+      duration: 0.55
+    });
+  }
+}
+
+function setupLimaHeroMap() {
+  const mapEl = document.getElementById("lima-hero-map");
+  if (!mapEl || typeof window.L === "undefined") return;
+  const L = window.L;
+
+  limaMapInstance = L.map(mapEl, {
+    zoomControl: true,
+    scrollWheelZoom: false,
+    attributionControl: true
+  }).setView([-12.1075, -77.0315], 14);
+
+  limaMapInstance.zoomControl.setPosition("topright");
+  limaRouteLayerGroup = L.layerGroup().addTo(limaMapInstance);
+
+  const activeTheme = document.documentElement.getAttribute("data-theme") || "light";
+  updateLimaMapTiles(activeTheme);
+  renderLimaMapRoute();
+
+  window.addEventListener("resize", () => {
+    if (limaMapInstance) {
+      limaMapInstance.invalidateSize();
+      renderLimaMapRoute();
+    }
+  });
+}
 
 function updateSessionFloraBanner() {
   const isEn = currentLang === "en_US";
@@ -659,9 +789,9 @@ function updateSessionFloraBanner() {
   }
   if (statusEl) {
     if (isEn) {
-      statusEl.innerHTML = `<strong>${sessionTripsCount} car-free rides</strong> · <strong>${sessionRecycledGrams.toLocaleString()} g CO₂ saved</strong> · <strong>♻ ${petEq} PET bottles</strong>`;
+      statusEl.innerHTML = `<strong>${sessionTripsCount} car-free rides</strong> · <strong>${sessionRecycledGrams.toLocaleString()} g CO₂ saved</strong> · <strong>[${petEq} PET_EQ]</strong>`;
     } else {
-      statusEl.innerHTML = `<strong>${sessionTripsCount} viajes sin auto</strong> · <strong>${sessionRecycledGrams.toLocaleString()} g CO₂ ahorrados</strong> · <strong>♻ ${petEq} botellas PET</strong>`;
+      statusEl.innerHTML = `<strong>${sessionTripsCount} viajes sin auto</strong> · <strong>${sessionRecycledGrams.toLocaleString()} g CO₂ ahorrados</strong> · <strong>[${petEq} PET_EQ]</strong>`;
     }
   }
 }
@@ -694,20 +824,22 @@ function renderSimulatorMetrics() {
 
   const localeData = isEn ? corridor.en : corridor.es;
 
-  if (routeTitleEl) routeTitleEl.textContent = `${localeData.routeTitle}, ${km.toFixed(1)} km`;
+  if (routeTitleEl) routeTitleEl.textContent = localeData.routeTitle;
   if (coordsEl) coordsEl.textContent = corridor.coords;
   if (distOutEl) distOutEl.textContent = `${km.toFixed(1)} km`;
-  if (carCo2El) carCo2El.textContent = isEn ? `${carCo2Grams} g of CO₂` : `${carCo2Grams} g de CO₂`;
-  if (bikeCo2El) bikeCo2El.textContent = isEn ? "0 g of CO₂ 🎉" : "0 g de CO₂ 🎉";
-  if (petEquivEl) petEquivEl.textContent = isEn ? `♻ ${petBottles} PET bottles` : `♻ ${petBottles} botellas PET`;
-  if (pointsEl) pointsEl.textContent = isEn ? `+${greenPoints} green points` : `+${greenPoints} puntos verdes`;
-  if (bikeTimeEl) bikeTimeEl.textContent = `${bikeMin} min`;
-  if (carTimeEl) carTimeEl.textContent = `${carMin} min`;
+  if (carCo2El) carCo2El.textContent = `-${carCo2Grams} g`;
+  if (bikeCo2El) bikeCo2El.textContent = "0 g";
+  if (petEquivEl) petEquivEl.textContent = isEn ? `${petBottles} PET bottles` : `${petBottles} botellas PET`;
+  if (pointsEl) pointsEl.textContent = `${corridor.moneySaved || "S/ 8.50"} · +${greenPoints} pts`;
+  if (bikeTimeEl) bikeTimeEl.textContent = `${corridor.bikeMin || bikeMin} min`;
+  if (carTimeEl) carTimeEl.textContent = `${corridor.carMin || carMin} min`;
   if (geminiTextEl) geminiTextEl.textContent = localeData.gemini;
-  if (svgCarPath) svgCarPath.setAttribute("d", corridor.carPath);
-  if (svgEcoPath) svgEcoPath.setAttribute("d", corridor.ecoPath);
+  if (svgCarPath && corridor.carPath) svgCarPath.setAttribute("d", corridor.carPath);
+  if (svgEcoPath && corridor.ecoPath) svgEcoPath.setAttribute("d", corridor.ecoPath);
   if (originTagEl) originTagEl.textContent = corridor.originTag;
   if (destTagEl) destTagEl.textContent = corridor.destTag;
+
+  renderLimaMapRoute();
 }
 
 function renderVehicleStage() {
@@ -766,10 +898,10 @@ function renderAlchemyLab() {
   if (annualKgEl) annualKgEl.textContent = annualKg;
   if (fuelEl) fuelEl.textContent = isEn ? `${fuelLiters} L / yr` : `${fuelLiters} L / año`;
   if (hoursEl) hoursEl.textContent = isEn ? `${trafficHours} h / yr` : `${trafficHours} h / año`;
-  if (petEl) petEl.textContent = petBottles.toLocaleString();
+  if (petEl) petEl.textContent = isEn ? `${petBottles.toLocaleString()} bottles` : `${petBottles.toLocaleString()} botellas`;
   if (aluEl) aluEl.textContent = aluCans.toLocaleString();
-  if (treesEl) treesEl.textContent = trees;
-  if (ptsEl) ptsEl.textContent = `+${greenPoints.toLocaleString()}`;
+  if (treesEl) treesEl.textContent = isEn ? `${trees} trees` : `${trees} árboles`;
+  if (ptsEl) ptsEl.textContent = `+${greenPoints.toLocaleString()} pts`;
 
   if (tokenGrid) {
     const dotsCount = Math.min(32, Math.max(6, Math.round(petBottles / 120)));
@@ -844,34 +976,80 @@ function setupLanguageToggle() {
   });
 }
 
-// Selector de Paleta Original (Lomas de Amancaes, Esmeralda, Sol Terracota)
-function setupBiomeSwitcher() {
-  const chips = document.querySelectorAll(".biome-chip");
-  const validPalettes = ["amancaes", "esmeralda", "terracota"];
-  let savedBiome = localStorage.getItem("ecocommute_biome") || "amancaes";
-  if (!validPalettes.includes(savedBiome)) {
-    savedBiome = "amancaes";
+// Selector de Tema (Claro por defecto + Oscuro)
+function setupThemeSwitcher() {
+  const chips = document.querySelectorAll("[data-theme-target]");
+  let savedTheme = localStorage.getItem("ecocommute_theme") || "light";
+  if (savedTheme !== "light" && savedTheme !== "dark") {
+    savedTheme = "light";
   }
-  document.documentElement.setAttribute("data-biome", savedBiome);
+
+  function applyTheme(theme) {
+    document.documentElement.setAttribute("data-theme", theme);
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    if (metaTheme) {
+      metaTheme.setAttribute("content", theme === "dark" ? "#0D0D0D" : "#F4F4F0");
+    }
+    chips.forEach((c) => {
+      const active = c.getAttribute("data-theme-target") === theme;
+      c.classList.toggle("is-active", active);
+      c.setAttribute("aria-pressed", active ? "true" : "false");
+    });
+    updateLimaMapTiles(theme);
+  }
+
+  applyTheme(savedTheme);
 
   chips.forEach((chip) => {
-    chip.classList.toggle("is-active", chip.getAttribute("data-biome-target") === savedBiome);
     chip.addEventListener("click", () => {
-      const targetBiome = chip.getAttribute("data-biome-target") || "amancaes";
-      chips.forEach((c) => c.classList.toggle("is-active", c === chip));
-      localStorage.setItem("ecocommute_biome", targetBiome);
-
-      const applyBiome = () => {
-        document.documentElement.setAttribute("data-biome", targetBiome);
-      };
+      const targetTheme = chip.getAttribute("data-theme-target") === "dark" ? "dark" : "light";
+      localStorage.setItem("ecocommute_theme", targetTheme);
 
       if (document.startViewTransition) {
-        document.startViewTransition(applyBiome);
+        document.startViewTransition(() => applyTheme(targetTheme));
       } else {
-        applyBiome();
+        applyTheme(targetTheme);
       }
     });
   });
+}
+
+// Animaciones al scrollear (IntersectionObserver con revelado fluido)
+function setupScrollAnimations() {
+  const prefersReduced = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+  const targets = document.querySelectorAll(
+    "[data-scroll-reveal], .vehicle-option-card, .impact-stat-card"
+  );
+
+  targets.forEach((el, idx) => {
+    el.setAttribute("data-scroll-reveal", "");
+    const staggerMs = (idx % 4) * 50;
+    el.style.setProperty("--reveal-delay", `${staggerMs}ms`);
+  });
+
+  if (prefersReduced || !("IntersectionObserver" in window)) {
+    targets.forEach((el) => el.classList.add("is-inview"));
+    return;
+  }
+
+  document.documentElement.classList.add("js-reveal-ready");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-inview");
+        }
+      });
+    },
+    { threshold: 0.01, rootMargin: "120px 0px 120px 0px" }
+  );
+
+  targets.forEach((el) => observer.observe(el));
+
+  if (window.location.hash) {
+    targets.forEach((el) => el.classList.add("is-inview"));
+  }
 }
 
 function setupSimulator() {
@@ -931,8 +1109,8 @@ function setupSimulator() {
       if (labelSpan) {
         const isEn = currentLang === "en_US";
         labelSpan.textContent = isEn
-          ? `🎉 Awesome! +${earnedPts} Green Points added!`
-          : `🎉 ¡Genial! Sumaste +${earnedPts} Puntos Verdes`;
+          ? `Trip logged (+${earnedPts} pts)`
+          : `Recorrido registrado (+${earnedPts} pts)`;
         setTimeout(() => {
           const dict = translations[currentLang] || translations.es_419;
           labelSpan.textContent = dict["sim.btn_recycle_trip"];
@@ -1274,88 +1452,88 @@ const VR_POV_MODES = {
     speedFactor: 4.4,
     laneOffset: -68,
     stepBob: 0.25,
-    gateTags: ["🪙 +15 PUNTOS", "💵 S/ 8.50 AHORRO", "🌱 -638g CO₂", "♻ 8 BOTELLAS"],
+    gateTags: ["+15 pts", "S/ 8.50 ahorro", "-638g CO₂", "8 botellas PET"],
     es: {
-      co2: "-638 g CO₂ ahorrados",
-      time: "14 min · 18 km/h (-8 min)",
-      money: "S/ 8.50 ahorrados · 115 kcal",
-      pts: "+15 pts · ♻ 8 PET",
+      co2: "-638 g CO₂",
+      time: "14 min · 18 km/h",
+      money: "S/ 8.50 · 115 kcal",
+      pts: "+15 pts",
       caption:
-        "🚲 VISTA CICLISTA: ¡Avanzas libre por la ciclovía verde de Av. Arequipa recogiendo monedas de Puntos Verdes mientras a la derecha el tráfico está detenido!"
+        "Ciclovía Av. Arequipa: avanzas fluido a 18 km/h mientras el tráfico vehicular está detenido."
     },
     en: {
-      co2: "-638 g CO₂ saved",
-      time: "14 min · 18 km/h (-8 min)",
-      money: "S/ 8.50 saved · 115 kcal",
-      pts: "+15 pts · ♻ 8 PET",
+      co2: "-638 g CO₂",
+      time: "14 min · 18 km/h",
+      money: "S/ 8.50 · 115 kcal",
+      pts: "+15 pts",
       caption:
-        "🚲 CYCLIST POV: Gliding smoothly down the Av. Arequipa green bike lane collecting Green Point coins while rush-hour cars sit still on the right!"
+        "Av. Arequipa bike lane: gliding at 18 km/h while rush-hour traffic sits still."
     }
   },
   walk: {
     speedFactor: 1.85,
     laneOffset: -135,
     stepBob: 1.0,
-    gateTags: ["🌱 0g HUMO", "❤️ +145 KCAL", "💵 S/ 0.00 GASTO", "🪙 +9 PUNTOS"],
+    gateTags: ["0g emisiones", "+145 kcal", "S/ 0.00 gasto", "+9 pts"],
     es: {
-      co2: "-274 g CO₂ (paseo 1.8 km)",
-      time: "21 min · 5 km/h (paseo fresco)",
-      money: "S/ 0.00 gasto · +145 kcal",
-      pts: "+9 pts · ♻ 3 PET",
+      co2: "-274 g CO₂",
+      time: "21 min · 5 km/h",
+      money: "S/ 0.00 · 145 kcal",
+      pts: "+9 pts",
       caption:
-        "🚶 VISTA A PIE: Caminas relajado bajo los árboles de la vereda sin gastar un sol y sumando pasos para tus recompensas."
+        "Vereda arbolada: caminas sin emisiones ni gasto de combustible sumando puntos en cada cuadra."
     },
     en: {
-      co2: "-274 g CO₂ (1.8 km walk)",
-      time: "21 min · 5 km/h (fresh walk)",
-      money: "S/ 0.00 cost · +145 kcal",
-      pts: "+9 pts · ♻ 3 PET",
+      co2: "-274 g CO₂",
+      time: "21 min · 5 km/h",
+      money: "S/ 0.00 · 145 kcal",
+      pts: "+9 pts",
       caption:
-        "🚶 WALKING POV: Strolling under the trees on a sunny sidewalk with zero fuel cost and earning rewards with every step."
+        "Tree-lined sidewalk: strolling with zero fuel cost and earning rewards with every block."
     }
   },
   scooter: {
     speedFactor: 4.9,
     laneOffset: -68,
     stepBob: 0.1,
-    gateTags: ["⚡ 0g HUMO", "🚀 -10 MIN TRÁFICO", "🚇 CONEXIÓN METRO", "🪙 +14 PUNTOS"],
+    gateTags: ["0g emisiones", "-10 min tráfico", "Conexión Metro", "+14 pts"],
     es: {
-      co2: "-638 g CO₂ ahorrados",
-      time: "12 min · 20 km/h (-10 min)",
-      money: "S/ 7.80 ahorrados en taxi",
-      pts: "+14 pts · ♻ 8 PET",
+      co2: "-638 g CO₂",
+      time: "12 min · 20 km/h",
+      money: "S/ 7.80 ahorrados",
+      pts: "+14 pts",
       caption:
-        "🛴 VISTA SCOOTER: Conectas súper rápido desde la estación del Metropolitano o Metro hasta tu destino sin sudar una gota."
+        "Micromovilidad eléctrica: conectas rápido desde el Metropolitano o Metro hasta tu destino a 20 km/h."
     },
     en: {
-      co2: "-638 g CO₂ saved",
-      time: "12 min · 20 km/h (-10 min)",
-      money: "S/ 7.80 saved vs. taxi",
-      pts: "+14 pts · ♻ 8 PET",
+      co2: "-638 g CO₂",
+      time: "12 min · 20 km/h",
+      money: "S/ 7.80 saved",
+      pts: "+14 pts",
       caption:
-        "🛴 E-SCOOTER POV: Zipping effortlessly from the Metropolitano or Metro station to your destination at 20 km/h."
+        "Electric micromobility: zipping effortlessly from the Metropolitano or Metro station at 20 km/h."
     }
   },
   car: {
     speedFactor: 0.85,
     laneOffset: 82,
     stepBob: 0.05,
-    gateTags: ["💨 +638g CO₂", "🐢 TRÁFICO 11 km/h", "💸 -S/ 8.50 GASTO", "0 PUNTOS 😢"],
+    gateTags: ["+638g CO₂", "Tráfico 11 km/h", "-S/ 8.50 gasto", "0 pts"],
     es: {
-      co2: "+638 g CO₂ emitidos",
-      time: "22 min · 11 km/h (hora punta)",
-      money: "S/ 8.50 gastados en gasolina",
-      pts: "0 pts · Sin premio 😢",
+      co2: "+638 g CO₂",
+      time: "22 min · 11 km/h",
+      money: "S/ 8.50 en gasolina",
+      pts: "0 pts",
       caption:
-        "🚗 VISTA EN AUTO: Atrapado en el tráfico de hora punta gastando gasolina mientras ves pasar a las bicis y scooters libres por la izquierda."
+        "Hora punta en auto: atrapado en congestión vehicular mientras la ciclovía fluye libre al costado."
     },
     en: {
-      co2: "+638 g CO₂ emitted",
-      time: "22 min · 11 km/h (gridlock)",
-      money: "S/ 8.50 spent on gas",
-      pts: "0 pts · No rewards 😢",
+      co2: "+638 g CO₂",
+      time: "22 min · 11 km/h",
+      money: "S/ 8.50 on fuel",
+      pts: "0 pts",
       caption:
-        "🚗 CAR POV: Stuck in bumper-to-bumper rush-hour traffic burning gas while cyclists and scooters breeze past on your left."
+        "Rush hour by car: stuck in congestion while the bike lane flows freely beside you."
     }
   }
 };
@@ -2332,7 +2510,9 @@ function setupVRCommuteSimulator() {
 
 document.addEventListener("DOMContentLoaded", () => {
   setupSiblingIndexFallback();
-  setupBiomeSwitcher();
+  setupLimaHeroMap();
+  setupThemeSwitcher();
+  setupScrollAnimations();
   setupLanguageToggle();
   setup3DTiltCards();
   setupSimulator();
