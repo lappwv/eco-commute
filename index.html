@@ -205,151 +205,178 @@
         </div>
       </section>
 
-      <!-- ==================== 2. COMPARATIVA DE MOVILIDAD URBANA ==================== -->
+            <!-- ==================== 2. COMPARATIVA AMIGABLE DE TRANSPORTE ==================== -->
       <section id="vehiculos" class="section alt">
         <div class="container">
           <div class="section-header" data-scroll-reveal>
             <div>
               <span class="section-eyebrow" data-i18n="veh.eyebrow">Comparativa de movilidad</span>
-              <h2 data-i18n="veh.title">Elige cómo moverte hoy por Lima.</h2>
+              <h2 data-i18n="veh.title">¿Cómo te conviene moverte por Lima?</h2>
             </div>
             <p class="section-subtitle" data-i18n="veh.subtitle">
-              Compara la velocidad media en hora punta, el espacio vial ocupado y las emisiones de cada alternativa en la ciudad.
+              Elige un medio de transporte y descubre cuánto tiempo, dinero y humo ahorras en tus recorridos cotidianos.
             </p>
           </div>
 
-          <div class="vehicle-studio-layout" data-scroll-reveal>
-            <!-- Tarjeta destacada del vehículo seleccionado -->
-            <div class="vehicle-stage-card">
-              <div class="vehicle-stage-topbar">
-                <span class="sim-eyebrow" id="veh-stage-code">Bicicleta urbana · Rápida y libre de tráfico</span>
-                <span class="vehicle-status-pill" id="veh-stage-badge">0 g CO₂ / km</span>
+          <!-- Selector amigable con pestañas grandes -->
+          <div class="transport-tabs-bar" role="tablist" aria-label="Elige un medio de transporte" data-scroll-reveal>
+            <button
+              type="button"
+              role="tab"
+              class="transport-tab-btn is-active"
+              data-vehicle="bike"
+              aria-selected="true"
+            >
+              <span class="tab-icon" aria-hidden="true">🚲</span>
+              <span class="tab-text">
+                <strong data-i18n="veh.tab_bike">Bicicleta</strong>
+                <small data-i18n="veh.tab_bike_sub">Más rápida · S/ 0 gasto</small>
+              </span>
+            </button>
+
+            <button
+              type="button"
+              role="tab"
+              class="transport-tab-btn"
+              data-vehicle="scooter"
+              aria-selected="false"
+            >
+              <span class="tab-icon" aria-hidden="true">⚡</span>
+              <span class="tab-text">
+                <strong data-i18n="veh.tab_scooter">Scooter</strong>
+                <small data-i18n="veh.tab_scooter_sub">Ágil · Sin esfuerzo</small>
+              </span>
+            </button>
+
+            <button
+              type="button"
+              role="tab"
+              class="transport-tab-btn"
+              data-vehicle="transit"
+              aria-selected="false"
+            >
+              <span class="tab-icon" aria-hidden="true">🚌</span>
+              <span class="tab-text">
+                <strong data-i18n="veh.tab_transit">Bus / Metro</strong>
+                <small data-i18n="veh.tab_transit_sub">Para tramos largos</small>
+              </span>
+            </button>
+
+            <button
+              type="button"
+              role="tab"
+              class="transport-tab-btn"
+              data-vehicle="car"
+              aria-selected="false"
+            >
+              <span class="tab-icon" aria-hidden="true">🚗</span>
+              <span class="tab-text">
+                <strong data-i18n="veh.tab_car">Auto en tráfico</strong>
+                <small data-i18n="veh.tab_car_sub">Lento en hora punta</small>
+              </span>
+            </button>
+          </div>
+
+          <!-- Tarjeta amigable unificada -->
+          <div class="transport-showcase-card" data-scroll-reveal>
+            <!-- Columna Visual: Foto con sticker y comparador visual de tiempo -->
+            <div class="showcase-visual-col">
+              <div class="showcase-img-box">
+                <img
+                  id="veh-showcase-img"
+                  src="./media/veh-bike.jpg"
+                  alt="Bicicleta urbana en Lima"
+                />
+                <div class="showcase-badge" id="veh-badge">
+                  <span class="badge-icon" id="veh-badge-icon">⭐</span>
+                  <span id="veh-badge-text">¡La opción más rápida en hora punta!</span>
+                </div>
               </div>
 
-              <div class="vehicle-hero-media" id="veh-svg-container">
-                <img class="veh-stage-render-img" src="./media/veh-bike.jpg" alt="Bicicleta urbana sostenible" />
-              </div>
-
-              <div class="veh-specs-grid">
-                <div class="veh-stat-chip">
-                  <span class="chip-label" data-i18n="veh.label_speed">Velocidad media</span>
-                  <strong class="chip-val" id="veh-stat-speed">18 km/h</strong>
+              <!-- Barra comparativa visual de tiempo -->
+              <div class="time-comparison-box">
+                <div class="time-comp-header">
+                  <span data-i18n="veh.comp_title">Comparación de tiempo en hora punta (trayecto típico de 5 km)</span>
                 </div>
-                <div class="veh-stat-chip">
-                  <span class="chip-label" data-i18n="veh.label_space">Espacio vial</span>
-                  <strong class="chip-val" id="veh-stat-space">1.5 m²</strong>
+                <div class="time-bars">
+                  <div class="time-bar-row">
+                    <span class="time-bar-label" id="time-bar-veh-label">🚲 En bicicleta</span>
+                    <div class="time-bar-track">
+                      <div class="time-bar-fill eco" id="time-bar-veh-fill" style="width: 40%;"></div>
+                    </div>
+                    <strong class="time-bar-val" id="time-bar-veh-val">14 min</strong>
+                  </div>
+                  <div class="time-bar-row">
+                    <span class="time-bar-label" data-i18n="veh.bar_car_label">🚗 En auto con tráfico</span>
+                    <div class="time-bar-track">
+                      <div class="time-bar-fill car" style="width: 100%;"></div>
+                    </div>
+                    <strong class="time-bar-val">35 min</strong>
+                  </div>
                 </div>
-                <div class="veh-stat-chip">
-                  <span class="chip-label" data-i18n="veh.label_emissions">Emisiones directas</span>
-                  <strong class="chip-val" id="veh-chassis-dim">0 g CO₂ / km</strong>
-                </div>
-                <div class="veh-stat-chip highlight">
-                  <span class="chip-label" data-i18n="veh.label_reward">Recompensa</span>
-                  <strong class="chip-val" id="veh-stat-pts">+15 pts / viaje</strong>
-                </div>
-              </div>
-
-              <div class="veh-impact-banner">
-                <span class="veh-impact-icon" aria-hidden="true">💡</span>
-                <p id="veh-lane-summary">
-                  30 ciclistas avanzan fluidos por la ciclovía mientras el tráfico vehicular está detenido en hora punta.
-                </p>
               </div>
             </div>
 
-            <!-- Selector de medios de transporte -->
-            <div class="vehicle-selector-column" role="radiogroup" aria-label="Medios de transporte">
-              <button
-                type="button"
-                class="vehicle-option-card is-active"
-                data-vehicle="bike"
-                role="radio"
-                aria-checked="true"
-              >
-                <div class="veh-opt-media">
-                  <img src="./media/veh-bike.jpg" alt="Bicicleta urbana sostenible" />
+            <!-- Columna Informativa: Beneficios en lenguaje humano -->
+            <div class="showcase-info-col">
+              <div class="showcase-title-row">
+                <div>
+                  <span class="showcase-kicker" id="veh-kicker">Recomendación para moverte hoy</span>
+                  <h3 class="showcase-name" id="veh-title">Bicicleta urbana</h3>
                 </div>
-                <div class="veh-opt-head">
-                  <div>
-                    <div class="veh-opt-title-row">
-                      <h3 data-i18n="veh.bike_title">Bicicleta urbana</h3>
-                      <span class="veh-opt-co2 eco">0 g CO₂</span>
-                    </div>
-                    <p data-i18n="veh.bike_desc">
-                      Cero emisiones, ahorras S/ 8.50 por viaje y evitas los cuellos de botella en hora punta.
-                    </p>
-                  </div>
-                </div>
-              </button>
+                <span class="showcase-tag" id="veh-co2-pill">0 g de humo</span>
+              </div>
 
-              <button
-                type="button"
-                class="vehicle-option-card"
-                data-vehicle="scooter"
-                role="radio"
-                aria-checked="false"
-              >
-                <div class="veh-opt-media">
-                  <img src="./media/veh-scooter.jpg" alt="Scooter eléctrico urbano" />
-                </div>
-                <div class="veh-opt-head">
-                  <div>
-                    <div class="veh-opt-title-row">
-                      <h3 data-i18n="veh.scooter_title">Scooter eléctrico</h3>
-                      <span class="veh-opt-co2 eco">0 g CO₂</span>
-                    </div>
-                    <p data-i18n="veh.scooter_desc">
-                      Ágil y fácil de combinar con el Metro o Metropolitano para cubrir la última milla sin esfuerzo.
-                    </p>
-                  </div>
-                </div>
-              </button>
+              <p class="showcase-desc" id="veh-desc">
+                Llegas directo por la ciclovía sin quedarte atascado en el tráfico, ahorras en combustible y ganas premios mientras pedaleas.
+              </p>
 
-              <button
-                type="button"
-                class="vehicle-option-card"
-                data-vehicle="transit"
-                role="radio"
-                aria-checked="false"
-              >
-                <div class="veh-opt-media">
-                  <img src="./media/veh-transit.jpg" alt="Bus y Tren eléctrico de Lima" />
-                </div>
-                <div class="veh-opt-head">
+              <!-- Grilla de 4 beneficios amigables -->
+              <div class="benefit-cards-grid">
+                <div class="benefit-card">
+                  <span class="benefit-icon" aria-hidden="true">⏱️</span>
                   <div>
-                    <div class="veh-opt-title-row">
-                      <h3 data-i18n="veh.transit_title">Bus / Tren eléctrico</h3>
-                      <span class="veh-opt-co2 eco">-75% CO₂</span>
-                    </div>
-                    <p data-i18n="veh.transit_desc">
-                      Para distancias largas, usar el Metropolitano o Metro reduce un 75% la huella frente al auto.
-                    </p>
+                    <span class="benefit-label" data-i18n="veh.benefit_time">Tiempo de viaje</span>
+                    <strong class="benefit-val" id="veh-benefit-time">14 min (fluido)</strong>
+                    <small class="benefit-sub" id="veh-benefit-time-sub">Sin semáforos atorados</small>
                   </div>
                 </div>
-              </button>
 
-              <button
-                type="button"
-                class="vehicle-option-card"
-                data-vehicle="car"
-                role="radio"
-                aria-checked="false"
-              >
-                <div class="veh-opt-media">
-                  <img src="./media/veh-car.jpg" alt="Auto en tráfico de hora punta" />
-                </div>
-                <div class="veh-opt-head">
+                <div class="benefit-card">
+                  <span class="benefit-icon" aria-hidden="true">💰</span>
                   <div>
-                    <div class="veh-opt-title-row">
-                      <h3 data-i18n="veh.car_title">Auto en hora punta</h3>
-                      <span class="veh-opt-co2 mid">152 g CO₂</span>
-                    </div>
-                    <p data-i18n="veh.car_desc">
-                      Avanza a solo 12 km/h promedio en congestión, ocupa 18 m² y emite 152 g de CO₂ por cada km.
-                    </p>
+                    <span class="benefit-label" data-i18n="veh.benefit_cost">Gasto del viaje</span>
+                    <strong class="benefit-val text-eco" id="veh-benefit-cost">S/ 0.00 (Gratis)</strong>
+                    <small class="benefit-sub" id="veh-benefit-cost-sub">Ahorras S/ 17 al día</small>
                   </div>
                 </div>
-              </button>
+
+                <div class="benefit-card">
+                  <span class="benefit-icon" aria-hidden="true">🌿</span>
+                  <div>
+                    <span class="benefit-label" data-i18n="veh.benefit_air">Aire para Lima</span>
+                    <strong class="benefit-val" id="veh-benefit-air">Cero humo</strong>
+                    <small class="benefit-sub" id="veh-benefit-air-sub">100% aire limpio</small>
+                  </div>
+                </div>
+
+                <div class="benefit-card highlight">
+                  <span class="benefit-icon" aria-hidden="true">🎁</span>
+                  <div>
+                    <span class="benefit-label" data-i18n="veh.benefit_reward">Tu recompensa</span>
+                    <strong class="benefit-val text-accent" id="veh-benefit-reward">+15 puntos</strong>
+                    <small class="benefit-sub" id="veh-benefit-reward-sub">Para canjear en cafés</small>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tip práctico para Lima -->
+              <div class="showcase-tip-box">
+                <span class="tip-icon" aria-hidden="true">💡</span>
+                <p id="veh-tip-text">
+                  <strong>Dato útil:</strong> Las ciclovías de Av. Arequipa y Salaverry te permiten conectar 4 distritos sin detenerte en ningún embotellamiento vehicular.
+                </p>
+              </div>
             </div>
           </div>
         </div>
