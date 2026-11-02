@@ -1,0 +1,594 @@
+<div class="scroll-progress" aria-hidden="true"></div>
+<a class="skip-link" href="#main-content">Saltar al contenido</a>
+
+<!-- ==================== NAVBAR MINIMALISTA ==================== -->
+<header class="topbar" role="banner">
+  <div class="container topbar-inner">
+    <a class="brand" href="#inicio" aria-label="EcoCommute Inicio">
+      <img
+        class="brand-logo"
+        src="media/logo-ecocommute.png"
+        alt="EcoCommute Logo"
+        width="30"
+        height="37"
+      />
+      <span class="brand-text">EcoCommute</span>
+    </a>
+
+    <nav class="nav" role="navigation" aria-label="Navegación principal">
+      <a href="#inicio">Simulador</a>
+      <a href="#modo-vr">Paseo VR 3D</a>
+      <a href="#vehiculos">Vehículos</a>
+      <a href="#alquimia">Impacto Anual</a>
+    </nav>
+
+    <div class="topbar-controls">
+      <div class="biome-switcher" id="theme-switcher" role="group" aria-label="Tema de color">
+        <button
+          type="button"
+          class="biome-chip"
+          [class.is-active]="activeTheme === 'light'"
+          (click)="setTheme('light')"
+        >
+          <span>Claro</span>
+        </button>
+        <button
+          type="button"
+          class="biome-chip"
+          [class.is-active]="activeTheme === 'dark'"
+          (click)="setTheme('dark')"
+        >
+          <span>Oscuro</span>
+        </button>
+      </div>
+
+      <button
+        type="button"
+        id="lang-toggle"
+        class="lang-toggle"
+        (click)="toggleLang()"
+        aria-label="Cambiar idioma (Español / English)"
+      >
+        <span class="lang-es" [class.active]="currentLang === 'es'">ES</span>
+        <span class="lang-sep">/</span>
+        <span class="lang-en" [class.active]="currentLang === 'en'">EN</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main-content" role="main">
+  <!-- ==================== 1. HERO + SIMULADOR DE RUTA ==================== -->
+  <section id="inicio" class="hero-section">
+    <div class="container hero-grid">
+      <!-- Columna Izquierda: Editorial & Propuesta de Valor -->
+      <div class="hero-copy" data-scroll-reveal>
+        <div class="hero-copy-main">
+          <h1 class="hero-headline">
+            Deja el tráfico atrás. <em>Muévete libre</em> por Lima.
+          </h1>
+
+          <p class="lead">
+            Planifica tu ruta en bicicleta, scooter o a pie, explora el recorrido en 3D y transforma cada kilómetro libre de emisiones en tiempo, ahorro y recompensas locales.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button primary" href="#modo-vr">
+              Explorar ciclovía en VR 360°
+            </a>
+            <a class="button secondary" href="#alquimia">
+              Calcular mi ahorro anual
+            </a>
+          </div>
+        </div>
+
+        <!-- Resumen limpio de métricas -->
+        <dl class="hero-metrics" aria-label="Indicadores clave">
+          <div class="metric-item">
+            <dt>En auto promedio</dt>
+            <dd>
+              152 g
+              <small>CO₂ por kilómetro</small>
+            </dd>
+          </div>
+          <div class="metric-item">
+            <dt>En bici o a pie</dt>
+            <dd class="text-eco">
+              0 g
+              <small>Emisiones directas</small>
+            </dd>
+          </div>
+          <div class="metric-item">
+            <dt>CO₂ ahorrado hoy</dt>
+            <dd>
+              <span id="session-recycled-co2">{{ sessionRecycledGrams | number }} g</span>
+              <small>En rutas activas</small>
+            </dd>
+          </div>
+        </dl>
+      </div>
+
+      <!-- Columna Derecha: Mapa Real de Lima con Rutas Predeterminadas -->
+      <aside id="simulador" class="sim-card" aria-label="Mapa de rutas en Lima" data-scroll-reveal>
+        <div class="sim-header">
+          <div>
+            <span class="sim-eyebrow">Mapa interactivo · Rutas reales en Lima</span>
+            <h2 class="note-route" id="sim-route-title">{{ currentCorridor.routeTitle }}</h2>
+          </div>
+          <span class="corridor-tag" id="sim-coords">{{ currentCorridor.coords }}</span>
+        </div>
+
+        <!-- Selector de rutas predeterminadas -->
+        <div class="corridor-pills" role="group" aria-label="Rutas predeterminadas de Lima">
+          <button
+            type="button"
+            class="corridor-btn"
+            [class.is-active]="currentCorridorKey === 'miraflores'"
+            (click)="selectCorridor('miraflores')"
+          >
+            Miraflores → San Isidro
+          </button>
+          <button
+            type="button"
+            class="corridor-btn"
+            [class.is-active]="currentCorridorKey === 'upc'"
+            (click)="selectCorridor('upc')"
+          >
+            Monterrico → San Borja
+          </button>
+          <button
+            type="button"
+            class="corridor-btn"
+            [class.is-active]="currentCorridorKey === 'jesusmaria'"
+            (click)="selectCorridor('jesusmaria')"
+          >
+            Jesús María → Lince
+          </button>
+          <button
+            type="button"
+            class="corridor-btn"
+            [class.is-active]="currentCorridorKey === 'barranco'"
+            (click)="selectCorridor('barranco')"
+          >
+            Barranco → Miraflores
+          </button>
+        </div>
+
+        <!-- Mapa Real de Lima (Leaflet + Trazado de Ciclovía vs. Tráfico) -->
+        <div class="lima-map-wrapper">
+          <div id="lima-hero-map" class="lima-hero-map" role="region" aria-label="Mapa interactivo del recorrido en Lima"></div>
+
+          <div class="map-floating-badges">
+            <span class="time-pill eco">
+              <span class="legend-line eco"></span>
+              <strong id="sim-bike-time">{{ currentCorridor.bikeMin }} min</strong> <span>en ciclovía</span>
+            </span>
+            <span class="time-pill car">
+              <span class="legend-line car"></span>
+              <strong id="sim-car-time">{{ currentCorridor.carMin }} min</strong> <span>en tráfico</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Resumen compacto del recorrido seleccionado -->
+        <ul class="note-figures">
+          <li>
+            <span>Distancia real</span>
+            <strong id="sim-distance-output">{{ currentKm }} km</strong>
+          </li>
+          <li>
+            <span>CO₂ evitado</span>
+            <strong id="sim-car-co2" class="val-emerald">-{{ carCo2Grams }} g</strong>
+          </li>
+          <li>
+            <span>Ahorro y puntos</span>
+            <strong id="sim-points">{{ currentCorridor.moneySaved }} · +{{ greenPoints }} pts</strong>
+          </li>
+        </ul>
+
+        <div class="sim-footer-bar">
+          <p class="gemini-insight-text" id="sim-gemini-text">
+            {{ currentCorridor.gemini }}
+          </p>
+          <button type="button" class="btn-recycle-action" id="recycle-trip-btn" (click)="logTrip()">
+            <span>{{ tripLoggedMessage || 'Registrar ruta' }}</span>
+          </button>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ==================== 2. VISOR VR 360° (EXPERIENCIA INMERSIVA) ==================== -->
+  <section id="modo-vr" class="section">
+    <div class="container">
+      <div class="section-header" data-scroll-reveal>
+        <div>
+          <span class="section-eyebrow">Experiencia interactiva 360°</span>
+          <h2>Explora la ciclovía en primera persona.</h2>
+        </div>
+        <p class="section-subtitle">
+          Cambia entre bicicleta, caminata, scooter o auto y arrastra la cámara para comparar cómo se vive el recorrido en hora punta.
+        </p>
+      </div>
+
+      <div class="vr-commute-card" id="vr-commute-shell" [attr.data-stereo]="isVRStereo" data-scroll-reveal>
+        <div class="vr-commute-toolbar">
+          <div class="vr-mode-tabs" role="tablist" aria-label="Modo de transporte en VR">
+            <button
+              type="button"
+              role="tab"
+              class="vr-pov-btn"
+              [class.is-active]="currentVRPov === 'bike'"
+              (click)="selectVRPov('bike')"
+            >
+              <span>En bicicleta</span>
+            </button>
+            <button
+              type="button"
+              role="tab"
+              class="vr-pov-btn"
+              [class.is-active]="currentVRPov === 'walk'"
+              (click)="selectVRPov('walk')"
+            >
+              <span>A pie</span>
+            </button>
+            <button
+              type="button"
+              role="tab"
+              class="vr-pov-btn"
+              [class.is-active]="currentVRPov === 'scooter'"
+              (click)="selectVRPov('scooter')"
+            >
+              <span>Scooter eléctrico</span>
+            </button>
+            <button
+              type="button"
+              role="tab"
+              class="vr-pov-btn"
+              [class.is-active]="currentVRPov === 'car'"
+              (click)="selectVRPov('car')"
+            >
+              <span>En auto (tráfico)</span>
+            </button>
+          </div>
+
+          <div class="vr-headset-actions">
+            <button
+              type="button"
+              class="btn-vr-tool"
+              id="vr-stereo-toggle"
+              (click)="toggleVRStereo()"
+              [attr.aria-pressed]="isVRStereo"
+            >
+              <span>Vista Gafas VR</span>
+            </button>
+            <button
+              type="button"
+              class="btn-vr-tool"
+              id="vr-fullscreen-toggle"
+              (click)="toggleVRFullscreen()"
+            >
+              <span>Pantalla completa</span>
+            </button>
+          </div>
+        </div>
+
+        <div
+          class="vr-commute-viewport"
+          id="vr-viewport"
+          (pointerdown)="onVRPointerDown($event)"
+          (pointermove)="onVRPointerMove($event)"
+          (pointerup)="onVRPointerUp()"
+          (pointercancel)="onVRPointerUp()"
+        >
+          <canvas
+            #vrCanvas
+            id="vr-commute-canvas"
+            width="1040"
+            height="460"
+            aria-label="Simulación 3D en primera persona por Lima"
+          ></canvas>
+
+          <div class="vr-stereo-mask" aria-hidden="true" [style.display]="isVRStereo ? 'grid' : 'none'">
+            <div class="vr-lens-frame"><span class="mono-tag">L</span></div>
+            <div class="vr-lens-divider"></div>
+            <div class="vr-lens-frame"><span class="mono-tag">R</span></div>
+          </div>
+
+          <!-- Telemetría flotante limpia -->
+          <div class="vr-savings-hud" aria-live="polite">
+            <div class="vr-hud-box">
+              <span>Emisiones</span>
+              <strong id="vr-hud-co2">{{ currentVRPovData.co2 }}</strong>
+            </div>
+            <div class="vr-hud-box">
+              <span>Tiempo y velocidad</span>
+              <strong id="vr-hud-time">{{ currentVRPovData.time }}</strong>
+            </div>
+            <div class="vr-hud-box">
+              <span>Ahorro estimado</span>
+              <strong id="vr-hud-money">{{ currentVRPovData.money }}</strong>
+            </div>
+            <div class="vr-hud-box highlight">
+              <span>Recompensa</span>
+              <strong id="vr-hud-pts">{{ currentVRPovData.pts }}</strong>
+            </div>
+          </div>
+
+          <div class="vr-bottom-caption">
+            <span id="vr-pov-caption">{{ currentVRPovData.caption }}</span>
+            <span class="vr-drag-pill">Arrastra para girar 360°</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 3. COMPARADOR DE FLOTA 3D ==================== -->
+  <section id="vehiculos" class="section alt">
+    <div class="container">
+      <div class="section-header" data-scroll-reveal>
+        <div>
+          <span class="section-eyebrow">Comparativa de movilidad</span>
+          <h2>Elige cómo moverte hoy.</h2>
+        </div>
+        <p class="section-subtitle">
+          Compara la velocidad promedio en hora punta, el espacio urbano que ocupas y las emisiones de cada alternativa en Lima.
+        </p>
+      </div>
+
+      <div class="vehicle-studio-layout" data-scroll-reveal>
+        <!-- Visor 3D del vehículo -->
+        <div class="vehicle-3d-stage-card">
+          <div class="vehicle-stage-topbar">
+            <span class="sim-eyebrow" id="veh-stage-code">{{ currentVehicle.code }}</span>
+            <span class="vehicle-status-pill" [class.is-danger]="currentVehicle.isDanger" id="veh-stage-badge">
+              {{ currentVehicle.badge }}
+            </span>
+          </div>
+
+          <div
+            class="vehicle-turntable-viewport"
+            id="vehicle-drag-zone"
+            role="img"
+            aria-label="Modelo 3D interactivo del medio de transporte"
+            (pointerdown)="onVehPointerDown($event)"
+            (pointermove)="onVehPointerMove($event)"
+            (pointerup)="onVehPointerUp()"
+            (pointercancel)="onVehPointerUp()"
+          >
+            <div class="turntable-floor-ring" aria-hidden="true"></div>
+
+            <div
+              class="vehicle-3d-model-card"
+              id="vehicle-3d-card"
+              [style.--veh-rx]="vehRotX + 'deg'"
+              [style.--veh-ry]="vehRotY + 'deg'"
+            >
+              <div class="veh-layer-chassis">
+                <span id="veh-chassis-dim">{{ currentVehicle.chassis }}</span>
+              </div>
+
+              <div class="veh-layer-blueprint" id="veh-svg-container">
+                <img
+                  class="veh-stage-render-img"
+                  [src]="currentVehicle.imgSrc"
+                  [alt]="currentVehicle.name"
+                />
+              </div>
+
+              <div class="veh-layer-telemetry">
+                <div class="veh-stat-chip">
+                  <span>Velocidad media</span>
+                  <strong id="veh-stat-speed">{{ currentVehicle.speed }}</strong>
+                </div>
+                <div class="veh-stat-chip">
+                  <span>Espacio vial</span>
+                  <strong id="veh-stat-space">{{ currentVehicle.space }}</strong>
+                </div>
+                <div class="veh-stat-chip">
+                  <span>Recompensa</span>
+                  <strong id="veh-stat-pts">{{ currentVehicle.pts }}</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="turntable-drag-hint">
+              Arrastra para inclinar el visor 3D
+            </div>
+          </div>
+
+          <!-- Flujo vial en vivo -->
+          <div class="lane-flow-simulator">
+            <div class="lane-flow-header">
+              <span>Flujo en vivo · Hora punta</span>
+              <span id="veh-lane-summary" class="text-eco">{{ currentVehicle.laneSummary }}</span>
+            </div>
+            <canvas
+              #transitCanvas
+              id="transit-corridor-canvas"
+              width="640"
+              height="110"
+              aria-label="Comparativa de flujo vial en tiempo real"
+            ></canvas>
+          </div>
+        </div>
+
+        <!-- Tarjetas selectoras con imágenes generadas -->
+        <div class="vehicle-selector-column" role="radiogroup" aria-label="Medios de transporte">
+          <button
+            *ngFor="let v of vehicles"
+            type="button"
+            class="vehicle-option-card"
+            [class.is-active]="currentVehicleKey === v.key"
+            (click)="selectVehicle(v.key)"
+            role="radio"
+            [attr.aria-checked]="currentVehicleKey === v.key"
+          >
+            <div class="veh-opt-media">
+              <img [src]="v.imgSrc" [alt]="v.name" />
+            </div>
+            <div class="veh-opt-head">
+              <div>
+                <div class="veh-opt-title-row">
+                  <h3>{{ v.name }}</h3>
+                  <span class="veh-opt-co2" [class.eco]="!v.isDanger" [class.mid]="v.isDanger">{{ v.badge }}</span>
+                </div>
+                <p>{{ v.desc }}</p>
+              </div>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 4. CALCULADORA DE IMPACTO ANUAL ==================== -->
+  <section id="alquimia" class="section">
+    <div class="container">
+      <div class="section-header" data-scroll-reveal>
+        <div>
+          <span class="section-eyebrow">Calculadora de impacto anual</span>
+          <h2>Descubre cuánto ahorras en un año.</h2>
+        </div>
+        <p class="section-subtitle">
+          Ajusta tus viajes por semana y la distancia de tu ruta para proyectar tu impacto anual en Lima.
+        </p>
+      </div>
+
+      <div class="alchemy-workbench" data-scroll-reveal>
+        <div class="alchemy-controls-panel">
+          <div class="alchemy-preset-row" role="group" aria-label="Perfiles de viaje">
+            <button
+              type="button"
+              class="alchemy-preset"
+              [class.is-active]="alchemyTrips === 4 && alchemyKm === 3.5"
+              (click)="setAlchemyPreset(4, 3.5)"
+            >
+              <span>Universitario (4 viajes/sem)</span>
+            </button>
+            <button
+              type="button"
+              class="alchemy-preset"
+              [class.is-active]="alchemyTrips === 6 && alchemyKm === 4.2"
+              (click)="setAlchemyPreset(6, 4.2)"
+            >
+              <span>Oficina (6 viajes/sem)</span>
+            </button>
+            <button
+              type="button"
+              class="alchemy-preset"
+              [class.is-active]="alchemyTrips === 10 && alchemyKm === 6.5"
+              (click)="setAlchemyPreset(10, 6.5)"
+            >
+              <span>Ciclista diario (10 viajes/sem)</span>
+            </button>
+          </div>
+
+          <div class="alchemy-sliders">
+            <div class="slider-group">
+              <div class="distance-label-row">
+                <label for="alchemy-trips-range">Viajes sin auto por semana</label>
+                <output id="alchemy-trips-out">{{ alchemyTrips }} viajes/sem</output>
+              </div>
+              <input
+                type="range"
+                id="alchemy-trips-range"
+                min="1"
+                max="14"
+                step="1"
+                [(ngModel)]="alchemyTrips"
+              />
+            </div>
+
+            <div class="slider-group">
+              <div class="distance-label-row">
+                <label for="alchemy-km-range">Distancia promedio por viaje</label>
+                <output id="alchemy-km-out">{{ alchemyKm }} km</output>
+              </div>
+              <input
+                type="range"
+                id="alchemy-km-range"
+                min="1.0"
+                max="18.0"
+                step="0.2"
+                [(ngModel)]="alchemyKm"
+              />
+            </div>
+          </div>
+
+          <div class="alchemy-summary-card">
+            <div class="alchemy-summary-col">
+              <span>Emisiones evitadas al año</span>
+              <div>
+                <strong id="alchemy-annual-kg" class="text-eco-bright">{{ annualKg }}</strong>
+                <strong class="text-eco-bright"> kg CO₂</strong>
+              </div>
+            </div>
+            <div class="alchemy-summary-col">
+              <span>Combustible ahorrado</span>
+              <strong id="alchemy-fuel-liters">{{ annualFuelLiters }} L / año</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="alchemy-cards-grid">
+          <article class="impact-stat-card">
+            <span class="impact-stat-label">Plástico equivalente</span>
+            <strong class="cutout-figure" id="eq-pet-bottles">{{ annualPetBottles | number }} botellas</strong>
+            <p>
+              Botellas PET de 500 ml cuyo impacto en carbono equivale al humo que evitaste emitir.
+            </p>
+          </article>
+
+          <article class="impact-stat-card">
+            <span class="impact-stat-label">Oxígeno urbano (absorción de CO₂)</span>
+            <strong class="cutout-figure" id="eq-trees">{{ annualTrees }} árboles</strong>
+            <p>
+              Árboles urbanos adultos absorbiendo CO₂ durante un año (~21 kg CO₂/árbol al año).
+            </p>
+          </article>
+
+          <article class="impact-stat-card">
+            <span class="impact-stat-label">Tiempo libre de tráfico</span>
+            <strong class="cutout-figure" id="alchemy-traffic-hours">{{ annualTrafficHours }} h / año</strong>
+            <p>
+              Horas al año que recuperas fuera de los embotellamientos en hora punta.
+            </p>
+          </article>
+
+          <article class="impact-stat-card">
+            <span class="impact-stat-label">Programa de recompensas</span>
+            <strong class="cutout-figure text-eco" id="eq-green-points">+{{ annualGreenPoints | number }} pts</strong>
+            <p>
+              Puntos acumulados para canjear en cafés locales, talleres de bici y comercios aliados.
+            </p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ==================== FOOTER MINIMALISTA ==================== -->
+<footer class="footer" role="contentinfo">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <img
+        class="brand-logo-sm"
+        src="media/logo-ecocommute.png"
+        alt=""
+        width="22"
+        height="27"
+      />
+      <strong>EcoCommute Lima</strong>
+      <span>© 2026 EcoCommute · Movilidad Sostenible (ODS 11.2)</span>
+    </div>
+    <nav class="footer-nav" aria-label="Enlaces legales">
+      <a href="#inicio">Simulador</a>
+      <a href="#modo-vr">Paseo VR</a>
+      <a href="#vehiculos">Vehículos</a>
+      <a href="#alquimia">Impacto Anual</a>
+    </nav>
+  </div>
+</footer>
