@@ -911,348 +911,167 @@ html[data-theme="dark"] .btn-recycle-action {
   font-size: 0.98rem;
 }
 
-/* ==================== 2. COMPARATIVA AMIGABLE DE TRANSPORTE ==================== */
-.transport-tabs-bar {
+/* ==================== 2. COMPARATIVA DE MOVILIDAD ==================== */
+.transport-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 0.85rem;
-  margin-bottom: 1.75rem;
+  gap: 1.5rem;
+  align-items: stretch;
 }
 
-.transport-tab-btn {
-  appearance: none;
-  background: var(--card);
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 0.95rem 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
-  cursor: pointer;
-  text-align: left;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: var(--shadow-sm);
-  color: var(--ink);
-}
-
-.transport-tab-btn:hover {
-  border-color: var(--border-strong);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-}
-
-.transport-tab-btn.is-active {
-  border-color: var(--accent);
-  background: var(--accent-soft);
-  box-shadow: 0 0 0 1px var(--accent), var(--shadow-md);
-}
-
-.transport-tab-btn .tab-icon {
-  font-size: 1.6rem;
-  line-height: 1;
-  flex-shrink: 0;
-  display: grid;
-  place-items: center;
-}
-
-.transport-tab-btn .tab-text {
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-  min-width: 0;
-}
-
-.transport-tab-btn .tab-text strong {
-  font-size: 0.98rem;
-  font-weight: 700;
-  color: var(--ink);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.transport-tab-btn .tab-text small {
-  font-size: 0.78rem;
-  color: var(--ink-secondary);
-  white-space: nowrap;
-}
-
-.transport-tab-btn.is-active .tab-text strong {
-  color: var(--accent);
-}
-
-/* Tarjeta principal unificada */
-.transport-showcase-card {
+.transport-card {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: 2rem;
-  box-shadow: var(--shadow-lg);
-  display: grid;
-  grid-template-columns: 1fr 1.15fr;
-  gap: 2.25rem;
-  align-items: start;
-}
-
-/* Columna visual */
-.showcase-visual-col {
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+  position: relative;
 }
 
-.showcase-img-box {
+.transport-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-strong);
+}
+
+.transport-card.is-recommended {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent), var(--shadow-md);
+}
+
+.transport-card-banner {
+  background: var(--accent);
+  color: #FFFFFF;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 0.35rem 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.transport-card-media {
   position: relative;
   width: 100%;
-  height: 270px;
-  border-radius: var(--radius-md);
-  overflow: hidden;
+  height: 165px;
   background: var(--dark-surface);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-md);
+  overflow: hidden;
 }
 
-.showcase-img-box img {
+.transport-card-media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.4s ease;
+  transition: transform 0.35s ease;
 }
 
-.transport-showcase-card:hover .showcase-img-box img {
-  transform: scale(1.02);
+.transport-card:hover .transport-card-media img {
+  transform: scale(1.05);
 }
 
-.showcase-badge {
+.transport-co2-pill {
   position: absolute;
-  top: 1rem;
-  left: 1rem;
-  right: 1rem;
-  background: rgba(17, 22, 19, 0.88);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #FFFFFF;
-  padding: 0.55rem 0.9rem;
-  border-radius: var(--radius-pill);
-  font-size: 0.82rem;
-  font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-  max-width: fit-content;
-}
-
-.showcase-badge.is-danger {
-  background: rgba(85, 20, 15, 0.92);
-  border-color: rgba(248, 113, 113, 0.35);
-  color: #FEE2E2;
-}
-
-/* Barra comparativa visual de tiempo */
-.time-comparison-box {
-  background: var(--card-subtle);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 1rem 1.2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.time-comp-header {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--ink-secondary);
-}
-
-.time-bars {
-  display: flex;
-  flex-direction: column;
-  gap: 0.65rem;
-}
-
-.time-bar-row {
-  display: grid;
-  grid-template-columns: 140px 1fr 55px;
-  align-items: center;
-  gap: 0.85rem;
-}
-
-.time-bar-label {
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--ink);
-  white-space: nowrap;
-}
-
-.time-bar-track {
-  height: 10px;
-  background: var(--border);
-  border-radius: 999px;
-  overflow: hidden;
-  position: relative;
-}
-
-.time-bar-fill {
-  height: 100%;
-  border-radius: 999px;
-  transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.time-bar-fill.eco {
-  background: linear-gradient(90deg, #22C55E, #15803D);
-}
-
-.time-bar-fill.car {
-  background: linear-gradient(90deg, #F97316, #EA580C);
-}
-
-.time-bar-val {
-  font-size: 0.86rem;
+  bottom: 0.75rem;
+  right: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  color: var(--ink);
-  text-align: right;
-  font-family: var(--mono);
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-pill);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 
-/* Columna de información */
-.showcase-info-col {
+.transport-co2-pill.eco {
+  background: rgba(21, 128, 61, 0.9);
+  color: #FFFFFF;
+}
+
+.transport-co2-pill.warn {
+  background: rgba(194, 65, 12, 0.9);
+  color: #FFFFFF;
+}
+
+.transport-card-body {
+  padding: 1.25rem;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
-}
-
-.showcase-title-row {
-  display: flex;
+  flex: 1;
   justify-content: space-between;
-  align-items: flex-start;
   gap: 1rem;
 }
 
-.showcase-kicker {
-  display: block;
-  font-size: 0.78rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--accent);
-  margin-bottom: 0.25rem;
+.transport-card-title-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
 }
 
-.showcase-name {
-  font-size: clamp(1.4rem, 2.4vw, 1.85rem);
-  font-weight: 800;
+.transport-card-title-row h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
   margin: 0;
   color: var(--ink);
 }
 
-.showcase-tag {
-  font-size: 0.78rem;
-  font-weight: 700;
-  padding: 0.3rem 0.85rem;
-  border-radius: var(--radius-pill);
-  background: var(--accent-soft);
-  color: var(--accent);
-  white-space: nowrap;
-  align-self: flex-start;
+.transport-card-sub {
+  font-size: 0.8rem;
+  color: var(--ink-secondary);
 }
 
-.showcase-tag.is-danger {
-  background: var(--warn-soft);
+.transport-card-metrics {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 0.85rem 0;
+}
+
+.transport-card-metrics li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.metric-name {
+  font-size: 0.75rem;
+  color: var(--ink-secondary);
+}
+
+.metric-value {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.metric-value.text-eco {
+  color: var(--accent);
+}
+
+.metric-value.text-accent {
+  color: var(--accent);
+}
+
+.metric-value.text-warn,
+.transport-card-sub.text-warn {
   color: var(--warn);
 }
 
-.showcase-desc {
-  font-size: 0.98rem;
-  line-height: 1.55;
-  color: var(--ink-secondary);
-  margin: 0;
-}
-
-/* Grilla de 4 beneficios amigables */
-.benefit-cards-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.85rem;
-}
-
-.benefit-card {
-  background: var(--card-subtle);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 0.9rem 1rem;
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  transition: border-color 0.18s ease;
-}
-
-.benefit-card:hover {
-  border-color: var(--border-strong);
-}
-
-.benefit-card.highlight {
-  border-color: rgba(40, 102, 70, 0.3);
-  background: var(--accent-soft);
-}
-
-.benefit-icon {
-  font-size: 1.35rem;
-  line-height: 1;
-  flex-shrink: 0;
-  margin-top: 0.1rem;
-}
-
-.benefit-label {
-  display: block;
-  font-size: 0.74rem;
-  font-weight: 600;
-  color: var(--ink-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-  margin-bottom: 0.2rem;
-}
-
-.benefit-val {
-  display: block;
-  font-size: 1.05rem;
-  font-weight: 800;
-  color: var(--ink);
-  line-height: 1.25;
-}
-
-.benefit-sub {
-  display: block;
-  font-size: 0.78rem;
-  color: var(--ink-secondary);
-  margin-top: 0.2rem;
-}
-
-/* Tip práctico para Lima */
-.showcase-tip-box {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  background: var(--card-subtle);
-  border-left: 3.5px solid var(--accent);
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-  padding: 0.9rem 1.15rem;
-  font-size: 0.88rem;
+.transport-card-desc {
+  font-size: 0.82rem;
   line-height: 1.5;
-  color: var(--ink);
-}
-
-.showcase-tip-box p {
+  color: var(--ink-secondary);
   margin: 0;
-}
-
-.showcase-tip-box .tip-icon {
-  font-size: 1.25rem;
-  line-height: 1;
-  flex-shrink: 0;
 }
 
 /* ==================== 4. CALCULADORA DE IMPACTO ANUAL ==================== */
@@ -1448,9 +1267,12 @@ html[data-theme="dark"] .btn-recycle-action {
   }
 
   .hero-grid,
-  .transport-showcase-card,
   .alchemy-workbench {
     grid-template-columns: 1fr;
+  }
+
+  .transport-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .lima-hero-map {
@@ -1468,14 +1290,6 @@ html[data-theme="dark"] .btn-recycle-action {
     display: none;
   }
 
-  .transport-tabs-bar {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .time-bar-row {
-    grid-template-columns: 120px 1fr 50px;
-  }
-
   .sim-footer-bar {
     grid-template-columns: 1fr;
   }
@@ -1485,6 +1299,12 @@ html[data-theme="dark"] .btn-recycle-action {
   }
 
   .corridor-pills {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .transport-grid {
     grid-template-columns: 1fr;
   }
 }
@@ -1504,23 +1324,6 @@ html[data-theme="dark"] .btn-recycle-action {
   .alchemy-cards-grid,
   .alchemy-summary-card {
     grid-template-columns: 1fr;
-  }
-
-  .transport-tabs-bar {
-    grid-template-columns: 1fr;
-  }
-
-  .transport-showcase-card {
-    padding: 1.25rem;
-  }
-
-  .benefit-cards-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .time-bar-row {
-    grid-template-columns: 100px 1fr 45px;
-    gap: 0.5rem;
   }
 
   .lima-hero-map {
