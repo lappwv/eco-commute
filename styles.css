@@ -911,182 +911,15 @@ html[data-theme="dark"] .btn-recycle-action {
   font-size: 0.98rem;
 }
 
-/* ==================== 2. VISOR VR 360° ==================== */
-.vr-commute-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 1.25rem;
-  box-shadow: var(--shadow-lg);
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.vr-commute-toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.vr-mode-tabs,
-.vr-headset-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-}
-
-.vr-pov-btn,
-.btn-vr-tool {
-  appearance: none;
-  background: var(--card-subtle);
-  color: var(--ink-secondary);
-  border: 1px solid transparent;
-  border-radius: var(--radius-pill);
-  padding: 0.5rem 1rem;
-  font-family: var(--sans);
-  font-size: 0.82rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.16s ease;
-}
-
-.vr-pov-btn:hover,
-.btn-vr-tool:hover {
-  color: var(--ink);
-  border-color: var(--border-strong);
-}
-
-.vr-pov-btn.is-active,
-.btn-vr-tool[aria-pressed="true"] {
-  background: var(--ink);
-  color: var(--bg);
-  font-weight: 600;
-}
-
-.vr-commute-viewport {
-  position: relative;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  background: #0D1310;
-  cursor: grab;
-  user-select: none;
-}
-
-.vr-commute-viewport:active {
-  cursor: grabbing;
-}
-
-#vr-commute-canvas {
-  width: 100%;
-  height: clamp(360px, 46vw, 480px);
-  display: block;
-}
-
-.vr-stereo-mask {
-  position: absolute;
-  inset: 0;
-  display: none;
-  grid-template-columns: 1fr 2px 1fr;
-  pointer-events: none;
-  z-index: 4;
-}
-
-.vr-commute-card[data-stereo="true"] .vr-stereo-mask {
-  display: grid;
-}
-
-.vr-lens-frame {
-  border: 10px solid rgba(11, 14, 12, 0.75);
-  padding: 0.75rem 1rem;
-  display: flex;
-  justify-content: flex-end;
-  color: #FFFFFF;
-}
-
-.vr-lens-divider {
-  background: rgba(255, 255, 255, 0.35);
-}
-
-/* Píldoras flotantes en el Visor VR */
-.vr-savings-hud {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  right: 1rem;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.65rem;
-  pointer-events: none;
-  z-index: 5;
-}
-
-.vr-hud-box {
-  background: rgba(17, 22, 19, 0.76);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  color: #F2F5F3;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: var(--radius-sm);
-  padding: 0.65rem 0.9rem;
-}
-
-.vr-hud-box span {
-  display: block;
-  font-size: 0.7rem;
-  color: rgba(242, 245, 243, 0.68);
-  margin-bottom: 0.1rem;
-}
-
-.vr-hud-box strong {
-  font-size: 0.92rem;
-  font-weight: 600;
-}
-
-.vr-hud-box.highlight {
-  background: rgba(21, 128, 61, 0.88);
-  border-color: rgba(74, 222, 128, 0.35);
-}
-
-.vr-bottom-caption {
-  position: absolute;
-  bottom: 1rem;
-  left: 1rem;
-  right: 1rem;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 0.5rem;
-  background: rgba(17, 22, 19, 0.78);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  color: #F2F5F3;
-  padding: 0.6rem 1rem;
-  border-radius: var(--radius-pill);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  font-size: 0.82rem;
-  pointer-events: none;
-  z-index: 5;
-}
-
-.vr-drag-pill {
-  color: #4ADE80;
-  font-weight: 600;
-  font-size: 0.78rem;
-}
-
-/* ==================== 3. COMPARADOR DE FLOTA 3D ==================== */
+/* ==================== 2. COMPARATIVA DE MOVILIDAD URBANA ==================== */
 .vehicle-studio-layout {
   display: grid;
-  grid-template-columns: 1.12fr 0.88fr;
+  grid-template-columns: 1.15fr 0.85fr;
   gap: 2rem;
   align-items: stretch;
 }
 
-.vehicle-3d-stage-card {
+.vehicle-stage-card {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
@@ -1102,134 +935,111 @@ html[data-theme="dark"] .btn-recycle-action {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
 }
 
 .vehicle-status-pill {
   font-size: 0.75rem;
   font-weight: 600;
-  padding: 0.25rem 0.75rem;
+  padding: 0.28rem 0.8rem;
   border-radius: var(--radius-pill);
   background: var(--accent-soft);
   color: var(--accent);
+  white-space: nowrap;
 }
 
-.vehicle-turntable-viewport {
-  position: relative;
-  min-height: 270px;
-  background: var(--dark-surface);
-  color: #F2F5F3;
+.vehicle-status-pill.is-danger {
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+
+.vehicle-hero-media {
+  width: 100%;
+  height: 250px;
   border-radius: var(--radius-md);
-  perspective: 1100px;
-  display: grid;
-  place-items: center;
-  padding: 1.5rem;
-  cursor: grab;
-  user-select: none;
   overflow: hidden;
-}
-
-.turntable-floor-ring {
-  position: absolute;
-  width: 280px;
-  height: 280px;
-  border-radius: 50%;
-  border: 1px dashed rgba(74, 222, 128, 0.28);
-  transform: rotateX(68deg) translateZ(-36px);
-  pointer-events: none;
-}
-
-.vehicle-3d-model-card {
-  width: min(420px, 100%);
   position: relative;
-  transform-style: preserve-3d;
-  transform: rotateX(var(--veh-rx, -6deg)) rotateY(var(--veh-ry, 12deg));
-  transition: transform 0.2s ease-out;
+  background: var(--dark-surface);
   display: flex;
-  flex-direction: column;
-  gap: 0.85rem;
-  padding: 1.25rem;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: var(--radius-md);
-}
-
-.veh-layer-chassis {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.75rem;
-  color: rgba(242, 245, 243, 0.7);
-}
-
-.veh-layer-blueprint {
-  display: grid;
-  place-items: center;
-  padding: 0.2rem 0;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
 }
 
 .veh-stage-render-img {
   width: 100%;
-  max-width: 340px;
-  height: 155px;
+  height: 100%;
   object-fit: cover;
-  border-radius: 12px;
   display: block;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+  transition: transform 0.35s ease;
 }
 
-.veh-blueprint-svg {
-  width: 100%;
-  max-width: 300px;
-  height: 100px;
+.vehicle-stage-card:hover .veh-stage-render-img {
+  transform: scale(1.02);
 }
 
-.veh-layer-telemetry {
+.veh-specs-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding-top: 0.75rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
 }
 
-.veh-stat-chip span {
-  display: block;
-  font-size: 0.68rem;
-  color: rgba(242, 245, 243, 0.6);
-}
-
-.veh-stat-chip strong {
-  font-size: 0.92rem;
-  color: #FFFFFF;
-}
-
-.turntable-drag-hint {
-  position: absolute;
-  bottom: 0.65rem;
-  font-size: 0.72rem;
-  color: rgba(242, 245, 243, 0.55);
-}
-
-.lane-flow-simulator {
+.veh-stat-chip {
   background: var(--card-subtle);
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 0.85rem 1rem;
-}
-
-.lane-flow-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.8rem;
-  font-weight: 500;
-  margin-bottom: 0.55rem;
-}
-
-#transit-corridor-canvas {
-  width: 100%;
-  height: 96px;
-  display: block;
   border-radius: var(--radius-sm);
+  padding: 0.75rem 0.95rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
+
+.veh-stat-chip .chip-label {
+  font-size: 0.72rem;
+  color: var(--ink-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+
+.veh-stat-chip .chip-val {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.veh-stat-chip.highlight {
+  border-color: rgba(40, 102, 70, 0.25);
+  background: var(--accent-soft);
+}
+
+.veh-stat-chip.highlight .chip-val {
+  color: var(--accent);
+}
+
+.veh-impact-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  background: var(--card-subtle);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 0.85rem 1rem;
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.veh-impact-banner p {
+  margin: 0;
+}
+
+.veh-impact-icon {
+  font-size: 1.15rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
 
 .vehicle-selector-column {
   display: flex;
@@ -1532,10 +1342,6 @@ html[data-theme="dark"] .btn-recycle-action {
   .lima-hero-map {
     height: 280px;
   }
-
-  .vr-savings-hud {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 
 @media (max-width: 768px) {
@@ -1574,8 +1380,7 @@ html[data-theme="dark"] .btn-recycle-action {
   .hero-metrics,
   .note-figures,
   .alchemy-cards-grid,
-  .alchemy-summary-card,
-  .vr-savings-hud {
+  .alchemy-summary-card {
     grid-template-columns: 1fr;
   }
 
