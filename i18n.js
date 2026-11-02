@@ -1,6 +1,6 @@
 /**
  * EcoCommute Lima — i18n & Interactivity
- * Comparador de movilidad amigable, simple y humano
+ * Comparador limpio de 4 tarjetas de movilidad urbana
  */
 
 "use strict";
@@ -122,173 +122,6 @@ const CORRIDORS = {
   }
 };
 
-const VEHICLE_DATA = {
-  bike: {
-    img: "./media/veh-bike.jpg",
-    alt: "Bicicleta urbana en Lima",
-    co2Pill: "0 g de humo",
-    badgeIcon: "⭐",
-    isDanger: false,
-    timeBarWidth: "40%",
-    timeBarVal: "14 min",
-    es: {
-      badgeText: "¡La opción más rápida en hora punta!",
-      kicker: "Recomendación para moverte hoy",
-      title: "Bicicleta urbana",
-      desc: "Llegas directo por la ciclovía sin quedarte atascado en el tráfico, ahorras en combustible y ganas premios mientras pedaleas.",
-      barLabel: "🚲 En bicicleta",
-      benefitTime: "14 min (fluido)",
-      benefitTimeSub: "Sin semáforos atorados",
-      benefitCost: "S/ 0.00 (Gratis)",
-      benefitCostSub: "Ahorras S/ 17 al día",
-      benefitAir: "Cero humo",
-      benefitAirSub: "100% aire limpio",
-      benefitReward: "+15 puntos",
-      benefitRewardSub: "Para canjear en cafés",
-      tip: "<strong>Dato útil:</strong> Las ciclovías de Av. Arequipa y Salaverry te permiten conectar 4 distritos sin detenerte en ningún embotellamiento vehicular."
-    },
-    en: {
-      badgeText: "The fastest option during rush hour!",
-      kicker: "Best recommendation for today",
-      title: "Urban bicycle",
-      desc: "Ride straight through dedicated bike lanes without getting stuck in traffic, save on fuel, and earn rewards as you pedal.",
-      barLabel: "🚲 By bicycle",
-      benefitTime: "14 min (smooth)",
-      benefitTimeSub: "No traffic gridlocks",
-      benefitCost: "S/ 0.00 (Free)",
-      benefitCostSub: "Save S/ 17 per day",
-      benefitAir: "Zero smoke",
-      benefitAirSub: "100% clean air",
-      benefitReward: "+15 points",
-      benefitRewardSub: "Redeem for coffee & perks",
-      tip: "<strong>Useful tip:</strong> Bike lanes along Av. Arequipa and Salaverry connect 4 districts without stopping in car traffic jams."
-    }
-  },
-  scooter: {
-    img: "./media/veh-scooter.jpg",
-    alt: "Scooter eléctrico urbano",
-    co2Pill: "0 g de humo",
-    badgeIcon: "⚡",
-    isDanger: false,
-    timeBarWidth: "46%",
-    timeBarVal: "16 min",
-    es: {
-      badgeText: "Ágil y sin esfuerzo físico",
-      kicker: "Ideal para tramos medios",
-      title: "Scooter eléctrico",
-      desc: "Avanza ágil por ciclovías y vías secundarias. Es ligero, fácil de plegar y se complementa perfectamente con el transporte masivo.",
-      barLabel: "⚡ En scooter eléctrico",
-      benefitTime: "16 min (ágil)",
-      benefitTimeSub: "Evita los cuellos de botella",
-      benefitCost: "S/ 0.20 de carga",
-      benefitCostSub: "Mucho más barato que taxi",
-      benefitAir: "Cero humo",
-      benefitAirSub: "Motor 100% eléctrico",
-      benefitReward: "+14 puntos",
-      benefitRewardSub: "Suma en cada viaje",
-      tip: "<strong>Dato útil:</strong> Es la alternativa perfecta para combinar con la Línea 1 del Metro o Metropolitano en el tramo de última milla."
-    },
-    en: {
-      badgeText: "Agile and effortless ride",
-      kicker: "Ideal for medium commutes",
-      title: "Electric scooter",
-      desc: "Glide easily through bike paths and calm streets. Lightweight, foldable, and the ideal partner for rapid transit.",
-      barLabel: "⚡ By e-scooter",
-      benefitTime: "16 min (agile)",
-      benefitTimeSub: "Bypasses traffic bottlenecks",
-      benefitCost: "S/ 0.20 charge",
-      benefitCostSub: "Way cheaper than taxis",
-      benefitAir: "Zero smoke",
-      benefitAirSub: "100% electric motor",
-      benefitReward: "+14 points",
-      benefitRewardSub: "Earn on every ride",
-      tip: "<strong>Useful tip:</strong> The perfect companion for Metro Line 1 or Metropolitano for your last-mile commute."
-    }
-  },
-  transit: {
-    img: "./media/veh-transit.jpg",
-    alt: "Bus y Tren eléctrico de Lima",
-    co2Pill: "-75% de humo",
-    badgeIcon: "🚌",
-    isDanger: false,
-    timeBarWidth: "58%",
-    timeBarVal: "20 min",
-    es: {
-      badgeText: "Transporte masivo con vía segregada",
-      kicker: "Para distancias mayores a 6 km",
-      title: "Bus / Tren eléctrico",
-      desc: "El Metropolitano y el Metro cuentan con corredores exclusivos que cruzan Lima de norte a sur sin quedar atrapados en semáforos.",
-      barLabel: "🚌 En Bus / Tren eléctrico",
-      benefitTime: "20 min (vía exclusiva)",
-      benefitTimeSub: "Sin semáforos en corredor",
-      benefitCost: "S/ 3.20 de pasaje",
-      benefitCostSub: "Sin peajes ni estacionamiento",
-      benefitAir: "-75% emisiones",
-      benefitAirSub: "1 bus reemplaza 35 autos",
-      benefitReward: "+10 puntos",
-      benefitRewardSub: "Por viaje sustentable",
-      tip: "<strong>Dato útil:</strong> Un bus de alta capacidad transporta hasta 80 pasajeros, liberando casi 2 cuadras de autos particulares en la vía."
-    },
-    en: {
-      badgeText: "Mass transit with dedicated lanes",
-      kicker: "Best for trips over 6 km",
-      title: "Bus / Electric train",
-      desc: "The Metropolitano and Metro use dedicated lanes across Lima from north to south, avoiding local traffic jams.",
-      barLabel: "🚌 By Bus / Electric train",
-      benefitTime: "20 min (dedicated lane)",
-      benefitTimeSub: "Bypasses road traffic",
-      benefitCost: "S/ 3.20 fare",
-      benefitCostSub: "No tolls or parking fees",
-      benefitAir: "-75% emissions",
-      benefitAirSub: "1 bus replaces 35 cars",
-      benefitReward: "+10 points",
-      benefitRewardSub: "For sustainable transit",
-      tip: "<strong>Useful tip:</strong> A high-capacity bus carries up to 80 riders, clearing nearly two full blocks of private cars off the avenue."
-    }
-  },
-  car: {
-    img: "./media/veh-car.jpg",
-    alt: "Auto particular en tráfico de Lima",
-    co2Pill: "152 g de humo / km",
-    badgeIcon: "⚠️",
-    isDanger: true,
-    timeBarWidth: "100%",
-    timeBarVal: "35 min",
-    es: {
-      badgeText: "La alternativa más lenta en hora punta",
-      kicker: "Congestión vehicular",
-      title: "Auto particular en hora punta",
-      desc: "En avenidas principales como Javier Prado o Vía Expresa, la velocidad media cae a solo 12 km/h con alto gasto de combustible y estrés.",
-      barLabel: "🚗 En auto con tráfico",
-      benefitTime: "35+ min (congestión)",
-      benefitTimeSub: "Atrapado en embotellamientos",
-      benefitCost: "S/ 15 a S/ 25 por viaje",
-      benefitCostSub: "Gasolina, peaje y cochera",
-      benefitAir: "152 g humo / km",
-      benefitAirSub: "El medio más contaminante",
-      benefitReward: "0 puntos",
-      benefitRewardSub: "Estrés y bocinazos",
-      tip: "<strong>Dato útil:</strong> En Lima, el 85% de los autos particulares circulan con solo 1 persona a bordo, siendo la causa principal del tráfico."
-    },
-    en: {
-      badgeText: "Slowest and most expensive in rush hour",
-      kicker: "Traffic congestion",
-      title: "Private car in rush hour",
-      desc: "On avenues like Javier Prado, speed drops to just 12 km/h with heavy fuel burn, parking costs, and high commute stress.",
-      barLabel: "🚗 By car in traffic",
-      benefitTime: "35+ min (gridlock)",
-      benefitTimeSub: "Stuck in traffic jams",
-      benefitCost: "S/ 15 to S/ 25 per trip",
-      benefitCostSub: "Fuel, parking & tolls",
-      benefitAir: "152 g smoke / km",
-      benefitAirSub: "Most polluting commute",
-      benefitReward: "0 points",
-      benefitRewardSub: "Traffic stress & honking",
-      tip: "<strong>Useful tip:</strong> In Lima, 85% of private cars carry only 1 passenger, making them the primary cause of urban gridlock."
-    }
-  }
-};
-
 const translations = {
   es_419: {
     "nav.skip": "Saltar al contenido",
@@ -318,24 +151,41 @@ const translations = {
     "map.stat_points": "Ahorro y puntos",
     "sim.btn_recycle_trip": "Registrar ruta",
 
+        // Vehículos 4 cards
     "veh.eyebrow": "Comparativa de movilidad",
     "veh.title": "¿Cómo te conviene moverte por Lima?",
-    "veh.subtitle":
-      "Elige un medio de transporte y descubre cuánto tiempo, dinero y humo ahorras en tus recorridos cotidianos.",
-    "veh.tab_bike": "Bicicleta",
-    "veh.tab_bike_sub": "Más rápida · S/ 0 gasto",
-    "veh.tab_scooter": "Scooter",
-    "veh.tab_scooter_sub": "Ágil · Sin esfuerzo",
-    "veh.tab_transit": "Bus / Metro",
-    "veh.tab_transit_sub": "Para tramos largos",
-    "veh.tab_car": "Auto en tráfico",
-    "veh.tab_car_sub": "Lento en hora punta",
-    "veh.comp_title": "Comparación de tiempo en hora punta (trayecto típico de 5 km)",
-    "veh.bar_car_label": "🚗 En auto con tráfico",
-    "veh.benefit_time": "Tiempo de viaje",
-    "veh.benefit_cost": "Gasto del viaje",
-    "veh.benefit_air": "Aire para Lima",
-    "veh.benefit_reward": "Tu recompensa",
+    "veh.subtitle": "Compara las 4 formas de recorrer la ciudad en hora punta y descubre cuál te ahorra más tiempo, dinero y emisiones.",
+    "veh.card_bike_badge": "⭐ La más recomendada",
+    "veh.bike_title": "Bicicleta urbana",
+    "veh.bike_sub": "Rápida y sin tráfico",
+    "veh.metric_time": "Tiempo típico (5 km)",
+    "veh.bike_time": "14 min (fluido)",
+    "veh.metric_cost": "Gasto por viaje",
+    "veh.bike_cost": "S/ 0.00 (Gratis)",
+    "veh.metric_reward": "Recompensa",
+    "veh.bike_reward": "+15 pts por viaje",
+    "veh.bike_desc": "Avanzas directo por la ciclovía sin semáforos trabados. Ahorras hasta S/ 17 al día y sumas salud.",
+
+    "veh.scooter_title": "Scooter eléctrico",
+    "veh.scooter_sub": "Ágil y sin esfuerzo",
+    "veh.scooter_time": "16 min (ágil)",
+    "veh.scooter_cost": "S/ 0.20 (carga)",
+    "veh.scooter_reward": "+14 pts por viaje",
+    "veh.scooter_desc": "Ligero y fácil de plegar. Ideal para tramos medianos y para conectar con las estaciones de Metro.",
+
+    "veh.transit_title": "Bus / Metropolitano",
+    "veh.transit_sub": "Carril exclusivo",
+    "veh.transit_time": "20 min (segregado)",
+    "veh.transit_cost": "S/ 3.20 (pasaje)",
+    "veh.transit_reward": "+10 pts por viaje",
+    "veh.transit_desc": "Cruza distritos de norte a sur por corredores dedicados, liberando la ciudad de decenas de autos.",
+
+    "veh.car_title": "Auto en tráfico",
+    "veh.car_sub": "Lento en hora punta",
+    "veh.car_time": "35+ min (tráfico)",
+    "veh.car_cost": "S/ 18+ (gasolina)",
+    "veh.car_reward": "0 pts (estrés)",
+    "veh.car_desc": "Avanza a solo 12 km/h atascado en semáforos. El 85% circula con una sola persona a bordo.",
 
     "calc.eyebrow": "Calculadora de impacto personal",
     "calc.title": "Descubre cuánto ahorras en un año.",
@@ -385,24 +235,41 @@ const translations = {
     "map.stat_points": "Savings & points",
     "sim.btn_recycle_trip": "Log route",
 
+        // Vehículos 4 cards
     "veh.eyebrow": "Urban mobility comparison",
     "veh.title": "What is the best way to move through Lima?",
-    "veh.subtitle":
-      "Choose a mode of transport and see how much time, money, and emissions you save on your daily commute.",
-    "veh.tab_bike": "Bicycle",
-    "veh.tab_bike_sub": "Fastest · S/ 0 cost",
-    "veh.tab_scooter": "Scooter",
-    "veh.tab_scooter_sub": "Agile · Effortless",
-    "veh.tab_transit": "Bus / Metro",
-    "veh.tab_transit_sub": "For long trips",
-    "veh.tab_car": "Car in traffic",
-    "veh.tab_car_sub": "Slow in rush hour",
-    "veh.comp_title": "Rush-hour travel time comparison (typical 5 km commute)",
-    "veh.bar_car_label": "🚗 By car in traffic",
-    "veh.benefit_time": "Travel time",
-    "veh.benefit_cost": "Trip cost",
-    "veh.benefit_air": "Clean air impact",
-    "veh.benefit_reward": "Your reward",
+    "veh.subtitle": "Compare all 4 rush-hour commute options and discover which one saves you the most time, money, and emissions.",
+    "veh.card_bike_badge": "⭐ Most recommended",
+    "veh.bike_title": "Urban bicycle",
+    "veh.bike_sub": "Fast & traffic-free",
+    "veh.metric_time": "Typical time (5 km)",
+    "veh.bike_time": "14 min (smooth)",
+    "veh.metric_cost": "Cost per trip",
+    "veh.bike_cost": "S/ 0.00 (Free)",
+    "veh.metric_reward": "Reward",
+    "veh.bike_reward": "+15 pts per trip",
+    "veh.bike_desc": "Ride smoothly through bike lanes without stuck traffic lights. Save up to S/ 17 a day and improve your fitness.",
+
+    "veh.scooter_title": "Electric scooter",
+    "veh.scooter_sub": "Agile & effortless",
+    "veh.scooter_time": "16 min (agile)",
+    "veh.scooter_cost": "S/ 0.20 (charge)",
+    "veh.scooter_reward": "+14 pts per trip",
+    "veh.scooter_desc": "Lightweight and foldable. Ideal for medium distances and connecting with Metro or Metropolitano stations.",
+
+    "veh.transit_title": "Bus / Metropolitano",
+    "veh.transit_sub": "Dedicated lane",
+    "veh.transit_time": "20 min (segregated)",
+    "veh.transit_cost": "S/ 3.20 (fare)",
+    "veh.transit_reward": "+10 pts per trip",
+    "veh.transit_desc": "Cross districts from north to south via dedicated transit ways, freeing the city from dozens of private cars.",
+
+    "veh.car_title": "Car in traffic",
+    "veh.car_sub": "Slow in rush hour",
+    "veh.car_time": "35+ min (gridlock)",
+    "veh.car_cost": "S/ 18+ (fuel/parking)",
+    "veh.car_reward": "0 pts (stress)",
+    "veh.car_desc": "Crawls at just 12 km/h stuck in traffic lights. 85% of cars in Lima carry only a single person.",
 
     "calc.eyebrow": "Personal impact calculator",
     "calc.title": "Discover how much you save in a year.",
@@ -431,7 +298,6 @@ let currentCorridor = "miraflores";
 let currentKm = CORRIDORS.miraflores.km;
 let sessionRecycledGrams = 1920;
 let sessionTripsCount = 3;
-let currentVehicleKey = "bike";
 let alchemyTrips = 6;
 let alchemyKm = 4.2;
 
@@ -605,74 +471,6 @@ function renderSimulatorMetrics() {
   renderLimaMapRoute();
 }
 
-function renderVehicleStage() {
-  const isEn = currentLang === "en_US";
-  const spec = VEHICLE_DATA[currentVehicleKey] || VEHICLE_DATA.bike;
-  const copy = isEn ? spec.en : spec.es;
-
-  const imgEl = document.getElementById("veh-showcase-img");
-  const badgeEl = document.getElementById("veh-badge");
-  const badgeIconEl = document.getElementById("veh-badge-icon");
-  const badgeTextEl = document.getElementById("veh-badge-text");
-
-  const barLabelEl = document.getElementById("time-bar-veh-label");
-  const barFillEl = document.getElementById("time-bar-veh-fill");
-  const barValEl = document.getElementById("time-bar-veh-val");
-
-  const kickerEl = document.getElementById("veh-kicker");
-  const titleEl = document.getElementById("veh-title");
-  const co2PillEl = document.getElementById("veh-co2-pill");
-  const descEl = document.getElementById("veh-desc");
-
-  const bTimeEl = document.getElementById("veh-benefit-time");
-  const bTimeSubEl = document.getElementById("veh-benefit-time-sub");
-  const bCostEl = document.getElementById("veh-benefit-cost");
-  const bCostSubEl = document.getElementById("veh-benefit-cost-sub");
-  const bAirEl = document.getElementById("veh-benefit-air");
-  const bAirSubEl = document.getElementById("veh-benefit-air-sub");
-  const bRewardEl = document.getElementById("veh-benefit-reward");
-  const bRewardSubEl = document.getElementById("veh-benefit-reward-sub");
-
-  const tipTextEl = document.getElementById("veh-tip-text");
-
-  if (imgEl) {
-    imgEl.src = spec.img;
-    imgEl.alt = spec.alt;
-  }
-  if (badgeEl) {
-    badgeEl.classList.toggle("is-danger", spec.isDanger);
-  }
-  if (badgeIconEl) badgeIconEl.textContent = spec.badgeIcon;
-  if (badgeTextEl) badgeTextEl.textContent = copy.badgeText;
-
-  if (barLabelEl) barLabelEl.textContent = copy.barLabel;
-  if (barFillEl) {
-    barFillEl.style.width = spec.timeBarWidth;
-    barFillEl.classList.toggle("car", spec.isDanger);
-    barFillEl.classList.toggle("eco", !spec.isDanger);
-  }
-  if (barValEl) barValEl.textContent = spec.timeBarVal;
-
-  if (kickerEl) kickerEl.textContent = copy.kicker;
-  if (titleEl) titleEl.textContent = copy.title;
-  if (co2PillEl) {
-    co2PillEl.textContent = spec.co2Pill;
-    co2PillEl.classList.toggle("is-danger", spec.isDanger);
-  }
-  if (descEl) descEl.textContent = copy.desc;
-
-  if (bTimeEl) bTimeEl.textContent = copy.benefitTime;
-  if (bTimeSubEl) bTimeSubEl.textContent = copy.benefitTimeSub;
-  if (bCostEl) bCostEl.textContent = copy.benefitCost;
-  if (bCostSubEl) bCostSubEl.textContent = copy.benefitCostSub;
-  if (bAirEl) bAirEl.textContent = copy.benefitAir;
-  if (bAirSubEl) bAirSubEl.textContent = copy.benefitAirSub;
-  if (bRewardEl) bRewardEl.textContent = copy.benefitReward;
-  if (bRewardSubEl) bRewardSubEl.textContent = copy.benefitRewardSub;
-
-  if (tipTextEl) tipTextEl.innerHTML = copy.tip;
-}
-
 function renderAlchemyLab() {
   const isEn = currentLang === "en_US";
   const annualKm = alchemyTrips * alchemyKm * 52;
@@ -730,7 +528,6 @@ function applyTranslations(lang) {
 
   updateSessionFloraBanner();
   renderSimulatorMetrics();
-  renderVehicleStage();
   renderAlchemyLab();
 }
 
@@ -839,29 +636,6 @@ function setupSimulator() {
   }
 }
 
-function setupVehicleStudio() {
-  const tabBtns = document.querySelectorAll(".transport-tab-btn");
-  if (!tabBtns.length) return;
-
-  tabBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const key = btn.getAttribute("data-vehicle") || "bike";
-      if (!VEHICLE_DATA[key]) return;
-      currentVehicleKey = key;
-
-      tabBtns.forEach((b) => {
-        const isSelected = b === btn;
-        b.classList.toggle("is-active", isSelected);
-        b.setAttribute("aria-selected", isSelected ? "true" : "false");
-      });
-
-      renderVehicleStage();
-    });
-  });
-
-  renderVehicleStage();
-}
-
 function setupAlchemyLab() {
   const tripsRange = document.getElementById("alchemy-trips-range");
   const kmRange = document.getElementById("alchemy-km-range");
@@ -905,7 +679,6 @@ document.addEventListener("DOMContentLoaded", () => {
   setupScrollAnimations();
   setupLanguageToggle();
   setupSimulator();
-  setupVehicleStudio();
   setupAlchemyLab();
   applyTranslations(currentLang);
 });
