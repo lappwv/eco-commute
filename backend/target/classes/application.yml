@@ -1,0 +1,52 @@
+server:
+  port: ${PORT:8080}
+  compression:
+    enabled: true
+  shutdown: graceful
+
+spring:
+  application:
+    name: ecocommute-backend
+  profiles:
+    default: local
+  threads:
+    virtual:
+      enabled: true
+
+  datasource:
+    # SPRING_DATASOURCE_URL manda; si no, se arma con DB_HOST/DB_PORT/DB_NAME (Render inyecta esas 3).
+    # Render exige SSL en Postgres -> sslmode=require (DB_SSLMODE=prefer para Postgres local sin SSL).
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:eco_commute}?sslmode=${DB_SSLMODE:require}}
+    driverClassName: ${SPRING_DATASOURCE_DRIVER:org.postgresql.Driver}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:postgres}
+
+  h2:
+    console:
+      enabled: false
+      path: /h2-console
+
+  jpa:
+    database-platform: ${SPRING_JPA_DATABASE_PLATFORM:org.hibernate.dialect.PostgreSQLDialect}
+    hibernate:
+      # Hibernate crea/actualiza el esquema al arrancar (no requiere ejecutar el SQL a mano).
+      # database/eco_commute_schema.sql queda como referencia para el ERD.
+      ddl-auto: ${SPRING_JPA_DDL_AUTO:update}
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+
+app:
+  jwt:
+    # Si JWT_SECRET no esta definida (ej. desarrollo local), usa el secreto por defecto para pruebas.
+    secret: ${JWT_SECRET:dev-only-ecocommute-local-secret-change-me-0123456789}
+    expiration-ms: 86400000 # 24 hours
+  google:
+    client-id: ${GOOGLE_CLIENT_ID:ecocommute-demo-client.apps.googleusercontent.com}
+  openai:
+    api-key: ${OPENAI_API_KEY:}
+  gemini:
+    api-key: ${GEMINI_API_KEY:}
+    model: ${GEMINI_MODEL:gemini-1.5-flash}
+  seed-demo-data: ${SEED_DEMO_DATA:true}
