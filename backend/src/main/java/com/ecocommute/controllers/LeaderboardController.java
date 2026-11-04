@@ -2,11 +2,7 @@ package com.ecocommute.controllers;
 
 import com.ecocommute.dto.LeaderboardEntryDTO;
 import com.ecocommute.services.LeaderboardService;
-import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +16,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/leaderboard")
-@Tag(name = "Leaderboard", description = "HU08 - Ranking y clasificacion de usuarios por distrito y metropolitano")
+@Tag(name = "Leaderboard", description = "HU08 - Ranking y clasificación de usuarios por distrito y metropolitano")
 public class LeaderboardController {
 
     private final LeaderboardService leaderboardService;
@@ -29,8 +25,8 @@ public class LeaderboardController {
         this.leaderboardService = leaderboardService;
     }
 
-    @Hidden
     @GetMapping
+    @Operation(summary = "HU08 - Consulta de leaderboard con filtro opcional por distrito y criterio de ordenamiento")
     public ResponseEntity<List<LeaderboardEntryDTO>> getLeaderboard(
             @RequestParam(required = false) String district,
             @RequestParam(required = false, defaultValue = "co2") String sortBy) {

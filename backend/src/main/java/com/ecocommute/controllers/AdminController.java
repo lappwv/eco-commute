@@ -5,7 +5,6 @@ import com.ecocommute.dto.RewardRequestDTO;
 import com.ecocommute.entities.Challenge;
 import com.ecocommute.entities.Reward;
 import com.ecocommute.services.AdminService;
-import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/admin")
 @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-@Tag(name = "Administración", description = "HU12, HU13 - Gestión administrativa de recompensas y retos")
+@Tag(name = "Administración", description = "HU12, HU13 - Gestión administrativa CRUD de recompensas y retos")
 public class AdminController {
 
     private final AdminService adminService;
@@ -27,8 +26,8 @@ public class AdminController {
         this.adminService = adminService;
     }
 
-    @Hidden
     @GetMapping("/rewards")
+    @Operation(summary = "HU12 - Listado completo de recompensas (activas e inactivas) para administración (ADMIN)")
     public ResponseEntity<List<Reward>> getRewards() {
         return ResponseEntity.ok(adminService.getRewards());
     }
@@ -45,15 +44,15 @@ public class AdminController {
         return ResponseEntity.ok(adminService.updateReward(id, request));
     }
 
-    @Hidden
     @DeleteMapping("/rewards/{id}")
+    @Operation(summary = "HU12 - Eliminación de recompensa del catálogo por administrador (ADMIN)")
     public ResponseEntity<Void> deleteReward(@PathVariable Long id) {
         adminService.deleteReward(id);
         return ResponseEntity.noContent().build();
     }
 
-    @Hidden
     @GetMapping("/challenges")
+    @Operation(summary = "HU13 - Listado completo de retos comunitarios para administración (ADMIN)")
     public ResponseEntity<List<Challenge>> getChallenges() {
         return ResponseEntity.ok(adminService.getChallenges());
     }
@@ -64,14 +63,14 @@ public class AdminController {
         return ResponseEntity.ok(adminService.createChallenge(request));
     }
 
-    @Hidden
     @PutMapping("/challenges/{id}")
+    @Operation(summary = "HU13 - Actualización de reto comunitario por administrador (ADMIN)")
     public ResponseEntity<Challenge> updateChallenge(@PathVariable Long id, @Valid @RequestBody ChallengeRequestDTO request) {
         return ResponseEntity.ok(adminService.updateChallenge(id, request));
     }
 
-    @Hidden
     @DeleteMapping("/challenges/{id}")
+    @Operation(summary = "HU13 - Eliminación de reto comunitario por administrador (ADMIN)")
     public ResponseEntity<Void> deleteChallenge(@PathVariable Long id) {
         adminService.deleteChallenge(id);
         return ResponseEntity.noContent().build();

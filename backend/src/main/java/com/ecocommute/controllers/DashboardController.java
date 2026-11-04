@@ -4,7 +4,6 @@ import com.ecocommute.dto.CommunityImpactDTO;
 import com.ecocommute.dto.DashboardSummaryDTO;
 import com.ecocommute.entities.User;
 import com.ecocommute.services.DashboardService;
-import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -17,7 +16,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/dashboard")
-@Tag(name = "Dashboard", description = "HU07, HU09 - Dashboard personal y recomendaciones ecológicas")
+@Tag(name = "Dashboard", description = "HU07, HU09 - Dashboard personal, impacto comunitario y recomendaciones ecológicas")
 public class DashboardController {
 
     private final DashboardService dashboardService;
@@ -55,8 +54,8 @@ public class DashboardController {
         ));
     }
 
-    @Hidden
     @GetMapping("/community-impact")
+    @Operation(summary = "HU07 - Impacto ambiental comunitario acumulado (CO2, km limpios, usuarios activos y árboles)")
     public ResponseEntity<CommunityImpactDTO> getCommunityImpact() {
         return ResponseEntity.ok(dashboardService.getCommunityImpact());
     }
