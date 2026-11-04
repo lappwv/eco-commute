@@ -1,52 +1,66 @@
-<div class="eco-app-shell">
-  <!-- Barra de Navegación Superior Responsive (Angular Material + WCAG 2.1 AA) -->
+<div class="eco-shell">
+  <!-- Top Navigation Bar -->
   <header class="eco-navbar" role="banner">
-    <div class="eco-navbar-inner">
+    <div class="eco-nav-inner">
       <div class="brand-cluster">
-        <a routerLink="/dashboard" class="brand-link" aria-label="EcoCommute Inicio">
-          <span class="brand-leaf">🌱</span>
-          <div class="brand-text">
+        <a routerLink="/dashboard" class="eco-brand" (click)="closeMobileMenu()">
+          <span class="brand-mark-wrap">
+            <img src="logo-ecocommute.png" alt="EcoCommute" class="brand-logo-img" />
+          </span>
+          <span class="brand-text">
             <strong>EcoCommute</strong>
-            <span class="brand-sub">Angular 18 · Material · ODS 11.2</span>
-          </div>
+            <small class="brand-sub">Lima Metropolitana</small>
+          </span>
         </a>
-        <span class="api-status-badge" [class.online]="backendOnline" [title]="auth.apiBase">
-          <span class="status-dot"></span>
-          {{ backendOnline ? i18n.t('status.online') : i18n.t('status.fallback') }}
-        </span>
+        <a href="/eco-commute/" class="landing-back-pill" title="Volver a la portada principal">
+          <app-icon name="arrow-right" [size]="13" class="flip-x"></app-icon>
+          <span>{{ i18n.t('nav.landing') }}</span>
+        </a>
       </div>
 
       <button
         type="button"
         class="mobile-menu-toggle"
         (click)="toggleMobileMenu()"
-        [attr.aria-expanded]="mobileMenuOpen"
-        aria-label="Abrir menú de navegación"
+        aria-label="Abrir o cerrar menú de navegación"
       >
-        ☰
+        <app-icon [name]="mobileMenuOpen ? 'close' : 'menu'" [size]="20"></app-icon>
       </button>
 
-      <nav class="eco-nav-links" [class.open]="mobileMenuOpen" role="navigation" aria-label="Navegación principal">
+      <nav class="eco-nav-links" [class.open]="mobileMenuOpen" aria-label="Navegación principal">
         <a routerLink="/dashboard" routerLinkActive="active" (click)="closeMobileMenu()">
-          📊 {{ i18n.t('nav.dashboard') }}
+          <app-icon name="dashboard" [size]="16"></app-icon>
+          <span>{{ i18n.t('nav.dashboard') }}</span>
         </a>
         <a routerLink="/routes" routerLinkActive="active" (click)="closeMobileMenu()">
-          🗺️ {{ i18n.t('nav.routes') }}
+          <app-icon name="route" [size]="16"></app-icon>
+          <span>{{ i18n.t('nav.routes') }}</span>
         </a>
         <a routerLink="/trips" routerLinkActive="active" (click)="closeMobileMenu()">
-          🚲 {{ i18n.t('nav.trips') }}
+          <app-icon name="bike" [size]="16"></app-icon>
+          <span>{{ i18n.t('nav.trips') }}</span>
         </a>
         <a routerLink="/gamification" routerLinkActive="active" (click)="closeMobileMenu()">
-          🏅 {{ i18n.t('nav.gamification') }}
+          <app-icon name="medal" [size]="16"></app-icon>
+          <span>{{ i18n.t('nav.gamification') }}</span>
         </a>
         <a routerLink="/leaderboard" routerLinkActive="active" (click)="closeMobileMenu()">
-          🏆 {{ i18n.t('nav.leaderboard') }}
+          <app-icon name="trophy" [size]="16"></app-icon>
+          <span>{{ i18n.t('nav.leaderboard') }}</span>
         </a>
         <a routerLink="/rewards" routerLinkActive="active" (click)="closeMobileMenu()">
-          🎟️ {{ i18n.t('nav.rewards') }}
+          <app-icon name="ticket" [size]="16"></app-icon>
+          <span>{{ i18n.t('nav.rewards') }}</span>
         </a>
-        <a routerLink="/admin" routerLinkActive="active" (click)="closeMobileMenu()">
-          🛡️ {{ i18n.t('nav.admin') }}
+        <a
+          *ngIf="auth.isAdmin"
+          routerLink="/admin"
+          routerLinkActive="active"
+          class="admin-pill"
+          (click)="closeMobileMenu()"
+        >
+          <app-icon name="shield" [size]="16"></app-icon>
+          <span>{{ i18n.t('nav.admin') }}</span>
         </a>
       </nav>
 
@@ -55,56 +69,65 @@
           type="button"
           class="util-btn"
           (click)="i18n.toggleLocale()"
-          aria-label="Cambiar idioma es_419 / en_US"
+          title="Cambiar idioma (ES / EN)"
         >
-          🌐 {{ i18n.currentLocale === 'es_419' ? 'ES' : 'EN' }}
+          <app-icon name="globe" [size]="15"></app-icon>
+          <span>{{ i18n.currentLocale === 'es_419' ? 'ES' : 'EN' }}</span>
         </button>
 
         <button
           type="button"
-          class="util-btn"
+          class="util-btn icon-only"
           (click)="toggleTheme()"
-          aria-label="Cambiar tema claro u oscuro"
+          [attr.aria-label]="activeTheme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'"
+          title="Cambiar apariencia"
         >
-          {{ activeTheme === 'dark' ? '☀️' : '🌙' }}
+          <app-icon [name]="activeTheme === 'dark' ? 'sun' : 'moon'" [size]="16"></app-icon>
         </button>
 
         <a
-          *ngIf="auth.currentUser as u; else loginBtn"
           routerLink="/login"
           class="user-pill"
-          [title]="u.email + ' (' + u.role + ')'"
+          *ngIf="auth.currentUser as u"
+          title="Ver cuenta y preferencias"
         >
-          <img [src]="u.avatarUrl" [alt]="u.fullName" class="avatar-xs" />
-          <span class="user-pill-name">{{ u.fullName | slice:0:14 }}</span>
-          <strong class="user-pill-pts">⚡ {{ u.currentPoints }}</strong>
+          <span class="user-avatar-badge">
+            <img [src]="u.avatarUrl" [alt]="u.fullName" class="avatar-xs" />
+          </span>
+          <span class="user-pill-name">{{ u.fullName }}</span>
+          <span class="user-pill-pts">
+            <app-icon name="bolt" [size]="13"></app-icon>
+            {{ u.currentPoints }} pts
+          </span>
         </a>
-        <ng-template #loginBtn>
-          <a routerLink="/login" class="btn-eco-primary">{{ i18n.t('nav.login') }}</a>
-        </ng-template>
       </div>
     </div>
   </header>
 
-  <!-- Contenido Dinámico de las Vistas de la Aplicación Web -->
-  <main class="eco-main-content" role="main">
+  <!-- Main Workspace -->
+  <main class="eco-main" role="main">
     <router-outlet></router-outlet>
   </main>
 
-  <!-- Pie de Página con Términos y Condiciones (ACM/IEEE & CIP), Landing y Swagger -->
+  <!-- Editorial Footer -->
   <footer class="eco-footer" role="contentinfo">
     <div class="eco-footer-inner">
-      <div class="footer-left">
-        <strong>🌱 EcoCommute Lima — Movilidad Urbana Sostenible</strong>
-        <p>{{ i18n.t('footer.ethics') }}</p>
+      <div class="footer-brand-line">
+        <span class="footer-logo-chip">
+          <app-icon name="brand" [size]="16"></app-icon>
+        </span>
+        <div>
+          <strong>EcoCommute Lima</strong>
+          <span class="footer-sep">·</span>
+          <span>Plataforma ciudadana para medir, premiar y compartir movilidad baja en carbono</span>
+        </div>
       </div>
       <div class="footer-links">
-        <a routerLink="/terms">📜 Términos y Condiciones de Servicio</a>
-        <a href="https://lappwv.github.io/eco-commute/" target="_blank" rel="noopener">🌐 Landing Page</a>
-        <a href="https://ecocommute-backend-a14m.onrender.com/swagger-ui.html" target="_blank" rel="noopener">
-          ⚙️ OpenAPI / Swagger UI
-        </a>
-        <a href="https://github.com/lappwv/eco-commute" target="_blank" rel="noopener">💻 GitHub Repository</a>
+        <a href="/eco-commute/">Portada</a>
+        <a routerLink="/routes">Comparador de rutas</a>
+        <a routerLink="/trips">Bitácora de viajes</a>
+        <a routerLink="/rewards">Catálogo de beneficios</a>
+        <a routerLink="/terms">Privacidad y Términos</a>
       </div>
     </div>
   </footer>

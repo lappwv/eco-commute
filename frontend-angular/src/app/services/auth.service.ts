@@ -168,7 +168,7 @@ export class AuthService {
               code: 'FIRST_STEP',
               title: 'Primer Paso Verde',
               description: 'Completaste tu primer viaje sostenible en EcoCommute',
-              iconEmoji: '🌱',
+              iconEmoji: 'leaf',
               awardedAt: new Date().toISOString()
             }
           ]

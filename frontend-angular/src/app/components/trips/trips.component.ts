@@ -1,212 +1,201 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
 import { ApiService } from '../../services/api.service';
 import { I18nService } from '../../services/i18n.service';
 import { TransportMode, TripRequest, TripResponse } from '../../models/api.models';
+import { EcoIconComponent } from '../icon/eco-icon.component';
 
 @Component({
   selector: 'app-trips',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatCardModule, MatButtonModule],
+  imports: [CommonModule, FormsModule, EcoIconComponent],
   template: `
-    <section class="app-page-container" aria-labelledby="trips-title">
-      <div class="page-header-card">
+    <section class="page-section">
+      <div class="section-header-row">
         <div>
-          <span class="eyebrow-tag">HU04 · HU05 · Operaciones CRUD Transaccionales + Cálculo Diferencial de CO₂</span>
-          <h1 id="trips-title">{{ i18n.t('trips.title') }}</h1>
-          <p class="subtitle">{{ i18n.t('trips.subtitle') }}</p>
+          <span class="eyebrow-tag">
+            <app-icon name="bike" [size]="14"></app-icon>
+            Registro Personal de Movilidad
+          </span>
+          <h1 class="page-title">{{ i18n.t('trips.title') }}</h1>
+          <p class="page-subtitle">{{ i18n.t('trips.subtitle') }}</p>
         </div>
-        <span class="badge-pill">POST · GET · PUT · DELETE /api/v1/trips</span>
       </div>
 
-      <div class="grid-2-col">
-        <!-- Formulario Crear / Editar Viaje (CREATE & UPDATE) -->
-        <mat-card class="eco-mat-card">
-          <div class="card-head-row">
-            <h2>{{ editingTripId ? '✏️ Corregir Viaje Registrado (PUT)' : '➕ Registrar Nuevo Viaje Sostenible (POST)' }}</h2>
-            <button *ngIf="editingTripId" type="button" class="btn-chip" (click)="resetForm()">
-              Cancelar edición
-            </button>
+      <!-- Create / Edit Trip Card -->
+      <article class="eco-card">
+        <div class="card-head-row">
+          <div>
+            <h2>{{ editingTripId ? 'Actualizar recorrido seleccionado' : 'Registrar nuevo recorrido' }}</h2>
+            <p class="card-sub">Ingresa los datos de tu traslado para calcular automáticamente el CO₂ evitado y tus puntos</p>
           </div>
+          <span class="badge-pill" *ngIf="editingTripId">
+            <app-icon name="edit" [size]="13"></app-icon>
+            <span>Editando registro</span>
+          </span>
+        </div>
 
-          <form class="eco-form" (ngSubmit)="saveTrip()" aria-label="Formulario CRUD de viajes">
+        <form (ngSubmit)="saveTrip()" class="eco-form">
+          <div class="form-row-4">
             <div class="form-group">
-              <label for="trip-mode">Medio de Transporte</label>
-              <select id="trip-mode" name="transportMode" [(ngModel)]="form.transportMode" class="eco-input" required>
-                <option value="BICYCLE">🚲 Bicicleta Mecánica (0 g CO₂/km)</option>
-                <option value="WALKING">🚶 Caminata Peatonal (0 g CO₂/km)</option>
-                <option value="ELECTRIC_SCOOTER">🛴 Scooter / Bici Eléctrica (15 g CO₂/km)</option>
-                <option value="PUBLIC_TRANSIT">🚌 Transporte Público / Metro (45 g CO₂/km)</option>
-                <option value="CARPOOL">🚘 Auto Compartido Carpool (85 g CO₂/km)</option>
-                <option value="CAR_SOLO">🚗 Automóvil Particular (170 g CO₂/km)</option>
+              <label>Medio de transporte</label>
+              <select [(ngModel)]="form.transportMode" name="transportMode" required>
+                <option value="BICYCLE">Bicicleta Mecánica (0 g CO₂/km)</option>
+                <option value="WALKING">Caminata Peatonal (0 g CO₂/km)</option>
+                <option value="ELECTRIC_SCOOTER">Scooter / Bici Eléctrica (15 g CO₂/km)</option>
+                <option value="PUBLIC_TRANSIT">Transporte Público (45 g CO₂/km)</option>
+                <option value="CARPOOL">Auto Compartido (85 g CO₂/km)</option>
+                <option value="CAR_SOLO">Automóvil Particular (170 g CO₂/km)</option>
               </select>
             </div>
-
+            <div class="form-group">
+              <label>Punto de partida</label>
+              <input type="text" [(ngModel)]="form.originName" name="originName" required placeholder="Ej. San Isidro" />
+            </div>
+            <div class="form-group">
+              <label>Destino</label>
+              <input type="text" [(ngModel)]="form.destinationName" name="destinationName" required placeholder="Ej. Miraflores" />
+            </div>
             <div class="form-row-2">
               <div class="form-group">
-                <label for="trip-origin">Punto de Partida (Origen)</label>
-                <input
-                  id="trip-origin"
-                  type="text"
-                  name="originName"
-                  [(ngModel)]="form.originName"
-                  required
-                  placeholder="Ej. Campus UPC Monterrico"
-                  class="eco-input"
-                />
+                <label>Distancia (km)</label>
+                <input type="number" step="0.1" min="0.1" [(ngModel)]="form.distanceKm" name="distanceKm" required />
               </div>
               <div class="form-group">
-                <label for="trip-dest">Punto de Llegada (Destino)</label>
-                <input
-                  id="trip-dest"
-                  type="text"
-                  name="destinationName"
-                  [(ngModel)]="form.destinationName"
-                  required
-                  placeholder="Ej. San Borja Sur"
-                  class="eco-input"
-                />
+                <label>Duración (min)</label>
+                <input type="number" min="1" [(ngModel)]="form.durationMinutes" name="durationMinutes" required />
               </div>
             </div>
+          </div>
 
-            <div class="form-row-2">
-              <div class="form-group">
-                <label for="trip-dist">Distancia Recorrida (km)</label>
-                <input
-                  id="trip-dist"
-                  type="number"
-                  step="0.1"
-                  min="0.1"
-                  name="distanceKm"
-                  [(ngModel)]="form.distanceKm"
-                  required
-                  class="eco-input"
-                />
-              </div>
-              <div class="form-group">
-                <label for="trip-dur">Duración del Viaje (minutos)</label>
-                <input
-                  id="trip-dur"
-                  type="number"
-                  min="1"
-                  name="durationMinutes"
-                  [(ngModel)]="form.durationMinutes"
-                  required
-                  class="eco-input"
-                />
-              </div>
+          <div class="co2-preview-box">
+            <div class="preview-item">
+              <span>Referencia en auto:</span>
+              <strong>{{ getPreviewBaseline() }} g CO₂</strong>
             </div>
-
-            <!-- Vista previa del cálculo de CO2 (HU05) -->
-            <div class="co2-preview-box">
-              <div class="preview-item">
-                <span>Línea Base Auto (170g/km)</span>
-                <strong>{{ previewBaselineCo2 }} g CO₂</strong>
-              </div>
-              <div class="preview-item">
-                <span>Emisión de tu viaje</span>
-                <strong>{{ previewEmittedCo2 }} g CO₂</strong>
-              </div>
-              <div class="preview-item highlight">
-                <span>CO₂ Ahorrado (HU05)</span>
-                <strong>🌱 {{ previewSavedCo2 }} g CO₂</strong>
-              </div>
-              <div class="preview-item highlight">
-                <span>Puntos Estimados (HU06)</span>
-                <strong>⚡ +{{ previewPoints }} pts</strong>
-              </div>
+            <div class="preview-item">
+              <span>CO₂ que evitas:</span>
+              <strong class="text-emerald">-{{ getPreviewSaved() }} g CO₂</strong>
             </div>
+            <div class="preview-item">
+              <span>Energía activa:</span>
+              <strong>{{ getPreviewCalories() }} kcal</strong>
+            </div>
+            <div class="preview-item">
+              <span>Puntos que ganas:</span>
+              <strong class="text-emerald">+{{ getPreviewPoints() }} pts</strong>
+            </div>
+          </div>
 
-            <div *ngIf="statusMessage" class="alert-success" role="status">{{ statusMessage }}</div>
-
-            <button type="submit" class="btn-eco-primary full-width">
-              {{ editingTripId ? '💾 Guardar Corrección y Recalcular CO₂ (PUT)' : '✅ Registrar Viaje Sostenible (POST)' }}
+          <div class="form-actions-row">
+            <button type="submit" class="btn-emerald">
+              <app-icon [name]="editingTripId ? 'check' : 'plus'" [size]="16"></app-icon>
+              <span>{{ editingTripId ? 'Guardar cambios' : 'Añadir a mi bitácora' }}</span>
             </button>
-          </form>
-        </mat-card>
-
-        <!-- Historial Paginado con Edición y Eliminación (READ, UPDATE, DELETE) -->
-        <mat-card class="eco-mat-card">
-          <div class="card-head-row">
-            <div>
-              <h2>Historial de Viajes del Usuario ({{ totalElements }})</h2>
-              <p class="muted">Selecciona "Editar" o "Eliminar" en cualquier viaje para recalcular tu CO₂ y puntos.</p>
-            </div>
-            <span class="badge-pill">GET /api/v1/trips/history</span>
+            <button type="button" class="btn-outline" *ngIf="editingTripId" (click)="cancelEdit()">
+              <span>Cancelar edición</span>
+            </button>
           </div>
+        </form>
 
-          <div class="table-responsive">
-            <table class="eco-table" aria-label="Tabla de viajes registrados">
-              <thead>
-                <tr>
-                  <th>Trayecto</th>
-                  <th>Modo</th>
-                  <th>Distancia</th>
-                  <th>CO₂ Ahorrado</th>
-                  <th>Puntos</th>
-                  <th>Acciones CRUD</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let t of trips" [class.editing-row]="editingTripId === t.id">
-                  <td>
-                    <strong>{{ t.originName }} → {{ t.destinationName }}</strong>
-                    <div class="muted-xs">{{ t.completedAt | date:'dd/MM/yyyy HH:mm' }} · {{ t.durationMinutes }} min</div>
-                    <span *ngIf="t.suspicious" class="warn-tag">⚠️ {{ t.suspiciousReason }}</span>
-                  </td>
-                  <td>{{ t.modeDisplayName || t.transportMode }}</td>
-                  <td>{{ t.distanceKm }} km</td>
-                  <td class="saved-cell">🌱 {{ t.co2SavedGrams | number:'1.0-0' }} g</td>
-                  <td><strong>+{{ t.pointsEarned }} pts</strong></td>
-                  <td class="actions-cell">
-                    <button
-                      type="button"
-                      class="btn-table-action edit"
-                      (click)="startEdit(t)"
-                      aria-label="Editar viaje"
-                    >
-                      ✏️ Editar
-                    </button>
-                    <button
-                      type="button"
-                      class="btn-table-action delete"
-                      (click)="removeTrip(t)"
-                      aria-label="Eliminar viaje"
-                    >
-                      🗑️ Eliminar
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+        <div class="toast-success" *ngIf="feedbackMsg">
+          <app-icon name="check" [size]="17"></app-icon>
+          <span>{{ feedbackMsg }}</span>
+        </div>
+      </article>
+
+      <!-- Trip History Table -->
+      <article class="eco-card">
+        <div class="card-head-row">
+          <div>
+            <h2>Historial de recorridos ({{ trips.length }})</h2>
+            <p class="card-sub">Puedes editar cualquier dato si te equivocaste o eliminar un registro</p>
           </div>
-        </mat-card>
-      </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="eco-table">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Modo</th>
+                <th>Trayecto (Origen → Destino)</th>
+                <th>Distancia</th>
+                <th>Tiempo</th>
+                <th>CO₂ evitado</th>
+                <th>Energía</th>
+                <th>Puntos</th>
+                <th>Verificación</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let t of trips" [class.editing-row]="t.id === editingTripId">
+                <td>{{ t.completedAt | date: 'dd/MM/yyyy HH:mm' }}</td>
+                <td>
+                  <span class="mode-badge">
+                    <app-icon [name]="t.transportMode" [size]="15"></app-icon>
+                    <span>{{ formatShortMode(t.transportMode) }}</span>
+                  </span>
+                </td>
+                <td>
+                  <div class="route-cell-text">
+                    <strong>{{ t.originName }}</strong>
+                    <span class="arrow-sep">→</span>
+                    <span>{{ t.destinationName }}</span>
+                  </div>
+                </td>
+                <td>{{ t.distanceKm | number: '1.1-2' }} km</td>
+                <td>{{ t.durationMinutes }} min</td>
+                <td class="text-emerald font-bold">-{{ t.co2SavedGrams }} g</td>
+                <td>{{ t.caloriesBurned }} kcal</td>
+                <td><span class="pts-pill">+{{ t.pointsEarned }} pts</span></td>
+                <td>
+                  <span class="status-ok" *ngIf="!t.suspicious">
+                    <app-icon name="check" [size]="13"></app-icon>
+                    <span>Verificado</span>
+                  </span>
+                  <span class="status-warn" *ngIf="t.suspicious" [title]="t.suspiciousReason || ''">
+                    <span>Revisión</span>
+                  </span>
+                </td>
+                <td class="actions-cell">
+                  <button type="button" class="btn-table-action" (click)="startEdit(t)" title="Editar recorrido">
+                    <app-icon name="edit" [size]="14"></app-icon>
+                    <span>Editar</span>
+                  </button>
+                  <button type="button" class="btn-table-action danger" (click)="removeTrip(t)" title="Eliminar recorrido">
+                    <app-icon name="trash" [size]="14"></app-icon>
+                    <span>Eliminar</span>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
     </section>
   `
 })
 export class TripsComponent implements OnInit {
   trips: TripResponse[] = [];
-  totalElements = 0;
   editingTripId: string | null = null;
-  statusMessage = '';
+  feedbackMsg = '';
 
   form: TripRequest = {
     transportMode: 'BICYCLE',
-    originName: 'Óvalo de Miraflores',
-    originLat: -12.1198,
-    originLng: -77.0295,
-    destinationName: 'Centro Financiero San Isidro',
-    destinationLat: -12.0945,
-    destinationLng: -77.0336,
-    distanceKm: 4.2,
-    durationMinutes: 15
+    originName: 'San Isidro (Centro Financiero)',
+    originLat: -12.0965,
+    originLng: -77.0285,
+    destinationName: 'Miraflores (Parque Kennedy)',
+    destinationLat: -12.1215,
+    destinationLng: -77.0298,
+    distanceKm: 5.4,
+    durationMinutes: 20
   };
 
-  private modeRates: Record<TransportMode, number> = {
+  private co2Rates: Record<TransportMode, number> = {
     BICYCLE: 0,
     WALKING: 0,
     ELECTRIC_SCOOTER: 15,
@@ -215,92 +204,102 @@ export class TripsComponent implements OnInit {
     CAR_SOLO: 170
   };
 
+  private kcalRates: Record<TransportMode, number> = {
+    BICYCLE: 32,
+    WALKING: 55,
+    ELECTRIC_SCOOTER: 8,
+    PUBLIC_TRANSIT: 10,
+    CARPOOL: 3,
+    CAR_SOLO: 2
+  };
+
   constructor(private api: ApiService, public i18n: I18nService) {}
 
   ngOnInit(): void {
-    this.loadHistory();
+    this.loadTrips();
   }
 
-  get previewBaselineCo2(): number {
-    return Math.round((this.form.distanceKm || 0) * 170);
-  }
-
-  get previewEmittedCo2(): number {
-    const rate = this.modeRates[this.form.transportMode] ?? 0;
-    return Math.round((this.form.distanceKm || 0) * rate);
-  }
-
-  get previewSavedCo2(): number {
-    return Math.max(0, this.previewBaselineCo2 - this.previewEmittedCo2);
-  }
-
-  get previewPoints(): number {
-    if (this.form.transportMode === 'CAR_SOLO') return 0;
-    return Math.max(5, Math.round(this.previewSavedCo2 / 10));
-  }
-
-  loadHistory(): void {
-    this.api.getTripsHistory(0, 20).subscribe(page => {
-      this.trips = page.content;
-      this.totalElements = page.totalElements;
+  loadTrips(): void {
+    this.api.getTripsHistory(0, 25).subscribe(page => {
+      this.trips = page.content || [];
     });
   }
 
+  getPreviewBaseline(): number {
+    return Math.round((this.form.distanceKm || 0) * 170);
+  }
+
+  getPreviewSaved(): number {
+    const base = this.getPreviewBaseline();
+    const emit = Math.round((this.form.distanceKm || 0) * (this.co2Rates[this.form.transportMode] ?? 0));
+    return Math.max(0, base - emit);
+  }
+
+  getPreviewCalories(): number {
+    return Math.round((this.form.distanceKm || 0) * (this.kcalRates[this.form.transportMode] ?? 10));
+  }
+
+  getPreviewPoints(): number {
+    if (this.form.transportMode === 'CAR_SOLO') return 0;
+    return Math.max(5, Math.round(this.getPreviewSaved() / 10));
+  }
+
   saveTrip(): void {
-    this.statusMessage = '';
     if (this.editingTripId) {
-      this.api.updateTrip(this.editingTripId, this.form).subscribe(updated => {
-        this.statusMessage = `Viaje actualizado (${updated.originName} → ${updated.destinationName}). Nuevo ahorro: ${updated.co2SavedGrams} g CO₂ (+${updated.pointsEarned} pts).`;
+      const id = this.editingTripId;
+      this.api.updateTrip(id, this.form).subscribe(updated => {
+        this.feedbackMsg = `Recorrido actualizado: ${updated.originName} → ${updated.destinationName} (-${updated.co2SavedGrams} g CO₂).`;
         this.editingTripId = null;
-        this.loadHistory();
+        this.loadTrips();
       });
     } else {
       this.api.recordTrip(this.form).subscribe(created => {
-        this.statusMessage = `Viaje registrado con éxito. Ahorraste ${created.co2SavedGrams} g de CO₂ y sumaste +${created.pointsEarned} puntos verdes.`;
-        this.loadHistory();
+        this.feedbackMsg = `Recorrido registrado: evitaste ${created.co2SavedGrams} g de CO₂ y sumaste +${created.pointsEarned} pts.`;
+        this.loadTrips();
       });
     }
   }
 
-  startEdit(trip: TripResponse): void {
-    this.editingTripId = trip.id;
-    this.statusMessage = '';
+  startEdit(t: TripResponse): void {
+    this.editingTripId = t.id;
     this.form = {
-      transportMode: trip.transportMode,
-      originName: trip.originName,
-      originLat: trip.originLat,
-      originLng: trip.originLng,
-      destinationName: trip.destinationName,
-      destinationLat: trip.destinationLat,
-      destinationLng: trip.destinationLng,
-      distanceKm: trip.distanceKm,
-      durationMinutes: trip.durationMinutes
+      transportMode: t.transportMode,
+      originName: t.originName,
+      originLat: t.originLat || -12.0965,
+      originLng: t.originLng || -77.0285,
+      destinationName: t.destinationName,
+      destinationLat: t.destinationLat || -12.1215,
+      destinationLng: t.destinationLng || -77.0298,
+      distanceKm: t.distanceKm,
+      durationMinutes: t.durationMinutes
     };
+    this.feedbackMsg = '';
   }
 
-  removeTrip(trip: TripResponse): void {
-    this.api.deleteTrip(trip.id).subscribe(() => {
-      if (this.editingTripId === trip.id) {
+  cancelEdit(): void {
+    this.editingTripId = null;
+    this.feedbackMsg = '';
+  }
+
+  removeTrip(t: TripResponse): void {
+    this.api.deleteTrip(t.id).subscribe(() => {
+      this.feedbackMsg = `Se eliminó el recorrido (${t.originName} → ${t.destinationName}).`;
+      if (this.editingTripId === t.id) {
         this.editingTripId = null;
       }
-      this.statusMessage = `Viaje "${trip.originName} → ${trip.destinationName}" eliminado y estadísticas recalculadas.`;
-      this.loadHistory();
+      this.loadTrips();
     });
   }
 
-  resetForm(): void {
-    this.editingTripId = null;
-    this.statusMessage = '';
-    this.form = {
-      transportMode: 'BICYCLE',
-      originName: 'Óvalo de Miraflores',
-      originLat: -12.1198,
-      originLng: -77.0295,
-      destinationName: 'Centro Financiero San Isidro',
-      destinationLat: -12.0945,
-      destinationLng: -77.0336,
-      distanceKm: 4.2,
-      durationMinutes: 15
+  formatShortMode(mode: TransportMode): string {
+    const map: Record<TransportMode, string> = {
+      BICYCLE: 'Bicicleta',
+      WALKING: 'Caminata',
+      ELECTRIC_SCOOTER: 'Scooter eléc.',
+      PUBLIC_TRANSIT: 'Transp. público',
+      CARPOOL: 'Carpool',
+      CAR_SOLO: 'Automóvil'
     };
+    return map[mode] || mode;
   }
 }
