@@ -124,7 +124,7 @@ const CORRIDORS = {
 
 const translations = {
   es_419: {
-    "nav.skip": "Saltar al contenido",
+    "nav.skip": "Saltar al contenido", "nav.how": "Cómo funciona", "nav.webapp": "Ir a mi panel", "hero.kicker": "Movilidad urbana baja en carbono · Lima Metropolitana", "hero.btn_webapp": "Empezar a medir mis viajes", "hero.btn_planner": "Comparar mi ruta en Lima", "how.eyebrow": "Simple, claro y pensado para tu día a día", "how.title": "¿Para qué sirve EcoCommute?", "how.step1_title": "Elige tu corredor en Lima", "how.step1_desc": "Compara cuánto tardas por ciclovías segregadas o a pie frente al tráfico en auto entre San Isidro, Miraflores, Jesús María, Lince o Barranco.", "how.step2_title": "Mide tu ahorro en tu bitácora", "how.step2_desc": "Cada recorrido limpio suma gramos de CO₂ evitados, calorías activas y puntos verificados para tu progreso semanal y el ranking de tu distrito.", "how.step3_title": "Canjea beneficios reales", "how.step3_desc": "Usa tus puntos acumulados para obtener cafés de cortesía, horas de bicicleta compartida y entradas culturales en comercios aliados de Lima.",
     "nav.routes": "Rutas en Lima",
     "nav.vehicles": "Comparativa de Transporte",
     "nav.impact": "Calculadora de Ahorro",
@@ -155,7 +155,7 @@ const translations = {
     "veh.eyebrow": "Comparativa de movilidad",
     "veh.title": "¿Cómo te conviene moverte por Lima?",
     "veh.subtitle": "Compara las 4 formas de recorrer la ciudad en hora punta y descubre cuál te ahorra más tiempo, dinero y emisiones.",
-    "veh.card_bike_badge": "⭐ La más recomendada",
+    "veh.card_bike_badge": "La más recomendada",
     "veh.bike_title": "Bicicleta urbana",
     "veh.bike_sub": "Rápida y sin tráfico",
     "veh.metric_time": "Tiempo típico (5 km)",
@@ -208,7 +208,7 @@ const translations = {
     "calc.card_reward_desc": "Puntos acumulados para canjear en cafés locales, talleres de bici y comercios aliados."
   },
   en_US: {
-    "nav.skip": "Skip to content",
+    "nav.skip": "Skip to content", "nav.how": "How it works", "nav.webapp": "Open my dashboard", "hero.kicker": "Low-carbon urban mobility · Metropolitan Lima", "hero.btn_webapp": "Start tracking my trips", "hero.btn_planner": "Compare my route in Lima", "how.eyebrow": "Simple, clear, and built for your daily commute", "how.title": "What is EcoCommute for?", "how.step1_title": "Pick your corridor in Lima", "how.step1_desc": "Compare travel times on dedicated bike lanes or walking versus car traffic across San Isidro, Miraflores, Jesús María, Lince, or Barranco.", "how.step2_title": "Track your savings in your log", "how.step2_desc": "Every clean commute adds avoided CO₂ grams, active calories, and verified points toward your weekly progress and district ranking.", "how.step3_title": "Redeem real local perks", "how.step3_desc": "Exchange your points for complimentary coffee, shared bike hours, and cultural passes at partner shops in Lima.",
     "nav.routes": "Lima Routes",
     "nav.vehicles": "Mobility Comparison",
     "nav.impact": "Savings Calculator",
@@ -239,7 +239,7 @@ const translations = {
     "veh.eyebrow": "Urban mobility comparison",
     "veh.title": "What is the best way to move through Lima?",
     "veh.subtitle": "Compare all 4 rush-hour commute options and discover which one saves you the most time, money, and emissions.",
-    "veh.card_bike_badge": "⭐ Most recommended",
+    "veh.card_bike_badge": "Most recommended",
     "veh.bike_title": "Urban bicycle",
     "veh.bike_sub": "Fast & traffic-free",
     "veh.metric_time": "Typical time (5 km)",

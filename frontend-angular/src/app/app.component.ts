@@ -6,17 +6,18 @@ import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from './services/auth.service';
 import { ApiService } from './services/api.service';
 import { I18nService } from './services/i18n.service';
+import { EcoIconComponent } from './components/icon/eco-icon.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterModule, MatToolbarModule, MatButtonModule],
+  imports: [CommonModule, RouterModule, MatToolbarModule, MatButtonModule, EcoIconComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
   isBrowser = false;
-  activeTheme: 'light' | 'dark' = 'dark';
+  activeTheme: 'light' | 'dark' = 'light';
   mobileMenuOpen = false;
   backendOnline = false;
 
@@ -32,7 +33,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.isBrowser) {
-      const savedTheme = (localStorage.getItem('ecocommute_theme') as 'light' | 'dark' | null) || 'dark';
+      const savedTheme = (localStorage.getItem('ecocommute_theme') as 'light' | 'dark' | null) || 'light';
       this.setTheme(savedTheme);
     }
     this.api.backendOnline$.subscribe(status => (this.backendOnline = status));

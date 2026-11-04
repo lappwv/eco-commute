@@ -2,282 +2,237 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatChipsModule } from '@angular/material/chips';
 import { AuthService, DEFAULT_RENDER_API, LOCAL_BACKEND_API } from '../../services/auth.service';
+import { ApiService } from '../../services/api.service';
 import { UserProfile } from '../../models/api.models';
+import { EcoIconComponent } from '../icon/eco-icon.component';
 
 @Component({
   selector: 'app-auth',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatCardModule, MatButtonModule, MatTabsModule, MatChipsModule],
+  imports: [CommonModule, FormsModule, EcoIconComponent],
   template: `
-    <section class="app-page-container" aria-labelledby="auth-heading">
-      <div class="page-header-card">
+    <section class="page-section">
+      <div class="section-header-row">
         <div>
-          <span class="eyebrow-tag">HU01 · HU02 · Spring Security + JWT + BCrypt</span>
-          <h1 id="auth-heading">Autenticación Segura y EcoPerfil</h1>
-          <p class="subtitle">
-            Inicia sesión con tu cuenta JWT o regístrate para sincronizar tus viajes sostenibles, puntos verdes y medallas con PostgreSQL en Render.
+          <span class="eyebrow-tag">
+            <app-icon name="user" [size]="14"></app-icon>
+            Tu Cuenta EcoCommute
+          </span>
+          <h1 class="page-title">Perfil y Acceso Rápido</h1>
+          <p class="page-subtitle">
+            Inicia sesión con tu cuenta o cambia entre los perfiles de demostración con un clic.
           </p>
-        </div>
-        <div class="quick-demo-box">
-          <span class="demo-label">Acceso rápido para evaluación docente:</span>
-          <div class="demo-btn-row">
-            <button type="button" class="btn-eco-primary" (click)="quickDemoLogin('user')" aria-label="Iniciar sesión como Usuario Demo">
-              👤 Demo Usuario (Elena · ROLE_USER)
-            </button>
-            <button type="button" class="btn-eco-outline" (click)="quickDemoLogin('admin')" aria-label="Iniciar sesión como Administrador Demo">
-              🛡️ Demo Admin (ROLE_ADMIN)
-            </button>
-          </div>
         </div>
       </div>
 
       <div class="grid-2-col">
-        <mat-card class="eco-mat-card">
-          <mat-tab-group animationDuration="200ms">
-            <mat-tab label="Iniciar Sesión (HU02)">
-              <form class="eco-form" (ngSubmit)="onLogin()" aria-label="Formulario de inicio de sesión">
-                <div class="form-group">
-                  <label for="login-email">Correo electrónico</label>
-                  <input
-                    id="login-email"
-                    type="email"
-                    name="loginEmail"
-                    [(ngModel)]="loginEmail"
-                    required
-                    placeholder="demo@ecocommute.org"
-                    class="eco-input"
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="login-password">Contraseña</label>
-                  <input
-                    id="login-password"
-                    type="password"
-                    name="loginPassword"
-                    [(ngModel)]="loginPassword"
-                    required
-                    placeholder="••••••••"
-                    class="eco-input"
-                  />
-                </div>
-
-                <div *ngIf="errorMessage" class="alert-error" role="alert">{{ errorMessage }}</div>
-                <div *ngIf="successMessage" class="alert-success" role="status">{{ successMessage }}</div>
-
-                <button type="submit" class="btn-eco-primary full-width" [disabled]="loading">
-                  {{ loading ? 'Autenticando con JWT...' : 'Iniciar Sesión (POST /api/v1/auth/login)' }}
-                </button>
-              </form>
-            </mat-tab>
-
-            <mat-tab label="Crear Cuenta (HU01)">
-              <form class="eco-form" (ngSubmit)="onRegister()" aria-label="Formulario de registro de usuario">
-                <div class="form-group">
-                  <label for="reg-name">Nombre completo</label>
-                  <input
-                    id="reg-name"
-                    type="text"
-                    name="regName"
-                    [(ngModel)]="regFullName"
-                    required
-                    placeholder="Ej. Rodrigo Condor Silvera"
-                    class="eco-input"
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="reg-email">Correo electrónico único</label>
-                  <input
-                    id="reg-email"
-                    type="email"
-                    name="regEmail"
-                    [(ngModel)]="regEmail"
-                    required
-                    placeholder="usuario@upc.edu.pe"
-                    class="eco-input"
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="reg-password">Contraseña (mín. 8 caracteres, letra y número)</label>
-                  <input
-                    id="reg-password"
-                    type="password"
-                    name="regPassword"
-                    [(ngModel)]="regPassword"
-                    required
-                    placeholder="EcoLima2026"
-                    class="eco-input"
-                  />
-                </div>
-                <div class="form-row-2">
-                  <label class="checkbox-label">
-                    <input type="checkbox" name="regBike" [(ngModel)]="regHasBicycle" />
-                    Cuento con bicicleta propia
-                  </label>
-                  <div class="form-group">
-                    <label for="reg-walk">Máx. caminata (min)</label>
-                    <input
-                      id="reg-walk"
-                      type="number"
-                      name="regWalk"
-                      [(ngModel)]="regMaxWalkingMinutes"
-                      min="5"
-                      max="120"
-                      class="eco-input"
-                    />
-                  </div>
-                </div>
-
-                <div *ngIf="errorMessage" class="alert-error" role="alert">{{ errorMessage }}</div>
-                <div *ngIf="successMessage" class="alert-success" role="status">{{ successMessage }}</div>
-
-                <button type="submit" class="btn-eco-primary full-width" [disabled]="loading">
-                  {{ loading ? 'Registrando cuenta con BCrypt...' : 'Registrar Cuenta (POST /api/v1/auth/register)' }}
-                </button>
-              </form>
-            </mat-tab>
-          </mat-tab-group>
-        </mat-card>
-
-        <mat-card class="eco-mat-card" *ngIf="auth.currentUser as user">
-          <div class="profile-header">
-            <img [src]="user.avatarUrl" [alt]="user.fullName" class="avatar-lg" />
-            <div>
-              <span class="role-pill" [class.admin]="user.role === 'ROLE_ADMIN'">{{ user.role }}</span>
-              <h2>{{ user.fullName }}</h2>
-              <p class="muted">{{ user.email }}</p>
-            </div>
+        <!-- Left Card: Login / Register & 1-Click Demo Profiles -->
+        <article class="eco-card">
+          <div class="tab-pills">
+            <button type="button" class="tab-btn" [class.active]="tab === 'login'" (click)="tab = 'login'">
+              Iniciar sesión
+            </button>
+            <button type="button" class="tab-btn" [class.active]="tab === 'register'" (click)="tab = 'register'">
+              Crear cuenta
+            </button>
           </div>
 
-          <div class="kpi-mini-grid">
-            <div class="kpi-mini">
-              <span class="kpi-label">Puntos Verdes</span>
-              <strong class="kpi-val accent">{{ user.currentPoints }} pts</strong>
+          <form *ngIf="tab === 'login'" (ngSubmit)="onLogin()" class="eco-form">
+            <div class="form-group">
+              <label>Correo electrónico</label>
+              <input type="email" [(ngModel)]="loginEmail" name="loginEmail" required />
             </div>
-            <div class="kpi-mini">
-              <span class="kpi-label">Nivel Eco</span>
-              <strong class="kpi-val">Nivel {{ user.currentLevel }}</strong>
+            <div class="form-group">
+              <label>Contraseña</label>
+              <input type="password" [(ngModel)]="loginPassword" name="loginPassword" required />
             </div>
-            <div class="kpi-mini">
-              <span class="kpi-label">Racha Activa</span>
-              <strong class="kpi-val">🔥 {{ user.streakDays }} días</strong>
-            </div>
-          </div>
+            <button type="submit" class="btn-emerald full-width">
+              <app-icon name="check" [size]="16"></app-icon>
+              <span>Entrar a mi cuenta</span>
+            </button>
+          </form>
 
-          <div class="api-selector-box">
-            <label for="api-url-select">Servidor Backend RESTful API:</label>
-            <div class="demo-btn-row">
-              <button
-                type="button"
-                class="btn-chip"
-                [class.active]="auth.apiBase === renderUrl"
-                (click)="setBackend(renderUrl)"
-              >
-                ☁️ Render Cloud (Producción)
+          <form *ngIf="tab === 'register'" (ngSubmit)="onRegister()" class="eco-form">
+            <div class="form-group">
+              <label>Nombre completo</label>
+              <input type="text" [(ngModel)]="regName" name="regName" required placeholder="Ej. Valeria Paredes" />
+            </div>
+            <div class="form-group">
+              <label>Correo electrónico</label>
+              <input type="email" [(ngModel)]="regEmail" name="regEmail" required placeholder="valeria&#64;lima.pe" />
+            </div>
+            <div class="form-group">
+              <label>Contraseña</label>
+              <input type="password" [(ngModel)]="regPassword" name="regPassword" required />
+            </div>
+            <div class="form-row-2">
+              <div class="form-group checkbox-align">
+                <label class="checkbox-label">
+                  <input type="checkbox" [(ngModel)]="regBicycle" name="regBicycle" />
+                  <span>Cuento con bicicleta</span>
+                </label>
+              </div>
+              <div class="form-group">
+                <label>Caminata diaria máx. (min)</label>
+                <input type="number" [(ngModel)]="regWalkMin" name="regWalkMin" min="5" max="180" />
+              </div>
+            </div>
+            <button type="submit" class="btn-emerald full-width">
+              <app-icon name="plus" [size]="16"></app-icon>
+              <span>Registrarme en EcoCommute</span>
+            </button>
+          </form>
+
+          <div class="demo-accounts-box">
+            <h3>Acceso rápido con cuentas de prueba</h3>
+            <p class="card-sub">Prueba la experiencia como ciudadana o como administrador de comercios aliados:</p>
+            <div class="demo-btns-row">
+              <button type="button" class="btn-outline" (click)="quickDemoUser()">
+                <app-icon name="user" [size]="16"></app-icon>
+                <span>Ciudadana (Elena Rios)</span>
               </button>
-              <button
-                type="button"
-                class="btn-chip"
-                [class.active]="auth.apiBase === localUrl"
-                (click)="setBackend(localUrl)"
-              >
-                💻 Localhost (:8080)
+              <button type="button" class="btn-outline" (click)="quickDemoAdmin()">
+                <app-icon name="shield" [size]="16"></app-icon>
+                <span>Administrador</span>
               </button>
             </div>
-            <code class="token-preview">JWT Bearer: {{ user.token | slice:0:38 }}...</code>
           </div>
-        </mat-card>
+
+          <div class="toast-success" *ngIf="feedbackMsg">
+            <app-icon name="check" [size]="17"></app-icon>
+            <span>{{ feedbackMsg }}</span>
+          </div>
+        </article>
+
+        <!-- Right Card: Active Profile Summary & Optional Server Settings -->
+        <div class="stack-col">
+          <article class="eco-card" *ngIf="profile as p">
+            <div class="profile-header">
+              <img [src]="p.avatarUrl" [alt]="p.fullName" class="avatar-lg" />
+              <div>
+                <span class="badge-emerald">{{ p.role === 'ROLE_ADMIN' ? 'Perfil Administrador' : 'Perfil Ciudadano' }}</span>
+                <h2>{{ p.fullName }}</h2>
+                <p class="card-sub">{{ p.email }}</p>
+              </div>
+            </div>
+
+            <div class="kpi-mini-grid">
+              <div class="kpi-mini">
+                <strong>{{ p.currentPoints }} pts</strong>
+                <span>Puntos</span>
+              </div>
+              <div class="kpi-mini">
+                <strong>Nivel {{ p.currentLevel }}</strong>
+                <span>Progreso</span>
+              </div>
+              <div class="kpi-mini">
+                <strong>{{ p.streakDays }} días</strong>
+                <span>Racha</span>
+              </div>
+              <div class="kpi-mini">
+                <strong>{{ p.totalCo2SavedKg | number: '1.2-2' }} kg</strong>
+                <span>CO₂ evitado</span>
+              </div>
+            </div>
+
+            <details class="coords-drawer mt-4">
+              <summary>
+                <app-icon name="sliders" [size]="14"></app-icon>
+                <span>Configuración avanzada de servidor</span>
+              </summary>
+              <div class="coords-drawer-body">
+                <div class="demo-btns-row">
+                  <button type="button" class="btn-outline" (click)="setServer(renderUrl)">
+                    <span>Nube (Render)</span>
+                  </button>
+                  <button type="button" class="btn-outline" (click)="setServer(localUrl)">
+                    <span>Localhost (8080)</span>
+                  </button>
+                </div>
+                <div class="form-group">
+                  <input type="text" [(ngModel)]="customServerUrl" (change)="setServer(customServerUrl)" />
+                </div>
+              </div>
+            </details>
+          </article>
+        </div>
       </div>
     </section>
   `
 })
 export class AuthComponent implements OnInit {
-  renderUrl = DEFAULT_RENDER_API;
-  localUrl = LOCAL_BACKEND_API;
-
+  tab: 'login' | 'register' = 'login';
   loginEmail = 'demo@ecocommute.org';
   loginPassword = 'Demo123!';
 
-  regFullName = '';
+  regName = '';
   regEmail = '';
   regPassword = '';
-  regHasBicycle = true;
-  regMaxWalkingMinutes = 25;
+  regBicycle = true;
+  regWalkMin = 30;
 
-  loading = false;
-  errorMessage = '';
-  successMessage = '';
+  renderUrl = DEFAULT_RENDER_API;
+  localUrl = LOCAL_BACKEND_API;
+  customServerUrl = DEFAULT_RENDER_API;
+
   profile: UserProfile | null = null;
+  feedbackMsg = '';
 
-  constructor(public auth: AuthService, private router: Router) {}
+  constructor(private auth: AuthService, private api: ApiService, private router: Router) {
+    this.customServerUrl = this.auth.apiBase;
+  }
 
   ngOnInit(): void {
-    this.auth.getMyProfile().subscribe(p => (this.profile = p));
+    this.refreshProfile();
+  }
+
+  refreshProfile(): void {
+    this.auth.getMyProfile().subscribe(res => (this.profile = res));
   }
 
   onLogin(): void {
-    this.errorMessage = '';
-    this.successMessage = '';
-    this.loading = true;
-    this.auth.login({ email: this.loginEmail, password: this.loginPassword }).subscribe({
-      next: res => {
-        this.loading = false;
-        this.successMessage = `Sesión iniciada correctamente como ${res.fullName} (${res.role}).`;
-        setTimeout(() => this.router.navigate(['/dashboard']), 600);
-      },
-      error: err => {
-        this.loading = false;
-        this.errorMessage = err?.error?.message || 'Credenciales inválidas. Verifica tu correo y contraseña.';
-      }
+    this.auth.login({ email: this.loginEmail, password: this.loginPassword }).subscribe(res => {
+      this.feedbackMsg = `Sesión iniciada como ${res.fullName}`;
+      this.refreshProfile();
+      setTimeout(() => this.router.navigate(['/dashboard']), 700);
     });
   }
 
   onRegister(): void {
-    this.errorMessage = '';
-    this.successMessage = '';
-    if (!/^(?=.*[A-Za-z])(?=.*\d).{8,}$/.test(this.regPassword)) {
-      this.errorMessage = 'La contraseña debe tener al menos 8 caracteres e incluir letras y números (HU01).';
-      return;
-    }
-    this.loading = true;
     this.auth
       .register({
-        fullName: this.regFullName,
+        fullName: this.regName,
         email: this.regEmail,
         password: this.regPassword,
-        hasBicycle: this.regHasBicycle,
-        maxWalkingMinutes: this.regMaxWalkingMinutes
+        hasBicycle: this.regBicycle,
+        maxWalkingMinutes: this.regWalkMin
       })
-      .subscribe({
-        next: res => {
-          this.loading = false;
-          this.successMessage = `Cuenta creada para ${res.fullName}. Token JWT generado exitosamente.`;
-          setTimeout(() => this.router.navigate(['/dashboard']), 600);
-        },
-        error: err => {
-          this.loading = false;
-          this.errorMessage = err?.error?.message || 'Error al registrar usuario. Verifica los campos.';
-        }
+      .subscribe(res => {
+        this.feedbackMsg = `Cuenta creada para ${res.fullName}`;
+        this.refreshProfile();
+        setTimeout(() => this.router.navigate(['/dashboard']), 700);
       });
   }
 
-  quickDemoLogin(type: 'user' | 'admin'): void {
-    if (type === 'admin') {
-      this.loginEmail = 'admin@ecocommute.org';
-      this.loginPassword = 'Admin123!';
-    } else {
-      this.loginEmail = 'demo@ecocommute.org';
-      this.loginPassword = 'Demo123!';
-    }
+  quickDemoUser(): void {
+    this.loginEmail = 'demo@ecocommute.org';
+    this.loginPassword = 'Demo123!';
     this.onLogin();
   }
 
-  setBackend(url: string): void {
+  quickDemoAdmin(): void {
+    this.loginEmail = 'admin@ecocommute.org';
+    this.loginPassword = 'Admin123!';
+    this.onLogin();
+  }
+
+  setServer(url: string): void {
+    this.customServerUrl = url;
     this.auth.setApiBase(url);
-    this.successMessage = `Servidor API actualizado a: ${url}`;
+    this.api.checkHealth().subscribe(() => {
+      this.feedbackMsg = `Servidor actualizado: ${url}`;
+      this.refreshProfile();
+    });
   }
 }

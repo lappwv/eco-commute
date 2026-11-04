@@ -153,7 +153,7 @@ export class ApiService {
       title: 'Café de cortesía',
       description: 'Un café orgánico gratis en cafetería aliada de Miraflores o San Isidro',
       pointsCost: 50,
-      iconEmoji: '☕',
+      iconEmoji: 'coffee',
       active: true
     },
     {
@@ -162,7 +162,7 @@ export class ApiService {
       title: 'Alquiler de bicicleta',
       description: 'Una hora de bicicleta compartida sin costo en CityBike Lima',
       pointsCost: 120,
-      iconEmoji: '🚲',
+      iconEmoji: 'bike',
       active: true
     },
     {
@@ -171,7 +171,7 @@ export class ApiService {
       title: 'Entrada al Parque de la Reserva',
       description: 'Pase libre para el Circuito Mágico del Agua en Lima',
       pointsCost: 200,
-      iconEmoji: '🎟️',
+      iconEmoji: 'ticket',
       active: true
     },
     {
@@ -180,7 +180,7 @@ export class ApiService {
       title: 'Planta un árbol en Lima',
       description: 'Dona tus puntos para plantar un árbol nativo en parques metropolitanos',
       pointsCost: 300,
-      iconEmoji: '🌳',
+      iconEmoji: 'tree',
       active: true
     }
   ];
@@ -190,7 +190,7 @@ export class ApiService {
       id: 101,
       rewardCode: 'COFFEE_50',
       rewardTitle: 'Café de cortesía',
-      rewardIconEmoji: '☕',
+      rewardIconEmoji: 'coffee',
       pointsUsed: 50,
       status: 'COMPLETED',
       createdAt: '2026-11-01T16:40:00'
@@ -236,7 +236,7 @@ export class ApiService {
       code: 'FIRST_STEP',
       title: 'Primer Paso Verde',
       description: 'Completaste tu primer viaje sostenible en EcoCommute',
-      iconEmoji: '🌱',
+      iconEmoji: 'leaf',
       requiredPoints: 10,
       requiredCo2SavedKg: 0,
       requiredStreakDays: 0,
@@ -247,7 +247,7 @@ export class ApiService {
       code: 'BIKE_CHAMP',
       title: 'Ciclista Urbano',
       description: 'Ahorraste tus primeros 5 kg de CO₂ pedaleando',
-      iconEmoji: '🚲',
+      iconEmoji: 'bike',
       requiredPoints: 50,
       requiredCo2SavedKg: 5,
       requiredStreakDays: 0,
@@ -258,7 +258,7 @@ export class ApiService {
       code: 'TRANSIT_PRO',
       title: 'Guardián del Aire',
       description: 'Completaste 10 viajes sostenibles en bicicleta o caminata',
-      iconEmoji: '🍃',
+      iconEmoji: 'leaf',
       requiredPoints: 150,
       requiredCo2SavedKg: 15,
       requiredStreakDays: 0,
@@ -269,7 +269,7 @@ export class ApiService {
       code: 'STREAK_7',
       title: 'Semana Imparable',
       description: 'Mantuviste una racha de 7 días consecutivos de transporte limpio',
-      iconEmoji: '🔥',
+      iconEmoji: 'flame',
       requiredPoints: 300,
       requiredCo2SavedKg: 20,
       requiredStreakDays: 7,
@@ -280,7 +280,7 @@ export class ApiService {
       code: 'FOREST_HERO',
       title: 'Salvador del Bosque',
       description: 'Evitaste más de 50 kg de CO₂ (equivalente a más de 2 árboles maduros)',
-      iconEmoji: '🌳',
+      iconEmoji: 'tree',
       requiredPoints: 600,
       requiredCo2SavedKg: 50,
       requiredStreakDays: 0,
@@ -291,7 +291,7 @@ export class ApiService {
       code: 'ZERO_EMISSION',
       title: 'Maestro Cero Emisiones',
       description: 'Acumulaste 100 km recorridos a pie o en bicicleta mecánica',
-      iconEmoji: '⚡',
+      iconEmoji: 'bolt',
       requiredPoints: 1000,
       requiredCo2SavedKg: 100,
       requiredStreakDays: 14,
@@ -305,6 +305,11 @@ export class ApiService {
 
   private get base(): string {
     return this.auth.apiBase;
+  }
+
+  private stripEmoji(text: string): string {
+    if (!text) return '';
+    return text.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}]/gu, '').trim();
   }
 
   checkHealth(): Observable<{ status: string }> {
@@ -321,6 +326,21 @@ export class ApiService {
   planRoutes(req: RoutePlanRequest): Observable<RoutePlanResponse> {
     return this.http.post<RoutePlanResponse>(`${this.base}/api/v1/routes/plan`, req).pipe(
       tap(() => this.backendOnlineSubject.next(true)),
+      map(res => ({
+        ...res,
+        baselineCarRoute: {
+          ...res.baselineCarRoute,
+          title: this.stripEmoji(res.baselineCarRoute.title)
+        },
+        standardProfileRoute: {
+          ...res.standardProfileRoute,
+          title: this.stripEmoji(res.standardProfileRoute.title)
+        },
+        aiGreenCorridorRoute: {
+          ...res.aiGreenCorridorRoute,
+          title: this.stripEmoji(res.aiGreenCorridorRoute.title)
+        }
+      })),
       catchError(() => {
         const oLat = req.origin.latitude;
         const oLng = req.origin.longitude;
@@ -358,7 +378,7 @@ export class ApiService {
           recommendedRouteId: 'route-ai-green-corridor',
           baselineCarRoute: {
             id: 'route-baseline-car',
-            title: '🚗 Auto / Vehículo Convencional (Línea Base)',
+            title: 'Auto Particular (Referencia)',
             mode: 'CAR_SOLO' as TransportMode,
             modeDisplayName: 'Automóvil Particular',
             distanceKm: distKm,
@@ -370,11 +390,11 @@ export class ApiService {
             isAiRecommended: false,
             aiInsight: null,
             pathCoordinates: carPath,
-            summary: 'Ruta vehicular estándar directa por avenidas principales con congestión en hora punta.'
+            summary: 'Ruta vehicular estándar por avenidas principales con tráfico habitual.'
           },
           standardProfileRoute: {
             id: 'route-standard-direct',
-            title: mode === 'WALKING' ? '🚶 Caminata (Ruta Directa)' : '🚲 Bicicleta (Ruta Directa)',
+            title: mode === 'WALKING' ? 'Caminata Directa' : 'Bicicleta Directa',
             mode,
             modeDisplayName: MODE_DISPLAY[mode],
             distanceKm: distKm,
@@ -390,11 +410,11 @@ export class ApiService {
               [midLat, midLng],
               [dLat, dLng]
             ],
-            summary: 'Ruta directa sobre la red vial de Lima Metropolitana.'
+            summary: 'Trazado más corto sobre la red vial de Lima Metropolitana.'
           },
           aiGreenCorridorRoute: {
             id: 'route-ai-green-corridor',
-            title: req.enableAiOptimization ? '🌿 Corredor Verde Optimizado con IA' : '🌿 Corredor Verde',
+            title: req.enableAiOptimization ? 'Corredor Verde Recomendado' : 'Corredor Verde',
             mode,
             modeDisplayName: MODE_DISPLAY[mode],
             distanceKm: Math.round(distKm * 0.98 * 100) / 100,
@@ -410,13 +430,13 @@ export class ApiService {
                   safetyRating: 92,
                   shadeTreeCoveragePercent: 68,
                   cyclingInfrastructureQuality: mode === 'BICYCLE' ? 'Ciclovía segregada continua' : 'Senda peatonal arbolada',
-                  healthBenefitSummary: `${kcal} kcal quemadas`,
+                  healthBenefitSummary: `${kcal} kcal activas`,
                   treesEquivalentFraction: savedCo2 / 1000 / 21.77,
-                  ecoReasoning: `Corredor Verde Optimizado con Google Gemini (gemini-1.5-flash): Recorrido de ${distKm} km con ciclovía segregada y menor exposición vehicular. Evitas ${savedCo2} g de CO₂ frente a un automóvil particular y sumas +10 puntos verdes de bonificación.`
+                  ecoReasoning: `Recorrido de ${distKm} km priorizando ciclovías segregadas, calles arboladas y cruces seguros. Evitas ${savedCo2} g de CO₂ frente al auto particular y ganas +10 puntos adicionales por elegir el corredor limpio.`
                 }
               : null,
             pathCoordinates: ecoPath,
-            summary: 'Corredor seleccionado por menor exposición a tráfico y mejor infraestructura sostenible.'
+            summary: 'Corredor con menor exposición vehicular, mayor cobertura arbórea y vía segregada.'
           }
         });
       })
@@ -522,7 +542,7 @@ export class ApiService {
       caloriesBurned: kcal,
       pointsEarned: pts,
       suspicious,
-      suspiciousReason: suspicious ? `Velocidad inusual detectada (${speedKmh.toFixed(1)} km/h)` : null,
+      suspiciousReason: suspicious ? `Velocidad alta detectada (${speedKmh.toFixed(1)} km/h)` : null,
       completedAt: new Date().toISOString()
     };
   }
@@ -596,10 +616,10 @@ export class ApiService {
       tap(() => this.backendOnlineSubject.next(true)),
       catchError(() =>
         of({
-          title: 'Corredor Verde Optimizado con IA (Google Gemini 1.5 Flash)',
+          title: 'Corredor ciclista Arequipa – Salaverry',
           recommendation:
-            'Prioriza viajes en bicicleta por los ejes segregados de Av. Arequipa, Av. Salaverry y Av. Primavera entre las 7:00 y 9:00 a.m. para ahorrar hasta 1,445 g de CO₂ por trayecto y duplicar tu racha de puntos verdes.',
-          advisor: 'Google Gemini (gemini-1.5-flash) / Heuristic Advisor'
+            'Si sales entre las 7:00 y 9:00 a.m., toma la ciclovía segregada de Av. Salaverry o Av. Arequipa: evitarás hasta 1,445 g de CO₂ por trayecto, ahorrarás 12 minutos frente al tráfico vehicular y sumarás puntos extra para tu racha semanal.',
+          advisor: 'Asesor de Movilidad EcoCommute'
         })
       )
     );
@@ -795,10 +815,10 @@ export class ApiService {
           throw err;
         }
         const reward = this.localRewards.find(r => r.id === rewardId);
-        if (!reward) throw new Error('Recompensa no encontrada');
+        if (!reward) throw new Error('Beneficio no encontrado');
         const currentPts = this.auth.currentUser?.currentPoints || 0;
         if (currentPts < reward.pointsCost) {
-          throw { error: { message: 'Puntos verdes insuficientes para este canje' } };
+          throw { error: { message: 'Aún no tienes suficientes puntos disponibles para este canje.' } };
         }
         const redemption: RedemptionItem = {
           id: Date.now(),

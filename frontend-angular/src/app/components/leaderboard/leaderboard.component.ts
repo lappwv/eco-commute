@@ -1,138 +1,153 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MatCardModule } from '@angular/material/card';
 import { ApiService } from '../../services/api.service';
 import { I18nService } from '../../services/i18n.service';
 import { DistrictsSummary, LeaderboardEntry } from '../../models/api.models';
+import { EcoIconComponent } from '../icon/eco-icon.component';
 
 @Component({
   selector: 'app-leaderboard',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatCardModule],
+  imports: [CommonModule, FormsModule, EcoIconComponent],
   template: `
-    <section class="app-page-container" aria-labelledby="lb-title">
-      <div class="page-header-card">
+    <section class="page-section">
+      <div class="section-header-row">
         <div>
-          <span class="eyebrow-tag">HU08 · Eco Identidad Urbana en Lima Metropolitana</span>
-          <h1 id="lb-title">{{ i18n.t('leaderboard.title') }}</h1>
-          <p class="subtitle">{{ i18n.t('leaderboard.subtitle') }}</p>
+          <span class="eyebrow-tag">
+            <app-icon name="trophy" [size]="14"></app-icon>
+            Comunidad EcoCommute · Lima
+          </span>
+          <h1 class="page-title">{{ i18n.t('leaderboard.title') }}</h1>
+          <p class="page-subtitle">{{ i18n.t('leaderboard.subtitle') }}</p>
         </div>
-        <div class="kpi-mini-grid" *ngIf="districtSummary">
-          <div class="kpi-mini">
-            <span class="kpi-label">Distritos Activos</span>
-            <strong class="kpi-val accent">{{ districtSummary.activeDistrictsCount }} distritos</strong>
-          </div>
-          <div class="kpi-mini">
-            <span class="kpi-label">Vecinos Clasificados</span>
-            <strong class="kpi-val">{{ districtSummary.totalRankedUsers }} ciclistas/peatones</strong>
-          </div>
+        <div class="district-summary-pill" *ngIf="districtsSummary as ds">
+          <app-icon name="pin" [size]="16"></app-icon>
+          <span><strong>{{ ds.activeDistrictsCount }}</strong> distritos activos · <strong>{{ ds.totalRankedUsers }}</strong> vecinos en ranking</span>
         </div>
       </div>
 
-      <mat-card class="eco-mat-card">
+      <!-- Top 3 Podium Showcase -->
+      <div class="podium-grid" *ngIf="entries.length >= 3">
+        <article class="podium-card" *ngFor="let top of entries | slice: 0 : 3" [class.rank-first]="top.rank === 1">
+          <div class="podium-rank-header">
+            <span class="podium-rank-num" [class.gold]="top.rank === 1" [class.silver]="top.rank === 2" [class.bronze]="top.rank === 3">
+              <app-icon [name]="top.rank === 1 ? 'trophy' : 'medal'" [size]="15"></app-icon>
+              <span>Puesto #{{ top.rank }}</span>
+            </span>
+            <span class="district-chip">
+              <app-icon name="pin" [size]="12"></app-icon>
+              {{ top.district }}
+            </span>
+          </div>
+          <div class="podium-user-row">
+            <img [src]="top.avatarUrl" [alt]="top.fullName" class="avatar-md" />
+            <div>
+              <h3>{{ top.fullName }}</h3>
+              <span class="podium-sub">{{ top.tripsCount }} recorridos · Racha {{ top.streakDays }} días</span>
+            </div>
+          </div>
+          <div class="podium-metrics-row">
+            <div>
+              <strong class="text-emerald">{{ top.totalCo2SavedKg | number: '1.2-2' }} kg</strong>
+              <span>CO₂ evitado</span>
+            </div>
+            <div>
+              <strong>{{ top.currentPoints }} pts</strong>
+              <span>Puntos</span>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Filter Bar & Full Table -->
+      <article class="eco-card">
         <div class="filter-bar">
           <div class="filter-group">
-            <label for="dist-filter">Filtrar por Distrito de Lima:</label>
-            <select
-              id="dist-filter"
-              name="selectedDistrict"
-              [(ngModel)]="selectedDistrict"
-              (change)="loadRanking()"
-              class="eco-input"
-            >
-              <option value="ALL">🏙️ Todos los distritos (Lima Metropolitana)</option>
-              <option *ngFor="let d of districts" [value]="d">📍 {{ d }}</option>
+            <label>Filtrar por distrito</label>
+            <select [(ngModel)]="selectedDistrict" (change)="loadLeaderboard()">
+              <option value="ALL">Todos los distritos de Lima</option>
+              <option *ngFor="let d of districts" [value]="d">{{ d }}</option>
             </select>
           </div>
 
           <div class="filter-group">
-            <label>Ordenar clasificación por:</label>
-            <div class="demo-btn-row">
-              <button
-                type="button"
-                class="btn-chip"
-                [class.active]="sortBy === 'co2'"
-                (click)="setSort('co2')"
-              >
-                🌱 Mayor CO₂ Ahorrado (kg)
-              </button>
-              <button
-                type="button"
-                class="btn-chip"
-                [class.active]="sortBy === 'points'"
-                (click)="setSort('points')"
-              >
-                ⚡ Mayor Puntaje Verde (pts)
-              </button>
-            </div>
+            <label>Ordenar ranking por</label>
+            <select [(ngModel)]="sortBy" (change)="loadLeaderboard()">
+              <option value="co2">Mayor CO₂ evitado (kg)</option>
+              <option value="points">Mayor puntaje acumulado</option>
+            </select>
           </div>
         </div>
 
         <div class="table-responsive">
-          <table class="eco-table" aria-label="Tabla de clasificación por distrito">
+          <table class="eco-table">
             <thead>
               <tr>
                 <th>Posición</th>
                 <th>Ciudadano</th>
                 <th>Distrito</th>
-                <th>CO₂ Total Ahorrado</th>
-                <th>Puntos Verdes</th>
-                <th>Viajes</th>
+                <th>CO₂ evitado</th>
+                <th>Puntos</th>
+                <th>Recorridos</th>
                 <th>Racha</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let entry of entries; let idx = index" [class.top-rank]="idx < 3">
+              <tr *ngFor="let item of entries" [class.top-rank]="item.rank <= 3">
                 <td>
-                  <span class="rank-medal">
-                    {{ idx === 0 ? '🥇 #1' : idx === 1 ? '🥈 #2' : idx === 2 ? '🥉 #3' : '#' + (idx + 1) }}
+                  <span class="rank-badge" [class.rank-1]="item.rank === 1" [class.rank-2]="item.rank === 2" [class.rank-3]="item.rank === 3">
+                    <app-icon *ngIf="item.rank <= 3" [name]="item.rank === 1 ? 'trophy' : 'medal'" [size]="14"></app-icon>
+                    <span>#{{ item.rank }}</span>
                   </span>
                 </td>
                 <td class="user-cell">
-                  <img [src]="entry.avatarUrl" [alt]="entry.fullName" class="avatar-sm" />
-                  <strong>{{ entry.fullName }}</strong>
+                  <img [src]="item.avatarUrl" [alt]="item.fullName" class="avatar-sm" />
+                  <strong>{{ item.fullName }}</strong>
                 </td>
-                <td><span class="badge-pill">{{ entry.district }}</span></td>
-                <td class="saved-cell"><strong>🌱 {{ entry.totalCo2SavedKg | number:'1.2-2' }} kg CO₂</strong></td>
-                <td><strong>{{ entry.currentPoints }} pts</strong></td>
-                <td>{{ entry.tripsCount }} viajes</td>
-                <td>🔥 {{ entry.streakDays }} días</td>
+                <td>
+                  <span class="district-chip">
+                    <app-icon name="pin" [size]="12"></app-icon>
+                    <span>{{ item.district }}</span>
+                  </span>
+                </td>
+                <td class="text-emerald font-bold">{{ item.totalCo2SavedKg | number: '1.2-2' }} kg</td>
+                <td><span class="pts-pill">{{ item.currentPoints }} pts</span></td>
+                <td>{{ item.tripsCount }}</td>
+                <td>
+                  <span class="streak-inline">
+                    <app-icon name="flame" [size]="14"></app-icon>
+                    <span>{{ item.streakDays }} d</span>
+                  </span>
+                </td>
               </tr>
             </tbody>
           </table>
         </div>
-      </mat-card>
+      </article>
     </section>
   `
 })
 export class LeaderboardComponent implements OnInit {
   entries: LeaderboardEntry[] = [];
-  districtSummary: DistrictsSummary | null = null;
-  districts: string[] = ['San Isidro', 'Lince', 'Surco', 'Surquillo', 'Barranco', 'Breña'];
+  districtsSummary: DistrictsSummary | null = null;
+  districts: string[] = ['San Isidro', 'Miraflores', 'Lince', 'Surco', 'Surquillo', 'Barranco', 'Breña'];
   selectedDistrict = 'ALL';
   sortBy: 'co2' | 'points' = 'co2';
 
   constructor(private api: ApiService, public i18n: I18nService) {}
 
   ngOnInit(): void {
-    this.api.getDistrictsSummary().subscribe(s => {
-      this.districtSummary = s;
-      if (s?.activeDistricts?.length) {
-        this.districts = s.activeDistricts;
+    this.loadLeaderboard();
+    this.api.getDistrictsSummary().subscribe(res => {
+      this.districtsSummary = res;
+      if (res?.activeDistricts?.length) {
+        this.districts = res.activeDistricts;
       }
     });
-    this.loadRanking();
   }
 
-  setSort(sort: 'co2' | 'points'): void {
-    this.sortBy = sort;
-    this.loadRanking();
-  }
-
-  loadRanking(): void {
-    this.api.getLeaderboard(this.selectedDistrict, this.sortBy).subscribe(list => {
-      this.entries = list;
-    });
+  loadLeaderboard(): void {
+    this.api.getLeaderboard(this.selectedDistrict, this.sortBy).subscribe(res => (this.entries = res));
   }
 }

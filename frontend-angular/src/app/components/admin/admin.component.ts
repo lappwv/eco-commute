@@ -1,183 +1,237 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MatCardModule } from '@angular/material/card';
 import { ApiService } from '../../services/api.service';
-import { AuthService } from '../../services/auth.service';
 import { I18nService } from '../../services/i18n.service';
 import { ChallengeItem, ChallengeRequest, RewardItem, RewardRequest } from '../../models/api.models';
+import { EcoIconComponent } from '../icon/eco-icon.component';
 
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatCardModule],
+  imports: [CommonModule, FormsModule, EcoIconComponent],
   template: `
-    <section class="app-page-container" aria-labelledby="admin-title">
-      <div class="page-header-card">
+    <section class="page-section">
+      <div class="section-header-row">
         <div>
-          <span class="eyebrow-tag">HU12 · HU13 · Control de Acceso Basado en Roles (&#64;PreAuthorize ROLE_ADMIN)</span>
-          <h1 id="admin-title">{{ i18n.t('admin.title') }}</h1>
-          <p class="subtitle">{{ i18n.t('admin.subtitle') }}</p>
-        </div>
-        <div class="demo-btn-row" *ngIf="!auth.isAdmin">
-          <button type="button" class="btn-eco-primary" (click)="switchToAdmin()">
-            🛡️ Activar Sesión ROLE_ADMIN (admin&#64;ecocommute.org)
-          </button>
+          <span class="eyebrow-tag">
+            <app-icon name="shield" [size]="14"></app-icon>
+            Administración de Comunidad y Aliados
+          </span>
+          <h1 class="page-title">{{ i18n.t('admin.title') }}</h1>
+          <p class="page-subtitle">{{ i18n.t('admin.subtitle') }}</p>
         </div>
       </div>
 
-      <div *ngIf="bannerMessage" class="alert-success" role="status">{{ bannerMessage }}</div>
+      <div class="toast-success" *ngIf="feedbackMsg">
+        <app-icon name="check" [size]="17"></app-icon>
+        <span>{{ feedbackMsg }}</span>
+      </div>
 
       <div class="grid-2-col">
-        <!-- CRUD de Recompensas (HU12) -->
-        <mat-card class="eco-mat-card">
+        <!-- Left Column: Partner Perks Management -->
+        <article class="eco-card">
           <div class="card-head-row">
-            <h2>{{ editingRewardId ? '✏️ Editar Recompensa (PUT)' : '🎁 Crear Recompensa (HU12 · POST)' }}</h2>
-            <button *ngIf="editingRewardId" type="button" class="btn-chip" (click)="resetRewardForm()">
-              Cancelar
-            </button>
+            <div>
+              <h2>{{ editingRewardId ? 'Editar beneficio #' + editingRewardId : 'Publicar beneficio aliado' }}</h2>
+              <p class="card-sub">Define el comercio, el costo en puntos y el icono de marca</p>
+            </div>
           </div>
 
-          <form class="eco-form" (ngSubmit)="saveReward()">
+          <form (ngSubmit)="saveReward()" class="eco-form">
             <div class="form-row-2">
               <div class="form-group">
-                <label for="rw-code">Código único</label>
-                <input id="rw-code" type="text" name="rwCode" [(ngModel)]="rewardForm.code" required class="eco-input" />
+                <label>Código del cupón</label>
+                <input type="text" [(ngModel)]="rewardForm.code" name="rCode" required />
               </div>
               <div class="form-group">
-                <label for="rw-emoji">Ícono Emoji</label>
-                <input id="rw-emoji" type="text" name="rwEmoji" [(ngModel)]="rewardForm.iconEmoji" required class="eco-input" />
+                <label>Icono de marca</label>
+                <select [(ngModel)]="rewardForm.iconEmoji" name="rIcon">
+                  <option value="coffee">Café / Gastronomía</option>
+                  <option value="bike">Bicicleta / Movilidad</option>
+                  <option value="ticket">Pase cultural / Entrada</option>
+                  <option value="tree">Reforestación urbana</option>
+                  <option value="leaf">Beneficio sostenible</option>
+                  <option value="bolt">Energía / Descuento</option>
+                </select>
               </div>
             </div>
-            <div class="form-row-2">
-              <div class="form-group">
-                <label for="rw-title">Título de la Recompensa</label>
-                <input id="rw-title" type="text" name="rwTitle" [(ngModel)]="rewardForm.title" required class="eco-input" />
-              </div>
-              <div class="form-group">
-                <label for="rw-cost">Costo en Puntos Verdes</label>
-                <input id="rw-cost" type="number" min="1" name="rwCost" [(ngModel)]="rewardForm.pointsCost" required class="eco-input" />
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="rw-desc">Descripción del beneficio</label>
-              <input id="rw-desc" type="text" name="rwDesc" [(ngModel)]="rewardForm.description" required class="eco-input" />
-            </div>
-            <label class="checkbox-label">
-              <input type="checkbox" name="rwActive" [(ngModel)]="rewardForm.active" />
-              Recompensa activa en el catálogo público
-            </label>
 
-            <button type="submit" class="btn-eco-primary full-width">
-              {{ editingRewardId ? '💾 Actualizar Recompensa (PUT /api/v1/admin/rewards)' : '➕ Publicar Recompensa (POST /api/v1/admin/rewards)' }}
-            </button>
+            <div class="form-row-2">
+              <div class="form-group">
+                <label>Nombre del beneficio</label>
+                <input type="text" [(ngModel)]="rewardForm.title" name="rTitle" required />
+              </div>
+              <div class="form-group">
+                <label>Costo en puntos</label>
+                <input type="number" min="10" [(ngModel)]="rewardForm.pointsCost" name="rPoints" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Descripción y comercio aliado</label>
+              <input type="text" [(ngModel)]="rewardForm.description" name="rDesc" required />
+            </div>
+
+            <div class="form-group">
+              <label class="checkbox-label">
+                <input type="checkbox" [(ngModel)]="rewardForm.active" name="rActive" />
+                <span>Disponible en el catálogo público</span>
+              </label>
+            </div>
+
+            <div class="form-actions-row">
+              <button type="submit" class="btn-emerald">
+                <app-icon [name]="editingRewardId ? 'check' : 'plus'" [size]="16"></app-icon>
+                <span>{{ editingRewardId ? 'Guardar cambios' : 'Crear beneficio' }}</span>
+              </button>
+              <button type="button" class="btn-outline" *ngIf="editingRewardId" (click)="cancelRewardEdit()">
+                <span>Cancelar</span>
+              </button>
+            </div>
           </form>
 
-          <div class="table-responsive" style="margin-top: 1.25rem;">
-            <table class="eco-table" aria-label="Tabla administrativa de recompensas">
+          <div class="table-responsive mt-4">
+            <table class="eco-table">
               <thead>
                 <tr>
-                  <th>Recompensa</th>
+                  <th>Beneficio</th>
+                  <th>Código</th>
                   <th>Costo</th>
                   <th>Estado</th>
-                  <th>Acciones CRUD</th>
+                  <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let r of rewards">
                   <td>
-                    <strong>{{ r.iconEmoji }} {{ r.title }}</strong>
-                    <div class="muted-xs">{{ r.code }} · {{ r.description }}</div>
+                    <div class="user-cell">
+                      <span class="mode-icon-chip">
+                        <app-icon [name]="r.code || r.iconEmoji" [size]="16"></app-icon>
+                      </span>
+                      <strong>{{ r.title }}</strong>
+                    </div>
                   </td>
-                  <td>{{ r.pointsCost }} pts</td>
+                  <td><code>{{ r.code }}</code></td>
+                  <td><span class="pts-pill">{{ r.pointsCost }} pts</span></td>
                   <td>
-                    <span class="status-tag" [class.ok]="r.active">{{ r.active ? 'Activa' : 'Inactiva' }}</span>
+                    <span [class]="r.active ? 'status-ok' : 'status-warn'">
+                      {{ r.active ? 'Activo' : 'Pausado' }}
+                    </span>
                   </td>
                   <td class="actions-cell">
-                    <button type="button" class="btn-table-action edit" (click)="editReward(r)">✏️ Editar</button>
-                    <button type="button" class="btn-table-action delete" (click)="deleteReward(r)">🗑️ Eliminar</button>
+                    <button type="button" class="btn-table-action" (click)="editReward(r)" title="Editar">
+                      <app-icon name="edit" [size]="14"></app-icon>
+                    </button>
+                    <button type="button" class="btn-table-action danger" (click)="deleteReward(r.id)" title="Eliminar">
+                      <app-icon name="trash" [size]="14"></app-icon>
+                    </button>
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
-        </mat-card>
+        </article>
 
-        <!-- CRUD de Retos Sostenibles (HU13) -->
-        <mat-card class="eco-mat-card">
+        <!-- Right Column: Monthly Challenges Management -->
+        <article class="eco-card">
           <div class="card-head-row">
-            <h2>{{ editingChallengeId ? '✏️ Editar Reto (PUT)' : '🎯 Crear Reto Comunitario (HU13 · POST)' }}</h2>
-            <button *ngIf="editingChallengeId" type="button" class="btn-chip" (click)="resetChallengeForm()">
-              Cancelar
-            </button>
+            <div>
+              <h2>{{ editingChallengeId ? 'Editar reto #' + editingChallengeId : 'Crear reto comunitario' }}</h2>
+              <p class="card-sub">Configura las metas colectivas del mes para Lima Metropolitana</p>
+            </div>
           </div>
 
-          <form class="eco-form" (ngSubmit)="saveChallenge()">
-            <div class="form-group">
-              <label for="ch-title">Título del Reto Sostenible</label>
-              <input id="ch-title" type="text" name="chTitle" [(ngModel)]="challengeForm.title" required class="eco-input" />
-            </div>
-            <div class="form-group">
-              <label for="ch-desc">Descripción</label>
-              <input id="ch-desc" type="text" name="chDesc" [(ngModel)]="challengeForm.description" required class="eco-input" />
-            </div>
+          <form (ngSubmit)="saveChallenge()" class="eco-form">
             <div class="form-row-2">
               <div class="form-group">
-                <label for="ch-goal">Meta Numérica</label>
-                <input id="ch-goal" type="number" min="1" name="chGoal" [(ngModel)]="challengeForm.goalValue" required class="eco-input" />
+                <label>Título del reto</label>
+                <input type="text" [(ngModel)]="challengeForm.title" name="cTitle" required />
               </div>
               <div class="form-group">
-                <label for="ch-unit">Unidad (kg_co2 / km / trips)</label>
-                <input id="ch-unit" type="text" name="chUnit" [(ngModel)]="challengeForm.goalUnit" required class="eco-input" />
+                <label>Valor de la meta</label>
+                <input type="number" step="1" min="1" [(ngModel)]="challengeForm.goalValue" name="cGoalVal" required />
               </div>
             </div>
-            <div class="form-row-2">
-              <div class="form-group">
-                <label for="ch-start">Fecha Inicio</label>
-                <input id="ch-start" type="date" name="chStart" [(ngModel)]="challengeForm.periodStart" required class="eco-input" />
-              </div>
-              <div class="form-group">
-                <label for="ch-end">Fecha Fin</label>
-                <input id="ch-end" type="date" name="chEnd" [(ngModel)]="challengeForm.periodEnd" required class="eco-input" />
-              </div>
-            </div>
-            <label class="checkbox-label">
-              <input type="checkbox" name="chActive" [(ngModel)]="challengeForm.active" />
-              Reto activo para la comunidad
-            </label>
 
-            <button type="submit" class="btn-eco-primary full-width">
-              {{ editingChallengeId ? '💾 Actualizar Reto (PUT /api/v1/admin/challenges)' : '➕ Publicar Reto (POST /api/v1/admin/challenges)' }}
-            </button>
+            <div class="form-row-2">
+              <div class="form-group">
+                <label>Unidad de medida</label>
+                <select [(ngModel)]="challengeForm.goalUnit" name="cGoalUnit" required>
+                  <option value="kg_co2">kg de CO₂ evitado</option>
+                  <option value="km">Kilómetros sostenibles</option>
+                  <option value="trips">Recorridos completados</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Fecha de inicio</label>
+                <input type="date" [(ngModel)]="challengeForm.periodStart" name="cStart" required />
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label>Fecha de cierre</label>
+                <input type="date" [(ngModel)]="challengeForm.periodEnd" name="cEnd" required />
+              </div>
+              <div class="form-group checkbox-align">
+                <label class="checkbox-label">
+                  <input type="checkbox" [(ngModel)]="challengeForm.active" name="cActive" />
+                  <span>Reto activo</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Descripción para los vecinos</label>
+              <input type="text" [(ngModel)]="challengeForm.description" name="cDesc" required />
+            </div>
+
+            <div class="form-actions-row">
+              <button type="submit" class="btn-emerald">
+                <app-icon [name]="editingChallengeId ? 'check' : 'plus'" [size]="16"></app-icon>
+                <span>{{ editingChallengeId ? 'Guardar cambios' : 'Publicar reto' }}</span>
+              </button>
+              <button type="button" class="btn-outline" *ngIf="editingChallengeId" (click)="cancelChallengeEdit()">
+                <span>Cancelar</span>
+              </button>
+            </div>
           </form>
 
-          <div class="table-responsive" style="margin-top: 1.25rem;">
-            <table class="eco-table" aria-label="Tabla administrativa de retos">
+          <div class="table-responsive mt-4">
+            <table class="eco-table">
               <thead>
                 <tr>
-                  <th>Reto Comunitario</th>
+                  <th>Reto</th>
                   <th>Meta</th>
                   <th>Vigencia</th>
-                  <th>Acciones CRUD</th>
+                  <th>Estado</th>
+                  <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let c of challenges">
-                  <td>
-                    <strong>🎯 {{ c.title }}</strong>
-                    <div class="muted-xs">{{ c.description }}</div>
-                  </td>
+                  <td><strong>{{ c.title }}</strong></td>
                   <td>{{ c.goalValue }} {{ c.goalUnit }}</td>
                   <td>{{ c.periodStart }} → {{ c.periodEnd }}</td>
+                  <td>
+                    <span [class]="c.active ? 'status-ok' : 'status-warn'">
+                      {{ c.active ? 'Activo' : 'Cerrado' }}
+                    </span>
+                  </td>
                   <td class="actions-cell">
-                    <button type="button" class="btn-table-action edit" (click)="editChallenge(c)">✏️ Editar</button>
-                    <button type="button" class="btn-table-action delete" (click)="deleteChallenge(c)">🗑️ Eliminar</button>
+                    <button type="button" class="btn-table-action" (click)="editChallenge(c)" title="Editar">
+                      <app-icon name="edit" [size]="14"></app-icon>
+                    </button>
+                    <button type="button" class="btn-table-action danger" (click)="deleteChallenge(c.id)" title="Eliminar">
+                      <app-icon name="trash" [size]="14"></app-icon>
+                    </button>
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
-        </mat-card>
+        </article>
       </div>
     </section>
   `
@@ -187,56 +241,49 @@ export class AdminComponent implements OnInit {
   challenges: ChallengeItem[] = [];
   editingRewardId: number | null = null;
   editingChallengeId: number | null = null;
-  bannerMessage = '';
+  feedbackMsg = '';
 
   rewardForm: RewardRequest = {
-    code: 'METRO_PASS',
-    title: 'Recarga Tarjeta Metro L1',
-    description: 'S/ 10 de saldo en la Línea 1 del Metro de Lima',
+    code: 'MUSEO_150',
+    title: 'Pase Cultural MALI',
+    description: 'Ingreso libre al Museo de Arte de Lima por movilidad limpia',
     pointsCost: 150,
-    iconEmoji: '🚇',
+    iconEmoji: 'ticket',
     active: true
   };
 
   challengeForm: ChallengeRequest = {
-    title: 'Semana Universitaria Cero Humo',
-    description: 'Llega al campus en bicicleta o caminata 5 veces esta semana',
+    title: 'Reto Costa Verde en Bici',
+    description: 'Completa 25 km en bicicleta por el corredor Miraflores - Barranco',
     goalValue: 25,
     goalUnit: 'km',
-    periodStart: '2026-11-04',
+    periodStart: '2026-11-01',
     periodEnd: '2026-11-30',
     active: true
   };
 
-  constructor(private api: ApiService, public auth: AuthService, public i18n: I18nService) {}
+  constructor(private api: ApiService, public i18n: I18nService) {}
 
   ngOnInit(): void {
-    this.loadAdminData();
+    this.loadData();
   }
 
-  loadAdminData(): void {
-    this.api.getAdminRewards().subscribe(r => (this.rewards = r));
-    this.api.getAdminChallenges().subscribe(c => (this.challenges = c));
-  }
-
-  switchToAdmin(): void {
-    this.auth.login({ email: 'admin@ecocommute.org', password: 'Admin123!' }).subscribe(() => {
-      this.bannerMessage = 'Sesión cambiada a Administrador (ROLE_ADMIN).';
-      this.loadAdminData();
-    });
+  loadData(): void {
+    this.api.getAdminRewards().subscribe(res => (this.rewards = res));
+    this.api.getAdminChallenges().subscribe(res => (this.challenges = res));
   }
 
   saveReward(): void {
     if (this.editingRewardId) {
-      this.api.updateAdminReward(this.editingRewardId, this.rewardForm).subscribe(updated => {
-        this.bannerMessage = `Recompensa "${updated.title}" actualizada correctamente.`;
+      this.api.updateAdminReward(this.editingRewardId, this.rewardForm).subscribe(res => {
+        this.feedbackMsg = `Beneficio actualizado: ${res.title}`;
         this.editingRewardId = null;
-        this.loadAdminData();
+        this.loadData();
       });
     } else {
-      this.api.createAdminReward(this.rewardForm).subscribe(created => {
-        this.bannerMessage = `Recompensa "${created.title}" creada en el catálogo.`;
-        this.loadAdminData();
+      this.api.createAdminReward(this.rewardForm).subscribe(res => {
+        this.feedbackMsg = `Beneficio publicado: ${res.title}`;
+        this.loadData();
       });
     }
   }
@@ -253,36 +300,28 @@ export class AdminComponent implements OnInit {
     };
   }
 
-  deleteReward(r: RewardItem): void {
-    this.api.deleteAdminReward(r.id).subscribe(() => {
-      this.bannerMessage = `Recompensa "${r.title}" eliminada del catálogo.`;
-      this.loadAdminData();
-    });
+  cancelRewardEdit(): void {
+    this.editingRewardId = null;
   }
 
-  resetRewardForm(): void {
-    this.editingRewardId = null;
-    this.rewardForm = {
-      code: 'METRO_PASS',
-      title: 'Recarga Tarjeta Metro L1',
-      description: 'S/ 10 de saldo en la Línea 1 del Metro de Lima',
-      pointsCost: 150,
-      iconEmoji: '🚇',
-      active: true
-    };
+  deleteReward(id: number): void {
+    this.api.deleteAdminReward(id).subscribe(() => {
+      this.feedbackMsg = `Beneficio eliminado del catálogo.`;
+      this.loadData();
+    });
   }
 
   saveChallenge(): void {
     if (this.editingChallengeId) {
-      this.api.updateAdminChallenge(this.editingChallengeId, this.challengeForm).subscribe(updated => {
-        this.bannerMessage = `Reto "${updated.title}" actualizado correctamente.`;
+      this.api.updateAdminChallenge(this.editingChallengeId, this.challengeForm).subscribe(res => {
+        this.feedbackMsg = `Reto actualizado: ${res.title}`;
         this.editingChallengeId = null;
-        this.loadAdminData();
+        this.loadData();
       });
     } else {
-      this.api.createAdminChallenge(this.challengeForm).subscribe(created => {
-        this.bannerMessage = `Reto "${created.title}" publicado para la comunidad.`;
-        this.loadAdminData();
+      this.api.createAdminChallenge(this.challengeForm).subscribe(res => {
+        this.feedbackMsg = `Reto comunitario creado: ${res.title}`;
+        this.loadData();
       });
     }
   }
@@ -300,23 +339,14 @@ export class AdminComponent implements OnInit {
     };
   }
 
-  deleteChallenge(c: ChallengeItem): void {
-    this.api.deleteAdminChallenge(c.id).subscribe(() => {
-      this.bannerMessage = `Reto "${c.title}" eliminado.`;
-      this.loadAdminData();
-    });
+  cancelChallengeEdit(): void {
+    this.editingChallengeId = null;
   }
 
-  resetChallengeForm(): void {
-    this.editingChallengeId = null;
-    this.challengeForm = {
-      title: 'Semana Universitaria Cero Humo',
-      description: 'Llega al campus en bicicleta o caminata 5 veces esta semana',
-      goalValue: 25,
-      goalUnit: 'km',
-      periodStart: '2026-11-04',
-      periodEnd: '2026-11-30',
-      active: true
-    };
+  deleteChallenge(id: number): void {
+    this.api.deleteAdminChallenge(id).subscribe(() => {
+      this.feedbackMsg = `Reto eliminado.`;
+      this.loadData();
+    });
   }
 }

@@ -1,110 +1,122 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatCardModule } from '@angular/material/card';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { RouterModule } from '@angular/router';
 import { ApiService } from '../../services/api.service';
 import { I18nService } from '../../services/i18n.service';
-import {
-  BadgeCatalogItem,
-  ChallengeItem,
-  DashboardBadge,
-  GamificationMilestones,
-  GamificationStats
-} from '../../models/api.models';
+import { BadgeCatalogItem, DashboardBadge, GamificationMilestones, GamificationStats } from '../../models/api.models';
+import { EcoIconComponent } from '../icon/eco-icon.component';
 
 @Component({
   selector: 'app-gamification',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatProgressBarModule],
+  imports: [CommonModule, RouterModule, EcoIconComponent],
   template: `
-    <section class="app-page-container" aria-labelledby="gam-title">
-      <div class="page-header-card">
+    <section class="page-section">
+      <div class="section-header-row">
         <div>
-          <span class="eyebrow-tag">HU06 · HU10 · HU11 · HU13 · Gamificación e Incentivos Sostenibles</span>
-          <h1 id="gam-title">{{ i18n.t('gamification.title') }}</h1>
-          <p class="subtitle">{{ i18n.t('gamification.subtitle') }}</p>
+          <span class="eyebrow-tag">
+            <app-icon name="medal" [size]="14"></app-icon>
+            Reconocimiento Ciudadano
+          </span>
+          <h1 class="page-title">{{ i18n.t('gamification.title') }}</h1>
+          <p class="page-subtitle">{{ i18n.t('gamification.subtitle') }}</p>
         </div>
-        <span class="badge-pill">GET /api/v1/gamification/* · /challenges</span>
       </div>
 
-      <!-- Progreso de Nivel y Estadísticas (HU06, HU10) -->
-      <div class="grid-2-col" *ngIf="stats && milestones">
-        <mat-card class="eco-mat-card">
-          <span class="eyebrow-tag">HU10 · Progreso de Hitos Personales</span>
-          <h2>Nivel Eco {{ milestones.currentLevel }} → Próximo Hito: {{ milestones.nextMilestonePoints }} pts</h2>
-          <div class="milestone-progress-wrap">
-            <div class="milestone-labels">
-              <span>Puntos actuales: <strong>{{ milestones.currentPoints }} pts</strong></span>
-              <span>Avance: <strong>{{ milestones.progressPercentage }}%</strong></span>
-            </div>
-            <mat-progress-bar mode="determinate" [value]="milestones.progressPercentage"></mat-progress-bar>
-          </div>
-          <div class="kpi-mini-grid">
-            <div class="kpi-mini">
-              <span class="kpi-label">CO₂ Ahorrado</span>
-              <strong class="kpi-val accent">{{ stats.totalCo2SavedKg | number:'1.2-2' }} kg</strong>
-            </div>
-            <div class="kpi-mini">
-              <span class="kpi-label">Distancia Total</span>
-              <strong class="kpi-val">{{ stats.totalDistanceKm | number:'1.1-1' }} km</strong>
-            </div>
-            <div class="kpi-mini">
-              <span class="kpi-label">Racha Sostenible</span>
-              <strong class="kpi-val">🔥 {{ stats.streakDays }} días</strong>
-            </div>
-          </div>
-        </mat-card>
-
-        <!-- Retos Comunitarios Activos (HU13) -->
-        <mat-card class="eco-mat-card">
-          <div class="card-head-row">
+      <!-- Level & Milestone Progress Card -->
+      <article class="eco-card milestone-hero-card" *ngIf="milestones as m">
+        <div class="milestone-header">
+          <div class="level-badge-cluster">
+            <span class="level-shield">
+              <app-icon name="medal" [size]="26"></app-icon>
+            </span>
             <div>
-              <span class="eyebrow-tag">HU13 · Desafíos Comunitarios ODS 11.2</span>
-              <h2>Retos Sostenibles Activos ({{ challenges.length }})</h2>
-            </div>
-            <span class="badge-pill">GET /api/v1/challenges</span>
-          </div>
-          <div class="challenges-list">
-            <div class="challenge-item" *ngFor="let c of challenges">
-              <div class="challenge-head">
-                <strong>🎯 {{ c.title }}</strong>
-                <span class="pts-tag">Meta: {{ c.goalValue }} {{ c.goalUnit }}</span>
-              </div>
-              <p class="muted">{{ c.description }}</p>
-              <div class="muted-xs">Vigencia: {{ c.periodStart }} al {{ c.periodEnd }}</div>
+              <span class="eyebrow-tag">Nivel actual {{ m.currentLevel }}</span>
+              <h2>{{ getLevelName(m.currentLevel) }}</h2>
+              <p class="card-sub">
+                Tienes <strong>{{ m.currentPoints }} puntos</strong> acumulados · Próxima meta:
+                <strong>{{ m.nextMilestonePoints }} puntos</strong>
+              </p>
             </div>
           </div>
-        </mat-card>
+          <div class="milestone-pct">{{ m.progressPercentage }}%</div>
+        </div>
+        <div class="milestone-progress-track">
+          <div class="milestone-progress-fill" [style.width.%]="m.progressPercentage"></div>
+        </div>
+      </article>
+
+      <!-- 4 Key Progress Metrics -->
+      <div class="kpi-grid-4" *ngIf="stats as st">
+        <article class="eco-kpi-card">
+          <div class="kpi-top">
+            <span class="kpi-label">Puntos acumulados</span>
+            <span class="kpi-icon"><app-icon name="bolt" [size]="19"></app-icon></span>
+          </div>
+          <div class="kpi-number">{{ st.currentPoints }} <small>pts</small></div>
+          <div class="kpi-foot">Disponibles para canjes en comercios aliados</div>
+        </article>
+
+        <article class="eco-kpi-card">
+          <div class="kpi-top">
+            <span class="kpi-label">Racha activa</span>
+            <span class="kpi-icon"><app-icon name="flame" [size]="19"></app-icon></span>
+          </div>
+          <div class="kpi-number">{{ st.streakDays }} <small>días</small></div>
+          <div class="kpi-foot">Días consecutivos moviéndote sin auto</div>
+        </article>
+
+        <article class="eco-kpi-card">
+          <div class="kpi-top">
+            <span class="kpi-label">Emisiones evitadas</span>
+            <span class="kpi-icon"><app-icon name="leaf" [size]="19"></app-icon></span>
+          </div>
+          <div class="kpi-number">{{ st.totalCo2SavedKg | number: '1.2-2' }} <small>kg</small></div>
+          <div class="kpi-foot">Ahorro verificado frente al vehículo particular</div>
+        </article>
+
+        <article class="eco-kpi-card">
+          <div class="kpi-top">
+            <span class="kpi-label">Recorridos limpios</span>
+            <span class="kpi-icon"><app-icon name="bike" [size]="19"></app-icon></span>
+          </div>
+          <div class="kpi-number">{{ st.totalTrips }}</div>
+          <div class="kpi-foot">{{ st.totalDistanceKm | number: '1.1-1' }} km registrados en Lima</div>
+        </article>
       </div>
 
-      <!-- Catálogo y Estado de Medallas (HU10, HU11) -->
-      <mat-card class="eco-mat-card">
+      <!-- Badges Collection -->
+      <article class="eco-card">
         <div class="card-head-row">
           <div>
-            <span class="eyebrow-tag">HU10 · HU11 · Desbloqueo Automático de Logros</span>
-            <h2>Mis Medallas e Insignias Ambientales</h2>
+            <h2>Colección de insignias</h2>
+            <p class="card-sub">Las insignias se desbloquean automáticamente cuando cumples su meta en la bitácora</p>
           </div>
-          <span class="badge-pill">GET /api/v1/gamification/badges & /catalog</span>
         </div>
 
-        <div class="badges-grid-3">
+        <div class="badges-catalog-grid">
           <div
-            class="badge-card-full"
+            class="badge-card-large"
             *ngFor="let b of userBadges"
             [class.unlocked]="b.unlocked"
           >
-            <div class="badge-card-top">
-              <span class="badge-emoji-lg">{{ b.iconEmoji }}</span>
-              <span class="status-tag" [class.ok]="b.unlocked">
-                {{ b.unlocked ? '✅ Desbloqueada' : '🔒 En progreso (' + b.progressPercent + '%)' }}
+            <div class="badge-large-top">
+              <span class="badge-icon-medallion">
+                <app-icon [name]="b.code || b.iconEmoji" [size]="24"></app-icon>
+              </span>
+              <span class="badge-status-chip" [class.done]="b.unlocked">
+                <app-icon [name]="b.unlocked ? 'check' : 'lock'" [size]="13"></app-icon>
+                <span>{{ b.unlocked ? 'Desbloqueada' : b.progressPercent + '% completado' }}</span>
               </span>
             </div>
             <h3>{{ b.title }}</h3>
-            <p class="muted">{{ b.description }}</p>
-            <mat-progress-bar mode="determinate" [value]="b.progressPercent"></mat-progress-bar>
+            <p>{{ b.description }}</p>
+            <div class="mode-progress-track">
+              <div class="mode-progress-fill" [style.width.%]="b.progressPercent"></div>
+            </div>
           </div>
         </div>
-      </mat-card>
+      </article>
     </section>
   `
 })
@@ -113,15 +125,24 @@ export class GamificationComponent implements OnInit {
   milestones: GamificationMilestones | null = null;
   userBadges: DashboardBadge[] = [];
   catalog: BadgeCatalogItem[] = [];
-  challenges: ChallengeItem[] = [];
 
   constructor(private api: ApiService, public i18n: I18nService) {}
 
   ngOnInit(): void {
-    this.api.getGamificationStats().subscribe(s => (this.stats = s));
-    this.api.getGamificationMilestones().subscribe(m => (this.milestones = m));
-    this.api.getUserBadges().subscribe(b => (this.userBadges = b));
-    this.api.getBadgeCatalog().subscribe(c => (this.catalog = c));
-    this.api.getChallenges().subscribe(ch => (this.challenges = ch));
+    this.api.getGamificationStats().subscribe(res => (this.stats = res));
+    this.api.getGamificationMilestones().subscribe(res => (this.milestones = res));
+    this.api.getUserBadges().subscribe(res => (this.userBadges = res));
+    this.api.getBadgeCatalog().subscribe(res => (this.catalog = res));
+  }
+
+  getLevelName(level: number): string {
+    const names: Record<number, string> = {
+      1: 'Explorador Sostenible',
+      2: 'Ciclista Urbano',
+      3: 'Embajador de Movilidad Limpia',
+      4: 'Guardián del Aire de Lima',
+      5: 'Leyenda Cero Emisiones'
+    };
+    return names[level] || `Nivel ${level} EcoCommute`;
   }
 }
