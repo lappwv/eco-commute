@@ -1,4 +1,4 @@
-# Render Blueprint: backend gratis (web service 512MB + Postgres 256MB, plan free).
+# Render Blueprint: Full-Stack EcoCommute (Spring Boot 3 Backend + Angular 18 Web App + PostgreSQL 16)
 # Activacion: render.com -> New -> Blueprint -> elegir este repo.
 services:
   - type: web
@@ -34,6 +34,17 @@ services:
           property: password
       - key: APP_SEED_DEMO_DATA
         value: "true"
+
+  - type: web
+    name: ecocommute-frontend
+    runtime: static
+    buildCommand: cd frontend-angular && npm ci && npm run build
+    staticPublishPath: frontend-angular/dist/frontend-angular/browser
+    autoDeployTrigger: commit
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
 
 databases:
   - name: ecocommute-db

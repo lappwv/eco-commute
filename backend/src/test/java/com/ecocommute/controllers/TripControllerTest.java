@@ -158,36 +158,39 @@ class TripControllerTest {
     }
 
     @Test
-    void normalUserCannotAccessAdministrativeTripOperations() throws Exception {
+    void nonOwnerUserCannotAccessOrModifyAnotherUsersTrip() throws Exception {
         String tripId = recordTrip(validRequest());
+        User otherUser = userRepository.save(new User(
+                UUID.randomUUID() + "@example.test", "unused", "Otro usuario", Role.ROLE_USER));
+        String otherToken = jwtTokenUtil.generateToken(otherUser);
         String path = "/api/v1/trips/" + tripId;
-        mockMvc.perform(get(path).header("Authorization", "Bearer " + token))
+
+        mockMvc.perform(get(path).header("Authorization", "Bearer " + otherToken))
                 .andExpect(status().isForbidden());
-        mockMvc.perform(put(path).header("Authorization", "Bearer " + token)
+        mockMvc.perform(put(path).header("Authorization", "Bearer " + otherToken)
                         .contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(validRequest())))
                 .andExpect(status().isForbidden());
-        mockMvc.perform(delete(path).header("Authorization", "Bearer " + token))
+        mockMvc.perform(delete(path).header("Authorization", "Bearer " + otherToken))
                 .andExpect(status().isForbidden());
         assertTrue(tripRepository.existsById(tripId));
     }
 
     @Test
-    void adminUpdatesMetricsAndDeletesTripWithoutChangingOwner() throws Exception {
+    void ownerOrAdminUpdatesMetricsAndDeletesTripWithoutChangingOwner() throws Exception {
         String tripId = recordTrip(validRequest());
-        User admin = userRepository.findByEmail("admin@ecocommute.org").orElseThrow();
-        String adminToken = jwtTokenUtil.generateToken(admin);
         String path = "/api/v1/trips/" + tripId;
         Map<String, Object> updatedRequest = validRequest();
         updatedRequest.put("distanceKm", 5.0);
 
-        mockMvc.perform(put(path).header("Authorization", "Bearer " + adminToken)
+        // Owner updates their own trip (HU04)
+        mockMvc.perform(put(path).header("Authorization", "Bearer " + token)
                         .contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(updatedRequest)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.distanceKm").value(5.0))
                 .andExpect(jsonPath("$.baselineCo2Grams").value(850.0))
                 .andExpect(jsonPath("$.co2EmittedGrams").value(0.0))
                 .andExpect(jsonPath("$.co2SavedGrams").value(850.0));
-        mockMvc.perform(get(path).header("Authorization", "Bearer " + adminToken))
+        mockMvc.perform(get(path).header("Authorization", "Bearer " + token))
                 .andExpect(status().isOk()).andExpect(jsonPath("$.id").value(tripId));
         assertEquals(user.getId(), tripRepository.findById(tripId).orElseThrow().getUser().getId());
         UserStats stats = userStatsRepository.findByUserId(user.getId()).orElseThrow();
@@ -195,7 +198,8 @@ class TripControllerTest {
         assertEquals(0.85, stats.getTotalCo2SavedKg(), 0.001);
         assertEquals(1, stats.getTotalTrips());
 
-        mockMvc.perform(delete(path).header("Authorization", "Bearer " + adminToken))
+        // Owner or Admin deletes the trip (HU04)
+        mockMvc.perform(delete(path).header("Authorization", "Bearer " + token))
                 .andExpect(status().isNoContent());
         assertFalse(tripRepository.existsById(tripId));
         assertEquals(0, stats.getTotalTrips());

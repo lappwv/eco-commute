@@ -6,7 +6,6 @@ import com.ecocommute.dto.RegisterRequestDTO;
 import com.ecocommute.dto.UserProfileDTO;
 import com.ecocommute.entities.User;
 import com.ecocommute.services.AuthService;
-import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -51,8 +50,8 @@ public class AuthController {
         return ResponseEntity.ok(authService.login(request));
     }
 
-    @Hidden
     @GetMapping("/users/me")
+    @Operation(summary = "HU01, HU02 - Consulta del perfil, estadísticas e insignias del usuario autenticado")
     public ResponseEntity<UserProfileDTO> getMyProfile(@AuthenticationPrincipal User user) {
         if (user == null) {
             return ResponseEntity.status(401).build();
