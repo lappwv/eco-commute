@@ -554,76 +554,92 @@ export class ApiService {
     this.auth.setPointsAbsolute(sum);
   }
 
-  // HU07, HU09 - Dashboard y Reportes
+  // HU07, HU09 - Dashboard y Reportes (Con emisión instantánea 0ms + timeout ante cold-start de Render)
+  buildFallbackDashboardSummary(): DashboardSummary {
+    const u = this.auth.currentUser;
+    const totalCo2SavedKg =
+      Math.round((this.localTrips.reduce((acc, t) => acc + t.co2SavedGrams, 0) / 1000) * 100) / 100;
+    const totalDistanceKm =
+      Math.round(this.localTrips.reduce((acc, t) => acc + t.distanceKm, 0) * 100) / 100;
+    const totalCaloriesBurned = this.localTrips.reduce((acc, t) => acc + t.caloriesBurned, 0);
+    const currentPoints = this.localTrips.reduce((acc, t) => acc + t.pointsEarned, 0);
+    const tripsByMode: Record<string, number> = {};
+    for (const t of this.localTrips) {
+      tripsByMode[t.transportMode] = (tripsByMode[t.transportMode] || 0) + 1;
+    }
+    return {
+      userId: u?.id || 'user-elena-rios',
+      fullName: u?.fullName || 'Elena Rios',
+      email: u?.email || 'demo@ecocommute.org',
+      avatarUrl: u?.avatarUrl || 'https://api.dicebear.com/7.x/bottts/svg?seed=elena',
+      totalCo2SavedKg,
+      totalDistanceKm,
+      totalTrips: this.localTrips.length,
+      currentPoints,
+      currentLevel: u?.currentLevel || 3,
+      totalCaloriesBurned,
+      treesEquivalent: Math.round((totalCo2SavedKg / 21.77) * 100) / 100,
+      weeklyTrend: [
+        { dayOfWeek: 'Lun', co2SavedGrams: 680 },
+        { dayOfWeek: 'Mar', co2SavedGrams: 1156 },
+        { dayOfWeek: 'Mié', co2SavedGrams: 540 },
+        { dayOfWeek: 'Jue', co2SavedGrams: 1445 },
+        { dayOfWeek: 'Vie', co2SavedGrams: 890 },
+        { dayOfWeek: 'Sáb', co2SavedGrams: 420 },
+        { dayOfWeek: 'Dom', co2SavedGrams: 310 }
+      ],
+      tripsByMode,
+      recentBadges: this.computeLocalDashboardBadges(currentPoints, totalCo2SavedKg, this.localTrips.length)
+    };
+  }
+
+  buildFallbackCommunityImpact(): CommunityImpact {
+    return {
+      totalCo2SavedTons: 0.42,
+      totalCleanKm: 214.5,
+      totalTrips: 23 + this.localTrips.length,
+      totalActiveUsers: 7,
+      totalTreesEquivalent: 19.3
+    };
+  }
+
+  buildFallbackRecommendation(): AiRecommendation {
+    return {
+      title: 'Corredor ciclista Arequipa – Salaverry',
+      recommendation:
+        'Si sales entre las 7:00 y 9:00 a.m., toma la ciclovía segregada de Av. Salaverry o Av. Arequipa: evitarás hasta 1,445 g de CO₂ por trayecto, ahorrarás 12 minutos frente al tráfico vehicular y sumarás puntos extra para tu racha semanal.',
+      advisor: 'Asesor de Movilidad EcoCommute'
+    };
+  }
+
   getDashboardSummary(): Observable<DashboardSummary> {
+    const fallback = this.buildFallbackDashboardSummary();
     return this.http.get<DashboardSummary>(`${this.base}/api/v1/dashboard/summary`).pipe(
+      timeout(2500),
       tap(() => this.backendOnlineSubject.next(true)),
-      catchError(() => {
-        const u = this.auth.currentUser;
-        const totalCo2SavedKg =
-          Math.round((this.localTrips.reduce((acc, t) => acc + t.co2SavedGrams, 0) / 1000) * 100) / 100;
-        const totalDistanceKm =
-          Math.round(this.localTrips.reduce((acc, t) => acc + t.distanceKm, 0) * 100) / 100;
-        const totalCaloriesBurned = this.localTrips.reduce((acc, t) => acc + t.caloriesBurned, 0);
-        const currentPoints = this.localTrips.reduce((acc, t) => acc + t.pointsEarned, 0);
-        const tripsByMode: Record<string, number> = {};
-        for (const t of this.localTrips) {
-          tripsByMode[t.transportMode] = (tripsByMode[t.transportMode] || 0) + 1;
-        }
-        return of({
-          userId: u?.id || 'user-elena-rios',
-          fullName: u?.fullName || 'Elena Rios',
-          email: u?.email || 'demo@ecocommute.org',
-          avatarUrl: u?.avatarUrl || 'https://api.dicebear.com/7.x/bottts/svg?seed=elena',
-          totalCo2SavedKg,
-          totalDistanceKm,
-          totalTrips: this.localTrips.length,
-          currentPoints,
-          currentLevel: u?.currentLevel || 2,
-          totalCaloriesBurned,
-          treesEquivalent: Math.round((totalCo2SavedKg / 21.77) * 100) / 100,
-          weeklyTrend: [
-            { dayOfWeek: 'Lun', co2SavedGrams: 680 },
-            { dayOfWeek: 'Mar', co2SavedGrams: 1156 },
-            { dayOfWeek: 'Mié', co2SavedGrams: 540 },
-            { dayOfWeek: 'Jue', co2SavedGrams: 1445 },
-            { dayOfWeek: 'Vie', co2SavedGrams: 890 },
-            { dayOfWeek: 'Sáb', co2SavedGrams: 420 },
-            { dayOfWeek: 'Dom', co2SavedGrams: 310 }
-          ],
-          tripsByMode,
-          recentBadges: this.computeLocalDashboardBadges(currentPoints, totalCo2SavedKg, this.localTrips.length)
-        });
-      })
+      map(res => (res && res.weeklyTrend?.length ? res : fallback)),
+      catchError(() => of(fallback)),
+      startWith(fallback)
     );
   }
 
   getCommunityImpact(): Observable<CommunityImpact> {
+    const fallback = this.buildFallbackCommunityImpact();
     return this.http.get<CommunityImpact>(`${this.base}/api/v1/dashboard/community-impact`).pipe(
+      timeout(2500),
       tap(() => this.backendOnlineSubject.next(true)),
-      catchError(() =>
-        of({
-          totalCo2SavedTons: 0.42,
-          totalCleanKm: 214.5,
-          totalTrips: 23 + this.localTrips.length,
-          totalActiveUsers: 7,
-          totalTreesEquivalent: 19.3
-        })
-      )
+      catchError(() => of(fallback)),
+      startWith(fallback)
     );
   }
 
   getRecommendations(): Observable<AiRecommendation> {
+    const fallback = this.buildFallbackRecommendation();
     return this.http.get<AiRecommendation>(`${this.base}/api/v1/dashboard/recommendations`).pipe(
+      timeout(2500),
       tap(() => this.backendOnlineSubject.next(true)),
-      catchError(() =>
-        of({
-          title: 'Corredor ciclista Arequipa – Salaverry',
-          recommendation:
-            'Si sales entre las 7:00 y 9:00 a.m., toma la ciclovía segregada de Av. Salaverry o Av. Arequipa: evitarás hasta 1,445 g de CO₂ por trayecto, ahorrarás 12 minutos frente al tráfico vehicular y sumarás puntos extra para tu racha semanal.',
-          advisor: 'Asesor de Movilidad EcoCommute'
-        })
-      )
+      catchError(() => of(fallback)),
+      startWith(fallback)
     );
   }
 
