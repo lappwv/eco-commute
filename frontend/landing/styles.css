@@ -1491,3 +1491,528 @@ html[data-theme="dark"] .nav-cta-pill {
     grid-template-columns: 1fr;
   }
 }
+
+
+/* ==========================================================================
+   PLAYFUL CARTOON / ILLUSTRATED ECO STYLE (REFERENCE IMAGE THEME)
+   Vibrant Lime (#6CC016), Sunny Yellow (#FFD24C), Sky Blue (#74C7EC),
+   Crisp White Blobs & 2.5px Dark Cartoon Outlines (#1E241E)
+   ========================================================================== */
+
+:root,
+html[data-theme="light"] {
+  --bg: #F3FCE8;
+  --bg-alt: #E5F7CE;
+  --card: #FFFFFF;
+  --card-subtle: #F7FBEF;
+  --ink: #1E241E;
+  --ink-secondary: #394439;
+  --ink-muted: #586658;
+  --accent: #58A700;
+  --accent-hover: #468600;
+  --accent-soft: #E3F9C6;
+  --accent-bright: #76C71A;
+  --sunny: #FFD24C;
+  --sunny-hover: #FFC21A;
+  --sky: #74C7EC;
+  --coral: #FF7A59;
+  --cartoon-line: #1E241E;
+  --border: #1E241E;
+  --border-strong: #1E241E;
+  --shadow-sm: 0 4px 0 #1E241E;
+  --shadow-md: 0 6px 0 #1E241E;
+  --shadow-lg: 0 8px 0 #1E241E;
+  --sans: "Nunito", "Inter", sans-serif;
+  --display: "Fredoka", "Plus Jakarta Sans", sans-serif;
+}
+
+html[data-theme="dark"] {
+  --bg: #132015;
+  --bg-alt: #1A2B1D;
+  --card: #1F3323;
+  --card-subtle: #27402C;
+  --ink: #F7FBEF;
+  --ink-secondary: #CFE3C8;
+  --ink-muted: #9AB892;
+  --accent: #8CE52E;
+  --accent-hover: #76C71A;
+  --accent-soft: rgba(140, 229, 46, 0.18);
+  --accent-bright: #A4F24B;
+  --sunny: #FFD24C;
+  --sunny-hover: #FFC21A;
+  --sky: #74C7EC;
+  --coral: #FF8A65;
+  --cartoon-line: #0A110B;
+  --border: #0A110B;
+  --border-strong: #0A110B;
+  --shadow-sm: 0 4px 0 #0A110B;
+  --shadow-md: 0 6px 0 #0A110B;
+  --shadow-lg: 0 8px 0 #0A110B;
+}
+
+/* Navbar Playful */
+.topbar {
+  background: rgba(255, 255, 255, 0.94);
+  border-bottom: 2.5px solid var(--cartoon-line);
+}
+
+html[data-theme="dark"] .topbar {
+  background: rgba(24, 40, 27, 0.95);
+}
+
+.brand-cartoon-badge {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  background: var(--sunny);
+  border: 2.5px solid var(--cartoon-line);
+  box-shadow: 0 3px 0 var(--cartoon-line);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-cartoon-badge.sm {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+}
+
+.brand-text {
+  font-family: var(--display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.nav a {
+  font-family: var(--display);
+  font-weight: 600;
+  color: var(--ink);
+  border: 2px solid transparent;
+}
+
+.nav a:hover {
+  background: var(--sunny);
+  color: #1E241E;
+  border-color: var(--cartoon-line);
+  box-shadow: 0 3px 0 var(--cartoon-line);
+}
+
+.nav-cta-pill {
+  background: var(--sunny) !important;
+  color: #1E241E !important;
+  border: 2.5px solid var(--cartoon-line) !important;
+  box-shadow: 0 3px 0 var(--cartoon-line);
+  font-family: var(--display);
+  font-weight: 700 !important;
+}
+
+.nav-cta-pill:hover {
+  transform: translateY(-1px);
+  background: var(--sunny-hover) !important;
+}
+
+.biome-switcher,
+.lang-toggle {
+  border: 2px solid var(--cartoon-line);
+  box-shadow: 0 3px 0 var(--cartoon-line);
+  background: var(--card);
+  font-weight: 700;
+}
+
+.biome-chip.is-active {
+  background: var(--sunny);
+  color: #1E241E;
+  font-weight: 800;
+}
+
+/* ==================== HERO PLAYFUL LIME GREEN + WHITE BLOBS ==================== */
+.hero-section {
+  background: #6CC016 !important;
+  border-bottom: 3px solid var(--cartoon-line);
+  position: relative;
+  overflow: hidden;
+}
+
+html[data-theme="dark"] .hero-section {
+  background: #234712 !important;
+}
+
+.hero-section::before,
+.hero-section::after {
+  display: none !important;
+}
+
+/* Domo blanco superior igual a la imagen de referencia */
+.hero-top-white-dome {
+  position: absolute;
+  top: -210px;
+  left: 16%;
+  width: 540px;
+  height: 320px;
+  background: #FFFFFF;
+  border-radius: 50%;
+  border: 3px solid var(--cartoon-line);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Gran círculo blanco derecho igual a la imagen de referencia */
+.hero-right-white-circle {
+  position: absolute;
+  right: -120px;
+  bottom: -140px;
+  width: 780px;
+  height: 780px;
+  background: #FFFFFF;
+  border-radius: 50%;
+  border: 3px solid var(--cartoon-line);
+  z-index: 0;
+  pointer-events: none;
+}
+
+html[data-theme="dark"] .hero-top-white-dome,
+html[data-theme="dark"] .hero-right-white-circle {
+  background: #182B1B;
+}
+
+/* Burbujas y nubes cartoon flotantes */
+.hero-doodles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.doodle-bubble {
+  position: absolute;
+  background: #FFFFFF;
+  border: 2.5px solid #1E241E;
+  border-radius: 50%;
+}
+
+.doodle-bubble.b1 {
+  width: 18px;
+  height: 18px;
+  top: 23%;
+  left: 48%;
+}
+
+.doodle-bubble.b2 {
+  width: 13px;
+  height: 13px;
+  top: 66%;
+  left: 43%;
+}
+
+.doodle-bubble.b3 {
+  width: 15px;
+  height: 15px;
+  bottom: 11%;
+  left: 36%;
+}
+
+.doodle-bubble.b4 {
+  width: 20px;
+  height: 20px;
+  top: 16%;
+  right: 10%;
+}
+
+.doodle-cloud {
+  position: absolute;
+  width: 108px;
+  height: auto;
+  filter: drop-shadow(0 4px 0 rgba(30, 36, 30, 0.18));
+}
+
+.doodle-cloud.c1 {
+  top: 15%;
+  left: 43%;
+}
+
+.doodle-cloud.c2 {
+  top: 12%;
+  right: 18%;
+  width: 90px;
+}
+
+.hero-kicker {
+  background: #FFFFFF !important;
+  color: #1E241E !important;
+  border: 2.5px solid #1E241E;
+  box-shadow: 0 3px 0 #1E241E;
+  font-family: var(--display);
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.hero-headline {
+  font-family: var(--display);
+  color: #FFFFFF !important;
+  text-shadow: 0 3px 0 #1E241E;
+  letter-spacing: 0.01em;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.hero-headline em {
+  color: var(--sunny) !important;
+}
+
+.hero-copy .lead {
+  color: #F7FFE8 !important;
+  font-weight: 700;
+  font-size: 1.08rem;
+}
+
+/* Botón Amarillo "Sign Up" idéntico a la imagen de referencia */
+.button {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1rem;
+  border: 2.5px solid #1E241E !important;
+  box-shadow: 0 4px 0 #1E241E !important;
+  padding: 0.85rem 1.85rem;
+}
+
+.button.primary {
+  background: var(--sunny) !important;
+  color: #1E241E !important;
+}
+
+.button.primary:hover {
+  background: var(--sunny-hover) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #1E241E !important;
+}
+
+.button.secondary {
+  background: #FFFFFF !important;
+  color: #1E241E !important;
+}
+
+.button.secondary:hover {
+  background: #F4FCEB !important;
+  transform: translateY(-2px);
+}
+
+/* Escena Ilustrada Cartoon en el Hero */
+.hero-cartoon-scene {
+  background: #FFFFFF;
+  border: 2.5px solid #1E241E;
+  border-radius: 22px;
+  padding: 0.55rem 0.9rem 0.3rem;
+  box-shadow: 0 5px 0 #1E241E;
+  max-width: 470px;
+}
+
+.cartoon-scene-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Píldoras de métricas del Hero */
+.hero-metrics {
+  border-top: none !important;
+  padding-top: 0.4rem !important;
+  gap: 0.85rem;
+}
+
+.metric-item {
+  background: #FFFFFF;
+  border: 2.5px solid #1E241E;
+  border-radius: 18px;
+  padding: 0.75rem 0.9rem;
+  box-shadow: 0 4px 0 #1E241E;
+}
+
+.metric-item dt {
+  color: #4A574A !important;
+  font-weight: 800;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+}
+
+.metric-item dd {
+  color: #1E241E !important;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.45rem;
+}
+
+.metric-item dd small {
+  color: #586658 !important;
+  font-weight: 700;
+}
+
+/* Tarjeta Derecha del Simulador con Borde Cartoon */
+.sim-card {
+  border: 3px solid #1E241E !important;
+  border-radius: 26px !important;
+  box-shadow: 0 8px 0 #1E241E !important;
+  background: #FFFFFF !important;
+}
+
+html[data-theme="dark"] .sim-card {
+  background: #1F3323 !important;
+}
+
+.corridor-tag {
+  background: var(--sunny) !important;
+  color: #1E241E !important;
+  border: 2px solid #1E241E !important;
+  font-weight: 800 !important;
+}
+
+.corridor-btn {
+  border: 2px solid #1E241E !important;
+  font-family: var(--display) !important;
+  font-weight: 600 !important;
+  box-shadow: 0 2px 0 #1E241E;
+}
+
+.corridor-btn.is-active {
+  background: #76C71A !important;
+  color: #1E241E !important;
+  font-weight: 700 !important;
+}
+
+.lima-map-wrapper {
+  border: 2.5px solid #1E241E !important;
+  border-radius: 18px !important;
+}
+
+.note-figures li {
+  border: 2px solid #1E241E !important;
+  border-radius: 14px !important;
+  background: #F7FBEF !important;
+}
+
+html[data-theme="dark"] .note-figures li {
+  background: #27402C !important;
+}
+
+.btn-recycle-action {
+  background: var(--sunny) !important;
+  color: #1E241E !important;
+  border: 2.5px solid #1E241E !important;
+  border-radius: 999px !important;
+  box-shadow: 0 4px 0 #1E241E !important;
+  font-family: var(--display) !important;
+  font-weight: 700 !important;
+}
+
+/* Tarjetas de 3 Pasos, Comparativa de Transporte y Calculadora */
+.section-eyebrow {
+  display: inline-block;
+  background: var(--sunny);
+  color: #1E241E !important;
+  border: 2px solid #1E241E;
+  border-radius: 999px;
+  padding: 0.25rem 0.85rem;
+  font-family: var(--display);
+  font-weight: 700;
+  box-shadow: 0 3px 0 #1E241E;
+  margin-bottom: 0.65rem;
+}
+
+.how-step-card,
+.transport-card,
+.alchemy-controls-panel,
+.impact-stat-card {
+  border: 2.5px solid #1E241E !important;
+  border-radius: 24px !important;
+  box-shadow: 0 6px 0 #1E241E !important;
+}
+
+.how-step-card.step-green {
+  background: #E9FAD2;
+}
+.how-step-card.step-yellow {
+  background: #FFF6D6;
+}
+.how-step-card.step-blue {
+  background: #E3F6FD;
+}
+
+html[data-theme="dark"] .how-step-card.step-green,
+html[data-theme="dark"] .how-step-card.step-yellow,
+html[data-theme="dark"] .how-step-card.step-blue {
+  background: #1F3323;
+}
+
+.how-step-icon,
+.impact-icon-chip {
+  background: #FFFFFF !important;
+  border: 2px solid #1E241E;
+  box-shadow: 0 3px 0 #1E241E;
+}
+
+.how-step-num {
+  background: #FFFFFF;
+  color: #1E241E !important;
+  border: 2px solid #1E241E;
+  border-radius: 999px;
+  padding: 0.2rem 0.65rem;
+  font-weight: 800;
+}
+
+.transport-card.is-recommended {
+  border-width: 3px !important;
+  background: #F4FCEB;
+}
+
+.transport-card-banner {
+  background: var(--sunny) !important;
+  color: #1E241E !important;
+  border-bottom: 2.5px solid #1E241E;
+  font-family: var(--display);
+  font-weight: 700;
+}
+
+.alchemy-preset {
+  border: 2px solid #1E241E !important;
+  box-shadow: 0 3px 0 #1E241E;
+  font-family: var(--display) !important;
+  font-weight: 600 !important;
+}
+
+.alchemy-preset.is-active {
+  background: var(--sunny) !important;
+  color: #1E241E !important;
+}
+
+.alchemy-summary-card {
+  background: #6CC016 !important;
+  color: #FFFFFF !important;
+  border: 2.5px solid #1E241E !important;
+  box-shadow: 0 4px 0 #1E241E;
+}
+
+.alchemy-summary-col span,
+.alchemy-summary-col strong {
+  color: #FFFFFF !important;
+}
+
+.impact-stat-card.card-tint-green {
+  background: #EEFAD9;
+}
+.impact-stat-card.card-tint-yellow {
+  background: #FFF7DB;
+}
+.impact-stat-card.card-tint-blue {
+  background: #E6F7FE;
+}
+.impact-stat-card.card-tint-orange {
+  background: #FFEDE4;
+}
+
+html[data-theme="dark"] .impact-stat-card.card-tint-green,
+html[data-theme="dark"] .impact-stat-card.card-tint-yellow,
+html[data-theme="dark"] .impact-stat-card.card-tint-blue,
+html[data-theme="dark"] .impact-stat-card.card-tint-orange {
+  background: #1F3323;
+}
