@@ -23,100 +23,99 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
         </div>
       </div>
 
-      <!-- Level & Milestone Progress Card -->
-      <article class="eco-card milestone-hero-card" *ngIf="milestones as m">
-        <div class="milestone-header">
-          <div class="level-badge-cluster">
-            <span class="level-shield">
-              <app-icon name="medal" [size]="26"></app-icon>
+      <!-- Diseño Asimétrico: Torre Vertical de Nivel/Métricas (Izq) + Lista Abierta de Insignias (Der) -->
+      <div class="gamification-split-layout">
+        <!-- Columna Vertical Izquierda: Unifica Nivel + 4 Estadísticas en 1 sola tarjeta vertical -->
+        <aside class="eco-card level-vertical-tower" *ngIf="milestones as m">
+          <div class="tower-shield-wrap">
+            <span class="level-shield-large">
+              <app-icon name="medal" [size]="34"></app-icon>
             </span>
-            <div>
-              <span class="eyebrow-tag">Nivel actual {{ m.currentLevel }}</span>
-              <h2>{{ getLevelName(m.currentLevel) }}</h2>
-              <p class="card-sub">
-                Tienes <strong>{{ m.currentPoints }} puntos</strong> acumulados · Próxima meta:
-                <strong>{{ m.nextMilestonePoints }} puntos</strong>
-              </p>
+            <span class="eyebrow-tag">Nivel actual {{ m.currentLevel }}</span>
+            <h2>{{ getLevelName(m.currentLevel) }}</h2>
+            <p class="card-sub">
+              <strong>{{ m.currentPoints }} pts</strong> acumulados · Próxima meta:
+              <strong>{{ m.nextMilestonePoints }} pts</strong>
+            </p>
+          </div>
+
+          <div class="tower-progress-box">
+            <div class="tower-progress-labels">
+              <span>Progreso de nivel</span>
+              <strong>{{ m.progressPercentage }}%</strong>
+            </div>
+            <div class="milestone-progress-track">
+              <div class="milestone-progress-fill" [style.width.%]="m.progressPercentage"></div>
             </div>
           </div>
-          <div class="milestone-pct">{{ m.progressPercentage }}%</div>
-        </div>
-        <div class="milestone-progress-track">
-          <div class="milestone-progress-fill" [style.width.%]="m.progressPercentage"></div>
-        </div>
-      </article>
 
-      <!-- 4 Key Progress Metrics -->
-      <div class="kpi-grid-4" *ngIf="stats as st">
-        <article class="eco-kpi-card">
-          <div class="kpi-top">
-            <span class="kpi-label">Puntos acumulados</span>
-            <span class="kpi-icon"><app-icon name="bolt" [size]="19"></app-icon></span>
+          <!-- Datos apilados verticalmente en vez de 4 tarjetas horizontales -->
+          <ul class="tower-vertical-stats" *ngIf="stats as st">
+            <li>
+              <span class="tower-stat-icon"><app-icon name="bolt" [size]="18"></app-icon></span>
+              <div>
+                <span>Puntos para canjes</span>
+                <strong>{{ st.currentPoints }} pts</strong>
+              </div>
+            </li>
+            <li>
+              <span class="tower-stat-icon"><app-icon name="flame" [size]="18"></app-icon></span>
+              <div>
+                <span>Racha activa sin auto</span>
+                <strong>{{ st.streakDays }} días seguidos</strong>
+              </div>
+            </li>
+            <li>
+              <span class="tower-stat-icon"><app-icon name="leaf" [size]="18"></app-icon></span>
+              <div>
+                <span>Emisiones evitadas</span>
+                <strong>{{ st.totalCo2SavedKg | number: '1.2-2' }} kg CO₂</strong>
+              </div>
+            </li>
+            <li>
+              <span class="tower-stat-icon"><app-icon name="bike" [size]="18"></app-icon></span>
+              <div>
+                <span>Recorridos limpios</span>
+                <strong>{{ st.totalTrips }} viajes ({{ st.totalDistanceKm | number: '1.1-1' }} km)</strong>
+              </div>
+            </li>
+          </ul>
+        </aside>
+
+        <!-- Columna Derecha Abierta (Sin tarjeta contenedora redundante) -->
+        <div class="badges-open-showcase">
+          <div class="feed-header-inline">
+            <h2>Colección de insignias ({{ userBadges.length }})</h2>
+            <span>Se desbloquean automáticamente al cumplir cada meta</span>
           </div>
-          <div class="kpi-number">{{ st.currentPoints }} <small>pts</small></div>
-          <div class="kpi-foot">Disponibles para canjes en comercios aliados</div>
-        </article>
 
-        <article class="eco-kpi-card">
-          <div class="kpi-top">
-            <span class="kpi-label">Racha activa</span>
-            <span class="kpi-icon"><app-icon name="flame" [size]="19"></app-icon></span>
-          </div>
-          <div class="kpi-number">{{ st.streakDays }} <small>días</small></div>
-          <div class="kpi-foot">Días consecutivos moviéndote sin auto</div>
-        </article>
-
-        <article class="eco-kpi-card">
-          <div class="kpi-top">
-            <span class="kpi-label">Emisiones evitadas</span>
-            <span class="kpi-icon"><app-icon name="leaf" [size]="19"></app-icon></span>
-          </div>
-          <div class="kpi-number">{{ st.totalCo2SavedKg | number: '1.2-2' }} <small>kg</small></div>
-          <div class="kpi-foot">Ahorro verificado frente al vehículo particular</div>
-        </article>
-
-        <article class="eco-kpi-card">
-          <div class="kpi-top">
-            <span class="kpi-label">Recorridos limpios</span>
-            <span class="kpi-icon"><app-icon name="bike" [size]="19"></app-icon></span>
-          </div>
-          <div class="kpi-number">{{ st.totalTrips }}</div>
-          <div class="kpi-foot">{{ st.totalDistanceKm | number: '1.1-1' }} km registrados en Lima</div>
-        </article>
-      </div>
-
-      <!-- Badges Collection -->
-      <article class="eco-card">
-        <div class="card-head-row">
-          <div>
-            <h2>Colección de insignias</h2>
-            <p class="card-sub">Las insignias se desbloquean automáticamente cuando cumples su meta en la bitácora</p>
-          </div>
-        </div>
-
-        <div class="badges-catalog-grid">
-          <div
-            class="badge-card-large"
-            *ngFor="let b of userBadges"
-            [class.unlocked]="b.unlocked"
-          >
-            <div class="badge-large-top">
+          <div class="badges-horizontal-list">
+            <article
+              class="badge-row-strip"
+              *ngFor="let b of userBadges"
+              [class.unlocked]="b.unlocked"
+            >
               <span class="badge-icon-medallion">
                 <app-icon [name]="b.code || b.iconEmoji" [size]="24"></app-icon>
               </span>
-              <span class="badge-status-chip" [class.done]="b.unlocked">
-                <app-icon [name]="b.unlocked ? 'check' : 'lock'" [size]="13"></app-icon>
-                <span>{{ b.unlocked ? 'Desbloqueada' : b.progressPercent + '% completado' }}</span>
-              </span>
-            </div>
-            <h3>{{ b.title }}</h3>
-            <p>{{ b.description }}</p>
-            <div class="mode-progress-track">
-              <div class="mode-progress-fill" [style.width.%]="b.progressPercent"></div>
-            </div>
+
+              <div class="badge-strip-body">
+                <div class="badge-strip-head">
+                  <h3>{{ b.title }}</h3>
+                  <span class="badge-status-chip" [class.done]="b.unlocked">
+                    <app-icon [name]="b.unlocked ? 'check' : 'lock'" [size]="13"></app-icon>
+                    <span>{{ b.unlocked ? '¡Desbloqueada!' : b.progressPercent + '%' }}</span>
+                  </span>
+                </div>
+                <p>{{ b.description }}</p>
+                <div class="mode-progress-track">
+                  <div class="mode-progress-fill" [style.width.%]="b.progressPercent"></div>
+                </div>
+              </div>
+            </article>
           </div>
         </div>
-      </article>
+      </div>
     </section>
   `
 })
