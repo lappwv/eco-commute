@@ -3641,3 +3641,189 @@ strong,
     flex-direction: row;
   }
 }
+
+/* ==================== ARTISTIC MAP BACKDROP, SOFTER SHADOWS & DECORATIVE BORDERS ==================== */
+
+/* 1. Illustrated Map & Bike-Road Backdrop Layer */
+.eco-shell {
+  position: relative;
+  isolation: isolate;
+}
+
+.eco-map-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  color: #1E241E;
+}
+
+[data-theme="dark"] .eco-map-backdrop {
+  color: #94A3B8;
+  opacity: 0.55;
+}
+
+.map-backdrop-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.eco-navbar,
+.eco-main,
+.eco-footer {
+  position: relative;
+  z-index: 1;
+}
+
+/* 2. Decorative Bike-Lane / Road Trim on Navbar & Footer */
+.eco-navbar {
+  border-bottom: none !important;
+}
+
+.eco-footer {
+  border-top: none !important;
+  background: rgba(255, 253, 246, 0.92);
+  backdrop-filter: blur(8px);
+}
+
+[data-theme="dark"] .eco-footer {
+  background: rgba(19, 29, 43, 0.92);
+}
+
+.navbar-road-trim {
+  width: 100%;
+  height: 8px;
+  background-color: #2A352A;
+  border-top: 1.8px solid #1E241E;
+  border-bottom: 1.8px solid #1E241E;
+  background-image: repeating-linear-gradient(
+    90deg,
+    #FFD24C 0px,
+    #FFD24C 14px,
+    transparent 14px,
+    transparent 28px
+  );
+  background-size: 100% 2px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* 3. Reduced, Lighter Shadows Across All Cards & Buttons */
+:root,
+[data-theme="light"] {
+  --shadow-sm: 0 2px 0 rgba(30, 36, 30, 0.45);
+  --shadow-card: 0 3px 0 rgba(30, 36, 30, 0.42), 0 8px 20px rgba(30, 36, 30, 0.04);
+}
+
+[data-theme="dark"] {
+  --shadow-sm: 0 2px 0 rgba(11, 18, 27, 0.65);
+  --shadow-card: 0 3px 0 rgba(11, 18, 27, 0.65), 0 8px 20px rgba(0, 0, 0, 0.22);
+}
+
+.cartoon-hero-banner {
+  border-width: 2px !important;
+  box-shadow: 0 4px 0 rgba(30, 36, 30, 0.48) !important;
+}
+
+.eco-card,
+.eco-stat-ribbon,
+.planner-unified-stage,
+.route-vertical-col,
+.trip-feed-item,
+.badge-row-strip,
+.podium-pillar,
+.ticket-voucher-card,
+.advisor-callout {
+  border-width: 2px !important;
+  box-shadow: var(--shadow-card) !important;
+  position: relative;
+}
+
+.btn-emerald,
+.btn-outline,
+.hero-step-pill,
+.util-btn,
+.user-pill,
+.landing-back-pill,
+.eco-nav-links {
+  border-width: 2px !important;
+  box-shadow: 0 2px 0 rgba(30, 36, 30, 0.48) !important;
+}
+
+.btn-emerald:hover:not(:disabled),
+.btn-outline:hover,
+.hero-step-pill:hover {
+  box-shadow: 0 3px 0 rgba(30, 36, 30, 0.58) !important;
+}
+
+/* 4. Artistic Border Treatments: Bike-Path Top Trim, Stitched Route Frame & Corner Leaf Sprout */
+
+/* 4a. Top Bike-Lane Track Border on Main Ribbon & Unified Map Stage */
+.eco-stat-ribbon,
+.planner-unified-stage {
+  overflow: hidden;
+  padding-top: calc(1.35rem + 7px);
+}
+
+.planner-unified-stage {
+  padding-top: 7px;
+}
+
+.eco-stat-ribbon::before,
+.planner-unified-stage::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 7px;
+  background-color: #58B80A;
+  border-bottom: 1.8px solid #1E241E;
+  background-image: repeating-linear-gradient(
+    90deg,
+    #FFFFFF 0px,
+    #FFFFFF 10px,
+    transparent 10px,
+    transparent 20px
+  );
+  background-size: 100% 2px;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 3;
+}
+
+/* 4b. Inner Stitched Map-Route Trail Border on Featured Cards */
+.advisor-callout,
+.level-vertical-tower,
+.route-vertical-col.recommended,
+.podium-pillar.pillar-gold {
+  outline: 1.8px dashed rgba(78, 154, 6, 0.42);
+  outline-offset: -7px;
+}
+
+[data-theme="dark"] .advisor-callout,
+[data-theme="dark"] .level-vertical-tower,
+[data-theme="dark"] .route-vertical-col.recommended,
+[data-theme="dark"] .podium-pillar.pillar-gold {
+  outline-color: rgba(140, 229, 46, 0.35);
+}
+
+/* 4c. Artistic Corner Leaf & Route-Dot Ornament on Cards */
+.eco-card::after,
+.route-vertical-col::after,
+.podium-pillar::after {
+  content: "";
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  width: 28px;
+  height: 28px;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2238%22%20height%3D%2238%22%20viewBox%3D%220%200%2038%2038%22%20fill%3D%22none%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M34%204%20C%2022%204%2C%2016%2012%2C%2018%2020%20C%2026%2022%2C%2034%2016%2C%2034%204%20Z%22%20fill%3D%22%238CE52E%22%20stroke%3D%22%231E241E%22%20stroke-width%3D%221.8%22%20stroke-linejoin%3D%22round%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M33%205%20L%2021%2017%22%20stroke%3D%22%231E241E%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2211%22%20cy%3D%2211%22%20r%3D%223%22%20fill%3D%22%23FFD24C%22%20stroke%3D%22%231E241E%22%20stroke-width%3D%221.5%22%2F%3E%0A%20%20%3C%2Fsvg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  opacity: 0.85;
+}

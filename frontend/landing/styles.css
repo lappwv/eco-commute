@@ -2178,3 +2178,120 @@ html[data-theme="dark"] .impact-stat-card.card-tint-blue,
 html[data-theme="dark"] .impact-stat-card.card-tint-orange {
   background: #1F3044;
 }
+
+/* ==================== ARTISTIC MAP BACKDROP, SOFTER SHADOWS & DECORATIVE BORDERS ==================== */
+
+/* 1. Cartographic Bike-Route & Urban Map Background Pattern on Sections */
+body,
+.how-section,
+.section {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22320%22%20height%3D%22320%22%20viewBox%3D%220%200%20320%20320%22%20fill%3D%22none%22%3E%0A%20%20%20%20%3Cg%20stroke%3D%22%234E9A06%22%20stroke-width%3D%221%22%20opacity%3D%220.08%22%3E%0A%20%20%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%2280%22%20x2%3D%22320%22%20y2%3D%2280%22%2F%3E%0A%20%20%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%22240%22%20x2%3D%22320%22%20y2%3D%22240%22%2F%3E%0A%20%20%20%20%20%20%3Cline%20x1%3D%2280%22%20y1%3D%220%22%20x2%3D%2280%22%20y2%3D%22320%22%2F%3E%0A%20%20%20%20%20%20%3Cline%20x1%3D%22240%22%20y1%3D%220%22%20x2%3D%22240%22%20y2%3D%22320%22%2F%3E%0A%20%20%20%20%3C%2Fg%3E%0A%20%20%20%20%3Cpath%20d%3D%22M-20%20160%20C%2060%20160%2C%20100%2060%2C%20180%2060%20C%20250%2060%2C%20270%20220%2C%20340%20220%22%20stroke%3D%22%236CC016%22%20stroke-width%3D%2216%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.09%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M-20%20160%20C%2060%20160%2C%20100%2060%2C%20180%2060%20C%20250%2060%2C%20270%20220%2C%20340%20220%22%20stroke%3D%22%234E9A06%22%20stroke-width%3D%221.8%22%20stroke-dasharray%3D%228%207%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.22%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22180%22%20cy%3D%2260%22%20r%3D%229%22%20fill%3D%22%23FFFDF6%22%20stroke%3D%22%234E9A06%22%20stroke-width%3D%222%22%20opacity%3D%220.25%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22180%22%20cy%3D%2260%22%20r%3D%223.5%22%20fill%3D%22%23FFD24C%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22240%22%20r%3D%227%22%20fill%3D%22%23FFFDF6%22%20stroke%3D%22%235BC0EB%22%20stroke-width%3D%222%22%20opacity%3D%220.22%22%2F%3E%0A%20%20%3C%2Fsvg%3E");
+  background-size: 320px 320px;
+  background-attachment: fixed;
+}
+
+.section.alt {
+  background-image:
+    url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22320%22%20height%3D%22320%22%20viewBox%3D%220%200%20320%20320%22%20fill%3D%22none%22%3E%0A%20%20%20%20%3Cg%20stroke%3D%22%234E9A06%22%20stroke-width%3D%221%22%20opacity%3D%220.08%22%3E%0A%20%20%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%2280%22%20x2%3D%22320%22%20y2%3D%2280%22%2F%3E%0A%20%20%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%22240%22%20x2%3D%22320%22%20y2%3D%22240%22%2F%3E%0A%20%20%20%20%20%20%3Cline%20x1%3D%2280%22%20y1%3D%220%22%20x2%3D%2280%22%20y2%3D%22320%22%2F%3E%0A%20%20%20%20%20%20%3Cline%20x1%3D%22240%22%20y1%3D%220%22%20x2%3D%22240%22%20y2%3D%22320%22%2F%3E%0A%20%20%20%20%3C%2Fg%3E%0A%20%20%20%20%3Cpath%20d%3D%22M-20%20160%20C%2060%20160%2C%20100%2060%2C%20180%2060%20C%20250%2060%2C%20270%20220%2C%20340%20220%22%20stroke%3D%22%236CC016%22%20stroke-width%3D%2216%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.09%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M-20%20160%20C%2060%20160%2C%20100%2060%2C%20180%2060%20C%20250%2060%2C%20270%20220%2C%20340%20220%22%20stroke%3D%22%234E9A06%22%20stroke-width%3D%221.8%22%20stroke-dasharray%3D%228%207%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.22%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22180%22%20cy%3D%2260%22%20r%3D%229%22%20fill%3D%22%23FFFDF6%22%20stroke%3D%22%234E9A06%22%20stroke-width%3D%222%22%20opacity%3D%220.25%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22180%22%20cy%3D%2260%22%20r%3D%223.5%22%20fill%3D%22%23FFD24C%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22240%22%20r%3D%227%22%20fill%3D%22%23FFFDF6%22%20stroke%3D%22%235BC0EB%22%20stroke-width%3D%222%22%20opacity%3D%220.22%22%2F%3E%0A%20%20%3C%2Fsvg%3E"),
+    linear-gradient(180deg, #E8F9D2 0%, #F4FCE8 100%) !important;
+  background-size: 320px 320px, 100% 100% !important;
+}
+
+html[data-theme="dark"] .section.alt {
+  background-image:
+    url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22320%22%20height%3D%22320%22%20viewBox%3D%220%200%20320%20320%22%20fill%3D%22none%22%3E%0A%20%20%20%20%3Cg%20stroke%3D%22%234E9A06%22%20stroke-width%3D%221%22%20opacity%3D%220.08%22%3E%0A%20%20%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%2280%22%20x2%3D%22320%22%20y2%3D%2280%22%2F%3E%0A%20%20%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%22240%22%20x2%3D%22320%22%20y2%3D%22240%22%2F%3E%0A%20%20%20%20%20%20%3Cline%20x1%3D%2280%22%20y1%3D%220%22%20x2%3D%2280%22%20y2%3D%22320%22%2F%3E%0A%20%20%20%20%20%20%3Cline%20x1%3D%22240%22%20y1%3D%220%22%20x2%3D%22240%22%20y2%3D%22320%22%2F%3E%0A%20%20%20%20%3C%2Fg%3E%0A%20%20%20%20%3Cpath%20d%3D%22M-20%20160%20C%2060%20160%2C%20100%2060%2C%20180%2060%20C%20250%2060%2C%20270%20220%2C%20340%20220%22%20stroke%3D%22%236CC016%22%20stroke-width%3D%2216%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.09%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M-20%20160%20C%2060%20160%2C%20100%2060%2C%20180%2060%20C%20250%2060%2C%20270%20220%2C%20340%20220%22%20stroke%3D%22%234E9A06%22%20stroke-width%3D%221.8%22%20stroke-dasharray%3D%228%207%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.22%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22180%22%20cy%3D%2260%22%20r%3D%229%22%20fill%3D%22%23FFFDF6%22%20stroke%3D%22%234E9A06%22%20stroke-width%3D%222%22%20opacity%3D%220.25%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22180%22%20cy%3D%2260%22%20r%3D%223.5%22%20fill%3D%22%23FFD24C%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22240%22%20r%3D%227%22%20fill%3D%22%23FFFDF6%22%20stroke%3D%22%235BC0EB%22%20stroke-width%3D%222%22%20opacity%3D%220.22%22%2F%3E%0A%20%20%3C%2Fsvg%3E"),
+    linear-gradient(180deg, #162334 0%, #1B2B3F 100%) !important;
+  background-size: 320px 320px, 100% 100% !important;
+}
+
+/* 2. Decorative Bike-Lane Road Divider Between Sections */
+.topbar {
+  border-bottom: none !important;
+}
+
+.topbar::after,
+.section::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 7px;
+  background-color: #2A352A;
+  border-top: 1.5px solid #1E241E;
+  border-bottom: 1.5px solid #1E241E;
+  background-image: repeating-linear-gradient(
+    90deg,
+    #FFD24C 0px,
+    #FFD24C 14px,
+    transparent 14px,
+    transparent 28px
+  );
+  background-size: 100% 2px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.section {
+  position: relative;
+  border-top: none !important;
+  padding-top: 0 !important;
+}
+
+.section > .container {
+  padding-top: clamp(3.5rem, 6vw, 5.25rem);
+}
+
+/* 3. Reduced, Lighter Shadows on Landing Page */
+:root,
+html[data-theme="light"] {
+  --shadow-sm: 0 2px 0 rgba(30, 36, 30, 0.45);
+  --shadow-md: 0 3px 0 rgba(30, 36, 30, 0.42), 0 8px 20px rgba(30, 36, 30, 0.05);
+  --shadow-lg: 0 4px 0 rgba(30, 36, 30, 0.48);
+}
+
+.how-step-card,
+.transport-card,
+.alchemy-controls-panel,
+.impact-stat-card,
+.sim-card,
+.metric-item,
+.hero-cartoon-scene {
+  border-width: 2px !important;
+  box-shadow: 0 3px 0 rgba(30, 36, 30, 0.44), 0 8px 18px rgba(30, 36, 30, 0.05) !important;
+  position: relative;
+}
+
+.button,
+.nav-cta-pill,
+.section-eyebrow,
+.hero-kicker,
+.transport-co2-pill,
+.alchemy-preset,
+.corridor-btn,
+.btn-recycle-action {
+  border-width: 2px !important;
+  box-shadow: 0 2px 0 rgba(30, 36, 30, 0.48) !important;
+}
+
+/* 4. Artistic Borders: Inner Stitched Route Line & Corner Leaf Sprout */
+.how-step-card,
+.transport-card.is-recommended,
+.impact-stat-card {
+  outline: 1.8px dashed rgba(78, 154, 6, 0.4);
+  outline-offset: -7px;
+}
+
+.how-step-card::after,
+.impact-stat-card::after,
+.alchemy-controls-panel::after {
+  content: "";
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  width: 26px;
+  height: 26px;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2238%22%20height%3D%2238%22%20viewBox%3D%220%200%2038%2038%22%20fill%3D%22none%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M34%204%20C%2022%204%2C%2016%2012%2C%2018%2020%20C%2026%2022%2C%2034%2016%2C%2034%204%20Z%22%20fill%3D%22%238CE52E%22%20stroke%3D%22%231E241E%22%20stroke-width%3D%221.8%22%20stroke-linejoin%3D%22round%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M33%205%20L%2021%2017%22%20stroke%3D%22%231E241E%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2211%22%20cy%3D%2211%22%20r%3D%223%22%20fill%3D%22%23FFD24C%22%20stroke%3D%22%231E241E%22%20stroke-width%3D%221.5%22%2F%3E%0A%20%20%3C%2Fsvg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  opacity: 0.85;
+}

@@ -1,4 +1,80 @@
 <div class="eco-shell">
+  <!-- Fondo Artístico de Mapa Urbano, Pistas y Ciclovías (Fijo detrás del contenido) -->
+  <div class="eco-map-backdrop" aria-hidden="true">
+    <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" fill="none" class="map-backdrop-svg">
+      <!-- Cuadrícula cartográfica suave de manzanas urbanas -->
+      <g stroke="currentColor" stroke-width="1.2" opacity="0.07">
+        <line x1="0" y1="140" x2="1440" y2="140" />
+        <line x1="0" y1="310" x2="1440" y2="310" />
+        <line x1="0" y1="490" x2="1440" y2="490" />
+        <line x1="0" y1="670" x2="1440" y2="670" />
+        <line x1="0" y1="820" x2="1440" y2="820" />
+        <line x1="180" y1="0" x2="180" y2="900" />
+        <line x1="420" y1="0" x2="420" y2="900" />
+        <line x1="720" y1="0" x2="720" y2="900" />
+        <line x1="1040" y1="0" x2="1040" y2="900" />
+        <line x1="1280" y1="0" x2="1280" y2="900" />
+      </g>
+
+      <!-- Islas de parques urbanos ilustrados -->
+      <path d="M40 190C40 150 85 120 140 125C195 130 230 165 220 210C210 255 155 280 95 270C45 260 40 225 40 190Z" fill="#76C71A" opacity="0.09" />
+      <path d="M1190 540C1190 490 1245 460 1310 470C1375 480 1410 525 1395 575C1380 625 1315 655 1250 640C1195 628 1190 585 1190 540Z" fill="#76C71A" opacity="0.09" />
+      <path d="M80 680C95 635 160 615 225 630C290 645 315 695 290 740C265 785 190 800 125 780C75 765 65 725 80 680Z" fill="#5BC0EB" opacity="0.08" />
+
+      <!-- Pista / Ciclovía Principal Serpenteante 1 (Izquierda a Derecha) -->
+      <path
+        d="M-60 260 C 180 260, 240 110, 480 110 C 740 110, 790 390, 1060 390 C 1240 390, 1340 250, 1500 250"
+        stroke="#6CC016"
+        stroke-width="34"
+        stroke-linecap="round"
+        opacity="0.11"
+      />
+      <path
+        d="M-60 260 C 180 260, 240 110, 480 110 C 740 110, 790 390, 1060 390 C 1240 390, 1340 250, 1500 250"
+        stroke="#4E9A06"
+        stroke-width="2.2"
+        stroke-dasharray="12 10"
+        stroke-linecap="round"
+        opacity="0.28"
+      />
+
+      <!-- Pista / Ruta Secundaria Serpenteante 2 (Abajo Izquierda a Arriba Derecha) -->
+      <path
+        d="M-40 770 C 230 770, 310 560, 590 560 C 860 560, 940 790, 1210 790 C 1340 790, 1410 710, 1500 690"
+        stroke="#5BC0EB"
+        stroke-width="28"
+        stroke-linecap="round"
+        opacity="0.10"
+      />
+      <path
+        d="M-40 770 C 230 770, 310 560, 590 560 C 860 560, 940 790, 1210 790 C 1340 790, 1410 710, 1500 690"
+        stroke="#1E241E"
+        stroke-width="2"
+        stroke-dasharray="8 10"
+        stroke-linecap="round"
+        opacity="0.16"
+      />
+
+      <!-- Óvalos / Rotondas de Ruta y Nodos de Mapa -->
+      <g opacity="0.24">
+        <circle cx="480" cy="110" r="18" fill="#FFFDF6" stroke="#4E9A06" stroke-width="3" />
+        <circle cx="480" cy="110" r="6" fill="#FFD24C" stroke="#1E241E" stroke-width="2" />
+
+        <circle cx="1060" cy="390" r="18" fill="#FFFDF6" stroke="#4E9A06" stroke-width="3" />
+        <circle cx="1060" cy="390" r="6" fill="#6CC016" stroke="#1E241E" stroke-width="2" />
+
+        <circle cx="590" cy="560" r="16" fill="#FFFDF6" stroke="#5BC0EB" stroke-width="3" />
+        <circle cx="590" cy="560" r="5" fill="#FFD24C" stroke="#1E241E" stroke-width="2" />
+
+        <!-- Pequeños árboles y pines de mapa en los márgenes -->
+        <circle cx="115" cy="185" r="10" fill="#6CC016" stroke="#1E241E" stroke-width="2" />
+        <circle cx="135" cy="195" r="8" fill="#8CE52E" stroke="#1E241E" stroke-width="2" />
+        <circle cx="1335" cy="535" r="11" fill="#6CC016" stroke="#1E241E" stroke-width="2" />
+        <circle cx="1355" cy="548" r="8" fill="#8CE52E" stroke="#1E241E" stroke-width="2" />
+      </g>
+    </svg>
+  </div>
+
   <!-- Top Navigation Bar -->
   <header class="eco-navbar" role="banner">
     <div class="eco-nav-inner">
@@ -102,6 +178,8 @@
         </a>
       </div>
     </div>
+    <!-- Borde Artístico Inferior de Pista / Ciclovía -->
+    <div class="navbar-road-trim" aria-hidden="true"></div>
   </header>
 
   <!-- Main Workspace -->
@@ -111,6 +189,7 @@
 
   <!-- Editorial Footer -->
   <footer class="eco-footer" role="contentinfo">
+    <div class="navbar-road-trim" aria-hidden="true"></div>
     <div class="eco-footer-inner">
       <div class="footer-brand-line">
         <span class="footer-logo-chip">
