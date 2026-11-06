@@ -1,18 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
 import { ApiService } from '../../services/api.service';
 import { I18nService } from '../../services/i18n.service';
 import { AiRecommendation, CommunityImpact, DashboardSummary } from '../../models/api.models';
 import { EcoIconComponent } from '../icon/eco-icon.component';
 
+interface QuickCorridorOption {
+  index: number;
+  origin: string;
+  destination: string;
+  distanceLabel: string;
+  timeLabel: string;
+}
+
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, RouterModule, EcoIconComponent],
+  imports: [CommonModule, FormsModule, RouterModule, EcoIconComponent],
   template: `
     <section class="page-section" *ngIf="summary as s">
-      <!-- 1. Hero Ilustrado con Guía de 3 Pasos Integrada (Sin tarjetas sueltas adicionales) -->
+      <!-- 1. Hero Ilustrado con Buscador Rápido de Ruta + Ilustración de Mapa, Ciclovía y Ciclista -->
       <div class="cartoon-hero-banner">
         <div class="cartoon-banner-copy">
           <span class="eyebrow-tag">
@@ -20,68 +29,144 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
             <span>¡Hola, {{ s.fullName }}! · Nivel {{ s.currentLevel }}</span>
           </span>
           <h1 class="cartoon-banner-title">PEDALEA, AHORRA Y CUIDA LIMA</h1>
-          <p class="cartoon-banner-sub">{{ i18n.t('dash.subtitle') }}</p>
+          <p class="cartoon-banner-sub">
+            Planifica tu ruta por ciclovías seguras, evita el tráfico vehicular y suma puntos verificados en cada recorrido para canjear en comercios aliados.
+          </p>
 
-          <!-- Flujo lineal de 3 pasos integrado (reemplaza las 3 tarjetas de onboarding) -->
-          <div class="hero-inline-steps" aria-label="Pasos rápidos">
-            <a routerLink="/routes" class="hero-step-pill">
-              <span class="hero-step-badge">1</span>
-              <app-icon name="route" [size]="16"></app-icon>
-              <span>Elige tu ruta</span>
+          <!-- Buscador Rápido de Origen / Destino con Acción Principal "Iniciar ruta" -->
+          <div class="quick-route-launcher" role="region" aria-label="Planificador rápido de ruta">
+            <div class="quick-route-field">
+              <span class="quick-route-label">
+                <app-icon name="pin" [size]="14"></app-icon>
+                <span>Corredor rápido (Origen → Destino)</span>
+              </span>
+              <select
+                class="quick-route-select"
+                [(ngModel)]="selectedQuickPreset"
+                aria-label="Seleccionar ruta rápida en Lima"
+              >
+                <option *ngFor="let c of quickCorridors" [ngValue]="c.index">
+                  {{ c.origin }} → {{ c.destination }} ({{ c.distanceLabel }} · {{ c.timeLabel }})
+                </option>
+              </select>
+            </div>
+
+            <button type="button" class="btn-start-route" (click)="launchQuickRoute()">
+              <app-icon name="route" [size]="18"></app-icon>
+              <span>Iniciar ruta</span>
+            </button>
+          </div>
+
+          <!-- Guía informativa lineal de los 3 pasos (sin parecer pestañas sueltas) -->
+          <div class="hero-steps-guide" aria-label="Cómo funciona en 3 pasos">
+            <a routerLink="/routes" class="step-guide-item active-step">
+              <span class="step-guide-num">1</span>
+              <span>Planifica tu ruta</span>
             </a>
-            <span class="hero-step-arrow" aria-hidden="true">→</span>
-            <a routerLink="/trips" class="hero-step-pill highlight">
-              <span class="hero-step-badge">2</span>
-              <app-icon name="plus" [size]="16"></app-icon>
+            <span class="step-guide-sep" aria-hidden="true">→</span>
+            <a routerLink="/trips" class="step-guide-item">
+              <span class="step-guide-num">2</span>
               <span>Anota tu viaje</span>
             </a>
-            <span class="hero-step-arrow" aria-hidden="true">→</span>
-            <a routerLink="/rewards" class="hero-step-pill">
-              <span class="hero-step-badge">3</span>
-              <app-icon name="ticket" [size]="16"></app-icon>
+            <span class="step-guide-sep" aria-hidden="true">→</span>
+            <a routerLink="/rewards" class="step-guide-item">
+              <span class="step-guide-num">3</span>
               <span>Canjea premios</span>
             </a>
           </div>
         </div>
 
-        <!-- Ilustración Cartoon Vectorial -->
+        <!-- Ilustración Cartoon: Mapa con Pin de Destino, Ciclovía y Ciclista en Movimiento -->
         <div class="cartoon-banner-art" aria-hidden="true">
-          <svg viewBox="0 0 360 175" fill="none" class="dashboard-cartoon-svg">
-            <path d="M36 46H78C84.5 46 89 41.5 89 35.5C89 30 84.8 25.6 79.4 25C77 19.6 71.4 16 65 16C57.2 16 50.6 21.4 49.2 28.8C47.5 28 45.6 27.6 43.6 27.6C37.2 27.6 32 32.4 31.4 38.6C27 39.4 24 42.5 24 44C24 45.2 29.5 46 36 46Z" fill="#FFFFFF" stroke="#1E241E" stroke-width="2.6" stroke-linejoin="round"/>
-            <path d="M254 42H292C297.5 42 301.5 38 301.5 33C301.5 28.5 298 24.8 293.5 24.2C291.5 19.6 286.8 16.5 281.2 16.5C274.5 16.5 268.8 21.2 267.6 27.5C262 27.5 257.5 31.6 257 37C253.5 37.8 251 40.2 251 41.2C251 41.8 252.2 42 254 42Z" fill="#FFFFFF" stroke="#1E241E" stroke-width="2.6" stroke-linejoin="round"/>
-            <circle cx="116" cy="28" r="6" fill="#FFFFFF" stroke="#1E241E" stroke-width="2.4"/>
-            <circle cx="222" cy="24" r="5" fill="#FFFFFF" stroke="#1E241E" stroke-width="2.4"/>
-            <path d="M46 156C36 156 28 148 28 138C28 128 36 120 46 120C49 105 62 94 78 94C92 94 104 103 108 116C112 114 116 113 121 113C135 113 146 124 146 138C146 148 138 156 128 156H46Z" fill="#529E0B" stroke="#1E241E" stroke-width="2.8" stroke-linejoin="round"/>
-            <path d="M68 156C60 156 53 149 53 141C53 133 60 126 68 126C72 115 82 108 94 108C108 108 119 118 121 131C129 131 136 138 136 146C136 152 131 156 125 156H68Z" fill="#8CE52E" stroke="#1E241E" stroke-width="2.8" stroke-linejoin="round"/>
-            <rect x="164" y="60" width="76" height="96" rx="9" fill="#FFB224" stroke="#1E241E" stroke-width="2.8"/>
-            <rect x="157" y="48" width="90" height="16" rx="6" fill="#FF9800" stroke="#1E241E" stroke-width="2.8"/>
-            <path d="M186 48V40C186 36 190 33 195 33H209C214 33 218 36 218 40V48" stroke="#1E241E" stroke-width="2.8"/>
-            <line x1="183" y1="78" x2="183" y2="138" stroke="#FFE082" stroke-width="3.2" stroke-linecap="round"/>
-            <line x1="202" y1="78" x2="202" y2="138" stroke="#FFE082" stroke-width="3.2" stroke-linecap="round"/>
-            <line x1="221" y1="78" x2="221" y2="138" stroke="#FFE082" stroke-width="3.2" stroke-linecap="round"/>
-            <rect x="138" y="92" width="32" height="64" rx="10" fill="#74C7EC" stroke="#1E241E" stroke-width="2.8"/>
-            <rect x="146" y="78" width="16" height="14" rx="4" fill="#74C7EC" stroke="#1E241E" stroke-width="2.8"/>
-            <rect x="145" y="71" width="18" height="8" rx="3" fill="#FF9800" stroke="#1E241E" stroke-width="2.5"/>
-            <rect x="138" y="112" width="32" height="22" fill="#1E241E"/>
-            <circle cx="154" cy="123" r="5" fill="#FFFFFF"/>
-            <circle cx="268" cy="134" r="20" fill="#FFFFFF" stroke="#1E241E" stroke-width="2.8"/>
-            <circle cx="268" cy="134" r="11" fill="#74C7EC" stroke="#1E241E" stroke-width="2.2"/>
-            <circle cx="330" cy="134" r="20" fill="#FFFFFF" stroke="#1E241E" stroke-width="2.8"/>
-            <circle cx="330" cy="134" r="11" fill="#74C7EC" stroke="#1E241E" stroke-width="2.2"/>
-            <path d="M268 134L288 102H318L300 134H268Z" stroke="#FF6B4A" stroke-width="3.5" stroke-linejoin="round"/>
-            <path d="M318 102L330 134" stroke="#1E241E" stroke-width="3" stroke-linecap="round"/>
-            <rect x="12" y="151" width="338" height="16" rx="6" fill="#525E57" stroke="#1E241E" stroke-width="2.5"/>
-            <line x1="26" y1="159" x2="336" y2="159" stroke="#FFFFFF" stroke-width="2.4" stroke-dasharray="14 10" stroke-linecap="round"/>
+          <svg viewBox="0 0 380 185" fill="none" class="dashboard-cartoon-svg">
+            <!-- Nubes suaves en el cielo -->
+            <path d="M24 38H64C70 38 74 34 74 28.5C74 23.5 70 19.5 65 19C62.8 14 57.5 10.5 51.5 10.5C44.2 10.5 38 15.5 36.8 22.2C31 22.2 26.5 26.5 26 32C22 32.8 19 35.2 19 36.5C19 37.5 21 38 24 38Z" fill="#FFFFFF" stroke="#1E241E" stroke-width="2.4" stroke-linejoin="round"/>
+            <path d="M286 34H322C327 34 331 30.2 331 25.5C331 21.2 327.8 17.8 323.5 17.2C321.5 12.8 317 10 311.8 10C305.5 10 300 14.4 299 20.4C293.8 20.4 289.5 24.2 289 29.2C285.8 30 283.5 32.2 283.5 33.2C283.5 33.8 284.5 34 286 34Z" fill="#FFFFFF" stroke="#1E241E" stroke-width="2.4" stroke-linejoin="round"/>
+
+            <!-- Tarjeta de Mapa Urbano en el Fondo Izquierdo con Ruta Trazada y Pin de Destino -->
+            <g transform="translate(16, 44)">
+              <rect x="0" y="0" width="136" height="92" rx="12" fill="#FFFDF6" stroke="#1E241E" stroke-width="2.8"/>
+              <!-- Parques y manzanas del mapa -->
+              <rect x="8" y="8" width="44" height="32" rx="6" fill="#B8F272" stroke="#1E241E" stroke-width="1.8"/>
+              <rect x="60" y="8" width="68" height="28" rx="6" fill="#E3F6FF" stroke="#1E241E" stroke-width="1.8"/>
+              <rect x="8" y="48" width="52" height="36" rx="6" fill="#FFF3B8" stroke="#1E241E" stroke-width="1.8"/>
+              <rect x="68" y="44" width="60" height="40" rx="6" fill="#C9F78E" stroke="#1E241E" stroke-width="1.8"/>
+              <!-- Ruta punteada desde Origen (A) hasta el Pin de Destino (B) -->
+              <path d="M22 68 C 38 68, 42 26, 68 26 C 88 26, 92 60, 106 58" stroke="#2B7A0B" stroke-width="3.4" stroke-dasharray="5 4" stroke-linecap="round"/>
+              <!-- Punto de Origen -->
+              <circle cx="22" cy="68" r="6" fill="#5BC0EB" stroke="#1E241E" stroke-width="2.2"/>
+              <circle cx="22" cy="68" r="2.2" fill="#FFFFFF"/>
+              <!-- Pin de Destino Destacado -->
+              <ellipse cx="106" cy="62" rx="9" ry="4" fill="#FFD24C" stroke="#1E241E" stroke-width="1.8"/>
+              <path d="M106 58C106 58 119 43 119 33C119 25.8 113.2 20 106 20C98.8 20 93 25.8 93 33C93 43 106 58 106 58Z" fill="#FF5A36" stroke="#1E241E" stroke-width="2.5" stroke-linejoin="round"/>
+              <circle cx="106" cy="33" r="5" fill="#FFFDF6" stroke="#1E241E" stroke-width="2"/>
+            </g>
+
+            <!-- Poste Señalizador de Ciclovía -->
+            <line x1="168" y1="86" x2="168" y2="148" stroke="#1E241E" stroke-width="3" stroke-linecap="round"/>
+            <rect x="152" y="64" width="32" height="24" rx="6" fill="#5BC0EB" stroke="#1E241E" stroke-width="2.4"/>
+            <path d="M161 76H173M173 76L169 72M173 76L169 80" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+
+            <!-- Líneas de velocidad / brisa de movimiento -->
+            <line x1="176" y1="104" x2="198" y2="104" stroke="#5BC0EB" stroke-width="2.8" stroke-linecap="round"/>
+            <line x1="168" y1="116" x2="192" y2="116" stroke="#FFD24C" stroke-width="2.8" stroke-linecap="round"/>
+
+            <!-- Ciclista en Movimiento sobre Bicicleta Completa (con Asiento, Manubrio y Pedales claros) -->
+            <!-- Rueda Trasera -->
+            <circle cx="228" cy="126" r="22" fill="#FFFFFF" stroke="#1E241E" stroke-width="3.2"/>
+            <circle cx="228" cy="126" r="14" fill="#74C7EC" stroke="#1E241E" stroke-width="2.2"/>
+            <circle cx="228" cy="126" r="4.5" fill="#FFD24C" stroke="#1E241E" stroke-width="2"/>
+            <!-- Rueda Delantera -->
+            <circle cx="312" cy="126" r="22" fill="#FFFFFF" stroke="#1E241E" stroke-width="3.2"/>
+            <circle cx="312" cy="126" r="14" fill="#74C7EC" stroke="#1E241E" stroke-width="2.2"/>
+            <circle cx="312" cy="126" r="4.5" fill="#FFD24C" stroke="#1E241E" stroke-width="2"/>
+
+            <!-- Cuadro Completo de la Bicicleta -->
+            <path d="M228 126 L252 90 H292 L266 126 H228 Z" fill="none" stroke="#FF5A36" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <line x1="248" y1="78" x2="266" y2="126" stroke="#1E241E" stroke-width="3.8" stroke-linecap="round"/>
+            <!-- Horquilla y Poste del Manubrio (Claramente visible) -->
+            <line x1="312" y1="126" x2="288" y2="72" stroke="#1E241E" stroke-width="4" stroke-linecap="round"/>
+            <path d="M278 72 H295 C299 72 301 75 299 79" fill="none" stroke="#1E241E" stroke-width="4.2" stroke-linecap="round"/>
+            <!-- Faro delantero -->
+            <circle cx="301" cy="84" r="4.5" fill="#FFD24C" stroke="#1E241E" stroke-width="2"/>
+            <!-- Asiento / Sillín Anatómico (Claramente visible) -->
+            <rect x="236" y="73" width="22" height="7" rx="3.5" fill="#1E241E"/>
+            <!-- Catalina y Pedal -->
+            <circle cx="266" cy="126" r="6.5" fill="#FFD24C" stroke="#1E241E" stroke-width="2.2"/>
+
+            <!-- Figura del Ciclista con Casco y Mochila -->
+            <!-- Pierna pedaleando -->
+            <path d="M250 76 L268 102 L266 122" fill="none" stroke="#1E241E" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Mochila verde -->
+            <rect x="232" y="48" width="14" height="22" rx="5" fill="#52B70A" stroke="#1E241E" stroke-width="2.4" transform="rotate(-14 232 48)"/>
+            <!-- Torso celeste inclinado hacia adelante -->
+            <path d="M248 74 L262 46" stroke="#5BC0EB" stroke-width="13" stroke-linecap="round"/>
+            <path d="M248 74 L262 46" stroke="#1E241E" stroke-width="2.5" stroke-linecap="round"/>
+            <!-- Brazo sujetando el manubrio -->
+            <path d="M262 48 L274 64 L286 71" fill="none" stroke="#5BC0EB" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M262 48 L274 64 L286 71" fill="none" stroke="#1E241E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Cabeza y Casco Amarillo de Ciclista -->
+            <circle cx="268" cy="32" r="10" fill="#FFE0B2" stroke="#1E241E" stroke-width="2.5"/>
+            <path d="M256 31 C256 22 263 17 271 17 C279 17 283 23 282 31 Z" fill="#FFD24C" stroke="#1E241E" stroke-width="2.5" stroke-linejoin="round"/>
+
+            <!-- Pin de Meta en el Extremo Derecho de la Ciclovía -->
+            <path d="M354 146C354 146 366 130 366 120C366 113.4 360.6 108 354 108C347.4 108 342 113.4 342 120C342 130 354 146 354 146Z" fill="#52B70A" stroke="#1E241E" stroke-width="2.5" stroke-linejoin="round"/>
+            <circle cx="354" cy="120" r="4.5" fill="#FFFFFF" stroke="#1E241E" stroke-width="1.8"/>
+
+            <!-- Pista / Ciclovía Asfáltica Gris con Líneas Blancas -->
+            <rect x="8" y="148" width="364" height="6" rx="3" fill="#DCE4E0" stroke="#1E241E" stroke-width="2"/>
+            <rect x="8" y="154" width="364" height="22" rx="6" fill="#4A5550" stroke="#1E241E" stroke-width="2.6"/>
+            <line x1="22" y1="165" x2="358" y2="165" stroke="#FFFFFF" stroke-width="2.8" stroke-dasharray="16 12" stroke-linecap="round"/>
           </svg>
         </div>
       </div>
 
-      <!-- 2. Cinta Continua de 4 Métricas (1 sola franja limpia en lugar de 4 tarjetas separadas) -->
+      <!-- 2. Cinta Continua de 4 Métricas en Español -->
       <div class="eco-stat-ribbon" aria-label="Resumen de impacto personal">
         <div class="ribbon-metric">
           <span class="ribbon-icon tint-green"><app-icon name="leaf" [size]="22"></app-icon></span>
           <div class="ribbon-copy">
-            <span class="ribbon-label">{{ i18n.t('dash.co2Saved') }}</span>
+            <span class="ribbon-label">CO₂ evitado total</span>
             <strong class="ribbon-val">{{ s.totalCo2SavedKg | number: '1.2-2' }} <small>kg</small></strong>
             <span class="ribbon-sub">≈ {{ s.treesEquivalent | number: '1.1-1' }} árboles urbanos</span>
           </div>
@@ -90,7 +175,7 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
         <div class="ribbon-metric">
           <span class="ribbon-icon tint-yellow"><app-icon name="bike" [size]="22"></app-icon></span>
           <div class="ribbon-copy">
-            <span class="ribbon-label">{{ i18n.t('dash.distance') }}</span>
+            <span class="ribbon-label">Recorrido sostenible</span>
             <strong class="ribbon-val">{{ s.totalDistanceKm | number: '1.1-1' }} <small>km</small></strong>
             <span class="ribbon-sub">{{ s.totalTrips }} recorridos registrados</span>
           </div>
@@ -99,7 +184,7 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
         <div class="ribbon-metric">
           <span class="ribbon-icon tint-blue"><app-icon name="bolt" [size]="22"></app-icon></span>
           <div class="ribbon-copy">
-            <span class="ribbon-label">{{ i18n.t('dash.points') }}</span>
+            <span class="ribbon-label">Puntos disponibles</span>
             <strong class="ribbon-val">{{ s.currentPoints }} <small>pts</small></strong>
             <a routerLink="/rewards" class="ribbon-link">Canjear beneficios →</a>
           </div>
@@ -108,9 +193,9 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
         <div class="ribbon-metric">
           <span class="ribbon-icon tint-orange"><app-icon name="flame" [size]="22"></app-icon></span>
           <div class="ribbon-copy">
-            <span class="ribbon-label">{{ i18n.t('dash.calories') }}</span>
+            <span class="ribbon-label">Energía activa</span>
             <strong class="ribbon-val">{{ s.totalCaloriesBurned }} <small>kcal</small></strong>
-            <span class="ribbon-sub">Energía activa acumulada</span>
+            <span class="ribbon-sub">Calorías quemadas en ruta</span>
           </div>
         </div>
       </div>
@@ -121,7 +206,7 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
         <article class="eco-card dash-main-chart-card">
           <div class="card-head-row">
             <div>
-              <h2>{{ i18n.t('dash.weeklyTitle') }}</h2>
+              <h2>Emisiones evitadas esta semana</h2>
               <p class="card-sub">Gramos de CO₂ que evitaste emitir cada día de la semana</p>
             </div>
             <span class="badge-pill">
@@ -137,16 +222,16 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
                 <div
                   class="bar-fill"
                   [style.height.%]="getBarHeightPercent(item.co2SavedGrams)"
-                  [title]="item.dayOfWeek + ': ' + item.co2SavedGrams + ' g CO₂'"
+                  [title]="formatDay(item.dayOfWeek) + ': ' + item.co2SavedGrams + ' g CO₂'"
                 ></div>
               </div>
-              <div class="bar-day">{{ item.dayOfWeek }}</div>
+              <div class="bar-day">{{ formatDay(item.dayOfWeek) }}</div>
             </div>
           </div>
 
           <div class="chart-divider-Section">
             <div class="split-header-inline">
-              <h3>{{ i18n.t('dash.modeSplit') }}</h3>
+              <h3>Cómo te moviste</h3>
               <span>Distribución de tus {{ s.totalTrips }} viajes</span>
             </div>
             <div class="mode-bars">
@@ -164,20 +249,20 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
           </div>
         </article>
 
-        <!-- Columna Vertical Derecha (Sin anidar múltiples tarjetas pesadas) -->
+        <!-- Columna Vertical Derecha -->
         <aside class="dash-vertical-sidebar">
           <!-- Globo de Consejo del Día -->
           <div class="advisor-callout" *ngIf="recommendation as rec">
             <div class="advisor-callout-top">
               <span class="advisor-spark-icon"><app-icon name="spark" [size]="18"></app-icon></span>
               <div>
-                <span class="advisor-kicker">Consejo mágico del día</span>
+                <span class="advisor-kicker">Ruta recomendada de hoy</span>
                 <h3>{{ rec.title }}</h3>
               </div>
             </div>
             <p class="advisor-text">{{ rec.recommendation }}</p>
             <a routerLink="/routes" class="inline-action-link">
-              <span>Probar ruta sugerida en el mapa</span>
+              <span>Abrir ruta sugerida en el mapa</span>
               <app-icon name="arrow-right" [size]="14"></app-icon>
             </a>
           </div>
@@ -187,7 +272,7 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
             <div class="timeline-group" *ngIf="community as c">
               <div class="timeline-head">
                 <h3>Impacto colectivo en Lima</h3>
-                <a routerLink="/leaderboard" class="link-emerald">Ranking →</a>
+                <a routerLink="/leaderboard" class="link-emerald">Ver ranking →</a>
               </div>
               <ul class="vertical-stat-list">
                 <li>
@@ -243,12 +328,54 @@ export class DashboardComponent implements OnInit {
   recommendation: AiRecommendation | null = null;
   Math = Math;
 
-  constructor(private api: ApiService, public i18n: I18nService) {}
+  selectedQuickPreset = 0;
+  quickCorridors: QuickCorridorOption[] = [
+    {
+      index: 0,
+      origin: 'San Isidro (Centro Financiero)',
+      destination: 'Miraflores (Parque Kennedy)',
+      distanceLabel: '3.6 km',
+      timeLabel: '12 min en ciclovía'
+    },
+    {
+      index: 1,
+      origin: 'Jesús María (Av. Salaverry)',
+      destination: 'San Isidro (Óvalo Gutiérrez)',
+      distanceLabel: '4.2 km',
+      timeLabel: '14 min en ciclovía'
+    },
+    {
+      index: 2,
+      origin: 'Miraflores (Parque Kennedy)',
+      destination: 'Barranco (Plaza Municipal)',
+      distanceLabel: '3.1 km',
+      timeLabel: '11 min en ciclovía'
+    },
+    {
+      index: 3,
+      origin: 'Ciudad Universitaria (UNMSM)',
+      destination: 'Centro Histórico (Plaza San Martín)',
+      distanceLabel: '5.4 km',
+      timeLabel: '18 min en ciclovía'
+    }
+  ];
+
+  constructor(
+    private api: ApiService,
+    public i18n: I18nService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.api.getDashboardSummary().subscribe(res => (this.summary = res));
     this.api.getCommunityImpact().subscribe(res => (this.community = res));
     this.api.getRecommendations().subscribe(res => (this.recommendation = res));
+  }
+
+  launchQuickRoute(): void {
+    this.router.navigate(['/routes'], {
+      queryParams: { preset: this.selectedQuickPreset }
+    });
   }
 
   getBarHeightPercent(grams: number): number {
@@ -260,6 +387,46 @@ export class DashboardComponent implements OnInit {
   getModeEntries(mapObj: Record<string, number> | undefined): { mode: string; count: number }[] {
     if (!mapObj) return [];
     return Object.entries(mapObj).map(([mode, count]) => ({ mode, count }));
+  }
+
+  formatDay(day: string): string {
+    if (!day) return '';
+    const clean = day.trim().toUpperCase();
+    const dayMap: Record<string, string> = {
+      MON: 'Lun',
+      MONDAY: 'Lun',
+      LUN: 'Lun',
+      LUNES: 'Lun',
+      TUE: 'Mar',
+      TUESDAY: 'Mar',
+      MAR: 'Mar',
+      MARTES: 'Mar',
+      WED: 'Mié',
+      WEDNESDAY: 'Mié',
+      MIE: 'Mié',
+      MIÉ: 'Mié',
+      MIERCOLES: 'Mié',
+      MIÉRCOLES: 'Mié',
+      THU: 'Jue',
+      THURSDAY: 'Jue',
+      JUE: 'Jue',
+      JUEVES: 'Jue',
+      FRI: 'Vie',
+      FRIDAY: 'Vie',
+      VIE: 'Vie',
+      VIERNES: 'Vie',
+      SAT: 'Sáb',
+      SATURDAY: 'Sáb',
+      SAB: 'Sáb',
+      SÁB: 'Sáb',
+      SABADO: 'Sáb',
+      SÁBADO: 'Sáb',
+      SUN: 'Dom',
+      SUNDAY: 'Dom',
+      DOM: 'Dom',
+      DOMINGO: 'Dom'
+    };
+    return dayMap[clean] || day;
   }
 
   formatMode(mode: string): string {
