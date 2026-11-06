@@ -2442,3 +2442,68 @@ html[data-theme="dark"] .hero-section {
   line-height: 1.55 !important;
   text-shadow: 0 2px 3px rgba(12, 24, 10, 0.55) !important;
 }
+
+
+/* ==================== SOFTER, SMOOTHER TYPOGRAPHY WEIGHTS (LESS HARSH BOLD) ==================== */
+html,
+body {
+  font-weight: 400 !important;
+}
+
+p,
+.section-subtitle,
+.how-step-card p,
+.transport-card-desc,
+.transport-card-sub,
+.impact-stat-card p,
+.gemini-insight-text {
+  font-weight: 500 !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+.hero-headline,
+.section-header h2,
+.how-header h2,
+.how-step-card h3,
+.transport-card-title-row h3,
+.note-route,
+.cutout-figure {
+  font-weight: 600 !important;
+}
+
+.hero-headline {
+  text-shadow: 0 2px 0 rgba(18, 28, 16, 0.55) !important;
+}
+
+.hero-copy .lead {
+  font-weight: 600 !important;
+  text-shadow: 0 1px 2px rgba(12, 24, 10, 0.45) !important;
+}
+
+strong,
+b,
+.button,
+.nav a,
+.nav-cta-pill,
+.hero-kicker,
+.section-eyebrow,
+.how-step-num,
+.transport-card-banner,
+.transport-co2-pill,
+.metric-name,
+.metric-value,
+.metric-item dt,
+.metric-item dd,
+.corridor-tag,
+.corridor-btn,
+.corridor-btn.is-active,
+.btn-recycle-action,
+.alchemy-preset,
+.alchemy-summary-col span,
+.alchemy-summary-col strong,
+.impact-stat-label {
+  font-weight: 600 !important;
+}
