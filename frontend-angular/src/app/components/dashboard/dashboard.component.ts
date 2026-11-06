@@ -70,7 +70,8 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
             <circle cx="330" cy="134" r="11" fill="#74C7EC" stroke="#1E241E" stroke-width="2.2"/>
             <path d="M268 134L288 102H318L300 134H268Z" stroke="#FF6B4A" stroke-width="3.5" stroke-linejoin="round"/>
             <path d="M318 102L330 134" stroke="#1E241E" stroke-width="3" stroke-linecap="round"/>
-            <line x1="18" y1="156" x2="346" y2="156" stroke="#1E241E" stroke-width="3" stroke-linecap="round"/>
+            <rect x="12" y="151" width="338" height="16" rx="6" fill="#525E57" stroke="#1E241E" stroke-width="2.5"/>
+            <line x1="26" y1="159" x2="336" y2="159" stroke="#FFFFFF" stroke-width="2.4" stroke-dasharray="14 10" stroke-linecap="round"/>
           </svg>
         </div>
       </div>
