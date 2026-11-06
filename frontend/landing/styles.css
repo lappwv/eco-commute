@@ -184,23 +184,40 @@ output,
   color: var(--accent-bright) !important;
 }
 
-/* ==================== ANIMACIONES AL SCROLLEAR ==================== */
+/* ==================== ANIMACIONES AL SCROLLEAR (EMIL KOWALSKI CRAFT) ==================== */
 html.js-reveal-ready [data-scroll-reveal] {
   opacity: 0;
-  transform: translateY(18px);
+  transform: translateY(22px);
   transition:
-    opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
   transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
 }
 
-html.js-reveal-ready [data-scroll-reveal].is-inview {
+html.js-reveal-ready [data-scroll-reveal].is-inview,
+html.js-reveal-ready [data-scroll-reveal].is-revealed {
   opacity: 1;
   transform: translateY(0);
 }
 
+/* Cascada de revelado para elementos en cuadrícula */
+.how-it-works-strip .how-step-card:nth-child(1) { --reveal-delay: 50ms; }
+.how-it-works-strip .how-step-card:nth-child(2) { --reveal-delay: 130ms; }
+.how-it-works-strip .how-step-card:nth-child(3) { --reveal-delay: 210ms; }
+
+.transport-grid .transport-card:nth-child(1) { --reveal-delay: 50ms; }
+.transport-grid .transport-card:nth-child(2) { --reveal-delay: 120ms; }
+.transport-grid .transport-card:nth-child(3) { --reveal-delay: 190ms; }
+.transport-grid .transport-card:nth-child(4) { --reveal-delay: 260ms; }
+
+.alchemy-cards-grid .impact-stat-card:nth-child(1) { --reveal-delay: 50ms; }
+.alchemy-cards-grid .impact-stat-card:nth-child(2) { --reveal-delay: 110ms; }
+.alchemy-cards-grid .impact-stat-card:nth-child(3) { --reveal-delay: 170ms; }
+.alchemy-cards-grid .impact-stat-card:nth-child(4) { --reveal-delay: 230ms; }
+
 @media (prefers-reduced-motion: reduce) {
-  [data-scroll-reveal] {
+  html.js-reveal-ready [data-scroll-reveal] {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
@@ -1493,1017 +1510,535 @@ html[data-theme="dark"] .nav-cta-pill {
 }
 
 
+
+
 /* ==========================================================================
-   PLAYFUL CARTOON / ILLUSTRATED ECO STYLE (REFERENCE IMAGE THEME)
-   Vibrant Lime (#6CC016), Sunny Yellow (#FFD24C), Sky Blue (#5BC0EB),
-   Warm Cream (#FFFDF6), Sunny Mint (#ECFAE0) & 2.5px Cartoon Outlines (#1E241E)
+   DISEÑO EDITORIAL & MULTI-PÁGINA (ESTÁNDAR TASTE + EMIL KOWALSKI + IMPECCABLE)
+   Elegancia minimalista, fotografía de alta definición y física táctil
    ========================================================================== */
 
-:root,
-html[data-theme="light"] {
-  --bg: #FFFDF6;
-  --bg-alt: #EBFAE0;
-  --card: #FFFFFF;
-  --card-subtle: #F4FCEB;
-  --dark-surface: #E7FCD4;
-  --ink: #1E241E;
-  --ink-secondary: #354235;
-  --ink-muted: #556655;
-  --accent: #4E9A06;
-  --accent-hover: #3D7A04;
-  --accent-soft: #E3F9C6;
-  --accent-bright: #6CC016;
-  --warn: #D9480F;
-  --warn-soft: #FFE8DC;
-  --sunny: #FFD24C;
-  --sunny-hover: #FFC21A;
-  --sky: #5BC0EB;
-  --coral: #FF6B4A;
-  --cartoon-line: #1E241E;
-  --border: #1E241E;
-  --border-strong: #1E241E;
-  --shadow-sm: 0 4px 0 #1E241E;
-  --shadow-md: 0 6px 0 #1E241E;
-  --shadow-lg: 0 8px 0 #1E241E;
-  --sans: "Nunito", "Inter", sans-serif;
-  --display: "Fredoka", "Plus Jakarta Sans", sans-serif;
+/* Navegación activa entre páginas */
+.nav .nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 0.95rem;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--ink-secondary);
+  text-decoration: none;
+  border-radius: var(--radius-pill);
+  transition: color 0.18s ease, background-color 0.18s ease;
 }
 
-html[data-theme="dark"] {
-  --bg: #131D2B;
-  --bg-alt: #182536;
-  --card: #1F3044;
-  --card-subtle: #283D56;
-  --dark-surface: #23364C;
-  --ink: #F8FAFC;
-  --ink-secondary: #D4E0ED;
-  --ink-muted: #9CB1C9;
-  --accent: #8CE52E;
-  --accent-hover: #76C71A;
-  --accent-soft: rgba(140, 229, 46, 0.18);
-  --accent-bright: #A4F24B;
-  --warn: #FF8A65;
-  --warn-soft: rgba(255, 138, 101, 0.18);
-  --sunny: #FFD24C;
-  --sunny-hover: #FFC21A;
-  --sky: #74C7EC;
-  --coral: #FF8A65;
-  --cartoon-line: #0B121B;
-  --border: #0B121B;
-  --border-strong: #0B121B;
-  --shadow-sm: 0 4px 0 #0B121B;
-  --shadow-md: 0 6px 0 #0B121B;
-  --shadow-lg: 0 8px 0 #0B121B;
+.nav .nav-link:hover {
+  color: var(--ink);
+  background: var(--card-subtle);
 }
 
-/* Navbar Playful */
-.topbar {
-  background: rgba(255, 253, 246, 0.96);
-  border-bottom: 2.5px solid var(--cartoon-line);
+.nav .nav-link.is-active {
+  color: var(--accent);
+  font-weight: 600;
+  background: var(--accent-soft);
 }
 
-html[data-theme="dark"] .topbar {
-  background: rgba(19, 29, 43, 0.96);
+/* Indicador de pulso en vivo para datos en tiempo real */
+@keyframes liveBeaconPulse {
+  0% {
+    transform: scale(0.92);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 7px rgba(16, 185, 129, 0);
+  }
+  100% {
+    transform: scale(0.92);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
 }
 
-.brand-cartoon-badge {
-  width: 42px;
-  height: 42px;
-  border-radius: 14px;
-  background: var(--sunny);
-  border: 2.5px solid var(--cartoon-line);
-  box-shadow: 0 3px 0 var(--cartoon-line);
+.live-pulse-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-bright);
+  margin-right: 6px;
+  vertical-align: 1px;
+  animation: liveBeaconPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Respuesta táctil en botones (:active physics de Emil Kowalski) */
+.button,
+.btn-recycle-action,
+.corridor-btn,
+.alchemy-preset,
+.biome-chip,
+.lang-toggle {
+  transition:
+    transform 0.15s cubic-bezier(0.2, 0.8, 0.4, 1),
+    box-shadow 0.15s cubic-bezier(0.2, 0.8, 0.4, 1),
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.button:hover,
+.btn-recycle-action:hover {
+  transform: translateY(-1.5px);
+  box-shadow: var(--shadow-md);
+}
+
+.button:active,
+.btn-recycle-action:active,
+.corridor-btn:active,
+.alchemy-preset:active,
+.biome-chip:active,
+.lang-toggle:active {
+  transform: translateY(2px) scale(0.98) !important;
+  box-shadow: var(--shadow-sm) !important;
+  transition-duration: 0.04s !important;
+}
+
+/* Encabezados para páginas dedicadas (Cómo Funciona, Vehículos, Impacto) */
+.page-hero {
+  padding: 6.5rem 0 3.5rem;
+  background: linear-gradient(180deg, var(--hero-tint-top) 0%, var(--bg) 100%);
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+}
+
+.page-hero-inner {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.page-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.95rem;
+  border-radius: var(--radius-pill);
+  background: var(--card);
+  border: 1px solid var(--border-strong);
+  color: var(--accent);
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-bottom: 1.1rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.page-title {
+  font-size: clamp(2.1rem, 4.2vw, 3.2rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  color: var(--ink);
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+
+.page-lead {
+  font-size: 1.14rem;
+  color: var(--ink-secondary);
+  line-height: 1.6;
+  margin: 0 auto 1.5rem;
+  max-width: 640px;
+}
+
+/* Tarjetas fotográficas editoriales de vehículos */
+.veh-editorial-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 1.5rem;
+  margin: 3rem 0;
+}
+
+.veh-editorial-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+.veh-editorial-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-strong);
+}
+
+.veh-card-img-wrap,
+.veh-photo-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--bg-alt);
+}
+
+.veh-card-img,
+.veh-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.4, 1);
+}
+
+.veh-editorial-card:hover .veh-card-img,
+.veh-editorial-card:hover .veh-photo {
+  transform: scale(1.05);
+}
+
+.veh-card-badge,
+.veh-tag {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.76rem;
+  font-weight: 700;
+  font-family: var(--mono);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(8px);
+  letter-spacing: 0.02em;
+}
+
+.veh-card-badge.eco,
+.veh-tag.green {
+  background: rgba(16, 185, 129, 0.94);
+  color: #FFFFFF;
+}
+
+.veh-card-badge.transit,
+.veh-tag.blue,
+.veh-tag.purple {
+  background: rgba(14, 165, 233, 0.94);
+  color: #FFFFFF;
+}
+
+.veh-card-badge.warn,
+.veh-tag.red {
+  background: rgba(239, 68, 68, 0.94);
+  color: #FFFFFF;
+}
+
+.veh-card-content,
+.veh-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.veh-card-title-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+}
+
+.veh-card-title,
+.veh-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+  font-family: var(--sans);
+}
+
+.veh-card-sub {
+  font-size: 0.82rem;
+  color: var(--ink-muted);
+}
+
+.veh-card-desc,
+.veh-desc {
+  font-size: 0.88rem;
+  color: var(--ink-secondary);
+  line-height: 1.55;
+  margin: 0.2rem 0 1.2rem;
+}
+
+.veh-stat-pills {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.veh-pill {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ink-secondary);
+  background: var(--card-subtle);
+  border: 1px solid var(--border);
+  padding: 0.4rem 0.65rem;
+  border-radius: var(--radius-sm);
+  text-align: center;
+  font-family: var(--sans);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.veh-editorial-card:hover .veh-pill {
+  border-color: var(--border-strong);
+  color: var(--ink);
+}
+
+.veh-metrics-list {
+  list-style: none;
+  padding: 0;
+  margin: auto 0 0;
+  border-top: 1px solid var(--border);
+  padding-top: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.veh-metric-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.84rem;
+}
+
+.veh-metric-label {
+  color: var(--ink-muted);
+}
+
+.veh-metric-value {
+  font-weight: 600;
+  color: var(--ink);
+  font-family: var(--mono);
+}
+
+/* Badges para tablas */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.75rem;
+  font-weight: 700;
+  font-family: var(--mono);
+  letter-spacing: 0.02em;
+}
+
+.badge-success {
+  background: rgba(16, 185, 129, 0.15);
+  color: #059669;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.badge-info {
+  background: rgba(14, 165, 233, 0.15);
+  color: #0284c7;
+  border: 1px solid rgba(14, 165, 233, 0.3);
+}
+
+.badge-danger {
+  background: rgba(239, 68, 68, 0.15);
+  color: #dc2626;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+html[data-theme="dark"] .badge-success {
+  background: rgba(16, 185, 129, 0.2);
+  color: #34d399;
+}
+
+html[data-theme="dark"] .badge-info {
+  background: rgba(14, 165, 233, 0.2);
+  color: #38bdf8;
+}
+
+html[data-theme="dark"] .badge-danger {
+  background: rgba(239, 68, 68, 0.2);
+  color: #f87171;
+}
+
+/* Tabla comparativa de movilidad */
+.comparison-table-wrap {
+  overflow-x: auto;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: var(--card);
+  box-shadow: var(--shadow-sm);
+  margin: 2.5rem 0;
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.92rem;
+}
+
+.comparison-table th,
+.comparison-table td {
+  padding: 1.1rem 1.4rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.comparison-table th {
+  background: var(--card-subtle);
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.comparison-table tr:last-child td {
+  border-bottom: none;
+}
+
+.comparison-table tr:hover td {
+  background: var(--accent-soft);
+}
+
+/* Tarjetas de enlace rápido en el Inicio hacia las páginas dedicadas */
+.page-links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin: 3.5rem 0;
+}
+
+.page-preview-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.8rem;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.page-preview-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent);
+}
+
+.page-preview-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--accent-soft);
+  color: var(--accent);
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 1.1rem;
 }
 
-.brand-cartoon-badge.sm {
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
-}
-
-.brand-text {
-  font-family: var(--display);
-  font-size: 1.35rem;
+.page-preview-title {
+  font-size: 1.25rem;
   font-weight: 700;
-  letter-spacing: -0.01em;
-}
-
-.nav a {
-  font-family: var(--display);
-  font-weight: 600;
   color: var(--ink);
-  border: 2px solid transparent;
+  margin-bottom: 0.5rem;
 }
 
-.nav a:hover {
-  background: var(--sunny);
-  color: #1E241E;
-  border-color: var(--cartoon-line);
-  box-shadow: 0 3px 0 var(--cartoon-line);
+.page-preview-desc {
+  font-size: 0.92rem;
+  color: var(--ink-secondary);
+  line-height: 1.55;
+  margin-bottom: 1.2rem;
 }
 
-.nav-cta-pill {
-  background: var(--sunny) !important;
-  color: #1E241E !important;
-  border: 2.5px solid var(--cartoon-line) !important;
-  box-shadow: 0 3px 0 var(--cartoon-line);
-  font-family: var(--display);
-  font-weight: 700 !important;
+.page-preview-action {
+  margin-top: auto;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 
-.nav-cta-pill:hover {
-  transform: translateY(-1px);
-  background: var(--sunny-hover) !important;
+.page-preview-card:hover .page-preview-action svg {
+  transform: translateX(4px);
 }
 
-.biome-switcher,
-.lang-toggle {
-  border: 2px solid var(--cartoon-line);
-  box-shadow: 0 3px 0 var(--cartoon-line);
+.page-preview-action svg {
+  transition: transform 0.2s ease;
+}
+
+/* Pasos detallados en Como Funciona */
+.how-detail-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin: 3rem 0;
+}
+
+.how-detail-card {
   background: var(--card);
-  font-weight: 700;
-}
-
-.biome-chip.is-active {
-  background: var(--sunny);
-  color: #1E241E;
-  font-weight: 800;
-}
-
-/* ==================== HERO PLAYFUL LIME GREEN + WHITE BLOBS ==================== */
-.hero-section {
-  background: #6CC016 !important;
-  border-bottom: 3px solid var(--cartoon-line);
-  position: relative;
-  overflow: hidden;
-}
-
-html[data-theme="dark"] .hero-section {
-  background: #235914 !important;
-}
-
-.hero-section::before,
-.hero-section::after {
-  display: none !important;
-}
-
-/* Domo blanco superior igual a la imagen de referencia */
-.hero-top-white-dome {
-  position: absolute;
-  top: -210px;
-  left: 16%;
-  width: 540px;
-  height: 320px;
-  background: #FFFFFF;
-  border-radius: 50%;
-  border: 3px solid var(--cartoon-line);
-  z-index: 0;
-  pointer-events: none;
-}
-
-/* Gran círculo blanco derecho igual a la imagen de referencia */
-.hero-right-white-circle {
-  position: absolute;
-  right: -120px;
-  bottom: -140px;
-  width: 780px;
-  height: 780px;
-  background: #FFFFFF;
-  border-radius: 50%;
-  border: 3px solid var(--cartoon-line);
-  z-index: 0;
-  pointer-events: none;
-}
-
-html[data-theme="dark"] .hero-top-white-dome,
-html[data-theme="dark"] .hero-right-white-circle {
-  background: #1B334B;
-}
-
-/* Burbujas y nubes cartoon flotantes */
-.hero-doodles {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.doodle-bubble {
-  position: absolute;
-  background: #FFFFFF;
-  border: 2.5px solid #1E241E;
-  border-radius: 50%;
-}
-
-.doodle-bubble.b1 {
-  width: 18px;
-  height: 18px;
-  top: 23%;
-  left: 48%;
-}
-
-.doodle-bubble.b2 {
-  width: 13px;
-  height: 13px;
-  top: 66%;
-  left: 43%;
-}
-
-.doodle-bubble.b3 {
-  width: 15px;
-  height: 15px;
-  bottom: 11%;
-  left: 36%;
-}
-
-.doodle-bubble.b4 {
-  width: 20px;
-  height: 20px;
-  top: 16%;
-  right: 10%;
-}
-
-.doodle-cloud {
-  position: absolute;
-  width: 108px;
-  height: auto;
-  filter: drop-shadow(0 4px 0 rgba(30, 36, 30, 0.18));
-}
-
-.doodle-cloud.c1 {
-  top: 15%;
-  left: 43%;
-}
-
-.doodle-cloud.c2 {
-  top: 12%;
-  right: 18%;
-  width: 90px;
-}
-
-.hero-kicker {
-  background: #FFFFFF !important;
-  color: #1E241E !important;
-  border: 2.5px solid #1E241E;
-  box-shadow: 0 3px 0 #1E241E;
-  font-family: var(--display);
-  font-size: 0.86rem;
-  font-weight: 700;
-}
-
-.hero-headline {
-  font-family: var(--display);
-  color: #FFFFFF !important;
-  text-shadow: 0 3px 0 #1E241E;
-  letter-spacing: 0.01em;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.hero-headline em {
-  color: var(--sunny) !important;
-}
-
-.hero-copy .lead {
-  color: #FFFFFF !important;
-  font-weight: 700;
-  font-size: 1.08rem;
-  text-shadow: 0 1px 2px rgba(30, 36, 30, 0.25);
-}
-
-/* Botón Amarillo "Sign Up" idéntico a la imagen de referencia */
-.button {
-  font-family: var(--display);
-  font-weight: 700;
-  font-size: 1rem;
-  border: 2.5px solid #1E241E !important;
-  box-shadow: 0 4px 0 #1E241E !important;
-  padding: 0.85rem 1.85rem;
-}
-
-.button.primary {
-  background: var(--sunny) !important;
-  color: #1E241E !important;
-}
-
-.button.primary:hover {
-  background: var(--sunny-hover) !important;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 0 #1E241E !important;
-}
-
-.button.secondary {
-  background: #FFFFFF !important;
-  color: #1E241E !important;
-}
-
-.button.secondary:hover {
-  background: #F4FCEB !important;
-  transform: translateY(-2px);
-}
-
-/* Escena Ilustrada Cartoon en el Hero */
-.hero-cartoon-scene {
-  background: #FFFFFF;
-  border: 2.5px solid #1E241E;
-  border-radius: 22px;
-  padding: 0.55rem 0.9rem 0.3rem;
-  box-shadow: 0 5px 0 #1E241E;
-  max-width: 470px;
-}
-
-.cartoon-scene-svg {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* Píldoras de métricas del Hero */
-.hero-metrics {
-  border-top: none !important;
-  padding-top: 0.4rem !important;
-  gap: 0.85rem;
-}
-
-.metric-item {
-  background: #FFFFFF;
-  border: 2.5px solid #1E241E;
-  border-radius: 18px;
-  padding: 0.75rem 0.9rem;
-  box-shadow: 0 4px 0 #1E241E;
-}
-
-.metric-item dt {
-  color: #4A574A !important;
-  font-weight: 800;
-  font-size: 0.76rem;
-  text-transform: uppercase;
-}
-
-.metric-item dd {
-  color: #1E241E !important;
-  font-family: var(--display);
-  font-weight: 700;
-  font-size: 1.45rem;
-}
-
-.metric-item dd small {
-  color: #586658 !important;
-  font-weight: 700;
-}
-
-/* Tarjeta Derecha del Simulador con Borde Cartoon */
-.sim-card {
-  border: 3px solid #1E241E !important;
-  border-radius: 26px !important;
-  box-shadow: 0 8px 0 #1E241E !important;
-  background: #FFFFFF !important;
-  color: #1E241E !important;
-}
-
-html[data-theme="dark"] .sim-card {
-  background: #1F3044 !important;
-  color: #F8FAFC !important;
-}
-
-.corridor-tag {
-  background: var(--sunny) !important;
-  color: #1E241E !important;
-  border: 2px solid #1E241E !important;
-  font-weight: 800 !important;
-}
-
-.corridor-btn {
-  border: 2px solid #1E241E !important;
-  font-family: var(--display) !important;
-  font-weight: 600 !important;
-  box-shadow: 0 2px 0 #1E241E;
-}
-
-.corridor-btn.is-active {
-  background: #76C71A !important;
-  color: #1E241E !important;
-  font-weight: 700 !important;
-}
-
-.lima-map-wrapper {
-  border: 2.5px solid #1E241E !important;
-  border-radius: 18px !important;
-}
-
-.note-figures li {
-  border: 2px solid #1E241E !important;
-  border-radius: 14px !important;
-  background: #F4FCEB !important;
-}
-
-html[data-theme="dark"] .note-figures li {
-  background: #283D56 !important;
-}
-
-.btn-recycle-action {
-  background: var(--sunny) !important;
-  color: #1E241E !important;
-  border: 2.5px solid #1E241E !important;
-  border-radius: 999px !important;
-  box-shadow: 0 4px 0 #1E241E !important;
-  font-family: var(--display) !important;
-  font-weight: 700 !important;
-}
-
-/* ==================== SECCIÓN 3 PASOS & COMPARATIVA DE VEHÍCULOS CARTOON ==================== */
-.section {
-  border-top: 2.5px solid var(--cartoon-line);
-}
-
-.section.alt {
-  background: linear-gradient(180deg, #E8F9D2 0%, #F4FCE8 100%);
-}
-
-html[data-theme="dark"] .section.alt {
-  background: linear-gradient(180deg, #162334 0%, #1B2B3F 100%);
-}
-
-.section-eyebrow {
-  display: inline-block;
-  background: var(--sunny);
-  color: #1E241E !important;
-  border: 2px solid #1E241E;
-  border-radius: 999px;
-  padding: 0.28rem 0.95rem;
-  font-family: var(--display);
-  font-weight: 700;
-  box-shadow: 0 3px 0 #1E241E;
-  margin-bottom: 0.65rem;
-}
-
-.how-step-card,
-.transport-card,
-.alchemy-controls-panel,
-.impact-stat-card {
-  border: 2.5px solid #1E241E !important;
-  border-radius: 24px !important;
-  box-shadow: 0 6px 0 #1E241E !important;
-}
-
-.how-step-card.step-green {
-  background: #E7FCD2;
-}
-.how-step-card.step-yellow {
-  background: #FFF4C8;
-}
-.how-step-card.step-blue {
-  background: #DFF4FE;
-}
-
-html[data-theme="dark"] .how-step-card.step-green,
-html[data-theme="dark"] .how-step-card.step-yellow,
-html[data-theme="dark"] .how-step-card.step-blue {
-  background: #1F3044;
-}
-
-.how-step-icon,
-.impact-icon-chip {
-  background: #FFFFFF !important;
-  color: #4E9A06 !important;
-  border: 2px solid #1E241E;
-  box-shadow: 0 3px 0 #1E241E;
-}
-
-.how-step-num {
-  background: #FFFFFF;
-  color: #1E241E !important;
-  border: 2px solid #1E241E;
-  border-radius: 999px;
-  padding: 0.2rem 0.65rem;
-  font-weight: 800;
-}
-
-/* Tarjetas de Vehículos con Ilustraciones Cartoon */
-.transport-card {
-  background: #FFFFFF;
-  color: #1E241E;
-}
-
-html[data-theme="dark"] .transport-card {
-  background: #1F3044;
-  color: #F8FAFC;
-}
-
-.transport-card.is-recommended {
-  border: 3px solid #1E241E !important;
-  background: #F7FEEF;
-  box-shadow: 0 8px 0 #1E241E !important;
-  transform: translateY(-3px);
-}
-
-html[data-theme="dark"] .transport-card.is-recommended {
-  background: #253B54;
-  border-color: var(--sunny) !important;
-  box-shadow: 0 8px 0 #0B121B !important;
-}
-
-.transport-card.is-recommended:hover {
-  transform: translateY(-6px);
-}
-
-.transport-card-banner {
-  background: var(--sunny) !important;
-  color: #1E241E !important;
-  border-bottom: 2.5px solid #1E241E;
-  font-family: var(--display);
-  font-size: 0.8rem;
-  font-weight: 700;
-  padding: 0.45rem 0.75rem;
-}
-
-/* Escenarios ilustrados cartoon en las 4 tarjetas */
-.transport-card-media {
-  position: relative;
-  width: 100%;
-  height: 182px;
-  border-bottom: 2.5px solid #1E241E;
-  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.8rem;
+  box-shadow: var(--shadow-sm);
   display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.how-detail-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-strong);
+}
+
+.how-step-badge {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-}
-
-.transport-card-media.media-sky-green {
-  background: linear-gradient(180deg, #B6EEFF 0%, #E5FCD2 100%) !important;
-}
-
-.transport-card-media.media-sky-blue {
-  background: linear-gradient(180deg, #BFE8FF 0%, #E8F8FF 100%) !important;
-}
-
-.transport-card-media.media-sky-yellow {
-  background: linear-gradient(180deg, #FFE89E 0%, #FFF9DE 100%) !important;
-}
-
-.transport-card-media.media-sky-orange {
-  background: linear-gradient(180deg, #FFD2BE 0%, #FFF0E6 100%) !important;
-}
-
-.transport-cartoon-svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.transport-card:hover .transport-cartoon-svg {
-  transform: scale(1.04);
-}
-
-.transport-co2-pill {
-  font-family: var(--display);
-  font-size: 0.76rem;
-  font-weight: 700;
-  padding: 0.26rem 0.72rem;
-  border: 2px solid #1E241E;
-  box-shadow: 0 3px 0 #1E241E;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-}
-
-.transport-co2-pill.eco {
-  background: #6CC016 !important;
-  color: #1E241E !important;
-}
-
-.transport-co2-pill.warn {
-  background: #FF6B4A !important;
-  color: #FFFFFF !important;
-}
-
-.transport-card-title-row h3 {
-  font-family: var(--display);
-  font-size: 1.24rem;
-  color: var(--ink);
-}
-
-.transport-card-sub {
-  font-weight: 700;
-  color: var(--ink-secondary);
-}
-
-.transport-card-metrics {
-  border-top: 2px dashed rgba(30, 36, 30, 0.18);
-  border-bottom: 2px dashed rgba(30, 36, 30, 0.18);
-}
-
-html[data-theme="dark"] .transport-card-metrics {
-  border-top-color: rgba(255, 255, 255, 0.16);
-  border-bottom-color: rgba(255, 255, 255, 0.16);
-}
-
-.metric-name {
-  font-weight: 700;
-  color: var(--ink-secondary);
-}
-
-.metric-value {
-  font-family: var(--display);
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: var(--ink);
-}
-
-.transport-card-desc {
-  font-weight: 600;
-  color: var(--ink-secondary);
-}
-
-/* Calculadora de Impacto */
-.alchemy-preset {
-  border: 2px solid #1E241E !important;
-  box-shadow: 0 3px 0 #1E241E;
-  font-family: var(--display) !important;
-  font-weight: 600 !important;
-}
-
-.alchemy-preset.is-active {
-  background: var(--sunny) !important;
-  color: #1E241E !important;
-}
-
-.slider-group {
-  border: 2px solid #1E241E;
-  background: #F4FCEB;
-}
-
-html[data-theme="dark"] .slider-group {
-  background: #283D56;
-}
-
-.alchemy-summary-card {
-  background: #6CC016 !important;
-  color: #1E241E !important;
-  border: 2.5px solid #1E241E !important;
-  box-shadow: 0 4px 0 #1E241E;
-}
-
-.alchemy-summary-col span {
-  color: #1E241E !important;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-pill);
+  background: var(--accent-soft);
+  color: var(--accent);
   font-weight: 800;
-  text-transform: uppercase;
+  font-size: 0.95rem;
+  margin-bottom: 1.2rem;
+  font-family: var(--mono);
 }
 
-.alchemy-summary-col strong {
-  color: #FFFFFF !important;
-  text-shadow: 0 2px 0 #1E241E;
-  font-family: var(--display);
+.how-detail-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 0.6rem;
 }
 
-.impact-stat-card.card-tint-green {
-  background: #E8FCD2;
-}
-.impact-stat-card.card-tint-yellow {
-  background: #FFF4C8;
-}
-.impact-stat-card.card-tint-blue {
-  background: #DFF4FE;
-}
-.impact-stat-card.card-tint-orange {
-  background: #FFE6D8;
+.how-detail-desc {
+  font-size: 0.92rem;
+  color: var(--ink-secondary);
+  line-height: 1.55;
 }
 
-html[data-theme="dark"] .impact-stat-card.card-tint-green,
-html[data-theme="dark"] .impact-stat-card.card-tint-yellow,
-html[data-theme="dark"] .impact-stat-card.card-tint-blue,
-html[data-theme="dark"] .impact-stat-card.card-tint-orange {
-  background: #1F3044;
-}
-
-/* ==================== ARTISTIC MAP BACKDROP, SOFTER SHADOWS & DECORATIVE BORDERS ==================== */
-
-/* 1. Cartographic Bike-Route & Urban Map Background Pattern on Sections */
-body,
-.how-section,
-.section {
-  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22320%22%20height%3D%22320%22%20viewBox%3D%220%200%20320%20320%22%20fill%3D%22none%22%3E%0A%20%20%20%20%3Cg%20stroke%3D%22%234E9A06%22%20stroke-width%3D%221%22%20opacity%3D%220.08%22%3E%0A%20%20%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%2280%22%20x2%3D%22320%22%20y2%3D%2280%22%2F%3E%0A%20%20%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%22240%22%20x2%3D%22320%22%20y2%3D%22240%22%2F%3E%0A%20%20%20%20%20%20%3Cline%20x1%3D%2280%22%20y1%3D%220%22%20x2%3D%2280%22%20y2%3D%22320%22%2F%3E%0A%20%20%20%20%20%20%3Cline%20x1%3D%22240%22%20y1%3D%220%22%20x2%3D%22240%22%20y2%3D%22320%22%2F%3E%0A%20%20%20%20%3C%2Fg%3E%0A%20%20%20%20%3Cpath%20d%3D%22M-20%20160%20C%2060%20160%2C%20100%2060%2C%20180%2060%20C%20250%2060%2C%20270%20220%2C%20340%20220%22%20stroke%3D%22%236CC016%22%20stroke-width%3D%2216%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.09%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M-20%20160%20C%2060%20160%2C%20100%2060%2C%20180%2060%20C%20250%2060%2C%20270%20220%2C%20340%20220%22%20stroke%3D%22%234E9A06%22%20stroke-width%3D%221.8%22%20stroke-dasharray%3D%228%207%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.22%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22180%22%20cy%3D%2260%22%20r%3D%229%22%20fill%3D%22%23FFFDF6%22%20stroke%3D%22%234E9A06%22%20stroke-width%3D%222%22%20opacity%3D%220.25%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22180%22%20cy%3D%2260%22%20r%3D%223.5%22%20fill%3D%22%23FFD24C%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22240%22%20r%3D%227%22%20fill%3D%22%23FFFDF6%22%20stroke%3D%22%235BC0EB%22%20stroke-width%3D%222%22%20opacity%3D%220.22%22%2F%3E%0A%20%20%3C%2Fsvg%3E");
-  background-size: 320px 320px;
-  background-attachment: fixed;
-}
-
-.section.alt {
-  background-image:
-    url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22320%22%20height%3D%22320%22%20viewBox%3D%220%200%20320%20320%22%20fill%3D%22none%22%3E%0A%20%20%20%20%3Cg%20stroke%3D%22%234E9A06%22%20stroke-width%3D%221%22%20opacity%3D%220.08%22%3E%0A%20%20%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%2280%22%20x2%3D%22320%22%20y2%3D%2280%22%2F%3E%0A%20%20%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%22240%22%20x2%3D%22320%22%20y2%3D%22240%22%2F%3E%0A%20%20%20%20%20%20%3Cline%20x1%3D%2280%22%20y1%3D%220%22%20x2%3D%2280%22%20y2%3D%22320%22%2F%3E%0A%20%20%20%20%20%20%3Cline%20x1%3D%22240%22%20y1%3D%220%22%20x2%3D%22240%22%20y2%3D%22320%22%2F%3E%0A%20%20%20%20%3C%2Fg%3E%0A%20%20%20%20%3Cpath%20d%3D%22M-20%20160%20C%2060%20160%2C%20100%2060%2C%20180%2060%20C%20250%2060%2C%20270%20220%2C%20340%20220%22%20stroke%3D%22%236CC016%22%20stroke-width%3D%2216%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.09%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M-20%20160%20C%2060%20160%2C%20100%2060%2C%20180%2060%20C%20250%2060%2C%20270%20220%2C%20340%20220%22%20stroke%3D%22%234E9A06%22%20stroke-width%3D%221.8%22%20stroke-dasharray%3D%228%207%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.22%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22180%22%20cy%3D%2260%22%20r%3D%229%22%20fill%3D%22%23FFFDF6%22%20stroke%3D%22%234E9A06%22%20stroke-width%3D%222%22%20opacity%3D%220.25%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22180%22%20cy%3D%2260%22%20r%3D%223.5%22%20fill%3D%22%23FFD24C%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22240%22%20r%3D%227%22%20fill%3D%22%23FFFDF6%22%20stroke%3D%22%235BC0EB%22%20stroke-width%3D%222%22%20opacity%3D%220.22%22%2F%3E%0A%20%20%3C%2Fsvg%3E"),
-    linear-gradient(180deg, #E8F9D2 0%, #F4FCE8 100%) !important;
-  background-size: 320px 320px, 100% 100% !important;
-}
-
-html[data-theme="dark"] .section.alt {
-  background-image:
-    url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22320%22%20height%3D%22320%22%20viewBox%3D%220%200%20320%20320%22%20fill%3D%22none%22%3E%0A%20%20%20%20%3Cg%20stroke%3D%22%234E9A06%22%20stroke-width%3D%221%22%20opacity%3D%220.08%22%3E%0A%20%20%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%2280%22%20x2%3D%22320%22%20y2%3D%2280%22%2F%3E%0A%20%20%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%22240%22%20x2%3D%22320%22%20y2%3D%22240%22%2F%3E%0A%20%20%20%20%20%20%3Cline%20x1%3D%2280%22%20y1%3D%220%22%20x2%3D%2280%22%20y2%3D%22320%22%2F%3E%0A%20%20%20%20%20%20%3Cline%20x1%3D%22240%22%20y1%3D%220%22%20x2%3D%22240%22%20y2%3D%22320%22%2F%3E%0A%20%20%20%20%3C%2Fg%3E%0A%20%20%20%20%3Cpath%20d%3D%22M-20%20160%20C%2060%20160%2C%20100%2060%2C%20180%2060%20C%20250%2060%2C%20270%20220%2C%20340%20220%22%20stroke%3D%22%236CC016%22%20stroke-width%3D%2216%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.09%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M-20%20160%20C%2060%20160%2C%20100%2060%2C%20180%2060%20C%20250%2060%2C%20270%20220%2C%20340%20220%22%20stroke%3D%22%234E9A06%22%20stroke-width%3D%221.8%22%20stroke-dasharray%3D%228%207%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.22%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22180%22%20cy%3D%2260%22%20r%3D%229%22%20fill%3D%22%23FFFDF6%22%20stroke%3D%22%234E9A06%22%20stroke-width%3D%222%22%20opacity%3D%220.25%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22180%22%20cy%3D%2260%22%20r%3D%223.5%22%20fill%3D%22%23FFD24C%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2280%22%20cy%3D%22240%22%20r%3D%227%22%20fill%3D%22%23FFFDF6%22%20stroke%3D%22%235BC0EB%22%20stroke-width%3D%222%22%20opacity%3D%220.22%22%2F%3E%0A%20%20%3C%2Fsvg%3E"),
-    linear-gradient(180deg, #162334 0%, #1B2B3F 100%) !important;
-  background-size: 320px 320px, 100% 100% !important;
-}
-
-/* 2. Decorative Bike-Lane Road Divider Between Sections */
-.topbar {
-  border-bottom: none !important;
-}
-
-.topbar::after,
-.section::before {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 7px;
-  background-color: #2A352A;
-  border-top: 1.5px solid #1E241E;
-  border-bottom: 1.5px solid #1E241E;
-  background-image: repeating-linear-gradient(
-    90deg,
-    #FFD24C 0px,
-    #FFD24C 14px,
-    transparent 14px,
-    transparent 28px
-  );
-  background-size: 100% 2px;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.section {
-  position: relative;
-  border-top: none !important;
-  padding-top: 0 !important;
-}
-
-.section > .container {
-  padding-top: clamp(3.5rem, 6vw, 5.25rem);
-}
-
-/* 3. Reduced, Lighter Shadows on Landing Page */
-:root,
-html[data-theme="light"] {
-  --shadow-sm: 0 2px 0 rgba(30, 36, 30, 0.45);
-  --shadow-md: 0 3px 0 rgba(30, 36, 30, 0.42), 0 8px 20px rgba(30, 36, 30, 0.05);
-  --shadow-lg: 0 4px 0 rgba(30, 36, 30, 0.48);
-}
-
-.how-step-card,
-.transport-card,
-.alchemy-controls-panel,
-.impact-stat-card,
-.sim-card,
-.metric-item,
-.hero-cartoon-scene {
-  border-width: 2px !important;
-  box-shadow: 0 3px 0 rgba(30, 36, 30, 0.44), 0 8px 18px rgba(30, 36, 30, 0.05) !important;
-  position: relative;
-}
-
-.button,
-.nav-cta-pill,
-.section-eyebrow,
-.hero-kicker,
-.transport-co2-pill,
-.alchemy-preset,
-.corridor-btn,
-.btn-recycle-action {
-  border-width: 2px !important;
-  box-shadow: 0 2px 0 rgba(30, 36, 30, 0.48) !important;
-}
-
-/* 4. Artistic Borders: Inner Stitched Route Line & Corner Leaf Sprout */
-.how-step-card,
-.transport-card.is-recommended,
-.impact-stat-card {
-  outline: 1.8px dashed rgba(78, 154, 6, 0.4);
-  outline-offset: -7px;
-}
-
-.how-step-card::after,
-.impact-stat-card::after,
-.alchemy-controls-panel::after {
-  content: "";
-  position: absolute;
-  top: 7px;
-  right: 7px;
-  width: 26px;
-  height: 26px;
-  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2238%22%20height%3D%2238%22%20viewBox%3D%220%200%2038%2038%22%20fill%3D%22none%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M34%204%20C%2022%204%2C%2016%2012%2C%2018%2020%20C%2026%2022%2C%2034%2016%2C%2034%204%20Z%22%20fill%3D%22%238CE52E%22%20stroke%3D%22%231E241E%22%20stroke-width%3D%221.8%22%20stroke-linejoin%3D%22round%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M33%205%20L%2021%2017%22%20stroke%3D%22%231E241E%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2211%22%20cy%3D%2211%22%20r%3D%223%22%20fill%3D%22%23FFD24C%22%20stroke%3D%22%231E241E%22%20stroke-width%3D%221.5%22%2F%3E%0A%20%20%3C%2Fsvg%3E");
-  background-size: contain;
-  background-repeat: no-repeat;
-  pointer-events: none;
-  opacity: 0.85;
-}
-
-
-/* ==================== UNBOXED ICONS & GRAY/WHITE ASPHALT ROAD ELEMENTS ==================== */
-
-/* 1. Quitar recuadros innecesarios alrededor de los íconos y el logo */
-.brand-cartoon-badge,
-.brand-cartoon-badge.sm,
-.how-step-icon,
-.impact-icon-chip {
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  border-radius: 0 !important;
-  width: auto !important;
-  height: auto !important;
-  padding: 0 !important;
-}
-
-.brand-logo {
-  width: 34px;
-  height: auto;
-  filter: drop-shadow(0 2px 0 rgba(30, 36, 30, 0.28));
-}
-
-.brand-logo-sm {
-  width: 24px;
-  height: auto;
-}
-
-.how-step-icon svg {
-  width: 36px !important;
-  height: 36px !important;
-  filter: drop-shadow(0 2px 0 rgba(30, 36, 30, 0.2));
-}
-
-.impact-icon-chip svg {
-  width: 30px !important;
-  height: 30px !important;
-  filter: drop-shadow(0 2px 0 rgba(30, 36, 30, 0.18));
-}
-
-/* 2. Fondo con pistas grises y líneas blancas discontinuas */
-body,
-.how-section,
-.section {
-  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22340%22%20height%3D%22340%22%20viewBox%3D%220%200%20340%20340%22%20fill%3D%22none%22%3E%0A%20%20%3Cg%20stroke%3D%22%2364706A%22%20stroke-width%3D%221%22%20opacity%3D%220.09%22%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%2285%22%20x2%3D%22340%22%20y2%3D%2285%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%22255%22%20x2%3D%22340%22%20y2%3D%22255%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%2285%22%20y1%3D%220%22%20x2%3D%2285%22%20y2%3D%22340%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%22255%22%20y1%3D%220%22%20x2%3D%22255%22%20y2%3D%22340%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cpath%20d%3D%22M-20%20170%20C%2065%20170%2C%20105%2064%2C%20188%2064%20C%20260%2064%2C%20280%20232%2C%20360%20232%22%20stroke%3D%22%232B332E%22%20stroke-width%3D%2224%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.12%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M-20%20170%20C%2065%20170%2C%20105%2064%2C%20188%2064%20C%20260%2064%2C%20280%20232%2C%20360%20232%22%20stroke%3D%22%235A665F%22%20stroke-width%3D%2218%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.16%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M-20%20170%20C%2065%20170%2C%20105%2064%2C%20188%2064%20C%20260%2064%2C%20280%20232%2C%20360%20232%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%222.4%22%20stroke-dasharray%3D%2210%209%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.78%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22188%22%20cy%3D%2264%22%20r%3D%2210%22%20fill%3D%22%235A665F%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%222.5%22%20opacity%3D%220.32%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2285%22%20cy%3D%22255%22%20r%3D%228%22%20fill%3D%22%2364706A%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%222%22%20opacity%3D%220.26%22%2F%3E%0A%3C%2Fsvg%3E") !important;
-  background-size: 340px 340px !important;
-  background-attachment: fixed;
-}
-
-.section.alt {
-  background-image:
-    url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22340%22%20height%3D%22340%22%20viewBox%3D%220%200%20340%20340%22%20fill%3D%22none%22%3E%0A%20%20%3Cg%20stroke%3D%22%2364706A%22%20stroke-width%3D%221%22%20opacity%3D%220.09%22%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%2285%22%20x2%3D%22340%22%20y2%3D%2285%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%22255%22%20x2%3D%22340%22%20y2%3D%22255%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%2285%22%20y1%3D%220%22%20x2%3D%2285%22%20y2%3D%22340%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%22255%22%20y1%3D%220%22%20x2%3D%22255%22%20y2%3D%22340%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cpath%20d%3D%22M-20%20170%20C%2065%20170%2C%20105%2064%2C%20188%2064%20C%20260%2064%2C%20280%20232%2C%20360%20232%22%20stroke%3D%22%232B332E%22%20stroke-width%3D%2224%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.12%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M-20%20170%20C%2065%20170%2C%20105%2064%2C%20188%2064%20C%20260%2064%2C%20280%20232%2C%20360%20232%22%20stroke%3D%22%235A665F%22%20stroke-width%3D%2218%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.16%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M-20%20170%20C%2065%20170%2C%20105%2064%2C%20188%2064%20C%20260%2064%2C%20280%20232%2C%20360%20232%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%222.4%22%20stroke-dasharray%3D%2210%209%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.78%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22188%22%20cy%3D%2264%22%20r%3D%2210%22%20fill%3D%22%235A665F%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%222.5%22%20opacity%3D%220.32%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2285%22%20cy%3D%22255%22%20r%3D%228%22%20fill%3D%22%2364706A%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%222%22%20opacity%3D%220.26%22%2F%3E%0A%3C%2Fsvg%3E"),
-    linear-gradient(180deg, #E8F9D2 0%, #F4FCE8 100%) !important;
-  background-size: 340px 340px, 100% 100% !important;
-}
-
-html[data-theme="dark"] .section.alt {
-  background-image:
-    url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22340%22%20height%3D%22340%22%20viewBox%3D%220%200%20340%20340%22%20fill%3D%22none%22%3E%0A%20%20%3Cg%20stroke%3D%22%2364706A%22%20stroke-width%3D%221%22%20opacity%3D%220.09%22%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%2285%22%20x2%3D%22340%22%20y2%3D%2285%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20y1%3D%22255%22%20x2%3D%22340%22%20y2%3D%22255%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%2285%22%20y1%3D%220%22%20x2%3D%2285%22%20y2%3D%22340%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%22255%22%20y1%3D%220%22%20x2%3D%22255%22%20y2%3D%22340%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cpath%20d%3D%22M-20%20170%20C%2065%20170%2C%20105%2064%2C%20188%2064%20C%20260%2064%2C%20280%20232%2C%20360%20232%22%20stroke%3D%22%232B332E%22%20stroke-width%3D%2224%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.12%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M-20%20170%20C%2065%20170%2C%20105%2064%2C%20188%2064%20C%20260%2064%2C%20280%20232%2C%20360%20232%22%20stroke%3D%22%235A665F%22%20stroke-width%3D%2218%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.16%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M-20%20170%20C%2065%20170%2C%20105%2064%2C%20188%2064%20C%20260%2064%2C%20280%20232%2C%20360%20232%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%222.4%22%20stroke-dasharray%3D%2210%209%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.78%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22188%22%20cy%3D%2264%22%20r%3D%2210%22%20fill%3D%22%235A665F%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%222.5%22%20opacity%3D%220.32%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2285%22%20cy%3D%22255%22%20r%3D%228%22%20fill%3D%22%2364706A%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%222%22%20opacity%3D%220.26%22%2F%3E%0A%3C%2Fsvg%3E"),
-    linear-gradient(180deg, #162334 0%, #1B2B3F 100%) !important;
-  background-size: 340px 340px, 100% 100% !important;
-}
-
-/* 3. Separadores de sección tipo Pista Gris con Líneas Blancas y Sardineles Claros */
-.topbar::after,
-.section::before {
-  height: 11px !important;
-  background-color: #525E57 !important;
-  border-top: 2px solid #D8E0DC !important;
-  border-bottom: 2px solid #D8E0DC !important;
-  box-shadow: 0 1.5px 0 #1E241E, 0 -1.5px 0 #1E241E;
-  background-image: repeating-linear-gradient(
-    90deg,
-    #FFFFFF 0px,
-    #FFFFFF 18px,
-    transparent 18px,
-    transparent 34px
-  ) !important;
-  background-size: 100% 2.5px !important;
-  background-position: center !important;
-  background-repeat: no-repeat !important;
-}
-
-/* 4. Pista gris con líneas blancas conectando los 3 pasos de "¿Cómo funciona?" */
-.how-it-works-strip {
-  position: relative;
-}
-
-@media (min-width: 901px) {
-  .how-it-works-strip::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: -14px;
-    right: -14px;
-    height: 18px;
-    transform: translateY(-50%);
-    background-color: #525E57;
-    border-top: 2.5px solid #DCE4E0;
-    border-bottom: 2.5px solid #DCE4E0;
-    box-shadow: 0 2px 0 #1E241E, 0 -2px 0 #1E241E;
-    border-radius: 999px;
-    background-image: repeating-linear-gradient(
-      90deg,
-      #FFFFFF 0px,
-      #FFFFFF 16px,
-      transparent 16px,
-      transparent 30px
-    );
-    background-size: 100% 2.6px;
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: 0;
+@media (prefers-reduced-motion: reduce) {
+  .live-pulse-dot {
+    animation: none !important;
   }
-
-  .how-step-card {
-    position: relative;
-    z-index: 1;
+  .button,
+  .veh-editorial-card,
+  .page-preview-card,
+  .how-detail-card {
+    transition: none !important;
+    transform: none !important;
   }
-}
-
-/* 5. Bordes internos tipo carril blanco/gris en tarjetas destacadas */
-.how-step-card,
-.transport-card.is-recommended,
-.impact-stat-card {
-  outline: 2px dashed rgba(82, 94, 87, 0.42) !important;
-  outline-offset: -7px;
-}
-
-
-/* ==================== HERO GREEN CONTRAST & LEAD TEXT LEGIBILITY ==================== */
-.hero-section {
-  background: linear-gradient(135deg, #276E09 0%, #368D12 55%, #1F5B06 100%) !important;
-}
-
-html[data-theme="dark"] .hero-section {
-  background: linear-gradient(135deg, #1A4708 0%, #235C0C 60%, #153A06 100%) !important;
-}
-
-.hero-copy .lead {
-  color: #FFFFFF !important;
-  font-weight: 800 !important;
-  font-size: 1.08rem !important;
-  line-height: 1.55 !important;
-  text-shadow: 0 2px 3px rgba(12, 24, 10, 0.55) !important;
-}
-
-
-/* ==================== SOFTER, SMOOTHER TYPOGRAPHY WEIGHTS (LESS HARSH BOLD) ==================== */
-html,
-body {
-  font-weight: 400 !important;
-}
-
-p,
-.section-subtitle,
-.how-step-card p,
-.transport-card-desc,
-.transport-card-sub,
-.impact-stat-card p,
-.gemini-insight-text {
-  font-weight: 500 !important;
-}
-
-h1,
-h2,
-h3,
-h4,
-.hero-headline,
-.section-header h2,
-.how-header h2,
-.how-step-card h3,
-.transport-card-title-row h3,
-.note-route,
-.cutout-figure {
-  font-weight: 600 !important;
-}
-
-.hero-headline {
-  text-shadow: 0 2px 0 rgba(18, 28, 16, 0.55) !important;
-}
-
-.hero-copy .lead {
-  font-weight: 600 !important;
-  text-shadow: 0 1px 2px rgba(12, 24, 10, 0.45) !important;
-}
-
-strong,
-b,
-.button,
-.nav a,
-.nav-cta-pill,
-.hero-kicker,
-.section-eyebrow,
-.how-step-num,
-.transport-card-banner,
-.transport-co2-pill,
-.metric-name,
-.metric-value,
-.metric-item dt,
-.metric-item dd,
-.corridor-tag,
-.corridor-btn,
-.corridor-btn.is-active,
-.btn-recycle-action,
-.alchemy-preset,
-.alchemy-summary-col span,
-.alchemy-summary-col strong,
-.impact-stat-label {
-  font-weight: 600 !important;
 }
