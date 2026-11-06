@@ -23,21 +23,22 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
         </div>
       </div>
 
-      <!-- Create / Edit Trip Card -->
-      <article class="eco-card">
-        <div class="card-head-row">
-          <div>
-            <h2>{{ editingTripId ? 'Actualizar recorrido seleccionado' : 'Registrar nuevo recorrido' }}</h2>
-            <p class="card-sub">Ingresa los datos de tu traslado para calcular automáticamente el CO₂ evitado y tus puntos</p>
+      <!-- Diseño Dividido: Formulario Vertical a la Izquierda + Bitácora Cronológica Abierta a la Derecha -->
+      <div class="trips-split-layout">
+        <!-- Columna Izquierda: Formulario Vertical Compacto (1 sola tarjeta) -->
+        <article class="eco-card trips-vertical-form-card">
+          <div class="card-head-row">
+            <div>
+              <h2>{{ editingTripId ? 'Editar recorrido' : 'Anotar nuevo viaje' }}</h2>
+              <p class="card-sub">Calculamos al instante tu ahorro de CO₂ y puntos</p>
+            </div>
+            <span class="badge-pill" *ngIf="editingTripId">
+              <app-icon name="edit" [size]="13"></app-icon>
+              <span>Editando</span>
+            </span>
           </div>
-          <span class="badge-pill" *ngIf="editingTripId">
-            <app-icon name="edit" [size]="13"></app-icon>
-            <span>Editando registro</span>
-          </span>
-        </div>
 
-        <form (ngSubmit)="saveTrip()" class="eco-form">
-          <div class="form-row-4">
+          <form (ngSubmit)="saveTrip()" class="eco-form-vertical">
             <div class="form-group">
               <label>Medio de transporte</label>
               <select [(ngModel)]="form.transportMode" name="transportMode" required>
@@ -49,14 +50,17 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
                 <option value="CAR_SOLO">Automóvil Particular (170 g CO₂/km)</option>
               </select>
             </div>
+
             <div class="form-group">
               <label>Punto de partida</label>
               <input type="text" [(ngModel)]="form.originName" name="originName" required placeholder="Ej. San Isidro" />
             </div>
+
             <div class="form-group">
               <label>Destino</label>
               <input type="text" [(ngModel)]="form.destinationName" name="destinationName" required placeholder="Ej. Miraflores" />
             </div>
+
             <div class="form-row-2">
               <div class="form-group">
                 <label>Distancia (km)</label>
@@ -67,114 +71,91 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
                 <input type="number" min="1" [(ngModel)]="form.durationMinutes" name="durationMinutes" required />
               </div>
             </div>
+
+            <!-- Resumen Vertical/Compacto en lugar de 4 cajas separadas -->
+            <div class="live-impact-strip">
+              <div>
+                <span>Evitas emitir</span>
+                <strong class="text-emerald">-{{ getPreviewSaved() }} g CO₂</strong>
+              </div>
+              <div>
+                <span>Energía</span>
+                <strong>{{ getPreviewCalories() }} kcal</strong>
+              </div>
+              <div>
+                <span>Ganas</span>
+                <strong class="text-emerald">+{{ getPreviewPoints() }} pts</strong>
+              </div>
+            </div>
+
+            <div class="form-actions-stack">
+              <button type="submit" class="btn-emerald full-width">
+                <app-icon [name]="editingTripId ? 'check' : 'plus'" [size]="16"></app-icon>
+                <span>{{ editingTripId ? 'Guardar cambios' : 'Añadir a mi bitácora' }}</span>
+              </button>
+              <button type="button" class="btn-outline full-width" *ngIf="editingTripId" (click)="cancelEdit()">
+                <span>Cancelar edición</span>
+              </button>
+            </div>
+          </form>
+
+          <div class="toast-success" *ngIf="feedbackMsg">
+            <app-icon name="check" [size]="17"></app-icon>
+            <span>{{ feedbackMsg }}</span>
+          </div>
+        </article>
+
+        <!-- Columna Derecha: Línea de Tiempo / Lista Vertical de Viajes (Sin tabla congestionada de 10 columnas) -->
+        <div class="trips-feed-column">
+          <div class="feed-header-inline">
+            <h2>Historial en tu bitácora ({{ trips.length }})</h2>
+            <span>Ordenado del más reciente al más antiguo</span>
           </div>
 
-          <div class="co2-preview-box">
-            <div class="preview-item">
-              <span>Referencia en auto:</span>
-              <strong>{{ getPreviewBaseline() }} g CO₂</strong>
-            </div>
-            <div class="preview-item">
-              <span>CO₂ que evitas:</span>
-              <strong class="text-emerald">-{{ getPreviewSaved() }} g CO₂</strong>
-            </div>
-            <div class="preview-item">
-              <span>Energía activa:</span>
-              <strong>{{ getPreviewCalories() }} kcal</strong>
-            </div>
-            <div class="preview-item">
-              <span>Puntos que ganas:</span>
-              <strong class="text-emerald">+{{ getPreviewPoints() }} pts</strong>
+          <div class="trips-timeline-list">
+            <div
+              class="trip-feed-item"
+              *ngFor="let t of trips"
+              [class.editing-row]="t.id === editingTripId"
+            >
+              <span class="trip-feed-icon">
+                <app-icon [name]="t.transportMode" [size]="20"></app-icon>
+              </span>
+
+              <div class="trip-feed-main">
+                <div class="trip-feed-route">
+                  <strong>{{ t.originName }}</strong>
+                  <span class="arrow-sep">→</span>
+                  <strong>{{ t.destinationName }}</strong>
+                </div>
+                <div class="trip-feed-meta">
+                  <span>{{ formatShortMode(t.transportMode) }}</span>
+                  <span>·</span>
+                  <span>{{ t.distanceKm | number: '1.1-2' }} km en {{ t.durationMinutes }} min</span>
+                  <span>·</span>
+                  <span>{{ t.caloriesBurned }} kcal</span>
+                  <span>·</span>
+                  <span>{{ t.completedAt | date: 'dd/MM/yyyy HH:mm' }}</span>
+                </div>
+              </div>
+
+              <div class="trip-feed-impact">
+                <strong class="text-emerald">-{{ t.co2SavedGrams }} g CO₂</strong>
+                <span class="pts-pill">+{{ t.pointsEarned }} pts</span>
+              </div>
+
+              <div class="trip-feed-actions">
+                <button type="button" class="btn-table-action" (click)="startEdit(t)" title="Editar recorrido">
+                  <app-icon name="edit" [size]="14"></app-icon>
+                </button>
+                <button type="button" class="btn-table-action danger" (click)="removeTrip(t)" title="Eliminar recorrido">
+                  <app-icon name="trash" [size]="14"></app-icon>
+                </button>
+              </div>
             </div>
           </div>
-
-          <div class="form-actions-row">
-            <button type="submit" class="btn-emerald">
-              <app-icon [name]="editingTripId ? 'check' : 'plus'" [size]="16"></app-icon>
-              <span>{{ editingTripId ? 'Guardar cambios' : 'Añadir a mi bitácora' }}</span>
-            </button>
-            <button type="button" class="btn-outline" *ngIf="editingTripId" (click)="cancelEdit()">
-              <span>Cancelar edición</span>
-            </button>
-          </div>
-        </form>
-
-        <div class="toast-success" *ngIf="feedbackMsg">
-          <app-icon name="check" [size]="17"></app-icon>
-          <span>{{ feedbackMsg }}</span>
         </div>
-      </article>
-
-      <!-- Trip History Table -->
-      <article class="eco-card">
-        <div class="card-head-row">
-          <div>
-            <h2>Historial de recorridos ({{ trips.length }})</h2>
-            <p class="card-sub">Puedes editar cualquier dato si te equivocaste o eliminar un registro</p>
-          </div>
-        </div>
-
-        <div class="table-responsive">
-          <table class="eco-table">
-            <thead>
-              <tr>
-                <th>Fecha</th>
-                <th>Modo</th>
-                <th>Trayecto (Origen → Destino)</th>
-                <th>Distancia</th>
-                <th>Tiempo</th>
-                <th>CO₂ evitado</th>
-                <th>Energía</th>
-                <th>Puntos</th>
-                <th>Verificación</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let t of trips" [class.editing-row]="t.id === editingTripId">
-                <td>{{ t.completedAt | date: 'dd/MM/yyyy HH:mm' }}</td>
-                <td>
-                  <span class="mode-badge">
-                    <app-icon [name]="t.transportMode" [size]="15"></app-icon>
-                    <span>{{ formatShortMode(t.transportMode) }}</span>
-                  </span>
-                </td>
-                <td>
-                  <div class="route-cell-text">
-                    <strong>{{ t.originName }}</strong>
-                    <span class="arrow-sep">→</span>
-                    <span>{{ t.destinationName }}</span>
-                  </div>
-                </td>
-                <td>{{ t.distanceKm | number: '1.1-2' }} km</td>
-                <td>{{ t.durationMinutes }} min</td>
-                <td class="text-emerald font-bold">-{{ t.co2SavedGrams }} g</td>
-                <td>{{ t.caloriesBurned }} kcal</td>
-                <td><span class="pts-pill">+{{ t.pointsEarned }} pts</span></td>
-                <td>
-                  <span class="status-ok" *ngIf="!t.suspicious">
-                    <app-icon name="check" [size]="13"></app-icon>
-                    <span>Verificado</span>
-                  </span>
-                  <span class="status-warn" *ngIf="t.suspicious" [title]="t.suspiciousReason || ''">
-                    <span>Revisión</span>
-                  </span>
-                </td>
-                <td class="actions-cell">
-                  <button type="button" class="btn-table-action" (click)="startEdit(t)" title="Editar recorrido">
-                    <app-icon name="edit" [size]="14"></app-icon>
-                    <span>Editar</span>
-                  </button>
-                  <button type="button" class="btn-table-action danger" (click)="removeTrip(t)" title="Eliminar recorrido">
-                    <app-icon name="trash" [size]="14"></app-icon>
-                    <span>Eliminar</span>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </article>
+      </div>
     </section>
   `
 })

@@ -23,44 +23,37 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
         </div>
         <div class="district-summary-pill" *ngIf="districtsSummary as ds">
           <app-icon name="pin" [size]="16"></app-icon>
-          <span><strong>{{ ds.activeDistrictsCount }}</strong> distritos activos · <strong>{{ ds.totalRankedUsers }}</strong> vecinos en ranking</span>
+          <span><strong>{{ ds.activeDistrictsCount }}</strong> distritos · <strong>{{ ds.totalRankedUsers }}</strong> vecinos</span>
         </div>
       </div>
 
-      <!-- Top 3 Podium Showcase -->
-      <div class="podium-grid" *ngIf="entries.length >= 3">
-        <article class="podium-card" *ngFor="let top of entries | slice: 0 : 3" [class.rank-first]="top.rank === 1">
-          <div class="podium-rank-header">
-            <span class="podium-rank-num" [class.gold]="top.rank === 1" [class.silver]="top.rank === 2" [class.bronze]="top.rank === 3">
-              <app-icon [name]="top.rank === 1 ? 'trophy' : 'medal'" [size]="15"></app-icon>
-              <span>Puesto #{{ top.rank }}</span>
-            </span>
-            <span class="district-chip">
-              <app-icon name="pin" [size]="12"></app-icon>
-              {{ top.district }}
-            </span>
-          </div>
-          <div class="podium-user-row">
-            <img [src]="top.avatarUrl" [alt]="top.fullName" class="avatar-md" />
-            <div>
-              <h3>{{ top.fullName }}</h3>
-              <span class="podium-sub">{{ top.tripsCount }} recorridos · Racha {{ top.streakDays }} días</span>
-            </div>
-          </div>
-          <div class="podium-metrics-row">
-            <div>
-              <strong class="text-emerald">{{ top.totalCo2SavedKg | number: '1.2-2' }} kg</strong>
-              <span>CO₂ evitado</span>
-            </div>
-            <div>
-              <strong>{{ top.currentPoints }} pts</strong>
-              <span>Puntos</span>
-            </div>
+      <!-- Podio Escalonado Vertical (#2 - #1 - #3) con Alineación Vertical Centrada -->
+      <div class="podium-stepped-stage" *ngIf="entries.length >= 3">
+        <article
+          class="podium-pillar"
+          *ngFor="let top of entries | slice: 0 : 3"
+          [class.pillar-gold]="top.rank === 1"
+          [class.pillar-silver]="top.rank === 2"
+          [class.pillar-bronze]="top.rank === 3"
+        >
+          <span class="podium-medal-floating">
+            <app-icon [name]="top.rank === 1 ? 'trophy' : 'medal'" [size]="16"></app-icon>
+            <span>#{{ top.rank }}</span>
+          </span>
+          <img [src]="top.avatarUrl" [alt]="top.fullName" class="avatar-lg" />
+          <h3>{{ top.fullName }}</h3>
+          <span class="district-chip">
+            <app-icon name="pin" [size]="12"></app-icon>
+            {{ top.district }}
+          </span>
+          <div class="podium-pillar-score">
+            <strong>{{ top.totalCo2SavedKg | number: '1.2-2' }} kg CO₂</strong>
+            <span>{{ top.currentPoints }} pts · {{ top.tripsCount }} viajes</span>
           </div>
         </article>
       </div>
 
-      <!-- Filter Bar & Full Table -->
+      <!-- Barra de Filtros en Línea + Tabla Limpia -->
       <article class="eco-card">
         <div class="filter-bar">
           <div class="filter-group">

@@ -24,6 +24,7 @@ interface LimaPreset {
   imports: [CommonModule, FormsModule, EcoIconComponent],
   template: `
     <section class="page-section">
+      <!-- Cabecera con Corredores Rápidos en Línea (Sin tarjeta extra) -->
       <div class="section-header-row">
         <div>
           <span class="eyebrow-tag">
@@ -33,14 +34,6 @@ interface LimaPreset {
           <h1 class="page-title">{{ i18n.t('routes.title') }}</h1>
           <p class="page-subtitle">{{ i18n.t('routes.subtitle') }}</p>
         </div>
-      </div>
-
-      <!-- Preset Corridors Strip -->
-      <div class="preset-bar">
-        <span class="preset-bar-label">
-          <app-icon name="pin" [size]="15"></app-icon>
-          <span>Corredores frecuentes en Lima:</span>
-        </span>
         <div class="preset-chips-row">
           <button
             type="button"
@@ -55,212 +48,179 @@ interface LimaPreset {
         </div>
       </div>
 
-      <div class="grid-planner">
-        <!-- Left Form Panel -->
-        <article class="eco-card">
-          <div class="card-head-row">
-            <div>
-              <h2>Configura tu trayecto</h2>
-              <p class="card-sub">Define tu punto de partida, destino y cómo prefieres moverte hoy</p>
+      <!-- 1. Escenario Unificado: Controles Verticales + Mapa Interactivo en un solo contenedor -->
+      <div class="planner-unified-stage">
+        <form (ngSubmit)="calculateRoutes()" class="planner-sidebar-form">
+          <h3>Configura tu trayecto</h3>
+
+          <div class="vertical-route-stops">
+            <div class="form-group">
+              <label>Punto de partida</label>
+              <div class="input-with-icon">
+                <app-icon name="pin" [size]="16"></app-icon>
+                <input type="text" [(ngModel)]="originName" name="originName" required placeholder="Ej. San Isidro" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Destino</label>
+              <div class="input-with-icon">
+                <app-icon name="flag" [size]="16"></app-icon>
+                <input type="text" [(ngModel)]="destName" name="destName" required placeholder="Ej. Miraflores" />
+              </div>
             </div>
           </div>
 
-          <form (ngSubmit)="calculateRoutes()" class="eco-form">
-            <div class="route-timeline-inputs">
-              <div class="form-group">
-                <label>Punto de partida</label>
-                <div class="input-with-icon">
-                  <app-icon name="pin" [size]="16"></app-icon>
-                  <input type="text" [(ngModel)]="originName" name="originName" required placeholder="Ej. San Isidro" />
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label>Destino</label>
-                <div class="input-with-icon">
-                  <app-icon name="flag" [size]="16"></app-icon>
-                  <input type="text" [(ngModel)]="destName" name="destName" required placeholder="Ej. Miraflores" />
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label>Modo de traslado</label>
-              <div class="mode-selector-grid">
-                <button
-                  type="button"
-                  class="mode-select-card"
-                  [class.selected]="selectedProfile === 'BICYCLE'"
-                  (click)="selectedProfile = 'BICYCLE'; calculateRoutes()"
-                >
-                  <app-icon name="bike" [size]="20"></app-icon>
-                  <span>Bicicleta</span>
-                  <small>0 g CO₂/km</small>
-                </button>
-
-                <button
-                  type="button"
-                  class="mode-select-card"
-                  [class.selected]="selectedProfile === 'WALKING'"
-                  (click)="selectedProfile = 'WALKING'; calculateRoutes()"
-                >
-                  <app-icon name="walk" [size]="20"></app-icon>
-                  <span>Caminata</span>
-                  <small>0 g CO₂/km</small>
-                </button>
-
-                <button
-                  type="button"
-                  class="mode-select-card"
-                  [class.selected]="selectedProfile === 'CAR'"
-                  (click)="selectedProfile = 'CAR'; calculateRoutes()"
-                >
-                  <app-icon name="car" [size]="20"></app-icon>
-                  <span>Auto (Ref.)</span>
-                  <small>170 g CO₂/km</small>
-                </button>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="checkbox-label">
-                <input type="checkbox" [(ngModel)]="enableAiOptimization" name="enableAi" />
-                <span>Priorizar calles arboladas y ciclovías segregadas (+10 pts extra)</span>
-              </label>
-            </div>
-
-            <details class="coords-drawer">
-              <summary>
-                <app-icon name="sliders" [size]="14"></app-icon>
-                <span>Ajustar coordenadas GPS manualmente</span>
-              </summary>
-              <div class="coords-drawer-body">
-                <div class="form-row-2">
-                  <div class="form-group">
-                    <label>Latitud origen</label>
-                    <input type="number" step="0.0001" [(ngModel)]="originLat" name="originLat" required />
-                  </div>
-                  <div class="form-group">
-                    <label>Longitud origen</label>
-                    <input type="number" step="0.0001" [(ngModel)]="originLng" name="originLng" required />
-                  </div>
-                </div>
-                <div class="form-row-2">
-                  <div class="form-group">
-                    <label>Latitud destino</label>
-                    <input type="number" step="0.0001" [(ngModel)]="destLat" name="destLat" required />
-                  </div>
-                  <div class="form-group">
-                    <label>Longitud destino</label>
-                    <input type="number" step="0.0001" [(ngModel)]="destLng" name="destLng" required />
-                  </div>
-                </div>
-              </div>
-            </details>
-
-            <button type="submit" class="btn-emerald full-width" [disabled]="loading">
-              <app-icon name="route" [size]="17"></app-icon>
-              <span>{{ loading ? 'Calculando opciones...' : 'Actualizar comparación de rutas' }}</span>
-            </button>
-          </form>
-        </article>
-
-        <!-- Right Map & Route Comparison Panel -->
-        <div class="stack-col">
-          <article class="eco-card map-card">
-            <div class="card-head-row">
-              <div>
-                <h2>Mapa del corredor: {{ originName }} → {{ destName }}</h2>
-                <p class="card-sub">La línea verde muestra el corredor sostenible recomendado frente a la ruta vehicular</p>
-              </div>
-              <div class="map-legend-pills">
-                <span class="legend-chip eco"><i class="dot-green"></i> Corredor verde</span>
-                <span class="legend-chip car"><i class="dot-red"></i> Tráfico auto</span>
-              </div>
-            </div>
-            <div id="eco-leaflet-map" class="leaflet-box"></div>
-          </article>
-
-          <div class="route-options-grid" *ngIf="planResult as res">
-            <article
-              class="eco-card route-option-card"
-              *ngFor="let opt of getOrderedRoutes(res)"
-              [class.recommended]="opt.id === res.recommendedRouteId || opt.isAiRecommended"
-            >
-              <div class="route-opt-header">
-                <div class="route-title-row">
-                  <span class="route-mode-avatar" [class.car-mode]="opt.mode === 'CAR_SOLO'">
-                    <app-icon [name]="opt.mode" [size]="18"></app-icon>
-                  </span>
-                  <div>
-                    <span class="badge-emerald" *ngIf="opt.id === res.recommendedRouteId || opt.isAiRecommended">
-                      Recomendada
-                    </span>
-                    <h3>{{ opt.title }}</h3>
-                  </div>
-                </div>
-                <span class="pts-pill" *ngIf="opt.potentialPoints > 0">
-                  <app-icon name="bolt" [size]="13"></app-icon>
-                  +{{ opt.potentialPoints }} pts
-                </span>
-              </div>
-
-              <p class="route-summary">{{ opt.summary }}</p>
-
-              <div class="route-metrics">
-                <div>
-                  <strong>{{ opt.distanceKm }} km</strong>
-                  <span>Distancia</span>
-                </div>
-                <div>
-                  <strong>{{ opt.durationMinutes }} min</strong>
-                  <span>Tiempo est.</span>
-                </div>
-                <div>
-                  <strong class="text-emerald">-{{ opt.co2SavedGrams }} g</strong>
-                  <span>CO₂ evitado</span>
-                </div>
-                <div>
-                  <strong>{{ opt.caloriesBurned }} kcal</strong>
-                  <span>Energía activa</span>
-                </div>
-              </div>
-
-              <div class="ai-insight-box" *ngIf="opt.aiInsight as ai">
-                <div class="insight-metrics-row">
-                  <span>
-                    <app-icon name="leaf" [size]="13"></app-icon>
-                    Índice verde: <strong>{{ ai.greenScore }}/100</strong>
-                  </span>
-                  <span>
-                    <app-icon name="shield" [size]="13"></app-icon>
-                    Seguridad vial: <strong>{{ ai.safetyRating }}/100</strong>
-                  </span>
-                  <span>
-                    <app-icon name="tree" [size]="13"></app-icon>
-                    Sombra arbórea: <strong>{{ ai.shadeTreeCoveragePercent }}%</strong>
-                  </span>
-                </div>
-                <p>{{ ai.ecoReasoning }}</p>
-              </div>
+          <div class="form-group">
+            <label>Modo de traslado</label>
+            <div class="mode-pills-vertical">
+              <button
+                type="button"
+                class="mode-pill-row"
+                [class.selected]="selectedProfile === 'BICYCLE'"
+                (click)="selectedProfile = 'BICYCLE'; calculateRoutes()"
+              >
+                <app-icon name="bike" [size]="18"></app-icon>
+                <span>Bicicleta</span>
+                <small>0 g CO₂/km</small>
+              </button>
 
               <button
                 type="button"
-                class="btn-outline full-width"
-                [class.btn-emerald]="opt.id === res.recommendedRouteId || opt.isAiRecommended"
-                (click)="recordThisRoute(opt)"
+                class="mode-pill-row"
+                [class.selected]="selectedProfile === 'WALKING'"
+                (click)="selectedProfile = 'WALKING'; calculateRoutes()"
               >
-                <app-icon name="check" [size]="16"></app-icon>
-                <span>Registrar este recorrido en mi bitácora (+{{ opt.potentialPoints }} pts)</span>
+                <app-icon name="walk" [size]="18"></app-icon>
+                <span>Caminata</span>
+                <small>0 g CO₂/km</small>
               </button>
-            </article>
+
+              <button
+                type="button"
+                class="mode-pill-row"
+                [class.selected]="selectedProfile === 'CAR'"
+                (click)="selectedProfile = 'CAR'; calculateRoutes()"
+              >
+                <app-icon name="car" [size]="18"></app-icon>
+                <span>Auto (Ref.)</span>
+                <small>170 g CO₂/km</small>
+              </button>
+            </div>
           </div>
 
-          <div class="toast-success" *ngIf="recordedBanner">
-            <app-icon name="check" [size]="18"></app-icon>
-            <span>{{ recordedBanner }}</span>
+          <label class="checkbox-label">
+            <input type="checkbox" [(ngModel)]="enableAiOptimization" name="enableAi" />
+            <span>Priorizar calles arboladas (+10 pts)</span>
+          </label>
+
+          <details class="coords-drawer">
+            <summary>
+              <app-icon name="sliders" [size]="14"></app-icon>
+              <span>Coordenadas GPS manuales</span>
+            </summary>
+            <div class="coords-drawer-body">
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label>Lat. origen</label>
+                  <input type="number" step="0.0001" [(ngModel)]="originLat" name="originLat" required />
+                </div>
+                <div class="form-group">
+                  <label>Lng. origen</label>
+                  <input type="number" step="0.0001" [(ngModel)]="originLng" name="originLng" required />
+                </div>
+              </div>
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label>Lat. destino</label>
+                  <input type="number" step="0.0001" [(ngModel)]="destLat" name="destLat" required />
+                </div>
+                <div class="form-group">
+                  <label>Lng. destino</label>
+                  <input type="number" step="0.0001" [(ngModel)]="destLng" name="destLng" required />
+                </div>
+              </div>
+            </div>
+          </details>
+
+          <button type="submit" class="btn-emerald full-width" [disabled]="loading">
+            <app-icon name="route" [size]="17"></app-icon>
+            <span>{{ loading ? 'Calculando...' : 'Actualizar mapa' }}</span>
+          </button>
+        </form>
+
+        <div class="planner-map-pane">
+          <div class="map-overlay-bar">
+            <strong>{{ originName }} → {{ destName }}</strong>
+            <div class="map-legend-pills">
+              <span class="legend-chip eco"><i class="dot-green"></i> Corredor verde</span>
+              <span class="legend-chip car"><i class="dot-red"></i> Tráfico auto</span>
+            </div>
           </div>
+          <div id="eco-leaflet-map" class="leaflet-box-tall"></div>
         </div>
+      </div>
+
+      <div class="toast-success" *ngIf="recordedBanner">
+        <app-icon name="check" [size]="18"></app-icon>
+        <span>{{ recordedBanner }}</span>
+      </div>
+
+      <!-- 2. Comparativa en 3 Columnas Verticales Lado a Lado (En vez de 3 bloques apilados) -->
+      <div class="route-columns-3" *ngIf="planResult as res">
+        <article
+          class="route-vertical-col"
+          *ngFor="let opt of getOrderedRoutes(res)"
+          [class.recommended]="opt.id === res.recommendedRouteId || opt.isAiRecommended"
+        >
+          <div class="route-col-top">
+            <div class="route-col-badges">
+              <span class="route-mode-avatar" [class.car-mode]="opt.mode === 'CAR_SOLO'">
+                <app-icon [name]="opt.mode" [size]="20"></app-icon>
+              </span>
+              <span class="badge-emerald" *ngIf="opt.id === res.recommendedRouteId || opt.isAiRecommended">
+                ★ Recomendada
+              </span>
+              <span class="pts-pill" *ngIf="opt.potentialPoints > 0">+{{ opt.potentialPoints }} pts</span>
+            </div>
+            <h3>{{ opt.title }}</h3>
+            <p class="route-summary">{{ opt.summary }}</p>
+          </div>
+
+          <!-- Lista Vertical de Datos para Lectura Rápida -->
+          <ul class="route-vertical-stats">
+            <li>
+              <span>Distancia total</span>
+              <strong>{{ opt.distanceKm }} km</strong>
+            </li>
+            <li>
+              <span>Tiempo estimado</span>
+              <strong>{{ opt.durationMinutes }} min</strong>
+            </li>
+            <li>
+              <span>CO₂ evitado</span>
+              <strong class="text-emerald">-{{ opt.co2SavedGrams }} g</strong>
+            </li>
+            <li>
+              <span>Energía activa</span>
+              <strong>{{ opt.caloriesBurned }} kcal</strong>
+            </li>
+            <li *ngIf="opt.aiInsight as ai">
+              <span>Índice verde / Sombra</span>
+              <strong>{{ ai.greenScore }}/100 · {{ ai.shadeTreeCoveragePercent }}% árboles</strong>
+            </li>
+          </ul>
+
+          <button
+            type="button"
+            class="btn-outline full-width"
+            [class.btn-emerald]="opt.id === res.recommendedRouteId || opt.isAiRecommended"
+            (click)="recordThisRoute(opt)"
+          >
+            <app-icon name="check" [size]="16"></app-icon>
+            <span>Anotar este viaje (+{{ opt.potentialPoints }} pts)</span>
+          </button>
+        </article>
       </div>
     </section>
   `
@@ -282,7 +242,7 @@ export class RoutesPlannerComponent implements OnInit, AfterViewInit {
   presets: LimaPreset[] = [
     {
       label: 'San Isidro → Miraflores',
-      corridorTag: 'Eje Arequipa · 3.6 km',
+      corridorTag: '3.6 km',
       originName: 'San Isidro (Centro Financiero)',
       originLat: -12.0965,
       originLng: -77.0285,
@@ -292,7 +252,7 @@ export class RoutesPlannerComponent implements OnInit, AfterViewInit {
     },
     {
       label: 'Jesús María → San Isidro',
-      corridorTag: 'Ciclovía Salaverry · 4.2 km',
+      corridorTag: '4.2 km',
       originName: 'Av. Salaverry (Jesús María)',
       originLat: -12.085,
       originLng: -77.045,
@@ -302,7 +262,7 @@ export class RoutesPlannerComponent implements OnInit, AfterViewInit {
     },
     {
       label: 'Miraflores → Barranco',
-      corridorTag: 'Malecón Costero · 3.1 km',
+      corridorTag: '3.1 km',
       originName: 'Parque Kennedy (Miraflores)',
       originLat: -12.1215,
       originLng: -77.0298,
@@ -311,8 +271,8 @@ export class RoutesPlannerComponent implements OnInit, AfterViewInit {
       destLng: -77.0218
     },
     {
-      label: 'UNMSM → Centro Histórico',
-      corridorTag: 'Eje Colonial · 5.4 km',
+      label: 'UNMSM → Centro',
+      corridorTag: '5.4 km',
       originName: 'Ciudad Universitaria',
       originLat: -12.056,
       originLng: -77.0845,
