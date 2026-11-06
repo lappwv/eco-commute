@@ -545,7 +545,7 @@ function setupThemeSwitcher() {
   const themeButtons = document.querySelectorAll(".biome-chip");
   const root = document.documentElement;
 
-  const savedTheme = localStorage.getItem("ecocommute_theme") || "light";
+  const savedTheme = localStorage.getItem("ecocommute_theme_v3") || "light";
   root.setAttribute("data-theme", savedTheme);
 
   themeButtons.forEach((btn) => {
@@ -557,7 +557,7 @@ function setupThemeSwitcher() {
     btn.addEventListener("click", () => {
       const theme = btn.getAttribute("data-theme-target");
       root.setAttribute("data-theme", theme);
-      localStorage.setItem("ecocommute_theme", theme);
+      localStorage.setItem("ecocommute_theme_v3", theme);
 
       themeButtons.forEach((b) => {
         const active = b === btn;
