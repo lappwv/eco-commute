@@ -4036,3 +4036,179 @@ strong,
   outline: 2px dashed rgba(82, 94, 87, 0.45) !important;
   outline-offset: -7px;
 }
+
+
+/* ==================== BANNER CONTRAST, QUICK ROUTE LAUNCHER & 3-STEP GUIDE ==================== */
+
+/* 1. Mayor contraste en el Banner Superior y Navbar (Verde Esmeralda-Bosque más profundo) */
+.eco-navbar {
+  background: linear-gradient(90deg, #276E09 0%, #348811 55%, #276E09 100%) !important;
+}
+
+.cartoon-hero-banner {
+  background: linear-gradient(135deg, #266C09 0%, #348A11 55%, #1F5B06 100%) !important;
+}
+
+[data-theme="dark"] .eco-navbar,
+[data-theme="dark"] .cartoon-hero-banner {
+  background: linear-gradient(135deg, #1A4708 0%, #235C0C 60%, #153A06 100%) !important;
+}
+
+.cartoon-banner-sub {
+  color: #FFFFFF !important;
+  font-size: 1.02rem !important;
+  font-weight: 800 !important;
+  line-height: 1.5 !important;
+  text-shadow: 0 2px 3px rgba(12, 24, 10, 0.55) !important;
+  margin-bottom: 1.15rem !important;
+}
+
+/* 2. Buscador Rápido de Origen / Destino + Botón Principal "Iniciar ruta" */
+.quick-route-launcher {
+  display: flex;
+  align-items: stretch;
+  gap: 0.65rem;
+  background: #FFFFFF;
+  border: 2.5px solid #1E241E;
+  border-radius: 20px;
+  padding: 0.55rem 0.65rem 0.55rem 1rem;
+  box-shadow: 0 4px 0 rgba(18, 28, 16, 0.55);
+  max-width: 610px;
+}
+
+[data-theme="dark"] .quick-route-launcher {
+  background: #1F3044;
+}
+
+.quick-route-field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.quick-route-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #2B7A0B;
+}
+
+[data-theme="dark"] .quick-route-label {
+  color: #8CE52E;
+}
+
+.quick-route-select {
+  appearance: none;
+  border: none !important;
+  background: transparent !important;
+  color: #1E241E !important;
+  font-family: 'Fredoka', 'Nunito', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 0.1rem 0 !important;
+  height: auto !important;
+  cursor: pointer;
+  outline: none;
+  width: 100%;
+  text-overflow: ellipsis;
+}
+
+[data-theme="dark"] .quick-route-select {
+  color: #F8FAFC !important;
+}
+
+.btn-start-route {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  background: #FFD24C;
+  color: #1E241E;
+  border: 2.5px solid #1E241E;
+  border-radius: 14px;
+  padding: 0.7rem 1.3rem;
+  font-family: 'Fredoka', sans-serif;
+  font-size: 0.96rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 3px 0 #1E241E;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.btn-start-route:hover {
+  background: #FFC21A;
+  transform: translateY(-2px);
+}
+
+/* 3. Guía Lineal de 3 Pasos Debajo del Buscador (Sin parecer pestañas sueltas) */
+.hero-steps-guide {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+  padding: 0.35rem 0.75rem;
+  background: rgba(15, 35, 10, 0.34);
+  border-radius: 999px;
+  border: 1.5px solid rgba(255, 255, 255, 0.28);
+}
+
+.step-guide-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.38rem;
+  color: #FFFFFF;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  opacity: 0.92;
+  transition: opacity 0.15s ease, color 0.15s ease;
+}
+
+.step-guide-item:hover,
+.step-guide-item.active-step {
+  opacity: 1;
+  color: #FFD24C;
+}
+
+.step-guide-num {
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  font-size: 0.72rem;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step-guide-item.active-step .step-guide-num {
+  background: #FFD24C;
+  color: #1E241E;
+}
+
+.step-guide-sep {
+  color: rgba(255, 255, 255, 0.65);
+  font-weight: 800;
+  font-size: 0.82rem;
+}
+
+@media (max-width: 680px) {
+  .quick-route-launcher {
+    flex-direction: column;
+    padding: 0.75rem;
+  }
+  .btn-start-route {
+    width: 100%;
+  }
+}

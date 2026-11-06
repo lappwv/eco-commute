@@ -2424,3 +2424,21 @@ html[data-theme="dark"] .section.alt {
   outline: 2px dashed rgba(82, 94, 87, 0.42) !important;
   outline-offset: -7px;
 }
+
+
+/* ==================== HERO GREEN CONTRAST & LEAD TEXT LEGIBILITY ==================== */
+.hero-section {
+  background: linear-gradient(135deg, #276E09 0%, #368D12 55%, #1F5B06 100%) !important;
+}
+
+html[data-theme="dark"] .hero-section {
+  background: linear-gradient(135deg, #1A4708 0%, #235C0C 60%, #153A06 100%) !important;
+}
+
+.hero-copy .lead {
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+  font-size: 1.08rem !important;
+  line-height: 1.55 !important;
+  text-shadow: 0 2px 3px rgba(12, 24, 10, 0.55) !important;
+}

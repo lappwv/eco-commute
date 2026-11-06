@@ -78,18 +78,6 @@
               <span>Noche</span>
             </button>
           </div>
-
-          <button
-            type="button"
-            id="lang-toggle"
-            class="lang-toggle"
-            aria-label="Cambiar idioma (Español / English)"
-            aria-pressed="false"
-          >
-            <span class="lang-es active">ES</span>
-            <span class="lang-sep">/</span>
-            <span class="lang-en">EN</span>
-          </button>
         </div>
       </div>
     </header>
@@ -147,30 +135,72 @@
 
             <!-- Ilustración Cartoon Vectorial estilo Freepik (Arbustos, Nubes, Bici, Ciudad Limpia) -->
             <div class="hero-cartoon-scene" aria-hidden="true">
-              <svg viewBox="0 0 460 155" fill="none" class="cartoon-scene-svg">
-                <path d="M35 142C24 142 16 133 16 122C16 111 25 103 36 103C39 87 53 75 70 75C85 75 98 85 102 99C106 97 111 96 116 96C131 96 143 108 143 123C143 134 135 142 124 142H35Z" fill="#529E0B" stroke="#1E241E" stroke-width="3" stroke-linejoin="round"/>
-                <path d="M58 142C49 142 42 135 42 126C42 117 49 110 58 110C62 98 73 90 86 90C101 90 113 101 115 115C124 115 131 122 131 131C131 137 126 142 120 142H58Z" fill="#8CE52E" stroke="#1E241E" stroke-width="3" stroke-linejoin="round"/>
-                <path d="M72 100C78 96 86 96 92 100" stroke="#FFFFFF" stroke-width="2.8" stroke-linecap="round"/>
-                <rect x="165" y="42" width="84" height="100" rx="10" fill="#FFB224" stroke="#1E241E" stroke-width="3"/>
-                <rect x="157" y="30" width="100" height="18" rx="7" fill="#FF9800" stroke="#1E241E" stroke-width="3"/>
-                <path d="M190 30V21C190 16.5 194.5 13 200 13H214C219.5 13 224 16.5 224 21V30" stroke="#1E241E" stroke-width="3"/>
-                <line x1="185" y1="62" x2="185" y2="124" stroke="#FFD97D" stroke-width="3.5" stroke-linecap="round"/>
-                <line x1="207" y1="62" x2="207" y2="124" stroke="#FFD97D" stroke-width="3.5" stroke-linecap="round"/>
-                <line x1="229" y1="62" x2="229" y2="124" stroke="#FFD97D" stroke-width="3.5" stroke-linecap="round"/>
-                <rect x="262" y="76" width="38" height="66" rx="12" fill="#74C7EC" stroke="#1E241E" stroke-width="3"/>
-                <rect x="272" y="62" width="18" height="14" rx="4" fill="#FFFFFF" stroke="#1E241E" stroke-width="3"/>
-                <rect x="270" y="54" width="22" height="9" rx="4" fill="#FF9800" stroke="#1E241E" stroke-width="2.8"/>
-                <rect x="262" y="96" width="38" height="24" fill="#FFD24C" stroke="#1E241E" stroke-width="3"/>
-                <circle cx="336" cy="118" r="22" fill="#FFFFFF" stroke="#1E241E" stroke-width="3.2"/>
-                <circle cx="336" cy="118" r="13" fill="#74C7EC" stroke="#1E241E" stroke-width="2.5"/>
-                <circle cx="412" cy="118" r="22" fill="#FFFFFF" stroke="#1E241E" stroke-width="3.2"/>
-                <circle cx="412" cy="118" r="13" fill="#74C7EC" stroke="#1E241E" stroke-width="2.5"/>
-                <path d="M336 118L360 82H396L374 118H336Z" fill="none" stroke="#FF6B4A" stroke-width="4" stroke-linejoin="round"/>
-                <path d="M396 82L412 118" stroke="#1E241E" stroke-width="3.5" stroke-linecap="round"/>
-                <path d="M352 82H368" stroke="#1E241E" stroke-width="4" stroke-linecap="round"/>
-                <path d="M388 70H404" stroke="#1E241E" stroke-width="3.5" stroke-linecap="round"/>
-                <rect x="6" y="138" width="446" height="15" rx="6" fill="#525E57" stroke="#1E241E" stroke-width="2.6"/>
-                <line x1="22" y1="145.5" x2="434" y2="145.5" stroke="#FFFFFF" stroke-width="2.4" stroke-dasharray="14 10" stroke-linecap="round"/>
+              <svg viewBox="0 0 460 165" fill="none" class="cartoon-scene-svg">
+                <!-- Nubes suaves en el cielo -->
+                <path d="M24 34H68C74 34 78 30 78 24.5C78 19.5 74 15.5 69 15C66.8 10 61.5 6.5 55.5 6.5C48.2 6.5 42 11.5 40.8 18.2C35 18.2 30.5 22.5 30 28C26 28.8 23 31.2 23 32.5C23 33.5 25 34 24 34Z" fill="#FFFFFF" stroke="#1E241E" stroke-width="2.4" stroke-linejoin="round"/>
+                <path d="M356 30H396C401 30 405 26.2 405 21.5C405 17.2 401.8 13.8 397.5 13.2C395.5 8.8 391 6 385.8 6C379.5 6 374 10.4 373 16.4C367.8 16.4 363.5 20.2 363 25.2C359.8 26 357.5 28.2 357.5 29.2C357.5 29.8 358.5 30 356 30Z" fill="#FFFFFF" stroke="#1E241E" stroke-width="2.4" stroke-linejoin="round"/>
+
+                <!-- Tarjeta de Mapa Urbano en la Izquierda con Ruta Punteada y Pin de Destino -->
+                <g transform="translate(18, 38)">
+                  <rect x="0" y="0" width="164" height="88" rx="12" fill="#FFFDF6" stroke="#1E241E" stroke-width="2.8"/>
+                  <rect x="8" y="8" width="54" height="30" rx="6" fill="#B8F272" stroke="#1E241E" stroke-width="1.8"/>
+                  <rect x="70" y="8" width="84" height="26" rx="6" fill="#E3F6FF" stroke="#1E241E" stroke-width="1.8"/>
+                  <rect x="8" y="46" width="64" height="34" rx="6" fill="#FFF3B8" stroke="#1E241E" stroke-width="1.8"/>
+                  <rect x="80" y="42" width="74" height="38" rx="6" fill="#C9F78E" stroke="#1E241E" stroke-width="1.8"/>
+                  <!-- Ruta punteada de Origen (A) a Pin de Destino (B) -->
+                  <path d="M26 64 C 46 64, 52 24, 84 24 C 108 24, 114 58, 130 56" stroke="#2B7A0B" stroke-width="3.4" stroke-dasharray="5 4" stroke-linecap="round"/>
+                  <circle cx="26" cy="64" r="6" fill="#5BC0EB" stroke="#1E241E" stroke-width="2.2"/>
+                  <circle cx="26" cy="64" r="2.2" fill="#FFFFFF"/>
+                  <!-- Pin de Destino -->
+                  <ellipse cx="130" cy="60" rx="9" ry="4" fill="#FFD24C" stroke="#1E241E" stroke-width="1.8"/>
+                  <path d="M130 56C130 56 143 41 143 31C143 23.8 137.2 18 130 18C122.8 18 117 23.8 117 31C117 41 130 56 130 56Z" fill="#FF5A36" stroke="#1E241E" stroke-width="2.5" stroke-linejoin="round"/>
+                  <circle cx="130" cy="31" r="5" fill="#FFFDF6" stroke="#1E241E" stroke-width="2"/>
+                </g>
+
+                <!-- Poste Señalizador de Ciclovía -->
+                <line x1="206" y1="78" x2="206" y2="136" stroke="#1E241E" stroke-width="3" stroke-linecap="round"/>
+                <rect x="190" y="56" width="32" height="24" rx="6" fill="#5BC0EB" stroke="#1E241E" stroke-width="2.4"/>
+                <path d="M199 68H211M211 68L207 64M211 68L207 72" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+
+                <!-- Líneas de velocidad / movimiento -->
+                <line x1="216" y1="96" x2="242" y2="96" stroke="#5BC0EB" stroke-width="2.8" stroke-linecap="round"/>
+                <line x1="208" y1="108" x2="236" y2="108" stroke="#FFD24C" stroke-width="2.8" stroke-linecap="round"/>
+
+                <!-- Ciclista en Movimiento sobre Bicicleta Completa -->
+                <circle cx="276" cy="116" r="22" fill="#FFFFFF" stroke="#1E241E" stroke-width="3.2"/>
+                <circle cx="276" cy="116" r="14" fill="#74C7EC" stroke="#1E241E" stroke-width="2.2"/>
+                <circle cx="276" cy="116" r="4.5" fill="#FFD24C" stroke="#1E241E" stroke-width="2"/>
+                <circle cx="362" cy="116" r="22" fill="#FFFFFF" stroke="#1E241E" stroke-width="3.2"/>
+                <circle cx="362" cy="116" r="14" fill="#74C7EC" stroke="#1E241E" stroke-width="2.2"/>
+                <circle cx="362" cy="116" r="4.5" fill="#FFD24C" stroke="#1E241E" stroke-width="2"/>
+
+                <!-- Cuadro, Asiento, Manubrio y Pedales -->
+                <path d="M276 116 L300 80 H342 L314 116 H276 Z" fill="none" stroke="#FF5A36" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <line x1="296" y1="68" x2="314" y2="116" stroke="#1E241E" stroke-width="3.8" stroke-linecap="round"/>
+                <line x1="362" y1="116" x2="338" y2="62" stroke="#1E241E" stroke-width="4" stroke-linecap="round"/>
+                <path d="M328 62 H345 C349 62 351 65 349 69" fill="none" stroke="#1E241E" stroke-width="4.2" stroke-linecap="round"/>
+                <circle cx="351" cy="74" r="4.5" fill="#FFD24C" stroke="#1E241E" stroke-width="2"/>
+                <rect x="284" y="63" width="22" height="7" rx="3.5" fill="#1E241E"/>
+                <circle cx="314" cy="116" r="6.5" fill="#FFD24C" stroke="#1E241E" stroke-width="2.2"/>
+
+                <!-- Ciclista con Casco y Mochila -->
+                <path d="M298 66 L316 92 L314 112" fill="none" stroke="#1E241E" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="280" y="38" width="14" height="22" rx="5" fill="#52B70A" stroke="#1E241E" stroke-width="2.4" transform="rotate(-14 280 38)"/>
+                <path d="M296 64 L310 36" stroke="#5BC0EB" stroke-width="13" stroke-linecap="round"/>
+                <path d="M296 64 L310 36" stroke="#1E241E" stroke-width="2.5" stroke-linecap="round"/>
+                <path d="M310 38 L322 54 L336 61" fill="none" stroke="#5BC0EB" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M310 38 L322 54 L336 61" fill="none" stroke="#1E241E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="316" cy="22" r="10" fill="#FFE0B2" stroke="#1E241E" stroke-width="2.5"/>
+                <path d="M304 21 C304 12 311 7 319 7 C327 7 331 13 330 21 Z" fill="#FFD24C" stroke="#1E241E" stroke-width="2.5" stroke-linejoin="round"/>
+
+                <!-- Pin de Meta en el Extremo Derecho -->
+                <path d="M418 136C418 136 430 120 430 110C430 103.4 424.6 98 418 98C411.4 98 406 103.4 406 110C406 120 418 136 418 136Z" fill="#52B70A" stroke="#1E241E" stroke-width="2.5" stroke-linejoin="round"/>
+                <circle cx="418" cy="110" r="4.5" fill="#FFFFFF" stroke="#1E241E" stroke-width="1.8"/>
+
+                <!-- Pista / Ciclovía Asfáltica Gris con Líneas Blancas -->
+                <rect x="6" y="136" width="446" height="6" rx="3" fill="#DCE4E0" stroke="#1E241E" stroke-width="2"/>
+                <rect x="6" y="142" width="446" height="18" rx="6" fill="#4A5550" stroke="#1E241E" stroke-width="2.6"/>
+                <line x1="22" y1="151" x2="436" y2="151" stroke="#FFFFFF" stroke-width="2.6" stroke-dasharray="16 12" stroke-linecap="round"/>
               </svg>
             </div>
 
