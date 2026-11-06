@@ -2295,3 +2295,174 @@ html[data-theme="light"] {
   pointer-events: none;
   opacity: 0.85;
 }
+
+/* ==================== LOGO-STYLE EMBLEMS & RICH NON-MINIMALIST VISUAL LAYER ==================== */
+
+/* 1. Crafted Double-Ring Logo-Style Medallions for All Icon Containers */
+.how-step-icon,
+.impact-icon-chip,
+.ribbon-icon,
+.trip-feed-icon,
+.badge-icon-medallion,
+.reward-icon-badge,
+.tower-stat-icon,
+.mode-icon-chip,
+.route-mode-avatar,
+.v-stat-dot,
+.badge-icon-circle,
+.advisor-spark-icon,
+.balance-icon {
+  background: radial-gradient(circle at 30% 25%, #FFFFFF 0%, #E6FAF5 62%, #C5F2EA 100%) !important;
+  border: 2px solid #3E5668 !important;
+  box-shadow:
+    inset 0 0 0 2px rgba(0, 184, 184, 0.38),
+    0 3px 0 rgba(44, 66, 81, 0.42) !important;
+  border-radius: 16px !important;
+  position: relative;
+}
+
+.brand-cartoon-badge,
+.brand-mark-wrap {
+  background: radial-gradient(circle at 30% 30%, #FFFFFF 0%, #E6FAF5 70%, #C2F0E8 100%) !important;
+  border: 2px solid #3E5668 !important;
+  box-shadow:
+    inset 0 0 0 2px #00B8B8,
+    0 3px 0 rgba(44, 66, 81, 0.5) !important;
+}
+
+/* 2. Decorative Multi-Tone Logo Ribbon Bar Under Section Headings (Less Minimalist) */
+.section-header h2,
+.how-header h2,
+.page-title,
+.feed-header-inline h2 {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.42rem;
+}
+
+.section-header h2::after,
+.how-header h2::after,
+.page-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: min(140px, 65%);
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    #00A86B 0%,
+    #00A86B 38%,
+    #00B8B8 38%,
+    #00B8B8 72%,
+    #FFD24C 72%,
+    #FFD24C 100%
+  );
+  border: 1.4px solid #3E5668;
+}
+
+.how-header h2::after {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* 3. Rich Textured & Layered Cards with Logo-Ribbon Corner Waves (No Sterile Empty White Boxes) */
+.eco-card,
+.route-vertical-col,
+.podium-pillar,
+.how-step-card,
+.transport-card,
+.alchemy-controls-panel,
+.impact-stat-card,
+.sim-card {
+  background-image:
+    url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2228%22%20height%3D%2228%22%20viewBox%3D%220%200%2028%2028%22%20fill%3D%22none%22%3E%0A%20%20%20%20%3Ccircle%20cx%3D%224%22%20cy%3D%224%22%20r%3D%221.1%22%20fill%3D%22%2300B8B8%22%20opacity%3D%220.13%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2218%22%20cy%3D%2218%22%20r%3D%221.1%22%20fill%3D%22%2300A86B%22%20opacity%3D%220.13%22%2F%3E%0A%20%20%3C%2Fsvg%3E"),
+    linear-gradient(165deg, rgba(255, 255, 255, 0.98) 0%, rgba(240, 253, 248, 0.94) 60%, rgba(230, 250, 245, 0.92) 100%);
+  background-size: 28px 28px, 100% 100%;
+}
+
+html[data-theme="dark"] .eco-card,
+html[data-theme="dark"] .route-vertical-col,
+html[data-theme="dark"] .podium-pillar,
+html[data-theme="dark"] .how-step-card,
+html[data-theme="dark"] .transport-card,
+html[data-theme="dark"] .alchemy-controls-panel,
+html[data-theme="dark"] .impact-stat-card,
+html[data-theme="dark"] .sim-card,
+[data-theme="dark"] .eco-card,
+[data-theme="dark"] .route-vertical-col,
+[data-theme="dark"] .podium-pillar {
+  background-image:
+    url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2228%22%20height%3D%2228%22%20viewBox%3D%220%200%2028%2028%22%20fill%3D%22none%22%3E%0A%20%20%20%20%3Ccircle%20cx%3D%224%22%20cy%3D%224%22%20r%3D%221.1%22%20fill%3D%22%2300B8B8%22%20opacity%3D%220.13%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2218%22%20cy%3D%2218%22%20r%3D%221.1%22%20fill%3D%22%2300A86B%22%20opacity%3D%220.13%22%2F%3E%0A%20%20%3C%2Fsvg%3E"),
+    linear-gradient(165deg, #1E3146 0%, #19293B 100%);
+  background-size: 28px 28px, 100% 100%;
+}
+
+/* Upgrade Corner Ornament to Multi-Ribbon Logo Wave (Emerald Leaf + Turquoise Swirl + Slate Loop) */
+.eco-card::after,
+.route-vertical-col::after,
+.podium-pillar::after,
+.how-step-card::after,
+.impact-stat-card::after,
+.alchemy-controls-panel::after {
+  top: 0 !important;
+  right: 0 !important;
+  width: 68px !important;
+  height: 68px !important;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2284%22%20height%3D%2284%22%20viewBox%3D%220%200%2084%2084%22%20fill%3D%22none%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M84%200V54C66%2052%2050%2040%2044%2022C40%2012%2042%204%2046%200H84Z%22%20fill%3D%22%2300B8B8%22%20opacity%3D%220.16%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M84%200V38C70%2036%2058%2026%2054%2012C52%206%2054%202%2056%200H84Z%22%20fill%3D%22%233E5668%22%20opacity%3D%220.14%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M68%208C54%208%2042%2016%2038%2030C52%2032%2064%2024%2068%208Z%22%20fill%3D%22%2300A86B%22%20stroke%3D%22%233E5668%22%20stroke-width%3D%221.5%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M40%2028C48%2022%2056%2016%2064%2010%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2272%22%20cy%3D%2216%22%20r%3D%224%22%20fill%3D%22%23FFD24C%22%20stroke%3D%22%233E5668%22%20stroke-width%3D%221.5%22%2F%3E%0A%20%20%3C%2Fsvg%3E") !important;
+  border-top-right-radius: 22px;
+  opacity: 0.95 !important;
+}
+
+/* 4. Multi-Band Logo Ribbon Trim on Top of Featured Cards & Ribbons */
+.eco-stat-ribbon::before,
+.planner-unified-stage::before {
+  height: 8px !important;
+  background: linear-gradient(
+    90deg,
+    #00A86B 0%,
+    #00B8B8 45%,
+    #3E5668 75%,
+    #FFD24C 100%
+  ) !important;
+  border-bottom: 1.8px solid #1E241E !important;
+}
+
+/* 5. Enrich Hero Banners with Dual-Tone Emerald + Turquoise Logo Aura */
+.hero-section,
+.cartoon-hero-banner {
+  background:
+    radial-gradient(circle at 14% 22%, rgba(0, 184, 184, 0.34) 0%, transparent 48%),
+    radial-gradient(circle at 85% 80%, rgba(0, 168, 107, 0.35) 0%, transparent 52%),
+    linear-gradient(135deg, #00A86B 0%, #38B61A 52%, #00B8B8 100%) !important;
+}
+
+html[data-theme="dark"] .hero-section,
+[data-theme="dark"] .cartoon-hero-banner {
+  background:
+    radial-gradient(circle at 14% 22%, rgba(0, 184, 184, 0.25) 0%, transparent 48%),
+    linear-gradient(135deg, #124E3F 0%, #1D5E3A 52%, #1B495E 100%) !important;
+}
+
+.eco-navbar {
+  background: linear-gradient(90deg, #00A86B 0%, #38B61A 50%, #00B8B8 100%) !important;
+}
+
+[data-theme="dark"] .eco-navbar {
+  background: linear-gradient(90deg, #134E3E 0%, #1B4D5E 100%) !important;
+}
+
+/* 6. Enrich Pills, Badges & Metric Items with Logo Accents */
+.eyebrow-tag,
+.section-eyebrow,
+.hero-kicker {
+  background: linear-gradient(90deg, #FFFDF6 0%, #E6FAF5 100%) !important;
+  border: 2px solid #3E5668 !important;
+  box-shadow: inset 0 0 0 1.5px #00B8B8, 0 2px 0 rgba(44, 66, 81, 0.45) !important;
+}
+
+.brand-inline-svg {
+  width: 21px !important;
+  height: 21px !important;
+}
