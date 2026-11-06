@@ -364,7 +364,11 @@ export class DashboardComponent implements OnInit {
     private api: ApiService,
     public i18n: I18nService,
     private router: Router
-  ) {}
+  ) {
+    this.summary = this.api.buildFallbackDashboardSummary();
+    this.community = this.api.buildFallbackCommunityImpact();
+    this.recommendation = this.api.buildFallbackRecommendation();
+  }
 
   ngOnInit(): void {
     this.api.getDashboardSummary().subscribe(res => (this.summary = res));
