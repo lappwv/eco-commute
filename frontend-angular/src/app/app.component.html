@@ -1,90 +1,81 @@
 <div class="eco-shell">
-  <!-- Fondo Artístico de Mapa Urbano, Pistas y Ciclovías (Fijo detrás del contenido) -->
+  <!-- Fondo Cartográfico Estilizado de Lima (Avenidas, Parques y Curvas Topográficas Sutiles) -->
   <div class="eco-map-backdrop" aria-hidden="true">
     <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" fill="none" class="map-backdrop-svg">
-      <!-- Cuadrícula cartográfica suave de manzanas urbanas -->
-      <g stroke="currentColor" stroke-width="1.2" opacity="0.07">
-        <line x1="0" y1="140" x2="1440" y2="140" />
-        <line x1="0" y1="310" x2="1440" y2="310" />
-        <line x1="0" y1="490" x2="1440" y2="490" />
-        <line x1="0" y1="670" x2="1440" y2="670" />
-        <line x1="0" y1="820" x2="1440" y2="820" />
-        <line x1="180" y1="0" x2="180" y2="900" />
-        <line x1="420" y1="0" x2="420" y2="900" />
-        <line x1="720" y1="0" x2="720" y2="900" />
-        <line x1="1040" y1="0" x2="1040" y2="900" />
-        <line x1="1280" y1="0" x2="1280" y2="900" />
+      <defs>
+        <linearGradient id="parkGradA" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#16A34A" stop-opacity="0.08" />
+          <stop offset="100%" stop-color="#0D9488" stop-opacity="0.03" />
+        </linearGradient>
+        <linearGradient id="corridorGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#15803D" stop-opacity="0.05" />
+          <stop offset="50%" stop-color="#16A34A" stop-opacity="0.16" />
+          <stop offset="100%" stop-color="#0284C7" stop-opacity="0.06" />
+        </linearGradient>
+      </defs>
+
+      <!-- Retícula urbana fina -->
+      <g stroke="currentColor" stroke-width="0.9" opacity="0.055">
+        <line x1="0" y1="130" x2="1440" y2="130" />
+        <line x1="0" y1="290" x2="1440" y2="290" />
+        <line x1="0" y1="470" x2="1440" y2="470" />
+        <line x1="0" y1="650" x2="1440" y2="650" />
+        <line x1="0" y1="810" x2="1440" y2="810" />
+        <line x1="170" y1="0" x2="170" y2="900" />
+        <line x1="390" y1="0" x2="390" y2="900" />
+        <line x1="690" y1="0" x2="690" y2="900" />
+        <line x1="1010" y1="0" x2="1010" y2="900" />
+        <line x1="1270" y1="0" x2="1270" y2="900" />
+        <!-- Diagonales tipo Av. Arequipa / Av. Salaverry -->
+        <line x1="260" y1="0" x2="680" y2="900" />
+        <line x1="940" y1="0" x2="1320" y2="900" />
       </g>
 
-      <!-- Islas de parques urbanos ilustrados -->
-      <path d="M40 190C40 150 85 120 140 125C195 130 230 165 220 210C210 255 155 280 95 270C45 260 40 225 40 190Z" fill="#76C71A" opacity="0.09" />
-      <path d="M1190 540C1190 490 1245 460 1310 470C1375 480 1410 525 1395 575C1380 625 1315 655 1250 640C1195 628 1190 585 1190 540Z" fill="#76C71A" opacity="0.09" />
-      <path d="M80 680C95 635 160 615 225 630C290 645 315 695 290 740C265 785 190 800 125 780C75 765 65 725 80 680Z" fill="#5BC0EB" opacity="0.08" />
+      <!-- Polígonos estilizados de áreas verdes metropolitanas -->
+      <path d="M55 150 L185 118 L235 205 L125 258 L42 215 Z" fill="url(#parkGradA)" />
+      <path d="M1160 495 L1335 458 L1395 568 L1245 628 L1148 565 Z" fill="url(#parkGradA)" />
+      <path d="M90 665 L245 632 L295 725 L160 778 L75 730 Z" fill="url(#parkGradA)" />
 
-      <!-- Pista Asfáltica Gris con Líneas Blancas 1 (Izquierda a Derecha) -->
+      <!-- Corredor ciclista estilizado principal -->
       <path
-        d="M-60 260 C 180 260, 240 110, 480 110 C 740 110, 790 390, 1060 390 C 1240 390, 1340 250, 1500 250"
-        stroke="#262E2A"
-        stroke-width="38"
+        d="M-60 250 C 190 250, 260 115, 510 115 C 770 115, 820 385, 1080 385 C 1250 385, 1345 255, 1500 255"
+        stroke="url(#corridorGlow)"
+        stroke-width="14"
         stroke-linecap="round"
-        opacity="0.16"
       />
       <path
-        d="M-60 260 C 180 260, 240 110, 480 110 C 740 110, 790 390, 1060 390 C 1240 390, 1340 250, 1500 250"
-        stroke="#5A665F"
-        stroke-width="30"
+        d="M-60 250 C 190 250, 260 115, 510 115 C 770 115, 820 385, 1080 385 C 1250 385, 1345 255, 1500 255"
+        stroke="#16A34A"
+        stroke-width="1.6"
+        stroke-dasharray="8 8"
         stroke-linecap="round"
         opacity="0.22"
       />
-      <path
-        d="M-60 260 C 180 260, 240 110, 480 110 C 740 110, 790 390, 1060 390 C 1240 390, 1340 250, 1500 250"
-        stroke="#FFFFFF"
-        stroke-width="3.2"
-        stroke-dasharray="16 14"
-        stroke-linecap="round"
-        opacity="0.85"
-      />
 
-      <!-- Pista Asfáltica Gris con Líneas Blancas 2 (Abajo Izquierda a Derecha) -->
+      <!-- Corredor secundario sur -->
       <path
-        d="M-40 770 C 230 770, 310 560, 590 560 C 860 560, 940 790, 1210 790 C 1340 790, 1410 710, 1500 690"
-        stroke="#262E2A"
-        stroke-width="32"
+        d="M-40 760 C 240 760, 320 565, 600 565 C 860 565, 950 775, 1215 775 C 1340 775, 1410 705, 1500 690"
+        stroke="currentColor"
+        stroke-width="8"
+        stroke-linecap="round"
+        opacity="0.045"
+      />
+      <path
+        d="M-40 760 C 240 760, 320 565, 600 565 C 860 565, 950 775, 1215 775 C 1340 775, 1410 705, 1500 690"
+        stroke="currentColor"
+        stroke-width="1.3"
+        stroke-dasharray="6 8"
         stroke-linecap="round"
         opacity="0.14"
       />
-      <path
-        d="M-40 770 C 230 770, 310 560, 590 560 C 860 560, 940 790, 1210 790 C 1340 790, 1410 710, 1500 690"
-        stroke="#66736C"
-        stroke-width="24"
-        stroke-linecap="round"
-        opacity="0.20"
-      />
-      <path
-        d="M-40 770 C 230 770, 310 560, 590 560 C 860 560, 940 790, 1210 790 C 1340 790, 1410 710, 1500 690"
-        stroke="#FFFFFF"
-        stroke-width="2.8"
-        stroke-dasharray="14 12"
-        stroke-linecap="round"
-        opacity="0.8"
-      />
 
-      <!-- Óvalos / Rotondas Grises con Borde Blanco y Nodos de Mapa -->
-      <g opacity="0.24">
-        <circle cx="480" cy="110" r="18" fill="#FFFDF6" stroke="#4E9A06" stroke-width="3" />
-        <circle cx="480" cy="110" r="6" fill="#FFD24C" stroke="#1E241E" stroke-width="2" />
-
-        <circle cx="1060" cy="390" r="18" fill="#FFFDF6" stroke="#4E9A06" stroke-width="3" />
-        <circle cx="1060" cy="390" r="6" fill="#6CC016" stroke="#1E241E" stroke-width="2" />
-
-        <circle cx="590" cy="560" r="16" fill="#FFFDF6" stroke="#5BC0EB" stroke-width="3" />
-        <circle cx="590" cy="560" r="5" fill="#FFD24C" stroke="#1E241E" stroke-width="2" />
-
-        <!-- Pequeños árboles y pines de mapa en los márgenes -->
-        <circle cx="115" cy="185" r="10" fill="#6CC016" stroke="#1E241E" stroke-width="2" />
-        <circle cx="135" cy="195" r="8" fill="#8CE52E" stroke="#1E241E" stroke-width="2" />
-        <circle cx="1335" cy="535" r="11" fill="#6CC016" stroke="#1E241E" stroke-width="2" />
-        <circle cx="1355" cy="548" r="8" fill="#8CE52E" stroke="#1E241E" stroke-width="2" />
+      <!-- Nodos de interconexión discretos -->
+      <g opacity="0.28">
+        <circle cx="510" cy="115" r="9" fill="#FFFFFF" stroke="#16A34A" stroke-width="2" />
+        <circle cx="510" cy="115" r="3.2" fill="#16A34A" />
+        <circle cx="1080" cy="385" r="9" fill="#FFFFFF" stroke="#16A34A" stroke-width="2" />
+        <circle cx="1080" cy="385" r="3.2" fill="#0284C7" />
+        <circle cx="600" cy="565" r="7.5" fill="#FFFFFF" stroke="#0D9488" stroke-width="1.8" />
       </g>
     </svg>
   </div>
@@ -155,7 +146,6 @@
       </nav>
 
       <div class="nav-utilities">
-
         <button
           type="button"
           class="util-btn icon-only"
@@ -183,8 +173,6 @@
         </a>
       </div>
     </div>
-    <!-- Borde Artístico Inferior de Pista / Ciclovía -->
-    <div class="navbar-road-trim" aria-hidden="true"></div>
   </header>
 
   <!-- Main Workspace -->
@@ -194,11 +182,10 @@
 
   <!-- Editorial Footer -->
   <footer class="eco-footer" role="contentinfo">
-    <div class="navbar-road-trim" aria-hidden="true"></div>
     <div class="eco-footer-inner">
       <div class="footer-brand-line">
         <span class="footer-logo-chip">
-          <app-icon name="brand" [size]="16"></app-icon>
+          <app-icon name="brand" [size]="18"></app-icon>
         </span>
         <div>
           <strong>EcoCommute Lima</strong>

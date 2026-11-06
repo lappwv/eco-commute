@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="EcoCommute Lima — Plataforma de movilidad urbana sostenible. Elige tu ruta en bici, scooter o transporte limpio, esquiva el tráfico y gana recompensas reales."
+      content="EcoCommute Lima — Muévete feliz en bici, scooter o a pie por Lima. Ahorra tiempo, cuida el aire y gana premios reales."
     />
-    <meta name="theme-color" content="#10B981" />
+    <meta name="theme-color" content="#6CC016" />
     <link rel="icon" type="image/png" href="./media/logo-ecocommute.png" />
-    <title>EcoCommute — Movilidad Sostenible y Recompensas en Lima</title>
+    <title>EcoCommute — Muévete Feliz y Cuida Lima</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <link
@@ -22,42 +22,52 @@
       href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
       crossorigin=""
     />
-    <link rel="stylesheet" href="./styles.css?v=20261106e" />
+
+    <link rel="stylesheet" href="./styles.css?v=20261106c" />
   </head>
   <body>
     <div class="scroll-progress" aria-hidden="true"></div>
     <a class="skip-link" href="#main-content" data-i18n="nav.skip">Saltar al contenido</a>
 
-    <!-- ==================== TOPBAR EDITORIAL ==================== -->
+    <!-- ==================== NAVBAR PLAYFUL ==================== -->
     <header class="topbar" role="banner">
       <div class="container topbar-inner">
-        <a class="brand" href="index.html" id="nav-brand-logo" aria-label="EcoCommute Lima - Inicio">
-          <img
-            class="brand-logo"
-            src="./media/logo-ecocommute.png"
-            alt="EcoCommute Logo"
-            width="28"
-            height="34"
-          />
+        <a class="brand" href="#inicio" aria-label="EcoCommute Inicio">
+          <span class="brand-cartoon-badge">
+            <img
+              class="brand-logo"
+              src="./media/logo-ecocommute.png"
+              alt="EcoCommute Logo"
+              width="28"
+              height="34"
+            />
+          </span>
           <span class="brand-text">EcoCommute</span>
         </a>
 
         <nav class="nav" role="navigation" aria-label="Navegación principal">
-          <a href="index.html" class="nav-link is-active" data-i18n="nav.home">Inicio</a>
-          <a href="como-funciona.html" class="nav-link" data-i18n="nav.how">¿Cómo funciona?</a>
-          <a href="vehiculos.html" class="nav-link" data-i18n="nav.vehicles">Comparativa</a>
-          <a href="impacto.html" class="nav-link" data-i18n="nav.impact">Calculadora</a>
+          <a href="#como-funciona" data-i18n="nav.how">¿Cómo funciona?</a>
+          <a href="#inicio" data-i18n="nav.routes">Mapa de Lima</a>
+          <a href="#vehiculos" data-i18n="nav.vehicles">Transporte</a>
+          <a href="#alquimia" data-i18n="nav.impact">Calculadora</a>
+          <a href="./app/#/dashboard" class="nav-cta-pill">
+            <svg class="brand-inline-svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M19.5 4.5C13 4.5 7.5 7.8 5.5 14.2C5 15.9 5 17.7 5.5 19.5C7.3 20 9.1 20 10.8 19.5C17.2 17.5 20.5 12 19.5 4.5Z" fill="#6CC016" stroke="#1E241E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M4.5 19.5C8.5 15.5 12 12 15.5 9.5" stroke="#1E241E" stroke-width="2.2" stroke-linecap="round"/>
+            </svg>
+            <span data-i18n="nav.webapp">¡Entrar a la App!</span>
+          </a>
         </nav>
 
         <div class="topbar-controls">
-          <div class="biome-switcher" id="theme-switcher" role="group" aria-label="Tema visual">
+          <div class="biome-switcher" id="theme-switcher" role="group" aria-label="Tema de color">
             <button
               type="button"
               class="biome-chip is-active"
               data-theme-target="light"
               aria-pressed="true"
             >
-              <span>Claro</span>
+              <span>Día</span>
             </button>
             <button
               type="button"
@@ -65,61 +75,155 @@
               data-theme-target="dark"
               aria-pressed="false"
             >
-              <span>Oscuro</span>
+              <span>Noche</span>
             </button>
           </div>
-
-          <button
-            type="button"
-            id="lang-toggle"
-            class="lang-toggle"
-            aria-label="Cambiar idioma (Español / English)"
-            aria-pressed="false"
-          >
-            <span class="lang-es active">ES</span>
-            <span class="lang-sep">/</span>
-            <span class="lang-en">EN</span>
-          </button>
-
-          <a href="./app/#/dashboard" class="button primary nav-cta-pill" data-i18n="nav.webapp">
-            Abrir Web App
-          </a>
         </div>
       </div>
     </header>
 
     <main id="main-content" role="main">
-      <!-- ==================== HERO SECTION EDITORIAL ==================== -->
+      <!-- ==================== 1. HERO PLAYFUL (INSPIRADO EN LA REFERENCIA) ==================== -->
       <section id="inicio" class="hero-section">
+        <!-- Domo blanco superior y círculo blanco derecho (como en la imagen de referencia) -->
+        <div class="hero-top-white-dome" aria-hidden="true"></div>
+        <div class="hero-right-white-circle" aria-hidden="true"></div>
+
+        <!-- Elementos flotantes cartoon (burbujas y nubes) -->
+        
+
         <div class="container hero-grid">
-          <!-- Columna Izquierda: Información de marca y llamadas a la acción -->
+          <!-- Columna Izquierda sobre fondo verde lima vibrante -->
           <div class="hero-copy" data-scroll-reveal>
             <div class="hero-copy-main">
-              <span class="page-eyebrow">
-                <span class="live-pulse-dot" aria-hidden="true"></span>
-                <span data-i18n="hero.kicker">Movilidad limpia y en tiempo real · Lima</span>
+              <span class="hero-kicker">
+                <svg class="brand-inline-svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M19.5 4.5C13 4.5 7.5 7.8 5.5 14.2C5 15.9 5 17.7 5.5 19.5C7.3 20 9.1 20 10.8 19.5C17.2 17.5 20.5 12 19.5 4.5Z" fill="#FFD24C" stroke="#1E241E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M4.5 19.5C8.5 15.5 12 12 15.5 9.5" stroke="#1E241E" stroke-width="2.2" stroke-linecap="round"/>
+                </svg>
+                <span data-i18n="hero.kicker">¡Muévete sin humo por Lima!</span>
               </span>
 
               <h1 class="hero-headline" data-i18n="hero.title">
-                Pedalea, explora y cuida tu ciudad.
+                Pedalea, explora y <em>transforma tu ciudad</em>
               </h1>
 
               <p class="lead" data-i18n="hero.lead">
-                Elige tu ruta en bici, scooter o transporte eficiente por Lima. Esquiva el tráfico, reduce tu huella de carbono y convierte cada kilómetro en puntos para canjear recompensas reales.
+                Elige tu ruta en bici, scooter o caminando, sáltate el tráfico y convierte cada kilómetro limpio en puntos para canjear cafés, paseos y premios reales.
               </p>
 
               <div class="hero-actions">
                 <a class="button primary" href="./app/#/dashboard">
                   <span data-i18n="hero.btn_webapp">¡Empezar ahora!</span>
                 </a>
-                <a class="button secondary" href="vehiculos.html">
-                  <span data-i18n="hero.btn_planner">Ver comparativa de rutas</span>
+                <a class="button secondary" href="./app/#/routes">
+                  <span data-i18n="hero.btn_planner">Ver mapa de rutas</span>
                 </a>
               </div>
             </div>
 
-            <!-- Resumen de métricas en píldoras sobrias -->
-            <dl class="hero-metrics" aria-label="Indicadores clave de movilidad">
+            <!-- Ilustración Cartoon Vectorial estilo Freepik (Arbustos, Nubes, Bici, Ciudad Limpia) -->
+            <div class="hero-cartoon-scene" aria-hidden="true">
+              <svg viewBox="0 0 460 215" fill="none" class="cartoon-scene-svg">
+                <defs>
+                  <linearGradient id="lHeroCard" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.97" />
+                    <stop offset="100%" stop-color="#ECFDF5" stop-opacity="0.92" />
+                  </linearGradient>
+                  <linearGradient id="lHeroFrame" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#34D399" />
+                    <stop offset="100%" stop-color="#059669" />
+                  </linearGradient>
+                  <linearGradient id="lHeroJacket" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#38BDF8" />
+                    <stop offset="100%" stop-color="#0369A1" />
+                  </linearGradient>
+                  <linearGradient id="lHeroBeam" x1="0" y1="0.5" x2="1" y2="0.5">
+                    <stop offset="0%" stop-color="#FEF08A" stop-opacity="0.6" />
+                    <stop offset="100%" stop-color="#FEF08A" stop-opacity="0" />
+                  </linearGradient>
+                </defs>
+
+                <!-- Skyline arquitectónico estilizado de Lima -->
+                <g opacity="0.82">
+                  <rect x="184" y="42" width="36" height="122" rx="4" fill="#1E5638" />
+                  <path d="M228 24L266 14V164H228V24Z" fill="#286B47" />
+                  <path d="M236 34H258M236 48H258M236 62H258M236 76H258" stroke="#A7F3D0" stroke-opacity="0.28" stroke-width="1.5" />
+                  <rect x="274" y="54" width="42" height="110" rx="4" fill="#194B30" />
+                  <rect x="388" y="46" width="38" height="118" rx="4" fill="#23603F" />
+                </g>
+
+                <!-- Copas arbóreas multicapa -->
+                <ellipse cx="198" cy="138" rx="26" ry="20" fill="#166534" />
+                <ellipse cx="192" cy="133" rx="20" ry="15" fill="#22C55E" fill-opacity="0.6" />
+                <ellipse cx="422" cy="136" rx="28" ry="22" fill="#166534" />
+                <ellipse cx="416" cy="130" rx="20" ry="16" fill="#4ADE80" fill-opacity="0.55" />
+
+                <!-- Tarjeta 3D de Ruta con Pin -->
+                <g transform="translate(14, 18)">
+                  <rect x="4" y="7" width="166" height="112" rx="14" fill="#071F12" fill-opacity="0.32" />
+                  <rect x="0" y="0" width="166" height="112" rx="14" fill="url(#lHeroCard)" stroke="#A7F3D0" stroke-width="1.4" />
+                  <rect x="10" y="10" width="56" height="34" rx="6" fill="#DCFCE7" />
+                  <rect x="74" y="10" width="82" height="30" rx="6" fill="#E0F2FE" />
+                  <rect x="10" y="52" width="66" height="36" rx="6" fill="#F1F5F9" />
+                  <rect x="84" y="48" width="72" height="40" rx="6" fill="#D1FAE5" />
+                  <path d="M26 74 C 48 74, 54 26, 88 26 C 114 26, 118 64, 134 62" stroke="#10B981" stroke-opacity="0.28" stroke-width="7" stroke-linecap="round" />
+                  <path d="M26 74 C 48 74, 54 26, 88 26 C 114 26, 118 64, 134 62" stroke="#059669" stroke-width="3" stroke-dasharray="6 4" stroke-linecap="round" />
+                  <circle cx="26" cy="74" r="4.5" fill="#0284C7" stroke="#FFFFFF" stroke-width="1.6" />
+                  <path d="M134 62C134 62 146 47 146 37C146 30.2 140.6 24.8 134 24.8C127.4 24.8 122 30.2 122 37C122 47 134 62 134 62Z" fill="#EA580C" />
+                  <circle cx="134" cy="37" r="4.5" fill="#FFFFFF" />
+                  <rect x="10" y="94" width="146" height="12" rx="6" fill="#064E3B" />
+                  <circle cx="19" cy="100" r="2.8" fill="#4ADE80" />
+                  <rect x="27" y="98.2" width="72" height="3.6" rx="1.8" fill="#A7F3D0" />
+                </g>
+
+                <!-- Haz de luz y ciclista estilizado -->
+                <polygon points="368,100 450,84 450,126" fill="url(#lHeroBeam)" />
+                <g transform="translate(216, 28)">
+                  <ellipse cx="86" cy="138" rx="72" ry="6" fill="#062312" fill-opacity="0.4" />
+                  <path d="M62 62 L82 88 L76 113" stroke="#0F172A" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+                  <g transform="translate(36, 108)">
+                    <circle cx="0" cy="0" r="26" stroke="#0F172A" stroke-width="5" />
+                    <circle cx="0" cy="0" r="22.2" stroke="#CBD5E1" stroke-width="1.7" />
+                    <line x1="-21" y1="0" x2="21" y2="0" stroke="#94A3B8" stroke-width="0.9" />
+                    <line x1="0" y1="-21" x2="0" y2="21" stroke="#94A3B8" stroke-width="0.9" />
+                    <line x1="-15" y1="-15" x2="15" y2="15" stroke="#94A3B8" stroke-width="0.9" />
+                    <line x1="-15" y1="15" x2="15" y2="-15" stroke="#94A3B8" stroke-width="0.9" />
+                    <circle cx="0" cy="0" r="3.2" fill="#F8FAFC" />
+                  </g>
+                  <g transform="translate(134, 108)">
+                    <circle cx="0" cy="0" r="26" stroke="#0F172A" stroke-width="5" />
+                    <circle cx="0" cy="0" r="22.2" stroke="#CBD5E1" stroke-width="1.7" />
+                    <line x1="-21" y1="0" x2="21" y2="0" stroke="#94A3B8" stroke-width="0.9" />
+                    <line x1="0" y1="-21" x2="0" y2="21" stroke="#94A3B8" stroke-width="0.9" />
+                    <line x1="-15" y1="-15" x2="15" y2="15" stroke="#94A3B8" stroke-width="0.9" />
+                    <line x1="-15" y1="15" x2="15" y2="-15" stroke="#94A3B8" stroke-width="0.9" />
+                    <circle cx="0" cy="0" r="3.2" fill="#F8FAFC" />
+                  </g>
+                  <path d="M36 108 L65 68 H112 L81 108 H36 Z" stroke="url(#lHeroFrame)" stroke-width="4.8" stroke-linecap="round" stroke-linejoin="round" />
+                  <line x1="58" y1="55" x2="81" y2="108" stroke="#1E293B" stroke-width="4" stroke-linecap="round" />
+                  <line x1="134" y1="108" x2="108" y2="50" stroke="#E2E8F0" stroke-width="3.8" stroke-linecap="round" />
+                  <path d="M99 50 H116 C120 50 122 53 120 56" stroke="#0F172A" stroke-width="3.8" stroke-linecap="round" />
+                  <path d="M48 52 C52 49, 65 50, 70 53 C67 56, 53 56, 48 52 Z" fill="#0F172A" />
+                  <circle cx="81" cy="108" r="7" fill="#1E293B" stroke="#34D399" stroke-width="2" />
+                  <path d="M59 59 L85 82 L84 107" stroke="#1E293B" stroke-width="8.8" stroke-linecap="round" stroke-linejoin="round" />
+                  <rect x="41" y="22" width="17" height="26" rx="5.5" transform="rotate(-17 41 22)" fill="#F59E0B" />
+                  <path d="M55 56 C54 41, 63 24, 75 19 C82 21, 85 29, 82 40 L68 59 Z" fill="url(#lHeroJacket)" />
+                  <path d="M75 24 L92 43 L109 50" stroke="#38BDF8" stroke-width="6.8" stroke-linecap="round" stroke-linejoin="round" />
+                  <circle cx="82" cy="9" r="8.5" fill="#FDBA74" />
+                  <path d="M70 8 C70 1, 78 -4, 87 -3 C94 -2, 98 3, 97 8 L70 8 Z" fill="#FACC15" />
+                </g>
+
+                <!-- Ciclovía segregada y calzada -->
+                <rect x="6" y="164" width="448" height="4.5" rx="2" fill="#CBD5E1" />
+                <rect x="6" y="168.5" width="448" height="20" rx="4" fill="#15803D" />
+                <line x1="22" y1="178.5" x2="438" y2="178.5" stroke="#DCFCE7" stroke-opacity="0.85" stroke-width="2" stroke-dasharray="16 12" stroke-linecap="round" />
+                <rect x="6" y="188.5" width="448" height="17" rx="4" fill="#1E293B" />
+              </svg>
+            </div>
+
+            <!-- Resumen de métricas en píldoras cartoon -->
+            <dl class="hero-metrics" aria-label="Indicadores clave">
               <div class="metric-item">
                 <dt data-i18n="hero.stat_car_label">En auto</dt>
                 <dd>
@@ -128,16 +232,15 @@
                 </dd>
               </div>
               <div class="metric-item">
-                <dt data-i18n="hero.stat_eco_label">En bici o scooter</dt>
+                <dt data-i18n="hero.stat_eco_label">En bici o a pie</dt>
                 <dd class="text-eco">
                   0 g
-                  <small data-i18n="hero.stat_eco_sub">Cero emisiones</small>
+                  <small data-i18n="hero.stat_eco_sub">¡Cero humo!</small>
                 </dd>
               </div>
               <div class="metric-item">
                 <dt data-i18n="hero.stat_saved_label">Aire limpio hoy</dt>
                 <dd>
-                  <span class="live-pulse-dot" aria-hidden="true"></span>
                   <span id="session-recycled-co2">1,920 g</span>
                   <small data-i18n="hero.stat_saved_sub">CO₂ ahorrado</small>
                 </dd>
@@ -145,18 +248,18 @@
             </dl>
           </div>
 
-          <!-- Columna Derecha: Estación de Mapa Interactivo de Lima -->
-          <aside id="simulador" class="sim-card" aria-label="Mapa interactivo de rutas en Lima" data-scroll-reveal>
+          <!-- Columna Derecha dentro del gran círculo blanco: Mapa Interactivo de Lima -->
+          <aside id="simulador" class="sim-card" aria-label="Mapa de rutas en Lima" data-scroll-reveal>
             <div class="sim-header">
               <div>
-                <span class="sim-eyebrow" data-i18n="map.eyebrow">Red de ciclovías de Lima</span>
+                <span class="sim-eyebrow" data-i18n="map.eyebrow">Explora las rutas de Lima</span>
                 <h2 class="note-route" id="sim-route-title">Miraflores → San Isidro</h2>
               </div>
               <span class="corridor-tag" id="sim-coords">Ciclovía Av. Arequipa · 4.2 km</span>
             </div>
 
-            <!-- Selector de corredores urbanos -->
-            <div class="corridor-pills" role="group" aria-label="Corredores de Lima">
+            <!-- Selector de rutas predeterminadas -->
+            <div class="corridor-pills" role="group" aria-label="Rutas predeterminadas de Lima">
               <button type="button" class="corridor-btn is-active" data-corridor="miraflores">
                 Miraflores → San Isidro
               </button>
@@ -171,9 +274,9 @@
               </button>
             </div>
 
-            <!-- Mapa Real Leaflet -->
+            <!-- Mapa Real de Lima (Leaflet + Trazado de Ciclovía vs. Tráfico) -->
             <div class="lima-map-wrapper">
-              <div id="lima-hero-map" class="lima-hero-map" role="region" aria-label="Mapa de la ruta en Lima"></div>
+              <div id="lima-hero-map" class="lima-hero-map" role="region" aria-label="Mapa interactivo del recorrido en Lima"></div>
 
               <div class="map-floating-badges">
                 <span class="time-pill eco">
@@ -187,7 +290,7 @@
               </div>
             </div>
 
-            <!-- Datos del recorrido -->
+            <!-- Resumen compacto del recorrido seleccionado -->
             <ul class="note-figures">
               <li>
                 <span data-i18n="map.stat_dist">Distancia</span>
@@ -215,78 +318,567 @@
         </div>
       </section>
 
-      <!-- ==================== SECCIÓN DE PÁGINAS DESTACADAS ==================== -->
-      <section class="section">
+      <!-- ==================== 1B. CÓMO FUNCIONA EN 3 PASOS SÚPER FÁCILES ==================== -->
+      <section id="como-funciona" class="how-section">
+        <div class="container">
+          <div class="how-header" data-scroll-reveal>
+            <span class="section-eyebrow" data-i18n="how.eyebrow">¡Tan fácil como jugar!</span>
+            <h2 data-i18n="how.title">¿Cómo funciona EcoCommute en 3 pasos?</h2>
+          </div>
+
+          <div class="how-it-works-strip" data-scroll-reveal>
+            <a href="./app/#/routes" class="how-step-card step-green">
+              <div class="how-step-top">
+                <span class="how-step-icon">
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <circle cx="6.5" cy="17.5" r="3" fill="#FFD24C" stroke="#1E241E" stroke-width="2"/>
+                    <circle cx="17.5" cy="6.5" r="3" fill="#8CE52E" stroke="#1E241E" stroke-width="2"/>
+                    <path d="M9.5 17.5H13.5C15.433 17.5 17 15.933 17 14C17 12.067 15.433 10.5 13.5 10.5H10.5C8.567 10.5 7 8.933 7 7C7 6.724 7.224 6.5 7.5 6.5H14.5" stroke="#1E241E" stroke-width="2.2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+                <span class="how-step-num">PASO 1</span>
+              </div>
+              <h3 data-i18n="how.step1_title">1. Elige tu camino</h3>
+              <p data-i18n="how.step1_desc">
+                Mira en el mapa qué ciclovía o vereda te lleva más rápido y seguro por Lima sin quedarte atrapado en el tráfico.
+              </p>
+            </a>
+
+            <a href="./app/#/trips" class="how-step-card step-yellow">
+              <div class="how-step-top">
+                <span class="how-step-icon">
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <circle cx="5.75" cy="16.75" r="3.5" fill="#74C7EC" stroke="#1E241E" stroke-width="2"/>
+                    <circle cx="18.25" cy="16.75" r="3.5" fill="#74C7EC" stroke="#1E241E" stroke-width="2"/>
+                    <path d="M5.75 16.75L9.5 9.5H14.5L12 16.75H5.75Z" stroke="#1E241E" stroke-width="2" stroke-linejoin="round"/>
+                    <path d="M14.5 9.5L18.25 16.75" stroke="#1E241E" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+                <span class="how-step-num">PASO 2</span>
+              </div>
+              <h3 data-i18n="how.step2_title">2. Anota tu aventura</h3>
+              <p data-i18n="how.step2_desc">
+                Guarda tu recorrido en tu bitácora para ver cuánto humo evitaste, subir de nivel y desbloquear medallas.
+              </p>
+            </a>
+
+            <a href="./app/#/rewards" class="how-step-card step-blue">
+              <div class="how-step-top">
+                <span class="how-step-icon">
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M3.5 7.5C3.5 6.395 4.395 5.5 5.5 5.5H18.5C19.605 5.5 20.5 6.395 20.5 7.5V9.8C19.1 10.1 18.2 11 18.2 12C18.2 13 19.1 13.9 20.5 14.2V16.5C20.5 17.605 19.605 18.5 18.5 18.5H5.5C4.395 18.5 3.5 17.605 3.5 16.5V14.2C4.9 13.9 5.8 13 5.8 12C5.8 11 4.9 10.1 3.5 9.8V7.5Z" fill="#FFD24C" stroke="#1E241E" stroke-width="2" stroke-linejoin="round"/>
+                    <path d="M10 8.5V15.5" stroke="#1E241E" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 2.5"/>
+                  </svg>
+                </span>
+                <span class="how-step-num">PASO 3</span>
+              </div>
+              <h3 data-i18n="how.step3_title">3. ¡Canjea tus premios!</h3>
+              <p data-i18n="how.step3_desc">
+                Cambia tus puntos por cafés gratis, paseos en bici y entradas a parques en tiendas amigas de Lima.
+              </p>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 2. COMPARATIVA DE MOVILIDAD (DIBUJOS ANIMADOS VECTORIALES) ==================== -->
+      <section id="vehiculos" class="section alt">
         <div class="container">
           <div class="section-header" data-scroll-reveal>
             <div>
-              <span class="page-eyebrow">Explora la plataforma</span>
-              <h2>Todo lo que necesitas para tu movilidad diaria</h2>
+              <span class="section-eyebrow" data-i18n="veh.eyebrow">Comparativa de movilidad</span>
+              <h2 data-i18n="veh.title">¿Cómo te conviene moverte por Lima?</h2>
             </div>
-            <p class="section-subtitle">
-              Descubre en detalle cómo funciona EcoCommute, compara las 4 formas de moverte por Lima y calcula tu ahorro ambiental.
+            <p class="section-subtitle" data-i18n="veh.subtitle">
+              Compara las 4 formas de recorrer la ciudad en hora punta y descubre cuál te ahorra más tiempo, dinero y emisiones.
             </p>
           </div>
 
-          <div class="page-links-grid" data-scroll-reveal>
-            <!-- 1. ¿Cómo Funciona? -->
-            <a href="como-funciona.html" class="page-preview-card">
-              <div class="page-preview-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+          <!-- Cuadrícula de 4 opciones con Ilustraciones Cartoon Vectoriales -->
+          <div class="transport-grid" data-scroll-reveal>
+            <!-- 1. Bicicleta Urbana (Dibujo Animado) -->
+            <article class="transport-card is-recommended">
+              <div class="transport-card-banner">
+                <svg class="brand-inline-svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M19.5 4.5C13 4.5 7.5 7.8 5.5 14.2C5 15.9 5 17.7 5.5 19.5C7.3 20 9.1 20 10.8 19.5C17.2 17.5 20.5 12 19.5 4.5Z" fill="#8CE52E" stroke="#1E241E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M4.5 19.5C8.5 15.5 12 12 15.5 9.5" stroke="#1E241E" stroke-width="2.2" stroke-linecap="round"/>
                 </svg>
+                <span data-i18n="veh.card_bike_badge">¡LA FAVORITA!</span>
               </div>
-              <h3 class="page-preview-title">¿Cómo funciona?</h3>
-              <p class="page-preview-desc">
-                Aprende el flujo completo en 3 pasos: planifica tu trayecto en ciclovías, registra tu bitácora y canjea tus puntos por recompensas en comercios aliados de Lima.
-              </p>
-              <span class="page-preview-action">
-                Ver guía paso a paso
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M6 12L10 8L6 4" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </span>
-            </a>
+              <div class="transport-card-media media-sky-green">
+                <!-- Ilustración Cartoon: Bicicleta Urbana Feliz en Ciclovía -->
+                <svg class="transport-cartoon-svg" viewBox="0 0 320 185" fill="none" aria-label="Ilustración estilizada de bicicleta urbana">
+    <defs>
+      <linearGradient id="vBikeSky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#DCFCE7" />
+        <stop offset="100%" stop-color="#F0FDF4" />
+      </linearGradient>
+      <linearGradient id="vBikeFrame" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#10B981" />
+        <stop offset="100%" stop-color="#047857" />
+      </linearGradient>
+    </defs>
+    <rect width="320" height="185" fill="url(#vBikeSky)" />
+    <!-- Skyline suave y arboleda de Av. Arequipa -->
+    <rect x="24" y="38" width="34" height="110" rx="4" fill="#BBF7D0" opacity="0.65" />
+    <rect x="66" y="24" width="42" height="124" rx="4" fill="#86EFAC" opacity="0.45" />
+    <rect x="234" y="32" width="44" height="116" rx="4" fill="#BBF7D0" opacity="0.6" />
+    <ellipse cx="52" cy="126" rx="34" ry="24" fill="#22C55E" opacity="0.35" />
+    <ellipse cx="268" cy="124" rx="38" ry="26" fill="#16A34A" opacity="0.3" />
+    <!-- Ciclovía en perspectiva -->
+    <rect x="0" y="146" width="320" height="5" fill="#CBD5E1" />
+    <rect x="0" y="151" width="320" height="34" fill="#15803D" />
+    <line x1="20" y1="168" x2="300" y2="168" stroke="#DCFCE7" stroke-width="2.4" stroke-dasharray="18 14" stroke-linecap="round" />
+    <!-- Sombra -->
+    <ellipse cx="160" cy="153" rx="76" ry="5.5" fill="#052E16" opacity="0.32" />
+    <!-- Ruedas de aleación con rayos y discos -->
+    <g transform="translate(98, 118)">
+      <circle r="31" stroke="#0F172A" stroke-width="5.5" />
+      <circle r="26.5" stroke="#94A3B8" stroke-width="1.8" />
+      <line x1="-25" y1="0" x2="25" y2="0" stroke="#94A3B8" stroke-width="1" />
+      <line x1="0" y1="-25" x2="0" y2="25" stroke="#94A3B8" stroke-width="1" />
+      <line x1="-18" y1="-18" x2="18" y2="18" stroke="#94A3B8" stroke-width="1" />
+      <line x1="-18" y1="18" x2="18" y2="-18" stroke="#94A3B8" stroke-width="1" />
+      <circle r="7.5" stroke="#64748B" stroke-width="1.6" />
+      <circle r="3.5" fill="#0F172A" />
+    </g>
+    <g transform="translate(222, 118)">
+      <circle r="31" stroke="#0F172A" stroke-width="5.5" />
+      <circle r="26.5" stroke="#94A3B8" stroke-width="1.8" />
+      <line x1="-25" y1="0" x2="25" y2="0" stroke="#94A3B8" stroke-width="1" />
+      <line x1="0" y1="-25" x2="0" y2="25" stroke="#94A3B8" stroke-width="1" />
+      <line x1="-18" y1="-18" x2="18" y2="18" stroke="#94A3B8" stroke-width="1" />
+      <line x1="-18" y1="18" x2="18" y2="-18" stroke="#94A3B8" stroke-width="1" />
+      <circle r="7.5" stroke="#64748B" stroke-width="1.6" />
+      <circle r="3.5" fill="#0F172A" />
+    </g>
+    <!-- Cuadro estilizado de geometría urbana -->
+    <path d="M98 118 L134 68 H194 L154 118 H98 Z" stroke="url(#vBikeFrame)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" />
+    <line x1="126" y1="53" x2="154" y2="118" stroke="#1E293B" stroke-width="4.5" stroke-linecap="round" />
+    <line x1="222" y1="118" x2="191" y2="48" stroke="#334155" stroke-width="4.5" stroke-linecap="round" />
+    <!-- Parrilla trasera y alforja -->
+    <path d="M92 82 H126 L112 114" stroke="#475569" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Sillín de cuero y manubrio -->
+    <path d="M113 50 C118 46, 134 47, 140 51 C136 55, 118 55, 113 50 Z" fill="#78350F" />
+    <path d="M180 48 H199 C204 48 206 51 203 55" stroke="#0F172A" stroke-width="4.2" stroke-linecap="round" />
+    <circle cx="205" cy="60" r="4" fill="#FACC15" />
+    <polygon points="209,58 268,46 268,74" fill="#FEF08A" opacity="0.45" />
+    <circle cx="154" cy="118" r="8.5" fill="#0F172A" stroke="#10B981" stroke-width="2.2" />
+  </svg>
+                <span class="transport-co2-pill eco">0 g CO₂</span>
+              </div>
+              <div class="transport-card-body">
+                <div class="transport-card-title-row">
+                  <h3 data-i18n="veh.bike_title">Bicicleta urbana</h3>
+                  <span class="transport-card-sub" data-i18n="veh.bike_sub">Rápida y sin tráfico</span>
+                </div>
 
-            <!-- 2. Comparativa de Vehículos -->
-            <a href="vehiculos.html" class="page-preview-card">
-              <div class="page-preview-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="5.5" cy="17.5" r="3.5"/>
-                  <circle cx="18.5" cy="17.5" r="3.5"/>
-                  <path d="M15 6h-3l-2.5 6h7.5L15 6zM5.5 17.5h13"/>
-                </svg>
-              </div>
-              <h3 class="page-preview-title">Comparativa de transporte</h3>
-              <p class="page-preview-desc">
-                Compara tiempos, emisiones y costos reales en hora punta limeña entre bicicleta urbana, scooter eléctrico, transporte público y automóvil particular.
-              </p>
-              <span class="page-preview-action">
-                Explorar comparativa completa
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M6 12L10 8L6 4" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </span>
-            </a>
+                <ul class="transport-card-metrics">
+                  <li>
+                    <span class="metric-name" data-i18n="veh.metric_time">Tiempo típico (5 km)</span>
+                    <strong class="metric-value text-eco" data-i18n="veh.bike_time">14 min (fluido)</strong>
+                  </li>
+                  <li>
+                    <span class="metric-name" data-i18n="veh.metric_cost">Gasto por viaje</span>
+                    <strong class="metric-value" data-i18n="veh.bike_cost">S/ 0.00 (Gratis)</strong>
+                  </li>
+                  <li>
+                    <span class="metric-name" data-i18n="veh.metric_reward">Recompensa</span>
+                    <strong class="metric-value text-accent" data-i18n="veh.bike_reward">+15 pts por viaje</strong>
+                  </li>
+                </ul>
 
-            <!-- 3. Calculadora de Impacto -->
-            <a href="impacto.html" class="page-preview-card">
-              <div class="page-preview-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-                </svg>
+                <p class="transport-card-desc" data-i18n="veh.bike_desc">
+                  Avanzas directo por la ciclovía sin semáforos trabados. Ahorras hasta S/ 17 al día y sumas salud.
+                </p>
               </div>
-              <h3 class="page-preview-title">Calculadora de impacto</h3>
-              <p class="page-preview-desc">
-                Simula en tiempo real cuánto combustible, emisiones de CO₂ y horas libres puedes ganar al año reemplazando tus viajes en auto por movilidad activa.
-              </p>
-              <span class="page-preview-action">
-                Calcular mi ahorro anual
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M6 12L10 8L6 4" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </span>
-            </a>
+            </article>
+
+            <!-- 2. Scooter Eléctrico (Dibujo Animado) -->
+            <article class="transport-card">
+              <div class="transport-card-media media-sky-blue">
+                <!-- Ilustración Cartoon: Scooter Eléctrico con Rayitos de Energía -->
+                <svg class="transport-cartoon-svg" viewBox="0 0 320 185" fill="none" aria-label="Ilustración estilizada de scooter eléctrico">
+    <defs>
+      <linearGradient id="vScootSky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#E0F2FE" />
+        <stop offset="100%" stop-color="#F8FAFC" />
+      </linearGradient>
+      <linearGradient id="vScootStem" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#334155" />
+        <stop offset="100%" stop-color="#0F172A" />
+      </linearGradient>
+    </defs>
+    <rect width="320" height="185" fill="url(#vScootSky)" />
+    <!-- Edificios modernos sutiles -->
+    <rect x="30" y="34" width="46" height="114" rx="5" fill="#BAE6FD" opacity="0.55" />
+    <rect x="86" y="52" width="38" height="96" rx="5" fill="#BAE6FD" opacity="0.38" />
+    <rect x="236" y="28" width="52" height="120" rx="5" fill="#BAE6FD" opacity="0.5" />
+    <!-- Senda urbana -->
+    <rect x="0" y="148" width="320" height="4" fill="#CBD5E1" />
+    <rect x="0" y="152" width="320" height="33" fill="#0F172A" />
+    <line x1="24" y1="168" x2="296" y2="168" stroke="#38BDF8" stroke-opacity="0.65" stroke-width="2.2" stroke-dasharray="16 12" stroke-linecap="round" />
+    <ellipse cx="162" cy="153" rx="68" ry="5" fill="#020617" opacity="0.4" />
+    <!-- Ruedas macizas honeycomb -->
+    <g transform="translate(102, 131)">
+      <circle r="21" fill="#0F172A" />
+      <circle r="14" fill="#334155" stroke="#38BDF8" stroke-width="2" />
+      <circle r="5" fill="#E2E8F0" />
+    </g>
+    <g transform="translate(218, 131)">
+      <circle r="21" fill="#0F172A" />
+      <circle r="14" fill="#334155" stroke="#10B981" stroke-width="2" />
+      <circle r="5" fill="#E2E8F0" />
+    </g>
+    <!-- Guardabarros trasero con luz LED -->
+    <path d="M80 124 C84 108, 106 106, 118 122" stroke="#1E293B" stroke-width="5" stroke-linecap="round" />
+    <circle cx="81" cy="121" r="3" fill="#EF4444" />
+    <!-- Plataforma aluminio + tira LED verde -->
+    <rect x="104" y="124" width="102" height="11" rx="5.5" fill="url(#vScootStem)" />
+    <line x1="114" y1="129.5" x2="196" y2="129.5" stroke="#10B981" stroke-width="2.6" stroke-linecap="round" />
+    <!-- Cuello reforzado y columna de dirección -->
+    <path d="M196 128 L212 108 L196 38" stroke="url(#vScootStem)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+    <line x1="218" y1="131" x2="208" y2="96" stroke="#64748B" stroke-width="5" stroke-linecap="round" />
+    <!-- Display digital y manubrio ergonómico -->
+    <rect x="183" y="32" width="28" height="8" rx="4" fill="#0F172A" />
+    <rect x="191" y="28" width="12" height="5" rx="2" fill="#38BDF8" />
+    <circle cx="204" cy="48" r="4" fill="#FEF08A" />
+    <polygon points="208,46 266,36 266,62" fill="#BAE6FD" opacity="0.45" />
+  </svg>
+                <span class="transport-co2-pill eco">0 g CO₂</span>
+              </div>
+              <div class="transport-card-body">
+                <div class="transport-card-title-row">
+                  <h3 data-i18n="veh.scooter_title">Scooter eléctrico</h3>
+                  <span class="transport-card-sub" data-i18n="veh.scooter_sub">Ágil y sin esfuerzo</span>
+                </div>
+
+                <ul class="transport-card-metrics">
+                  <li>
+                    <span class="metric-name" data-i18n="veh.metric_time">Tiempo típico (5 km)</span>
+                    <strong class="metric-value" data-i18n="veh.scooter_time">16 min (ágil)</strong>
+                  </li>
+                  <li>
+                    <span class="metric-name" data-i18n="veh.metric_cost">Gasto por viaje</span>
+                    <strong class="metric-value" data-i18n="veh.scooter_cost">S/ 0.20 (carga)</strong>
+                  </li>
+                  <li>
+                    <span class="metric-name" data-i18n="veh.metric_reward">Recompensa</span>
+                    <strong class="metric-value text-accent" data-i18n="veh.scooter_reward">+14 pts por viaje</strong>
+                  </li>
+                </ul>
+
+                <p class="transport-card-desc" data-i18n="veh.scooter_desc">
+                  Ligero y fácil de plegar. Ideal para tramos medianos y para conectar con las estaciones de Metro.
+                </p>
+              </div>
+            </article>
+
+            <!-- 3. Bus / Metropolitano (Dibujo Animado) -->
+            <article class="transport-card">
+              <div class="transport-card-media media-sky-yellow">
+                <!-- Ilustración Cartoon: Bus / Metropolitano Alegre -->
+                <svg class="transport-cartoon-svg" viewBox="0 0 320 185" fill="none" aria-label="Ilustración estilizada de Bus Metropolitano">
+    <defs>
+      <linearGradient id="vBusSky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#FEF3C7" />
+        <stop offset="100%" stop-color="#FFFBEB" />
+      </linearGradient>
+      <linearGradient id="vBusBody" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#0284C7" />
+        <stop offset="65%" stop-color="#0369A1" />
+        <stop offset="100%" stop-color="#0F172A" />
+      </linearGradient>
+      <linearGradient id="vBusGlass" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#0F172A" />
+        <stop offset="100%" stop-color="#1E3A8A" />
+      </linearGradient>
+    </defs>
+    <rect width="320" height="185" fill="url(#vBusSky)" />
+    <!-- Estación BRT estilizada al fondo -->
+    <path d="M18 52 H148 L138 60 H18 Z" fill="#94A3B8" opacity="0.45" />
+    <rect x="34" y="60" width="6" height="88" fill="#CBD5E1" />
+    <rect x="112" y="60" width="6" height="88" fill="#CBD5E1" />
+    <!-- Corredor segregado exclusivo -->
+    <rect x="0" y="148" width="320" height="4" fill="#F59E0B" />
+    <rect x="0" y="152" width="320" height="33" fill="#334155" />
+    <line x1="18" y1="168" x2="302" y2="168" stroke="#FDE047" stroke-width="2.2" stroke-dasharray="20 14" stroke-linecap="round" />
+    <ellipse cx="162" cy="152" rx="116" ry="5.5" fill="#0F172A" opacity="0.38" />
+    <!-- Carrocería aerodinámica articulada BRT -->
+    <path d="M34 66 C34 59, 40 54, 48 54 H266 C276 54, 283 61, 286 72 L290 134 C290 139, 286 142, 281 142 H42 C37 142, 34 138, 34 133 V66 Z" fill="url(#vBusBody)" />
+    <!-- Fuelle articulado central -->
+    <rect x="142" y="55" width="14" height="86" fill="#1E293B" />
+    <line x1="146" y1="57" x2="146" y2="139" stroke="#475569" stroke-width="1.5" />
+    <line x1="152" y1="57" x2="152" y2="139" stroke="#475569" stroke-width="1.5" />
+    <!-- Franja inferior eco-ámbar -->
+    <rect x="34" y="116" width="255" height="12" fill="#F59E0B" />
+    <!-- Ventanales panorámicos con reflejos diagonales -->
+    <rect x="44" y="65" width="42" height="38" rx="5" fill="url(#vBusGlass)" />
+    <rect x="92" y="65" width="42" height="38" rx="5" fill="url(#vBusGlass)" />
+    <rect x="164" y="65" width="52" height="38" rx="5" fill="url(#vBusGlass)" />
+    <path d="M222 65 H274 L280 103 H222 V65 Z" fill="url(#vBusGlass)" />
+    <!-- Letrero LED frontal de ruta -->
+    <rect x="242" y="58" width="32" height="6" rx="3" fill="#0F172A" />
+    <line x1="246" y1="61" x2="270" y2="61" stroke="#4ADE80" stroke-width="2.2" stroke-linecap="round" />
+    <!-- Reflejos en vidrio -->
+    <line x1="52" y1="98" x2="72" y2="70" stroke="#BAE6FD" stroke-opacity="0.35" stroke-width="3" stroke-linecap="round" />
+    <line x1="174" y1="98" x2="194" y2="70" stroke="#BAE6FD" stroke-opacity="0.35" stroke-width="3" stroke-linecap="round" />
+    <!-- Ruedas dobles -->
+    <circle cx="84" cy="142" r="16" fill="#0F172A" />
+    <circle cx="84" cy="142" r="8" fill="#CBD5E1" />
+    <circle cx="236" cy="142" r="16" fill="#0F172A" />
+    <circle cx="236" cy="142" r="8" fill="#CBD5E1" />
+    <rect x="282" y="122" width="7" height="9" rx="2" fill="#FEF08A" />
+  </svg>
+                <span class="transport-co2-pill eco">-75% CO₂</span>
+              </div>
+              <div class="transport-card-body">
+                <div class="transport-card-title-row">
+                  <h3 data-i18n="veh.transit_title">Bus / Metropolitano</h3>
+                  <span class="transport-card-sub" data-i18n="veh.transit_sub">Carril exclusivo</span>
+                </div>
+
+                <ul class="transport-card-metrics">
+                  <li>
+                    <span class="metric-name" data-i18n="veh.metric_time">Tiempo típico (5 km)</span>
+                    <strong class="metric-value" data-i18n="veh.transit_time">20 min (segregado)</strong>
+                  </li>
+                  <li>
+                    <span class="metric-name" data-i18n="veh.metric_cost">Gasto por viaje</span>
+                    <strong class="metric-value" data-i18n="veh.transit_cost">S/ 3.20 (pasaje)</strong>
+                  </li>
+                  <li>
+                    <span class="metric-name" data-i18n="veh.metric_reward">Recompensa</span>
+                    <strong class="metric-value text-accent" data-i18n="veh.transit_reward">+10 pts por viaje</strong>
+                  </li>
+                </ul>
+
+                <p class="transport-card-desc" data-i18n="veh.transit_desc">
+                  Cruza distritos de norte a sur por corredores dedicados, liberando la ciudad de decenas de autos.
+                </p>
+              </div>
+            </article>
+
+            <!-- 4. Auto en Hora Punta (Dibujo Animado) -->
+            <article class="transport-card is-traffic">
+              <div class="transport-card-media media-sky-orange">
+                <!-- Ilustración Cartoon: Auto Atascado con Semáforo en Rojo y Nubes de Humo -->
+                <svg class="transport-cartoon-svg" viewBox="0 0 320 185" fill="none" aria-label="Ilustración estilizada de auto en hora punta">
+    <defs>
+      <linearGradient id="vCarSky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#FFEDD5" />
+        <stop offset="100%" stop-color="#F1F5F9" />
+      </linearGradient>
+      <linearGradient id="vCarBody" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#64748B" />
+        <stop offset="100%" stop-color="#334155" />
+      </linearGradient>
+    </defs>
+    <rect width="320" height="185" fill="url(#vCarSky)" />
+    <!-- Silueta de fila de autos delante en congestión -->
+    <path d="M214 114 L228 94 H278 L292 114 H306 V138 H206 V114 Z" fill="#94A3B8" opacity="0.55" />
+    <rect x="208" y="118" width="12" height="5" rx="2" fill="#EF4444" opacity="0.8" />
+    <!-- Pórtico semafórico urbano en rojo -->
+    <line x1="274" y1="22" x2="274" y2="148" stroke="#475569" stroke-width="4" />
+    <line x1="224" y1="28" x2="274" y2="28" stroke="#475569" stroke-width="4" stroke-linecap="round" />
+    <rect x="232" y="20" width="22" height="46" rx="6" fill="#1E293B" />
+    <circle cx="243" cy="31" r="6" fill="#EF4444" />
+    <circle cx="243" cy="31" r="11" fill="#EF4444" opacity="0.24" />
+    <circle cx="243" cy="43" r="5" fill="#475569" />
+    <circle cx="243" cy="55" r="5" fill="#475569" />
+    <!-- Calzada congestionada -->
+    <rect x="0" y="148" width="320" height="37" fill="#334155" />
+    <line x1="16" y1="167" x2="304" y2="167" stroke="#94A3B8" stroke-width="2" stroke-dasharray="16 14" />
+    <!-- Estelas de emisiones / humo -->
+    <ellipse cx="38" cy="128" rx="18" ry="11" fill="#94A3B8" opacity="0.45" />
+    <ellipse cx="24" cy="114" rx="14" ry="9" fill="#64748B" opacity="0.32" />
+    <ellipse cx="48" cy="110" rx="12" ry="8" fill="#94A3B8" opacity="0.3" />
+    <!-- Sedán estilizado principal -->
+    <ellipse cx="146" cy="150" rx="86" ry="5.5" fill="#0F172A" opacity="0.4" />
+    <path d="M56 114 L84 78 C89 72, 96 70, 105 70 H174 C184 70, 192 73, 199 81 L222 108 L244 113 C250 115, 254 120, 254 126 V139 C254 142, 251 144, 248 144 H54 C50 144, 48 141, 48 137 V122 C48 117, 51 114, 56 114 Z" fill="url(#vCarBody)" />
+    <!-- Ventanillas polarizadas -->
+    <path d="M90 78 H138 V106 H70 L90 78 Z" fill="#0F172A" />
+    <path d="M145 78 H178 C184 78, 189 80, 194 86 L210 106 H145 V78 Z" fill="#0F172A" />
+    <!-- Luces de freno traseras y faros -->
+    <rect x="48" y="118" width="12" height="7" rx="2.5" fill="#EF4444" />
+    <rect x="242" y="119" width="11" height="7" rx="2.5" fill="#FDE047" />
+    <!-- Ruedas de aleación -->
+    <circle cx="96" cy="142" r="18" fill="#0F172A" />
+    <circle cx="96" cy="142" r="10" fill="#CBD5E1" />
+    <circle cx="204" cy="142" r="18" fill="#0F172A" />
+    <circle cx="204" cy="142" r="10" fill="#CBD5E1" />
+  </svg>
+                <span class="transport-co2-pill warn">152 g CO₂ / km</span>
+              </div>
+              <div class="transport-card-body">
+                <div class="transport-card-title-row">
+                  <h3 data-i18n="veh.car_title">Auto en tráfico</h3>
+                  <span class="transport-card-sub text-warn" data-i18n="veh.car_sub">Lento en hora punta</span>
+                </div>
+
+                <ul class="transport-card-metrics">
+                  <li>
+                    <span class="metric-name" data-i18n="veh.metric_time">Tiempo típico (5 km)</span>
+                    <strong class="metric-value text-warn" data-i18n="veh.car_time">35+ min (tráfico)</strong>
+                  </li>
+                  <li>
+                    <span class="metric-name" data-i18n="veh.metric_cost">Gasto por viaje</span>
+                    <strong class="metric-value text-warn" data-i18n="veh.car_cost">S/ 18+ (gasolina)</strong>
+                  </li>
+                  <li>
+                    <span class="metric-name" data-i18n="veh.metric_reward">Recompensa</span>
+                    <strong class="metric-value" data-i18n="veh.car_reward">0 pts (estrés)</strong>
+                  </li>
+                </ul>
+
+                <p class="transport-card-desc" data-i18n="veh.car_desc">
+                  Avanza a solo 12 km/h atascado en semáforos. El 85% circula con una sola persona a bordo.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 3. CALCULADORA DE IMPACTO ANUAL ==================== -->
+      <section id="alquimia" class="section">
+        <div class="container">
+          <div class="section-header" data-scroll-reveal>
+            <div>
+              <span class="section-eyebrow" data-i18n="calc.eyebrow">Tu súper poder ambiental</span>
+              <h2 data-i18n="calc.title">¡Mira todo lo que logras en un año!</h2>
+            </div>
+            <p class="section-subtitle" data-i18n="calc.subtitle">
+              Mueve las barritas según tus viajes por semana y descubre cuántos árboles y horas libres ganas al año.
+            </p>
+          </div>
+
+          <div class="alchemy-workbench" data-scroll-reveal>
+            <div class="alchemy-controls-panel">
+              <div class="alchemy-preset-row" role="group" aria-label="Perfiles de viaje">
+                <button type="button" class="alchemy-preset" data-trips="4" data-km="3.5">
+                  <span data-i18n="calc.preset_student">Estudiante (4 viajes/sem)</span>
+                </button>
+                <button type="button" class="alchemy-preset is-active" data-trips="6" data-km="4.2">
+                  <span data-i18n="calc.preset_office">Oficina (6 viajes/sem)</span>
+                </button>
+                <button type="button" class="alchemy-preset" data-trips="10" data-km="6.5">
+                  <span data-i18n="calc.preset_cyclist">Súper Ciclista (10 viajes/sem)</span>
+                </button>
+              </div>
+
+              <div class="alchemy-sliders">
+                <div class="slider-group">
+                  <div class="distance-label-row">
+                    <label for="alchemy-trips-range" data-i18n="calc.label_trips">Viajes sin auto por semana</label>
+                    <output id="alchemy-trips-out">6 viajes/sem</output>
+                  </div>
+                  <input
+                    type="range"
+                    id="alchemy-trips-range"
+                    min="1"
+                    max="14"
+                    step="1"
+                    value="6"
+                  />
+                </div>
+
+                <div class="slider-group">
+                  <div class="distance-label-row">
+                    <label for="alchemy-km-range" data-i18n="calc.label_dist">Distancia de cada viaje</label>
+                    <output id="alchemy-km-out">4.2 km</output>
+                  </div>
+                  <input
+                    type="range"
+                    id="alchemy-km-range"
+                    min="1.0"
+                    max="18.0"
+                    step="0.2"
+                    value="4.2"
+                  />
+                </div>
+              </div>
+
+              <div class="alchemy-summary-card">
+                <div class="alchemy-summary-col">
+                  <span data-i18n="calc.avoided_label">Humo que evitas al año</span>
+                  <div>
+                    <strong id="alchemy-annual-kg" class="text-eco-bright">199.2</strong>
+                    <strong class="text-eco-bright"> kg CO₂</strong>
+                  </div>
+                </div>
+                <div class="alchemy-summary-col">
+                  <span data-i18n="calc.fuel_label">Gasolina ahorrada</span>
+                  <strong id="alchemy-fuel-liters">85 L / año</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="alchemy-cards-grid">
+              <article class="impact-stat-card card-tint-green">
+                <div class="impact-card-head">
+                  <span class="impact-stat-label" data-i18n="calc.card_pet_label">Botellas recicladas equiv.</span>
+                  <span class="impact-icon-chip">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path d="M19.5 4.5C13 4.5 7.5 7.8 5.5 14.2C5 15.9 5 17.7 5.5 19.5C7.3 20 9.1 20 10.8 19.5C17.2 17.5 20.5 12 19.5 4.5Z" fill="#8CE52E" stroke="#1E241E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M4.5 19.5C8.5 15.5 12 12 15.5 9.5" stroke="#1E241E" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                  </span>
+                </div>
+                <strong class="cutout-figure" id="eq-pet-bottles">2,406 botellas</strong>
+                <p data-i18n="calc.card_pet_desc">
+                  Equivale a reciclar miles de botellas plásticas para que no contaminen nuestro planeta.
+                </p>
+              </article>
+
+              <article class="impact-stat-card card-tint-yellow">
+                <div class="impact-card-head">
+                  <span class="impact-stat-label" data-i18n="calc.card_trees_label">Árboles felices en Lima</span>
+                  <span class="impact-icon-chip">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path d="M12 3.5C8.686 3.5 6 6.186 6 9.5C6 12.433 8.106 14.873 10.885 15.394L12 15.5L13.115 15.394C15.894 14.873 18 12.433 18 9.5C18 6.186 15.314 3.5 12 3.5Z" fill="#8CE52E" stroke="#1E241E" stroke-width="2"/>
+                      <path d="M12 11.5V20.5M9 20.5H15" stroke="#1E241E" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                  </span>
+                </div>
+                <strong class="cutout-figure" id="eq-trees">9.5 árboles</strong>
+                <p data-i18n="calc.card_trees_desc">
+                  Trabajando todo un año para limpiar el aire que respiramos en nuestros parques.
+                </p>
+              </article>
+
+              <article class="impact-stat-card card-tint-blue">
+                <div class="impact-card-head">
+                  <span class="impact-stat-label" data-i18n="calc.card_time_label">Horas libres para ti</span>
+                  <span class="impact-icon-chip">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <circle cx="12" cy="12" r="8.5" fill="#74C7EC" stroke="#1E241E" stroke-width="2"/>
+                      <path d="M12 7.5V12L15.2 14" stroke="#1E241E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                </div>
+                <strong class="cutout-figure" id="alchemy-traffic-hours">42 h / año</strong>
+                <p data-i18n="calc.card_time_desc">
+                  Tiempo que ganas fuera del tráfico para descansar, estudiar o compartir con amigos.
+                </p>
+              </article>
+
+              <article class="impact-stat-card card-tint-orange">
+                <div class="impact-card-head">
+                  <span class="impact-stat-label" data-i18n="calc.card_reward_label">Puntos para premios</span>
+                  <span class="impact-icon-chip">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path d="M3.5 7.5C3.5 6.395 4.395 5.5 5.5 5.5H18.5C19.605 5.5 20.5 6.395 20.5 7.5V9.8C19.1 10.1 18.2 11 18.2 12C18.2 13 19.1 13.9 20.5 14.2V16.5C20.5 17.605 19.605 18.5 18.5 18.5H5.5C4.395 18.5 3.5 17.605 3.5 16.5V14.2C4.9 13.9 5.8 13 5.8 12C5.8 11 4.9 10.1 3.5 9.8V7.5Z" fill="#FFD24C" stroke="#1E241E" stroke-width="2" stroke-linejoin="round"/>
+                      <path d="M10 8.5V15.5" stroke="#1E241E" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 2.5"/>
+                    </svg>
+                  </span>
+                </div>
+                <strong class="cutout-figure text-eco" id="eq-green-points">+4,678 pts</strong>
+                <p data-i18n="calc.card_reward_desc">
+                  Puntos listos para cambiar por tus premios favoritos dentro de la Web App.
+                </p>
+              </article>
+            </div>
           </div>
         </div>
       </section>
@@ -296,18 +888,26 @@
     <footer class="footer" role="contentinfo">
       <div class="container footer-inner">
         <div class="footer-brand">
-          <img class="brand-logo" src="./media/logo-ecocommute.png" alt="" width="24" height="28" />
-          <span class="footer-copy">
-            © 2026 EcoCommute Lima. Movilidad sostenible, saludable y premiada.
+          <span class="brand-cartoon-badge sm">
+            <img
+              class="brand-logo-sm"
+              src="./media/logo-ecocommute.png"
+              alt=""
+              width="20"
+              height="24"
+            />
           </span>
+          <strong>EcoCommute Lima</strong>
+          <span>© 2026 EcoCommute · Ciudad Limpia y Feliz (ODS 11.2)</span>
         </div>
-        <div class="footer-links">
-          <a href="como-funciona.html">¿Cómo funciona?</a>
-          <a href="vehiculos.html">Comparativa</a>
-          <a href="impacto.html">Calculadora</a>
-          <a href="terms.html">Términos y Condiciones</a>
-          <a href="./app/#/login">Iniciar Sesión</a>
-        </div>
+        <nav class="footer-nav" aria-label="Enlaces secundarios">
+          <a href="./app/#/dashboard">¡Abrir Web App!</a>
+          <a href="#como-funciona" data-i18n="nav.how">¿Cómo funciona?</a>
+          <a href="#inicio" data-i18n="nav.routes">Mapa de Lima</a>
+          <a href="#vehiculos" data-i18n="nav.vehicles">Transporte</a>
+          <a href="#alquimia" data-i18n="nav.impact">Calculadora</a>
+          <a href="./terms.html" data-i18n="nav.terms">Privacidad</a>
+        </nav>
       </div>
     </footer>
 
@@ -316,6 +916,6 @@
       crossorigin=""
       defer
     ></script>
-    <script src="./i18n.js?v=20261106e" defer></script>
+    <script src="./i18n.js?v=20261106b" defer></script>
   </body>
 </html>

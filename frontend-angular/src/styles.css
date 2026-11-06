@@ -4290,3 +4290,654 @@ label,
 .podium-pillar-score strong {
   font-weight: 600 !important;
 }
+
+
+/* ==========================================================================
+   STYLIZED ARCHITECTURAL ILLUSTRATION THEME (LESS CARTOON · LARGER TEXT · HIGH SECTION CONTRAST)
+   ========================================================================== */
+
+:root,
+[data-theme="light"] {
+  --bg-page: #EFF4F1 !important;
+  --bg-card: #FFFFFF !important;
+  --bg-soft: #E5EEE8 !important;
+  --bg-elevated: #DAE6DF !important;
+  --text-main: #0D1A13 !important;
+  --text-muted: #33473C !important;
+  --text-subtle: #556B5E !important;
+  --border: #C9D8CF !important;
+  --border-strong: #AEBFB5 !important;
+  --emerald: #15803D !important;
+  --emerald-hover: #166534 !important;
+  --shadow-sm: 0 2px 8px rgba(13, 26, 19, 0.06) !important;
+  --shadow-card: 0 12px 32px -10px rgba(13, 26, 19, 0.09), 0 2px 6px rgba(13, 26, 19, 0.04) !important;
+}
+
+[data-theme="dark"] {
+  --bg-page: #0B120E !important;
+  --bg-card: #131D17 !important;
+  --bg-soft: #19261E !important;
+  --bg-elevated: #213128 !important;
+  --text-main: #F1F7F3 !important;
+  --text-muted: #BDD0C4 !important;
+  --text-subtle: #88A091 !important;
+  --border: #26382E !important;
+  --border-strong: #354C3F !important;
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.35) !important;
+  --shadow-card: 0 16px 36px -10px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Base Typography Scaled Up & De-Cartoonized */
+html,
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  font-size: 16.5px !important;
+  line-height: 1.6 !important;
+  color: var(--text-main) !important;
+  background-color: var(--bg-page) !important;
+}
+
+h1, h2, h3, h4,
+.page-title,
+.cartoon-banner-title,
+.section-block-title,
+.ribbon-val,
+.kpi-number,
+.btn-start-route,
+.btn-emerald,
+.btn-outline {
+  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif !important;
+  letter-spacing: -0.025em !important;
+}
+
+/* Remove cartoon doodles, comic borders & striped road trims */
+.eco-card::after,
+.route-vertical-col::after,
+.podium-pillar::after,
+.eco-stat-ribbon::before,
+.planner-unified-stage::before,
+.navbar-road-trim {
+  display: none !important;
+  content: none !important;
+}
+
+.advisor-callout,
+.level-vertical-tower,
+.route-vertical-col.recommended,
+.podium-pillar.pillar-gold {
+  outline: none !important;
+}
+
+/* Clean Frosted Architectural Navbar (High contrast against dark forest Hero) */
+.eco-navbar {
+  background: rgba(255, 255, 255, 0.94) !important;
+  backdrop-filter: blur(16px) !important;
+  border-bottom: 1px solid var(--border) !important;
+  box-shadow: 0 4px 18px rgba(13, 26, 19, 0.05) !important;
+}
+
+[data-theme="dark"] .eco-navbar {
+  background: rgba(16, 25, 20, 0.94) !important;
+}
+
+.eco-navbar .brand-text strong {
+  color: var(--text-main) !important;
+  font-size: 1.18rem !important;
+  font-weight: 800 !important;
+}
+
+.eco-navbar .brand-sub {
+  color: var(--text-muted) !important;
+  font-size: 0.78rem !important;
+}
+
+.eco-nav-links {
+  background: var(--bg-soft) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: none !important;
+  padding: 0.3rem !important;
+}
+
+.eco-nav-links a {
+  color: var(--text-muted) !important;
+  font-size: 0.92rem !important;
+  font-weight: 600 !important;
+  padding: 0.48rem 0.95rem !important;
+}
+
+.eco-nav-links a:hover {
+  color: var(--text-main) !important;
+  background: var(--bg-card) !important;
+}
+
+.eco-nav-links a.active {
+  background: #14532D !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 3px 10px rgba(20, 83, 45, 0.25) !important;
+}
+
+[data-theme="dark"] .eco-nav-links a.active {
+  background: #22C55E !important;
+  color: #07170D !important;
+}
+
+.landing-back-pill,
+.util-btn,
+.user-pill {
+  background: var(--bg-soft) !important;
+  color: var(--text-main) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: none !important;
+}
+
+.brand-logo-img {
+  filter: none !important;
+}
+
+/* Main Workspace Spacing */
+.eco-main {
+  max-width: 1340px !important;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem !important;
+}
+
+.page-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2.35rem !important;
+}
+
+/* Clear Section Headers & Page Headers (Much Larger & High-Contrast) */
+.section-header-row {
+  padding-bottom: 1.25rem !important;
+  border-bottom: 2px solid var(--border) !important;
+  margin-bottom: 0.25rem !important;
+}
+
+.page-title {
+  font-size: clamp(2rem, 3vw, 2.55rem) !important;
+  font-weight: 800 !important;
+  line-height: 1.15 !important;
+  color: var(--text-main) !important;
+  margin-top: 0.35rem !important;
+}
+
+.page-subtitle {
+  font-size: 1.08rem !important;
+  font-weight: 500 !important;
+  color: var(--text-muted) !important;
+  max-width: 72ch;
+  margin-top: 0.45rem !important;
+}
+
+.dash-section-block {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  padding-top: 0.5rem;
+}
+
+.section-divider-head {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1.5px solid var(--border);
+}
+
+.section-step-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: #14532D;
+  color: #FFFFFF;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.95rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(20, 83, 45, 0.22);
+}
+
+[data-theme="dark"] .section-step-badge {
+  background: #22C55E;
+  color: #07170D;
+}
+
+.section-block-title {
+  font-size: clamp(1.45rem, 2.2vw, 1.8rem) !important;
+  font-weight: 800 !important;
+  color: var(--text-main) !important;
+  line-height: 1.2 !important;
+  margin: 0 !important;
+}
+
+.section-block-sub {
+  font-size: 1rem !important;
+  color: var(--text-muted) !important;
+  margin: 0.2rem 0 0 !important;
+}
+
+/* Section 1: Deep Architectural Forest Hero Banner */
+.cartoon-hero-banner {
+  background: linear-gradient(132deg, #0E341E 0%, #164E2E 52%, #0B2717 100%) !important;
+  border: 1px solid rgba(134, 239, 172, 0.24) !important;
+  border-radius: 24px !important;
+  padding: 2.35rem 2.5rem !important;
+  box-shadow: 0 20px 44px -14px rgba(10, 35, 20, 0.38) !important;
+  display: grid;
+  grid-template-columns: 1.15fr 0.95fr;
+  align-items: center;
+  gap: 2rem;
+}
+
+.hero-eyebrow-pill {
+  background: rgba(255, 255, 255, 0.12) !important;
+  color: #BBF7D0 !important;
+  border: 1px solid rgba(187, 247, 208, 0.28) !important;
+  box-shadow: none !important;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+}
+
+.cartoon-banner-title {
+  font-size: clamp(2.1rem, 3.2vw, 2.75rem) !important;
+  font-weight: 800 !important;
+  line-height: 1.12 !important;
+  color: #FFFFFF !important;
+  text-shadow: none !important;
+  margin: 0.65rem 0 0.75rem !important;
+}
+
+.cartoon-banner-sub {
+  font-size: 1.08rem !important;
+  font-weight: 400 !important;
+  line-height: 1.6 !important;
+  color: rgba(240, 253, 244, 0.92) !important;
+  text-shadow: none !important;
+  max-width: 56ch;
+}
+
+.quick-route-launcher {
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 12px 28px rgba(6, 22, 12, 0.28) !important;
+  padding: 0.65rem 0.7rem 0.65rem 1.15rem !important;
+  max-width: 650px !important;
+}
+
+.quick-route-select {
+  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+}
+
+.btn-start-route {
+  background: #FACC15 !important;
+  color: #0F172A !important;
+  border: none !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 12px rgba(250, 204, 21, 0.3) !important;
+  font-size: 1rem !important;
+  font-weight: 700 !important;
+  padding: 0.8rem 1.45rem !important;
+}
+
+.btn-start-route:hover {
+  background: #FDE047 !important;
+  transform: translateY(-1px);
+}
+
+.hero-steps-guide {
+  background: rgba(9, 27, 16, 0.42) !important;
+  border: 1px solid rgba(187, 247, 208, 0.2) !important;
+  padding: 0.45rem 0.95rem !important;
+  margin-top: 1rem !important;
+}
+
+.step-guide-item {
+  font-size: 0.88rem !important;
+  font-weight: 600 !important;
+}
+
+.dashboard-cartoon-svg {
+  width: 100%;
+  max-width: 470px;
+  height: auto;
+  display: block;
+  margin-left: auto;
+}
+
+/* Section 2: Clean Architectural KPI Deck */
+.eco-stat-ribbon {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 20px !important;
+  padding: 1.5rem 1.75rem !important;
+  box-shadow: var(--shadow-card) !important;
+}
+
+.ribbon-metric {
+  padding-top: 0.65rem;
+  border-top: 3px solid transparent;
+}
+
+.ribbon-metric.accent-green { border-top-color: #16A34A; }
+.ribbon-metric.accent-amber { border-top-color: #D97706; }
+.ribbon-metric.accent-sky   { border-top-color: #0284C7; }
+.ribbon-metric.accent-coral { border-top-color: #EA580C; }
+
+.ribbon-label {
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted) !important;
+}
+
+.ribbon-val {
+  font-size: clamp(2rem, 2.7vw, 2.4rem) !important;
+  font-weight: 800 !important;
+  line-height: 1.1 !important;
+  color: var(--text-main) !important;
+  font-variant-numeric: tabular-nums;
+}
+
+.ribbon-val small {
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  color: var(--text-muted) !important;
+}
+
+.ribbon-sub,
+.ribbon-link {
+  font-size: 0.94rem !important;
+  font-weight: 600 !important;
+}
+
+/* All Cards, Panels & Buttons: Clean Architectural Lines, Larger Text, Clear Contrast */
+.eco-card,
+.planner-unified-stage,
+.route-vertical-col,
+.trip-feed-item,
+.badge-row-strip,
+.podium-pillar,
+.ticket-voucher-card {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 18px !important;
+  box-shadow: var(--shadow-card) !important;
+}
+
+.route-vertical-col.recommended {
+  border: 2px solid #16A34A !important;
+  background: linear-gradient(180deg, rgba(22, 163, 74, 0.04) 0%, var(--bg-card) 100%) !important;
+}
+
+/* Contrast Tinted Surface for Sidebar Callout & Collective Timeline */
+.advisor-callout {
+  background: linear-gradient(145deg, #E6F4EC 0%, #F2F9F5 100%) !important;
+  border: 1px solid #A7D7B9 !important;
+  border-left: 5px solid #15803D !important;
+  border-radius: 18px !important;
+  padding: 1.5rem !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+[data-theme="dark"] .advisor-callout {
+  background: linear-gradient(145deg, #132A1E 0%, #16241C 100%) !important;
+  border-color: #27533B !important;
+  border-left-color: #22C55E !important;
+}
+
+.vertical-timeline-section {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 18px !important;
+  padding: 1.5rem 1.5rem 1.5rem 2.1rem !important;
+  box-shadow: var(--shadow-card) !important;
+}
+
+.vertical-timeline-section::before,
+.vertical-route-stops::before {
+  width: 3px !important;
+  left: 16px !important;
+  top: 22px !important;
+  bottom: 22px !important;
+  background: linear-gradient(180deg, #16A34A 0%, #0284C7 100%) !important;
+  border: none !important;
+}
+
+/* Progress Bars: Sleek Modern Pill Tracks Instead of Cartoon Striped Roads */
+.mode-progress-track,
+.v-medal-bar,
+.milestone-progress-track {
+  height: 9px !important;
+  background: var(--bg-soft) !important;
+  border: none !important;
+  border-radius: 999px !important;
+  overflow: hidden;
+}
+
+.mode-progress-fill,
+.v-medal-fill,
+.milestone-progress-fill {
+  background: linear-gradient(90deg, #15803D 0%, #22C55E 100%) !important;
+  border-radius: 999px !important;
+}
+
+/* Larger Headings & Text Inside Cards Across All Tabs */
+.card-head-row h2,
+.feed-header-inline h2,
+.level-vertical-tower h2 {
+  font-size: 1.5rem !important;
+  font-weight: 800 !important;
+  color: var(--text-main) !important;
+}
+
+.card-sub,
+.feed-header-inline span {
+  font-size: 0.98rem !important;
+  color: var(--text-muted) !important;
+}
+
+.split-header-inline h3,
+.timeline-head h3,
+.advisor-callout-top h3,
+.route-col-top h3,
+.ticket-main h3,
+.badge-strip-head h3,
+.podium-pillar h3 {
+  font-size: 1.22rem !important;
+  font-weight: 700 !important;
+  color: var(--text-main) !important;
+}
+
+.advisor-text,
+.route-summary,
+.badge-strip-body p,
+.ticket-main p,
+.trip-feed-meta,
+.v-stat-body span {
+  font-size: 0.98rem !important;
+  line-height: 1.55 !important;
+  color: var(--text-muted) !important;
+}
+
+.trip-feed-route strong,
+.v-stat-body strong,
+.mode-name,
+.route-vertical-stats li strong,
+.tower-vertical-stats li strong {
+  font-size: 1.06rem !important;
+  font-weight: 700 !important;
+  color: var(--text-main) !important;
+}
+
+/* Clean Tactile Buttons & Badges */
+.btn-emerald {
+  background: #15803D !important;
+  color: #FFFFFF !important;
+  border: 1px solid #14532D !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 12px rgba(21, 128, 61, 0.22) !important;
+  font-size: 0.98rem !important;
+  font-weight: 700 !important;
+  padding: 0.72rem 1.25rem !important;
+}
+
+.btn-emerald:hover:not(:disabled) {
+  background: #166534 !important;
+  box-shadow: 0 6px 16px rgba(21, 128, 61, 0.3) !important;
+}
+
+.btn-outline {
+  background: var(--bg-card) !important;
+  color: var(--text-main) !important;
+  border: 1.5px solid var(--border-strong) !important;
+  border-radius: 12px !important;
+  box-shadow: none !important;
+  font-size: 0.96rem !important;
+  font-weight: 600 !important;
+}
+
+.eyebrow-tag,
+.badge-pill,
+.pts-pill,
+.pts-cost-pill {
+  border-width: 1px !important;
+  box-shadow: none !important;
+  font-size: 0.84rem !important;
+  font-weight: 700 !important;
+}
+
+.ribbon-icon app-icon svg,
+.trip-feed-icon app-icon svg,
+.reward-icon-badge app-icon svg,
+.badge-icon-medallion app-icon svg,
+.route-mode-avatar app-icon svg,
+.v-stat-dot app-icon svg {
+  filter: none !important;
+}
+
+@media (max-width: 980px) {
+  .cartoon-hero-banner {
+    grid-template-columns: 1fr !important;
+    padding: 1.75rem !important;
+  }
+  .dashboard-cartoon-svg {
+    margin: 0 auto;
+  }
+}
+
+
+/* ==========================================================================
+   FULL-VIEWPORT (100% SCREEN) SECTIONS — CLEAN, SPACIOUS, ZERO OVERLOAD
+   ========================================================================== */
+.eco-main {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.page-section {
+  min-height: calc(100svh - 68px);
+  justify-content: center;
+  padding: 2.5rem 0;
+  gap: 0 !important;
+}
+
+/* Dashboard: 3 Full-Screen Stages (Hero / KPIs / Analytics) */
+.dashboard-page {
+  padding: 0 !important;
+}
+
+.dash-fullscreen-stage,
+.dash-section-block {
+  min-height: calc(100svh - 68px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3rem 0 !important;
+  gap: 1.85rem !important;
+  border-bottom: 1px solid var(--border);
+}
+
+.dash-section-block:last-child {
+  border-bottom: none;
+}
+
+.cartoon-hero-banner {
+  min-height: min(620px, calc(100svh - 140px));
+  padding: 3rem 3.25rem !important;
+}
+
+.eco-stat-ribbon {
+  padding: 2.5rem 2.25rem !important;
+}
+
+.ribbon-metric {
+  padding: 1rem 0.5rem !important;
+}
+
+/* Routes Planner: Stage 1 (Header + Map) = 100% screen, Stage 2 (3 Route Comparison Cards) = 100% screen */
+app-routes-planner .planner-unified-stage {
+  min-height: min(560px, calc(100svh - 230px));
+  margin-bottom: 3rem;
+}
+
+app-routes-planner .routes-vertical-columns {
+  min-height: calc(100svh - 90px);
+  align-content: center;
+  padding: 3rem 0;
+  border-top: 1px solid var(--border);
+}
+
+/* Leaderboard: Stage 1 (Header + Podium) = 100% screen, Stage 2 (District Table) = 100% screen */
+app-leaderboard .podium-open-stage {
+  min-height: calc(100svh - 240px);
+  align-items: center;
+  padding: 2rem 0 3.5rem;
+}
+
+app-leaderboard .leaderboard-list-section {
+  min-height: calc(100svh - 90px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3rem 0;
+  border-top: 1px solid var(--border);
+}
+
+/* Rewards: Stage 1 (Voucher Catalog) = 100% screen, Stage 2 (Challenges + Redemptions) = 100% screen */
+app-rewards .rewards-tickets-grid {
+  min-height: calc(100svh - 240px);
+  align-content: center;
+  padding: 1.5rem 0 3.5rem;
+}
+
+app-rewards .rewards-bottom-split {
+  min-height: calc(100svh - 90px);
+  align-items: center;
+  padding: 3rem 0;
+  border-top: 1px solid var(--border);
+}
+
+@media (max-width: 900px) {
+  .dash-fullscreen-stage,
+  .dash-section-block,
+  app-routes-planner .routes-vertical-columns,
+  app-leaderboard .podium-open-stage,
+  app-leaderboard .leaderboard-list-section,
+  app-rewards .rewards-tickets-grid,
+  app-rewards .rewards-bottom-split {
+    min-height: auto;
+    padding: 2.25rem 0 !important;
+  }
+  .cartoon-hero-banner {
+    min-height: auto;
+    padding: 1.85rem !important;
+  }
+}

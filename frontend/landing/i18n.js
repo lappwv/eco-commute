@@ -130,7 +130,7 @@ const translations = {
     "nav.impact": "Calculadora de Ahorro",
     "nav.terms": "Términos y Privacidad",
 
-    "hero.title": "PEDALEA, EXPLORA, <em>CUIDA TU CIUDAD</em>",
+    "hero.title": "Pedalea, explora y <em>transforma tu ciudad</em>",
     "hero.lead":
       "Planifica tu ruta en bicicleta, scooter o a pie, compara tiempos frente al tráfico vehicular y transforma cada kilómetro sin humo en ahorro económico, salud y recompensas.",
     "hero.btn_map": "Probar rutas en el mapa",
@@ -572,12 +572,9 @@ function setupThemeSwitcher() {
 }
 
 function setupScrollAnimations() {
-  document.documentElement.classList.add("js-reveal-ready");
   const elements = document.querySelectorAll("[data-scroll-reveal]");
   if (!("IntersectionObserver" in window)) {
-    elements.forEach((el) => {
-      el.classList.add("is-revealed", "is-inview");
-    });
+    elements.forEach((el) => el.classList.add("is-revealed"));
     return;
   }
 
@@ -585,7 +582,7 @@ function setupScrollAnimations() {
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add("is-revealed", "is-inview");
+          entry.target.classList.add("is-revealed");
           observer.unobserve(entry.target);
         }
       });
@@ -625,35 +622,15 @@ function setupSimulator() {
       sessionTripsCount += 1;
       updateSessionFloraBanner();
 
-      // Animación elástica en el contador de aire limpio
-      const sessionEl = document.getElementById("session-recycled-co2");
-      if (sessionEl) {
-        sessionEl.textContent = `${sessionRecycledGrams.toLocaleString()} g`;
-        sessionEl.style.transform = "scale(1.22)";
-        sessionEl.style.transition = "transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1)";
-        setTimeout(() => {
-          sessionEl.style.transform = "scale(1)";
-        }, 300);
-      }
-
-      // Animación de botón y feedback de éxito
-      recycleBtn.style.transform = "scale(0.95)";
-      setTimeout(() => {
-        recycleBtn.style.transform = "";
-      }, 150);
-
       const labelSpan = recycleBtn.querySelector("[data-i18n='sim.btn_recycle_trip']");
       if (labelSpan) {
         const isEn = currentLang === "en_US";
         labelSpan.textContent = isEn
-          ? `✓ Route logged (+${earnedPts} pts)`
-          : `✓ ¡Ruta sumada! (+${earnedPts} pts)`;
-        recycleBtn.classList.add("is-logged");
-
+          ? `Route logged (+${earnedPts} pts)`
+          : `Ruta registrada (+${earnedPts} pts)`;
         setTimeout(() => {
           const dict = translations[currentLang] || translations.es_419;
-          labelSpan.textContent = dict["sim.btn_recycle_trip"] || "¡Sumar ruta!";
-          recycleBtn.classList.remove("is-logged");
+          labelSpan.textContent = dict["sim.btn_recycle_trip"];
         }, 2200);
       }
     });
@@ -697,26 +674,7 @@ function setupAlchemyLab() {
   renderAlchemyLab();
 }
 
-function setupBrandLogoNavigation() {
-  const brandLogo = document.getElementById("nav-brand-logo");
-  if (!brandLogo) return;
-
-  brandLogo.addEventListener("click", (e) => {
-    const path = window.location.pathname;
-    const isHome =
-      path.endsWith("index.html") ||
-      path.endsWith("/") ||
-      path.endsWith("/landing") ||
-      path.endsWith("/landing/");
-    if (isHome) {
-      e.preventDefault();
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  });
-}
-
 document.addEventListener("DOMContentLoaded", () => {
-  setupBrandLogoNavigation();
   setupLimaHeroMap();
   setupThemeSwitcher();
   setupScrollAnimations();

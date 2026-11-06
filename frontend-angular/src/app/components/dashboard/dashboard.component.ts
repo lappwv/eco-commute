@@ -1,935 +1,454 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
 import { ApiService } from '../../services/api.service';
 import { I18nService } from '../../services/i18n.service';
 import { AiRecommendation, CommunityImpact, DashboardSummary } from '../../models/api.models';
 import { EcoIconComponent } from '../icon/eco-icon.component';
 
+interface QuickCorridorOption {
+  index: number;
+  origin: string;
+  destination: string;
+  distanceLabel: string;
+  timeLabel: string;
+}
+
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, RouterModule, EcoIconComponent],
+  imports: [CommonModule, FormsModule, RouterModule, EcoIconComponent],
   template: `
-    <div class="dash-container" *ngIf="summary as s">
-      <!-- ==================== 1. HERO EDITORIAL HEADER ==================== -->
-      <header class="dash-hero-header">
-        <div class="dash-hero-inner">
-          <div class="dash-hero-copy">
-            <div class="dash-eyebrow-row">
-              <span class="dash-status-pill">
-                <span class="dash-pulse-dot" aria-hidden="true"></span>
-                <span>En Línea · Nivel {{ s.currentLevel }}</span>
+    <section class="page-section dashboard-page" *ngIf="summary as s">
+      <!-- ==================== SECCIÓN 1: HERO PRINCIPAL DE RUTAS ==================== -->
+      <div class="dash-fullscreen-stage"><div class="cartoon-hero-banner">
+        <div class="cartoon-banner-copy">
+          <span class="eyebrow-tag hero-eyebrow-pill">
+            <app-icon name="leaf" [size]="15"></app-icon>
+            <span>Hola, {{ s.fullName }} · Nivel {{ s.currentLevel }}</span>
+          </span>
+          <h1 class="cartoon-banner-title">Pedalea, ahorra y transforma Lima</h1>
+          <p class="cartoon-banner-sub">
+            Planifica tus recorridos por ciclovías segregadas, evita la congestión vehicular y convierte cada kilómetro limpio en beneficios reales.
+          </p>
+
+          <!-- Buscador Rápido de Origen / Destino con Acción Principal "Iniciar ruta" -->
+          <div class="quick-route-launcher" role="region" aria-label="Planificador rápido de ruta">
+            <div class="quick-route-field">
+              <span class="quick-route-label">
+                <app-icon name="pin" [size]="14"></app-icon>
+                <span>Corredor rápido (Origen → Destino)</span>
               </span>
-              <span class="dash-tag-subtle">Lima Metropolitana</span>
-            </div>
-
-            <h1 class="dash-title">Hola, {{ s.fullName }}</h1>
-            <p class="dash-subtitle">
-              {{ i18n.t('dash.subtitle') || 'Tu panel de telemetría de movilidad sostenible, impacto ambiental y beneficios reales en Lima.' }}
-            </p>
-          </div>
-
-          <!-- Acciones Rápidas con Física Táctil -->
-          <div class="dash-hero-actions" aria-label="Acciones prioritarias">
-            <a routerLink="/routes" class="dash-action-btn primary" title="Planificar ruta multimodal segura">
-              <app-icon name="route" [size]="16"></app-icon>
-              <span>Planificar ruta</span>
-            </a>
-            <a routerLink="/trips" class="dash-action-btn secondary" title="Registrar nuevo viaje">
-              <app-icon name="plus" [size]="16"></app-icon>
-              <span>Anotar viaje</span>
-            </a>
-            <a routerLink="/rewards" class="dash-action-btn subtle" title="Canjear Puntos Verdes">
-              <app-icon name="ticket" [size]="16"></app-icon>
-              <span>Canjear premios</span>
-            </a>
-          </div>
-        </div>
-      </header>
-
-      <!-- ==================== 2. GRID DE 4 KPIS CLAVE ==================== -->
-      <section class="dash-kpi-grid" aria-label="Métricas de impacto personal">
-        <!-- CO2 Evitado -->
-        <article class="dash-kpi-card">
-          <div class="kpi-head">
-            <span class="kpi-icon-wrap tint-emerald">
-              <app-icon name="leaf" [size]="18"></app-icon>
-            </span>
-            <span class="kpi-badge emerald">Huella Neta</span>
-          </div>
-          <div class="kpi-body">
-            <span class="kpi-label">{{ i18n.t('dash.co2Saved') || 'CO₂ evitado acumulado' }}</span>
-            <div class="kpi-value-row">
-              <strong class="kpi-val">{{ s.totalCo2SavedKg | number: '1.2-2' }}</strong>
-              <span class="kpi-unit">kg CO₂</span>
-            </div>
-            <p class="kpi-context">
-              ≈ <strong>{{ s.treesEquivalent | number: '1.1-1' }}</strong> árboles urbanos en absorción
-            </p>
-          </div>
-        </article>
-
-        <!-- Distancia Limpia -->
-        <article class="dash-kpi-card">
-          <div class="kpi-head">
-            <span class="kpi-icon-wrap tint-teal">
-              <app-icon name="bike" [size]="18"></app-icon>
-            </span>
-            <span class="kpi-badge teal">Movilidad Activa</span>
-          </div>
-          <div class="kpi-body">
-            <span class="kpi-label">{{ i18n.t('dash.distance') || 'Distancia recorrida limpia' }}</span>
-            <div class="kpi-value-row">
-              <strong class="kpi-val">{{ s.totalDistanceKm | number: '1.1-1' }}</strong>
-              <span class="kpi-unit">km</span>
-            </div>
-            <p class="kpi-context">
-              <strong>{{ s.totalTrips }}</strong> trayectos registrados y validados
-            </p>
-          </div>
-        </article>
-
-        <!-- Puntos Verdes -->
-        <article class="dash-kpi-card">
-          <div class="kpi-head">
-            <span class="kpi-icon-wrap tint-amber">
-              <app-icon name="bolt" [size]="18"></app-icon>
-            </span>
-            <a routerLink="/rewards" class="kpi-badge-link" title="Ir a recompensas">Canjear →</a>
-          </div>
-          <div class="kpi-body">
-            <span class="kpi-label">{{ i18n.t('dash.points') || 'Puntos Verdes acumulados' }}</span>
-            <div class="kpi-value-row">
-              <strong class="kpi-val">{{ s.currentPoints | number }}</strong>
-              <span class="kpi-unit">pts</span>
-            </div>
-            <p class="kpi-context">
-              Disponibles para vouchers y comercios aliados
-            </p>
-          </div>
-        </article>
-
-        <!-- Calorías Quemadas -->
-        <article class="dash-kpi-card">
-          <div class="kpi-head">
-            <span class="kpi-icon-wrap tint-rose">
-              <app-icon name="flame" [size]="18"></app-icon>
-            </span>
-            <span class="kpi-badge rose">Salud Activa</span>
-          </div>
-          <div class="kpi-body">
-            <span class="kpi-label">{{ i18n.t('dash.calories') || 'Energía física activa' }}</span>
-            <div class="kpi-value-row">
-              <strong class="kpi-val">{{ s.totalCaloriesBurned | number }}</strong>
-              <span class="kpi-unit">kcal</span>
-            </div>
-            <p class="kpi-context">
-              Aporte cardiovascular directo en cada ruta
-            </p>
-          </div>
-        </article>
-      </section>
-
-      <!-- ==================== 3. CUERPO PRINCIPAL (2 COLUMNAS EDITORIALES) ==================== -->
-      <div class="dash-main-layout">
-        <!-- COLUMNA IZQUIERDA: GRÁFICO SEMANAL + REPARTO MODAL -->
-        <div class="dash-content-primary">
-          <!-- Gráfico Semanal -->
-          <article class="dash-card">
-            <div class="dash-card-header">
-              <div>
-                <h2 class="dash-card-title">{{ i18n.t('dash.weeklyTitle') || 'Evolución semanal de emisiones' }}</h2>
-                <p class="dash-card-desc">Gramos de CO₂ evitados por día en tus desplazamientos limpios</p>
-              </div>
-              <span class="dash-period-chip">Últimos 7 días</span>
-            </div>
-
-            <div class="dash-chart-wrap">
-              <div class="dash-chart-bars">
-                <div class="chart-col" *ngFor="let item of s.weeklyTrend">
-                  <span class="chart-col-val">{{ item.co2SavedGrams }}g</span>
-                  <div class="chart-col-track">
-                    <div
-                      class="chart-col-fill"
-                      [style.height.%]="getBarHeightPercent(item.co2SavedGrams)"
-                      [title]="item.dayOfWeek + ': ' + item.co2SavedGrams + ' g CO₂'"
-                    ></div>
-                  </div>
-                  <span class="chart-col-label">{{ item.dayOfWeek }}</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Reparto por Modo de Transporte -->
-            <div class="dash-modal-split">
-              <div class="split-header">
-                <h3 class="split-title">{{ i18n.t('dash.modeSplit') || 'Reparto por modo de transporte' }}</h3>
-                <span class="split-sub">Total de {{ s.totalTrips }} viajes</span>
-              </div>
-
-              <div class="split-list">
-                <div class="split-row" *ngFor="let m of getModeEntries(s.tripsByMode)">
-                  <div class="split-meta">
-                    <span class="split-icon-badge">
-                      <app-icon [name]="m.mode" [size]="14"></app-icon>
-                    </span>
-                    <span class="split-name">{{ formatMode(m.mode) }}</span>
-                  </div>
-                  <div class="split-bar-wrap">
-                    <div
-                      class="split-bar-fill"
-                      [style.width.%]="(m.count / Math.max(1, s.totalTrips)) * 100"
-                    ></div>
-                  </div>
-                  <span class="split-count">{{ m.count }} {{ m.count === 1 ? 'viaje' : 'viajes' }}</span>
-                </div>
-              </div>
-            </div>
-          </article>
-        </div>
-
-        <!-- COLUMNA DERECHA: ASESOR GEMINI AI + IMPACTO COLECTIVO + INSIGNIAS -->
-        <aside class="dash-sidebar">
-          <!-- Asesor Gemini AI -->
-          <article class="dash-card gemini-card" *ngIf="recommendation as rec">
-            <div class="gemini-header">
-              <span class="gemini-badge">
-                <app-icon name="spark" [size]="14"></app-icon>
-                <span>Asesor Gemini AI</span>
-              </span>
-              <span class="gemini-live-dot" title="Análisis en tiempo real"></span>
-            </div>
-            <h3 class="gemini-title">{{ rec.title }}</h3>
-            <p class="gemini-text">{{ rec.recommendation }}</p>
-            <a routerLink="/routes" class="gemini-link">
-              <span>Probar ruta sugerida en el mapa</span>
-              <app-icon name="arrow-right" [size]="13"></app-icon>
-            </a>
-          </article>
-
-          <!-- Impacto Colectivo de Lima -->
-          <article class="dash-card collective-card" *ngIf="community as c">
-            <div class="collective-header">
-              <h3 class="dash-card-title">Impacto colectivo Lima</h3>
-              <a routerLink="/leaderboard" class="sidebar-link">Ranking →</a>
-            </div>
-            <div class="collective-metrics">
-              <div class="collective-item">
-                <span class="collective-dot green"></span>
-                <div class="collective-text">
-                  <strong>{{ c.totalCo2SavedTons | number: '1.2-2' }} toneladas</strong>
-                  <span>de CO₂ evitadas entre {{ c.totalActiveUsers }} ciclistas</span>
-                </div>
-              </div>
-              <div class="collective-item">
-                <span class="collective-dot teal"></span>
-                <div class="collective-text">
-                  <strong>{{ c.totalCleanKm | number: '1.0-0' }} km limpios</strong>
-                  <span>equivalentes a {{ c.totalTreesEquivalent | number: '1.0-0' }} árboles urbanos</span>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <!-- Medallas Recientes -->
-          <article class="dash-card badges-card">
-            <div class="badges-header">
-              <h3 class="dash-card-title">Medallas recientes</h3>
-              <a routerLink="/gamification" class="sidebar-link">Ver todas →</a>
-            </div>
-            <div class="badges-list">
-              <div
-                class="badge-row"
-                *ngFor="let b of s.recentBadges | slice: 0 : 3"
-                [class.unlocked]="b.unlocked"
+              <select
+                class="quick-route-select"
+                [(ngModel)]="selectedQuickPreset"
+                aria-label="Seleccionar ruta rápida en Lima"
               >
-                <div class="badge-icon-wrap">
-                  <app-icon [name]="b.code || b.iconEmoji" [size]="16"></app-icon>
+                <option *ngFor="let c of quickCorridors" [ngValue]="c.index">
+                  {{ c.origin }} → {{ c.destination }} ({{ c.distanceLabel }} · {{ c.timeLabel }})
+                </option>
+              </select>
+            </div>
+
+            <button type="button" class="btn-start-route" (click)="launchQuickRoute()">
+              <app-icon name="route" [size]="18"></app-icon>
+              <span>Iniciar ruta</span>
+            </button>
+          </div>
+
+          <!-- Guía informativa lineal de los 3 pasos -->
+          <div class="hero-steps-guide" aria-label="Cómo funciona en 3 pasos">
+            <a routerLink="/routes" class="step-guide-item active-step">
+              <span class="step-guide-num">1</span>
+              <span>Planifica tu ruta</span>
+            </a>
+            <span class="step-guide-sep" aria-hidden="true">→</span>
+            <a routerLink="/trips" class="step-guide-item">
+              <span class="step-guide-num">2</span>
+              <span>Anota tu viaje</span>
+            </a>
+            <span class="step-guide-sep" aria-hidden="true">→</span>
+            <a routerLink="/rewards" class="step-guide-item">
+              <span class="step-guide-num">3</span>
+              <span>Canjea premios</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Ilustración Vectorial Estilizada: Skyline de Lima, Tarjeta de Ruta 3D, Ciclovía y Ciclista Urbano -->
+        <div class="cartoon-banner-art" aria-hidden="true">
+          <svg viewBox="0 0 460 238" fill="none" class="dashboard-cartoon-svg">
+            <defs>
+              <radialGradient id="dashSunGlow" cx="76%" cy="22%" r="54%">
+                <stop offset="0%" stop-color="#FDE047" stop-opacity="0.34" />
+                <stop offset="55%" stop-color="#4ADE80" stop-opacity="0.12" />
+                <stop offset="100%" stop-color="#14532D" stop-opacity="0" />
+              </radialGradient>
+              <linearGradient id="dashTowerA" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#2D6A4F" stop-opacity="0.72" />
+                <stop offset="100%" stop-color="#143D29" stop-opacity="0.9" />
+              </linearGradient>
+              <linearGradient id="dashTowerB" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#40916C" stop-opacity="0.65" />
+                <stop offset="100%" stop-color="#1B4332" stop-opacity="0.88" />
+              </linearGradient>
+              <linearGradient id="dashCardGlass" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.97" />
+                <stop offset="100%" stop-color="#ECFDF5" stop-opacity="0.92" />
+              </linearGradient>
+              <linearGradient id="dashPinGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#FB923C" />
+                <stop offset="100%" stop-color="#DC2626" />
+              </linearGradient>
+              <linearGradient id="dashFrameGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#34D399" />
+                <stop offset="100%" stop-color="#059669" />
+              </linearGradient>
+              <linearGradient id="dashJacketGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#38BDF8" />
+                <stop offset="100%" stop-color="#0369A1" />
+              </linearGradient>
+              <linearGradient id="dashBeamGrad" x1="0" y1="0.5" x2="1" y2="0.5">
+                <stop offset="0%" stop-color="#FEF08A" stop-opacity="0.62" />
+                <stop offset="100%" stop-color="#FEF08A" stop-opacity="0" />
+              </linearGradient>
+              <linearGradient id="dashLaneGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#15803D" />
+                <stop offset="100%" stop-color="#16A34A" />
+              </linearGradient>
+            </defs>
+
+            <!-- Resplandor atmosférico -->
+            <ellipse cx="338" cy="64" rx="145" ry="92" fill="url(#dashSunGlow)" />
+
+            <!-- Skyline arquitectónico estilizado de San Isidro / Miraflores -->
+            <g opacity="0.88">
+              <rect x="176" y="54" width="38" height="128" rx="4" fill="url(#dashTowerA)" />
+              <path d="M183 66H207M183 78H207M183 90H207M183 102H207" stroke="#A7F3D0" stroke-opacity="0.24" stroke-width="1.5" />
+              <path d="M222 36L262 24V182H222V36Z" fill="url(#dashTowerB)" />
+              <path d="M230 46H254M230 58H254M230 70H254M230 82H254M230 94H254" stroke="#D1FAE5" stroke-opacity="0.25" stroke-width="1.4" />
+              <rect x="270" y="68" width="44" height="114" rx="4" fill="url(#dashTowerA)" />
+              <rect x="382" y="58" width="36" height="124" rx="4" fill="url(#dashTowerB)" />
+              <path d="M389 72H411M389 84H411M389 96H411" stroke="#D1FAE5" stroke-opacity="0.22" stroke-width="1.4" />
+            </g>
+
+            <!-- Copas de árboles urbanos multicapa -->
+            <g>
+              <ellipse cx="192" cy="154" rx="28" ry="22" fill="#166534" />
+              <ellipse cx="185" cy="148" rx="22" ry="17" fill="#22C55E" fill-opacity="0.65" />
+              <rect x="190" y="164" width="4" height="22" rx="2" fill="#0F291E" />
+
+              <ellipse cx="418" cy="150" rx="30" ry="24" fill="#166534" />
+              <ellipse cx="412" cy="144" rx="22" ry="18" fill="#4ADE80" fill-opacity="0.58" />
+              <rect x="416" y="160" width="4.5" height="26" rx="2" fill="#0F291E" />
+            </g>
+
+            <!-- Tarjeta Flotante Estilizada de Navegación y Ruta (Izquierda) -->
+            <g transform="translate(14, 24)">
+              <!-- Sombra suave proyectada -->
+              <rect x="5" y="8" width="166" height="122" rx="16" fill="#071F12" fill-opacity="0.34" />
+              <!-- Superficie cristalina -->
+              <rect x="0" y="0" width="166" height="122" rx="16" fill="url(#dashCardGlass)" stroke="#A7F3D0" stroke-width="1.4" />
+              <!-- Bloques cartográficos estilizados -->
+              <rect x="11" y="12" width="56" height="38" rx="7" fill="#DCFCE7" />
+              <rect x="74" y="12" width="81" height="34" rx="7" fill="#E0F2FE" />
+              <rect x="11" y="57" width="66" height="40" rx="7" fill="#F1F5F9" />
+              <rect x="84" y="53" width="71" height="44" rx="7" fill="#D1FAE5" />
+              <!-- Ríos / avenidas finas -->
+              <path d="M11 45 L155 38" stroke="#FFFFFF" stroke-width="3" />
+              <path d="M71 12 L80 97" stroke="#FFFFFF" stroke-width="3" />
+
+              <!-- Trazado de ciclovía activa con halo -->
+              <path d="M28 82 C 50 82, 54 31, 88 31 C 114 31, 116 70, 134 68" stroke="#10B981" stroke-opacity="0.28" stroke-width="8" stroke-linecap="round" />
+              <path d="M28 82 C 50 82, 54 31, 88 31 C 114 31, 116 70, 134 68" stroke="#059669" stroke-width="3.2" stroke-dasharray="6 4" stroke-linecap="round" />
+
+              <!-- Nodo de origen -->
+              <circle cx="28" cy="82" r="7" fill="#0284C7" fill-opacity="0.22" />
+              <circle cx="28" cy="82" r="4.5" fill="#0284C7" stroke="#FFFFFF" stroke-width="1.6" />
+
+              <!-- Pin 3D esculpido de destino -->
+              <ellipse cx="134" cy="72" rx="10" ry="4" fill="#059669" fill-opacity="0.28" />
+              <path d="M134 68C134 68 147 52 147 41.5C147 34.3 141.2 28.5 134 28.5C126.8 28.5 121 34.3 121 41.5C121 52 134 68 134 68Z" fill="url(#dashPinGrad)" />
+              <circle cx="134" cy="41.5" r="4.8" fill="#FFFFFF" />
+
+              <!-- Píldora inferior de telemetría -->
+              <rect x="11" y="101" width="144" height="15" rx="7.5" fill="#064E3B" />
+              <circle cx="21" cy="108.5" r="3" fill="#4ADE80" />
+              <rect x="29" y="106.5" width="68" height="4" rx="2" fill="#A7F3D0" opacity="0.85" />
+              <rect x="114" y="106.5" width="32" height="4" rx="2" fill="#FDE047" opacity="0.9" />
+            </g>
+
+            <!-- Haz de luz LED delantero de la bicicleta -->
+            <polygon points="366,116 448,98 448,144" fill="url(#dashBeamGrad)" />
+
+            <!-- Estelas aerodinámicas finas -->
+            <line x1="196" y1="126" x2="228" y2="126" stroke="#7DD3FC" stroke-opacity="0.65" stroke-width="2" stroke-linecap="round" />
+            <line x1="186" y1="140" x2="216" y2="140" stroke="#86EFAC" stroke-opacity="0.65" stroke-width="2" stroke-linecap="round" />
+
+            <!-- ==================== CICLISTA URBANO ESTILIZADO ==================== -->
+            <g transform="translate(212, 42)">
+              <!-- Sombra elíptica sobre la ciclovía -->
+              <ellipse cx="86" cy="144" rx="74" ry="6.5" fill="#062312" fill-opacity="0.45" />
+
+              <!-- Pierna posterior (profundidad) -->
+              <path d="M62 66 L83 92 L76 119" stroke="#0F172A" stroke-width="8.5" stroke-linecap="round" stroke-linejoin="round" />
+              <rect x="70" y="117" width="14" height="5.5" rx="2.8" fill="#334155" />
+
+              <!-- RUEDA TRASERA DETALLADA -->
+              <g transform="translate(36, 114)">
+                <circle cx="0" cy="0" r="27" stroke="#0F172A" stroke-width="5.2" />
+                <circle cx="0" cy="0" r="23.2" stroke="#CBD5E1" stroke-width="1.8" />
+                <g stroke="#94A3B8" stroke-width="0.9" opacity="0.85">
+                  <line x1="-22" y1="0" x2="22" y2="0" />
+                  <line x1="0" y1="-22" x2="0" y2="22" />
+                  <line x1="-15.5" y1="-15.5" x2="15.5" y2="15.5" />
+                  <line x1="-15.5" y1="15.5" x2="15.5" y2="-15.5" />
+                </g>
+                <circle cx="0" cy="0" r="6.5" stroke="#64748B" stroke-width="1.6" fill="none" />
+                <circle cx="0" cy="0" r="3.4" fill="#F8FAFC" />
+              </g>
+
+              <!-- RUEDA DELANTERA DETALLADA -->
+              <g transform="translate(136, 114)">
+                <circle cx="0" cy="0" r="27" stroke="#0F172A" stroke-width="5.2" />
+                <circle cx="0" cy="0" r="23.2" stroke="#CBD5E1" stroke-width="1.8" />
+                <g stroke="#94A3B8" stroke-width="0.9" opacity="0.85">
+                  <line x1="-22" y1="0" x2="22" y2="0" />
+                  <line x1="0" y1="-22" x2="0" y2="22" />
+                  <line x1="-15.5" y1="-15.5" x2="15.5" y2="15.5" />
+                  <line x1="-15.5" y1="15.5" x2="15.5" y2="-15.5" />
+                </g>
+                <circle cx="0" cy="0" r="6.5" stroke="#64748B" stroke-width="1.6" fill="none" />
+                <circle cx="0" cy="0" r="3.4" fill="#F8FAFC" />
+              </g>
+
+              <!-- Cuadro hidroformado de la bicicleta -->
+              <path d="M36 114 L66 72 H114 L82 114 H36 Z" stroke="url(#dashFrameGrad)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+              <!-- Tubo vertical y tija -->
+              <line x1="59" y1="59" x2="82" y2="114" stroke="#1E293B" stroke-width="4.2" stroke-linecap="round" />
+              <!-- Horquilla delantera y potencia/manubrio -->
+              <line x1="136" y1="114" x2="110" y2="54" stroke="#E2E8F0" stroke-width="4" stroke-linecap="round" />
+              <path d="M101 54 H118 C122 54 124 57 122 60" stroke="#0F172A" stroke-width="4" stroke-linecap="round" />
+              <!-- Faro LED frontal -->
+              <rect x="119" y="64" width="8" height="6" rx="3" fill="#FEF08A" />
+              <!-- Sillín ergonómico esculpido -->
+              <path d="M48 56 C52 53, 66 54, 71 57 C68 60, 53 60, 48 56 Z" fill="#0F172A" />
+              <!-- Catalina y biela -->
+              <circle cx="82" cy="114" r="7.5" fill="#1E293B" stroke="#34D399" stroke-width="2" />
+
+              <!-- Pierna delantera articulada -->
+              <path d="M60 63 L86 86 L85 113" stroke="#1E293B" stroke-width="9.2" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M81 112 H94 C96 112 97 115 95 116.5 H81 Z" fill="#F8FAFC" />
+
+              <!-- Mochila urbana roll-top -->
+              <rect x="41" y="25" width="18" height="28" rx="6" transform="rotate(-17 41 25)" fill="#F59E0B" />
+              <rect x="44" y="28" width="13" height="8" rx="3" transform="rotate(-17 44 28)" fill="#D97706" />
+
+              <!-- Torso estilizado con cortavientos -->
+              <path d="M56 60 C55 44, 64 27, 76 22 C83 24, 86 32, 83 43 L69 63 Z" fill="url(#dashJacketGrad)" />
+              <!-- Brazo extendido al manubrio -->
+              <path d="M76 27 L93 46 L111 54" stroke="#38BDF8" stroke-width="7.2" stroke-linecap="round" stroke-linejoin="round" />
+              <circle cx="112" cy="54" r="3.5" fill="#FDBA74" />
+
+              <!-- Cabeza y casco aerodinámico -->
+              <circle cx="83" cy="11" r="9" fill="#FDBA74" />
+              <path d="M71 10 C71 2, 79 -3, 88 -2 C95 -1, 99 4, 98 10 L71 10 Z" fill="#FACC15" />
+              <path d="M89 9 H99 L96 12 H89 Z" fill="#0F172A" />
+            </g>
+
+            <!-- Perspectiva de Ciclovía Segregada + Calzada -->
+            <rect x="8" y="182" width="444" height="5" rx="2.5" fill="#CBD5E1" />
+            <rect x="8" y="187" width="444" height="22" rx="5" fill="url(#dashLaneGrad)" />
+            <line x1="24" y1="198" x2="436" y2="198" stroke="#DCFCE7" stroke-opacity="0.85" stroke-width="2.2" stroke-dasharray="16 12" stroke-linecap="round" />
+            <rect x="8" y="209" width="444" height="19" rx="5" fill="#1E293B" />
+            <line x1="34" y1="218.5" x2="426" y2="218.5" stroke="#64748B" stroke-width="1.8" stroke-dasharray="22 18" stroke-linecap="round" />
+          </svg>
+        </div>
+      </div>
+
+      </div>
+
+      <!-- ==================== SECCIÓN 2: CINTA DE IMPACTO PERSONAL ==================== -->
+      <div class="dash-section-block">
+        <div class="section-divider-head">
+          <span class="section-step-badge">01</span>
+          <div>
+            <h2 class="section-block-title">Tu impacto personal acumulado</h2>
+            <p class="section-block-sub">Métricas verificadas a partir de tus recorridos registrados en Lima</p>
+          </div>
+        </div>
+
+        <div class="eco-stat-ribbon" aria-label="Resumen de impacto personal">
+          <div class="ribbon-metric accent-green">
+            <span class="ribbon-icon tint-green"><app-icon name="leaf" [size]="26"></app-icon></span>
+            <div class="ribbon-copy">
+              <span class="ribbon-label">CO₂ evitado total</span>
+              <strong class="ribbon-val">{{ s.totalCo2SavedKg | number: '1.2-2' }} <small>kg</small></strong>
+              <span class="ribbon-sub">≈ {{ s.treesEquivalent | number: '1.1-1' }} árboles urbanos</span>
+            </div>
+          </div>
+
+          <div class="ribbon-metric accent-amber">
+            <span class="ribbon-icon tint-yellow"><app-icon name="bike" [size]="26"></app-icon></span>
+            <div class="ribbon-copy">
+              <span class="ribbon-label">Recorrido sostenible</span>
+              <strong class="ribbon-val">{{ s.totalDistanceKm | number: '1.1-1' }} <small>km</small></strong>
+              <span class="ribbon-sub">{{ s.totalTrips }} recorridos registrados</span>
+            </div>
+          </div>
+
+          <div class="ribbon-metric accent-sky">
+            <span class="ribbon-icon tint-blue"><app-icon name="bolt" [size]="26"></app-icon></span>
+            <div class="ribbon-copy">
+              <span class="ribbon-label">Puntos disponibles</span>
+              <strong class="ribbon-val">{{ s.currentPoints }} <small>pts</small></strong>
+              <a routerLink="/rewards" class="ribbon-link">Canjear beneficios →</a>
+            </div>
+          </div>
+
+          <div class="ribbon-metric accent-coral">
+            <span class="ribbon-icon tint-orange"><app-icon name="flame" [size]="26"></app-icon></span>
+            <div class="ribbon-copy">
+              <span class="ribbon-label">Energía activa</span>
+              <strong class="ribbon-val">{{ s.totalCaloriesBurned }} <small>kcal</small></strong>
+              <span class="ribbon-sub">Calorías quemadas en ruta</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== SECCIÓN 3: ANÁLISIS SEMANAL Y COMUNIDAD ==================== -->
+      <div class="dash-section-block">
+        <div class="section-divider-head">
+          <span class="section-step-badge">02</span>
+          <div>
+            <h2 class="section-block-title">Evolución semanal, rutas sugeridas y comunidad</h2>
+            <p class="section-block-sub">Detalle diario de emisiones evitadas y avance colectivo en la ciudad</p>
+          </div>
+        </div>
+
+        <div class="dash-editorial-grid">
+          <!-- Panel Principal Izquierdo: Evolución Semanal y Reparto por Vehículo -->
+          <article class="eco-card dash-main-chart-card">
+            <div class="card-head-row">
+              <div>
+                <h2>Emisiones evitadas esta semana</h2>
+                <p class="card-sub">Gramos de CO₂ que evitaste emitir cada día de la semana</p>
+              </div>
+              <span class="badge-pill">
+                <app-icon name="leaf" [size]="15"></app-icon>
+                <span>Últimos 7 días</span>
+              </span>
+            </div>
+
+            <div class="bar-chart-clean">
+              <div class="bar-column" *ngFor="let item of s.weeklyTrend">
+                <div class="bar-val">{{ item.co2SavedGrams }}g</div>
+                <div class="bar-track">
+                  <div
+                    class="bar-fill"
+                    [style.height.%]="getBarHeightPercent(item.co2SavedGrams)"
+                    [title]="formatDay(item.dayOfWeek) + ': ' + item.co2SavedGrams + ' g CO₂'"
+                  ></div>
                 </div>
-                <div class="badge-info">
-                  <strong class="badge-title">{{ b.title }}</strong>
-                  <div class="badge-progress-track">
-                    <div class="badge-progress-bar" [style.width.%]="b.progressPercent"></div>
+                <div class="bar-day">{{ formatDay(item.dayOfWeek) }}</div>
+              </div>
+            </div>
+
+            <div class="chart-divider-Section">
+              <div class="split-header-inline">
+                <h3>Cómo te moviste</h3>
+                <span>Distribución de tus {{ s.totalTrips }} viajes</span>
+              </div>
+              <div class="mode-bars">
+                <div class="mode-row" *ngFor="let m of getModeEntries(s.tripsByMode)">
+                  <div class="mode-name-wrap">
+                    <span class="mode-icon-chip"><app-icon [name]="m.mode" [size]="18"></app-icon></span>
+                    <span class="mode-name">{{ formatMode(m.mode) }}</span>
                   </div>
+                  <div class="mode-progress-track">
+                    <div class="mode-progress-fill" [style.width.%]="(m.count / Math.max(1, s.totalTrips)) * 100"></div>
+                  </div>
+                  <span class="mode-count">{{ m.count }} {{ m.count === 1 ? 'viaje' : 'viajes' }}</span>
                 </div>
-                <span class="badge-pct">{{ b.progressPercent }}%</span>
               </div>
             </div>
           </article>
-        </aside>
+
+          <!-- Columna Vertical Derecha -->
+          <aside class="dash-vertical-sidebar">
+            <!-- Tarjeta Destacada del Asesor IA -->
+            <div class="advisor-callout" *ngIf="recommendation as rec">
+              <div class="advisor-callout-top">
+                <span class="advisor-spark-icon"><app-icon name="spark" [size]="20"></app-icon></span>
+                <div>
+                  <span class="advisor-kicker">Ruta recomendada de hoy</span>
+                  <h3>{{ rec.title }}</h3>
+                </div>
+              </div>
+              <p class="advisor-text">{{ rec.recommendation }}</p>
+              <a routerLink="/routes" class="inline-action-link">
+                <span>Abrir ruta sugerida en el mapa</span>
+                <app-icon name="arrow-right" [size]="15"></app-icon>
+              </a>
+            </div>
+
+            <!-- Panel Contrastado de Impacto Colectivo y Medallas -->
+            <div class="vertical-timeline-section">
+              <div class="timeline-group" *ngIf="community as c">
+                <div class="timeline-head">
+                  <h3>Impacto colectivo en Lima</h3>
+                  <a routerLink="/leaderboard" class="link-emerald">Ver ranking →</a>
+                </div>
+                <ul class="vertical-stat-list">
+                  <li>
+                    <span class="v-stat-dot green"><app-icon name="leaf" [size]="18"></app-icon></span>
+                    <div class="v-stat-body">
+                      <strong>{{ c.totalCo2SavedTons | number: '1.2-2' }} toneladas de CO₂</strong>
+                      <span>Evitadas entre {{ c.totalActiveUsers }} vecinos activos</span>
+                    </div>
+                  </li>
+                  <li>
+                    <span class="v-stat-dot yellow"><app-icon name="bike" [size]="18"></app-icon></span>
+                    <div class="v-stat-body">
+                      <strong>{{ c.totalCleanKm | number: '1.0-0' }} km sin humo</strong>
+                      <span>Equivalentes a {{ c.totalTreesEquivalent | number: '1.0-0' }} árboles urbanos</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="timeline-group">
+                <div class="timeline-head">
+                  <h3>Tus medallas recientes</h3>
+                  <a routerLink="/gamification" class="link-emerald">Ver todas →</a>
+                </div>
+                <div class="vertical-medals-list">
+                  <div
+                    class="v-medal-row"
+                    *ngFor="let b of s.recentBadges | slice: 0 : 3"
+                    [class.unlocked]="b.unlocked"
+                  >
+                    <span class="badge-icon-circle">
+                      <app-icon [name]="b.code || b.iconEmoji" [size]="20"></app-icon>
+                    </span>
+                    <div class="v-medal-copy">
+                      <strong>{{ b.title }}</strong>
+                      <div class="v-medal-bar">
+                        <div class="v-medal-fill" [style.width.%]="b.progressPercent"></div>
+                      </div>
+                    </div>
+                    <span class="v-medal-pct">{{ b.progressPercent }}%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
       </div>
-    </div>
-  `,
-  styles: [`
-    :host {
-      display: block;
-      width: 100%;
-    }
-
-    .dash-container {
-      max-width: 1240px;
-      margin: 0 auto;
-      padding: 1.5rem 1rem 3.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1.75rem;
-    }
-
-    /* 1. HERO EDITORIAL HEADER */
-    .dash-hero-header {
-      background: var(--card, #FFFFFF);
-      border: 1px solid var(--border, #E4E7E5);
-      border-radius: 16px;
-      padding: clamp(1.4rem, 2.5vw, 2.2rem);
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .dash-hero-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-
-    .dash-hero-copy {
-      flex: 1;
-      min-width: 280px;
-    }
-
-    .dash-eyebrow-row {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 0.6rem;
-    }
-
-    .dash-status-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      font-size: 0.78rem;
-      font-weight: 700;
-      color: #059669;
-      background: rgba(16, 185, 129, 0.1);
-      border: 1px solid rgba(16, 185, 129, 0.25);
-      padding: 0.25rem 0.65rem;
-      border-radius: 9999px;
-      letter-spacing: 0.02em;
-    }
-
-    .dash-pulse-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #10B981;
-      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-      animation: pulseRadar 2s infinite;
-    }
-
-    @keyframes pulseRadar {
-      0% {
-        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-      }
-      70% {
-        box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
-      }
-      100% {
-        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
-      }
-    }
-
-    .dash-tag-subtle {
-      font-size: 0.8rem;
-      color: var(--ink-muted, #78827C);
-      font-weight: 500;
-    }
-
-    .dash-title {
-      font-size: clamp(1.6rem, 3vw, 2.2rem);
-      font-weight: 800;
-      color: var(--ink, #111613);
-      letter-spacing: -0.025em;
-      line-height: 1.15;
-      margin: 0 0 0.35rem;
-      font-family: var(--sans, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
-    }
-
-    .dash-subtitle {
-      font-size: 0.94rem;
-      color: var(--ink-secondary, #4E5752);
-      line-height: 1.5;
-      margin: 0;
-      max-width: 620px;
-    }
-
-    .dash-hero-actions {
-      display: flex;
-      align-items: center;
-      gap: 0.65rem;
-      flex-wrap: wrap;
-    }
-
-    .dash-action-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      padding: 0.65rem 1.15rem;
-      border-radius: 10px;
-      font-size: 0.875rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: transform 0.12s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
-      cursor: pointer;
-    }
-
-    .dash-action-btn:active {
-      transform: scale(0.97);
-    }
-
-    .dash-action-btn.primary {
-      background: var(--accent, #10B981);
-      color: #FFFFFF;
-      box-shadow: 0 2px 6px rgba(16, 185, 129, 0.28);
-      border: 1px solid transparent;
-    }
-
-    .dash-action-btn.primary:hover {
-      background: #059669;
-      box-shadow: 0 4px 10px rgba(16, 185, 129, 0.35);
-    }
-
-    .dash-action-btn.secondary {
-      background: var(--card-subtle, #F6F5F0);
-      color: var(--ink, #111613);
-      border: 1px solid var(--border, #E4E7E5);
-    }
-
-    .dash-action-btn.secondary:hover {
-      background: var(--card, #FFFFFF);
-      border-color: var(--border-strong, #CBD2CE);
-    }
-
-    .dash-action-btn.subtle {
-      background: transparent;
-      color: var(--ink-secondary, #4E5752);
-      border: 1px solid transparent;
-    }
-
-    .dash-action-btn.subtle:hover {
-      background: var(--card-subtle, #F6F5F0);
-      color: var(--ink, #111613);
-    }
-
-    /* 2. GRID DE 4 KPIS CLAVE */
-    .dash-kpi-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.15rem;
-    }
-
-    .dash-kpi-card {
-      background: var(--card, #FFFFFF);
-      border: 1px solid var(--border, #E4E7E5);
-      border-radius: 14px;
-      padding: 1.35rem 1.4rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.9rem;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
-      transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.18s ease, border-color 0.18s ease;
-    }
-
-    .dash-kpi-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-      border-color: var(--border-strong, #CBD2CE);
-    }
-
-    .kpi-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .kpi-icon-wrap {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .tint-emerald { background: rgba(16, 185, 129, 0.12); color: #059669; }
-    .tint-teal    { background: rgba(20, 184, 166, 0.12); color: #0d9488; }
-    .tint-amber   { background: rgba(245, 158, 11, 0.12); color: #d97706; }
-    .tint-rose    { background: rgba(244, 63, 94, 0.12);  color: #e11d48; }
-
-    .kpi-badge {
-      font-size: 0.72rem;
-      font-weight: 700;
-      padding: 0.2rem 0.55rem;
-      border-radius: 9999px;
-      letter-spacing: 0.02em;
-    }
-
-    .kpi-badge.emerald { background: rgba(16, 185, 129, 0.1); color: #059669; }
-    .kpi-badge.teal    { background: rgba(20, 184, 166, 0.1); color: #0d9488; }
-    .kpi-badge.rose    { background: rgba(244, 63, 94, 0.1);  color: #e11d48; }
-
-    .kpi-badge-link {
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: #059669;
-      text-decoration: none;
-      transition: color 0.15s ease;
-    }
-
-    .kpi-badge-link:hover {
-      text-decoration: underline;
-    }
-
-    .kpi-body {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-    }
-
-    .kpi-label {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--ink-muted, #78827C);
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-
-    .kpi-value-row {
-      display: flex;
-      align-items: baseline;
-      gap: 0.4rem;
-    }
-
-    .kpi-val {
-      font-size: 1.85rem;
-      font-weight: 800;
-      color: var(--ink, #111613);
-      font-family: var(--mono, 'JetBrains Mono', monospace);
-      letter-spacing: -0.03em;
-      line-height: 1.1;
-    }
-
-    .kpi-unit {
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--ink-muted, #78827C);
-    }
-
-    .kpi-context {
-      font-size: 0.8rem;
-      color: var(--ink-secondary, #4E5752);
-      margin: 0.25rem 0 0;
-      line-height: 1.4;
-    }
-
-    /* 3. MAIN LAYOUT (2 COLUMNAS) */
-    .dash-main-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1.65fr) minmax(300px, 1fr);
-      gap: 1.5rem;
-      align-items: start;
-    }
-
-    @media (max-width: 960px) {
-      .dash-main-layout {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .dash-card {
-      background: var(--card, #FFFFFF);
-      border: 1px solid var(--border, #E4E7E5);
-      border-radius: 16px;
-      padding: 1.5rem 1.6rem;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
-    }
-
-    .dash-card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 1.5rem;
-      gap: 1rem;
-    }
-
-    .dash-card-title {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--ink, #111613);
-      margin: 0 0 0.2rem;
-    }
-
-    .dash-card-desc {
-      font-size: 0.84rem;
-      color: var(--ink-muted, #78827C);
-      margin: 0;
-    }
-
-    .dash-period-chip {
-      font-size: 0.75rem;
-      font-weight: 600;
-      padding: 0.25rem 0.65rem;
-      border-radius: 9999px;
-      background: var(--card-subtle, #F6F5F0);
-      color: var(--ink-secondary, #4E5752);
-      border: 1px solid var(--border, #E4E7E5);
-      white-space: nowrap;
-    }
-
-    /* BARS CHART */
-    .dash-chart-wrap {
-      margin-bottom: 2rem;
-    }
-
-    .dash-chart-bars {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      gap: 0.75rem;
-      height: 170px;
-      padding: 1rem 0.5rem 0;
-      border-bottom: 1px solid var(--border, #E4E7E5);
-    }
-
-    .chart-col {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.45rem;
-      height: 100%;
-      justify-content: flex-end;
-    }
-
-    .chart-col-val {
-      font-size: 0.7rem;
-      font-weight: 700;
-      color: var(--ink-muted, #78827C);
-      font-family: var(--mono, monospace);
-    }
-
-    .chart-col-track {
-      width: 100%;
-      max-width: 38px;
-      height: 110px;
-      background: var(--card-subtle, #F6F5F0);
-      border-radius: 6px;
-      display: flex;
-      align-items: flex-end;
-      overflow: hidden;
-    }
-
-    .chart-col-fill {
-      width: 100%;
-      background: linear-gradient(180deg, #10B981 0%, #059669 100%);
-      border-radius: 6px 6px 0 0;
-      transition: height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.15s ease;
-    }
-
-    .chart-col:hover .chart-col-fill {
-      opacity: 0.85;
-    }
-
-    .chart-col-label {
-      font-size: 0.76rem;
-      font-weight: 600;
-      color: var(--ink-secondary, #4E5752);
-      text-transform: uppercase;
-    }
-
-    /* REPARTO MODAL */
-    .dash-modal-split {
-      padding-top: 1.25rem;
-      border-top: 1px solid var(--border, #E4E7E5);
-    }
-
-    .split-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 1rem;
-    }
-
-    .split-title {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--ink, #111613);
-      margin: 0;
-    }
-
-    .split-sub {
-      font-size: 0.78rem;
-      color: var(--ink-muted, #78827C);
-    }
-
-    .split-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-
-    .split-row {
-      display: grid;
-      grid-template-columns: 140px 1fr 75px;
-      align-items: center;
-      gap: 0.85rem;
-    }
-
-    .split-meta {
-      display: flex;
-      align-items: center;
-      gap: 0.45rem;
-    }
-
-    .split-icon-badge {
-      color: var(--ink-secondary, #4E5752);
-    }
-
-    .split-name {
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--ink, #111613);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .split-bar-wrap {
-      height: 8px;
-      background: var(--card-subtle, #F6F5F0);
-      border-radius: 9999px;
-      overflow: hidden;
-    }
-
-    .split-bar-fill {
-      height: 100%;
-      background: var(--accent, #10B981);
-      border-radius: 9999px;
-    }
-
-    .split-count {
-      font-size: 0.76rem;
-      font-weight: 600;
-      color: var(--ink-muted, #78827C);
-      text-align: right;
-      font-family: var(--mono, monospace);
-    }
-
-    /* SIDEBAR */
-    .dash-sidebar {
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-    }
-
-    /* GEMINI CARD */
-    .gemini-card {
-      border-left: 3px solid #10B981;
-      background: linear-gradient(145deg, var(--card, #FFFFFF) 0%, rgba(16, 185, 129, 0.04) 100%);
-    }
-
-    .gemini-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.75rem;
-    }
-
-    .gemini-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.76rem;
-      font-weight: 700;
-      color: #059669;
-    }
-
-    .gemini-live-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #10B981;
-    }
-
-    .gemini-title {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--ink, #111613);
-      margin: 0 0 0.4rem;
-    }
-
-    .gemini-text {
-      font-size: 0.86rem;
-      color: var(--ink-secondary, #4E5752);
-      line-height: 1.5;
-      margin: 0 0 1rem;
-    }
-
-    .gemini-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: #059669;
-      text-decoration: none;
-      transition: transform 0.15s ease;
-    }
-
-    .gemini-link:hover {
-      transform: translateX(2px);
-    }
-
-    /* COLLECTIVE CARD */
-    .collective-header,
-    .badges-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 1rem;
-    }
-
-    .sidebar-link {
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: #059669;
-      text-decoration: none;
-    }
-
-    .sidebar-link:hover {
-      text-decoration: underline;
-    }
-
-    .collective-metrics {
-      display: flex;
-      flex-direction: column;
-      gap: 0.85rem;
-    }
-
-    .collective-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.65rem;
-    }
-
-    .collective-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      margin-top: 5px;
-      flex-shrink: 0;
-    }
-
-    .collective-dot.green { background: #10B981; }
-    .collective-dot.teal  { background: #14B8A6; }
-
-    .collective-text {
-      display: flex;
-      flex-direction: column;
-      font-size: 0.82rem;
-      color: var(--ink-secondary, #4E5752);
-      line-height: 1.4;
-    }
-
-    .collective-text strong {
-      color: var(--ink, #111613);
-      font-size: 0.88rem;
-    }
-
-    /* BADGES */
-    .badges-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-
-    .badge-row {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 0.5rem 0.6rem;
-      border-radius: 8px;
-      background: var(--card-subtle, #F6F5F0);
-      transition: background 0.15s ease;
-    }
-
-    .badge-row:hover {
-      background: rgba(16, 185, 129, 0.06);
-    }
-
-    .badge-icon-wrap {
-      width: 28px;
-      height: 28px;
-      border-radius: 6px;
-      background: var(--card, #FFFFFF);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--ink-secondary, #4E5752);
-      flex-shrink: 0;
-    }
-
-    .badge-info {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .badge-title {
-      display: block;
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--ink, #111613);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      margin-bottom: 0.2rem;
-    }
-
-    .badge-progress-track {
-      height: 5px;
-      background: rgba(0, 0, 0, 0.06);
-      border-radius: 9999px;
-      overflow: hidden;
-    }
-
-    .badge-progress-bar {
-      height: 100%;
-      background: #10B981;
-      border-radius: 9999px;
-    }
-
-    .badge-pct {
-      font-size: 0.72rem;
-      font-weight: 700;
-      font-family: var(--mono, monospace);
-      color: var(--ink-muted, #78827C);
-    }
-
-    /* REDUCED MOTION */
-    @media (prefers-reduced-motion: reduce) {
-      .dash-pulse-dot {
-        animation: none;
-      }
-      .dash-action-btn,
-      .dash-kpi-card,
-      .chart-col-fill {
-        transition: none !important;
-        transform: none !important;
-      }
-    }
-  `]
+    </section>
+  `
 })
 export class DashboardComponent implements OnInit {
   summary: DashboardSummary | null = null;
@@ -937,12 +456,58 @@ export class DashboardComponent implements OnInit {
   recommendation: AiRecommendation | null = null;
   Math = Math;
 
-  constructor(private api: ApiService, public i18n: I18nService) {}
+  selectedQuickPreset = 0;
+  quickCorridors: QuickCorridorOption[] = [
+    {
+      index: 0,
+      origin: 'San Isidro (Centro Financiero)',
+      destination: 'Miraflores (Parque Kennedy)',
+      distanceLabel: '3.6 km',
+      timeLabel: '12 min en ciclovía'
+    },
+    {
+      index: 1,
+      origin: 'Jesús María (Av. Salaverry)',
+      destination: 'San Isidro (Óvalo Gutiérrez)',
+      distanceLabel: '4.2 km',
+      timeLabel: '14 min en ciclovía'
+    },
+    {
+      index: 2,
+      origin: 'Miraflores (Parque Kennedy)',
+      destination: 'Barranco (Plaza Municipal)',
+      distanceLabel: '3.1 km',
+      timeLabel: '11 min en ciclovía'
+    },
+    {
+      index: 3,
+      origin: 'Ciudad Universitaria (UNMSM)',
+      destination: 'Centro Histórico (Plaza San Martín)',
+      distanceLabel: '5.4 km',
+      timeLabel: '18 min en ciclovía'
+    }
+  ];
+
+  constructor(
+    private api: ApiService,
+    public i18n: I18nService,
+    private router: Router
+  ) {
+    this.summary = this.api.buildFallbackDashboardSummary();
+    this.community = this.api.buildFallbackCommunityImpact();
+    this.recommendation = this.api.buildFallbackRecommendation();
+  }
 
   ngOnInit(): void {
     this.api.getDashboardSummary().subscribe(res => (this.summary = res));
     this.api.getCommunityImpact().subscribe(res => (this.community = res));
     this.api.getRecommendations().subscribe(res => (this.recommendation = res));
+  }
+
+  launchQuickRoute(): void {
+    this.router.navigate(['/routes'], {
+      queryParams: { preset: this.selectedQuickPreset }
+    });
   }
 
   getBarHeightPercent(grams: number): number {
@@ -954,6 +519,46 @@ export class DashboardComponent implements OnInit {
   getModeEntries(mapObj: Record<string, number> | undefined): { mode: string; count: number }[] {
     if (!mapObj) return [];
     return Object.entries(mapObj).map(([mode, count]) => ({ mode, count }));
+  }
+
+  formatDay(day: string): string {
+    if (!day) return '';
+    const clean = day.trim().toUpperCase();
+    const dayMap: Record<string, string> = {
+      MON: 'Lun',
+      MONDAY: 'Lun',
+      LUN: 'Lun',
+      LUNES: 'Lun',
+      TUE: 'Mar',
+      TUESDAY: 'Mar',
+      MAR: 'Mar',
+      MARTES: 'Mar',
+      WED: 'Mié',
+      WEDNESDAY: 'Mié',
+      MIE: 'Mié',
+      MIÉ: 'Mié',
+      MIERCOLES: 'Mié',
+      MIÉRCOLES: 'Mié',
+      THU: 'Jue',
+      THURSDAY: 'Jue',
+      JUE: 'Jue',
+      JUEVES: 'Jue',
+      FRI: 'Vie',
+      FRIDAY: 'Vie',
+      VIE: 'Vie',
+      VIERNES: 'Vie',
+      SAT: 'Sáb',
+      SATURDAY: 'Sáb',
+      SAB: 'Sáb',
+      SÁB: 'Sáb',
+      SABADO: 'Sáb',
+      SÁBADO: 'Sáb',
+      SUN: 'Dom',
+      SUNDAY: 'Dom',
+      DOM: 'Dom',
+      DOMINGO: 'Dom'
+    };
+    return dayMap[clean] || day;
   }
 
   formatMode(mode: string): string {
