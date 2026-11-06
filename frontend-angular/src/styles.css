@@ -2236,29 +2236,29 @@ textarea {
 
 /* ==========================================================================
    PLAYFUL CARTOON / ILLUSTRATED ECO STYLE (REFERENCE IMAGE THEME)
-   Vibrant Lime (#6CC016), Sunny Yellow (#FFD24C), Sky Blue (#74C7EC),
-   Crisp White Blobs & 2.5px Dark Cartoon Outlines (#1E241E)
+   Vibrant Lime (#6CC016), Sunny Yellow (#FFD24C), Sky Blue (#5BC0EB),
+   Warm Cream (#FFFDF6), Sunny Mint (#EEFAE0) & 2.5px Cartoon Outlines (#1E241E)
    ========================================================================== */
 
 :root,
 [data-theme="light"] {
-  --bg-page: #F2FCE4;
+  --bg-page: #FFFDF6;
   --bg-card: #FFFFFF;
-  --bg-soft: #F7FBEF;
-  --bg-elevated: #E8F8D1;
+  --bg-soft: #F3FCE6;
+  --bg-elevated: #E6F9CC;
   --text-main: #1E241E;
-  --text-muted: #3F4D3F;
-  --text-subtle: #5C6B5C;
+  --text-muted: #384638;
+  --text-subtle: #566656;
   --border: #1E241E;
   --border-strong: #1E241E;
-  --emerald: #529E0B;
-  --emerald-hover: #428207;
-  --emerald-bright: #8CE52E;
-  --emerald-soft: #E8F8D1;
+  --emerald: #4E9A06;
+  --emerald-hover: #3D7A04;
+  --emerald-bright: #6CC016;
+  --emerald-soft: #E6F9CC;
   --emerald-border: #1E241E;
   --sunny: #FFD24C;
   --sunny-hover: #FFC21A;
-  --sky: #74C7EC;
+  --sky: #5BC0EB;
   --shadow-sm: 0 4px 0 #1E241E;
   --shadow-card: 0 6px 0 #1E241E;
   --radius-sm: 14px;
@@ -2267,25 +2267,25 @@ textarea {
 }
 
 [data-theme="dark"] {
-  --bg-page: #132015;
-  --bg-card: #1F3323;
-  --bg-soft: #27402C;
-  --bg-elevated: #2F4D35;
-  --text-main: #F7FBEF;
-  --text-muted: #CFE3C8;
-  --text-subtle: #9AB892;
-  --border: #0A110B;
-  --border-strong: #0A110B;
+  --bg-page: #131D2B;
+  --bg-card: #1F3044;
+  --bg-soft: #263B52;
+  --bg-elevated: #2E4661;
+  --text-main: #F8FAFC;
+  --text-muted: #D4E0ED;
+  --text-subtle: #9CB1C9;
+  --border: #0B121B;
+  --border-strong: #0B121B;
   --emerald: #8CE52E;
   --emerald-hover: #76C71A;
   --emerald-bright: #A4F24B;
   --emerald-soft: rgba(140, 229, 46, 0.2);
-  --emerald-border: #0A110B;
+  --emerald-border: #0B121B;
   --sunny: #FFD24C;
   --sunny-hover: #FFC21A;
   --sky: #74C7EC;
-  --shadow-sm: 0 4px 0 #0A110B;
-  --shadow-card: 0 6px 0 #0A110B;
+  --shadow-sm: 0 4px 0 #0B121B;
+  --shadow-card: 0 6px 0 #0B121B;
 }
 
 html,
@@ -2313,7 +2313,7 @@ strong,
 }
 
 [data-theme="dark"] .eco-navbar {
-  background: #1C3A13;
+  background: #235914;
 }
 
 .brand-mark-wrap {
@@ -2355,7 +2355,7 @@ strong,
 }
 
 [data-theme="dark"] .eco-nav-links {
-  background: #1F3323;
+  background: #1F3044;
 }
 
 .eco-nav-links a {
@@ -2382,8 +2382,8 @@ strong,
 
 [data-theme="dark"] .util-btn,
 [data-theme="dark"] .user-pill {
-  background: #1F3323;
-  color: #F7FBEF;
+  background: #1F3044;
+  color: #F8FAFC;
 }
 
 .user-pill-pts {
@@ -2409,7 +2409,7 @@ strong,
 }
 
 [data-theme="dark"] .cartoon-hero-banner {
-  background: #234712;
+  background: #235914;
 }
 
 .cartoon-banner-copy {
@@ -2437,7 +2437,7 @@ strong,
 }
 
 .cartoon-banner-sub {
-  color: #F7FFE8;
+  color: #FFFFFF;
   font-size: 0.98rem;
   font-weight: 700;
   margin-bottom: 1.15rem;
@@ -2503,19 +2503,19 @@ strong,
 }
 
 .onboarding-step.step-tint-green {
-  background: #E9FAD2;
+  background: #E7FCD2;
 }
 .onboarding-step.step-tint-yellow {
-  background: #FFF6D6;
+  background: #FFF4C8;
 }
 .onboarding-step.step-tint-blue {
-  background: #E3F6FD;
+  background: #DFF4FE;
 }
 
 [data-theme="dark"] .onboarding-step.step-tint-green,
 [data-theme="dark"] .onboarding-step.step-tint-yellow,
 [data-theme="dark"] .onboarding-step.step-tint-blue {
-  background: #1F3323;
+  background: #1F3044;
 }
 
 .step-icon-box,
@@ -2527,7 +2527,7 @@ strong,
   background: #FFFFFF !important;
   border: 2px solid #1E241E !important;
   box-shadow: 0 3px 0 #1E241E;
-  color: #1E241E !important;
+  color: #4E9A06 !important;
 }
 
 .step-num {
@@ -2540,23 +2540,23 @@ strong,
 }
 
 .eco-kpi-card.highlight {
-  background: #E9FAD2 !important;
+  background: #E7FCD2 !important;
 }
 .eco-kpi-card.kpi-yellow {
-  background: #FFF6D6 !important;
+  background: #FFF4C8 !important;
 }
 .eco-kpi-card.kpi-blue {
-  background: #E3F6FD !important;
+  background: #DFF4FE !important;
 }
 .eco-kpi-card.kpi-orange {
-  background: #FFEDE4 !important;
+  background: #FFE6D8 !important;
 }
 
 [data-theme="dark"] .eco-kpi-card.highlight,
 [data-theme="dark"] .eco-kpi-card.kpi-yellow,
 [data-theme="dark"] .eco-kpi-card.kpi-blue,
 [data-theme="dark"] .eco-kpi-card.kpi-orange {
-  background: #1F3323 !important;
+  background: #1F3044 !important;
 }
 
 .badge-pill,
@@ -2571,11 +2571,11 @@ strong,
 
 .bar-chart-container {
   border: 2.5px solid #1E241E;
-  background: #F7FBEF;
+  background: #F4FCEB;
 }
 
 [data-theme="dark"] .bar-chart-container {
-  background: #17281A;
+  background: #182536;
 }
 
 .bar-track {

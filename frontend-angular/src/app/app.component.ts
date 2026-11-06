@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.isBrowser) {
-      const savedTheme = (localStorage.getItem('ecocommute_theme') as 'light' | 'dark' | null) || 'light';
+      const savedTheme = (localStorage.getItem('ecocommute_theme_v3') as 'light' | 'dark' | null) || 'light';
       this.setTheme(savedTheme);
     }
     this.api.backendOnline$.subscribe(status => (this.backendOnline = status));
@@ -43,7 +43,7 @@ export class AppComponent implements OnInit {
     this.activeTheme = theme;
     if (this.isBrowser) {
       document.documentElement.setAttribute('data-theme', theme);
-      localStorage.setItem('ecocommute_theme', theme);
+      localStorage.setItem('ecocommute_theme_v3', theme);
     }
   }
 
