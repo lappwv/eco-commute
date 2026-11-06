@@ -323,7 +323,109 @@ export class ApiService {
   }
 
   // HU03, HU09 - Planificador OSRM + IA Gemini
+  private buildFallbackRoutePlan(req: RoutePlanRequest): RoutePlanResponse {
+    const oLat = req.origin.latitude;
+    const oLng = req.origin.longitude;
+    const dLat = req.destination.latitude;
+    const dLng = req.destination.longitude;
+    const dLatRad = ((dLat - oLat) * Math.PI) / 180;
+    const dLngRad = ((dLng - oLng) * Math.PI) / 180;
+    const a =
+      Math.sin(dLatRad / 2) ** 2 +
+      Math.cos((oLat * Math.PI) / 180) * Math.cos((dLat * Math.PI) / 180) * Math.sin(dLngRad / 2) ** 2;
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distKm = Math.max(0.8, Math.round(6371 * c * 1.32 * 100) / 100);
+    const baselineCo2 = Math.round(distKm * 170);
+    const mode: TransportMode =
+      req.selectedProfile === 'WALKING' ? 'WALKING' : req.selectedProfile === 'CAR' ? 'CAR_SOLO' : 'BICYCLE';
+    const modeCo2 = Math.round(distKm * MODE_CO2_G_PER_KM[mode]);
+    const savedCo2 = Math.max(0, baselineCo2 - modeCo2);
+    const durationMin = Math.max(4, Math.round((distKm / (mode === 'WALKING' ? 4.8 : mode === 'BICYCLE' ? 16 : 24)) * 60));
+    const pts = mode === 'CAR_SOLO' ? 0 : Math.max(10, Math.round(savedCo2 / 10));
+    const kcal = Math.round(distKm * MODE_KCAL_PER_KM[mode]);
+
+    const midLat = (oLat + dLat) / 2;
+    const midLng = (oLng + dLng) / 2;
+    const ecoPath = [
+      [oLat, oLng],
+      [midLat + 0.002, midLng - 0.002],
+      [dLat, dLng]
+    ];
+    const carPath = [
+      [oLat, oLng],
+      [midLat - 0.0025, midLng + 0.0025],
+      [dLat, dLng]
+    ];
+
+    return {
+      recommendedRouteId: 'route-ai-green-corridor',
+      baselineCarRoute: {
+        id: 'route-baseline-car',
+        title: 'Auto Particular (Referencia)',
+        mode: 'CAR_SOLO' as TransportMode,
+        modeDisplayName: 'Automóvil Particular',
+        distanceKm: distKm,
+        durationMinutes: Math.max(8, Math.round(durationMin * 1.35)),
+        co2EmittedGrams: baselineCo2,
+        co2SavedGrams: 0,
+        potentialPoints: 0,
+        caloriesBurned: Math.round(distKm * 2),
+        isAiRecommended: false,
+        aiInsight: null,
+        pathCoordinates: carPath,
+        summary: 'Ruta vehicular estándar por avenidas principales con tráfico habitual.'
+      },
+      standardProfileRoute: {
+        id: 'route-standard-direct',
+        title: mode === 'WALKING' ? 'Caminata Directa' : 'Bicicleta Directa',
+        mode,
+        modeDisplayName: MODE_DISPLAY[mode],
+        distanceKm: distKm,
+        durationMinutes: durationMin,
+        co2EmittedGrams: modeCo2,
+        co2SavedGrams: savedCo2,
+        potentialPoints: pts,
+        caloriesBurned: kcal,
+        isAiRecommended: false,
+        aiInsight: null,
+        pathCoordinates: [
+          [oLat, oLng],
+          [midLat, midLng],
+          [dLat, dLng]
+        ],
+        summary: 'Trazado más corto sobre la red vial de Lima Metropolitana.'
+      },
+      aiGreenCorridorRoute: {
+        id: 'route-ai-green-corridor',
+        title: req.enableAiOptimization ? 'Corredor Verde Recomendado' : 'Corredor Verde',
+        mode,
+        modeDisplayName: MODE_DISPLAY[mode],
+        distanceKm: Math.round(distKm * 0.98 * 100) / 100,
+        durationMinutes: Math.max(4, durationMin - 1),
+        co2EmittedGrams: modeCo2,
+        co2SavedGrams: savedCo2,
+        potentialPoints: pts + 10,
+        caloriesBurned: kcal,
+        isAiRecommended: req.enableAiOptimization,
+        aiInsight: req.enableAiOptimization
+          ? {
+              greenScore: 95,
+              safetyRating: 92,
+              shadeTreeCoveragePercent: 68,
+              cyclingInfrastructureQuality: mode === 'BICYCLE' ? 'Ciclovía segregada continua' : 'Senda peatonal arbolada',
+              healthBenefitSummary: `${kcal} kcal activas`,
+              treesEquivalentFraction: savedCo2 / 1000 / 21.77,
+              ecoReasoning: `Recorrido de ${distKm} km priorizando ciclovías segregadas, calles arboladas y cruces seguros. Evitas ${savedCo2} g de CO₂ frente al auto particular y ganas +10 puntos adicionales por elegir el corredor limpio.`
+            }
+          : null,
+        pathCoordinates: ecoPath,
+        summary: 'Corredor con menor exposición vehicular, mayor cobertura arbórea y vía segregada.'
+      }
+    };
+  }
+
   planRoutes(req: RoutePlanRequest): Observable<RoutePlanResponse> {
+    const fallback = this.buildFallbackRoutePlan(req);
     return this.http.post<RoutePlanResponse>(`${this.base}/api/v1/routes/plan`, req).pipe(
       timeout(2500),
       tap(() => this.backendOnlineSubject.next(true)),
@@ -342,110 +444,26 @@ export class ApiService {
           title: this.stripEmoji(res.aiGreenCorridorRoute.title)
         }
       })),
-      catchError(() => {
-        const oLat = req.origin.latitude;
-        const oLng = req.origin.longitude;
-        const dLat = req.destination.latitude;
-        const dLng = req.destination.longitude;
-        const dLatRad = ((dLat - oLat) * Math.PI) / 180;
-        const dLngRad = ((dLng - oLng) * Math.PI) / 180;
-        const a =
-          Math.sin(dLatRad / 2) ** 2 +
-          Math.cos((oLat * Math.PI) / 180) * Math.cos((dLat * Math.PI) / 180) * Math.sin(dLngRad / 2) ** 2;
-        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        const distKm = Math.max(0.8, Math.round(6371 * c * 1.32 * 100) / 100);
-        const baselineCo2 = Math.round(distKm * 170);
-        const mode: TransportMode = req.selectedProfile === 'WALKING' ? 'WALKING' : req.selectedProfile === 'CAR' ? 'CAR_SOLO' : 'BICYCLE';
-        const modeCo2 = Math.round(distKm * MODE_CO2_G_PER_KM[mode]);
-        const savedCo2 = Math.max(0, baselineCo2 - modeCo2);
-        const durationMin = Math.max(4, Math.round((distKm / (mode === 'WALKING' ? 4.8 : mode === 'BICYCLE' ? 16 : 24)) * 60));
-        const pts = mode === 'CAR_SOLO' ? 0 : Math.max(10, Math.round(savedCo2 / 10));
-        const kcal = Math.round(distKm * MODE_KCAL_PER_KM[mode]);
-
-        const midLat = (oLat + dLat) / 2;
-        const midLng = (oLng + dLng) / 2;
-        const ecoPath = [
-          [oLat, oLng],
-          [midLat + 0.002, midLng - 0.002],
-          [dLat, dLng]
-        ];
-        const carPath = [
-          [oLat, oLng],
-          [midLat - 0.0025, midLng + 0.0025],
-          [dLat, dLng]
-        ];
-
-        return of<RoutePlanResponse>({
-          recommendedRouteId: 'route-ai-green-corridor',
-          baselineCarRoute: {
-            id: 'route-baseline-car',
-            title: 'Auto Particular (Referencia)',
-            mode: 'CAR_SOLO' as TransportMode,
-            modeDisplayName: 'Automóvil Particular',
-            distanceKm: distKm,
-            durationMinutes: Math.max(8, Math.round(durationMin * 1.35)),
-            co2EmittedGrams: baselineCo2,
-            co2SavedGrams: 0,
-            potentialPoints: 0,
-            caloriesBurned: Math.round(distKm * 2),
-            isAiRecommended: false,
-            aiInsight: null,
-            pathCoordinates: carPath,
-            summary: 'Ruta vehicular estándar por avenidas principales con tráfico habitual.'
-          },
-          standardProfileRoute: {
-            id: 'route-standard-direct',
-            title: mode === 'WALKING' ? 'Caminata Directa' : 'Bicicleta Directa',
-            mode,
-            modeDisplayName: MODE_DISPLAY[mode],
-            distanceKm: distKm,
-            durationMinutes: durationMin,
-            co2EmittedGrams: modeCo2,
-            co2SavedGrams: savedCo2,
-            potentialPoints: pts,
-            caloriesBurned: kcal,
-            isAiRecommended: false,
-            aiInsight: null,
-            pathCoordinates: [
-              [oLat, oLng],
-              [midLat, midLng],
-              [dLat, dLng]
-            ],
-            summary: 'Trazado más corto sobre la red vial de Lima Metropolitana.'
-          },
-          aiGreenCorridorRoute: {
-            id: 'route-ai-green-corridor',
-            title: req.enableAiOptimization ? 'Corredor Verde Recomendado' : 'Corredor Verde',
-            mode,
-            modeDisplayName: MODE_DISPLAY[mode],
-            distanceKm: Math.round(distKm * 0.98 * 100) / 100,
-            durationMinutes: Math.max(4, durationMin - 1),
-            co2EmittedGrams: modeCo2,
-            co2SavedGrams: savedCo2,
-            potentialPoints: pts + 10,
-            caloriesBurned: kcal,
-            isAiRecommended: req.enableAiOptimization,
-            aiInsight: req.enableAiOptimization
-              ? {
-                  greenScore: 95,
-                  safetyRating: 92,
-                  shadeTreeCoveragePercent: 68,
-                  cyclingInfrastructureQuality: mode === 'BICYCLE' ? 'Ciclovía segregada continua' : 'Senda peatonal arbolada',
-                  healthBenefitSummary: `${kcal} kcal activas`,
-                  treesEquivalentFraction: savedCo2 / 1000 / 21.77,
-                  ecoReasoning: `Recorrido de ${distKm} km priorizando ciclovías segregadas, calles arboladas y cruces seguros. Evitas ${savedCo2} g de CO₂ frente al auto particular y ganas +10 puntos adicionales por elegir el corredor limpio.`
-                }
-              : null,
-            pathCoordinates: ecoPath,
-            summary: 'Corredor con menor exposición vehicular, mayor cobertura arbórea y vía segregada.'
-          }
-        });
-      })
+      catchError(() => of(fallback)),
+      startWith(fallback)
     );
   }
 
   // HU04, HU05 - CRUD de Viajes
+  private buildFallbackTripsPage(page = 0, size = 10): PageResponse<TripResponse> {
+    const start = page * size;
+    const slice = this.localTrips.slice(start, start + size);
+    return {
+      content: slice,
+      totalElements: this.localTrips.length,
+      totalPages: Math.max(1, Math.ceil(this.localTrips.length / size)),
+      number: page,
+      size
+    };
+  }
+
   getTripsHistory(page = 0, size = 10): Observable<PageResponse<TripResponse>> {
+    const fallback = this.buildFallbackTripsPage(page, size);
     const params = new HttpParams().set('page', page).set('size', size);
     return this.http.get<PageResponse<TripResponse>>(`${this.base}/api/v1/trips/history`, { params }).pipe(
       timeout(2500),
@@ -455,22 +473,14 @@ export class ApiService {
           this.localTrips = res.content;
         }
       }),
-      catchError(() => {
-        const start = page * size;
-        const slice = this.localTrips.slice(start, start + size);
-        return of({
-          content: slice,
-          totalElements: this.localTrips.length,
-          totalPages: Math.max(1, Math.ceil(this.localTrips.length / size)),
-          number: page,
-          size
-        });
-      })
+      catchError(() => of(this.buildFallbackTripsPage(page, size))),
+      startWith(fallback)
     );
   }
 
   recordTrip(req: TripRequest): Observable<TripResponse> {
     return this.http.post<TripResponse>(`${this.base}/api/v1/trips`, req).pipe(
+      timeout(4000),
       tap(saved => {
         this.backendOnlineSubject.next(true);
         this.localTrips = [saved, ...this.localTrips];
@@ -487,6 +497,7 @@ export class ApiService {
 
   updateTrip(tripId: string, req: TripRequest): Observable<TripResponse> {
     return this.http.put<TripResponse>(`${this.base}/api/v1/trips/${tripId}`, req).pipe(
+      timeout(4000),
       tap(updated => {
         this.backendOnlineSubject.next(true);
         this.localTrips = this.localTrips.map(t => (t.id === tripId ? updated : t));
@@ -503,6 +514,7 @@ export class ApiService {
 
   deleteTrip(tripId: string): Observable<void> {
     return this.http.delete<void>(`${this.base}/api/v1/trips/${tripId}`).pipe(
+      timeout(4000),
       tap(() => {
         this.backendOnlineSubject.next(true);
         this.localTrips = this.localTrips.filter(t => t.id !== tripId);
@@ -644,58 +656,70 @@ export class ApiService {
   }
 
   // HU06, HU10, HU11 - Gamificación
+  private buildFallbackGamificationStats(): GamificationStats {
+    const totalCo2SavedKg =
+      Math.round((this.localTrips.reduce((acc, t) => acc + t.co2SavedGrams, 0) / 1000) * 100) / 100;
+    const totalDistanceKm =
+      Math.round(this.localTrips.reduce((acc, t) => acc + t.distanceKm, 0) * 100) / 100;
+    const currentPoints = this.localTrips.reduce((acc, t) => acc + t.pointsEarned, 0);
+    return {
+      currentPoints,
+      totalCo2SavedKg,
+      totalDistanceKm,
+      streakDays: this.auth.currentUser?.streakDays || 5,
+      totalTrips: this.localTrips.length
+    };
+  }
+
   getGamificationStats(): Observable<GamificationStats> {
+    const fallback = this.buildFallbackGamificationStats();
     return this.http.get<GamificationStats>(`${this.base}/api/v1/gamification/stats`).pipe(
       timeout(2500),
-      catchError(() => {
-        const totalCo2SavedKg =
-          Math.round((this.localTrips.reduce((acc, t) => acc + t.co2SavedGrams, 0) / 1000) * 100) / 100;
-        const totalDistanceKm =
-          Math.round(this.localTrips.reduce((acc, t) => acc + t.distanceKm, 0) * 100) / 100;
-        const currentPoints = this.localTrips.reduce((acc, t) => acc + t.pointsEarned, 0);
-        return of({
-          currentPoints,
-          totalCo2SavedKg,
-          totalDistanceKm,
-          streakDays: this.auth.currentUser?.streakDays || 5,
-          totalTrips: this.localTrips.length
-        });
-      })
+      tap(() => this.backendOnlineSubject.next(true)),
+      catchError(() => of(this.buildFallbackGamificationStats())),
+      startWith(fallback)
     );
   }
 
+  private buildFallbackMilestones(): GamificationMilestones {
+    const points = this.localTrips.reduce((acc, t) => acc + t.pointsEarned, 0);
+    const nextMilestone =
+      points < 100 ? 100 : points < 300 ? 300 : points < 700 ? 700 : points < 1500 ? 1500 : 3000;
+    return {
+      currentLevel: this.auth.currentUser?.currentLevel || 3,
+      currentPoints: points,
+      nextMilestonePoints: nextMilestone,
+      progressPercentage: Math.min(100, Math.round((points / nextMilestone) * 100))
+    };
+  }
+
   getGamificationMilestones(): Observable<GamificationMilestones> {
+    const fallback = this.buildFallbackMilestones();
     return this.http.get<GamificationMilestones>(`${this.base}/api/v1/gamification/milestones`).pipe(
       timeout(2500),
-      catchError(() => {
-        const points = this.localTrips.reduce((acc, t) => acc + t.pointsEarned, 0);
-        const nextMilestone =
-          points < 100 ? 100 : points < 300 ? 300 : points < 700 ? 700 : points < 1500 ? 1500 : 3000;
-        return of({
-          currentLevel: this.auth.currentUser?.currentLevel || 2,
-          currentPoints: points,
-          nextMilestonePoints: nextMilestone,
-          progressPercentage: Math.min(100, Math.round((points / nextMilestone) * 100))
-        });
-      })
+      tap(() => this.backendOnlineSubject.next(true)),
+      catchError(() => of(this.buildFallbackMilestones())),
+      startWith(fallback)
     );
   }
 
   getUserBadges(): Observable<DashboardBadge[]> {
+    const pts = this.localTrips.reduce((acc, t) => acc + t.pointsEarned, 0);
+    const co2Kg = this.localTrips.reduce((acc, t) => acc + t.co2SavedGrams, 0) / 1000;
+    const fallback = this.computeLocalDashboardBadges(pts, co2Kg, this.localTrips.length);
     return this.http.get<DashboardBadge[]>(`${this.base}/api/v1/gamification/badges`).pipe(
       timeout(2500),
-      catchError(() => {
-        const pts = this.localTrips.reduce((acc, t) => acc + t.pointsEarned, 0);
-        const co2Kg = this.localTrips.reduce((acc, t) => acc + t.co2SavedGrams, 0) / 1000;
-        return of(this.computeLocalDashboardBadges(pts, co2Kg, this.localTrips.length));
-      })
+      tap(() => this.backendOnlineSubject.next(true)),
+      catchError(() => of(fallback)),
+      startWith(fallback)
     );
   }
 
   getBadgeCatalog(): Observable<BadgeCatalogItem[]> {
     return this.http.get<BadgeCatalogItem[]>(`${this.base}/api/v1/gamification/badges/catalog`).pipe(
       timeout(2500),
-      catchError(() => of(this.localBadges))
+      catchError(() => of(this.localBadges)),
+      startWith(this.localBadges)
     );
   }
 
@@ -718,118 +742,129 @@ export class ApiService {
   }
 
   // HU08 - Leaderboard Distrital
+  private buildFallbackLeaderboard(district?: string, sortBy: 'co2' | 'points' = 'co2'): LeaderboardEntry[] {
+    const seed: LeaderboardEntry[] = [
+      {
+        userId: 'u-sofia',
+        fullName: 'Sofía Morales',
+        avatarUrl: 'https://api.dicebear.com/7.x/bottts/svg?seed=sofia',
+        district: 'Surco',
+        totalCo2SavedKg: 12.33,
+        currentPoints: 1235,
+        tripsCount: 5,
+        streakDays: 5,
+        rank: 1
+      },
+      {
+        userId: 'u-mateo',
+        fullName: 'Mateo Silva',
+        avatarUrl: 'https://api.dicebear.com/7.x/bottts/svg?seed=mateo',
+        district: 'Lince',
+        totalCo2SavedKg: 12.24,
+        currentPoints: 1224,
+        tripsCount: 6,
+        streakDays: 6,
+        rank: 2
+      },
+      {
+        userId: 'u-elena',
+        fullName: 'Elena Rios',
+        avatarUrl: 'https://api.dicebear.com/7.x/bottts/svg?seed=elena',
+        district: 'San Isidro',
+        totalCo2SavedKg: 3.15,
+        currentPoints: 345,
+        tripsCount: 4,
+        streakDays: 5,
+        rank: 3
+      },
+      {
+        userId: 'u-diego',
+        fullName: 'Diego Torres',
+        avatarUrl: 'https://api.dicebear.com/7.x/bottts/svg?seed=diego',
+        district: 'Breña',
+        totalCo2SavedKg: 2.55,
+        currentPoints: 255,
+        tripsCount: 1,
+        streakDays: 1,
+        rank: 4
+      },
+      {
+        userId: 'u-carlos',
+        fullName: 'Carlos Mendoza',
+        avatarUrl: 'https://api.dicebear.com/7.x/bottts/svg?seed=carlos',
+        district: 'Surquillo',
+        totalCo2SavedKg: 2.21,
+        currentPoints: 221,
+        tripsCount: 2,
+        streakDays: 2,
+        rank: 5
+      },
+      {
+        userId: 'u-lucia',
+        fullName: 'Lucía Vega',
+        avatarUrl: 'https://api.dicebear.com/7.x/bottts/svg?seed=lucia',
+        district: 'Barranco',
+        totalCo2SavedKg: 1.36,
+        currentPoints: 136,
+        tripsCount: 1,
+        streakDays: 1,
+        rank: 6
+      }
+    ];
+    const filtered = district && district !== 'ALL' ? seed.filter(s => s.district === district) : seed;
+    const sorted = [...filtered].sort((a, b) =>
+      sortBy === 'points' ? b.currentPoints - a.currentPoints : b.totalCo2SavedKg - a.totalCo2SavedKg
+    );
+    return sorted.map((item, idx) => ({ ...item, rank: idx + 1 }));
+  }
+
   getLeaderboard(district?: string, sortBy: 'co2' | 'points' = 'co2'): Observable<LeaderboardEntry[]> {
+    const fallback = this.buildFallbackLeaderboard(district, sortBy);
     let params = new HttpParams().set('sortBy', sortBy);
     if (district && district !== 'ALL') {
       params = params.set('district', district);
     }
     return this.http.get<LeaderboardEntry[]>(`${this.base}/api/v1/leaderboard`, { params }).pipe(
       timeout(2500),
-      catchError(() => {
-        const seed: LeaderboardEntry[] = [
-          {
-            userId: 'u-sofia',
-            fullName: 'Sofía Morales',
-            avatarUrl: 'https://api.dicebear.com/7.x/bottts/svg?seed=sofia',
-            district: 'Surco',
-            totalCo2SavedKg: 12.33,
-            currentPoints: 1235,
-            tripsCount: 5,
-            streakDays: 5,
-            rank: 1
-          },
-          {
-            userId: 'u-mateo',
-            fullName: 'Mateo Silva',
-            avatarUrl: 'https://api.dicebear.com/7.x/bottts/svg?seed=mateo',
-            district: 'Lince',
-            totalCo2SavedKg: 12.24,
-            currentPoints: 1224,
-            tripsCount: 6,
-            streakDays: 6,
-            rank: 2
-          },
-          {
-            userId: 'u-elena',
-            fullName: 'Elena Rios',
-            avatarUrl: 'https://api.dicebear.com/7.x/bottts/svg?seed=elena',
-            district: 'San Isidro',
-            totalCo2SavedKg: 3.15,
-            currentPoints: 345,
-            tripsCount: 4,
-            streakDays: 5,
-            rank: 3
-          },
-          {
-            userId: 'u-diego',
-            fullName: 'Diego Torres',
-            avatarUrl: 'https://api.dicebear.com/7.x/bottts/svg?seed=diego',
-            district: 'Breña',
-            totalCo2SavedKg: 2.55,
-            currentPoints: 255,
-            tripsCount: 1,
-            streakDays: 1,
-            rank: 4
-          },
-          {
-            userId: 'u-carlos',
-            fullName: 'Carlos Mendoza',
-            avatarUrl: 'https://api.dicebear.com/7.x/bottts/svg?seed=carlos',
-            district: 'Surquillo',
-            totalCo2SavedKg: 2.21,
-            currentPoints: 221,
-            tripsCount: 2,
-            streakDays: 2,
-            rank: 5
-          },
-          {
-            userId: 'u-lucia',
-            fullName: 'Lucía Vega',
-            avatarUrl: 'https://api.dicebear.com/7.x/bottts/svg?seed=lucia',
-            district: 'Barranco',
-            totalCo2SavedKg: 1.36,
-            currentPoints: 136,
-            tripsCount: 1,
-            streakDays: 1,
-            rank: 6
-          }
-        ];
-        const filtered = district && district !== 'ALL' ? seed.filter(s => s.district === district) : seed;
-        const sorted = [...filtered].sort((a, b) =>
-          sortBy === 'points' ? b.currentPoints - a.currentPoints : b.totalCo2SavedKg - a.totalCo2SavedKg
-        );
-        return of(sorted.map((item, idx) => ({ ...item, rank: idx + 1 })));
-      })
+      tap(() => this.backendOnlineSubject.next(true)),
+      catchError(() => of(fallback)),
+      startWith(fallback)
     );
   }
 
   getDistrictsSummary(): Observable<DistrictsSummary> {
+    const fallback: DistrictsSummary = {
+      activeDistrictsCount: 6,
+      activeDistricts: ['San Isidro', 'Lince', 'Surco', 'Surquillo', 'Barranco', 'Breña'],
+      totalRankedUsers: 6
+    };
     return this.http.get<DistrictsSummary>(`${this.base}/api/v1/leaderboard/districts/summary`).pipe(
       timeout(2500),
-      catchError(() =>
-        of({
-          activeDistrictsCount: 6,
-          activeDistricts: ['San Isidro', 'Lince', 'Surco', 'Surquillo', 'Barranco', 'Breña'],
-          totalRankedUsers: 6
-        })
-      )
+      tap(() => this.backendOnlineSubject.next(true)),
+      catchError(() => of(fallback)),
+      startWith(fallback)
     );
   }
 
   // HU12, HU13, HU14 - Recompensas, Canjes y Retos
   getRewards(): Observable<RewardItem[]> {
+    const fallback = this.localRewards.filter(r => r.active);
     return this.http.get<RewardItem[]>(`${this.base}/api/v1/rewards`).pipe(
       timeout(2500),
       tap(list => {
+        this.backendOnlineSubject.next(true);
         if (list?.length) this.localRewards = list;
       }),
-      catchError(() => of(this.localRewards.filter(r => r.active)))
+      catchError(() => of(this.localRewards.filter(r => r.active))),
+      startWith(fallback)
     );
   }
 
   redeemReward(rewardId: number): Observable<RedeemResponse> {
     return this.http.post<RedeemResponse>(`${this.base}/api/v1/rewards/${rewardId}/redeem`, {}).pipe(
+      timeout(4000),
       tap(res => {
+        this.backendOnlineSubject.next(true);
         if (res?.redemption) {
           this.localRedemptions = [res.redemption, ...this.localRedemptions];
           this.auth.updatePointsAndLevel(-res.redemption.pointsUsed);
@@ -862,38 +897,50 @@ export class ApiService {
   }
 
   getRedemptions(): Observable<RedemptionItem[]> {
+    const fallback = [...this.localRedemptions];
     return this.http.get<RedemptionItem[]>(`${this.base}/api/v1/redemptions`).pipe(
       timeout(2500),
       tap(list => {
+        this.backendOnlineSubject.next(true);
         if (list) this.localRedemptions = list;
       }),
-      catchError(() => of(this.localRedemptions))
+      catchError(() => of([...this.localRedemptions])),
+      startWith(fallback)
     );
   }
 
   getChallenges(): Observable<ChallengeItem[]> {
+    const fallback = this.localChallenges.filter(c => c.active);
     return this.http.get<ChallengeItem[]>(`${this.base}/api/v1/challenges`).pipe(
       timeout(2500),
       tap(list => {
+        this.backendOnlineSubject.next(true);
         if (list?.length) this.localChallenges = list;
       }),
-      catchError(() => of(this.localChallenges.filter(c => c.active)))
+      catchError(() => of(this.localChallenges.filter(c => c.active))),
+      startWith(fallback)
     );
   }
 
   // HU12, HU13 - Administración CRUD (ROLE_ADMIN)
   getAdminRewards(): Observable<RewardItem[]> {
+    const fallback = [...this.localRewards];
     return this.http.get<RewardItem[]>(`${this.base}/api/v1/admin/rewards`).pipe(
+      timeout(2500),
       tap(list => {
+        this.backendOnlineSubject.next(true);
         if (list) this.localRewards = list;
       }),
-      catchError(() => of(this.localRewards))
+      catchError(() => of([...this.localRewards])),
+      startWith(fallback)
     );
   }
 
   createAdminReward(req: RewardRequest): Observable<RewardItem> {
     return this.http.post<RewardItem>(`${this.base}/api/v1/admin/rewards`, req).pipe(
+      timeout(4000),
       tap(saved => {
+        this.backendOnlineSubject.next(true);
         this.localRewards = [...this.localRewards, saved];
       }),
       catchError(() => {
@@ -906,7 +953,9 @@ export class ApiService {
 
   updateAdminReward(id: number, req: RewardRequest): Observable<RewardItem> {
     return this.http.put<RewardItem>(`${this.base}/api/v1/admin/rewards/${id}`, req).pipe(
+      timeout(4000),
       tap(updated => {
+        this.backendOnlineSubject.next(true);
         this.localRewards = this.localRewards.map(r => (r.id === id ? updated : r));
       }),
       catchError(() => {
@@ -919,7 +968,9 @@ export class ApiService {
 
   deleteAdminReward(id: number): Observable<void> {
     return this.http.delete<void>(`${this.base}/api/v1/admin/rewards/${id}`).pipe(
+      timeout(4000),
       tap(() => {
+        this.backendOnlineSubject.next(true);
         this.localRewards = this.localRewards.filter(r => r.id !== id);
       }),
       catchError(() => {
@@ -930,17 +981,23 @@ export class ApiService {
   }
 
   getAdminChallenges(): Observable<ChallengeItem[]> {
+    const fallback = [...this.localChallenges];
     return this.http.get<ChallengeItem[]>(`${this.base}/api/v1/admin/challenges`).pipe(
+      timeout(2500),
       tap(list => {
+        this.backendOnlineSubject.next(true);
         if (list) this.localChallenges = list;
       }),
-      catchError(() => of(this.localChallenges))
+      catchError(() => of([...this.localChallenges])),
+      startWith(fallback)
     );
   }
 
   createAdminChallenge(req: ChallengeRequest): Observable<ChallengeItem> {
     return this.http.post<ChallengeItem>(`${this.base}/api/v1/admin/challenges`, req).pipe(
+      timeout(4000),
       tap(saved => {
+        this.backendOnlineSubject.next(true);
         this.localChallenges = [...this.localChallenges, saved];
       }),
       catchError(() => {
@@ -953,7 +1010,9 @@ export class ApiService {
 
   updateAdminChallenge(id: number, req: ChallengeRequest): Observable<ChallengeItem> {
     return this.http.put<ChallengeItem>(`${this.base}/api/v1/admin/challenges/${id}`, req).pipe(
+      timeout(4000),
       tap(updated => {
+        this.backendOnlineSubject.next(true);
         this.localChallenges = this.localChallenges.map(c => (c.id === id ? updated : c));
       }),
       catchError(() => {
@@ -966,7 +1025,9 @@ export class ApiService {
 
   deleteAdminChallenge(id: number): Observable<void> {
     return this.http.delete<void>(`${this.base}/api/v1/admin/challenges/${id}`).pipe(
+      timeout(4000),
       tap(() => {
+        this.backendOnlineSubject.next(true);
         this.localChallenges = this.localChallenges.filter(c => c.id !== id);
       }),
       catchError(() => {

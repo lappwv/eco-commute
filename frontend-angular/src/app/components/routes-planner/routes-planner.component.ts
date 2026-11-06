@@ -294,13 +294,20 @@ export class RoutesPlannerComponent implements OnInit, AfterViewInit {
     @Inject(PLATFORM_ID) platformId: object,
     private api: ApiService,
     public i18n: I18nService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
   }
 
   ngOnInit(): void {
-    this.calculateRoutes();
+    const rawPreset = this.route.snapshot.queryParamMap.get('preset');
+    const idx = rawPreset !== null ? Number(rawPreset) : NaN;
+    if (!Number.isNaN(idx) && idx >= 0 && idx < this.presets.length) {
+      this.applyPreset(this.presets[idx], idx);
+    } else {
+      this.calculateRoutes();
+    }
   }
 
   async ngAfterViewInit(): Promise<void> {

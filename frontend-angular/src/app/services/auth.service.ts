@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, catchError, map, of, tap } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, of, startWith, tap, timeout } from 'rxjs';
 import { AuthResponse, LoginRequest, RegisterRequest, UserProfile } from '../models/api.models';
 
 export const DEFAULT_RENDER_API = 'https://ecocommute-backend-a14m.onrender.com';
@@ -49,13 +49,15 @@ export class AuthService {
       const savedUser = localStorage.getItem('ecocommute_user');
       if (savedUser) {
         try {
-          this.currentUserSubject.next(JSON.parse(savedUser));
+          const parsed = JSON.parse(savedUser) as AuthResponse;
+          this.setSession(parsed);
         } catch {
           this.setSession(DEMO_USER_AUTH);
         }
       } else {
         this.setSession(DEMO_USER_AUTH);
       }
+      this.trySilentBackendTokenUpgrade();
     }
   }
 
@@ -69,6 +71,7 @@ export class AuthService {
     if (typeof window !== 'undefined') {
       localStorage.setItem('ecocommute_api_base', clean);
     }
+    this.trySilentBackendTokenUpgrade();
   }
 
   get currentUser(): AuthResponse | null {
@@ -83,8 +86,36 @@ export class AuthService {
     return this.currentUserSubject.value?.role === 'ROLE_ADMIN';
   }
 
+  private trySilentBackendTokenUpgrade(): void {
+    const u = this.currentUserSubject.value;
+    if (!u || !u.token) return;
+    const isPlaceholder = u.token.startsWith('demo-jwt-token-') || u.token.startsWith('resilient-jwt-');
+    if (!isPlaceholder) return;
+
+    let creds: LoginRequest | null = null;
+    if (u.email.toLowerCase() === 'demo@ecocommute.org') {
+      creds = { email: 'demo@ecocommute.org', password: 'Demo123!' };
+    } else if (u.email.toLowerCase() === 'admin@ecocommute.org') {
+      creds = { email: 'admin@ecocommute.org', password: 'Admin123!' };
+    }
+    if (!creds) return;
+
+    this.http
+      .post<AuthResponse>(`${this.apiBase}/api/v1/auth/login`, creds)
+      .pipe(
+        timeout(8000),
+        catchError(() => of(null))
+      )
+      .subscribe(realAuth => {
+        if (realAuth?.token && this.currentUserSubject.value?.email.toLowerCase() === realAuth.email.toLowerCase()) {
+          this.setSession(realAuth);
+        }
+      });
+  }
+
   login(payload: LoginRequest): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.apiBase}/api/v1/auth/login`, payload).pipe(
+      timeout(3500),
       tap(res => this.setSession(res)),
       catchError(err => {
         if (err?.status === 401 || err?.status === 400) {
@@ -93,10 +124,12 @@ export class AuthService {
         // Resilient fallback when Render free tier is cold-starting
         if (payload.email.toLowerCase() === 'admin@ecocommute.org' && payload.password === 'Admin123!') {
           this.setSession(DEMO_ADMIN_AUTH);
+          setTimeout(() => this.trySilentBackendTokenUpgrade(), 8000);
           return of(DEMO_ADMIN_AUTH);
         }
         if (payload.email.toLowerCase() === 'demo@ecocommute.org' && payload.password === 'Demo123!') {
           this.setSession(DEMO_USER_AUTH);
+          setTimeout(() => this.trySilentBackendTokenUpgrade(), 8000);
           return of(DEMO_USER_AUTH);
         }
         const customUser: AuthResponse = {
@@ -119,6 +152,7 @@ export class AuthService {
 
   register(payload: RegisterRequest): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.apiBase}/api/v1/auth/register`, payload).pipe(
+      timeout(3500),
       tap(res => this.setSession(res)),
       catchError(err => {
         if (err?.status === 400 || err?.status === 409) {
@@ -142,38 +176,43 @@ export class AuthService {
     );
   }
 
+  buildFallbackProfile(): UserProfile {
+    const u = this.currentUser || DEMO_USER_AUTH;
+    return {
+      id: u.id,
+      email: u.email,
+      fullName: u.fullName,
+      avatarUrl: u.avatarUrl,
+      role: u.role,
+      currentPoints: u.currentPoints,
+      currentLevel: u.currentLevel,
+      streakDays: u.streakDays,
+      hasBicycle: true,
+      maxWalkingMinutes: 30,
+      totalCo2SavedKg: Math.round(18.5 * 0.17 * 100) / 100,
+      totalDistanceKm: 18.5,
+      totalTrips: 4,
+      totalCaloriesBurned: 580,
+      treesEquivalent: Math.round(((18.5 * 0.17) / 21.77) * 100) / 100,
+      badges: [
+        {
+          id: 1,
+          code: 'FIRST_STEP',
+          title: 'Primer Paso Verde',
+          description: 'Completaste tu primer viaje sostenible en EcoCommute',
+          iconEmoji: 'leaf',
+          awardedAt: new Date().toISOString()
+        }
+      ]
+    };
+  }
+
   getMyProfile(): Observable<UserProfile> {
+    const fallback = this.buildFallbackProfile();
     return this.http.get<UserProfile>(`${this.apiBase}/api/v1/users/me`).pipe(
-      catchError(() => {
-        const u = this.currentUser || DEMO_USER_AUTH;
-        return of({
-          id: u.id,
-          email: u.email,
-          fullName: u.fullName,
-          avatarUrl: u.avatarUrl,
-          role: u.role,
-          currentPoints: u.currentPoints,
-          currentLevel: u.currentLevel,
-          streakDays: u.streakDays,
-          hasBicycle: true,
-          maxWalkingMinutes: 30,
-          totalCo2SavedKg: 18.5 * 0.17,
-          totalDistanceKm: 18.5,
-          totalTrips: 4,
-          totalCaloriesBurned: 580,
-          treesEquivalent: (18.5 * 0.17) / 21.77,
-          badges: [
-            {
-              id: 1,
-              code: 'FIRST_STEP',
-              title: 'Primer Paso Verde',
-              description: 'Completaste tu primer viaje sostenible en EcoCommute',
-              iconEmoji: 'leaf',
-              awardedAt: new Date().toISOString()
-            }
-          ]
-        });
-      })
+      timeout(2500),
+      catchError(() => of(fallback)),
+      startWith(fallback)
     );
   }
 
