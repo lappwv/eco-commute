@@ -130,7 +130,7 @@ const translations = {
     "nav.impact": "Calculadora de Ahorro",
     "nav.terms": "Términos y Privacidad",
 
-    "hero.title": "PEDALEA, EXPLORA, <em>CUIDA TU CIUDAD</em>",
+    "hero.title": "Pedalea, explora y <em>transforma tu ciudad</em>",
     "hero.lead":
       "Planifica tu ruta en bicicleta, scooter o a pie, compara tiempos frente al tráfico vehicular y transforma cada kilómetro sin humo en ahorro económico, salud y recompensas.",
     "hero.btn_map": "Probar rutas en el mapa",
