@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="EcoCommute Lima — Movilidad sostenible inteligente. Planifica tu ruta, compara alternativas de transporte y descubre cuánto tiempo, dinero y CO₂ ahorras cada día."
+      content="EcoCommute Lima — Muévete feliz en bici, scooter o a pie por Lima. Ahorra tiempo, cuida el aire y gana premios reales."
     />
-    <meta name="theme-color" content="#FAF9F5" />
+    <meta name="theme-color" content="#6CC016" />
     <link rel="icon" type="image/png" href="./media/logo-ecocommute.png" />
-    <title>EcoCommute — Movilidad Sostenible en Lima</title>
+    <title>EcoCommute — Muévete Feliz y Cuida Lima</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=JetBrains+Mono:wght@600;700&family=Nunito:wght@500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <link
@@ -23,37 +23,39 @@
       crossorigin=""
     />
 
-    <link rel="stylesheet" href="./styles.css?v=20261104c" />
+    <link rel="stylesheet" href="./styles.css?v=20261106a" />
   </head>
   <body>
     <div class="scroll-progress" aria-hidden="true"></div>
     <a class="skip-link" href="#main-content" data-i18n="nav.skip">Saltar al contenido</a>
 
-    <!-- ==================== NAVBAR ==================== -->
+    <!-- ==================== NAVBAR PLAYFUL ==================== -->
     <header class="topbar" role="banner">
       <div class="container topbar-inner">
         <a class="brand" href="#inicio" aria-label="EcoCommute Inicio">
-          <img
-            class="brand-logo"
-            src="./media/logo-ecocommute.png"
-            alt="EcoCommute Logo"
-            width="30"
-            height="37"
-          />
+          <span class="brand-cartoon-badge">
+            <img
+              class="brand-logo"
+              src="./media/logo-ecocommute.png"
+              alt="EcoCommute Logo"
+              width="28"
+              height="34"
+            />
+          </span>
           <span class="brand-text">EcoCommute</span>
         </a>
 
         <nav class="nav" role="navigation" aria-label="Navegación principal">
-          <a href="#como-funciona" data-i18n="nav.how">Cómo funciona</a>
-          <a href="#inicio" data-i18n="nav.routes">Rutas en Lima</a>
-          <a href="#vehiculos" data-i18n="nav.vehicles">Comparativa</a>
+          <a href="#como-funciona" data-i18n="nav.how">¿Cómo funciona?</a>
+          <a href="#inicio" data-i18n="nav.routes">Mapa de Lima</a>
+          <a href="#vehiculos" data-i18n="nav.vehicles">Transporte</a>
           <a href="#alquimia" data-i18n="nav.impact">Calculadora</a>
           <a href="./app/#/dashboard" class="nav-cta-pill">
             <svg class="brand-inline-svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M19.5 4.5C13 4.5 7.5 7.8 5.5 14.2C5 15.9 5 17.7 5.5 19.5C7.3 20 9.1 20 10.8 19.5C17.2 17.5 20.5 12 19.5 4.5Z" fill="currentColor" fill-opacity="0.22" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M4.5 19.5C8.5 15.5 12 12 15.5 9.5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+              <path d="M19.5 4.5C13 4.5 7.5 7.8 5.5 14.2C5 15.9 5 17.7 5.5 19.5C7.3 20 9.1 20 10.8 19.5C17.2 17.5 20.5 12 19.5 4.5Z" fill="#6CC016" stroke="#1E241E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M4.5 19.5C8.5 15.5 12 12 15.5 9.5" stroke="#1E241E" stroke-width="2.2" stroke-linecap="round"/>
             </svg>
-            <span data-i18n="nav.webapp">Ir a mi panel</span>
+            <span data-i18n="nav.webapp">¡Entrar a la App!</span>
           </a>
         </nav>
 
@@ -65,7 +67,7 @@
               data-theme-target="light"
               aria-pressed="true"
             >
-              <span>Claro</span>
+              <span>Día</span>
             </button>
             <button
               type="button"
@@ -73,7 +75,7 @@
               data-theme-target="dark"
               aria-pressed="false"
             >
-              <span>Oscuro</span>
+              <span>Noche</span>
             </button>
           </div>
 
@@ -93,80 +95,120 @@
     </header>
 
     <main id="main-content" role="main">
-      <!-- ==================== 1. HERO + RUTAS REALES EN LIMA ==================== -->
+      <!-- ==================== 1. HERO PLAYFUL (INSPIRADO EN LA REFERENCIA) ==================== -->
       <section id="inicio" class="hero-section">
+        <!-- Domo blanco superior y círculo blanco derecho (como en la imagen de referencia) -->
+        <div class="hero-top-white-dome" aria-hidden="true"></div>
+        <div class="hero-right-white-circle" aria-hidden="true"></div>
+
+        <!-- Elementos flotantes cartoon (burbujas, nubes y símbolos de reciclaje) -->
+        <div class="hero-doodles" aria-hidden="true">
+          <span class="doodle-bubble b1"></span>
+          <span class="doodle-bubble b2"></span>
+          <span class="doodle-bubble b3"></span>
+          <span class="doodle-bubble b4"></span>
+          <svg class="doodle-cloud c1" viewBox="0 0 120 64" fill="none">
+            <path d="M26 52H96C106.5 52 114 44.5 114 35C114 26.2 107.2 19 98.5 18.2C94.5 9.5 85.5 4 75 4C62.2 4 51.5 12.8 49.2 24.8C46.5 23.6 43.5 23 40.2 23C29.8 23 21.2 30.8 20.2 41C13.2 42.2 8 47.2 8 49.5C8 51.2 16 52 26 52Z" fill="#FFFFFF" stroke="#1E241E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <svg class="doodle-cloud c2" viewBox="0 0 120 64" fill="none">
+            <path d="M26 52H96C106.5 52 114 44.5 114 35C114 26.2 107.2 19 98.5 18.2C94.5 9.5 85.5 4 75 4C62.2 4 51.5 12.8 49.2 24.8C46.5 23.6 43.5 23 40.2 23C29.8 23 21.2 30.8 20.2 41C13.2 42.2 8 47.2 8 49.5C8 51.2 16 52 26 52Z" fill="#FFFFFF" stroke="#1E241E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
         <div class="container hero-grid">
-          <!-- Columna Izquierda: Editorial & Propuesta de Valor -->
+          <!-- Columna Izquierda sobre fondo verde lima vibrante -->
           <div class="hero-copy" data-scroll-reveal>
             <div class="hero-copy-main">
               <span class="hero-kicker">
                 <svg class="brand-inline-svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M19.5 4.5C13 4.5 7.5 7.8 5.5 14.2C5 15.9 5 17.7 5.5 19.5C7.3 20 9.1 20 10.8 19.5C17.2 17.5 20.5 12 19.5 4.5Z" fill="currentColor" fill-opacity="0.2" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M4.5 19.5C8.5 15.5 12 12 15.5 9.5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+                  <path d="M19.5 4.5C13 4.5 7.5 7.8 5.5 14.2C5 15.9 5 17.7 5.5 19.5C7.3 20 9.1 20 10.8 19.5C17.2 17.5 20.5 12 19.5 4.5Z" fill="#FFD24C" stroke="#1E241E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M4.5 19.5C8.5 15.5 12 12 15.5 9.5" stroke="#1E241E" stroke-width="2.2" stroke-linecap="round"/>
                 </svg>
-                <span data-i18n="hero.kicker">Movilidad urbana baja en carbono · Lima Metropolitana</span>
+                <span data-i18n="hero.kicker">¡Muévete sin humo por Lima!</span>
               </span>
 
               <h1 class="hero-headline" data-i18n="hero.title">
-                Deja el tráfico atrás. <em>Muévete libre</em> por Lima.
+                PEDALEA, EXPLORA, <em>CUIDA TU CIUDAD</em>
               </h1>
 
               <p class="lead" data-i18n="hero.lead">
-                Planifica tu ruta en bicicleta, scooter o a pie, compara tiempos frente al tráfico vehicular y transforma cada kilómetro sin humo en ahorro económico, salud y beneficios en comercios locales.
+                Elige tu ruta en bici, scooter o caminando, sáltate el tráfico y convierte cada kilómetro limpio en puntos para canjear cafés, paseos y premios reales.
               </p>
 
               <div class="hero-actions">
                 <a class="button primary" href="./app/#/dashboard">
-                  <svg class="brand-inline-svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <rect x="3.5" y="3.5" width="7.5" height="9" rx="2" fill="currentColor" fill-opacity="0.22" stroke="currentColor" stroke-width="1.9"/>
-                    <rect x="13" y="3.5" width="7.5" height="5.5" rx="2" stroke="currentColor" stroke-width="1.9"/>
-                    <rect x="13" y="11.5" width="7.5" height="9" rx="2" fill="currentColor" fill-opacity="0.22" stroke="currentColor" stroke-width="1.9"/>
-                    <rect x="3.5" y="15" width="7.5" height="5.5" rx="2" stroke="currentColor" stroke-width="1.9"/>
-                  </svg>
-                  <span data-i18n="hero.btn_webapp">Empezar a medir mis viajes</span>
+                  <span data-i18n="hero.btn_webapp">¡Empezar ahora!</span>
                 </a>
                 <a class="button secondary" href="./app/#/routes">
-                  <svg class="brand-inline-svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <circle cx="6.5" cy="17.5" r="2.75" fill="currentColor" fill-opacity="0.2" stroke="currentColor" stroke-width="1.85"/>
-                    <circle cx="17.5" cy="6.5" r="2.75" fill="currentColor" fill-opacity="0.2" stroke="currentColor" stroke-width="1.85"/>
-                    <path d="M9.2 17.5H13.5C15.433 17.5 17 15.933 17 14C17 12.067 15.433 10.5 13.5 10.5H10.5C8.567 10.5 7 8.933 7 7C7 6.724 7.224 6.5 7.5 6.5H14.8" stroke="currentColor" stroke-width="1.85" stroke-linecap="round"/>
-                  </svg>
-                  <span data-i18n="hero.btn_planner">Comparar mi ruta en Lima</span>
+                  <span data-i18n="hero.btn_planner">Ver mapa de rutas</span>
                 </a>
               </div>
             </div>
 
-            <!-- Resumen limpio de métricas -->
+            <!-- Ilustración Cartoon Vectorial estilo Freepik (Arbustos, Nubes, Bici, Ciudad Limpia) -->
+            <div class="hero-cartoon-scene" aria-hidden="true">
+              <svg viewBox="0 0 460 155" fill="none" class="cartoon-scene-svg">
+                <!-- Arbustos verdes con brillos blancos -->
+                <path d="M35 142C24 142 16 133 16 122C16 111 25 103 36 103C39 87 53 75 70 75C85 75 98 85 102 99C106 97 111 96 116 96C131 96 143 108 143 123C143 134 135 142 124 142H35Z" fill="#529E0B" stroke="#1E241E" stroke-width="3" stroke-linejoin="round"/>
+                <path d="M58 142C49 142 42 135 42 126C42 117 49 110 58 110C62 98 73 90 86 90C101 90 113 101 115 115C124 115 131 122 131 131C131 137 126 142 120 142H58Z" fill="#8CE52E" stroke="#1E241E" stroke-width="3" stroke-linejoin="round"/>
+                <path d="M72 100C78 96 86 96 92 100" stroke="#FFFFFF" stroke-width="2.8" stroke-linecap="round"/>
+                <!-- Estación Amarilla EcoCommute & Bicicleta Cartoon -->
+                <rect x="165" y="42" width="84" height="100" rx="10" fill="#FFB224" stroke="#1E241E" stroke-width="3"/>
+                <rect x="157" y="30" width="100" height="18" rx="7" fill="#FF9800" stroke="#1E241E" stroke-width="3"/>
+                <path d="M190 30V21C190 16.5 194.5 13 200 13H214C219.5 13 224 16.5 224 21V30" stroke="#1E241E" stroke-width="3"/>
+                <line x1="185" y1="62" x2="185" y2="124" stroke="#FFD97D" stroke-width="3.5" stroke-linecap="round"/>
+                <line x1="207" y1="62" x2="207" y2="124" stroke="#FFD97D" stroke-width="3.5" stroke-linecap="round"/>
+                <line x1="229" y1="62" x2="229" y2="124" stroke="#FFD97D" stroke-width="3.5" stroke-linecap="round"/>
+                <!-- Botella / Termo Eco Azul -->
+                <rect x="262" y="76" width="38" height="66" rx="12" fill="#74C7EC" stroke="#1E241E" stroke-width="3"/>
+                <rect x="272" y="62" width="18" height="14" rx="4" fill="#FFFFFF" stroke="#1E241E" stroke-width="3"/>
+                <rect x="270" y="54" width="22" height="9" rx="4" fill="#FF9800" stroke="#1E241E" stroke-width="2.8"/>
+                <rect x="262" y="96" width="38" height="24" fill="#FFD24C" stroke="#1E241E" stroke-width="3"/>
+                <!-- Bicicleta Urbana Alegre -->
+                <circle cx="336" cy="118" r="22" fill="#FFFFFF" stroke="#1E241E" stroke-width="3.2"/>
+                <circle cx="336" cy="118" r="13" fill="#74C7EC" stroke="#1E241E" stroke-width="2.5"/>
+                <circle cx="412" cy="118" r="22" fill="#FFFFFF" stroke="#1E241E" stroke-width="3.2"/>
+                <circle cx="412" cy="118" r="13" fill="#74C7EC" stroke="#1E241E" stroke-width="2.5"/>
+                <path d="M336 118L360 82H396L374 118H336Z" fill="none" stroke="#FF6B4A" stroke-width="4" stroke-linejoin="round"/>
+                <path d="M396 82L412 118" stroke="#1E241E" stroke-width="3.5" stroke-linecap="round"/>
+                <path d="M352 82H368" stroke="#1E241E" stroke-width="4" stroke-linecap="round"/>
+                <path d="M388 70H404" stroke="#1E241E" stroke-width="3.5" stroke-linecap="round"/>
+                <!-- Suelo cartoon -->
+                <line x1="8" y1="142" x2="450" y2="142" stroke="#1E241E" stroke-width="3.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+
+            <!-- Resumen de métricas en píldoras cartoon -->
             <dl class="hero-metrics" aria-label="Indicadores clave">
               <div class="metric-item">
-                <dt data-i18n="hero.stat_car_label">En auto promedio</dt>
+                <dt data-i18n="hero.stat_car_label">En auto</dt>
                 <dd>
                   152 g
-                  <small data-i18n="hero.stat_car_sub">CO₂ por kilómetro</small>
+                  <small data-i18n="hero.stat_car_sub">CO₂ por km</small>
                 </dd>
               </div>
               <div class="metric-item">
                 <dt data-i18n="hero.stat_eco_label">En bici o a pie</dt>
                 <dd class="text-eco">
                   0 g
-                  <small data-i18n="hero.stat_eco_sub">Emisiones directas</small>
+                  <small data-i18n="hero.stat_eco_sub">¡Cero humo!</small>
                 </dd>
               </div>
               <div class="metric-item">
-                <dt data-i18n="hero.stat_saved_label">CO₂ evitado hoy</dt>
+                <dt data-i18n="hero.stat_saved_label">Aire limpio hoy</dt>
                 <dd>
                   <span id="session-recycled-co2">1,920 g</span>
-                  <small data-i18n="hero.stat_saved_sub">En rutas activas</small>
+                  <small data-i18n="hero.stat_saved_sub">CO₂ ahorrado</small>
                 </dd>
               </div>
             </dl>
           </div>
 
-          <!-- Columna Derecha: Mapa Real de Lima con Rutas Predeterminadas -->
+          <!-- Columna Derecha dentro del gran círculo blanco: Mapa Interactivo de Lima -->
           <aside id="simulador" class="sim-card" aria-label="Mapa de rutas en Lima" data-scroll-reveal>
             <div class="sim-header">
               <div>
-                <span class="sim-eyebrow" data-i18n="map.eyebrow">Mapa interactivo · Rutas reales en Lima</span>
+                <span class="sim-eyebrow" data-i18n="map.eyebrow">Explora las rutas de Lima</span>
                 <h2 class="note-route" id="sim-route-title">Miraflores → San Isidro</h2>
               </div>
               <span class="corridor-tag" id="sim-coords">Ciclovía Av. Arequipa · 4.2 km</span>
@@ -207,11 +249,11 @@
             <!-- Resumen compacto del recorrido seleccionado -->
             <ul class="note-figures">
               <li>
-                <span data-i18n="map.stat_dist">Distancia real</span>
+                <span data-i18n="map.stat_dist">Distancia</span>
                 <strong id="sim-distance-output">4.2 km</strong>
               </li>
               <li>
-                <span data-i18n="map.stat_co2">CO₂ evitado</span>
+                <span data-i18n="map.stat_co2">Humo evitado</span>
                 <strong id="sim-car-co2" class="val-emerald">-638 g</strong>
               </li>
               <li>
@@ -225,71 +267,70 @@
                 Recorrido directo por la berma central de Av. Arequipa desde el Óvalo de Miraflores hasta el centro financiero de San Isidro.
               </p>
               <button type="button" class="btn-recycle-action" id="recycle-trip-btn">
-                <span data-i18n="sim.btn_recycle_trip">Registrar ruta</span>
+                <span data-i18n="sim.btn_recycle_trip">¡Sumar ruta!</span>
               </button>
             </div>
           </aside>
         </div>
       </section>
 
-      <!-- ==================== 1B. CÓMO FUNCIONA EN 3 PASOS CLAROS ==================== -->
+      <!-- ==================== 1B. CÓMO FUNCIONA EN 3 PASOS SÚPER FÁCILES ==================== -->
       <section id="como-funciona" class="how-section">
         <div class="container">
           <div class="how-header" data-scroll-reveal>
-            <span class="section-eyebrow" data-i18n="how.eyebrow">Simple, claro y pensado para tu día a día</span>
-            <h2 data-i18n="how.title">¿Para qué sirve EcoCommute?</h2>
+            <span class="section-eyebrow" data-i18n="how.eyebrow">¡Tan fácil como jugar!</span>
+            <h2 data-i18n="how.title">¿Cómo funciona EcoCommute en 3 pasos?</h2>
           </div>
 
           <div class="how-it-works-strip" data-scroll-reveal>
-            <a href="./app/#/routes" class="how-step-card">
+            <a href="./app/#/routes" class="how-step-card step-green">
               <div class="how-step-top">
                 <span class="how-step-icon">
                   <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <circle cx="6.5" cy="17.5" r="2.75" fill="currentColor" fill-opacity="0.2" stroke="currentColor" stroke-width="1.85"/>
-                    <circle cx="17.5" cy="6.5" r="2.75" fill="currentColor" fill-opacity="0.2" stroke="currentColor" stroke-width="1.85"/>
-                    <path d="M9.2 17.5H13.5C15.433 17.5 17 15.933 17 14C17 12.067 15.433 10.5 13.5 10.5H10.5C8.567 10.5 7 8.933 7 7C7 6.724 7.224 6.5 7.5 6.5H14.8" stroke="currentColor" stroke-width="1.85" stroke-linecap="round"/>
+                    <circle cx="6.5" cy="17.5" r="3" fill="#FFD24C" stroke="#1E241E" stroke-width="2"/>
+                    <circle cx="17.5" cy="6.5" r="3" fill="#8CE52E" stroke="#1E241E" stroke-width="2"/>
+                    <path d="M9.5 17.5H13.5C15.433 17.5 17 15.933 17 14C17 12.067 15.433 10.5 13.5 10.5H10.5C8.567 10.5 7 8.933 7 7C7 6.724 7.224 6.5 7.5 6.5H14.5" stroke="#1E241E" stroke-width="2.2" stroke-linecap="round"/>
                   </svg>
                 </span>
-                <span class="how-step-num">PASO 01</span>
+                <span class="how-step-num">PASO 1</span>
               </div>
-              <h3 data-i18n="how.step1_title">Elige tu corredor en Lima</h3>
+              <h3 data-i18n="how.step1_title">1. Elige tu camino</h3>
               <p data-i18n="how.step1_desc">
-                Compara cuánto tardas por ciclovías segregadas o a pie frente al tráfico en auto entre San Isidro, Miraflores, Jesús María, Lince o Barranco.
+                Mira en el mapa qué ciclovía o vereda te lleva más rápido y seguro por Lima sin quedarte atrapado en el tráfico.
               </p>
             </a>
 
-            <a href="./app/#/trips" class="how-step-card">
+            <a href="./app/#/trips" class="how-step-card step-yellow">
               <div class="how-step-top">
                 <span class="how-step-icon">
                   <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <circle cx="5.75" cy="16.75" r="3.5" fill="currentColor" fill-opacity="0.16" stroke="currentColor" stroke-width="1.85"/>
-                    <circle cx="18.25" cy="16.75" r="3.5" fill="currentColor" fill-opacity="0.16" stroke="currentColor" stroke-width="1.85"/>
-                    <path d="M5.75 16.75L9.5 9.5H14.5L12 16.75H5.75Z" stroke="currentColor" stroke-width="1.85" stroke-linejoin="round"/>
-                    <path d="M14.5 9.5L18.25 16.75" stroke="currentColor" stroke-width="1.85" stroke-linecap="round"/>
-                    <path d="M8 9.5H11" stroke="currentColor" stroke-width="1.85" stroke-linecap="round"/>
+                    <circle cx="5.75" cy="16.75" r="3.5" fill="#74C7EC" stroke="#1E241E" stroke-width="2"/>
+                    <circle cx="18.25" cy="16.75" r="3.5" fill="#74C7EC" stroke="#1E241E" stroke-width="2"/>
+                    <path d="M5.75 16.75L9.5 9.5H14.5L12 16.75H5.75Z" stroke="#1E241E" stroke-width="2" stroke-linejoin="round"/>
+                    <path d="M14.5 9.5L18.25 16.75" stroke="#1E241E" stroke-width="2" stroke-linecap="round"/>
                   </svg>
                 </span>
-                <span class="how-step-num">PASO 02</span>
+                <span class="how-step-num">PASO 2</span>
               </div>
-              <h3 data-i18n="how.step2_title">Mide tu ahorro en tu bitácora</h3>
+              <h3 data-i18n="how.step2_title">2. Anota tu aventura</h3>
               <p data-i18n="how.step2_desc">
-                Cada recorrido limpio suma gramos de CO₂ evitados, calorías activas y puntos verificados para tu progreso semanal y el ranking de tu distrito.
+                Guarda tu recorrido en tu bitácora para ver cuánto humo evitaste, subir de nivel y desbloquear medallas.
               </p>
             </a>
 
-            <a href="./app/#/rewards" class="how-step-card">
+            <a href="./app/#/rewards" class="how-step-card step-blue">
               <div class="how-step-top">
                 <span class="how-step-icon">
                   <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path d="M3.5 7.5C3.5 6.395 4.395 5.5 5.5 5.5H18.5C19.605 5.5 20.5 6.395 20.5 7.5V9.8C19.1 10.1 18.2 11 18.2 12C18.2 13 19.1 13.9 20.5 14.2V16.5C20.5 17.605 19.605 18.5 18.5 18.5H5.5C4.395 18.5 3.5 17.605 3.5 16.5V14.2C4.9 13.9 5.8 13 5.8 12C5.8 11 4.9 10.1 3.5 9.8V7.5Z" fill="currentColor" fill-opacity="0.16" stroke="currentColor" stroke-width="1.85" stroke-linejoin="round"/>
-                    <path d="M10 8.5V15.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-dasharray="2 2.5"/>
+                    <path d="M3.5 7.5C3.5 6.395 4.395 5.5 5.5 5.5H18.5C19.605 5.5 20.5 6.395 20.5 7.5V9.8C19.1 10.1 18.2 11 18.2 12C18.2 13 19.1 13.9 20.5 14.2V16.5C20.5 17.605 19.605 18.5 18.5 18.5H5.5C4.395 18.5 3.5 17.605 3.5 16.5V14.2C4.9 13.9 5.8 13 5.8 12C5.8 11 4.9 10.1 3.5 9.8V7.5Z" fill="#FFD24C" stroke="#1E241E" stroke-width="2" stroke-linejoin="round"/>
+                    <path d="M10 8.5V15.5" stroke="#1E241E" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 2.5"/>
                   </svg>
                 </span>
-                <span class="how-step-num">PASO 03</span>
+                <span class="how-step-num">PASO 3</span>
               </div>
-              <h3 data-i18n="how.step3_title">Canjea beneficios reales</h3>
+              <h3 data-i18n="how.step3_title">3. ¡Canjea tus premios!</h3>
               <p data-i18n="how.step3_desc">
-                Usa tus puntos acumulados para obtener cafés de cortesía, horas de bicicleta compartida y entradas culturales en comercios aliados de Lima.
+                Cambia tus puntos por cafés gratis, paseos en bici y entradas a parques en tiendas amigas de Lima.
               </p>
             </a>
           </div>
@@ -301,11 +342,11 @@
         <div class="container">
           <div class="section-header" data-scroll-reveal>
             <div>
-              <span class="section-eyebrow" data-i18n="veh.eyebrow">Comparativa de movilidad</span>
-              <h2 data-i18n="veh.title">¿Cómo te conviene moverte por Lima?</h2>
+              <span class="section-eyebrow" data-i18n="veh.eyebrow">Elige a tu compañero de viaje</span>
+              <h2 data-i18n="veh.title">¿Cómo quieres moverte hoy por Lima?</h2>
             </div>
             <p class="section-subtitle" data-i18n="veh.subtitle">
-              Compara las 4 formas de recorrer la ciudad en hora punta y descubre cuál te ahorra más tiempo, dinero y emisiones.
+              Compara las 4 formas de viajar en hora punta y descubre cuál te regala más tiempo libre, ahorro y puntos.
             </p>
           </div>
 
@@ -315,10 +356,10 @@
             <article class="transport-card is-recommended">
               <div class="transport-card-banner">
                 <svg class="brand-inline-svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M19.5 4.5C13 4.5 7.5 7.8 5.5 14.2C5 15.9 5 17.7 5.5 19.5C7.3 20 9.1 20 10.8 19.5C17.2 17.5 20.5 12 19.5 4.5Z" fill="currentColor" fill-opacity="0.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M4.5 19.5C8.5 15.5 12 12 15.5 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M19.5 4.5C13 4.5 7.5 7.8 5.5 14.2C5 15.9 5 17.7 5.5 19.5C7.3 20 9.1 20 10.8 19.5C17.2 17.5 20.5 12 19.5 4.5Z" fill="#8CE52E" stroke="#1E241E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M4.5 19.5C8.5 15.5 12 12 15.5 9.5" stroke="#1E241E" stroke-width="2.2" stroke-linecap="round"/>
                 </svg>
-                <span data-i18n="veh.card_bike_badge">La más recomendada</span>
+                <span data-i18n="veh.card_bike_badge">¡La favorita!</span>
               </div>
               <div class="transport-card-media">
                 <img src="./media/veh-bike.jpg" alt="Bicicleta urbana en Lima" loading="lazy" />
@@ -327,12 +368,12 @@
               <div class="transport-card-body">
                 <div class="transport-card-title-row">
                   <h3 data-i18n="veh.bike_title">Bicicleta urbana</h3>
-                  <span class="transport-card-sub" data-i18n="veh.bike_sub">Rápida y sin tráfico</span>
+                  <span class="transport-card-sub" data-i18n="veh.bike_sub">Rápida y divertida</span>
                 </div>
 
                 <ul class="transport-card-metrics">
                   <li>
-                    <span class="metric-name" data-i18n="veh.metric_time">Tiempo típico (5 km)</span>
+                    <span class="metric-name" data-i18n="veh.metric_time">Tiempo (5 km)</span>
                     <strong class="metric-value text-eco" data-i18n="veh.bike_time">14 min (fluido)</strong>
                   </li>
                   <li>
@@ -340,13 +381,13 @@
                     <strong class="metric-value" data-i18n="veh.bike_cost">S/ 0.00 (Gratis)</strong>
                   </li>
                   <li>
-                    <span class="metric-name" data-i18n="veh.metric_reward">Recompensa</span>
+                    <span class="metric-name" data-i18n="veh.metric_reward">Premio</span>
                     <strong class="metric-value text-accent" data-i18n="veh.bike_reward">+15 pts por viaje</strong>
                   </li>
                 </ul>
 
                 <p class="transport-card-desc" data-i18n="veh.bike_desc">
-                  Avanzas directo por la ciclovía sin semáforos trabados. Ahorras hasta S/ 17 al día y sumas salud.
+                  Vas directo por la ciclovía sin atascos, ahorras dinero todos los días y llenas tu día de energía.
                 </p>
               </div>
             </article>
@@ -360,12 +401,12 @@
               <div class="transport-card-body">
                 <div class="transport-card-title-row">
                   <h3 data-i18n="veh.scooter_title">Scooter eléctrico</h3>
-                  <span class="transport-card-sub" data-i18n="veh.scooter_sub">Ágil y sin esfuerzo</span>
+                  <span class="transport-card-sub" data-i18n="veh.scooter_sub">Ágil y sin sudar</span>
                 </div>
 
                 <ul class="transport-card-metrics">
                   <li>
-                    <span class="metric-name" data-i18n="veh.metric_time">Tiempo típico (5 km)</span>
+                    <span class="metric-name" data-i18n="veh.metric_time">Tiempo (5 km)</span>
                     <strong class="metric-value" data-i18n="veh.scooter_time">16 min (ágil)</strong>
                   </li>
                   <li>
@@ -373,13 +414,13 @@
                     <strong class="metric-value" data-i18n="veh.scooter_cost">S/ 0.20 (carga)</strong>
                   </li>
                   <li>
-                    <span class="metric-name" data-i18n="veh.metric_reward">Recompensa</span>
+                    <span class="metric-name" data-i18n="veh.metric_reward">Premio</span>
                     <strong class="metric-value text-accent" data-i18n="veh.scooter_reward">+14 pts por viaje</strong>
                   </li>
                 </ul>
 
                 <p class="transport-card-desc" data-i18n="veh.scooter_desc">
-                  Ligero y fácil de plegar. Ideal para tramos medianos y para conectar con las estaciones de Metro.
+                  Ligero y plegable. Perfecto para combinar con el tren o llegar temprano a clases y oficina.
                 </p>
               </div>
             </article>
@@ -393,12 +434,12 @@
               <div class="transport-card-body">
                 <div class="transport-card-title-row">
                   <h3 data-i18n="veh.transit_title">Bus / Metropolitano</h3>
-                  <span class="transport-card-sub" data-i18n="veh.transit_sub">Carril exclusivo</span>
+                  <span class="transport-card-sub" data-i18n="veh.transit_sub">Vía exclusiva</span>
                 </div>
 
                 <ul class="transport-card-metrics">
                   <li>
-                    <span class="metric-name" data-i18n="veh.metric_time">Tiempo típico (5 km)</span>
+                    <span class="metric-name" data-i18n="veh.metric_time">Tiempo (5 km)</span>
                     <strong class="metric-value" data-i18n="veh.transit_time">20 min (segregado)</strong>
                   </li>
                   <li>
@@ -406,13 +447,13 @@
                     <strong class="metric-value" data-i18n="veh.transit_cost">S/ 3.20 (pasaje)</strong>
                   </li>
                   <li>
-                    <span class="metric-name" data-i18n="veh.metric_reward">Recompensa</span>
+                    <span class="metric-name" data-i18n="veh.metric_reward">Premio</span>
                     <strong class="metric-value text-accent" data-i18n="veh.transit_reward">+10 pts por viaje</strong>
                   </li>
                 </ul>
 
                 <p class="transport-card-desc" data-i18n="veh.transit_desc">
-                  Cruza distritos de norte a sur por corredores dedicados, liberando la ciudad de decenas de autos.
+                  Cruza varios distritos por carril propio y ayuda a que haya muchos menos autos en la pista.
                 </p>
               </div>
             </article>
@@ -426,12 +467,12 @@
               <div class="transport-card-body">
                 <div class="transport-card-title-row">
                   <h3 data-i18n="veh.car_title">Auto en tráfico</h3>
-                  <span class="transport-card-sub text-warn" data-i18n="veh.car_sub">Lento en hora punta</span>
+                  <span class="transport-card-sub text-warn" data-i18n="veh.car_sub">Atascado y lento</span>
                 </div>
 
                 <ul class="transport-card-metrics">
                   <li>
-                    <span class="metric-name" data-i18n="veh.metric_time">Tiempo típico (5 km)</span>
+                    <span class="metric-name" data-i18n="veh.metric_time">Tiempo (5 km)</span>
                     <strong class="metric-value text-warn" data-i18n="veh.car_time">35+ min (tráfico)</strong>
                   </li>
                   <li>
@@ -439,13 +480,13 @@
                     <strong class="metric-value text-warn" data-i18n="veh.car_cost">S/ 18+ (gasolina)</strong>
                   </li>
                   <li>
-                    <span class="metric-name" data-i18n="veh.metric_reward">Recompensa</span>
+                    <span class="metric-name" data-i18n="veh.metric_reward">Premio</span>
                     <strong class="metric-value" data-i18n="veh.car_reward">0 pts (estrés)</strong>
                   </li>
                 </ul>
 
                 <p class="transport-card-desc" data-i18n="veh.car_desc">
-                  Avanza a solo 12 km/h atascado en semáforos. El 85% circula con una sola persona a bordo.
+                  Avanza a paso de tortuga entre bocinas y semáforos, gastando combustible y ensuciando el aire.
                 </p>
               </div>
             </article>
@@ -458,11 +499,11 @@
         <div class="container">
           <div class="section-header" data-scroll-reveal>
             <div>
-              <span class="section-eyebrow" data-i18n="calc.eyebrow">Calculadora de impacto personal</span>
-              <h2 data-i18n="calc.title">Descubre cuánto ahorras en un año.</h2>
+              <span class="section-eyebrow" data-i18n="calc.eyebrow">Tu súper poder ambiental</span>
+              <h2 data-i18n="calc.title">¡Mira todo lo que logras en un año!</h2>
             </div>
             <p class="section-subtitle" data-i18n="calc.subtitle">
-              Ajusta tus viajes por semana y la distancia de tu ruta para proyectar tu impacto anual en Lima.
+              Mueve las barritas según tus viajes por semana y descubre cuántos árboles y horas libres ganas al año.
             </p>
           </div>
 
@@ -470,13 +511,13 @@
             <div class="alchemy-controls-panel">
               <div class="alchemy-preset-row" role="group" aria-label="Perfiles de viaje">
                 <button type="button" class="alchemy-preset" data-trips="4" data-km="3.5">
-                  <span data-i18n="calc.preset_student">Universitario (4 viajes/sem)</span>
+                  <span data-i18n="calc.preset_student">Estudiante (4 viajes/sem)</span>
                 </button>
                 <button type="button" class="alchemy-preset is-active" data-trips="6" data-km="4.2">
                   <span data-i18n="calc.preset_office">Oficina (6 viajes/sem)</span>
                 </button>
                 <button type="button" class="alchemy-preset" data-trips="10" data-km="6.5">
-                  <span data-i18n="calc.preset_cyclist">Ciclista diario (10 viajes/sem)</span>
+                  <span data-i18n="calc.preset_cyclist">Súper Ciclista (10 viajes/sem)</span>
                 </button>
               </div>
 
@@ -498,7 +539,7 @@
 
                 <div class="slider-group">
                   <div class="distance-label-row">
-                    <label for="alchemy-km-range" data-i18n="calc.label_dist">Distancia promedio por viaje</label>
+                    <label for="alchemy-km-range" data-i18n="calc.label_dist">Distancia de cada viaje</label>
                     <output id="alchemy-km-out">4.2 km</output>
                   </div>
                   <input
@@ -514,81 +555,81 @@
 
               <div class="alchemy-summary-card">
                 <div class="alchemy-summary-col">
-                  <span data-i18n="calc.avoided_label">Emisiones evitadas al año</span>
+                  <span data-i18n="calc.avoided_label">Humo que evitas al año</span>
                   <div>
                     <strong id="alchemy-annual-kg" class="text-eco-bright">199.2</strong>
                     <strong class="text-eco-bright"> kg CO₂</strong>
                   </div>
                 </div>
                 <div class="alchemy-summary-col">
-                  <span data-i18n="calc.fuel_label">Combustible ahorrado</span>
+                  <span data-i18n="calc.fuel_label">Gasolina ahorrada</span>
                   <strong id="alchemy-fuel-liters">85 L / año</strong>
                 </div>
               </div>
             </div>
 
             <div class="alchemy-cards-grid">
-              <article class="impact-stat-card">
+              <article class="impact-stat-card card-tint-green">
                 <div class="impact-card-head">
-                  <span class="impact-stat-label" data-i18n="calc.card_pet_label">Plástico equivalente</span>
+                  <span class="impact-stat-label" data-i18n="calc.card_pet_label">Botellas recicladas equiv.</span>
                   <span class="impact-icon-chip">
                     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                      <path d="M19.5 4.5C13 4.5 7.5 7.8 5.5 14.2C5 15.9 5 17.7 5.5 19.5C7.3 20 9.1 20 10.8 19.5C17.2 17.5 20.5 12 19.5 4.5Z" fill="currentColor" fill-opacity="0.18" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"/>
-                      <path d="M4.5 19.5C8.5 15.5 12 12 15.5 9.5" stroke="currentColor" stroke-width="1.85" stroke-linecap="round"/>
+                      <path d="M19.5 4.5C13 4.5 7.5 7.8 5.5 14.2C5 15.9 5 17.7 5.5 19.5C7.3 20 9.1 20 10.8 19.5C17.2 17.5 20.5 12 19.5 4.5Z" fill="#8CE52E" stroke="#1E241E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M4.5 19.5C8.5 15.5 12 12 15.5 9.5" stroke="#1E241E" stroke-width="2" stroke-linecap="round"/>
                     </svg>
                   </span>
                 </div>
                 <strong class="cutout-figure" id="eq-pet-bottles">2,406 botellas</strong>
                 <p data-i18n="calc.card_pet_desc">
-                  Botellas PET de 500 ml cuyo impacto en carbono equivale al humo que evitaste emitir.
+                  Equivale a reciclar miles de botellas plásticas para que no contaminen nuestro planeta.
                 </p>
               </article>
 
-              <article class="impact-stat-card">
+              <article class="impact-stat-card card-tint-yellow">
                 <div class="impact-card-head">
-                  <span class="impact-stat-label" data-i18n="calc.card_trees_label">Oxígeno urbano (absorción de CO₂)</span>
+                  <span class="impact-stat-label" data-i18n="calc.card_trees_label">Árboles felices en Lima</span>
                   <span class="impact-icon-chip">
                     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                      <path d="M12 3.5C8.686 3.5 6 6.186 6 9.5C6 12.433 8.106 14.873 10.885 15.394L12 15.5L13.115 15.394C15.894 14.873 18 12.433 18 9.5C18 6.186 15.314 3.5 12 3.5Z" fill="currentColor" fill-opacity="0.18" stroke="currentColor" stroke-width="1.85"/>
-                      <path d="M12 11.5V20.5M9 20.5H15" stroke="currentColor" stroke-width="1.85" stroke-linecap="round"/>
+                      <path d="M12 3.5C8.686 3.5 6 6.186 6 9.5C6 12.433 8.106 14.873 10.885 15.394L12 15.5L13.115 15.394C15.894 14.873 18 12.433 18 9.5C18 6.186 15.314 3.5 12 3.5Z" fill="#8CE52E" stroke="#1E241E" stroke-width="2"/>
+                      <path d="M12 11.5V20.5M9 20.5H15" stroke="#1E241E" stroke-width="2" stroke-linecap="round"/>
                     </svg>
                   </span>
                 </div>
                 <strong class="cutout-figure" id="eq-trees">9.5 árboles</strong>
                 <p data-i18n="calc.card_trees_desc">
-                  Árboles urbanos adultos absorbiendo CO₂ durante un año (~21 kg CO₂/árbol al año).
+                  Trabajando todo un año para limpiar el aire que respiramos en nuestros parques.
                 </p>
               </article>
 
-              <article class="impact-stat-card">
+              <article class="impact-stat-card card-tint-blue">
                 <div class="impact-card-head">
-                  <span class="impact-stat-label" data-i18n="calc.card_time_label">Tiempo libre de tráfico</span>
+                  <span class="impact-stat-label" data-i18n="calc.card_time_label">Horas libres para ti</span>
                   <span class="impact-icon-chip">
                     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                      <circle cx="12" cy="12" r="8.5" fill="currentColor" fill-opacity="0.16" stroke="currentColor" stroke-width="1.85"/>
-                      <path d="M12 7.5V12L15.2 14" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"/>
+                      <circle cx="12" cy="12" r="8.5" fill="#74C7EC" stroke="#1E241E" stroke-width="2"/>
+                      <path d="M12 7.5V12L15.2 14" stroke="#1E241E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                   </span>
                 </div>
                 <strong class="cutout-figure" id="alchemy-traffic-hours">42 h / año</strong>
                 <p data-i18n="calc.card_time_desc">
-                  Horas al año que recuperas fuera de los embotellamientos en hora punta.
+                  Tiempo que ganas fuera del tráfico para descansar, estudiar o compartir con amigos.
                 </p>
               </article>
 
-              <article class="impact-stat-card">
+              <article class="impact-stat-card card-tint-orange">
                 <div class="impact-card-head">
-                  <span class="impact-stat-label" data-i18n="calc.card_reward_label">Programa de recompensas</span>
+                  <span class="impact-stat-label" data-i18n="calc.card_reward_label">Puntos para premios</span>
                   <span class="impact-icon-chip">
                     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                      <path d="M3.5 7.5C3.5 6.395 4.395 5.5 5.5 5.5H18.5C19.605 5.5 20.5 6.395 20.5 7.5V9.8C19.1 10.1 18.2 11 18.2 12C18.2 13 19.1 13.9 20.5 14.2V16.5C20.5 17.605 19.605 18.5 18.5 18.5H5.5C4.395 18.5 3.5 17.605 3.5 16.5V14.2C4.9 13.9 5.8 13 5.8 12C5.8 11 4.9 10.1 3.5 9.8V7.5Z" fill="currentColor" fill-opacity="0.16" stroke="currentColor" stroke-width="1.85" stroke-linejoin="round"/>
-                      <path d="M10 8.5V15.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-dasharray="2 2.5"/>
+                      <path d="M3.5 7.5C3.5 6.395 4.395 5.5 5.5 5.5H18.5C19.605 5.5 20.5 6.395 20.5 7.5V9.8C19.1 10.1 18.2 11 18.2 12C18.2 13 19.1 13.9 20.5 14.2V16.5C20.5 17.605 19.605 18.5 18.5 18.5H5.5C4.395 18.5 3.5 17.605 3.5 16.5V14.2C4.9 13.9 5.8 13 5.8 12C5.8 11 4.9 10.1 3.5 9.8V7.5Z" fill="#FFD24C" stroke="#1E241E" stroke-width="2" stroke-linejoin="round"/>
+                      <path d="M10 8.5V15.5" stroke="#1E241E" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 2.5"/>
                     </svg>
                   </span>
                 </div>
                 <strong class="cutout-figure text-eco" id="eq-green-points">+4,678 pts</strong>
                 <p data-i18n="calc.card_reward_desc">
-                  Puntos acumulados para canjear en cafés locales, talleres de bici y comercios aliados.
+                  Puntos listos para cambiar por tus premios favoritos dentro de la Web App.
                 </p>
               </article>
             </div>
@@ -601,23 +642,25 @@
     <footer class="footer" role="contentinfo">
       <div class="container footer-inner">
         <div class="footer-brand">
-          <img
-            class="brand-logo-sm"
-            src="./media/logo-ecocommute.png"
-            alt=""
-            width="22"
-            height="27"
-          />
+          <span class="brand-cartoon-badge sm">
+            <img
+              class="brand-logo-sm"
+              src="./media/logo-ecocommute.png"
+              alt=""
+              width="20"
+              height="24"
+            />
+          </span>
           <strong>EcoCommute Lima</strong>
-          <span>© 2026 EcoCommute · Movilidad Sostenible (ODS 11.2)</span>
+          <span>© 2026 EcoCommute · Ciudad Limpia y Feliz (ODS 11.2)</span>
         </div>
         <nav class="footer-nav" aria-label="Enlaces secundarios">
-          <a href="./app/#/dashboard">Abrir Aplicación</a>
-          <a href="#como-funciona" data-i18n="nav.how">Cómo funciona</a>
-          <a href="#inicio" data-i18n="nav.routes">Rutas en Lima</a>
-          <a href="#vehiculos" data-i18n="nav.vehicles">Comparativa</a>
+          <a href="./app/#/dashboard">¡Abrir Web App!</a>
+          <a href="#como-funciona" data-i18n="nav.how">¿Cómo funciona?</a>
+          <a href="#inicio" data-i18n="nav.routes">Mapa de Lima</a>
+          <a href="#vehiculos" data-i18n="nav.vehicles">Transporte</a>
           <a href="#alquimia" data-i18n="nav.impact">Calculadora</a>
-          <a href="./terms.html" data-i18n="nav.terms">Términos y Privacidad</a>
+          <a href="./terms.html" data-i18n="nav.terms">Privacidad</a>
         </nav>
       </div>
     </footer>
@@ -627,6 +670,6 @@
       crossorigin=""
       defer
     ></script>
-    <script src="./i18n.js?v=20261104c" defer></script>
+    <script src="./i18n.js?v=20261106a" defer></script>
   </body>
 </html>
