@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { BehaviorSubject, Observable, catchError, map, of, tap } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, map, of, startWith, tap, timeout } from 'rxjs';
 import {
   AiRecommendation,
   BadgeCatalogItem,
@@ -325,6 +325,7 @@ export class ApiService {
   // HU03, HU09 - Planificador OSRM + IA Gemini
   planRoutes(req: RoutePlanRequest): Observable<RoutePlanResponse> {
     return this.http.post<RoutePlanResponse>(`${this.base}/api/v1/routes/plan`, req).pipe(
+      timeout(2500),
       tap(() => this.backendOnlineSubject.next(true)),
       map(res => ({
         ...res,
@@ -447,6 +448,7 @@ export class ApiService {
   getTripsHistory(page = 0, size = 10): Observable<PageResponse<TripResponse>> {
     const params = new HttpParams().set('page', page).set('size', size);
     return this.http.get<PageResponse<TripResponse>>(`${this.base}/api/v1/trips/history`, { params }).pipe(
+      timeout(2500),
       tap(res => {
         this.backendOnlineSubject.next(true);
         if (res?.content?.length) {
@@ -628,6 +630,7 @@ export class ApiService {
   // HU06, HU10, HU11 - Gamificación
   getGamificationStats(): Observable<GamificationStats> {
     return this.http.get<GamificationStats>(`${this.base}/api/v1/gamification/stats`).pipe(
+      timeout(2500),
       catchError(() => {
         const totalCo2SavedKg =
           Math.round((this.localTrips.reduce((acc, t) => acc + t.co2SavedGrams, 0) / 1000) * 100) / 100;
@@ -647,6 +650,7 @@ export class ApiService {
 
   getGamificationMilestones(): Observable<GamificationMilestones> {
     return this.http.get<GamificationMilestones>(`${this.base}/api/v1/gamification/milestones`).pipe(
+      timeout(2500),
       catchError(() => {
         const points = this.localTrips.reduce((acc, t) => acc + t.pointsEarned, 0);
         const nextMilestone =
@@ -663,6 +667,7 @@ export class ApiService {
 
   getUserBadges(): Observable<DashboardBadge[]> {
     return this.http.get<DashboardBadge[]>(`${this.base}/api/v1/gamification/badges`).pipe(
+      timeout(2500),
       catchError(() => {
         const pts = this.localTrips.reduce((acc, t) => acc + t.pointsEarned, 0);
         const co2Kg = this.localTrips.reduce((acc, t) => acc + t.co2SavedGrams, 0) / 1000;
@@ -673,6 +678,7 @@ export class ApiService {
 
   getBadgeCatalog(): Observable<BadgeCatalogItem[]> {
     return this.http.get<BadgeCatalogItem[]>(`${this.base}/api/v1/gamification/badges/catalog`).pipe(
+      timeout(2500),
       catchError(() => of(this.localBadges))
     );
   }
@@ -702,6 +708,7 @@ export class ApiService {
       params = params.set('district', district);
     }
     return this.http.get<LeaderboardEntry[]>(`${this.base}/api/v1/leaderboard`, { params }).pipe(
+      timeout(2500),
       catchError(() => {
         const seed: LeaderboardEntry[] = [
           {
@@ -782,6 +789,7 @@ export class ApiService {
 
   getDistrictsSummary(): Observable<DistrictsSummary> {
     return this.http.get<DistrictsSummary>(`${this.base}/api/v1/leaderboard/districts/summary`).pipe(
+      timeout(2500),
       catchError(() =>
         of({
           activeDistrictsCount: 6,
@@ -795,6 +803,7 @@ export class ApiService {
   // HU12, HU13, HU14 - Recompensas, Canjes y Retos
   getRewards(): Observable<RewardItem[]> {
     return this.http.get<RewardItem[]>(`${this.base}/api/v1/rewards`).pipe(
+      timeout(2500),
       tap(list => {
         if (list?.length) this.localRewards = list;
       }),
@@ -838,6 +847,7 @@ export class ApiService {
 
   getRedemptions(): Observable<RedemptionItem[]> {
     return this.http.get<RedemptionItem[]>(`${this.base}/api/v1/redemptions`).pipe(
+      timeout(2500),
       tap(list => {
         if (list) this.localRedemptions = list;
       }),
@@ -847,6 +857,7 @@ export class ApiService {
 
   getChallenges(): Observable<ChallengeItem[]> {
     return this.http.get<ChallengeItem[]>(`${this.base}/api/v1/challenges`).pipe(
+      timeout(2500),
       tap(list => {
         if (list?.length) this.localChallenges = list;
       }),

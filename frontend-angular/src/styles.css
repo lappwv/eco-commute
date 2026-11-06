@@ -4212,3 +4212,81 @@ strong,
     width: 100%;
   }
 }
+
+
+/* ==================== SOFTER, SMOOTHER TYPOGRAPHY WEIGHTS (LESS HARSH BOLD) ==================== */
+html,
+body {
+  font-weight: 400 !important;
+}
+
+p,
+li,
+td,
+.card-sub,
+.page-subtitle,
+.ribbon-sub,
+.advisor-text,
+.route-summary,
+.v-stat-body span,
+.tower-vertical-stats li span,
+.badge-strip-body p,
+.ticket-main p {
+  font-weight: 500 !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+.page-title,
+.cartoon-banner-title,
+.card-head-row h2,
+.split-header-inline h3,
+.timeline-head h3,
+.advisor-callout-top h3,
+.route-col-top h3,
+.ticket-main h3,
+.badge-strip-head h3,
+.podium-pillar h3 {
+  font-weight: 600 !important;
+}
+
+.cartoon-banner-title {
+  text-shadow: 0 2px 0 rgba(18, 28, 16, 0.55) !important;
+}
+
+.cartoon-banner-sub {
+  font-weight: 600 !important;
+  text-shadow: 0 1px 2px rgba(12, 24, 10, 0.45) !important;
+}
+
+strong,
+b,
+th,
+label,
+.ribbon-val,
+.ribbon-label,
+.kpi-number,
+.btn-emerald,
+.btn-outline,
+.btn-start-route,
+.quick-route-select,
+.quick-route-label,
+.step-guide-item,
+.eco-nav-links a,
+.eco-nav-links a.active,
+.util-btn,
+.user-pill,
+.user-pill-pts,
+.landing-back-pill,
+.eyebrow-tag,
+.badge-pill,
+.pts-pill,
+.pts-cost-pill,
+.mode-pill-row,
+.chip-btn strong,
+.podium-medal-floating,
+.podium-pillar-score strong {
+  font-weight: 600 !important;
+}
