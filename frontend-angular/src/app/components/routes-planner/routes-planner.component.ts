@@ -6,6 +6,7 @@ import { ApiService } from '../../services/api.service';
 import { I18nService } from '../../services/i18n.service';
 import { RouteOption, RoutePlanResponse, TransportMode } from '../../models/api.models';
 import { EcoIconComponent } from '../icon/eco-icon.component';
+import { CountUpDirective } from '../../directives/count-up.directive';
 
 interface LimaPreset {
   label: string;
@@ -21,7 +22,7 @@ interface LimaPreset {
 @Component({
   selector: 'app-routes-planner',
   standalone: true,
-  imports: [CommonModule, FormsModule, EcoIconComponent],
+  imports: [CommonModule, FormsModule, EcoIconComponent, CountUpDirective],
   template: `
     <section class="page-section">
       <!-- Cabecera con Corredores Rápidos en Línea (Sin tarjeta extra) -->
@@ -181,7 +182,7 @@ interface LimaPreset {
               <span class="badge-emerald" *ngIf="opt.id === res.recommendedRouteId || opt.isAiRecommended">
                 ★ Recomendada
               </span>
-              <span class="pts-pill" *ngIf="opt.potentialPoints > 0">+{{ opt.potentialPoints }} pts</span>
+              <span class="pts-pill" *ngIf="opt.potentialPoints > 0">+<span [appCountUp]="opt.potentialPoints"></span> pts</span>
             </div>
             <h3>{{ opt.title }}</h3>
             <p class="route-summary">{{ opt.summary }}</p>
@@ -191,19 +192,19 @@ interface LimaPreset {
           <ul class="route-vertical-stats">
             <li>
               <span>Distancia total</span>
-              <strong>{{ opt.distanceKm }} km</strong>
+              <strong><span [appCountUp]="opt.distanceKm" [decimals]="2"></span> km</strong>
             </li>
             <li>
               <span>Tiempo estimado</span>
-              <strong>{{ opt.durationMinutes }} min</strong>
+              <strong><span [appCountUp]="opt.durationMinutes"></span> min</strong>
             </li>
             <li>
               <span>CO₂ evitado</span>
-              <strong class="text-emerald">-{{ opt.co2SavedGrams }} g</strong>
+              <strong class="text-emerald">-<span [appCountUp]="opt.co2SavedGrams"></span> g</strong>
             </li>
             <li>
               <span>Energía activa</span>
-              <strong>{{ opt.caloriesBurned }} kcal</strong>
+              <strong><span [appCountUp]="opt.caloriesBurned"></span> kcal</strong>
             </li>
             <li *ngIf="opt.aiInsight as ai">
               <span>Índice verde / Sombra</span>
