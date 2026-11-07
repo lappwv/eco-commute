@@ -542,7 +542,10 @@ function setupThemeSwitcher() {
   const themeButtons = document.querySelectorAll(".biome-chip");
   const root = document.documentElement;
 
-  const savedTheme = localStorage.getItem("ecocommute_theme_v3") || "light";
+  const savedTheme =
+      localStorage.getItem("ecocommute_theme_v3") ||
+      root.getAttribute("data-theme") ||
+      "light";
   root.setAttribute("data-theme", savedTheme);
 
   themeButtons.forEach((btn) => {
