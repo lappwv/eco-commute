@@ -363,7 +363,7 @@ interface QuickCorridorOption {
                 <span>Distribución de tus {{ s.totalTrips }} viajes</span>
               </div>
               <div class="mode-bars">
-                <div class="mode-row" *ngFor="let m of getModeEntries(s.tripsByMode)">
+                <div class="mode-row" *ngFor="let m of getModeEntries(s.tripsByMode); trackBy: trackByMode">
                   <div class="mode-name-wrap">
                     <span class="mode-icon-chip"><app-icon [name]="m.mode" [size]="18"></app-icon></span>
                     <span class="mode-name">{{ formatMode(m.mode) }}</span>
@@ -515,6 +515,10 @@ export class DashboardComponent implements OnInit {
     if (!this.summary?.weeklyTrend?.length) return 15;
     const max = Math.max(...this.summary.weeklyTrend.map(x => x.co2SavedGrams), 500);
     return Math.max(14, Math.round((grams / max) * 100));
+  }
+
+  trackByMode(_index: number, item: { mode: string; count: number }): string {
+    return item.mode;
   }
 
   getModeEntries(mapObj: Record<string, number> | undefined): { mode: string; count: number }[] {
