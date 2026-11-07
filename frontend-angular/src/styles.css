@@ -5450,3 +5450,50 @@ app-leaderboard .podium-stepped-stage {
     white-space: nowrap;
   }
 }
+
+
+/* Luz del cursor visible detras de tablas, canjes y pie de voucher */
+.eco-table th {
+  background: color-mix(in srgb, var(--bg-soft) 55%, transparent);
+}
+
+.eco-table tbody tr:hover {
+  background: color-mix(in srgb, var(--bg-soft) 55%, transparent);
+}
+
+.ticket-stub-footer {
+  background: color-mix(in srgb, var(--bg-card) 50%, transparent);
+}
+
+.redemption-row {
+  background: color-mix(in srgb, var(--bg-soft) 55%, transparent);
+}
+
+/* Tarjeta con tabla: solo se levanta (sin inclinar) para reaccionar al instante */
+app-leaderboard .eco-card {
+  will-change: transform;
+}
+
+app-leaderboard .eco-card:hover {
+  transform: translateY(-4px);
+  transition:
+    transform 0.12s ease-out,
+    box-shadow 0.28s ease,
+    border-color 0.28s ease;
+}
+
+/* Celda del ciudadano: alinear su borde con el resto de la fila */
+.eco-table td.user-cell {
+  display: table-cell;
+  white-space: nowrap;
+}
+
+.eco-table td.user-cell > img,
+.eco-table td.user-cell > strong {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.eco-table td.user-cell > img {
+  margin-right: 0.65rem;
+}
