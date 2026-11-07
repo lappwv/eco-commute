@@ -5213,3 +5213,13 @@ app-rewards .rewards-bottom-split {
     stroke-dashoffset: 0;
   }
 }
+
+/* Comunidad: separar el podio de la tabla */
+app-leaderboard .section-header-row {
+  margin-bottom: 2rem;
+}
+
+app-leaderboard .podium-stepped-stage {
+  margin-bottom: 3.5rem;
+  padding-top: 1rem;
+}
