@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, Inject, PLATFORM_ID, NgZone } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -227,7 +227,7 @@ interface LimaPreset {
     </section>
   `
 })
-export class RoutesPlannerComponent implements OnInit, AfterViewInit {
+export class RoutesPlannerComponent implements OnInit, AfterViewInit, OnDestroy {
   originName = 'San Isidro (Centro Financiero)';
   originLat = -12.0965;
   originLng = -77.0285;
@@ -291,9 +291,13 @@ export class RoutesPlannerComponent implements OnInit, AfterViewInit {
   private map: any = null;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private polylines: any[] = [];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private riderMarker: any = null;
+  private riderFrame = 0;
 
   constructor(
     @Inject(PLATFORM_ID) platformId: object,
+    private zone: NgZone,
     private api: ApiService,
     public i18n: I18nService,
     private router: Router,
@@ -377,6 +381,60 @@ export class RoutesPlannerComponent implements OnInit, AfterViewInit {
       });
   }
 
+  ngOnDestroy(): void {
+    this.stopRider();
+  }
+
+  private stopRider(): void {
+    cancelAnimationFrame(this.riderFrame);
+    if (this.riderMarker && this.map) {
+      this.map.removeLayer(this.riderMarker);
+    }
+    this.riderMarker = null;
+  }
+
+  // Ciclista que recorre el corredor verde en bucle (fuera de la zona de Angular)
+  private startRider(coords: number[][]): void {
+    this.stopRider();
+    if (!this.L || !this.map || !coords || coords.length < 2) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    // Distancias acumuladas para avanzar a velocidad constante
+    const cum: number[] = [0];
+    for (let i = 1; i < coords.length; i++) {
+      const dLat = coords[i][0] - coords[i - 1][0];
+      const dLng = coords[i][1] - coords[i - 1][1];
+      cum.push(cum[i - 1] + Math.hypot(dLat, dLng));
+    }
+    const total = cum[cum.length - 1];
+    if (!total) return;
+
+    const icon = this.L.divIcon({
+      className: 'rider-marker',
+      html: '<span class="rider-pulse"></span><span class="rider-dot"></span>',
+      iconSize: [26, 26],
+      iconAnchor: [13, 13]
+    });
+    this.riderMarker = this.L.marker(coords[0], { icon, interactive: false, keyboard: false }).addTo(this.map);
+
+    const duration = 9000;
+    const start = performance.now();
+    this.zone.runOutsideAngular(() => {
+      const step = (now: number): void => {
+        const target = (((now - start) % duration) / duration) * total;
+        let i = 1;
+        while (i < cum.length - 1 && cum[i] < target) i++;
+        const seg = cum[i] - cum[i - 1] || 1;
+        const k = Math.min(Math.max((target - cum[i - 1]) / seg, 0), 1);
+        const lat = coords[i - 1][0] + (coords[i][0] - coords[i - 1][0]) * k;
+        const lng = coords[i - 1][1] + (coords[i][1] - coords[i - 1][1]) * k;
+        this.riderMarker?.setLatLng([lat, lng]);
+        this.riderFrame = requestAnimationFrame(step);
+      };
+      this.riderFrame = requestAnimationFrame(step);
+    });
+  }
+
   private initMap(): void {
     if (!this.L || this.map) return;
     const container = document.getElementById('eco-leaflet-map');
@@ -414,9 +472,12 @@ export class RoutesPlannerComponent implements OnInit, AfterViewInit {
     drawPoly(res.standardProfileRoute?.pathCoordinates, '#2563eb', 4);
     drawPoly(res.aiGreenCorridorRoute?.pathCoordinates, '#15803D', 6);
 
+    this.startRider(res.aiGreenCorridorRoute?.pathCoordinates);
+
     if (res.aiGreenCorridorRoute?.pathCoordinates?.length) {
       const bounds = this.L.latLngBounds(res.aiGreenCorridorRoute.pathCoordinates);
       this.map.fitBounds(bounds, { padding: [28, 28] });
     }
   }
 }
+
