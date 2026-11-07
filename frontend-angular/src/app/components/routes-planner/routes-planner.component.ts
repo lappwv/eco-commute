@@ -158,7 +158,8 @@ interface LimaPreset {
               <span class="legend-chip car"><i class="dot-red"></i> Tráfico auto</span>
             </div>
           </div>
-          <div id="eco-leaflet-map" class="leaflet-box-tall"></div>
+          <div class="map-loading-bar" *ngIf="loading"></div>
+                    <div id="eco-leaflet-map" class="leaflet-box-tall"></div>
         </div>
       </div>
 
