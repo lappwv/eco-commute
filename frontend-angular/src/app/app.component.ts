@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID, HostListener } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -58,6 +58,26 @@ export class AppComponent implements OnInit {
   closeMobileMenu(): void {
     this.mobileMenuOpen = false;
   }
+
+  @HostListener('document:pointermove', ['$event'])
+  onPointerMove(event: PointerEvent): void {
+    if (!this.isBrowser || event.pointerType === 'touch') return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const card = (event.target as HTMLElement | null)?.closest?.('.eco-card') as HTMLElement | null;
+    if (!card) return;
+
+    const rect = card.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
+    card.style.setProperty('--mx', `${x}px`);
+    card.style.setProperty('--my', `${y}px`);
+    card.style.setProperty('--rx', `${((y / rect.height - 0.5) * -4).toFixed(2)}deg`);
+    card.style.setProperty('--ry', `${((x / rect.width - 0.5) * 4).toFixed(2)}deg`);
+  }
+
+
 
   onLogout(): void {
     this.auth.logout();

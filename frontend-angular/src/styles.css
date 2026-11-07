@@ -5157,3 +5157,17 @@ app-rewards .rewards-bottom-split {
     animation: none;
   }
 }
+
+/* Inclinación 3D y luz que sigue al cursor */
+.eco-card:hover {
+  transform: perspective(900px) translateY(-4px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  background-image: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), rgba(34, 197, 94, 0.16), transparent 65%) !important;
+  transition: transform 0.12s ease-out, box-shadow 0.28s ease, border-color 0.28s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eco-card:hover {
+    transform: none;
+    background-image: none !important;
+  }
+}
