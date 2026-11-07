@@ -396,6 +396,16 @@ export class RoutesPlannerComponent implements OnInit, AfterViewInit {
       if (!coords?.length) return;
       const poly = this.L.polyline(coords, { color, weight, dashArray }).addTo(this.map);
       this.polylines.push(poly);
+
+      // Animación de trazado solo para líneas continuas (la punteada se queda como está)
+      if (!dashArray) {
+        const path = poly.getElement?.() as SVGPathElement | undefined;
+        if (path) {
+          path.setAttribute('pathLength', '1');
+          path.classList.add('route-draw');
+          path.addEventListener('animationend', () => path.classList.remove('route-draw'), { once: true });
+        }
+      }
     };
 
     drawPoly(res.baselineCarRoute?.pathCoordinates, '#dc2626', 3, '6, 8');
