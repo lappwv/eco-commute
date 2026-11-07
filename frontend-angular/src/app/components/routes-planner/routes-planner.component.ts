@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, Inject, PLATFORM_ID, NgZone } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -6,6 +6,7 @@ import { ApiService } from '../../services/api.service';
 import { I18nService } from '../../services/i18n.service';
 import { RouteOption, RoutePlanResponse, TransportMode } from '../../models/api.models';
 import { EcoIconComponent } from '../icon/eco-icon.component';
+import { CountUpDirective } from '../../directives/count-up.directive';
 
 interface LimaPreset {
   label: string;
@@ -21,7 +22,7 @@ interface LimaPreset {
 @Component({
   selector: 'app-routes-planner',
   standalone: true,
-  imports: [CommonModule, FormsModule, EcoIconComponent],
+  imports: [CommonModule, FormsModule, EcoIconComponent, CountUpDirective],
   template: `
     <section class="page-section">
       <!-- Cabecera con Corredores Rápidos en Línea (Sin tarjeta extra) -->
@@ -147,6 +148,15 @@ interface LimaPreset {
             <app-icon name="route" [size]="17"></app-icon>
             <span>{{ loading ? 'Calculando...' : 'Actualizar mapa' }}</span>
           </button>
+
+          <div class="saving-teaser" *ngIf="planResult as r">
+            <svg class="teaser-leaf leaf-1" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19C5 10 10 5 20 4c0 10-4 15-13 15z" fill="currentColor" /></svg>
+            <svg class="teaser-leaf leaf-2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19C5 10 10 5 20 4c0 10-4 15-13 15z" fill="currentColor" /></svg>
+            <svg class="teaser-leaf leaf-3" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19C5 10 10 5 20 4c0 10-4 15-13 15z" fill="currentColor" /></svg>
+            <small>Tu ahorro estimado</small>
+            <strong><span [appCountUp]="r.aiGreenCorridorRoute?.co2SavedGrams"></span> g de CO₂</strong>
+            <span class="teaser-pts">+<span [appCountUp]="r.aiGreenCorridorRoute?.potentialPoints"></span> pts por pedalear esta ruta</span>
+          </div>
         </form>
 
         <div class="planner-map-pane">
@@ -157,7 +167,8 @@ interface LimaPreset {
               <span class="legend-chip car"><i class="dot-red"></i> Tráfico auto</span>
             </div>
           </div>
-          <div id="eco-leaflet-map" class="leaflet-box-tall"></div>
+          <div class="map-loading-bar" *ngIf="loading"></div>
+                    <div id="eco-leaflet-map" class="leaflet-box-tall"></div>
         </div>
       </div>
 
@@ -181,7 +192,7 @@ interface LimaPreset {
               <span class="badge-emerald" *ngIf="opt.id === res.recommendedRouteId || opt.isAiRecommended">
                 ★ Recomendada
               </span>
-              <span class="pts-pill" *ngIf="opt.potentialPoints > 0">+{{ opt.potentialPoints }} pts</span>
+              <span class="pts-pill" *ngIf="opt.potentialPoints > 0">+<span [appCountUp]="opt.potentialPoints"></span> pts</span>
             </div>
             <h3>{{ opt.title }}</h3>
             <p class="route-summary">{{ opt.summary }}</p>
@@ -191,19 +202,19 @@ interface LimaPreset {
           <ul class="route-vertical-stats">
             <li>
               <span>Distancia total</span>
-              <strong>{{ opt.distanceKm }} km</strong>
+              <strong><span [appCountUp]="opt.distanceKm" [decimals]="2"></span> km</strong>
             </li>
             <li>
               <span>Tiempo estimado</span>
-              <strong>{{ opt.durationMinutes }} min</strong>
+              <strong><span [appCountUp]="opt.durationMinutes"></span> min</strong>
             </li>
             <li>
               <span>CO₂ evitado</span>
-              <strong class="text-emerald">-{{ opt.co2SavedGrams }} g</strong>
+              <strong class="text-emerald">-<span [appCountUp]="opt.co2SavedGrams"></span> g</strong>
             </li>
             <li>
               <span>Energía activa</span>
-              <strong>{{ opt.caloriesBurned }} kcal</strong>
+              <strong><span [appCountUp]="opt.caloriesBurned"></span> kcal</strong>
             </li>
             <li *ngIf="opt.aiInsight as ai">
               <span>Índice verde / Sombra</span>
@@ -225,7 +236,7 @@ interface LimaPreset {
     </section>
   `
 })
-export class RoutesPlannerComponent implements OnInit, AfterViewInit {
+export class RoutesPlannerComponent implements OnInit, AfterViewInit, OnDestroy {
   originName = 'San Isidro (Centro Financiero)';
   originLat = -12.0965;
   originLng = -77.0285;
@@ -289,9 +300,13 @@ export class RoutesPlannerComponent implements OnInit, AfterViewInit {
   private map: any = null;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private polylines: any[] = [];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private riderMarker: any = null;
+  private riderFrame = 0;
 
   constructor(
     @Inject(PLATFORM_ID) platformId: object,
+    private zone: NgZone,
     private api: ApiService,
     public i18n: I18nService,
     private router: Router,
@@ -375,6 +390,60 @@ export class RoutesPlannerComponent implements OnInit, AfterViewInit {
       });
   }
 
+  ngOnDestroy(): void {
+    this.stopRider();
+  }
+
+  private stopRider(): void {
+    cancelAnimationFrame(this.riderFrame);
+    if (this.riderMarker && this.map) {
+      this.map.removeLayer(this.riderMarker);
+    }
+    this.riderMarker = null;
+  }
+
+  // Ciclista que recorre el corredor verde en bucle (fuera de la zona de Angular)
+  private startRider(coords: number[][]): void {
+    this.stopRider();
+    if (!this.L || !this.map || !coords || coords.length < 2) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    // Distancias acumuladas para avanzar a velocidad constante
+    const cum: number[] = [0];
+    for (let i = 1; i < coords.length; i++) {
+      const dLat = coords[i][0] - coords[i - 1][0];
+      const dLng = coords[i][1] - coords[i - 1][1];
+      cum.push(cum[i - 1] + Math.hypot(dLat, dLng));
+    }
+    const total = cum[cum.length - 1];
+    if (!total) return;
+
+    const icon = this.L.divIcon({
+      className: 'rider-marker',
+      html: '<span class="rider-pulse"></span><span class="rider-dot"></span>',
+      iconSize: [26, 26],
+      iconAnchor: [13, 13]
+    });
+    this.riderMarker = this.L.marker(coords[0], { icon, interactive: false, keyboard: false }).addTo(this.map);
+
+    const duration = 9000;
+    const start = performance.now();
+    this.zone.runOutsideAngular(() => {
+      const step = (now: number): void => {
+        const target = (((now - start) % duration) / duration) * total;
+        let i = 1;
+        while (i < cum.length - 1 && cum[i] < target) i++;
+        const seg = cum[i] - cum[i - 1] || 1;
+        const k = Math.min(Math.max((target - cum[i - 1]) / seg, 0), 1);
+        const lat = coords[i - 1][0] + (coords[i][0] - coords[i - 1][0]) * k;
+        const lng = coords[i - 1][1] + (coords[i][1] - coords[i - 1][1]) * k;
+        this.riderMarker?.setLatLng([lat, lng]);
+        this.riderFrame = requestAnimationFrame(step);
+      };
+      this.riderFrame = requestAnimationFrame(step);
+    });
+  }
+
   private initMap(): void {
     if (!this.L || this.map) return;
     const container = document.getElementById('eco-leaflet-map');
@@ -412,9 +481,12 @@ export class RoutesPlannerComponent implements OnInit, AfterViewInit {
     drawPoly(res.standardProfileRoute?.pathCoordinates, '#2563eb', 4);
     drawPoly(res.aiGreenCorridorRoute?.pathCoordinates, '#15803D', 6);
 
+    this.startRider(res.aiGreenCorridorRoute?.pathCoordinates);
+
     if (res.aiGreenCorridorRoute?.pathCoordinates?.length) {
       const bounds = this.L.latLngBounds(res.aiGreenCorridorRoute.pathCoordinates);
       this.map.fitBounds(bounds, { padding: [28, 28] });
     }
   }
 }
+
