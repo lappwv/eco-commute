@@ -5420,3 +5420,33 @@ app-leaderboard .podium-stepped-stage {
     display: none;
   }
 }
+
+/* Header: evitar desborde entre 1021px y 1320px */
+@media (min-width: 1021px) and (max-width: 1320px) {
+  .eco-nav-inner {
+    gap: 0.6rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .brand-sub,
+  .landing-back-pill span,
+  .user-pill-name {
+    display: none !important;
+  }
+  .eco-nav-links a {
+    padding: 0.4rem 0.55rem !important;
+    font-size: 0.84rem !important;
+  }
+}
+
+/* Entre 1021px y 1120px: solo icono, el texto queda oculto visualmente (sigue legible para lectores de pantalla) */
+@media (min-width: 1021px) and (max-width: 1120px) {
+  .eco-nav-links a:not(.active) span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+}
