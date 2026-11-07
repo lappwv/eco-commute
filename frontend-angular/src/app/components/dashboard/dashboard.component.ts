@@ -6,6 +6,7 @@ import { ApiService } from '../../services/api.service';
 import { I18nService } from '../../services/i18n.service';
 import { AiRecommendation, CommunityImpact, DashboardSummary } from '../../models/api.models';
 import { EcoIconComponent } from '../icon/eco-icon.component';
+import { CountUpDirective } from '../../directives/count-up.directive';
 
 interface QuickCorridorOption {
   index: number;
@@ -18,7 +19,7 @@ interface QuickCorridorOption {
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule, EcoIconComponent],
+  imports: [CommonModule, FormsModule, RouterModule, EcoIconComponent, CountUpDirective],
   template: `
     <section class="page-section dashboard-page" *ngIf="summary as s">
       <!-- ==================== SECCIÓN 1: HERO PRINCIPAL DE RUTAS ==================== -->
@@ -284,7 +285,7 @@ interface QuickCorridorOption {
             <span class="ribbon-icon tint-green"><app-icon name="leaf" [size]="26"></app-icon></span>
             <div class="ribbon-copy">
               <span class="ribbon-label">CO₂ evitado total</span>
-              <strong class="ribbon-val">{{ s.totalCo2SavedKg | number: '1.2-2' }} <small>kg</small></strong>
+              <strong class="ribbon-val"><span [appCountUp]="s.totalCo2SavedKg" [decimals]="2"></span> <small>kg</small></strong>
               <span class="ribbon-sub">≈ {{ s.treesEquivalent | number: '1.1-1' }} árboles urbanos</span>
             </div>
           </div>
@@ -293,7 +294,7 @@ interface QuickCorridorOption {
             <span class="ribbon-icon tint-yellow"><app-icon name="bike" [size]="26"></app-icon></span>
             <div class="ribbon-copy">
               <span class="ribbon-label">Recorrido sostenible</span>
-              <strong class="ribbon-val">{{ s.totalDistanceKm | number: '1.1-1' }} <small>km</small></strong>
+              <strong class="ribbon-val"><span [appCountUp]="s.totalDistanceKm" [decimals]="1"></span> <small>km</small></strong>
               <span class="ribbon-sub">{{ s.totalTrips }} recorridos registrados</span>
             </div>
           </div>
@@ -302,7 +303,7 @@ interface QuickCorridorOption {
             <span class="ribbon-icon tint-blue"><app-icon name="bolt" [size]="26"></app-icon></span>
             <div class="ribbon-copy">
               <span class="ribbon-label">Puntos disponibles</span>
-              <strong class="ribbon-val">{{ s.currentPoints }} <small>pts</small></strong>
+              <strong class="ribbon-val"><span [appCountUp]="s.currentPoints"></span> <small>pts</small></strong>
               <a routerLink="/rewards" class="ribbon-link">Canjear beneficios →</a>
             </div>
           </div>
@@ -311,7 +312,7 @@ interface QuickCorridorOption {
             <span class="ribbon-icon tint-orange"><app-icon name="flame" [size]="26"></app-icon></span>
             <div class="ribbon-copy">
               <span class="ribbon-label">Energía activa</span>
-              <strong class="ribbon-val">{{ s.totalCaloriesBurned }} <small>kcal</small></strong>
+              <strong class="ribbon-val"><span [appCountUp]="s.totalCaloriesBurned"></span> <small>kcal</small></strong>
               <span class="ribbon-sub">Calorías quemadas en ruta</span>
             </div>
           </div>
