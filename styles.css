@@ -2512,12 +2512,14 @@ b,
 /* ==========================================================================
    STYLIZED ARCHITECTURAL ILLUSTRATION OVERRIDES (LESS CARTOON · LARGER TEXT · CLEAR SECTIONS)
    ========================================================================== */
-:root,
-html[data-theme="light"] {
+:root {
   --display: 'Plus Jakarta Sans', 'Inter', sans-serif !important;
   --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
-  --ink: #0D1A13 !important;
-  --ink-secondary: #33473C !important;
+}
+
+html[data-theme="light"] {
+  --ink: #0D1A13;
+  --ink-secondary: #33473C;
 }
 
 html,
@@ -2702,5 +2704,39 @@ html[data-theme="dark"] .section.alt {
   .section.alt {
     min-height: auto !important;
     padding: 3.25rem 0 !important;
+  }
+}
+
+/* Fix: evitar desborde horizontal del hero y del simulador en celular */
+@media (max-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero-copy,
+  .hero-copy-main {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .sim-header {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+}
+
+/* Tarjetas vivas en la landing: elevación, inclinación 3D y luz */
+html[data-theme] body :is(.how-step-card, .transport-card:not(.is-recommended), .impact-stat-card, .metric-item, .alchemy-summary-card):hover {
+  transform: perspective(900px) translateY(-5px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  box-shadow: 0 20px 40px -14px rgba(60, 120, 10, 0.35) !important;
+  background-image: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), rgba(140, 229, 46, 0.18), transparent 65%) !important;
+  transition: transform 0.12s ease-out, box-shadow 0.28s ease, border-color 0.28s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-theme] body :is(.how-step-card, .transport-card:not(.is-recommended), .impact-stat-card, .metric-item, .alchemy-summary-card):hover {
+    transform: none;
+    background-image: none !important;
   }
 }
