@@ -673,6 +673,32 @@ function setupAlchemyLab() {
   renderAlchemyLab();
 }
 
+function setupCardTilt() {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  const cardSelector =
+      ".how-step-card, .transport-card:not(.is-recommended), .impact-stat-card, .metric-item, .alchemy-summary-card";
+
+  document.addEventListener(
+      "pointermove",
+      (event) => {
+        if (event.pointerType === "touch") return;
+        const card = event.target.closest && event.target.closest(cardSelector);
+        if (!card) return;
+
+        const rect = card.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+
+        card.style.setProperty("--mx", x + "px");
+        card.style.setProperty("--my", y + "px");
+        card.style.setProperty("--rx", ((y / rect.height - 0.5) * -4).toFixed(2) + "deg");
+        card.style.setProperty("--ry", ((x / rect.width - 0.5) * 4).toFixed(2) + "deg");
+      },
+      { passive: true }
+  );
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   setupLimaHeroMap();
   setupThemeSwitcher();
@@ -680,5 +706,6 @@ document.addEventListener("DOMContentLoaded", () => {
   setupLanguageToggle();
   setupSimulator();
   setupAlchemyLab();
+  setupCardTilt();
   applyTranslations(currentLang);
 });
