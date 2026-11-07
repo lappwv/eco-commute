@@ -5400,3 +5400,23 @@ app-leaderboard .podium-stepped-stage {
   0% { left: -60%; opacity: 1; }
   100% { left: 130%; opacity: 1; }
 }
+
+/* Accesibilidad: apagar el movimiento permanente si el usuario lo pide */
+@media (prefers-reduced-motion: reduce) {
+  .eco-map-backdrop::before,
+  .eco-map-backdrop::after,
+  .map-backdrop-svg path[stroke-dasharray],
+  .cartoon-hero-banner::after,
+  .dashboard-cartoon-svg,
+  .dashboard-cartoon-svg path[stroke-dasharray="6 4"],
+  .dashboard-cartoon-svg polygon,
+  .dashboard-cartoon-svg line,
+  .chip-btn.active,
+  .mode-pill-row.selected app-icon {
+    animation: none;
+  }
+
+  .backdrop-riders {
+    display: none;
+  }
+}
