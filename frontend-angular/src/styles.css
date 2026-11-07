@@ -5039,7 +5039,7 @@ app-rewards .rewards-bottom-split {
 .eco-main .ticket-voucher-card,
 .eco-main .badge-row-strip,
 .eco-main .podium-pillar {
-  animation: card-rise 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: card-rise 0.55s cubic-bezier(0.22, 1, 0.36, 1) backwards;
 }
 
 .eco-main .eco-card:nth-child(2),
