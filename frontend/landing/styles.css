@@ -2691,7 +2691,8 @@ html[data-theme="dark"] .section.alt {
 .hero-section > .container {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
-  width: 100%;
+  width: min(1160px, calc(100% - clamp(3.5rem, 9vw, 8rem))) !important;
+  margin-inline: auto !important;
 }
 
 @media (max-width: 900px) {
