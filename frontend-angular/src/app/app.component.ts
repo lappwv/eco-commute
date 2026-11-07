@@ -56,7 +56,9 @@ export class AppComponent implements OnInit, OnDestroy {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     const card = (event.target as HTMLElement | null)?.closest?.(
-      '.eco-card, .ribbon-metric, .ticket-voucher-card, .badge-row-strip, .podium-pillar'
+      '.eco-card, .ribbon-metric, .ticket-voucher-card, .badge-row-strip, .podium-pillar, ' +
+      '.quick-route-launcher, .hero-steps-guide, .v-medal-row, .trip-feed-item, ' +
+      '.live-impact-strip, .tower-progress-box, .balance-card-inline, .vertical-timeline-section'
     ) as HTMLElement | null;
     if (!card) return;
 

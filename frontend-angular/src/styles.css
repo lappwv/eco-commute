@@ -5159,32 +5159,35 @@ app-rewards .rewards-bottom-split {
 }
 
 /* Inclinación 3D y luz que sigue al cursor (todas las tarjetas) */
-.ribbon-metric {
+:is(.ribbon-metric, .quick-route-launcher, .hero-steps-guide, .v-medal-row, .trip-feed-item,
+    .live-impact-strip, .tower-progress-box, .balance-card-inline, .vertical-timeline-section,
+    .advisor-callout) {
   transition:
     transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.28s ease;
+    box-shadow 0.28s ease,
+    border-color 0.28s ease;
 }
 
-.eco-card:hover,
-.ribbon-metric:hover,
-.ticket-voucher-card:hover,
-.badge-row-strip:hover,
-.podium-pillar:hover {
+:is(.eco-card, .ribbon-metric, .ticket-voucher-card, .badge-row-strip, .podium-pillar,
+    .quick-route-launcher, .hero-steps-guide, .v-medal-row, .trip-feed-item,
+    .live-impact-strip, .tower-progress-box, .balance-card-inline, .vertical-timeline-section):hover {
   transform: perspective(900px) translateY(-4px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  box-shadow: 0 18px 38px -12px rgba(21, 128, 61, 0.35) !important;
   background-image: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), rgba(34, 197, 94, 0.16), transparent 65%) !important;
   transition: transform 0.12s ease-out, box-shadow 0.28s ease, border-color 0.28s ease;
 }
 
-.ribbon-metric:hover {
-  box-shadow: 0 18px 38px -12px rgba(21, 128, 61, 0.35);
+/* El callout ya tiene su propio degradado: solo sube y gana sombra */
+.advisor-callout:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 38px -12px rgba(21, 128, 61, 0.35) !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .eco-card:hover,
-  .ribbon-metric:hover,
-  .ticket-voucher-card:hover,
-  .badge-row-strip:hover,
-  .podium-pillar:hover {
+  :is(.eco-card, .ribbon-metric, .ticket-voucher-card, .badge-row-strip, .podium-pillar,
+      .quick-route-launcher, .hero-steps-guide, .v-medal-row, .trip-feed-item,
+      .live-impact-strip, .tower-progress-box, .balance-card-inline, .vertical-timeline-section,
+      .advisor-callout):hover {
     transform: none;
     background-image: none !important;
   }
