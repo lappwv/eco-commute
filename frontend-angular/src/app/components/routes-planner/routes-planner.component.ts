@@ -154,8 +154,8 @@ interface LimaPreset {
             <svg class="teaser-leaf leaf-2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19C5 10 10 5 20 4c0 10-4 15-13 15z" fill="currentColor" /></svg>
             <svg class="teaser-leaf leaf-3" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19C5 10 10 5 20 4c0 10-4 15-13 15z" fill="currentColor" /></svg>
             <small>Tu ahorro estimado</small>
-            <strong><span [appCountUp]="r.aiGreenCorridorRoute?.co2SavedGrams"></span> g de CO₂</strong>
-            <span class="teaser-pts">+<span [appCountUp]="r.aiGreenCorridorRoute?.potentialPoints"></span> pts por pedalear esta ruta</span>
+            <strong><span [appCountUp]="r.aiGreenCorridorRoute.co2SavedGrams"></span> g de CO₂</strong>
+            <span class="teaser-pts">+<span [appCountUp]="r.aiGreenCorridorRoute.potentialPoints"></span> pts por pedalear esta ruta</span>
           </div>
         </form>
 
