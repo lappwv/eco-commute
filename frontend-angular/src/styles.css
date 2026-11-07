@@ -5450,3 +5450,21 @@ app-leaderboard .podium-stepped-stage {
     white-space: nowrap;
   }
 }
+
+
+/* Luz del cursor visible detras de tablas, canjes y pie de voucher */
+.eco-table th {
+  background: color-mix(in srgb, var(--bg-soft) 55%, transparent);
+}
+
+.eco-table tbody tr:hover {
+  background: color-mix(in srgb, var(--bg-soft) 55%, transparent);
+}
+
+.ticket-stub-footer {
+  background: color-mix(in srgb, var(--bg-card) 50%, transparent);
+}
+
+.redemption-row {
+  background: color-mix(in srgb, var(--bg-soft) 55%, transparent);
+}
