@@ -4725,8 +4725,52 @@ h1, h2, h3, h4,
 .mode-progress-fill,
 .v-medal-fill,
 .milestone-progress-fill {
-  background: linear-gradient(90deg, #15803D 0%, #22C55E 100%) !important;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(90deg, #14532D 0%, #15803D 35%, #22C55E 70%, #86EFAC 100%) !important;
   border-radius: 999px !important;
+  animation: bar-grow 1.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Líneas de velocidad que avanzan hacia la derecha */
+.mode-progress-fill::after,
+.v-medal-fill::after,
+.milestone-progress-fill::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.75)),
+    linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.55)),
+    linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.65));
+  background-size: 38px 1.5px, 61px 1.5px, 47px 1.5px;
+  background-position: 0 1px, 0 4px, 0 7px;
+  background-repeat: repeat-x;
+  animation: speed-lines 0.8s linear infinite;
+}
+
+@keyframes speed-lines {
+  to {
+    background-position: 38px 1px, 61px 4px, 47px 7px;
+  }
+}
+
+@keyframes bar-grow {
+  from {
+    width: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mode-progress-fill,
+  .v-medal-fill,
+  .milestone-progress-fill,
+  .mode-progress-fill::after,
+  .v-medal-fill::after,
+  .milestone-progress-fill::after {
+    animation: none;
+  }
 }
 
 /* Larger Headings & Text Inside Cards Across All Tabs */
@@ -4939,5 +4983,233 @@ app-rewards .rewards-bottom-split {
   .cartoon-hero-banner {
     min-height: auto;
     padding: 1.85rem !important;
+  }
+}
+
+/* Tarjetas vivas: elevación y sombra al pasar el cursor */
+.eco-card,
+.ticket-voucher-card,
+.badge-row-strip,
+.podium-pillar {
+  transition:
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.28s ease,
+    border-color 0.28s ease;
+}
+
+.eco-card:hover,
+.ticket-voucher-card:hover,
+.badge-row-strip:hover,
+.podium-pillar:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 38px -12px rgba(21, 128, 61, 0.35) !important;
+  border-color: var(--emerald-border, rgba(34, 197, 94, 0.45)) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eco-card,
+  .ticket-voucher-card,
+  .badge-row-strip,
+  .podium-pillar {
+    transition: none;
+  }
+
+  .eco-card:hover,
+  .ticket-voucher-card:hover,
+  .badge-row-strip:hover,
+  .podium-pillar:hover {
+    transform: none;
+  }
+}
+
+
+/* Entrada escalonada de las tarjetas al abrir cada pantalla */
+@keyframes card-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.eco-main .eco-card,
+.eco-main .ticket-voucher-card,
+.eco-main .badge-row-strip,
+.eco-main .podium-pillar {
+  animation: card-rise 0.55s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+.eco-main .eco-card:nth-child(2),
+.eco-main .ticket-voucher-card:nth-child(2),
+.eco-main .badge-row-strip:nth-child(2),
+.eco-main .podium-pillar:nth-child(2) {
+  animation-delay: 0.08s;
+}
+
+.eco-main .eco-card:nth-child(3),
+.eco-main .ticket-voucher-card:nth-child(3),
+.eco-main .badge-row-strip:nth-child(3),
+.eco-main .podium-pillar:nth-child(3) {
+  animation-delay: 0.16s;
+}
+
+.eco-main .eco-card:nth-child(n + 4),
+.eco-main .ticket-voucher-card:nth-child(n + 4),
+.eco-main .badge-row-strip:nth-child(n + 4),
+.eco-main .podium-pillar:nth-child(n + 4) {
+  animation-delay: 0.24s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eco-main .eco-card,
+  .eco-main .ticket-voucher-card,
+  .eco-main .badge-row-strip,
+  .eco-main .podium-pillar {
+    animation: none;
+  }
+}
+
+/* Barras semanales con efecto líquido: ola en la superficie y burbujas */
+.bar-fill {
+  position: relative;
+  --liquid-top: #8EDB2F;
+  background: linear-gradient(180deg, #8EDB2F 0%, #6CC016 45%, #4E9A0E 100%);
+  border-top: 0;
+  animation: liquid-fill 1.2s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+/* Ola que se desplaza sobre la superficie */
+.bar-fill::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -6px;
+  height: 8px;
+  background: radial-gradient(ellipse 9px 6px at 50% 100%, var(--liquid-top) 96%, transparent 100%);
+  background-size: 18px 8px;
+  background-repeat: repeat-x;
+  animation: liquid-wave 1.8s linear infinite;
+}
+
+/* Burbujas que suben dentro del líquido */
+.bar-fill::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle, rgba(255, 255, 255, 0.6) 2px, transparent 2.6px),
+    radial-gradient(circle, rgba(255, 255, 255, 0.45) 1.5px, transparent 2px);
+  background-size: 22px 34px, 16px 27px;
+  background-position: 3px 0, 12px 0;
+  background-repeat: repeat;
+  animation: liquid-bubbles 2.8s linear infinite;
+}
+
+/* Desfase para que cada barra se mueva distinto */
+.bar-column:nth-child(2n) .bar-fill::before { animation-delay: -0.6s; }
+.bar-column:nth-child(3n) .bar-fill::before { animation-delay: -1.1s; }
+.bar-column:nth-child(2n) .bar-fill::after { animation-delay: -0.9s; }
+.bar-column:nth-child(3n) .bar-fill::after { animation-delay: -1.7s; }
+
+@keyframes liquid-wave {
+  to { background-position-x: 18px; }
+}
+
+@keyframes liquid-bubbles {
+  to { background-position: 3px -34px, 12px -27px; }
+}
+
+@keyframes liquid-fill {
+  from { height: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bar-fill,
+  .bar-fill::before,
+  .bar-fill::after {
+    animation: none;
+  }
+}
+
+/* Transición suave al abrir cada pantalla */
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.page-section {
+  animation: page-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-section {
+    animation: none;
+  }
+}
+
+/* Inclinación 3D y luz que sigue al cursor (todas las tarjetas) */
+:is(.ribbon-metric, .quick-route-launcher, .hero-steps-guide, .v-medal-row, .trip-feed-item,
+    .live-impact-strip, .tower-progress-box, .balance-card-inline, .vertical-timeline-section,
+    .advisor-callout) {
+  transition:
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.28s ease,
+    border-color 0.28s ease;
+}
+
+:is(.eco-card, .ribbon-metric, .ticket-voucher-card, .badge-row-strip, .podium-pillar,
+    .quick-route-launcher, .hero-steps-guide, .v-medal-row, .trip-feed-item,
+    .live-impact-strip, .tower-progress-box, .balance-card-inline, .vertical-timeline-section):hover {
+  transform: perspective(900px) translateY(-4px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  box-shadow: 0 18px 38px -12px rgba(21, 128, 61, 0.35) !important;
+  background-image: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), rgba(34, 197, 94, 0.16), transparent 65%) !important;
+  transition: transform 0.12s ease-out, box-shadow 0.28s ease, border-color 0.28s ease;
+}
+
+/* El callout ya tiene su propio degradado: solo sube y gana sombra */
+.advisor-callout:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 38px -12px rgba(21, 128, 61, 0.35) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :is(.eco-card, .ribbon-metric, .ticket-voucher-card, .badge-row-strip, .podium-pillar,
+      .quick-route-launcher, .hero-steps-guide, .v-medal-row, .trip-feed-item,
+      .live-impact-strip, .tower-progress-box, .balance-card-inline, .vertical-timeline-section,
+      .advisor-callout):hover {
+    transform: none;
+    background-image: none !important;
+  }
+}
+
+/* Ruta del mapa que se dibuja de inicio a fin */
+.route-draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: route-draw 1.6s ease-out forwards;
+}
+
+@keyframes route-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .route-draw {
+    animation: none;
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
   }
 }
