@@ -309,14 +309,11 @@ let limaTileLayer = null;
 function updateLimaMapTiles() {
   if (!limaMapInstance || typeof window.L === "undefined") return;
   const L = window.L;
-  const isDark = document.documentElement.getAttribute("data-theme") === "dark";
 
-  const tileUrl = isDark
-    ? "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-    : "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png";
+  const tileUrl = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
 
   const attribution =
-    '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener">CARTO</a>';
+      '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors';
 
   if (limaTileLayer) {
     limaMapInstance.removeLayer(limaTileLayer);
@@ -324,8 +321,7 @@ function updateLimaMapTiles() {
 
   limaTileLayer = L.tileLayer(tileUrl, {
     attribution,
-    maxZoom: 19,
-    subdomains: "abcd"
+    maxZoom: 19
   }).addTo(limaMapInstance);
 }
 
