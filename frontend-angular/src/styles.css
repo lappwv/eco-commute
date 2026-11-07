@@ -5497,3 +5497,231 @@ app-leaderboard .eco-card:hover {
 .eco-table td.user-cell > img {
   margin-right: 0.65rem;
 }
+
+/* Rutas: entrada escalonada de las tarjetas y brillo en la recomendada */
+@keyframes route-col-in {
+  from {
+    opacity: 0;
+    transform: translateY(22px) scale(0.97);
+  }
+}
+
+@keyframes route-rec-glow {
+  0%,
+  100% {
+    box-shadow: 0 7px 0 #1E241E, 0 0 0 0 rgba(34, 197, 94, 0);
+  }
+  50% {
+    box-shadow: 0 7px 0 #1E241E, 0 0 26px 4px rgba(34, 197, 94, 0.42);
+  }
+}
+
+.route-columns-3 .route-vertical-col {
+  animation: route-col-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+.route-columns-3 .route-vertical-col:nth-child(2) {
+  animation-delay: 0.12s;
+}
+
+.route-columns-3 .route-vertical-col:nth-child(3) {
+  animation-delay: 0.24s;
+}
+
+.route-columns-3 .route-vertical-col.recommended {
+  animation:
+    route-col-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) backwards,
+    route-rec-glow 3.2s ease-in-out 0.8s infinite;
+}
+
+/* Rutas: inclinacion y luz del cursor en las tarjetas de resultado */
+.route-vertical-col {
+  transition:
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.28s ease,
+    border-color 0.28s ease;
+}
+
+.route-vertical-col:hover {
+  transform: perspective(900px) translateY(-4px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  box-shadow: 0 18px 38px -12px rgba(21, 128, 61, 0.35) !important;
+  background-image: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), rgba(34, 197, 94, 0.16), transparent 65%) !important;
+  transition:
+    transform 0.12s ease-out,
+    box-shadow 0.28s ease,
+    border-color 0.28s ease;
+}
+
+/* Rutas: barra de carga animada sobre el mapa */
+.planner-map-pane {
+  position: relative;
+}
+
+.map-loading-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  z-index: 1100;
+  overflow: hidden;
+  background: rgba(34, 197, 94, 0.18);
+}
+
+.map-loading-bar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 40%;
+  background: linear-gradient(90deg, transparent, #22C55E, transparent);
+  animation: map-loading 1s ease-in-out infinite;
+}
+
+@keyframes map-loading {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(350%);
+  }
+}
+
+/* Rutas: ciclista que recorre el corredor verde */
+.rider-marker {
+  background: none;
+  border: 0;
+}
+
+.rider-dot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border-radius: 50%;
+  background: #16A34A;
+  border: 3px solid #FFFFFF;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+
+.rider-pulse {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 26px;
+  height: 26px;
+  margin: -13px 0 0 -13px;
+  border-radius: 50%;
+  background: rgba(34, 197, 94, 0.4);
+  animation: rider-pulse 1.6s ease-out infinite;
+}
+
+@keyframes rider-pulse {
+  from {
+    transform: scale(0.4);
+    opacity: 0.9;
+  }
+  to {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+/* Rutas: tarjeta de ahorro estimado en el panel izquierdo */
+.saving-teaser {
+  position: relative;
+  overflow: hidden;
+  margin-top: auto;
+  padding: 1rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  border-radius: 18px;
+  border: 2px solid #1E241E;
+  box-shadow: 0 4px 0 #1E241E;
+  background: linear-gradient(160deg, #E6F9CC, #F4FCEB);
+  color: #1E241E;
+}
+
+[data-theme="dark"] .saving-teaser {
+  background: linear-gradient(160deg, #1E3A2A, #19251F);
+  color: var(--text-main);
+}
+
+.saving-teaser small {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+.saving-teaser strong {
+  font-size: 1.45rem;
+  color: var(--emerald);
+}
+
+.teaser-pts {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.teaser-leaf {
+  position: absolute;
+  bottom: -12px;
+  width: 18px;
+  height: 18px;
+  color: #22C55E;
+  opacity: 0;
+  pointer-events: none;
+  animation: leaf-float 6s ease-in infinite;
+}
+
+.teaser-leaf.leaf-1 {
+  right: 14%;
+}
+
+.teaser-leaf.leaf-2 {
+  right: 34%;
+  width: 14px;
+  height: 14px;
+  animation-delay: 2s;
+}
+
+.teaser-leaf.leaf-3 {
+  right: 6%;
+  width: 16px;
+  height: 16px;
+  animation-delay: 3.6s;
+}
+
+@keyframes leaf-float {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-110px) rotate(50deg);
+    opacity: 0;
+  }
+}
+
+/* Rutas: apagar el movimiento permanente si el usuario lo pide */
+@media (prefers-reduced-motion: reduce) {
+  .route-columns-3 .route-vertical-col,
+  .route-columns-3 .route-vertical-col.recommended,
+  .map-loading-bar::before,
+  .rider-pulse,
+  .teaser-leaf {
+    animation: none;
+  }
+
+  .teaser-leaf {
+    display: none;
+  }
+}
