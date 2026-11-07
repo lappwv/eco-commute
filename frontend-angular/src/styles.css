@@ -5710,3 +5710,18 @@ app-leaderboard .eco-card:hover {
     opacity: 0;
   }
 }
+
+/* Rutas: apagar el movimiento permanente si el usuario lo pide */
+@media (prefers-reduced-motion: reduce) {
+  .route-columns-3 .route-vertical-col,
+  .route-columns-3 .route-vertical-col.recommended,
+  .map-loading-bar::before,
+  .rider-pulse,
+  .teaser-leaf {
+    animation: none;
+  }
+
+  .teaser-leaf {
+    display: none;
+  }
+}
