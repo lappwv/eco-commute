@@ -5021,3 +5021,53 @@ app-rewards .rewards-bottom-split {
     transform: none;
   }
 }
+
+
+/* Entrada escalonada de las tarjetas al abrir cada pantalla */
+@keyframes card-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.eco-main .eco-card,
+.eco-main .ticket-voucher-card,
+.eco-main .badge-row-strip,
+.eco-main .podium-pillar {
+  animation: card-rise 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.eco-main .eco-card:nth-child(2),
+.eco-main .ticket-voucher-card:nth-child(2),
+.eco-main .badge-row-strip:nth-child(2),
+.eco-main .podium-pillar:nth-child(2) {
+  animation-delay: 0.08s;
+}
+
+.eco-main .eco-card:nth-child(3),
+.eco-main .ticket-voucher-card:nth-child(3),
+.eco-main .badge-row-strip:nth-child(3),
+.eco-main .podium-pillar:nth-child(3) {
+  animation-delay: 0.16s;
+}
+
+.eco-main .eco-card:nth-child(n + 4),
+.eco-main .ticket-voucher-card:nth-child(n + 4),
+.eco-main .badge-row-strip:nth-child(n + 4),
+.eco-main .podium-pillar:nth-child(n + 4) {
+  animation-delay: 0.24s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eco-main .eco-card,
+  .eco-main .ticket-voucher-card,
+  .eco-main .badge-row-strip,
+  .eco-main .podium-pillar {
+    animation: none;
+  }
+}
