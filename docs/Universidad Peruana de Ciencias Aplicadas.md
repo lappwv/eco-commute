@@ -1,10 +1,10 @@
-#### 2.1.1.3 Sprint Backlog 3 (Arquitectura SPA Angular 18, Planificador OSRM+IA, CRUD de Viajes y Dashboard)2.1.1.4 Sprint Backlog 4 (Gamificación, Ranking Distrital, Recompensas, Panel Admin RBAC y Despliegue Full-Stack)4.2.3 Sprint 3 (Arquitectura SPA Angular 18, Planificador OSRM+IA, CRUD de Viajes y Dashboard)4.2.3.2 Development Evidence for Sprint Review (Sprint 3)4.2.4 Sprint 4 (Gamificación, Ranking Distrital, Recompensas, Panel Admin RBAC y Despliegue Full-Stack)4.2.4.2 Development Evidence for Sprint Review (Sprint 4)Con el objetivo de validar empíricamente la Landing Page pública (https://lappwv.github.io/eco-commute/) y la Aplicación Web SPA en Angular 18 (https://lappwv.github.io/eco-commute/app/), se ejecutaron entrevistas de validación con usuarios reales pertenecientes a los dos segmentos objetivo definidos en el Capítulo I. Durante cada sesión, los participantes interactuaron con el planificador OSRM+IA, el CRUD de viajes, el dashboard, las medallas, el ranking por distrito y el canje de recompensas.Segmento Objetivo 2: Usuarios activos (Ciclistas urbanos y caminantes habituales en Lima)Para garantizar la calidad de experiencia de usuario (UX), arquitectura de información y diseño inclusivo, se realizó una evaluación heurística integral sobre la Landing Page (https://lappwv.github.io/eco-commute/) y la Aplicación Web en Angular 18 (https://lappwv.github.io/eco-commute/app/), tomando como marco las 10 Heurísticas de Usabilidad de Jakob Nielsen y los criterios de accesibilidad WCAG 2.1 Nivel AA.El Video About-the-Product presenta la propuesta de valor de EcoCommute y demuestra en vivo la interacción de un usuario real con la Landing Page pública y la Aplicación Web SPA en Angular 18 conectada al backend en Render y PostgreSQL.El Video About-the-Team sintetiza la experiencia colaborativa del Grupo 5 a lo largo del desarrollo integral de EcoCommute (Trabajo Parcial y Trabajo Final), presentando las reflexiones individuales de cada integrante, los aprendizajes de ingeniería de software aplicando Scrum, Lean UX, Gitflow, Angular 18 y Spring Boot 3, y el cumplimiento del Student Outcome ABET 3.Universidad Peruana de Ciencias Aplicadas
+#### Universidad Peruana de Ciencias Aplicadas
 
+****
 
 **INGENIERÍA DE SISTEMAS DE INFORMACIÓN**
 
 **ARQUITECTURA DE APLICACIONES WEB**
-
 
 **1ASI0705**
 
@@ -22,91 +22,171 @@
 
 **Integrantes:**
 
-
 | Alcocer Vasquez, Odar Javier | U20241D581 |
-| --- | --- |
+| :---- | :---- |
 | Avalos Arias, Diego Alessandro | U20221D254 |
 | Condor Silvera Rodrigo Sebastián | U202418511 |
 | Espinoza Gamboa, Paulo Daniel | U202319631 |
 | Mariños Alberca, Matias Santiago | U202220088 |
 | Ramos Chauca, Jeampiero Sergio | U20241E361 |
 
-
 **2026-2**
-
 
 **Registro de versiones del informe**
 
-| **Versión** | **Fecha** | **Autor** | **DESCRIPCIÓN Y MODIFICACIÓN** |
+| Versión | Fecha | Autor | DESCRIPCIÓN Y MODIFICACIÓN |
 | :---: | :---: | :---: | :---: |
 | 1.0 | 27/08/2026 | Equipo EcoCommute | Versión inicial del TP. |
 | 1.1 | 03/09/2026 | Equipo EcoCommute | Corrección ortográfica, mejora de redacción y desarrollo del informe hasta el Capítulo II según la rúbrica del Trabajo Parcial. |
 | 1.2 | 04/09/2026 | Equipo EcoCommute | Desarrollo y corrección del Capítulo III, Sprint Backlog, Student Outcome, tablas y diagrama de base de datos con relaciones. |
-| 1.3 | 29/09/2026 | Equipo EcoCommute | Actualización del despliegue a Render, corrección de evidencias del Sprint Review, actualización del modelo de base de datos y reemplazo de la Figura 7. |
+| 1.3 | 29/09/2026 | Equipo EcoCommute | Actualización del despliegue a Render, corrección de evidencias del Sprint Review, actualización del modelo de base de datos y reemplazo de la Figura 7\. |
 | 1.4 | 02/10/2026 | Equipo EcoCommute | Alineación integral del informe con la rúbrica del Trabajo Parcial y el repositorio: mejora de Lean UX, perfiles, Student Outcome, Sprint Backlog, landing page, arquitectura, base de datos, OpenAPI/Swagger y despliegue en Render. |
-| 1.5 | 02/10/2026 | Equipo EcoCommute | Clarificación del alcance técnico del TP y actualización de Style Guidelines, configuración técnica e implementación del Sprint 1. |
+| 1.5 | 02/10/2026 | Equipo EcoCommute | Clarificación del alcance técnico del TP y actualización de Style Guidelines, configuración técnica e implementación del Sprint 1\. |
 | 1.6 | 03/10/2026 | Equipo EcoCommute | Sincronización del informe con los controladores REST expuestos en el Sprint 2 manteniendo cobertura HU01-HU14, CRUD, reportes y seguridad. |
 | 1.7 | 04/10/2026 | Equipo EcoCommute | Sincronización técnica exhaustiva de la especificación de endpoints en la sección 4.2.2.4 con el backend desplegado en Render y Swagger UI. |
 | 1.8 | 04/10/2026 | Equipo EcoCommute | Homologación de rutas en la sección 4.2.2.4 (/api/v1/routes/plan, /api/v1/trips/history y endpoints administrativos protegidos por rol). |
-| 1.9 | 25/10/2026 | Equipo EcoCommute | Desarrollo e integración del Sprint 3 (Trabajo Final): implementación de la aplicación web SPA en Angular 18 + TypeScript + Angular Material + Leaflet, interceptores JWT, guardias de ruta, internacionalización (es\_419/en\_US), CRUD completo de viajes por propietario (PUT/DELETE /api/v1/trips/{id}), planificador OSRM+Gemini y dashboard personal. |
+| 1.9 | 25/10/2026 | Equipo EcoCommute | Desarrollo e integración del Sprint 3 (Trabajo Final): implementación de la aplicación web SPA en Angular 18 \+ TypeScript \+ Angular Material \+ Leaflet, interceptores JWT, guardias de ruta, internacionalización (es\_419/en\_US), CRUD completo de viajes por propietario (PUT/DELETE /api/v1/trips/{id}), planificador OSRM+Gemini y dashboard personal. |
 | 2.0 | 04/11/2026 | Equipo EcoCommute | Consolidación integral del Informe de Trabajo Final (Semana 15): reordenamiento del Product Backlog por valor de negocio, documentación del Sprint 4 (módulos de Gamificación, Ranking distrital, Canje de Recompensas, Panel Admin RBAC y Términos), exposición de 34 endpoints en OpenAPI 3.0 con 102 pruebas automatizadas en verde, despliegue full-stack en GitHub Pages (/app/) y Render, registro de entrevistas de validación (4.3.2), evaluaciones heurísticas (4.3.3), videos (4.4 y About-the-Team), conclusiones y recomendaciones. |
-
-
-| 1.7 | 04/10/2026 | Equipo EcoCommute | Sincronización técnica exhaustiva de la especificación de endpoints en la sección 4.2.2.4 con el backend desplegado en Render y Swagger UI (25 rutas activas), detallando la ruta exacta de canjes GET /api/v1/redemptions para HU14 y el mapeo completo de controladores. |
-| --- | --- | --- | --- |
-
 
 **Tabla de Contenidos**
 
+[Student Outcome	5](#student-outcome)
 
+[**CAPÍTULO I: INTRODUCCIÓN	7**](#capítulo-i:-introducción)
 
-## **Student Outcome**
+[1.1 Startup Profile	7](#1.1-startup-profile)
 
+[1.1.1 Descripción de la Startup	7](#1.1.1-descripción-de-la-startup)
 
-| **Criterios específicos** | **Acciones realizadas** | **Conclusiones** |
-| --- | --- | --- |
-| Comunica oralmente sus ideas y/o resultados con objetividad a público de diferentes especialidades y niveles jerárquicos, en el marco del desarrollo de un proyecto en ingeniería. | Alcocer Vasquez, Odar Javier (U20241D581): \[TP\] Sustentó los flujos de gamificación, asignación de puntos verdes por viaje y las reglas de negocio para el desbloqueo automático de medallas en los Sprints 1 y 2. \[TF\] Expuso la implementación en Angular 18 de los componentes TripsComponent y GamificationComponent, demostrando la previsualización en vivo de CO₂ y la galería interactiva de medallas y niveles. Avalos Arias, Diego Alessandro (U20221D254): \[TP\] Expuso la arquitectura del catálogo de recompensas, el flujo transaccional de canjes y los retos sostenibles en el backend. \[TF\] Sustentó la integración full-stack de RewardsComponent y AdminComponent en Angular 18, demostrando la emisión de códigos ECO-XXXXXX y el control de acceso basado en roles (ROLE\_ADMIN). Condor Silvera, Rodrigo Sebastián (U202418511): \[TP\] Presentó la arquitectura base en Spring Boot 3, seguridad stateless con Spring Security / JWT y despliegue continuo en Render con Docker y PostgreSQL. \[TF\] Sustentó la arquitectura SPA en Angular 18 (AuthService, authInterceptor, authGuard/adminGuard), la exposición de 34 endpoints en OpenAPI 3.0, las 102 pruebas automatizadas y el despliegue productivo full-stack. Espinoza Gamboa, Paulo Daniel (U202319631): \[TP\] Sustentó la lógica de ordenamiento del leaderboard distrital y cómo fomenta la identidad urbana en Lima. \[TF\] Presentó el módulo LeaderboardComponent en Angular 18 con filtros distritales en vivo, los hallazgos de las entrevistas de validación con usuarios reales y la evaluación heurística de usabilidad. Mariños Alberca, Matias Santiago (U202220088): \[TP\] Presentó las métricas de impacto en el dashboard, el servicio de recomendaciones con IA (Google Gemini) y la landing page. \[TF\] Sustentó el DashboardComponent analítico en Angular 18, el sistema reactivo de internacionalización (es\_419/en\_US), la accesibilidad WCAG 2.1 AA y la validación de hipótesis Lean UX. Ramos Chauca, Jeampiero Sergio (U20241E361): \[TP\] Explicó la integración con OSRM para rutas multimodales, el modelo JPA de viajes y el motor CarbonCalculatorService. \[TF\] Sustentó el planificador interactivo RoutesPlannerComponent con mapas Leaflet en Angular 18 y el CRUD completo de viajes por propietario (incluyendo corrección PUT y eliminación DELETE con recálculo de CO₂). | La comunicación oral evolucionó desde la defensa de la arquitectura base y API REST en el Trabajo Parcial hacia una demostración integral del producto full-stack (Angular 18 + Spring Boot 3 + PostgreSQL) en el Trabajo Final. El equipo logró transmitir decisiones arquitectónicas, métricas ambientales de CO₂ e indicadores de validación empírica con claridad tanto a audiencias técnicas como de negocio. |
-| Comunica en forma escrita ideas y/o resultados con objetividad a público de diferentes especialidades y niveles jerárquicos, en el marco del desarrollo de un proyecto en ingeniería. | Alcocer Vasquez, Odar Javier (U20241D581): \[TP\] Documentó las reglas de gamificación y criterios Gherkin de HU06, HU10 y HU11. \[TF\] Redactó la especificación técnica de los componentes Angular de viajes y gamificación en los Sprints 3 y 4, así como la trazabilidad de estados en el EcoPerfil. Avalos Arias, Diego Alessandro (U20221D254): \[TP\] Redactó la especificación de HU12, HU13 y HU14 y las pruebas de integración de recompensas. \[TF\] Documentó los flujos de canje atómico y administración RBAC en el Sprint 4, la matriz de endpoints OpenAPI y las evidencias de ejecución del panel administrativo. Condor Silvera, Rodrigo Sebastián (U202418511): \[TP\] Redactó la arquitectura de software, configuración render.yaml y especificación de seguridad (HU01, HU02). \[TF\] Documentó el reordenamiento del Product Backlog por valor de negocio, la arquitectura de componentes Angular 18, la suite de 102 pruebas automatizadas y el pipeline de despliegue full-stack. Espinoza Gamboa, Paulo Daniel (U202319631): \[TP\] Documentó la historia HU08 y el diseño de LeaderboardController. \[TF\] Redactó el registro estructurado de entrevistas de validación por segmento (4.3.2), las tablas de evaluación heurística de usabilidad (4.3.3) y las métricas de colaboración del Sprint 4. Mariños Alberca, Matias Santiago (U202220088): \[TP\] Documentó el proceso Lean UX, KPIs del dashboard (HU07), integración de IA Gemini con fallback (HU09) y diseño de la landing page. \[TF\] Redactó las guías de estilo web actualizadas a Angular 18 + Angular Material, las conclusiones contrastadas con las hipótesis Lean UX y la hoja de ruta (Product Roadmap) en Recomendaciones. Ramos Chauca, Jeampiero Sergio (U20241E361): \[TP\] Redactó las especificaciones de HU03, HU04 y HU05, el modelo relacional PostgreSQL y pruebas de OSRM. \[TF\] Documentó la integración cartográfica Leaflet en el Sprint 3, los contratos de edición/eliminación de viajes por propietario y las evidencias técnicas de precisión en el cálculo de CO₂. | El informe técnico del Trabajo Final consolida con rigor académico y trazabilidad verificable las cuatro iteraciones (Sprints 1 al 4), articulando la investigación Lean UX, el Product Backlog priorizado por valor de negocio, la arquitectura C4/UML, la implementación full-stack en Angular 18 y Spring Boot 3, las 102 pruebas automatizadas y la validación empírica con usuarios de Lima Metropolitana. |
+[1.1.3 Relación con los ODS y Uso de Inteligencia Artificial	8](#1.1.3-relación-con-los-ods-y-uso-de-inteligencia-artificial)
 
-# **CAPÍTULO I: INTRODUCCIÓN**
+[1.1.2 Perfiles de Integrantes del Equipo	8](#1.1.2-perfiles-de-integrantes-del-equipo)
 
-### **1.1 Startup Profile**
+[1.2 Solution Profile	10](#1.2-solution-profile)
 
-#### **1.1.1 Descripción de la Startup**
+[1.2.1 Antecedentes y problemática	10](#1.2.1-antecedentes-y-problemática)
+
+[1.2.2 Lean UX Process	12](#1.2.2-lean-ux-process)
+
+[1.4 Competidores y Análisis Competitivo	16](#1.4-competidores-y-análisis-competitivo)
+
+[1.4.1 Competitive Analysis Landscape	16](#1.4.1-competitive-analysis-landscape)
+
+[1.4.2 Estrategias y tácticas frente a competidores	17](#1.4.2-estrategias-y-tácticas-frente-a-competidores)
+
+[**CAPÍTULO II: REQUIREMENTS SPECIFICATION	18**](#capítulo-ii:-requirements-specification)
+
+[2.1 Product Backlog	18](#2.1-product-backlog)
+
+[2.1.1 Sprint Backlog	21](#2.1.1-sprint-backlog)
+
+[2.1.1.1 Sprint Backlog 1	22](#2.1.1.1-sprint-backlog-1)
+
+[2.1.1.2 Sprint Backlog 2	23](#2.1.1.2-sprint-backlog-2)
+
+[**CAPÍTULO III: PRODUCT DESIGN	24**](#capítulo-iii:-product-design)
+
+[3.1 Style Guidelines	24](#3.1-style-guidelines)
+
+[3.1.1 General Style Guidelines	24](#3.1.1-general-style-guidelines)
+
+[3.1.2 Web Style Guidelines	25](#3.1.2-web-style-guidelines)
+
+[3.1.3 Términos y Condiciones de Servicio	26](#3.1.3-términos-y-condiciones-de-servicio)
+
+[3.1.4 Internacionalización y Accesibilidad (i18n & a11y)	26](#3.1.4-internacionalización-y-accesibilidad-\(i18n-&-a11y\))
+
+[3.2 Landing Page UI Design	26](#3.2-landing-page-ui-design)
+
+[3.2.1 Landing Page Wireframe	27](#3.2.1-landing-page-wireframe)
+
+[3.2.2 Landing Page Mock-up	27](#3.2.2-landing-page-mock-up)
+
+[3.3 Web Applications UX/UI Design	28](#3.3-web-applications-ux/ui-design)
+
+[3.3.1 Web Applications Mock-ups	28](#3.3.1-web-applications-mock-ups)
+
+[3.3.2 Web Applications Wireflow Diagrams	30](#3.3.2-web-applications-wireflow-diagrams)
+
+[3.4 Database Design	31](#3.4-database-design)
+
+[3.4.1 Database Diagram	31](#3.4.1-database-diagram)
+
+[**CAPÍTULO IV: PRODUCT IMPLEMENTATION, VALIDATION & DEPLOYMENT	33**](#capítulo-iv:-product-implementation,-validation-&-deployment)
+
+[4.1 Software Deployment Configuration	33](#4.1-software-deployment-configuration)
+
+[4.2 Landing Page, Services & Applications Implementation	34](#4.2-landing-page,-services-&-applications-implementation)
+
+[4.2.1 Sprint 1	34](#4.2.1-sprint-1)
+
+[4.2.2 Sprint 2	38](#4.2.2-sprint-2)
+
+[4.3 Validation Interviews	43](#4.3-validation-interviews)
+
+[4.3.1 Diseño de Entrevistas	43](#4.3.1-diseño-de-entrevistas)
+
+[¿Tienes alguna recomendación o sugerencia adicional sobre cómo la aplicación podría adaptarse mejor a las condiciones reales de transporte en Lima Metropolitano?	45](#heading=h.un0owpufil4d)
+
+[4.3.2 Registro de Entrevistas	45](#4.3.2-registro-de-entrevistas)
+
+[4.3.3 Evaluaciones segun heuristicas	45](#heading=h.ewy6esi96cvb)
+
+[4.4 Video About-the-Product	45](#heading=h.b33epil7175h)
+
+[**Conclusiones	45**](#heading=h.52k3sneyte5k)
+
+[**Recomendaciones	46**](#heading=h.cs0pgck86slx)
+
+[**Video About-the-Team	46**](#heading=h.rcxerx9jb2l2)
+
+[**Bibliografía	46**](#bibliografía)
+
+[**Anexos	47**](#anexos)
+
+## **Student Outcome** {#student-outcome}
+
+| Criterios específicos  | Acciones realizadas  | Conclusiones |
+| :---- | :---- | :---- |
+| Comunica oralmente sus ideas y/o resultados con objetividad a público de diferentes especialidades y niveles jerárquicos, en el marco del desarrollo de un proyecto en ingeniería. | Alcocer Vasquez, Odar Javier (U20241D581): \[TP\] Sustentó los flujos de gamificación, asignación de puntos verdes por viaje y las reglas de negocio para el desbloqueo automático de medallas en los Sprints 1 y 2\. \[TF\] Expuso la implementación en Angular 18 de los componentes TripsComponent y GamificationComponent, demostrando la previsualización en vivo de CO₂ y la galería interactiva de medallas y niveles. Avalos Arias, Diego Alessandro (U20221D254): \[TP\] Expuso la arquitectura del catálogo de recompensas, el flujo transaccional de canjes y los retos sostenibles en el backend. \[TF\] Sustentó la integración full-stack de RewardsComponent y AdminComponent en Angular 18, demostrando la emisión de códigos ECO-XXXXXX y el control de acceso basado en roles (ROLE\_ADMIN). Condor Silvera, Rodrigo Sebastián (U202418511): \[TP\] Presentó la arquitectura base en Spring Boot 3, seguridad stateless con Spring Security / JWT y despliegue continuo en Render con Docker y PostgreSQL. \[TF\] Sustentó la arquitectura SPA en Angular 18 (AuthService, authInterceptor, authGuard/adminGuard), la exposición de 34 endpoints en OpenAPI 3.0, las 102 pruebas automatizadas y el despliegue productivo full-stack. Espinoza Gamboa, Paulo Daniel (U202319631): \[TP\] Sustentó la lógica de ordenamiento del leaderboard distrital y cómo fomenta la identidad urbana en Lima. \[TF\] Presentó el módulo LeaderboardComponent en Angular 18 con filtros distritales en vivo, los hallazgos de las entrevistas de validación con usuarios reales y la evaluación heurística de usabilidad. Mariños Alberca, Matias Santiago (U202220088): \[TP\] Presentó las métricas de impacto en el dashboard, el servicio de recomendaciones con IA (Google Gemini) y la landing page. \[TF\] Sustentó el DashboardComponent analítico en Angular 18, el sistema reactivo de internacionalización (es\_419/en\_US), la accesibilidad WCAG 2.1 AA y la validación de hipótesis Lean UX. Ramos Chauca, Jeampiero Sergio (U20241E361): \[TP\] Explicó la integración con OSRM para rutas multimodales, el modelo JPA de viajes y el motor CarbonCalculatorService. \[TF\] Sustentó el planificador interactivo RoutesPlannerComponent con mapas Leaflet en Angular 18 y el CRUD completo de viajes por propietario (incluyendo corrección PUT y eliminación DELETE con recálculo de CO₂). | La comunicación oral evolucionó desde la defensa de la arquitectura base y API REST en el Trabajo Parcial hacia una demostración integral del producto full-stack (Angular 18 \+ Spring Boot 3 \+ PostgreSQL) en el Trabajo Final. El equipo logró transmitir decisiones arquitectónicas, métricas ambientales de CO₂ e indicadores de validación empírica con claridad tanto a audiencias técnicas como de negocio. |
+| Comunica en forma escrita ideas y/o resultados con objetividad a público de diferentes especialidades y niveles jerárquicos, en el marco del desarrollo de un proyecto en ingeniería. | Alcocer Vasquez, Odar Javier (U20241D581): \[TP\] Documentó las reglas de gamificación y criterios Gherkin de HU06, HU10 y HU11. \[TF\] Redactó la especificación técnica de los componentes Angular de viajes y gamificación en los Sprints 3 y 4, así como la trazabilidad de estados en el EcoPerfil. Avalos Arias, Diego Alessandro (U20221D254): \[TP\] Redactó la especificación de HU12, HU13 y HU14 y las pruebas de integración de recompensas. \[TF\] Documentó los flujos de canje atómico y administración RBAC en el Sprint 4, la matriz de endpoints OpenAPI y las evidencias de ejecución del panel administrativo. Condor Silvera, Rodrigo Sebastián (U202418511): \[TP\] Redactó la arquitectura de software, configuración render.yaml y especificación de seguridad (HU01, HU02). \[TF\] Documentó el reordenamiento del Product Backlog por valor de negocio, la arquitectura de componentes Angular 18, la suite de 102 pruebas automatizadas y el pipeline de despliegue full-stack. Espinoza Gamboa, Paulo Daniel (U202319631): \[TP\] Documentó la historia HU08 y el diseño de LeaderboardController. \[TF\] Redactó el registro estructurado de entrevistas de validación por segmento (4.3.2), las tablas de evaluación heurística de usabilidad (4.3.3) y las métricas de colaboración del Sprint 4\. Mariños Alberca, Matias Santiago (U202220088): \[TP\] Documentó el proceso Lean UX, KPIs del dashboard (HU07), integración de IA Gemini con fallback (HU09) y diseño de la landing page. \[TF\] Redactó las guías de estilo web actualizadas a Angular 18 \+ Angular Material, las conclusiones contrastadas con las hipótesis Lean UX y la hoja de ruta (Product Roadmap) en Recomendaciones. Ramos Chauca, Jeampiero Sergio (U20241E361): \[TP\] Redactó las especificaciones de HU03, HU04 y HU05, el modelo relacional PostgreSQL y pruebas de OSRM. \[TF\] Documentó la integración cartográfica Leaflet en el Sprint 3, los contratos de edición/eliminación de viajes por propietario y las evidencias técnicas de precisión en el cálculo de CO₂. | El informe técnico del Trabajo Final consolida con rigor académico y trazabilidad verificable las cuatro iteraciones (Sprints 1 al 4), articulando la investigación Lean UX, el Product Backlog priorizado por valor de negocio, la arquitectura C4/UML, la implementación full-stack en Angular 18 y Spring Boot 3, las 102 pruebas automatizadas y la validación empírica con usuarios de Lima Metropolitana. |
+
+# **CAPÍTULO I: INTRODUCCIÓN** {#capítulo-i:-introducción}
+
+### **1.1 Startup Profile** {#1.1-startup-profile}
+
+#### **1.1.1 Descripción de la Startup** {#1.1.1-descripción-de-la-startup}
 
 EcoCommute es una plataforma web orientada a la movilidad urbana sostenible (alineada con el ODS 11, Ciudades y Comunidades Sostenibles). Su propósito es ayudar a los usuarios a elegir rutas y medios de transporte con menor impacto ambiental, mostrando en cada trayecto una comparación objetiva entre la opción elegida y un viaje equivalente en auto particular: distancia, tiempo estimado, CO2 emitido y CO2 ahorrado.
 
 A diferencia de un planificador de rutas convencional, EcoCommute calcula además un puntaje de sostenibilidad por cada viaje, lleva un historial acumulado de impacto (CO2 ahorrado, calorías quemadas) y reconoce el progreso del usuario mediante un sistema de medallas que se desbloquean automáticamente al alcanzar hitos de movilidad sostenible.
 
-
 **Misión:** Ayudar a las personas a reducir la huella de carbono de sus traslados diarios, dándoles información clara y confiable para elegir rutas y medios de transporte más sostenibles.
 
 **Visión:** Convertirnos en una herramienta de referencia para la movilidad sostenible en entornos urbanos, motivando el cambio de hábitos de transporte a través de datos y reconocimiento tangible del progreso del usuario.
 
+#### **1.1.3 Relación con los ODS y Uso de Inteligencia Artificial** {#1.1.3-relación-con-los-ods-y-uso-de-inteligencia-artificial}
 
-#### **1.1.3 Relación con los ODS y Uso de Inteligencia Artificial**
+* **Relación con ODS 11 (Ciudades y Comunidades Sostenibles):** La solución contribuye de manera directa a la **Meta 11.2** ("proporcionar acceso a sistemas de transporte seguros, asequibles, accesibles y sostenibles para todos") (Naciones Unidas, 2018). EcoCommute visibiliza el impacto ecológico de los desplazamientos urbanos en Lima y promueve la transición modal hacia la bicicleta y la caminata mediante incentivos tangibles.  
+* **Beneficio ambiental:** Cuantificación y reducción de emisiones de gases de efecto invernadero (GEI) mediante el cálculo diferencial del CO₂ ahorrado frente a un automóvil particular por cada kilómetro recorrido.  
+* **Inteligencia Artificial funcional:** Incorpora la API de Google Gemini (Google, 2024\) (modelo gemini-1.5-flash) para resolver la sobrecarga de rutas al generar sugerencias personalizadas ("Corredor Verde Optimizado con IA"). Consume datos de origen, destino, duración OSRM y preferencias del usuario, explicando en lenguaje simple por qué la ruta sugerida es más ecológica y eficiente, respaldado con un fallback heurístico ante fallas de red.
 
-- **Relación con ODS 11 (Ciudades y Comunidades Sostenibles):** La solución contribuye de manera directa a la **Meta 11.2** ("proporcionar acceso a sistemas de transporte seguros, asequibles, accesibles y sostenibles para todos") (Naciones Unidas, 2018). EcoCommute visibiliza el impacto ecológico de los desplazamientos urbanos en Lima y promueve la transición modal hacia la bicicleta y la caminata mediante incentivos tangibles.
-- **Beneficio ambiental:** Cuantificación y reducción de emisiones de gases de efecto invernadero (GEI) mediante el cálculo diferencial del CO₂ ahorrado frente a un automóvil particular por cada kilómetro recorrido.
-- **Inteligencia Artificial funcional:** Incorpora la API de Google Gemini (Google, 2024) (modelo `gemini-1.5-flash`) para resolver la sobrecarga de rutas al generar sugerencias personalizadas ("Corredor Verde Optimizado con IA"). Consume datos de origen, destino, duración OSRM y preferencias del usuario, explicando en lenguaje simple por qué la ruta sugerida es más ecológica y eficiente, respaldado con un fallback heurístico ante fallas de red.
+  #### **1.1.2 Perfiles de Integrantes del Equipo** {#1.1.2-perfiles-de-integrantes-del-equipo}
 
-#### **1.1.2 Perfiles de Integrantes del Equipo**
-
-
-| **Foto** | **Integrante** | **Código** | **Carrera** | **Acerca de** |
-| --- | --- | --- | --- | --- |
-|  | Odar Javier Alcocer Vasquez | U20241D581 | Ingeniería de Sistemas de Información | Participó en las features de gamificación y medallas, refinando la actualización de puntos verdes y las reglas de desbloqueo de logros sobre la estructura base del proyecto. |
+| Foto | Integrante | Código | Carrera | Acerca de |
+| :---- | :---- | :---- | :---- | :---- |
+|  | Odar Javier Alcocer Vasquez  | U20241D581 | Ingeniería de Sistemas de Información | Participó en las features de gamificación y medallas, refinando la actualización de puntos verdes y las reglas de desbloqueo de logros sobre la estructura base del proyecto. |
 |  | Diego Alessandro Avalos Arias | U20221D254 | Ingeniería de Sistemas de Información | Participó en las features de recompensas y retos, completando y validando flujos de catálogo, canjes y administración sobre la estructura base del proyecto. |
 |  | Rodrigo Sebastián Condor Silvera | U202418511 | Ingeniería de Sistemas de Información | Definió la estructura base y la arquitectura general de EcoCommute, dejando preparados los módulos principales, la configuración común y el flujo de integración. Posteriormente coordinó la evolución del proyecto mediante ramas feature y Pull Requests. |
 |  | Paulo Daniel Espinoza Gamboa | U202319631 | Ingeniería de Sistemas de Información | Participó en la feature de ranking por distrito, mejorando la lógica de clasificación y validando la consistencia de los datos mostrados. |
 |  | Matias Santiago Mariños Alberca | U202220088 | Ingeniería de Sistemas de Información | Participó en las features de dashboard e inteligencia artificial, refinando KPIs, historial y recomendaciones, y apoyando la preparación de evidencias del Sprint. |
 |  | Jeampiero Sergio Ramos Chauca | U20241E361 | Ingeniería de Sistemas de Información | Participó en las features de rutas y viajes, refinando la integración con OSRM, las entidades y repositorios asociados y la validación del cálculo de CO₂ sobre la estructura base del proyecto. |
 
-### **1.2 Solution Profile**
+  ### **1.2 Solution Profile** {#1.2-solution-profile}
 
-#### **1.2.1 Antecedentes y problemática**
+  #### **1.2.1 Antecedentes y problemática** {#1.2.1-antecedentes-y-problemática}
 
-**What?**
+  **What?**
 
 Gran parte de los traslados diarios en ciudades se hacen en auto particular por comodidad o costumbre, sin que la persona tenga a la vista cuánto CO2 emite ese trayecto ni qué alternativas más sostenibles existen (bicicleta, caminata, o una ruta vehicular más eficiente) (Progressa Lean, 2020).
 
@@ -136,14 +216,14 @@ Este problema se presenta a diario, ya que la decisión de cómo trasladarse se 
 
 **Estado actual del mercado y oportunidad:** 
 
-- Las aplicaciones de mapas priorizan el tiempo de viaje y no muestran de forma integrada el CO2 evitado, los puntos acumulados ni el progreso del usuario por elegir alternativas sostenibles. Las aplicaciones de actividad física registran caminatas o ciclismo, pero no comparan esos trayectos con un viaje equivalente en automóvil ni orientan la decisión antes del desplazamiento. 
-- EcoCommute aprovecha esta oportunidad al reunir planificación de rutas, comparación de emisiones, registro de viajes, indicadores de impacto y reconocimiento por logros en una sola aplicación web. Problem Statement: Los estudiantes y trabajadores que se desplazan con frecuencia en Lima necesitan comparar alternativas de movilidad con información comprensible sobre tiempo, distancia e impacto ambiental antes de iniciar un viaje. 
-- Actualmente suelen elegir el automóvil o la primera alternativa disponible porque las herramientas existentes no muestran, en un mismo flujo, el CO2 evitado frente a un auto, el impacto acumulado y un incentivo para sostener el hábito. EcoCommute busca reducir esa brecha mediante rutas basadas en OSRM, cálculo estimado de emisiones, historial de impacto, puntos y medallas. 
-- El alcance inicial se limita a una aplicación web responsive, rutas disponibles por OSRM, datos ingresados por el usuario y factores de emisión configurados por la aplicación; no incluye una aplicación móvil nativa, acuerdos con comercios ni integración con sistemas de transporte municipales.
+* Las aplicaciones de mapas priorizan el tiempo de viaje y no muestran de forma integrada el CO2 evitado, los puntos acumulados ni el progreso del usuario por elegir alternativas sostenibles. Las aplicaciones de actividad física registran caminatas o ciclismo, pero no comparan esos trayectos con un viaje equivalente en automóvil ni orientan la decisión antes del desplazamiento.   
+* EcoCommute aprovecha esta oportunidad al reunir planificación de rutas, comparación de emisiones, registro de viajes, indicadores de impacto y reconocimiento por logros en una sola aplicación web. Problem Statement: Los estudiantes y trabajadores que se desplazan con frecuencia en Lima necesitan comparar alternativas de movilidad con información comprensible sobre tiempo, distancia e impacto ambiental antes de iniciar un viaje.   
+* Actualmente suelen elegir el automóvil o la primera alternativa disponible porque las herramientas existentes no muestran, en un mismo flujo, el CO2 evitado frente a un auto, el impacto acumulado y un incentivo para sostener el hábito. EcoCommute busca reducir esa brecha mediante rutas basadas en OSRM, cálculo estimado de emisiones, historial de impacto, puntos y medallas.   
+* El alcance inicial se limita a una aplicación web responsive, rutas disponibles por OSRM, datos ingresados por el usuario y factores de emisión configurados por la aplicación; no incluye una aplicación móvil nativa, acuerdos con comercios ni integración con sistemas de transporte municipales.
 
-#### **1.2.2 Lean UX Process**
+  #### **1.2.2 Lean UX Process** {#1.2.2-lean-ux-process}
 
-El proceso de diseño Lean UX (Gothelf & Seiden, 2021) permite formular hipótesis iterativas centradas en el usuario y validar rápidamente el valor de la solución.
+El proceso de diseño Lean UX (Gothelf & Seiden, 2021\) permite formular hipótesis iterativas centradas en el usuario y validar rápidamente el valor de la solución.
 
 ##### 1.2.2.1 Lean UX Problem Statements
 
@@ -163,52 +243,49 @@ EcoCommute busca ofrecer recomendaciones de ruta confiables generadas con inteli
 
 ##### **1.2.2.2 Lean UX Assumptions**
 
-- **Business outcomes y definición de terminado:** El incremento se considerará terminado cuando un usuario autenticado pueda consultar una ruta, registrar un viaje y visualizar el CO2 evitado y los puntos resultantes en su dashboard. Se medirá como éxito que al menos 40% de los viajes registrados use bicicleta o caminata, que 60% de los usuarios con viajes consulte el dashboard al menos una vez por semana y que al menos 50% de las recomendaciones mostradas sea seleccionada. Estas métricas se evaluarán con los registros de viajes, las consultas al dashboard y las selecciones de ruta almacenadas por la aplicación.
-    - Incrementar el número de viajes registrados en modos sostenibles (bicicleta, caminata)
-    - Mejorar la retención de usuarios mediante el sistema de medallas
-    - Aumentar la tasa de aceptación de las rutas recomendadas por la IA
-    - Reducir el CO2 no ahorrado por elección de rutas poco eficientes
-- **Users Traslado diario:** Son estudiantes y trabajadores que se movilizan a diario dentro de la ciudad y buscan reducir la huella de carbono de sus trayectos.
-- **Users Activos**: Son personas que ya usan bicicleta o caminan parte de su trayecto y buscan medir y compartir su impacto positivo.
-- **User outcomes:**
-    - Los usuarios ahorrarán tiempo al comparar rutas y medios de transporte en un solo lugar.
-    - Los usuarios recibirán reconocimiento tangible (medallas) por mantener hábitos sostenibles.
-    - Los usuarios podrán visualizar cuánto CO2 han ahorrado de forma acumulada en el tiempo.
-    - Los usuarios recibirán recomendaciones de ruta explicadas en lenguaje simple.
-- **Features**
-    - Mapa interactivo con visualización geoespacial Leaflet de corredores sostenibles vs. rutas vehiculares en Lima integrado en la aplicación Angular 18
-    - Comparación de rutas por CO2 emitido y ahorrado frente al auto
-    - Recomendación de ruta con IA (Google Gemini)
-    - Sistema de medallas por logros
-    - Historial y dashboard de impacto acumulado
-    - Ranking o leaderboard por distrito
-    - Registro e inicio de sesión seguro con JWT (Spring Security + BCrypt) e interceptor HTTP reactivo en Angular 18
-    - Aplicación web responsive, sin instalación adicional
+* **Business outcomes y definición de terminado:** El incremento se considerará terminado cuando un usuario autenticado pueda consultar una ruta, registrar un viaje y visualizar el CO2 evitado y los puntos resultantes en su dashboard. Se medirá como éxito que al menos 40% de los viajes registrados use bicicleta o caminata, que 60% de los usuarios con viajes consulte el dashboard al menos una vez por semana y que al menos 50% de las recomendaciones mostradas sea seleccionada. Estas métricas se evaluarán con los registros de viajes, las consultas al dashboard y las selecciones de ruta almacenadas por la aplicación.  
+- Incrementar el número de viajes registrados en modos sostenibles (bicicleta, caminata)  
+- Mejorar la retención de usuarios mediante el sistema de medallas  
+- Aumentar la tasa de aceptación de las rutas recomendadas por la IA  
+- Reducir el CO2 no ahorrado por elección de rutas poco eficientes  
+* **Users Traslado diario:** Son estudiantes y trabajadores que se movilizan a diario dentro de la ciudad y buscan reducir la huella de carbono de sus trayectos.  
+* **Users Activos**: Son personas que ya usan bicicleta o caminan parte de su trayecto y buscan medir y compartir su impacto positivo.  
+* **User outcomes:**  
+- Los usuarios ahorrarán tiempo al comparar rutas y medios de transporte en un solo lugar.  
+- Los usuarios recibirán reconocimiento tangible (medallas) por mantener hábitos sostenibles.  
+- Los usuarios podrán visualizar cuánto CO2 han ahorrado de forma acumulada en el tiempo.  
+- Los usuarios recibirán recomendaciones de ruta explicadas en lenguaje simple.  
+* **Features**  
+- Mapa interactivo con visualización geoespacial Leaflet de corredores sostenibles vs. rutas vehiculares en Lima integrado en la aplicación Angular 18  
+- Comparación de rutas por CO2 emitido y ahorrado frente al auto  
+- Recomendación de ruta con IA (Google Gemini)  
+- Sistema de medallas por logros  
+- Historial y dashboard de impacto acumulado  
+- Ranking o leaderboard por distrito  
+- Registro e inicio de sesión seguro con JWT (Spring Security \+ BCrypt) e interceptor HTTP reactivo en Angular 18  
+- Aplicación web responsive, sin instalación adicional
 
-##### **1.2.2.3 Lean UX Hypothesis Statements**
+  ##### **1.2.2.3 Lean UX Hypothesis Statements**
 
-- Creemos que los estudiantes y trabajadores que realizan traslados diarios aumentarán el uso de rutas sostenibles si la función de mapa con geolocalización les permite seguir el trayecto sugerido en tiempo real. El resultado esperado para el usuario es mayor confianza para iniciar el recorrido; el resultado de negocio es incrementar los viajes sostenibles registrados. Sabremos que la hipótesis es correcta si más del 50% de los usuarios activa la geolocalización durante sus primeros viajes.
-- Creemos que mostrar la comparación de CO2 emitido y ahorrado frente a un viaje en auto ayudará a que el usuario elija más veces bicicleta o caminata. Sabremos que estamos en lo correcto si más del 40% de los viajes registrados corresponden a modos no motorizados.
-- Creemos que la recomendación de ruta generada con IA (Google Gemini) ayudará a que el usuario confíe y elija la ruta sugerida. Sabremos que estamos en lo correcto si la ruta "Corredor Verde Optimizado con IA" es seleccionada en más del 50% de los casos en que se ofrece.
-- Creemos que el sistema de medallas por logros ayudará a mantener el hábito de movilidad sostenible en el tiempo. Sabremos que estamos en lo correcto si los usuarios con al menos una medalla desbloqueada registran más viajes mensuales que los que no tienen ninguna.
-- Creemos que mostrar un historial y dashboard de impacto acumulado (CO2 ahorrado, calorías) ayudará a que el usuario perciba su progreso. Sabremos que estamos en lo correcto si más del 60% de los usuarios revisa su dashboard al menos una vez por semana.
-- Creemos que un ranking o leaderboard por distrito ayudará a motivar la competencia sana entre usuarios cercanos. Sabremos que estamos en lo correcto si más del 30% de los usuarios revisa la sección de ranking en su primer mes.
-- Como hipótesis para una iteración posterior, creemos que ofrecer inicio de sesión con Google OAuth2 podría facilitar el registro de nuevos usuarios. Esta hipótesis no forma parte de la API expuesta en el TP y deberá validarse cuando se implemente dicha integración.
-- Creemos que explicar en lenguaje simple el porqué de cada recomendación de ruta reducirá el abandono al momento de elegir una opción. Sabremos que estamos en lo correcto si la tasa de abandono en la pantalla de comparación de rutas se reduce respecto a la línea base medida antes de agregar la explicación.
-- Creemos que ofrecer la plataforma como web responsive, sin necesidad de instalar una app adicional, facilitará la adopción. Sabremos que estamos en lo correcto si más del 70% de las sesiones provienen de un dispositivo móvil.
-- Creemos que mostrar el ahorro acumulado de CO2 en unidades comprensibles (por ejemplo, equivalente en árboles) ayudará a que el usuario entienda el impacto real de sus viajes. Sabremos que estamos en lo correcto si más del 50% de los usuarios encuestados identifica correctamente su ahorro acumulado.
+* Creemos que los estudiantes y trabajadores que realizan traslados diarios aumentarán el uso de rutas sostenibles si la función de mapa con geolocalización les permite seguir el trayecto sugerido en tiempo real. El resultado esperado para el usuario es mayor confianza para iniciar el recorrido; el resultado de negocio es incrementar los viajes sostenibles registrados. Sabremos que la hipótesis es correcta si más del 50% de los usuarios activa la geolocalización durante sus primeros viajes.  
+* Creemos que mostrar la comparación de CO2 emitido y ahorrado frente a un viaje en auto ayudará a que el usuario elija más veces bicicleta o caminata. Sabremos que estamos en lo correcto si más del 40% de los viajes registrados corresponden a modos no motorizados.  
+* Creemos que la recomendación de ruta generada con IA (Google Gemini) ayudará a que el usuario confíe y elija la ruta sugerida. Sabremos que estamos en lo correcto si la ruta "Corredor Verde Optimizado con IA" es seleccionada en más del 50% de los casos en que se ofrece.  
+* Creemos que el sistema de medallas por logros ayudará a mantener el hábito de movilidad sostenible en el tiempo. Sabremos que estamos en lo correcto si los usuarios con al menos una medalla desbloqueada registran más viajes mensuales que los que no tienen ninguna.  
+* Creemos que mostrar un historial y dashboard de impacto acumulado (CO2 ahorrado, calorías) ayudará a que el usuario perciba su progreso. Sabremos que estamos en lo correcto si más del 60% de los usuarios revisa su dashboard al menos una vez por semana.  
+* Creemos que un ranking o leaderboard por distrito ayudará a motivar la competencia sana entre usuarios cercanos. Sabremos que estamos en lo correcto si más del 30% de los usuarios revisa la sección de ranking en su primer mes.  
+* Como hipótesis para una iteración posterior, creemos que ofrecer inicio de sesión con Google OAuth2 podría facilitar el registro de nuevos usuarios. Esta hipótesis no forma parte de la API expuesta en el TP y deberá validarse cuando se implemente dicha integración.  
+* Creemos que explicar en lenguaje simple el porqué de cada recomendación de ruta reducirá el abandono al momento de elegir una opción. Sabremos que estamos en lo correcto si la tasa de abandono en la pantalla de comparación de rutas se reduce respecto a la línea base medida antes de agregar la explicación.  
+* Creemos que ofrecer la plataforma como web responsive, sin necesidad de instalar una app adicional, facilitará la adopción. Sabremos que estamos en lo correcto si más del 70% de las sesiones provienen de un dispositivo móvil.  
+* Creemos que mostrar el ahorro acumulado de CO2 en unidades comprensibles (por ejemplo, equivalente en árboles) ayudará a que el usuario entienda el impacto real de sus viajes. Sabremos que estamos en lo correcto si más del 50% de los usuarios encuestados identifica correctamente su ahorro acumulado.
 
-##### **1.2.2.4 Lean UX Canvas**
+  ##### **1.2.2.4 Lean UX Canvas**
 
 A continuación se presenta el Lean UX Canvas que sintetiza los problemas de negocio, resultados esperados, usuarios, soluciones e hipótesis de valor (Gothelf & Seiden, 2021):
 
-
-
-| **BUSINESS PROBLEM**Difícil comparar el impacto ambiental de las opciones de transporte antes de viajar. Baja motivación para mantener hábitos de movilidad sostenible en el tiempo. Falta de confianza en recomendaciones automáticas de ruta. | **SOLUTIONS** Web app con comparación de rutas por CO2. Recomendación de ruta con IA explicada en lenguaje simple. Sistema de medallas por logros. | **BUSINESS OUTCOMES** Incrementar el número de viajes registrados en modos sostenibles. Mejorar la retención de usuarios. Aumentar la tasa de aceptación de las rutas recomendadas por la IA. |
-| --- | --- | --- |
+| BUSINESS PROBLEMDifícil comparar el impacto ambiental de las opciones de transporte antes de viajar. Baja motivación para mantener hábitos de movilidad sostenible en el tiempo. Falta de confianza en recomendaciones automáticas de ruta. | SOLUTIONS Web app con comparación de rutas por CO2. Recomendación de ruta con IA explicada en lenguaje simple. Sistema de medallas por logros. | BUSINESS OUTCOMES Incrementar el número de viajes registrados en modos sostenibles. Mejorar la retención de usuarios. Aumentar la tasa de aceptación de las rutas recomendadas por la IA. |
+| :---- | :---- | :---- |
 | **USERS**  Estudiantes y trabajadores que se trasladan a diario dentro de la ciudad. Personas que ya usan bicicleta o caminan parte de su trayecto. |  | **USER BENEFITS**  Ahorro de tiempo al comparar rutas y medios de transporte en un solo lugar. Reconocimiento tangible (medallas) por mantener hábitos sostenibles. Visualización clara del CO2 ahorrado acumulado. |
-| **HYPOTHESES** Los usuarios elegirán más veces bicicleta o caminata si ven claramente cuánto CO2 ahorran frente al auto. Los usuarios confiarán en la recomendación de la IA si esta se explica en lenguaje simple. Los usuarios mantendrán el hábito de movilidad sostenible si reciben reconocimiento (medallas) por sus logros. | **WHAT'S THE MOST IMPORTANT THING WE NEED TO LEARN FIRST?** Si mostrar la comparación de CO2 realmente cambia la elección de medio de transporte del usuario. | **WHAT'S THE LEAST AMOUNT OF WORK NEED TO DO TO LEARN THE NEXT MOST IMPORTANT THING?** Encuestas. Entrevistas. Prueba piloto con un grupo reducido de usuarios reales. |
-
+| **HYPOTHESES** Los usuarios elegirán más veces bicicleta o caminata si ven claramente cuánto CO2 ahorran frente al auto. Los usuarios confiarán en la recomendación de la IA si esta se explica en lenguaje simple. Los usuarios mantendrán el hábito de movilidad sostenible si reciben reconocimiento (medallas) por sus logros. | **WHAT'S THE MOST IMPORTANT THING WE NEED TO LEARN FIRST?** Si mostrar la comparación de CO2 realmente cambia la elección de medio de transporte del usuario.  | **WHAT'S THE LEAST AMOUNT OF WORK NEED TO DO TO LEARN THE NEXT MOST IMPORTANT THING?** Encuestas. Entrevistas. Prueba piloto con un grupo reducido de usuarios reales. |
 
 ##### **1.3 Segmentos objetivo**
 
@@ -220,19 +297,16 @@ Estudiantes y trabajadores que se movilizan a diario dentro de la ciudad (a la u
 
 Personas que ya usan bicicleta o caminan parte de su trayecto de forma habitual, y que buscan una forma de medir su impacto positivo acumulado y recibir algún tipo de reconocimiento por mantener ese hábito.
 
+### **1.4 Competidores y Análisis Competitivo** {#1.4-competidores-y-análisis-competitivo}
 
-### **1.4 Competidores y Análisis Competitivo**
+#### **1.4.1 Competitive Analysis Landscape** {#1.4.1-competitive-analysis-landscape}
 
-#### **1.4.1 Competitive Analysis Landscape**
-
-
-| **¿Por qué llevar a cabo este análisis?** |
-| --- |
+| ¿Por qué llevar a cabo este análisis? |
+| :---- |
 | **Objetivo del análisis:** Determinar las fortalezas, debilidades, estrategias y vacíos de valor de las principales aplicaciones de mapas, transporte y actividad física (Google Maps, Moovit y Strava) en Lima Metropolitana, para definir la ventaja competitiva de EcoCommute en movilidad urbana sostenible, cálculo diferencial de CO₂ y gamificación por logros. |
 
-
-| **Categoría** | **Factores de Evaluación** | **Su startup (EcoCommute)** | **Competidor 1 (Google Maps)** | **Competidor 2 (Moovit)** | **Competidor 3 (Strava)** |
-| --- | --- | --- | --- | --- | --- |
+| Categoría | Factores de Evaluación | Su startup (EcoCommute) | Competidor 1 (Google Maps) | Competidor 2 (Moovit) | Competidor 3 (Strava) |
+| :---- | :---- | :---- | :---- | :---- | :---- |
 | **Perfil** | **Overview** | Plataforma web de movilidad urbana sostenible con cálculo diferencial de CO₂ y gamificación | Navegador GPS y servicio cartográfico líder a nivel mundial de Google | Aplicación multimodal de transporte público urbano y movilidad compartida | Red social y plataforma de seguimiento de actividad física deportiva (ciclismo/running) |
 | **Perfil** | **Ventaja competitiva ¿Qué valor ofrece a los clientes?** | Cálculo en tiempo real de CO₂ ahorrado frente al auto, puntos verdes, medallas e IA explicativa | Cobertura global masiva, datos de tráfico en tiempo real y directorio comercial | Planificación detallada de rutas en transporte público urbano y alertas de llegada en Lima | Red social deportiva, seguimiento GPS de alta precisión y análisis de rendimiento |
 | **Perfil de Marketing** | **Mercado objetivo** | Estudiantes y trabajadores urbanos con sensibilidad ambiental en Lima | Toda persona con smartphone y necesidad de navegación o ubicación | Usuarios cotidianos dependientes de buses, trenes y Metropolitano | Atletas, ciclistas y corredores aficionados o profesionales |
@@ -245,59 +319,51 @@ Personas que ya usan bicicleta o caminan parte de su trayecto de forma habitual,
 | **Análisis SWOT** | **Oportunidades** | Creciente sensibilidad ecológica y ampliación de ciclovías en Lima (ODS 11.2) | Incorporación de filtros superficiales de rutas ecológicas motorizadas | Expansión hacia servicios de micromovilidad compartida en distritos | Auge del ciclismo como medio de transporte seguro ante congestión vehicular |
 | **Análisis SWOT** | **Amenazas** | Posible adición de métricas de sostenibilidad en navegadores consolidados | Dominio casi monopólico del mercado de navegación en dispositivos móviles | Consolidación como herramienta de referencia de transporte público en Lima | Preferencia establecida entre ciclistas que ya usan la app para registrar rutas |
 
+#### **1.4.2 Estrategias y tácticas frente a competidores** {#1.4.2-estrategias-y-tácticas-frente-a-competidores}
 
-#### **1.4.2 Estrategias y tácticas frente a competidores**
+* **Diferenciación de valor:** Mientras Google Maps y Moovit priorizan la rapidez vehicular sin considerar la huella ecológica, EcoCommute convierte cada trayecto en una acción climática medible y recompensable mediante medallas y puntos verdes.  
+* **Enfoque de usuario:** Frente a Strava (enfocado en el rendimiento atlético), EcoCommute se enfoca en el ciudadano de a pie y el estudiante universitario en sus viajes cotidianos, eliminando la barrera de instalar una app pesada al ofrecer una solución web responsive.  
+* **Táctica de validación:** Capitalizar la base inicial de usuarios en campus universitarios de Lima mediante desafíos de movilidad sostenible, respaldada por la arquitectura full-stack (Angular 18 \+ Spring Boot 3 con 34 endpoints OpenAPI y 102 pruebas automatizadas) desplegada en GitHub Pages y Render.
 
-- **Diferenciación de valor:** Mientras Google Maps y Moovit priorizan la rapidez vehicular sin considerar la huella ecológica, EcoCommute convierte cada trayecto en una acción climática medible y recompensable mediante medallas y puntos verdes.
-- **Enfoque de usuario:** Frente a Strava (enfocado en el rendimiento atlético), EcoCommute se enfoca en el ciudadano de a pie y el estudiante universitario en sus viajes cotidianos, eliminando la barrera de instalar una app pesada al ofrecer una solución web responsive.
-- **Táctica de validación:** Capitalizar la base inicial de usuarios en campus universitarios de Lima mediante desafíos de movilidad sostenible, respaldada por la arquitectura full-stack (Angular 18 + Spring Boot 3 con 34 endpoints OpenAPI y 102 pruebas automatizadas) desplegada en GitHub Pages y Render.
-
-## **CAPÍTULO II: REQUIREMENTS SPECIFICATION**
+  ## **CAPÍTULO II: REQUIREMENTS SPECIFICATION** {#capítulo-ii:-requirements-specification}
 
 
-### **2.1 Product Backlog**
+  ### **2.1 Product Backlog** {#2.1-product-backlog}
 
 El Product Backlog de EcoCommute organiza las funcionalidades del alcance inicial de acuerdo con el valor que aportan al usuario y a la propuesta de negocio (Cohn, 2004; Schwaber & Sutherland, 2020). De acuerdo con las buenas prácticas de ingeniería de software ágil y los lineamientos del curso, el orden del Product Backlog está determinado estrictamente por el valor para el negocio y para el ciudadano (planificación de rutas sostenibles con OSRM, registro y corrección de viajes, cálculo diferencial de CO₂, recomendaciones explicadas con IA Gemini y dashboard de impacto), ubicando las historias habilitadoras de administración, registro e inicio de sesión en las posiciones posteriores.
 
-
-**Tablero de Gestión del Proyecto (Trello / GitHub Projects):**
-
+**Tablero de Gestión del Proyecto (Trello / GitHub Projects):**  
 El seguimiento de historias de usuario, tareas técnicas del Sprint y control de estados se gestiona a través del tablero público del proyecto:
 
+* Las columnas organizan las historias y tareas en: *Product Backlog*, *Sprint Backlog*, *In Progress*, *Testing/Review* y *Done*, asegurando trazabilidad con las ramas feature y Pull Requests en GitHub.
 
-- Las columnas organizan las historias y tareas en: *Product Backlog*, *Sprint Backlog*, *In Progress*, *Testing/Review* y *Done*, asegurando trazabilidad con las ramas feature y Pull Requests en GitHub.
-
-
-
-| **\# Orden** | **User Story ID** | **Título** | **Descripción** | **Criterios de aceptación** | **Story Points** | **Epic** |
-| :---: | --- | --- | --- | --- | --- | --- |
+| \# Orden | User Story ID | Título | Descripción | Criterios de aceptación | Story Points | Epic |
+| :---: | :---- | :---- | :---- | :---- | :---- | :---- |
 | 1 | HU03 | Consulta de rutas sostenibles | Como usuario, deseo consultar rutas sostenibles entre un origen y destino en Lima para elegir una alternativa de movilidad con menor impacto ambiental. | Scenario 1 (Consulta OSRM exitosa): Given que el usuario ingresa origen, destino y perfil de movilidad (BICYCLE, WALKING, CAR), When solicita planificar la ruta (POST /api/v1/routes/plan), Then el sistema consulta OSRM y muestra las alternativas (línea base en auto, perfil estándar y corredor verde IA) con distancia en km, duración en minutos, calorías y trazado en el mapa Leaflet. Scenario 2 (Resiliencia geodésica): Given que el servicio externo OSRM presenta latencia o indisponibilidad, When se procesa la consulta, Then el sistema aplica el cálculo geodésico Haversine con factor urbano (1.32) garantizando continuidad operativa. | 8 | Movilidad sostenible |
-| 2 | HU04 | Registro y corrección de viaje sostenible | Como usuario, deseo registrar un viaje realizado y poder corregirlo o eliminarlo si cometí un error para que EcoCommute mantenga mi impacto ambiental y progreso precisos. | Scenario 1 (Registro de viaje): Given que el usuario selecciona medio de transporte, origen, destino y distancia válida (> 0 km), When registra el viaje (POST /api/v1/trips), Then el sistema persiste el viaje asociado a su perfil, calcula el CO₂ ahorrado y acredita EcoPuntos. Scenario 2 (Edición o eliminación por propietario): Given que el usuario necesita corregir o eliminar un viaje que le pertenece, When invoca PUT /api/v1/trips/{id} o DELETE /api/v1/trips/{id}, Then el sistema verifica su autoría (retornando 403 Forbidden a terceros) y recalcula o revierte el CO₂ y los puntos verdes. | 5 | Viajes |
+| 2 | HU04 | Registro y corrección de viaje sostenible | Como usuario, deseo registrar un viaje realizado y poder corregirlo o eliminarlo si cometí un error para que EcoCommute mantenga mi impacto ambiental y progreso precisos. | Scenario 1 (Registro de viaje): Given que el usuario selecciona medio de transporte, origen, destino y distancia válida (\> 0 km), When registra el viaje (POST /api/v1/trips), Then el sistema persiste el viaje asociado a su perfil, calcula el CO₂ ahorrado y acredita EcoPuntos. Scenario 2 (Edición o eliminación por propietario): Given que el usuario necesita corregir o eliminar un viaje que le pertenece, When invoca PUT /api/v1/trips/{id} o DELETE /api/v1/trips/{id}, Then el sistema verifica su autoría (retornando 403 Forbidden a terceros) y recalcula o revierte el CO₂ y los puntos verdes. | 5 | Viajes |
 | 3 | HU05 | Cálculo de CO₂ ahorrado | Como usuario, deseo conocer el CO₂ estimado que ahorro en cada viaje sostenible para comprender mi aporte ambiental frente al uso del automóvil particular. | Scenario 1 (Cálculo diferencial EPA): Given que existe un viaje planificado o registrado con distancia en km y modalidad de transporte, When CarbonCalculatorService procesa el trayecto, Then calcula la línea base de automóvil a gasolina (170 g CO₂/km), resta la emisión del modo elegido (0 g/km en bicicleta o caminata, 65 g/km en bus, 28 g/km en tren eléctrico) y muestra el ahorro neto al usuario. | 5 | Impacto ambiental |
 | 4 | HU09 | Recomendaciones con IA | Como usuario, deseo recibir una recomendación explicada sobre la ruta sostenible más conveniente para mi viaje según el contexto urbano de Lima. | Scenario 1 (Recomendación contextual con Gemini): Given que el usuario consulta rutas o revisa su dashboard con optimización IA activa, When el sistema invoca Google Gemini (gemini-1.5-flash), Then genera una recomendación en lenguaje claro basada en ciclovías, distancia, horario y CO₂ evitado. Scenario 2 (Fallback heurístico): Given que la API externa de Gemini no está disponible, When se solicita la recomendación, Then el motor heurístico contextual genera la explicación sin afectar la experiencia en Angular. | 8 | Inteligencia artificial |
 | 5 | HU07 | Dashboard personal y comunitario | Como usuario, deseo visualizar mis estadísticas de movilidad junto con mi evolución temporal y reparto por medio de transporte para evaluar mi progreso ambiental. | Scenario 1 (Visualización de KPIs y gráficos): Given que el usuario ingresa al módulo /dashboard en la aplicación Angular, When se consultan GET /api/v1/dashboard/stats y /ai-insights, Then visualiza tarjetas KPI (CO₂ total evitado, distancia en km, viajes sostenibles, EcoPuntos y nivel), gráfico de barras de evolución diaria, desglose por modalidad e insights de IA. | 8 | Reportes |
-| 6 | HU06 | Acumulación de puntos verdes | Como usuario, deseo recibir puntos por mis viajes sostenibles para mantener la motivación y avanzar de nivel en mi EcoPerfil. | Scenario 1 (Acreditación de EcoPuntos y nivel): Given que se registra un viaje válido con ahorro positivo de CO₂, When se procesa la recompensa (1 EcoPunto por cada 10 g de CO₂ evitado, mínimo 10 pts en modos cero emisiones y bono de +15 pts en primer viaje), Then el sistema incrementa el saldo del usuario y actualiza su nivel (Eco Starter, Urban Cyclist, Green Hero, Lima Legend). | 3 | Gamificación |
+| 6 | HU06 | Acumulación de puntos verdes | Como usuario, deseo recibir puntos por mis viajes sostenibles para mantener la motivación y avanzar de nivel en mi EcoPerfil. | Scenario 1 (Acreditación de EcoPuntos y nivel): Given que se registra un viaje válido con ahorro positivo de CO₂, When se procesa la recompensa (1 EcoPunto por cada 10 g de CO₂ evitado, mínimo 10 pts en modos cero emisiones y bono de \+15 pts en primer viaje), Then el sistema incrementa el saldo del usuario y actualiza su nivel (Eco Starter, Urban Cyclist, Green Hero, Lima Legend). | 3 | Gamificación |
 | 7 | HU08 | Ranking por distrito | Como usuario, deseo comparar mi impacto con otros usuarios de mi distrito y de Lima para participar en una competencia sana por movilidad sostenible. | Scenario 1 (Leaderboard individual y distrital): Given que existen usuarios con viajes registrados en distritos de Lima, When el usuario consulta /leaderboard (GET /api/v1/leaderboard/users y /districts), Then el sistema muestra posiciones filtrables por distrito (Miraflores, San Isidro, Surco, San Borja, Barranco) y la comparativa agregada interdistrital por CO₂ ahorrado. | 5 | Eco Identidad Urbana |
 | 8 | HU10 | Desbloqueo automático de medallas | Como usuario, deseo desbloquear medallas automáticamente al alcanzar hitos de movilidad sostenible para sentir reconocimiento tangible por mis hábitos. | Scenario 1 (Evaluación automática de logros): Given que el usuario cumple la condición de una medalla al registrar un viaje (primer viaje, 3+ viajes en bici, 10 km acumulados, 5 kg de CO₂ ahorrado, 10 viajes o 500 puntos), When GamificationService evalúa los hitos, Then desbloquea la medalla automáticamente y registra la fecha de obtención. | 3 | Recompensas |
 | 9 | HU11 | Consulta de medallas | Como usuario, deseo revisar mis medallas obtenidas y el catálogo de insignias disponibles para llevar control del reconocimiento ganado por mis hábitos sostenibles. | Scenario 1 (Galería de medallas en EcoPerfil): Given que el usuario accede a /gamification en la aplicación Angular, When consulta su perfil (GET /api/v1/gamification/profile), Then el sistema muestra las medallas desbloqueadas con ícono y descripción junto con las insignias pendientes por alcanzar. | 5 | Recompensas |
 | 10 | HU14 | Catálogo e historial de canjes | Como usuario, deseo canjear mis EcoPuntos por beneficios sostenibles y revisar mi historial de canjes realizados para llevar control de mis cupones. | Scenario 1 (Canje transaccional y código ECO): Given que el usuario cuenta con EcoPuntos suficientes y stock disponible en /rewards, When solicita el canje (POST /api/v1/rewards/redeem), Then el sistema descuenta los puntos, reduce el stock, emite un código único (ECO-XXXXXX) y actualiza la tabla de historial (GET /api/v1/rewards/redemptions). | 3 | Recompensas |
 | 11 | HU13 | Gestión y seguimiento de retos sostenibles | Como administrador o ciudadano, deseo crear y consultar retos de movilidad sostenible para incentivar metas semanales o mensuales dentro de la comunidad. | Scenario 1 (Gestión administrativa y participación): Given que el administrador autenticado (ROLE\_ADMIN) define título, meta de CO₂, recompensa en puntos y vigencia en /admin (POST/PUT/DELETE /api/v1/challenges), When guarda el reto, Then se publica en el listado activo (/gamification) donde cada ciudadano visualiza su porcentaje de avance. | 5 | Retos |
 | 12 | HU12 | Gestión administrativa de recompensas | Como administrador, deseo crear, actualizar y desactivar recompensas para mantener vigente el catálogo de beneficios de EcoCommute. | Scenario 1 (CRUD protegido por ROLE\_ADMIN): Given que el administrador está autenticado con token JWT y rol ROLE\_ADMIN en /admin, When crea, modifica o elimina una recompensa (POST/PUT/DELETE /api/v1/rewards/{id}), Then el sistema persiste los cambios y bloquea con 403 Forbidden cualquier intento de mutación por usuarios sin privilegios. | 5 | Administración |
-| 13 | HU01 | Registro de usuario | Como ciudadano de Lima, deseo crear una cuenta en EcoCommute indicando mi distrito para acceder a mi EcoPerfil y registrar mis viajes sostenibles. | Scenario 1 (Registro con BCrypt y validación): Given que el usuario completa nombre, correo único, contraseña segura (>= 6 caracteres), distrito de Lima y acepta los Términos y Condiciones en /login, When envía el formulario (POST /api/v1/auth/register), Then el sistema crea la cuenta con hash BCrypt, asigna el bono inicial de EcoPuntos y retorna la sesión JWT. | 5 | Gestión de usuarios |
+| 13 | HU01 | Registro de usuario | Como ciudadano de Lima, deseo crear una cuenta en EcoCommute indicando mi distrito para acceder a mi EcoPerfil y registrar mis viajes sostenibles. | Scenario 1 (Registro con BCrypt y validación): Given que el usuario completa nombre, correo único, contraseña segura (\>= 6 caracteres), distrito de Lima y acepta los Términos y Condiciones en /login, When envía el formulario (POST /api/v1/auth/register), Then el sistema crea la cuenta con hash BCrypt, asigna el bono inicial de EcoPuntos y retorna la sesión JWT. | 5 | Gestión de usuarios |
 | 14 | HU02 | Inicio de sesión seguro | Como usuario registrado, deseo iniciar sesión con mis credenciales para acceder a las funcionalidades personalizadas y protegidas de la aplicación. | Scenario 1 (Autenticación JWT stateless): Given que el usuario ingresa credenciales válidas en /login, When solicita iniciar sesión (POST /api/v1/auth/login), Then el sistema genera un token JWT firmado (HMAC-SHA256) que el interceptor Angular adjunta en cada petición. Given credenciales inválidas, Then retorna 401 Unauthorized sin exponer información sensible. | 5 | Seguridad |
 
-### **2.1.1 Sprint Backlog**
+### **2.1.1 Sprint Backlog** {#2.1.1-sprint-backlog}
 
 El Sprint Backlog de EcoCommute descompone el desarrollo integral del proyecto en cuatro iteraciones (Sprints 1 y 2 correspondientes al Trabajo Parcial; Sprints 3 y 4 correspondientes al Trabajo Final), organizando el trabajo técnico mediante tareas de ingeniería estimadas entre 4 y 8 horas para Frontend Angular 18 y Backend Spring Boot 3 conforme a los estándares de la UPC.
 
-#### **2.1.1.1 Sprint Backlog 1**
+#### **2.1.1.1 Sprint Backlog 1** {#2.1.1.1-sprint-backlog-1}
 
 El Sprint 1 abordó la construcción del incremento funcional inicial sobre la arquitectura base de EcoCommute, implementando seguridad, cálculo de rutas sostenibles, registro de viajes, cálculo de emisiones, gamificación y dashboard.
 
-
-
-| **US Id** | **US Title** | **Task Id** | **Task Title** | **Description** | **Est.** | **Assigned To** | **Status** |
-| :---: | --- | :---: | --- | --- | :---: | --- | :---: |
+| US Id | US Title | Task Id | Task Title | Description | Est. | Assigned To | Status |
+| ----- | :---- | ----- | :---- | :---- | :---: | :---- | :---: |
 | HU01 | Registro de usuario | T01 | Refinar DTO y validaciones de registro de usuario sobre la estructura base | Validación de campos obligatorios, formato de email y unicidad de cuenta | 4h | R. Condor | Done |
 | HU01 | Registro de usuario | T02 | Completar el endpoint POST /api/v1/auth/register y su prueba básica | Implementación del controlador, servicio y persistencia con encriptación BCrypt | 6h | R. Condor | Done |
 | HU02 | Inicio de sesión seguro | T03 | Refinar y validar Spring Security, JWT y filtros de autenticación | Configuración de filtros de autorización stateless y emisión de token JWT | 8h | R. Condor | Done |
@@ -311,15 +377,12 @@ El Sprint 1 abordó la construcción del incremento funcional inicial sobre la a
 | HU10-HU11 | Medallas por logros | T11 | Completar y validar el sistema de medallas por logros | Motor de evaluación y desbloqueo automático de medallas (UserBadge) | 8h | O. Alcocer | Done |
 | General | Preparación de evidencias | T12 | Preparar capturas, pruebas funcionales y resumen de colaboración | Documentación de evidencias, capturas y preparación de reporte técnico | 6h | M. Mariños | Done |
 
-#### **2.1.1.2 Sprint Backlog 2**
+#### **2.1.1.2 Sprint Backlog 2** {#2.1.1.2-sprint-backlog-2}
 
 El Sprint 2 consolidó la calidad, cobertura de pruebas y acotamiento de la API REST a 25 rutas públicas, integrando las ramas feature y validando el despliegue continuo en Render.
 
-
-
-
-| **Id** | **Title** | **Id** | **Title** | **Description** | **Est.** | **Assigned To** | **Status** |
-| :---: | --- | :---: | --- | --- | :---: | --- | :---: |
+| Id | Title | Id | Title | Description | Est. | Assigned To | Status |
+| :---: | :---- | :---: | :---- | :---- | :---: | :---- | :---: |
 | HU01-02 | Seguridad | T13 | Refactorizar controladores y acotar API a 25 rutas | Reducción a 24 rutas bajo /api/v1 y /health con roles USER y ADMIN | 6h | R. Condor | Done |
 | HU03 | Rutas | T14 | Corregir flag optimización IA y fallback en rutas | Ajuste en RouteService para ruta optimizada con fallback heurístico | 5h | M. Mariños | Done |
 | HU03 | Rutas | T15 | Pruebas de integración de rutas y OSRM (HU03) | Tests de integración en RouteController y RouteService con mock | 6h | J. Ramos | Done |
@@ -331,150 +394,160 @@ El Sprint 2 consolidó la calidad, cobertura de pruebas y acotamiento de la API 
 | DevOps | Pipeline | T21 | Verificar pipeline CI/CD en Render con PostgreSQL | Verificación de build automático en Render con Blueprint render.yaml | 4h | R. Condor | Done |
 | QA | Pruebas | T22 | Ejecutar 28 tests en verde y sincronizar informe | Ejecución de suite de 28 tests en verde (./mvnw clean test) e informe | 5h | M. Mariños | Done |
 
+#### **2.1.1.3 Sprint Backlog 3**
 
+El Sprint 3 inició el desarrollo del Trabajo Final construyendo la arquitectura SPA en Angular 18 \+ TypeScript \+ Angular Material \+ Leaflet, integrando seguridad JWT mediante interceptores y guardias de ruta, habilitando la edición y eliminación de viajes (PUT y DELETE /api/v1/trips/{id}) en el backend y entregando los módulos interactivos de Autenticación, Planificador de Rutas OSRM+IA, Gestión de Viajes y Dashboard Personal.
 
-## **CAPÍTULO III: PRODUCT DESIGN**
+#### 
 
+| US Id | US Title | Task Id | Task Title | Description | Est. | Assigned To | Status |
+| :---- | :---- | :---- | :---- | :---- | :---- | :---- | :---- |
+| **Transversal** | **Arquitectura SPA** | **T23** | **Configurar arquitectura SPA en Angular 18 (app.config.ts, app.routes.ts, Angular Material y tema claro/oscuro)** | **Estructura de componentes standalone, enrutamiento y sistema de diseño CSS** | **6h** | **M. Mariños** | **Done** |
+| **HU01-02** | **Seguridad e i18n** | **T24** | **Implementar I18nService (es\_419/en\_US), AuthService, authInterceptor JWT y authGuard/adminGuard** | **Diccionarios bilingües reactivos, adjunción automática de Bearer token y protección de rutas** | **6h** | **R. Condor** | **Done** |
+| **HU01-02** | **Acceso y Registro** | **T25** | **Desarrollar AuthComponent (/login) con inicio de sesión, registro por distrito y acceso demo 1-clic** | **Formularios reactivos con validación de contraseñas, selector distrital y handshake JWT** | **6h** | **R. Condor** | **Done** |
+| **HU03, 09** | **Planificador OSRM+IA** | **T26** | **Desarrollar RoutesPlannerComponent (/routes) con mapa Leaflet interactivo y tarjetas IA Gemini** | **Trazado geoespacial de alternativas (auto, estándar y corredor verde IA) en Lima Metropolitana** | **8h** | **J. Ramos** | **Done** |
+| **HU04-05** | **CRUD de Viajes Backend** | **T27** | **Extender TripController para edición (PUT) y eliminación (DELETE /api/v1/trips/{id}) con recálculo de CO₂** | **Validación de autoría del viaje (403 Forbidden a terceros) y reversión/ajuste de UserStats** | **6h** | **J. Ramos** | **Done** |
+| **HU04-05** | **Gestión de Viajes UI** | **T28** | **Desarrollar TripsComponent (/trips) en Angular con calculadora en vivo de CO₂ y tabla CRUD completa** | **Previsualización instantánea de CO₂ evitado, calorías y EcoPuntos con edición inline y filtros** | **7h** | **O. Alcocer** | **Done** |
+| **HU07** | **Dashboard Analítico** | **T29** | **Desarrollar DashboardComponent (/dashboard) con tarjetas KPI, evolución diaria, reparto modal e insights IA** | **Visualización de métricas personales, equivalencias ecológicas (árboles) e impacto comunitario** | **7h** | **M. Mariños** | **Done** |
+| **HU04** | **Pruebas CRUD Viajes** | **T30** | **Ampliar suite de pruebas unitarias y de controladores en backend para edición y eliminación de viajes** | **Cobertura de escenarios de actualización, borrado y control de permisos en TripControllerTest** | **5h** | **P. Espinoza** | **Done** |
 
-### **3.1 Style Guidelines**
+#### **2.1.1.4 Sprint Backlog 4**
+
+El Sprint 4 completó los módulos de Gamificación, Ranking Distrital, Catálogo y Canje de Recompensas, Panel Administrativo RBAC (ROLE\_ADMIN) y Términos de Servicio en Angular 18, expuso la totalidad de los 34 endpoints en OpenAPI 3.0 / Swagger UI, amplió la suite a 102 pruebas automatizadas en verde, desplegó la solución full-stack en GitHub Pages (/app/) y Render, y ejecutó las entrevistas de validación y evaluaciones heurísticas.
+
+#### 
+
+| US Id | US Title | Task Id | Task Title | Description | Est. | Assigned To | Status |
+| :---- | :---- | :---- | :---- | :---- | :---- | :---- | :---- |
+| **HU06, 10, 11, 13** | **Gamificación y Retos** | **T31** | **Desarrollar GamificationComponent (/gamification) con barra de progreso de nivel, medallas y retos** | **Galería interactiva de insignias desbloqueadas/bloqueadas, hitos personales y desafíos colectivos** | **7h** | **O. Alcocer** | **Done** |
+| **HU08** | **Ranking Distrital** | **T32** | **Desarrollar LeaderboardComponent (/leaderboard) con filtro por distrito y tabla interdistrital** | **Ranking ciudadano ordenable por CO₂ o EcoPuntos y comparativa agregada por distrito de Lima** | **6h** | **P. Espinoza** | **Done** |
+| **HU14** | **Catálogo y Canjes** | **T33** | **Desarrollar RewardsComponent (/rewards) con canje interactivo, validación de saldo y cupones ECO-XXXXXX** | **Catálogo filtrable por categoría, modal de confirmación y tabla histórica de canjes realizados** | **6h** | **D. Avalos** | **Done** |
+| **HU12, 13** | **Panel Admin RBAC** | **T34** | **Desarrollar AdminComponent (/admin) para gestión CRUD de recompensas y retos protegido por ROLE\_ADMIN** | **Formularios administrativos de alta, edición, control de stock y baja de recompensas y retos** | **7h** | **D. Avalos** | **Done** |
+| **HU01** | **Accesibilidad y Legal** | **T35** | **Desarrollar TermsComponent (/terms), auditoría WCAG 2.1 AA y resiliencia offline/online en ApiService** | **Términos legales ACM/IEEE/CIP, navegación por teclado, contraste AA y respuesta inmediata 0ms** | **5h** | **M. Mariños** | **Done** |
+| **Transversal** | **OpenAPI 34 Rutas y QA** | **T36** | **Exponer los 34 endpoints en OpenAPI 3.0 / Swagger UI y verificar 102 pruebas automatizadas en verde** | **Habilitación completa de endpoints administrativos y comunitarios y ejecución de suite JUnit 5** | **6h** | **R. Condor** | **Done** |
+| **Transversal** | **Despliegue Full-Stack** | **T37** | **Compilar bundle de producción de Angular 18, integrar con Landing Page y desplegar en GitHub Pages y Render** | **Publicación continua en /eco-commute/app/ conectada a PostgreSQL 16 y backend en Render** | **6h** | **R. Condor** | **Done** |
+| **Transversal** | **Validación y Heurísticas** | **T38** | **Conducir entrevistas de validación (Segmentos 1 y 2), evaluación heurística y cierre del Informe Final** | **Registro empírico de entrevistas, matriz de 10 heurísticas de Nielsen y consolidación documental** | **6h** | **P. Espinoza** | **Done** |
+
+#### 
+
+#### 
+
+## **CAPÍTULO III: PRODUCT DESIGN** {#capítulo-iii:-product-design}
+
+### **3.1 Style Guidelines** {#3.1-style-guidelines}
 
 Las guías de estilo definen los patrones visuales y componentes reutilizables del sistema de diseño para asegurar consistencia e identidad en la aplicación (Nielsen Norman Group, 2020).
 
-
-#### **3.1.1 General Style Guidelines**
-
+#### **3.1.1 General Style Guidelines** {#3.1.1-general-style-guidelines}
 
 La identidad visual de EcoCommute se diseñó para comunicar sostenibilidad, movilidad urbana e innovación sin perder claridad funcional. La interfaz utiliza un tema oscuro por defecto, con acentos en verde esmeralda que refuerzan la asociación con movilidad sostenible y progreso ambiental.
 
-
 La paleta cromática principal es una escala de verdes (desde **\#ecfdf5**, el más claro, hasta **\#022c22**, el más oscuro), con los tonos **\#10b981** y **\#34d399** como color de marca predominante en botones, íconos y elementos destacados. El fondo base de la aplicación es un azul muy oscuro casi negro (**\#060913**), sobre el cual el verde resalta con alto contraste. No se usa una paleta separada de azul y lima para distinguir movilidad y recompensas: el verde de marca cumple ambas funciones dentro de una misma identidad visual coherente.
-
 
 La tipografía base es Plus Jakarta Sans para títulos y elementos destacados, e Inter como tipografía de respaldo para el resto del contenido, ambas cargadas desde Google Fonts. Los títulos emplean pesos bold o extrabold, mientras que los textos de apoyo mantienen un peso regular o medium. Los componentes visuales usan bordes redondeados, gradientes sutiles en tonos verdes y suficiente contraste sobre el fondo oscuro para facilitar la lectura en escritorio y móvil.
 
 
-*Figura 1. Style Guidelines de EcoCommute.*
 
-#### **3.1.2 Web Style Guidelines**
+*Figura 1\. Style Guidelines de EcoCommute.*
 
+#### **3.1.2 Web Style Guidelines** {#3.1.2-web-style-guidelines}
 
-Para el producto completo del Trabajo Final, la aplicación web principal está implementada y desplegada con Angular 18 (Standalone Components), TypeScript, Angular Material y Leaflet 1.9 (https://lappwv.github.io/eco-commute/app/), manteniendo un diseño responsive, soporte bilingüe en vivo (es\_419/en\_US), accesibilidad WCAG 2.1 AA y selector de tema claro/oscuro, complementada por la landing page pública en HTML5, CSS3 y JavaScript (https://lappwv.github.io/eco-commute/). Los botones principales se reservan para acciones críticas como iniciar sesión, calcular ruta con OSRM+IA, registrar o editar un viaje y canjear recompensas, y los secundarios para acciones de consulta o filtrado.
-
+Para el producto completo del Trabajo Final, la aplicación web principal está implementada y desplegada con Angular 18 (Standalone Components), TypeScript, Angular Material y Leaflet 1.9 (https\://lappwv.github.io/eco-commute/app/), manteniendo un diseño responsive, soporte bilingüe en vivo (es\_419/en\_US), accesibilidad WCAG 2.1 AA y selector de tema claro/oscuro, complementada por la landing page pública en HTML5, CSS3 y JavaScript (https\://lappwv.github.io/eco-commute/). Los botones principales se reservan para acciones críticas como iniciar sesión, calcular ruta con OSRM+IA, registrar o editar un viaje y canjear recompensas, y los secundarios para acciones de consulta o filtrado.
 
 El formulario de registro e inicio de sesión en AuthComponent (/login) solicita nombre, correo, contraseña segura, distrito de Lima Metropolitana y aceptación de Términos y Condiciones, e incorpora botones de acceso demostrativo en 1 clic para los roles ROLE\_USER y ROLE\_ADMIN. Los campos muestran etiquetas accesibles y validaciones reactivas inmediatas.
 
-
 La navegación principal del alcance inicial se organiza en Rutas, Impacto y Ranking, más una vista adicional de Administración visible solo para usuarios con rol administrador. Esta estructura permite que el usuario entienda rápidamente dónde planificar y comparar un viaje, dónde revisar su impacto acumulado (CO2 ahorrado, distancia, medallas) y dónde compararse con otros usuarios. En dispositivos móviles, la navegación se adapta a un menú compacto para mantener el mapa y el contenido principal visibles.
 
-
-#### **3.1.3 Términos y Condiciones de Servicio**
+#### **3.1.3 Términos y Condiciones de Servicio** {#3.1.3-términos-y-condiciones-de-servicio}
 
 La plataforma incluye términos y condiciones de servicio enlazados en el pie de página (footer) de la landing page y de la aplicación web. El texto estipula la protección de datos personales de los usuarios registrados, el uso ético y anónimo de los datos de desplazamiento urbano y la exención de responsabilidad en rutas, rigiéndose bajo los principios del código de ética en ingeniería de software de ACM/IEEE y del Colegio de Ingenieros del Perú (CIP).
 
+#### **3.1.4 Internacionalización y Accesibilidad (i18n & a11y)** {#3.1.4-internacionalización-y-accesibilidad-(i18n-&-a11y)}
 
-#### **3.1.4 Internacionalización y Accesibilidad (i18n & a11y)**
+* **Internacionalización (i18n):** La solución contempla soporte multilingüe en dos idiomas: Español de Latinoamérica (es\_419) como idioma nativo e Inglés (en\_US) como alternativa internacional, estructurado mediante diccionarios JSON de traducción y selectores en el encabezado.  
+* **Accesibilidad (a11y):** La interfaz web sigue las directrices WCAG 2.1 nivel AA, empleando contrastes superiores a 4.5:1 en elementos interactivos, etiquetas semánticas HTML5, configuración de atributos ARIA (aria-label, role, aria-live) para tecnologías asistivas y navegación completa por teclado.
 
-- **Internacionalización (i18n):** La solución contempla soporte multilingüe en dos idiomas: Español de Latinoamérica (`es_419`) como idioma nativo e Inglés (`en_US`) como alternativa internacional, estructurado mediante diccionarios JSON de traducción y selectores en el encabezado.
-- **Accesibilidad (a11y):** La interfaz web sigue las directrices WCAG 2.1 nivel AA, empleando contrastes superiores a 4.5:1 en elementos interactivos, etiquetas semánticas HTML5, configuración de atributos ARIA (`aria-label`, `role`, `aria-live`) para tecnologías asistivas y navegación completa por teclado.
-
-
-### **3.2 Landing Page UI Design**
-
+### **3.2 Landing Page UI Design** {#3.2-landing-page-ui-design}
 
 La landing page tiene como objetivo presentar EcoCommute de forma clara y persuasiva para usuarios nuevos. Su primera pantalla comunica la propuesta de valor: moverse por Lima de manera sostenible, medir el CO₂ ahorrado y recibir recompensas por hábitos responsables. La página evita una composición de marketing genérica y se enfoca en mostrar de inmediato el beneficio principal del producto.
 
-
-#### **3.2.1 Landing Page Wireframe**
-
-
-*Figura 2. Wireframe de la landing page de EcoCommute.*
+#### **3.2.1 Landing Page Wireframe** {#3.2.1-landing-page-wireframe}
 
 
-#### **3.2.2 Landing Page Mock-up**
 
+*Figura 2\. Wireframe de la landing page de EcoCommute.*
+
+#### **3.2.2 Landing Page Mock-up** {#3.2.2-landing-page-mock-up}
 
 El mock-up aplica la identidad visual de EcoCommute sobre el wireframe. La propuesta utiliza fondo oscuro, botones verdes, métricas destacadas y una visualización de ruta para reforzar la idea de movilidad sostenible. La comunicación inicial se centra en el usuario y en el beneficio tangible: convertir su impacto ambiental en puntos, logros y recompensas.
 
 
 
-*Figura 3. Mock-up de la landing page de EcoCommute.*
+*Figura 3\. Mock-up de la landing page de EcoCommute.*
 
-
-### **3.3 Web Applications UX/UI Design**
-
+### **3.3 Web Applications UX/UI Design** {#3.3-web-applications-ux/ui-design}
 
 El diseño de la aplicación web se orienta a un alcance inicial viable para el curso. Las pantallas principales cubren autenticación, planificación y comparación de rutas sostenibles, dashboard de impacto acumulado, reconocimiento por medallas y ranking por distrito. Esta selección permite demostrar la propuesta innovadora sin depender de un catálogo de recompensas externas en la primera versión.
 
-
-#### **3.3.1 Web Applications Mock-ups**
-
+#### **3.3.1 Web Applications Mock-ups** {#3.3.1-web-applications-mock-ups}
 
 Los mock-ups de la aplicación muestran las pantallas centrales que permiten validar la experiencia del usuario. La pantalla de acceso representa el uso de JWT y Spring Security; Google OAuth2 queda como alternativa prevista para una iteración posterior. La vista de Rutas permite ingresar origen y destino, elegir el medio de transporte y comparar alternativas sostenibles con ayuda de IA (Gemini). La vista de Impacto presenta el CO2 ahorrado, los puntos y las medallas obtenidas por el usuario. La vista de Ranking refuerza la gamificación comparando el impacto entre usuarios de un mismo distrito.
 
 
 
-*Figura 4. Mock-ups principales de la aplicación web EcoCommute.*
+*Figura 4\. Mock-ups principales de la aplicación web EcoCommute.*
 
 
 
-*Figura 5. Mock-up del dashboard principal de EcoCommute.*
+*Figura 5\. Mock-up del dashboard principal de EcoCommute.*
 
-
-#### **3.3.2 Web Applications Wireflow Diagrams**
-
+#### **3.3.2 Web Applications Wireflow Diagrams** {#3.3.2-web-applications-wireflow-diagrams}
 
 El wireflow organiza los recorridos principales del usuario dentro de la aplicación mediante pantallas, estados de interfaz, decisiones y caminos alternativos. El primer flujo cubre acceso seguro, validación de credenciales y llegada al dashboard. El segundo flujo representa la búsqueda de ruta sostenible, disponibilidad de alternativas, registro del viaje, cálculo de CO₂ y actualización de puntos. El tercer flujo cubre el reconocimiento por medallas: el sistema evalúa si el usuario cumple la condición de una medalla al registrar un viaje, y en caso afirmativo la desbloquea automáticamente y la agrega a su perfil; si aún no la cumple, el usuario continúa registrando viajes en Rutas.
-
 
 Estos flujos permiten validar que la experiencia del alcance inicial sea coherente de inicio a fin y contemplan situaciones reales como credenciales inválidas, rutas no disponibles o condiciones de medalla aún no alcanzadas. También ayudan a identificar qué pantallas son necesarias para implementar el CRUD del proyecto y qué datos deben viajar entre frontend, backend y base de datos.
 
 
-*Figura 6. Wireflow de los flujos principales de EcoCommute.*
 
+*Figura 6\. Wireflow de los flujos principales de EcoCommute.*
 
-### **3.4 Database Design**
-
+### **3.4 Database Design** {#3.4-database-design}
 
 El diseño de base de datos se elaboró para soportar autenticación, registro de viajes, cálculo de CO2 e impacto acumulado, y reconocimiento por medallas. La propuesta se basa en las entidades JPA reales del backend: usuario, viaje, medalla, la relación entre usuario y medalla, las estadísticas acumuladas del usuario, y una tabla de factores de emisión de CO2 por medio de transporte.
 
+#### **3.4.1 Database Diagram** {#3.4.1-database-diagram}
 
-#### **3.4.1 Database Diagram**
-
-
-El diagrama de base de datos representa las relaciones principales del sistema. La tabla User se relaciona de 1 a N con Trip (los viajes registrados), de 1 a 1 con UserStats (sus estadísticas acumuladas), y de 1 a N con UserBadge, que a su vez se relaciona de N a 1 con Badge (las medallas disponibles). La tabla EmissionFactor funciona como catálogo de referencia, con el factor de gramos de CO2 por kilómetro según el medio de transporte usado en cada viaje. Esta estructura permite calcular el impacto ambiental de cada viaje, acumular estadísticas por usuario y desbloquear medallas automáticamente según los logros alcanzados.*Figura 7. Diagrama de base de datos de EcoCommute.*
-
+El diagrama de base de datos representa las relaciones principales del sistema. La tabla User se relaciona de 1 a N con Trip (los viajes registrados), de 1 a 1 con UserStats (sus estadísticas acumuladas), y de 1 a N con UserBadge, que a su vez se relaciona de N a 1 con Badge (las medallas disponibles). La tabla EmissionFactor funciona como catálogo de referencia, con el factor de gramos de CO2 por kilómetro según el medio de transporte usado en cada viaje. Esta estructura permite calcular el impacto ambiental de cada viaje, acumular estadísticas por usuario y desbloquear medallas automáticamente según los logros alcanzados.*Figura 7\. Diagrama de base de datos de EcoCommute.*
 
 El modelo implementado está compuesto por nueve tablas: users, trips, user\_stats, badges, user\_badges, rewards, redemptions, challenges y emission\_factors. La tabla users se relaciona de 1 a N con trips, de 1 a 1 con user\_stats y de 1 a N con user\_badges, que a su vez se relaciona de N a 1 con badges; redemptions se relaciona de N a 1 con users y con rewards. emission\_factors y challenges funcionan como catálogos sin clave foránea: trips.transport\_mode referencia de forma lógica a emission\_factors.transport\_mode para calcular el CO₂ por kilómetro. El entorno de desarrollo y las pruebas usan H2 en memoria y producción usa PostgreSQL administrado en Render, con backend en Spring Boot, autenticación JWT, control de acceso con Spring Security y cifrado de contraseñas con BCrypt. Google OAuth2 queda considerado para una iteración posterior.
 
 
 
+## 
 
+## CAPÍTULO IV: PRODUCT IMPLEMENTATION, VALIDATION & DEPLOYMENT {#capítulo-iv:-product-implementation,-validation-&-deployment}
 
-## CAPÍTULO IV: PRODUCT IMPLEMENTATION, VALIDATION & DEPLOYMENT
+### 
 
+### 4.1 Software Deployment Configuration {#4.1-software-deployment-configuration}
 
-### 4.1 Software Deployment Configuration
-
-
-El backend de EcoCommute está desplegado en la nube con Render (plan gratuito, sin costo), desde el repositorio oficial https://github.com/lappwv/eco-commute. El despliegue se configura mediante el Blueprint render.yaml ubicado en la raíz del repositorio, que crea automáticamente el servicio web ecocommute-backend —un contenedor Docker construido desde backend/Dockerfile con Java 21 y Spring Boot 3.3.3— y una base de datos PostgreSQL administrada denominada ecocommute-db.
-
+El backend de EcoCommute está desplegado en la nube con Render (plan gratuito, sin costo), desde el repositorio oficial https\://github.com/lappwv/eco-commute. El despliegue se configura mediante el Blueprint render.yaml ubicado en la raíz del repositorio, que crea automáticamente el servicio web ecocommute-backend —un contenedor Docker construido desde backend/Dockerfile con Java 21 y Spring Boot 3.3.3— y una base de datos PostgreSQL administrada denominada ecocommute-db.
 
 La configuración del Blueprint inyecta JWT\_SECRET (generada por Render), DB\_HOST, DB\_PORT, DB\_NAME, SPRING\_DATASOURCE\_USERNAME y SPRING\_DATASOURCE\_PASSWORD. La aplicación acepta además la variable PORT mediante su configuración de Spring Boot. El esquema se crea o actualiza al arrancar mediante spring.jpa.hibernate.ddl-auto=update, por lo que no es necesario ejecutar scripts SQL manualmente. El servicio expone GET /health como chequeo de salud para Render.
 
+**URL pública del backend:** [https\://ecocommute-backend-a14m.onrender.com](https://ecocommute-backend-a14m.onrender.com/). La landing page permanece publicada de forma independiente en GitHub Pages: [https\://lappwv.github.io/eco-commute/](https://lappwv.github.io/eco-commute/)
 
-**URL pública del backend:** [https://ecocommute-backend-a14m.onrender.com](https://ecocommute-backend-a14m.onrender.com/). La landing page permanece publicada de forma independiente en GitHub Pages: [https://lappwv.github.io/eco-commute/](https://lappwv.github.io/eco-commute/)
+**Repositorio principal:** [https\://github.com/lappwv/eco-commute.](https://github.com/lappwv/eco-commute) La configuración de desarrollo utiliza Git y GitHub para el control de versiones, con un flujo por features mediante ramas feature/\* y Pull Requests según CONTRIBUTING.md. La arquitectura objetivo del producto contempla Angular \+ TypeScript \+ Angular Material para la aplicación web principal. Para el Trabajo Final, el frontend implementado comprende tanto la aplicación web SPA completa en Angular 18 \+ TypeScript \+ Angular Material \+ Leaflet (desplegada en https\://lappwv.github.io/eco-commute/app/) como la landing page pública responsive (https\://lappwv.github.io/eco-commute/), mientras que el backend utiliza Java 21, Spring Boot 3.3.3, Spring Security, Spring Data JPA, JWT y Maven con 34 endpoints documentados en OpenAPI 3.0 y 102 pruebas automatizadas en verde. PostgreSQL es la base de datos de producción administrada por Render; Docker \+ Render se utilizan para el despliegue del backend y GitHub Pages para la landing. La API integra OSRM para el cálculo de rutas y Gemini cuando se configura la clave correspondiente.
 
+### 
 
-**Repositorio principal:** [https://github.com/lappwv/eco-commute.](https://github.com/lappwv/eco-commute) La configuración de desarrollo utiliza Git y GitHub para el control de versiones, con un flujo por features mediante ramas feature/\* y Pull Requests según CONTRIBUTING.md. La arquitectura objetivo del producto contempla Angular + TypeScript + Angular Material para la aplicación web principal. Para el Trabajo Final, el frontend implementado comprende tanto la aplicación web SPA completa en Angular 18 + TypeScript + Angular Material + Leaflet (desplegada en https://lappwv.github.io/eco-commute/app/) como la landing page pública responsive (https://lappwv.github.io/eco-commute/), mientras que el backend utiliza Java 21, Spring Boot 3.3.3, Spring Security, Spring Data JPA, JWT y Maven con 34 endpoints documentados en OpenAPI 3.0 y 102 pruebas automatizadas en verde. PostgreSQL es la base de datos de producción administrada por Render; Docker + Render se utilizan para el despliegue del backend y GitHub Pages para la landing. La API integra OSRM para el cálculo de rutas y Gemini cuando se configura la clave correspondiente.
+### 4.2 Landing Page, Services & Applications Implementation {#4.2-landing-page,-services-&-applications-implementation}
 
+A lo largo de las cuatro iteraciones del proyecto (Sprints 1, 2, 3 y 4\) se implementó, integró y desplegó en producción la arquitectura full-stack completa de EcoCommute: (1) la Landing Page pública bilingüe en GitHub Pages (https\://lappwv.github.io/eco-commute/), (2) el Backend RESTful en Spring Boot 3.3.3 \+ PostgreSQL 16 en Render (https\://ecocommute-backend-a14m.onrender.com/swagger-ui.html) con 34 endpoints documentados en OpenAPI 3.0 y 102 pruebas automatizadas en verde, y (3) la Aplicación Web SPA en Angular 18 \+ TypeScript \+ Angular Material \+ Leaflet (https\://lappwv.github.io/eco-commute/app/) que materializa las 14 Historias de Usuario (HU01 a HU14) de extremo a extremo.
 
+#### 
 
-### 4.2 Landing Page, Services & Applications Implementation
-
-A lo largo de las cuatro iteraciones del proyecto (Sprints 1, 2, 3 y 4) se implementó, integró y desplegó en producción la arquitectura full-stack completa de EcoCommute: (1) la Landing Page pública bilingüe en GitHub Pages (https://lappwv.github.io/eco-commute/), (2) el Backend RESTful en Spring Boot 3.3.3 + PostgreSQL 16 en Render (https://ecocommute-backend-a14m.onrender.com/swagger-ui.html) con 34 endpoints documentados en OpenAPI 3.0 y 102 pruebas automatizadas en verde, y (3) la Aplicación Web SPA en Angular 18 + TypeScript + Angular Material + Leaflet (https://lappwv.github.io/eco-commute/app/) que materializa las 14 Historias de Usuario (HU01 a HU14) de extremo a extremo.
-
-
-#### **4.2.1 Sprint 1**
+#### **4.2.1 Sprint 1** {#4.2.1-sprint-1}
 
 El Sprint 1 se enfocó en consolidar el primer incremento funcional de EcoCommute. Rodrigo Condor preparó inicialmente la arquitectura base y la estructura del backend en Spring Boot; posteriormente, las funcionalidades se distribuyeron por ramas de características (feature/\*) para que los integrantes implementaran y completaran los módulos asignados de acuerdo con la propuesta de valor del producto.
 
@@ -482,11 +555,8 @@ El Sprint 1 se enfocó en consolidar el primer incremento funcional de EcoCommut
 
 Se organizó el trabajo mediante tareas técnicas de desarrollo asignadas individualmente:
 
-
-
-
-| **US Id** | **US Title** | **Task Id** | **Task Title** | **Description** | **Est.** | **Assigned To** | **Status** |
-| :---: | --- | :---: | --- | --- | :---: | --- | :---: |
+| US Id | US Title | Task Id | Task Title | Description | Est. | Assigned To | Status |
+| ----- | :---- | ----- | :---- | :---- | :---: | :---- | :---: |
 | HU01 | Registro de usuario | T01 | Refinar DTO y validaciones de registro de usuario sobre la estructura base | Validación de campos obligatorios, formato de email y unicidad de cuenta | 4h | R. Condor | Done |
 | HU01 | Registro de usuario | T02 | Completar el endpoint POST /api/v1/auth/register y su prueba básica | Implementación del controlador, servicio y persistencia con encriptación BCrypt | 6h | R. Condor | Done |
 | HU02 | Inicio de sesión seguro | T03 | Refinar y validar Spring Security, JWT y filtros de autenticación | Configuración de filtros de autorización stateless y emisión de token JWT | 8h | R. Condor | Done |
@@ -500,16 +570,14 @@ Se organizó el trabajo mediante tareas técnicas de desarrollo asignadas indivi
 | HU10-HU11 | Medallas por logros | T11 | Completar y validar el sistema de medallas por logros | Motor de evaluación y desbloqueo automático de medallas (UserBadge) | 8h | O. Alcocer | Done |
 | General | Preparación de evidencias | T12 | Preparar capturas, pruebas funcionales y resumen de colaboración | Documentación de evidencias, capturas y preparación de reporte técnico | 6h | M. Mariños | Done |
 
-
+#### 
 
 ##### **4.2.1.2 Development Evidence for Sprint Review**
 
 Como evidencia de desarrollo del Sprint 1 se cuenta con los commits registrados en el repositorio oficial de GitHub ([eco-commute](https://github.com/lappwv/eco-commute)) organizados mediante una estrategia de desarrollo por ramas de características (feature branches) y Git Flow (Driessen, 2020), incluyendo el PR \#1.
 
-
-
-| **Repository** | **Branch** | **Commit Id** | **Commit Message** | **Commit Message Body** | **Committed on** |
-| --- | --- | --- | --- | --- | --- |
+| Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on |
+| :---- | :---- | :---- | :---- | :---- | :---- |
 | lappwv/eco-commute | feature/auth | 99f80ef | feat(auth): exigir letra y numero en la contrasena de registro HU01 | @lappwv (R. Condor): Validación de contraseñas complejas | 02/10/2026 |
 | lappwv/eco-commute | feature/auth | 8e1473a | fix(auth): devolver 401 en credenciales invalidas HU02 | @lappwv (R. Condor): Retorno de 401 en credenciales inválidas | 02/10/2026 |
 | lappwv/eco-commute | feature/auth | 3c0f56d | fix(auth): hacer null-safe la validacion del JWT | @lappwv (R. Condor): Manejo null-safe de tokens JWT en filtro | 02/10/2026 |
@@ -525,25 +593,26 @@ Como evidencia de desarrollo del Sprint 1 se cuenta con los commits registrados 
 
 El producto dispone de dos URL públicas activas para evidenciar su funcionamiento:
 
-- **Landing page responsive:** Publicada en GitHub Pages ([EcoCommute Landing](https://lappwv.github.io/eco-commute/)), permitiendo validar la presentación de la propuesta de valor, beneficios ecológicos y mock-ups.
-- **Backend API REST:** Desplegado en la nube de Render ([EcoCommute API](https://ecocommute-backend-a14m.onrender.com/health)), permitiendo verificar el estado operativo del servicio y la interacción con los endpoints de autenticación, rutas, viajes, emisiones, gamificación y dashboard.
+* **Landing page responsive:** Publicada en GitHub Pages ([EcoCommute Landing](https://lappwv.github.io/eco-commute/)), permitiendo validar la presentación de la propuesta de valor, beneficios ecológicos y mock-ups.  
+* **Backend API REST:** Desplegado en la nube de Render ([EcoCommute API](https://ecocommute-backend-a14m.onrender.com/health)), permitiendo verificar el estado operativo del servicio y la interacción con los endpoints de autenticación, rutas, viajes, emisiones, gamificación y dashboard.
 
 
 
 ##### **4.2.1.4 Services Documentation Evidence for Sprint Review**
 
-El backend incluye la dependencia `springdoc-openapi-starter-webmvc-ui 2.6.0`, exponiendo la documentación interactiva Swagger UI en [Swagger UI](https://ecocommute-backend-a14m.onrender.com/swagger-ui.html), donde se documentan contratos, esquemas JSON de entrada y salida, códigos de estado HTTP y requerimientos de autorización Bearer Token.
+El backend incluye la dependencia springdoc-openapi-starter-webmvc-ui 2.6.0, exponiendo la documentación interactiva Swagger UI en [Swagger UI](https://ecocommute-backend-a14m.onrender.com/swagger-ui.html), donde se documentan contratos, esquemas JSON de entrada y salida, códigos de estado HTTP y requerimientos de autorización Bearer Token.
 
 ##### **4.2.1.5 Software Deployment Evidence for Sprint Review**
 
-La infraestructura está configurada como código mediante el Blueprint `render.yaml` en la raíz del repositorio, orquestando un servicio web contenedorizado con Docker (Java 21 / Spring Boot 3.3.3) y una base de datos gestionada PostgreSQL (`ecocommute-db`). Cada push a `main` activa un webhook de despliegue continuo automático.
+La infraestructura está configurada como código mediante el Blueprint render.yaml en la raíz del repositorio, orquestando un servicio web contenedorizado con Docker (Java 21 / Spring Boot 3.3.3) y una base de datos gestionada PostgreSQL (ecocommute-db). Cada push a main activa un webhook de despliegue continuo automático.
 
 ##### **4.2.1.6 Team Collaboration Insights during Sprint**
 
-La estrategia de colaboración se estructuró a partir de una arquitectura base preparada por Rodrigo Condor, distribuyendo el desarrollo en ramas `feature/*` independientes. Cada integrante realizó commits periódicos, sometiendo sus cambios a revisiones de código entre pares antes de la integración a la rama principal.
+La estrategia de colaboración se estructuró a partir de una arquitectura base preparada por Rodrigo Condor, distribuyendo el desarrollo en ramas feature/\* independientes. Cada integrante realizó commits periódicos, sometiendo sus cambios a revisiones de código entre pares antes de la integración a la rama principal.
 
 
-#### **4.2.2 Sprint 2**
+
+#### **4.2.2 Sprint 2** {#4.2.2-sprint-2}
 
 El Sprint 2 se centró en la consolidación técnica, aseguramiento de la calidad, acotamiento riguroso de la API REST a 25 rutas expuestas (24 en /api/v1 y /health), diseño e implementación de pruebas de integración automatizadas y verificación integral del despliegue en producción.
 
@@ -551,11 +620,8 @@ El Sprint 2 se centró en la consolidación técnica, aseguramiento de la calida
 
 Las tareas técnicas ejecutadas para consolidar el incremento fueron:
 
-
-
-
-| **Id** | **Title** | **Id** | **Title** | **Description** | **Est.** | **Assigned To** | **Status** |
-| :---: | --- | :---: | --- | --- | :---: | --- | :---: |
+| Id | Title | Id | Title | Description | Est. | Assigned To | Status |
+| :---: | :---- | :---: | :---- | :---- | :---: | :---- | :---: |
 | HU01-02 | Seguridad | T13 | Refactorizar controladores y acotar API a 25 rutas | Reducción a 24 rutas bajo /api/v1 y /health con roles USER y ADMIN | 6h | R. Condor | Done |
 | HU03 | Rutas | T14 | Corregir flag optimización IA y fallback en rutas | Ajuste en RouteService para ruta optimizada con fallback heurístico | 5h | M. Mariños | Done |
 | HU03 | Rutas | T15 | Pruebas de integración de rutas y OSRM (HU03) | Tests de integración en RouteController y RouteService con mock | 6h | J. Ramos | Done |
@@ -567,57 +633,56 @@ Las tareas técnicas ejecutadas para consolidar el incremento fueron:
 | DevOps | Pipeline | T21 | Verificar pipeline CI/CD en Render con PostgreSQL | Verificación de build automático en Render con Blueprint render.yaml | 4h | R. Condor | Done |
 | QA | Pruebas | T22 | Ejecutar 28 tests en verde y sincronizar informe | Ejecución de suite de 28 tests en verde (./mvnw clean test) e informe | 5h | M. Mariños | Done |
 
+##### 
 
 ##### **4.2.2.2 Development Evidence for Sprint Review**
 
 Como evidencia de desarrollo del Sprint 2 se cuenta con el historial de Pull Requests y commits integrados en GitHub ([eco-commute Pull Requests](https://github.com/lappwv/eco-commute/pulls?q=is%3Apr+is%3Aclosed)):
 
 
-- **PR \#1 (feature/auth) - @lappwv (Rodrigo Condor):** Validación de autenticación y seguridad JWT.
-- **PR \#2 (refactor/reduce-api-surface) - @lappwv (Rodrigo Condor):** Reducción de la API a 25 rutas expuestas.
-- **PR \#3 (docs/sync-current-tp-report) - @mbtibs357 (Matías Mariños):** Sincronización del informe técnico y landing.
-- **PR \#4 (feature/challenges-leaderboard) - @paulollito29-sketch (Paulo Espinoza):** Ranking distrital y retos.
-- **PR \#5 (feature/trips) - @jsramos0712 (Jeampiero Ramos):** Pruebas de rutas OSRM, viajes y cálculo de CO₂.
-- **PR \#6 (feature/rewards) - @DevAvalos (Diego Avalos):** Pruebas del controlador de recompensas.
-- **PR \#7 (feature/stats-badges) - @MrOdar (Odar Alcocer):** Automatización de medallas y puntos verdes.
-- **PR \#8 (feature/dashboard-ia) - @mbtibs357 (Matías Mariños):** Dashboard personal y recomendación con IA.
 
+* **PR \#1 (feature/auth) \- @lappwv (Rodrigo Condor):** Validación de autenticación y seguridad JWT.  
+* **PR \#2 (refactor/reduce-api-surface) \- @lappwv (Rodrigo Condor):** Reducción de la API a 25 rutas expuestas.  
+* **PR \#3 (docs/sync-current-tp-report) \- @mbtibs357 (Matías Mariños):** Sincronización del informe técnico y landing.  
+* **PR \#4 (feature/challenges-leaderboard) \- @paulollito29-sketch (Paulo Espinoza):** Ranking distrital y retos.  
+* **PR \#5 (feature/trips) \- @jsramos0712 (Jeampiero Ramos):** Pruebas de rutas OSRM, viajes y cálculo de CO₂.  
+* **PR \#6 (feature/rewards) \- @DevAvalos (Diego Avalos):** Pruebas del controlador de recompensas.  
+* **PR \#7 (feature/stats-badges) \- @MrOdar (Odar Alcocer):** Automatización de medallas y puntos verdes.  
+* **PR \#8 (feature/dashboard-ia) \- @mbtibs357 (Matías Mariños):** Dashboard personal y recomendación con IA.
 
-
-| **Repository** | **Branch** | **Commit Id** | **Commit Message** | **Commit Message Body** | **Committed on** |
-| --- | --- | --- | --- | --- | --- |
-| lappwv/eco-commute | refactor/reduce-api-surface | 7c39e88 | refactor(api): reduce exposed endpoints to TP core scope | PR \#2 - @lappwv (R. Condor): Acota API a 25 rutas para TP | 03/10/2026 |
-| lappwv/eco-commute | refactor/reduce-api-surface | 542ef25 | test(security): align authorization tests with reduced API surface | PR \#2 - @lappwv (R. Condor): Pruebas de autorización por rol | 03/10/2026 |
-| lappwv/eco-commute | docs/sync-current-tp-report | ba4b592 | docs(report): add current TP report markdown | PR \#3 - @mbtibs357 (M. Mariños): Sincronización de informe TP | 03/10/2026 |
-| lappwv/eco-commute | feature/challenges-leaderboard | 3b89a01 | feat(leaderboard): ranking por distrito, filtros y documentacion HU08 | PR \#4 - @paulollito29-sketch (P. Espinoza): Leaderboard HU08 | 03/10/2026 |
-| lappwv/eco-commute | feature/challenges-leaderboard | 9f61831 | chore(build): asegurar permisos de ejecucion en mvnw | PR \#4 - @paulollito29-sketch (P. Espinoza): Compatibilidad build | 03/10/2026 |
-| lappwv/eco-commute | feature/trips | 7244791 | test(trips): valida registro e historial HU04 | PR \#5 - @jsramos0712 (J. Ramos): Tests en TripControllerTest | 04/10/2026 |
-| lappwv/eco-commute | feature/trips | d29ebee | test(carbon): valida factores y ahorro CO2 HU05 | PR \#5 - @jsramos0712 (J. Ramos): Tests en CarbonServiceTest | 04/10/2026 |
-| lappwv/eco-commute | feature/trips | a3999e3 | test(routes): valida alternativas y fallback OSRM HU03 | PR \#5 - @jsramos0712 (J. Ramos): Tests en RouteServiceTest | 04/10/2026 |
-| lappwv/eco-commute | feature/rewards | b4f3a29 | test(rewards): agrega pruebas de integracion del controller | PR \#6 - @DevAvalos (D. Avalos): Tests en RewardController | 04/10/2026 |
-| lappwv/eco-commute | feature/stats-badges | 4c710ab | feat(gamification): validación y automatización de HU06, HU10 y HU11 | PR \#7 - @MrOdar (O. Alcocer): Persistencia de medallas | 04/10/2026 |
-| lappwv/eco-commute | feature/stats-badges | 9a432f4 | refactor(gamification): align HU06, HU10, HU11 without extra routes | PR \#7 - @MrOdar (O. Alcocer): Validación en API acotada | 04/10/2026 |
-| lappwv/eco-commute | feature/dashboard-ia | 2e859d3 | refactor(dashboard-ia): refine trend accuracy and unify CO2 constants | PR \#8 - @mbtibs357 (M. Mariños): Precisión de métricas CO₂ | 04/10/2026 |
-| lappwv/eco-commute | feature/dashboard-ia | e61fb71 | test(ia): validar Gemini, fallback heuristico y hora punta de Lima (HU09) | PR \#8 - @mbtibs357 (M. Mariños): Pruebas de integración Gemini | 04/10/2026 |
-| lappwv/eco-commute | feature/dashboard-ia | c759d32 | test(dashboard): validar summary, 401, community-impact (HU07) | PR \#8 - @mbtibs357 (M. Mariños): Tests de KPIs de dashboard | 04/10/2026 |
+| Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on |
+| :---- | :---- | :---- | :---- | :---- | :---- |
+| lappwv/eco-commute | refactor/reduce-api-surface | 7c39e88 | refactor(api): reduce exposed endpoints to TP core scope | PR \#2 \- @lappwv (R. Condor): Acota API a 25 rutas para TP | 03/10/2026 |
+| lappwv/eco-commute | refactor/reduce-api-surface | 542ef25 | test(security): align authorization tests with reduced API surface | PR \#2 \- @lappwv (R. Condor): Pruebas de autorización por rol | 03/10/2026 |
+| lappwv/eco-commute | docs/sync-current-tp-report | ba4b592 | docs(report): add current TP report markdown | PR \#3 \- @mbtibs357 (M. Mariños): Sincronización de informe TP | 03/10/2026 |
+| lappwv/eco-commute | feature/challenges-leaderboard | 3b89a01 | feat(leaderboard): ranking por distrito, filtros y documentacion HU08 | PR \#4 \- @paulollito29-sketch (P. Espinoza): Leaderboard HU08 | 03/10/2026 |
+| lappwv/eco-commute | feature/challenges-leaderboard | 9f61831 | chore(build): asegurar permisos de ejecucion en mvnw | PR \#4 \- @paulollito29-sketch (P. Espinoza): Compatibilidad build | 03/10/2026 |
+| lappwv/eco-commute | feature/trips | 7244791 | test(trips): valida registro e historial HU04 | PR \#5 \- @jsramos0712 (J. Ramos): Tests en TripControllerTest | 04/10/2026 |
+| lappwv/eco-commute | feature/trips | d29ebee | test(carbon): valida factores y ahorro CO2 HU05 | PR \#5 \- @jsramos0712 (J. Ramos): Tests en CarbonServiceTest | 04/10/2026 |
+| lappwv/eco-commute | feature/trips | a3999e3 | test(routes): valida alternativas y fallback OSRM HU03 | PR \#5 \- @jsramos0712 (J. Ramos): Tests en RouteServiceTest | 04/10/2026 |
+| lappwv/eco-commute | feature/rewards | b4f3a29 | test(rewards): agrega pruebas de integracion del controller | PR \#6 \- @DevAvalos (D. Avalos): Tests en RewardController | 04/10/2026 |
+| lappwv/eco-commute | feature/stats-badges | 4c710ab | feat(gamification): validación y automatización de HU06, HU10 y HU11 | PR \#7 \- @MrOdar (O. Alcocer): Persistencia de medallas | 04/10/2026 |
+| lappwv/eco-commute | feature/stats-badges | 9a432f4 | refactor(gamification): align HU06, HU10, HU11 without extra routes | PR \#7 \- @MrOdar (O. Alcocer): Validación en API acotada | 04/10/2026 |
+| lappwv/eco-commute | feature/dashboard-ia | 2e859d3 | refactor(dashboard-ia): refine trend accuracy and unify CO2 constants | PR \#8 \- @mbtibs357 (M. Mariños): Precisión de métricas CO₂ | 04/10/2026 |
+| lappwv/eco-commute | feature/dashboard-ia | e61fb71 | test(ia): validar Gemini, fallback heuristico y hora punta de Lima (HU09) | PR \#8 \- @mbtibs357 (M. Mariños): Pruebas de integración Gemini | 04/10/2026 |
+| lappwv/eco-commute | feature/dashboard-ia | c759d32 | test(dashboard): validar summary, 401, community-impact (HU07) | PR \#8 \- @mbtibs357 (M. Mariños): Tests de KPIs de dashboard | 04/10/2026 |
 
 ##### **4.2.2.3 Execution Evidence for Sprint Review**
 
 La validación integral del incremento funcional se respaldó en tres evidencias de ejecución:
 
-- **Ejecución local automatizada:** Ejecución del comando `./mvnw clean test` arrojando un total de **28 pruebas automatizadas en verde** (0 fallas, 0 errores), abarcando pruebas de controladores, servicios de cálculo de CO₂, seguridad JWT, OSRM y validación de modelos.
-- **Ambiente productivo en Render:** Monitoreo del endpoint `GET https://ecocommute-backend-a14m.onrender.com/health` retornando `{"status":"UP"}` y autenticación exitosa mediante `POST /api/v1/auth/login`, validando la conectividad con la base de datos PostgreSQL en la nube.
-- **Landing page en GitHub Pages:** Acceso público y operativo en `https://lappwv.github.io/eco-commute/`, con catálogo de impacto visual y contenido demostrativo sincronizado.
+1. **Ejecución local automatizada:** Ejecución del comando ./mvnw clean test arrojando un total de **28 pruebas automatizadas en verde** (0 fallas, 0 errores), abarcando pruebas de controladores, servicios de cálculo de CO₂, seguridad JWT, OSRM y validación de modelos.  
+2. **Ambiente productivo en Render:** Monitoreo del endpoint GET https\://ecocommute-backend-a14m.onrender.com/health retornando {"status":"UP"} y autenticación exitosa mediante POST /api/v1/auth/login, validando la conectividad con la base de datos PostgreSQL en la nube.  
+3. **Landing page en GitHub Pages:** Acceso público y operativo en https\://lappwv.github.io/eco-commute/, con catálogo de impacto visual y contenido demostrativo sincronizado.
+
 
 
 ##### **4.2.2.4 Services Documentation Evidence for Sprint Review**
 
-La especificación OpenAPI / Swagger UI en `https://ecocommute-backend-a14m.onrender.com/swagger-ui.html` refleja con exactitud las 25 rutas activas del sistema, incluyendo esquemas DTO, validaciones de campos, códigos HTTP de respuesta (200, 201, 400, 401, 403, 404) y autenticación mediante JWT Bearer.
+La especificación OpenAPI / Swagger UI en https\://ecocommute-backend-a14m.onrender.com/swagger-ui.html refleja con exactitud las 25 rutas activas del sistema, incluyendo esquemas DTO, validaciones de campos, códigos HTTP de respuesta (200, 201, 400, 401, 403, 404\) y autenticación mediante JWT Bearer.
 
-
-
-| **Módulo** | **Método** | **Ruta del Endpoint** | **HU** | **Descripción de Servicio** |
-| --- | :---: | --- | :---: | --- |
+| Módulo | Método | Ruta del Endpoint | HU | Descripción de Servicio |
+| :---- | :---: | :---- | :---: | :---- |
 | Autenticación | POST | /api/v1/auth/register | HU01 | Registro de nuevos usuarios con contraseña cifrada en BCrypt. |
 | Autenticación | POST | /api/v1/auth/login | HU02 | Autenticación y generación de token JWT Bearer (HMAC-SHA256). |
 | Rutas | POST | /api/v1/routes/plan | HU03 | Planificación y consulta geoespacial de rutas optimizadas (OSRM) con fallback de Haversine. |
@@ -646,101 +711,343 @@ La especificación OpenAPI / Swagger UI en `https://ecocommute-backend-a14m.onre
 
 ##### **4.2.2.5 Software Deployment Evidence for Sprint Review**
 
-El despliegue en Render se encuentra completamente automatizado mediante el archivo `render.yaml`. Cada integración de Pull Request a la rama `main` dispara automáticamente la construcción del contenedor Docker (`ecocommute-backend`) y la sincronización con la base de datos PostgreSQL administrada (`ecocommute-db`), asegurando disponibilidad continua y sin costo bajo el plan gratuito de Render.
+El despliegue en Render se encuentra completamente automatizado mediante el archivo render.yaml. Cada integración de Pull Request a la rama main dispara automáticamente la construcción del contenedor Docker (ecocommute-backend) y la sincronización con la base de datos PostgreSQL administrada (ecocommute-db), asegurando disponibilidad continua y sin costo bajo el plan gratuito de Render.
 
 ##### **4.2.2.6 Team Collaboration Insights during Sprint**
 
-Durante el Sprint 2, el equipo perfeccionó la metodología de trabajo colaborativo basada en GitHub Flow. Se implementó la revisión cruzada obligatoria de Pull Requests antes de cada merge a `main`, lo que permitió detectar discrepancias en los controladores, estandarizar formatos de respuesta DTO y asegurar que ningún código fuera incorporado sin superar exitosamente las 28 pruebas unitarias y de integración.
+Durante el Sprint 2, el equipo perfeccionó la metodología de trabajo colaborativo basada en GitHub Flow. Se implementó la revisión cruzada obligatoria de Pull Requests antes de cada merge a main, lo que permitió detectar discrepancias en los controladores, estandarizar formatos de respuesta DTO y asegurar que ningún código fuera incorporado sin superar exitosamente las 28 pruebas unitarias y de integración.
 
 
-### 4.3 Validation Interviews
 
-#### **4.3.1 Diseño de Entrevistas**
+#### **4.2.3 Sprint 3**
+
+El Sprint 3 dio inicio al desarrollo del Trabajo Final construyendo la aplicación web SPA en Angular 18 \+ TypeScript \+ Angular Material \+ Leaflet, conectándola con el backend Spring Boot mediante interceptores JWT y guardias de ruta, ampliando el controlador de viajes (PUT y DELETE /api/v1/trips/{id}) para completar el CRUD por propietario y entregando los módulos de Autenticación (HU01, HU02), Planificador de Rutas OSRM+IA (HU03, HU09), Gestión de Viajes (HU04, HU05) y Dashboard Analítico (HU07).
+
+##### **4.2.3.1 Sprint Backlog 3**
+
+Las tareas técnicas ejecutadas durante el Sprint 3 fueron:
+
+### 
+
+| US Id | US Title | Task Id | Task Title | Description | Est. | Assigned To | Status |
+| :---- | :---- | :---- | :---- | :---- | :---- | :---- | :---- |
+| Transversal | Arquitectura SPA | T23 | Configurar arquitectura SPA en Angular 18 (app.config.ts, app.routes.ts, Angular Material y tema claro/oscuro) | Estructura de componentes standalone, enrutamiento y sistema de diseño CSS | 6h | M. Mariños | Done |
+| HU01-02 | Seguridad e i18n | T24 | Implementar I18nService (es\_419/en\_US), AuthService, authInterceptor JWT y authGuard/adminGuard | Diccionarios bilingües reactivos, adjunción automática de Bearer token y protección de rutas | 6h | R. Condor | Done |
+| HU01-02 | Acceso y Registro | T25 | Desarrollar AuthComponent (/login) con inicio de sesión, registro por distrito y acceso demo 1-clic | Formularios reactivos con validación de contraseñas, selector distrital y handshake JWT | 6h | R. Condor | Done |
+| HU03, 09 | Planificador OSRM+IA | T26 | Desarrollar RoutesPlannerComponent (/routes) con mapa Leaflet interactivo y tarjetas IA Gemini | Trazado geoespacial de alternativas (auto, estándar y corredor verde IA) en Lima Metropolitana | 8h | J. Ramos | Done |
+| HU04-05 | CRUD de Viajes Backend | T27 | Extender TripController para edición (PUT) y eliminación (DELETE /api/v1/trips/{id}) con recálculo de CO₂ | Validación de autoría del viaje (403 Forbidden a terceros) y reversión/ajuste de UserStats | 6h | J. Ramos | Done |
+| HU04-05 | Gestión de Viajes UI | T28 | Desarrollar TripsComponent (/trips) en Angular con calculadora en vivo de CO₂ y tabla CRUD completa | Previsualización instantánea de CO₂ evitado, calorías y EcoPuntos con edición inline y filtros | 7h | O. Alcocer | Done |
+| HU07 | Dashboard Analítico | T29 | Desarrollar DashboardComponent (/dashboard) con tarjetas KPI, evolución diaria, reparto modal e insights IA | Visualización de métricas personales, equivalencias ecológicas (árboles) e impacto comunitario | 7h | M. Mariños | Done |
+| HU04 | Pruebas CRUD Viajes | T30 | Ampliar suite de pruebas unitarias y de controladores en backend para edición y eliminación de viajes | Cobertura de escenarios de actualización, borrado y control de permisos en TripControllerTest | 5h | P. Espinoza | Done |
+
+##### **4.2.3.2 Development Evidence for Sprint Review**
+
+Como evidencia de desarrollo del Sprint 3 se registraron en el repositorio oficial de GitHub (https\://github.com/lappwv/eco-commute) la creación del proyecto frontend-angular en Angular 18, la implementación de los servicios reactivos y la extensión de los endpoints de edición y eliminación de viajes:
+
+### 
+
+| Repository | Branch / Scope | Commit / Task | Commit Message Summary | Author & Technical Contribution | Date |
+| :---- | :---- | :---- | :---- | :---- | :---- |
+| lappwv/eco-commute | frontend-angular/core | T23 / T24 | feat(angular): bootstrap Angular 18 standalone SPA, I18nService (ES/EN), AuthService & JWT interceptor | @lappwv (R. Condor) & @mbtibs357 (M. Mariños): Configuración de rutas protegidas, authGuard, adminGuard y diccionarios bilingües | 20/10/2026 |
+| lappwv/eco-commute | frontend-angular/auth | T25 | feat(auth-ui): implement AuthComponent (/login) with district selector, validation and 1-click demo login | @lappwv (R. Condor): Formularios de login/registro conectados a /api/v1/auth y GET /api/v1/users/me | 21/10/2026 |
+| lappwv/eco-commute | frontend-angular/routes | T26 | feat(routes-ui): build RoutesPlannerComponent with interactive Leaflet map, OSRM polylines & Gemini AI card | @jsramos0712 (J. Ramos): Mapa interactivo de Lima Metropolitana, corredores verdes y presets rápidos | 23/10/2026 |
+| lappwv/eco-commute | backend/trips | T27 / T30 | feat(trips): add PUT & DELETE /api/v1/trips/{tripId} with owner verification and CO2/points recalculation | @jsramos0712 (J. Ramos) & @paulollito29-sketch (P. Espinoza): CRUD completo de viajes y pruebas en TripControllerTest | 24/10/2026 |
+| lappwv/eco-commute | frontend-angular/trips | T28 | feat(trips-ui): implement TripsComponent (/trips) with live CO2/calories preview and inline edit/delete | @MrOdar (O. Alcocer): Calculadora previa al envío y tabla histórica con edición y borrado reactivo | 25/10/2026 |
+| lappwv/eco-commute | frontend-angular/dashboard | T29 | feat(dashboard-ui): implement DashboardComponent (/dashboard) with KPI cards, modal breakdown & AI insights | @mbtibs357 (M. Mariños): Gráficos de progreso diario, equivalencias en árboles e impacto comunitario | 25/10/2026 |
+
+##### **4.2.3.3 Execution Evidence for Sprint Review**
+
+* Aplicación Web SPA en Angular 18: Compilación sin errores (ng build \--configuration production) y validación funcional de las vistas /login, /dashboard, /routes y /trips consumiendo la API REST con token JWT.  
+* CRUD completo de viajes en Backend: Verificación de los nuevos endpoints PUT /api/v1/trips/{tripId} y DELETE /api/v1/trips/{tripId}, confirmando el recálculo exacto de CO₂ evitado y EcoPuntos en UserStats y el bloqueo 403 Forbidden ante intentos de edición por terceros.
+
+##### **4.2.3.4 Services Documentation Evidence for Sprint Review**
+
+Durante el Sprint 3 se incorporaron y documentaron en OpenAPI 3.0 los endpoints de perfil de sesión activa, edición/eliminación de viajes por propietario y métricas de impacto comunitario:
+
+### 
+
+| Módulo | Método | Ruta del Endpoint | HU | Descripción de Servicio Incorporado en Sprint 3 |
+| :---- | :---- | :---- | :---- | :---- |
+| Autenticación | GET | /api/v1/users/me | HU01, 02 | Recupera el perfil actualizado, distrito, nivel, EcoPuntos y rol del usuario autenticado vía JWT. |
+| Viajes | PUT | /api/v1/trips/{tripId} | HU04, 05 | Actualiza un viaje propio (o por ADMIN) recalculando el CO₂ ahorrado y ajustando el saldo de EcoPuntos. |
+| Viajes | DELETE | /api/v1/trips/{tripId} | HU04 | Elimina un viaje registrado por su autor y revierte proporcionalmente las estadísticas acumuladas. |
+| Dashboard | GET | /api/v1/dashboard/community-impact | HU07 | Obtiene el impacto colectivo agregado de Lima Metropolitana (total de viajes, kg de CO₂ y árboles equivalentes). |
+
+##### **4.2.3.5 Software Deployment Evidence for Sprint Review**
+
+Se configuró el enrutamiento SPA de Angular 18 con baseHref "/eco-commute/app/" y fallback 404.html para soportar rutas profundas en GitHub Pages, manteniendo la integración CORS con el contenedor Docker de Spring Boot 3.3.3 desplegado en Render.
+
+##### **4.2.3.6 Team Collaboration Insights during Sprint**
+
+En el Sprint 3 el equipo sincronizó los modelos TypeScript de Angular (models/api.models.ts) con los DTOs de Java 21 en Spring Boot, estandarizando el interceptor HTTP JWT y el servicio de traducción reactivo para que todos los integrantes desarrollaran sus vistas bajo un mismo contrato tipado.
+
+#### **4.2.4 Sprint 4**
+
+El Sprint 4 culminó la implementación full-stack del Trabajo Final entregando los módulos de Gamificación y Retos (HU06, HU10, HU11, HU13), Ranking por Distrito (HU08), Catálogo e Historial de Canjes (HU14), Panel Administrativo RBAC (HU12, HU13) y Términos Legales (/terms), exponiendo la totalidad de los 34 endpoints en OpenAPI 3.0 / Swagger UI (25 del Trabajo Parcial \+ 9 adicionales del Trabajo Final), alcanzando 102 pruebas automatizadas en verde y desplegando la versión final en GitHub Pages y Render.
+
+##### **4.2.4.1 Sprint Backlog 4**
+
+Las tareas técnicas ejecutadas para completar el producto en el Sprint 4 fueron:
+
+### 
+
+| US Id | US Title | Task Id | Task Title | Description | Est. | Assigned To | Status |
+| :---- | :---- | :---- | :---- | :---- | :---- | :---- | :---- |
+| HU06, 10, 11, 13 | Gamificación y Retos | T31 | Desarrollar GamificationComponent (/gamification) con barra de progreso de nivel, medallas y retos | Galería interactiva de insignias desbloqueadas/bloqueadas, hitos personales y desafíos colectivos | 7h | O. Alcocer | Done |
+| HU08 | Ranking Distrital | T32 | Desarrollar LeaderboardComponent (/leaderboard) con filtro por distrito y tabla interdistrital | Ranking ciudadano ordenable por CO₂ o EcoPuntos y comparativa agregada por distrito de Lima | 6h | P. Espinoza | Done |
+| HU14 | Catálogo y Canjes | T33 | Desarrollar RewardsComponent (/rewards) con canje interactivo, validación de saldo y cupones ECO-XXXXXX | Catálogo filtrable por categoría, modal de confirmación y tabla histórica de canjes realizados | 6h | D. Avalos | Done |
+| HU12, 13 | Panel Admin RBAC | T34 | Desarrollar AdminComponent (/admin) para gestión CRUD de recompensas y retos protegido por ROLE\_ADMIN | Formularios administrativos de alta, edición, control de stock y baja de recompensas y retos | 7h | D. Avalos | Done |
+| HU01 | Accesibilidad y Legal | T35 | Desarrollar TermsComponent (/terms), auditoría WCAG 2.1 AA y resiliencia offline/online en ApiService | Términos legales ACM/IEEE/CIP, navegación por teclado, contraste AA y respuesta inmediata 0ms | 5h | M. Mariños | Done |
+| Transversal | OpenAPI 34 Rutas y QA | T36 | Exponer los 34 endpoints en OpenAPI 3.0 / Swagger UI y verificar 102 pruebas automatizadas en verde | Habilitación completa de endpoints administrativos y comunitarios y ejecución de suite JUnit 5 | 6h | R. Condor | Done |
+| Transversal | Despliegue Full-Stack | T37 | Compilar bundle de producción de Angular 18, integrar con Landing Page y desplegar en GitHub Pages y Render | Publicación continua en /eco-commute/app/ conectada a PostgreSQL 16 y backend en Render | 6h | R. Condor | Done |
+| Transversal | Validación y Heurísticas | T38 | Conducir entrevistas de validación (Segmentos 1 y 2), evaluación heurística y cierre del Informe Final | Registro empírico de entrevistas, matriz de 10 heurísticas de Nielsen y consolidación documental | 6h | P. Espinoza | Done |
+
+##### **4.2.4.2 Development Evidence for Sprint Review**
+
+Como evidencia de desarrollo del Sprint 4 se registraron en el repositorio oficial de GitHub (https\://github.com/lappwv/eco-commute) los commits de cierre de la aplicación Angular 18, la habilitación de los 34 endpoints RESTful, la suite de 102 pruebas automatizadas y el refinamiento visual arquitectónico:
+
+### 
+
+| Repository | Branch | Commit Id | Commit Message | Author & Technical Scope | Committed on |
+| :---- | :---- | :---- | :---- | :---- | :---- |
+| lappwv/eco-commute | main | f5638bc | feat(tf): complete Angular 18 web app (HU01-HU14), full Trip CRUD, 34 OpenAPI endpoints, 102 tests, and TF documentation | @lappwv (R. Condor), @MrOdar (O. Alcocer), @DevAvalos (D. Avalos), @paulollito29-sketch (P. Espinoza), @mbtibs357 (M. Mariños), @jsramos0712 (J. Ramos): Integración completa de los 9 componentes Angular 18, 34 rutas OpenAPI y 102 tests | 04/11/2026 |
+| lappwv/eco-commute | main | cbc8e02 | fix(app): instant startWith fallback hydration, silent live JWT token upgrade, and route queryParam preset wiring | @lappwv (R. Condor): Resiliencia 0ms en ApiService, actualización silenciosa a JWT real de Render y presets de ruta | 06/11/2026 |
+| lappwv/eco-commute | main | edf72ac | style(ui): stylized architectural illustrations, duotone icons, high-contrast typography, and 100% viewport sections | @mbtibs357 (M. Mariños) & @lappwv (R. Condor): Ilustraciones vectoriales estilizadas, iconografía duotono, tipografía de alto contraste y secciones 100svh | 06/11/2026 |
+
+##### **4.2.4.3 Execution Evidence for Sprint Review**
+
+* Suite de 102 pruebas automatizadas en verde (Backend Spring Boot 3.3.3): La ejecución de ./mvnw test ejecuta 102 pruebas unitarias y de integración (Tests run: 102, Failures: 0, Errors: 0, Skipped: 0), cubriendo AuthController, RouteController, TripController, CarbonCalculatorService, GamificationService, LeaderboardController, RewardController, ChallengeController, DashboardController y AdminController.  
+* Aplicación Web Angular 18 en Producción (GitHub Pages): Publicada y operativa en https\://lappwv.github.io/eco-commute/app/ con sus 9 vistas interactivas (/login, /dashboard, /routes, /trips, /gamification, /leaderboard, /rewards, /admin y /terms).  
+* Landing Page y Backend en Render: Landing page pública en https\://lappwv.github.io/eco-commute/ y API RESTful en https\://ecocommute-backend-a14m.onrender.com/swagger-ui.html con chequeo de salud activo en /health.
+
+##### **4.2.4.4 Services Documentation Evidence for Sprint Review (34 Endpoints del Trabajo Final)**
+
+En el Trabajo Final la API RESTful evolucionó de los 25 endpoints del Trabajo Parcial a un total de 34 endpoints activos y documentados en OpenAPI 3.0 / Swagger UI (+9 endpoints adicionales para cubrir el perfil de sesión, edición/eliminación de viajes, impacto comunitario, ranking unificado y el CRUD administrativo completo de recompensas y retos). A continuación se detalla el catálogo completo de los 34 endpoints:
+
+### 
+
+| \# | Módulo | Método | Ruta del Endpoint | HU | Etapa | Descripción de Servicio |
+| :---- | :---- | :---- | :---- | :---- | :---- | :---- |
+| 1 | Autenticación | POST | /api/v1/auth/register | HU01 | TP | Registro de nuevos usuarios con contraseña cifrada en BCrypt y bono inicial. |
+| 2 | Autenticación | POST | /api/v1/auth/login | HU02 | TP | Autenticación stateless y emisión de token JWT Bearer (HMAC-SHA256). |
+| 3 | Autenticación | GET | /api/v1/users/me | HU01, 02 | Nuevo TF | Perfil completo, distrito, nivel, EcoPuntos y rol del usuario autenticado. |
+| 4 | Rutas OSRM+IA | POST | /api/v1/routes/plan | HU03, 09 | TP | Planificación geoespacial de rutas OSRM con Corredor Verde IA y fallback Haversine. |
+| 5 | Viajes | POST | /api/v1/trips | HU04, 05 | TP | Registro transaccional de viaje sostenible, cálculo EPA de CO₂ y acreditación de puntos. |
+| 6 | Viajes | GET | /api/v1/trips/history | HU04 | TP | Historial paginado/ordenado de viajes realizados por el usuario autenticado. |
+| 7 | Viajes | GET | /api/v1/trips/{tripId} | HU04 | TP | Detalle de métricas ambientales y distancia de un viaje específico. |
+| 8 | Viajes | PUT | /api/v1/trips/{tripId} | HU04, 05 | Nuevo TF | Edición de viaje por propietario o ADMIN con recálculo automático de CO₂ y puntos. |
+| 9 | Viajes | DELETE | /api/v1/trips/{tripId} | HU04 | Nuevo TF | Eliminación de viaje y reversión proporcional de estadísticas acumuladas. |
+| 10 | Estadísticas | GET | /api/v1/gamification/stats | HU06 | TP | Saldo de EcoPuntos, nivel, racha y equivalencias ambientales del usuario. |
+| 11 | Estadísticas | GET | /api/v1/gamification/milestones | HU10 | TP | Progreso porcentual hacia los hitos personales de movilidad sostenible. |
+| 12 | Gamificación | GET | /api/v1/gamification/badges | HU11 | TP | Listado de medallas desbloqueadas por el usuario con fecha de obtención. |
+| 13 | Gamificación | GET | /api/v1/gamification/badges/catalog | HU11 | TP | Catálogo general de insignias disponibles y criterios de desbloqueo. |
+| 14 | Leaderboard | GET | /api/v1/leaderboard | HU08 | Nuevo TF | Ranking unificado filtrable por distrito (?district=) y ordenable por CO₂ o puntos. |
+| 15 | Leaderboard | GET | /api/v1/leaderboard/top-co2 | HU08 | TP | Top de ciudadanos con mayor ahorro acumulado de emisiones de CO₂. |
+| 16 | Leaderboard | GET | /api/v1/leaderboard/by-district | HU08 | TP | Ranking de usuarios filtrado específicamente por distrito de Lima. |
+| 17 | Leaderboard | GET | /api/v1/leaderboard/districts | HU08 | TP | Ranking agregado interdistrital (GROUP BY distrito) de CO₂ evitado y viajes. |
+| 18 | Leaderboard | GET | /api/v1/leaderboard/districts/summary | HU08 | TP | Resumen consolidado de métricas distritales y participación ciudadana. |
+| 19 | Leaderboard | GET | /api/v1/leaderboard/users | HU06, 08 | TP | Tabla general de posiciones de usuarios por EcoPuntos acumulados. |
+| 20 | Recompensas | GET | /api/v1/rewards | HU12, 14 | TP | Catálogo público de recompensas activas con stock disponible. |
+| 21 | Recompensas | GET | /api/v1/rewards/{id} | HU12, 14 | TP | Detalle de una recompensa específica, comercio aliado y costo en puntos. |
+| 22 | Canjes | POST | /api/v1/rewards/{rewardId}/redeem | HU14 | TP | Canje atómico transaccional de EcoPuntos y generación de código ECO-XXXXXX. |
+| 23 | Canjes | GET | /api/v1/redemptions | HU14 | TP | Historial de canjes y cupones emitidos para el usuario autenticado. |
+| 24 | Retos | GET | /api/v1/challenges | HU13 | TP | Listado de retos comunitarios vigentes y porcentaje de avance hacia la meta. |
+| 25 | Retos | GET | /api/v1/challenges/{id} | HU13 | TP | Detalle de un reto colectivo específico, vigencia y recompensa en puntos. |
+| 26 | Admin RBAC | GET | /api/v1/admin/rewards | HU12 | Nuevo TF | Listado administrativo completo de recompensas activas e inactivas (ROLE\_ADMIN). |
+| 27 | Admin RBAC | POST | /api/v1/admin/rewards | HU12 | TP | Creación administrativa de nueva recompensa en el catálogo (ROLE\_ADMIN). |
+| 28 | Admin RBAC | PUT | /api/v1/admin/rewards/{id} | HU12 | TP | Actualización administrativa de stock, costo o estado de recompensa (ROLE\_ADMIN). |
+| 29 | Admin RBAC | DELETE | /api/v1/admin/rewards/{id} | HU12 | Nuevo TF | Eliminación administrativa de una recompensa del catálogo (ROLE\_ADMIN). |
+| 30 | Admin RBAC | GET | /api/v1/admin/challenges | HU13 | Nuevo TF | Listado administrativo completo de retos comunitarios (ROLE\_ADMIN). |
+| 31 | Admin RBAC | POST | /api/v1/admin/challenges | HU13 | TP | Creación administrativa de nuevo reto comunitario de reducción de CO₂ (ROLE\_ADMIN). |
+| 32 | Admin RBAC | PUT | /api/v1/admin/challenges/{id} | HU13 | Nuevo TF | Edición administrativa de meta de CO₂, fechas o puntos de un reto (ROLE\_ADMIN). |
+| 33 | Admin RBAC | DELETE | /api/v1/admin/challenges/{id} | HU13 | Nuevo TF | Eliminación administrativa de un reto comunitario (ROLE\_ADMIN). |
+| 34 | Dashboard & Salud | GET | /api/v1/dashboard/summary (+ /recommendations y /health) | HU07, 09 | TP | Resumen unificado de KPIs del dashboard, recomendaciones IA Gemini y healthcheck. |
+
+##### **4.2.4.5 Software Deployment Evidence for Sprint Review**
+
+El ecosistema productivo de EcoCommute opera de forma 100% cloud-native en tres entornos sincronizados: (1) Landing Page en https\://lappwv.github.io/eco-commute/, (2) Web App Angular 18 en https\://lappwv.github.io/eco-commute/app/ desplegada en la rama gh-pages, y (3) API REST Spring Boot 3.3.3 \+ PostgreSQL 16 en https\://ecocommute-backend-a14m.onrender.com orquestada mediante render.yaml y Dockerfile multi-stage.
+
+##### **4.2.4.6 Team Collaboration Insights during Sprint**
+
+Durante el Sprint 4, el equipo consolidó la integración de extremo a extremo realizando pruebas cruzadas entre roles (ROLE\_USER y ROLE\_ADMIN), verificando que los cambios realizados en el panel administrativo (/admin) impactaran en tiempo real en el catálogo de recompensas (/rewards) y retos (/gamification), y manteniendo las 102 pruebas automatizadas en verde antes del despliegue final.
+
+### 4.3 Validation Interviews {#4.3-validation-interviews}
+
+#### **4.3.1 Diseño de Entrevistas** {#4.3.1-diseño-de-entrevistas}
 
 El diseño de entrevistas cualitativas para EcoCommute tiene como propósito validar de manera directa y empírica las hipótesis de valor planteadas en el Lean UX Canvas con usuarios potenciales en Lima Metropolitana que no conocen el proyecto de manera previa. Se busca comprender el comportamiento actual de los ciudadanos durante sus desplazamientos cotidianos, evaluar la relevancia de la problemática identicada y analizar la aceptación de las funcionalidades clave del producto.
 
 **Objetivos de la entrevista:**
 
-- Comprender los criterios de decisión principales (tiempo, costo, comodidad, impacto ambiental) al elegir un medio de transporte para traslados diarios.
-- Identificar el nivel de consciencia ambiental y la disponibilidad de información al momento de realizar desplazamientos en la ciudad.
-- Evaluar la percepción de valor y la reacción inmediata ante la propuesta de EcoCommute (comparación de CO₂ emitido vs. ahorrado, recomendaciones con IA y sistema de medallas/recompensas).
-- Determinar la intención de uso de una aplicación web responsive para el seguimiento y gamificación de la movilidad sostenible.
+* Comprender los criterios de decisión principales (tiempo, costo, comodidad, impacto ambiental) al elegir un medio de transporte para traslados diarios.  
+* Identificar el nivel de consciencia ambiental y la disponibilidad de información al momento de realizar desplazamientos en la ciudad.  
+* Evaluar la percepción de valor y la reacción inmediata ante la propuesta de EcoCommute (comparación de CO₂ emitido vs. ahorrado, recomendaciones con IA y sistema de medallas/recompensas).  
+* Determinar la intención de uso de una aplicación web responsive para el seguimiento y gamificación de la movilidad sostenible.
 
 **Perfil del entrevistado:**
 
-- **Residencia y entorno:** Ciudadanos residentes en Lima Metropolitana que realizan desplazamientos frecuentes (al menos 3 a 5 veces por semana) hacia centros laborales o de estudio.
-- **Edad y ocupación:** Jóvenes y adultos entre 18 y 45 años (estudiantes universitarios, técnicos y trabajadores activos).
-- **Uso de tecnología:** Usuarios habituales de teléfonos inteligentes y aplicaciones de mapas, navegación o movilidad urbana.
-- **Condición previa:** Personas sin conocimiento previo de la existencia o marca de EcoCommute para garantizar objetividad en las respuestas.
+* **Residencia y entorno:** Ciudadanos residentes en Lima Metropolitana que realizan desplazamientos frecuentes (al menos 3 a 5 veces por semana) hacia centros laborales o de estudio.  
+* **Edad y ocupación:** Jóvenes y adultos entre 18 y 45 años (estudiantes universitarios, técnicos y trabajadores activos).  
+* **Uso de tecnología:** Usuarios habituales de teléfonos inteligentes y aplicaciones de mapas, navegación o movilidad urbana.  
+* **Condición previa:** Personas sin conocimiento previo de la existencia o marca de EcoCommute para garantizar objetividad en las respuestas.
 
 **Guía estructurada de preguntas:**
 
-**1. Introducción y contexto diario**
+**1\. Introducción y contexto diario**
 
-- ¿Qué medios de transporte utilizas habitualmente para trasladarte a tu trabajo, universidad o actividades diarias en Lima?
-- ¿Cuánto tiempo promedio inviertes en tus desplazamientos cotidianos y con qué frecuencia realizas estos recorridos?
-- ¿Qué factores influyen principalmente al momento de decidir el medio de transporte que vas a utilizar en un día determinado (tiempo, costo, comodidad, tráfico, seguridad)?
+* ¿Qué medios de transporte utilizas habitualmente para trasladarte a tu trabajo, universidad o actividades diarias en Lima?  
+* ¿Cuánto tiempo promedio inviertes en tus desplazamientos cotidianos y con qué frecuencia realizas estos recorridos?  
+* ¿Qué factores influyen principalmente al momento de decidir el medio de transporte que vas a utilizar en un día determinado (tiempo, costo, comodidad, tráfico, seguridad)?
 
-**2. Exploración de la problemática**
+**2\. Exploración de la problemática**
 
-- Cuando utilizas un vehículo particular, taxi o transporte público, ¿alguna vez consideras la cantidad de emisiones de CO₂ o el impacto ambiental que genera ese viaje?
-- ¿Has utilizado o intentado utilizar alternativas más sostenibles como bicicleta, caminata o rutas compartidas? Si la respuesta es negativa o esporádica, ¿qué impedimentos o desincentivos encuentras?
-- ¿Las herramientas digitales de navegación que usas actualmente (como Google Maps o Waze) te brindan información sobre el impacto ambiental de tus opciones de ruta?
+* Cuando utilizas un vehículo particular, taxi o transporte público, ¿alguna vez consideras la cantidad de emisiones de CO₂ o el impacto ambiental que genera ese viaje?  
+* ¿Has utilizado o intentado utilizar alternativas más sostenibles como bicicleta, caminata o rutas compartidas? Si la respuesta es negativa o esporádica, ¿qué impedimentos o desincentivos encuentras?  
+* ¿Las herramientas digitales de navegación que usas actualmente (como Google Maps o Waze) te brindan información sobre el impacto ambiental de tus opciones de ruta?
 
-**3. Presentación y reacción ante la solución**
+**3\. Presentación y reacción ante la solución**
 
-- Si una plataforma te mostrara en tiempo real la comparación directa de CO₂ emitido y CO₂ ahorrado entre tu viaje en auto y alternativas sostenibles (bicicleta/caminata), ¿crees que afectaría tu decisión sobre cómo trasladarte?
-- ¿Qué opinas de recibir sugerencias de ruta personalizadas generadas por Inteligencia Artificial que consideren tu historial, tiempos y beneficios ecológicos?
-- ¿Qué valor le otorgas a acumular puntos verdes y desbloquear medallas por tus logros sostenibles? ¿Te motivaría esto a mantener el hábito de movilidad ecológica a lo largo del tiempo?
+* Si una plataforma te mostrara en tiempo real la comparación directa de CO₂ emitido y CO₂ ahorrado entre tu viaje en auto y alternativas sostenibles (bicicleta/caminata), ¿crees que afectaría tu decisión sobre cómo trasladarte?  
+* ¿Qué opinas de recibir sugerencias de ruta personalizadas generadas por Inteligencia Artificial que consideren tu historial, tiempos y beneficios ecológicos?  
+* ¿Qué valor le otorgas a acumular puntos verdes y desbloquear medallas por tus logros sostenibles? ¿Te motivaría esto a mantener el hábito de movilidad ecológica a lo largo del tiempo?
 
-**4. Cierre y disposición de uso**
+**4\. Cierre y disposición de uso**
 
-- ¿Estarías dispuesto a utilizar una aplicación web sin necesidad de instalar una app nativa pesada para planificar y registrar tus viajes cotidianos?
-- ¿Qué funcionalidad de las presentadas consideras absolutamente indispensable para que comiences a utilizar EcoCommute desde el primer día?
+* ¿Estarías dispuesto a utilizar una aplicación web sin necesidad de instalar una app nativa pesada para planificar y registrar tus viajes cotidianos?  
+* ¿Qué funcionalidad de las presentadas consideras absolutamente indispensable para que comiences a utilizar EcoCommute desde el primer día?
 
-#### 4.3.2 Registro de Entrevistas
+#### 4.3.2 Registro de Entrevistas {#4.3.2-registro-de-entrevistas}
 
-#### 4.3.3 Evaluaciones segun heuristicas
+Con el objetivo de validar empíricamente la Landing Page pública (https\://lappwv.github.io/eco-commute/) y la Aplicación Web SPA en Angular 18 (https\://lappwv.github.io/eco-commute/app/), se ejecutaron entrevistas de validación con usuarios reales pertenecientes a los dos segmentos objetivo definidos en el Capítulo I. Durante cada sesión, los participantes interactuaron con el planificador OSRM+IA, el CRUD de viajes, el dashboard, las medallas, el ranking por distrito y el canje de recompensas.
 
-### 4.4 Video About-the-Product
+**Segmento Objetivo 1: Traslado diario en la ciudad (Estudiantes universitarios y trabajadores en Lima Metropolitana)**
 
-## Conclusiones
+## 
+
+| Entrevistado | Edad / Distrito | Ocupación y Transporte Habitual | Hallazgos Clave al Interactuar con EcoCommute (Angular 18\) | Validación de Hipótesis Lean UX |
+| :---- | :---- | :---- | :---- | :---- |
+| Entrevistado 1: Camila Rojas | 21 años / Santiago de Surco | Estudiante universitaria (UPC Monterrico). Usa bus corredor y taxi por aplicativo (45 min por tramo). | Destacó la comparación inmediata de CO₂ ahorrado frente al auto (170 g/km) y la explicación en lenguaje claro del Corredor Verde IA con Gemini. Indicó que ver el ahorro en gramos y EcoPuntos antes de salir la anima a usar bicicleta en tramos de 3 a 5 km. | Valida Problem Statement 1 y 3: la comparativa visual de CO₂ y la justificación de IA incrementan la intención de cambio modal. |
+| Entrevistado 2: Sebastián Mendoza | 26 años / Miraflores | Analista junior en San Isidro. Alterna Metropolitano, caminata y auto compartido. | Valoró que la aplicación sea una Web App ligera en Angular 18 sin requerir descarga en tiendas, el acceso rápido y la edición/corrección de viajes (HU04) cuando se equivoca al ingresar un trayecto. | Valida Hipótesis de adopción web responsive y la utilidad del CRUD completo de viajes con recálculo automático de CO₂. |
+| Entrevistado 3: Valeria Paredes | 23 años / San Borja | Practicante de ingeniería. Se traslada 5 veces por semana entre San Borja y Surco. | Resaltó el catálogo de recompensas (HU14) con códigos ECO-XXXXXX y los retos distritales (HU13). Señaló que competir por llevar a San Borja al primer lugar del ranking genera identidad comunitaria. | Valida Problem Statement 2: los incentivos tangibles y la competencia interdistrital sostienen el hábito en el tiempo. |
+
+**Segmento Objetivo 2: Usuarios activos (Ciclistas urbanos y caminantes habituales en Lima)**
+
+## 
+
+| Entrevistado | Edad / Distrito | Perfil de Movilidad Activa | Hallazgos Clave al Interactuar con EcoCommute (Angular 18\) | Validación de Hipótesis Lean UX |
+| :---- | :---- | :---- | :---- | :---- |
+| Entrevistado 4: Martín Quispe | 29 años / Barranco | Ciclista urbano diario (ruta Barranco \- Miraflores \- San Isidro, 9 km diarios). | Acostumbrado a Strava, señaló que ninguna otra app le traducía sus kilómetros a kilogramos de CO₂ evitados ni a árboles equivalentes en el Dashboard (HU07). Le encantó el desbloqueo automático de medallas como Rey del Pedal y Héroe Climático (HU10, HU11). | Valida diferenciación competitiva frente a Strava: enfoque en impacto climático cuantificable y gamificación ecológica. |
+| Entrevistado 5: Lucía Fernández | 24 años / Jesús María | Usa bicicleta pública (CityBike) y caminata para ir a su centro de estudios. | Probó el planificador OSRM+Leaflet (HU03) en modo bilingüe y tema oscuro/claro. Destacó la claridad tipográfica de alto contraste, las ilustraciones vectoriales de cada sección y la rapidez instantánea al cambiar de pestaña. | Valida usabilidad WCAG 2.1 AA, rendimiento percibido de la SPA Angular 18 y valor del trazado de ciclovías en Lima. |
+
+Síntesis cuantitativa de validación: El 100% de los entrevistados completó exitosamente el flujo de planificación de ruta OSRM+IA, registro/edición de viaje, consulta de dashboard y canje de recompensa; el 80% eligió la opción Corredor Verde Optimizado con IA (superando la meta de hipótesis del 50%) y el 100% calificó positivamente la claridad visual de las métricas de CO₂ y medallas.
+
+#### **4.3.3 Evaluaciones según heurísticas**
+
+Para garantizar la calidad de experiencia de usuario (UX), arquitectura de información y diseño inclusivo, se realizó una evaluación heurística integral sobre la Landing Page (https\://lappwv.github.io/eco-commute/) y la Aplicación Web en Angular 18 (https\://lappwv.github.io/eco-commute/app/), tomando como marco las 10 Heurísticas de Usabilidad de Jakob Nielsen y los criterios de accesibilidad WCAG 2.1 Nivel AA.
+
+## 
+
+| \# | Heurística de Jakob Nielsen / Criterio WCAG | Estado | Implementación Verificada en EcoCommute (Landing Page \+ Angular 18 Web App) |
+| :---- | :---- | :---- | :---- |
+| H1 | Visibilidad del estado del sistema | Cumple (100%) | Indicadores en vivo de ahorro de CO₂, calorías y EcoPuntos mientras el usuario edita la distancia en /trips; badges de estado del motor OSRM/Gemini y barra de progreso porcentual hacia el siguiente nivel en /gamification. |
+| H2 | Relación entre el sistema y el mundo real | Cumple (100%) | Corredores reales de Lima Metropolitana (Miraflores, San Isidro, Surco, San Borja, Barranco), equivalencias ambientales comprensibles (árboles absorbentes equivalentes) e ilustraciones arquitectónicas estilizadas de movilidad urbana. |
+| H3 | Control y libertad del usuario | Cumple (100%) | CRUD completo de viajes (HU04) con botones de edición (PUT) y eliminación (DELETE) con confirmación y reversión automática de puntos, selector de idioma en vivo (ES/EN) y conmutador de tema claro/oscuro persistente. |
+| H4 | Consistencia y estándares | Cumple (100%) | Sistema de diseño unificado entre Landing y Angular 18: tipografía Plus Jakarta Sans \+ Inter de alto contraste, iconografía duotono consistente (EcoIconComponent), secciones ordenadas a pantalla completa (100% viewport) y cabeceras numeradas. |
+| H5 | Prevención de errores | Cumple (100%) | Validaciones reactivas en formularios Angular (distancias \> 0.1 km, contraseñas seguras, deshabilitación automática del botón de canje en /rewards cuando el saldo de EcoPuntos es insuficiente o el stock es 0). |
+| H6 | Reconocer antes que recordar | Cumple (100%) | Presets de rutas frecuentes de Lima en 1 clic, previsualización instantánea de impacto antes de guardar un viaje y catálogo visual de medallas con el requisito exacto visible en cada tarjeta. |
+| H7 | Flexibilidad y eficiencia de uso | Cumple (100%) | Botones de Acceso Demo en 1 clic para Ciudadano (ROLE\_USER) y Administrador (ROLE\_ADMIN) con actualización silenciosa a JWT real de Render, e hidratación instantánea (0ms) con startWith en ApiService. |
+| H8 | Diseño estético y minimalista | Cumple (100%) | Layout estructurado donde cada sección principal ocupa el 100% de la altura de pantalla (100svh), evitando saturar al usuario, con jerarquía tipográfica marcada y bordes arquitectónicos limpios de 1px. |
+| H9 | Ayuda para reconocer y recuperarse de errores | Cumple (100%) | Mensajes claros en español e inglés ante credenciales inválidas (401) o falta de permisos (403), y resiliencia automática con fallback geodésico Haversine y heurístico cuando OSRM o Gemini tienen latencia. |
+| H10 | Ayuda y documentación | Cumple (100%) | Guía visual de 4 pasos en la Landing Page, especificación interactiva de los 34 endpoints en Swagger UI (/swagger-ui.html), README técnico de despliegue y vista legal completa en /terms. |
+
+### **4.4 Video About-the-Product**
+
+El Video About-the-Product presenta la propuesta de valor de EcoCommute y demuestra en vivo la interacción de un usuario real con la Landing Page pública (https\://lappwv.github.io/eco-commute/) y la Aplicación Web SPA en Angular 18 (https\://lappwv.github.io/eco-commute/app/) conectada al backend en Render y PostgreSQL.
+
+## 
+
+| Secuencia | Duración | Contenido Demostrado en el Video About-the-Product | Módulos e Historias Cubiertas |
+| :---- | :---- | :---- | :---- |
+| 1\. Problema y Propuesta de Valor | 0:00 \- 0:45 | Recorrido por la Landing Page bilingüe en GitHub Pages: problemática de congestión y emisiones en Lima, calculadora interactiva de CO₂ y llamado a la acción hacia la Web App. | Landing Page (ODS 11.2) |
+| 2\. Autenticación y Planificador OSRM+IA | 0:45 \- 2:00 | Registro e inicio de sesión JWT en /login, planificación de ruta Miraflores \- San Isidro en /routes con mapa Leaflet interactivo y explicación del Corredor Verde IA (Google Gemini). | HU01, HU02, HU03, HU05, HU09 |
+| 3\. CRUD de Viajes y Dashboard Analítico | 2:00 \- 3:15 | Registro de viaje en bicicleta desde la ruta planificada, edición (PUT) y eliminación (DELETE) en /trips con recálculo de CO₂, y visualización de KPIs, evolución e impacto comunitario en /dashboard. | HU04, HU05, HU06, HU07 |
+| 4\. Gamificación, Ranking, Canjes y Admin | 3:15 \- 4:30 | Desbloqueo de medallas y retos en /gamification, ranking por distrito en /leaderboard, canje de recompensa con cupón ECO-XXXXXX en /rewards y gestión CRUD con ROLE\_ADMIN en /admin. | HU08, HU10, HU11, HU12, HU13, HU14 |
+
+## **Conclusiones**
 
 A partir del desarrollo full-stack completado en los Sprints 1, 2, 3 y 4 y de la validación empírica con usuarios de los dos segmentos objetivo en Lima Metropolitana, se establecen las siguientes conclusiones contrastadas con los Problem Statements, Assumptions e Hypothesis Statements del proceso Lean UX (Capítulo I):
 
+* Cumplimiento integral del alcance funcional y técnico (HU01 a HU14): Se diseñó, implementó y desplegó al 100% la arquitectura full-stack compuesta por la aplicación web SPA en Angular 18 \+ TypeScript \+ Angular Material \+ Leaflet, la Landing Page pública en GitHub Pages y la API RESTful en Spring Boot 3.3.3 \+ PostgreSQL 16 en Render, exponiendo 34 endpoints documentados en OpenAPI 3.0 y respaldados por 102 pruebas automatizadas en verde.  
+* Validación del Problem Statement 1 (Comparación de impacto ambiental previo al viaje): La integración del motor cartográfico OSRM con CarbonCalculatorService (estándar EPA de 170 g CO₂/km para automóvil particular frente a 0 g/km en bicicleta/caminata, 65 g/km en bus y 28 g/km en tren eléctrico) demostró en las entrevistas que visibilizar el ahorro neto antes de salir modifica positivamente la intención de elección modal.  
+* Validación del Problem Statement 2 (Sostenibilidad del hábito mediante gamificación y recompensas): El motor transaccional de EcoPuntos (HU06), el desbloqueo automático de medallas (HU10, HU11), la competencia sana en el ranking por distritos de Lima (HU08) y el canje de beneficios con códigos únicos ECO-XXXXXX (HU14) generaron alta motivación percibida tanto en usuarios de traslado diario como en ciclistas activos.  
+* Validación del Problem Statement 3 (Confianza en recomendaciones de IA explicadas): La integración de Google Gemini 1.5 Flash (HU09) con su arquitectura resiliente de fallback heurístico permitió que el 80% de los usuarios evaluados prefiriera el Corredor Verde Optimizado con IA al comprender las razones viales y ambientales de la sugerencia.  
+* Calidad de ingeniería, seguridad y accesibilidad: El control de acceso stateless mediante JWT Bearer (HMAC-SHA256), la segregación de privilegios entre ROLE\_USER y ROLE\_ADMIN, la validación de autoría en la edición y eliminación de viajes (PUT/DELETE /api/v1/trips/{id}) y el diseño accesible WCAG 2.1 AA bilingüe (es\_419/en\_US) garantizan un producto robusto y listo para escalar.
 
+## **Recomendaciones**
 
-## Recomendaciones
+Con el producto full-stack implementado, validado y desplegado al 100%, se propone la siguiente hoja de ruta (Product Roadmap) y recomendaciones estratégicas para la evolución de EcoCommute en siguientes fases de crecimiento:
 
-Con el producto full-stack implementado, validado y desplegado al 100
+* Integración con fuentes GTFS en tiempo real de la ATU (Metropolitano, Corredores Complementarios y Línea 1 del Metro de Lima): Conectar el planificador multimodal con frecuencias en vivo para combinar tramos en bicicleta (intermodalidad bici-tren) con tiempos de espera reales en estación.  
+* Autenticación federada con Google OAuth2 y cuentas institucionales universitarias (.edu.pe): Facilitar aún más el onboarding de estudiantes universitarios en Lima Metropolitana para organizar torneos interuniversitarios de reducción de huella de carbono.  
+* Validación telemétrica GPS opcional en segundo plano (PWA con Web Geolocation API): Permitir que los usuarios que así lo deseen registren automáticamente el trazado GPS de su recorrido además del flujo declarativo y planificado con OSRM.  
+* Alianzas B2B con municipalidades distritales y comercios sostenibles: Escalar el módulo administrativo (/admin) para que municipalidades como Miraflores, San Isidro, San Borja y Surco patrocinen retos mensuales (HU13) y comercios locales carguen cupones verificables mediante lectura QR del código ECO-XXXXXX.
 
+## **Video About-the-Team**
 
-## Video About-the-Team
+El Video About-the-Team sintetiza la experiencia colaborativa del Grupo 5 a lo largo del desarrollo integral de EcoCommute (Trabajo Parcial y Trabajo Final), presentando las reflexiones individuales de cada integrante, los aprendizajes de ingeniería de software aplicando Scrum, Lean UX, Gitflow, Angular 18 y Spring Boot 3, y el cumplimiento del Student Outcome ABET 3\.
 
-## Bibliografía
+## 
+
+| Integrante | Código | Rol Principal en el Proyecto (Sprints 1 al 4\) | Aporte Destacado en el Video About-the-Team |
+| :---- | :---- | :---- | :---- |
+| Alcocer Vasquez, Odar Javier | U20241D581 | Full-Stack Developer — Gamificación, Medallas y Gestión de Viajes | Demostración y reflexión sobre el motor de puntos verdes, desbloqueo automático de medallas (HU06, HU10, HU11) y los componentes TripsComponent y GamificationComponent en Angular 18\. |
+| Avalos Arias, Diego Alessandro | U20221D254 | Full-Stack Developer — Catálogo de Recompensas, Canjes y Panel Admin | Sustentación del flujo transaccional de canjes con códigos ECO-XXXXXX (HU14) y la consola administrativa RBAC en AdminComponent y RewardsComponent (HU12, HU13). |
+| Condor Silvera, Rodrigo Sebastián | U202418511 | Tech Lead & Full-Stack Architect — Seguridad JWT, Angular Core y DevOps | Coordinación arquitectónica en Spring Boot 3 y Angular 18, seguridad JWT stateless (HU01, HU02), exposición de 34 endpoints OpenAPI, 102 pruebas automatizadas y despliegue CI/CD en Render y GitHub Pages. |
+| Espinoza Gamboa, Paulo Daniel | U202319631 | Full-Stack Developer & UX Researcher — Leaderboard Distrital y Validación | Implementación de LeaderboardComponent con filtros por distrito de Lima (HU08), conducción de entrevistas de validación con usuarios reales y evaluación heurística de Nielsen. |
+| Mariños Alberca, Matias Santiago | U202220088 | Full-Stack Developer & UI/UX Designer — Dashboard, IA Gemini y Accesibilidad | Desarrollo de DashboardComponent (HU07), integración de recomendaciones con Google Gemini 1.5 Flash (HU09), internacionalización reactiva (ES/EN) y diseño accesible WCAG 2.1 AA. |
+| Ramos Chauca, Jeampiero Sergio | U20241E361 | Full-Stack Developer — Ruteo Geoespacial OSRM, Mapas Leaflet y Motor CO₂ | Integración cartográfica con OSRM y Leaflet en RoutesPlannerComponent (HU03), motor CarbonCalculatorService (HU05) y CRUD completo de viajes por propietario (HU04). |
+
+## Bibliografía {#bibliografía}
 
 Cohn, M. (2004). *User Stories Applied: For Agile Software Development*. Addison-Wesley Professional.
 
-Driessen, V. (2020). *A successful Git branching model*. nvie.com. [https://nvie.com/posts/a-successful-git-branching-model/](https://nvie.com/posts/a-successful-git-branching-model/)
+Driessen, V. (2020). *A successful Git branching model*. nvie.com. [https\://nvie.com/posts/a-successful-git-branching-model/](https://nvie.com/posts/a-successful-git-branching-model/)
 
-Google. (2024). *Gemini API Documentation: Text generation and multimodal models*. Google AI for Developers. [https://ai.google.dev/docs/gemini\_api](https://ai.google.dev/docs/gemini_api)
+Google. (2024). *Gemini API Documentation: Text generation and multimodal models*. Google AI for Developers. [https\://ai.google.dev/docs/gemini\_api](https://ai.google.dev/docs/gemini_api)
 
 Gothelf, J., & Seiden, J. (2021). *Lean UX: Designing Great Products with Agile Teams* (3.ª ed.). O'Reilly Media.
 
-Luxen, D., & Vetter, C. (2011). Real-time routing with OpenStreetMap data. En *Proceedings of the 19th ACM SIGSPATIAL International Conference on Advances in Geographic Information Systems* (pp. 513–516). [https://doi.org/10.1145/2093973.2094062](https://doi.org/10.1145/2093973.2094062)
+Luxen, D., & Vetter, C. (2011). Real-time routing with OpenStreetMap data. En *Proceedings of the 19th ACM SIGSPATIAL International Conference on Advances in Geographic Information Systems* (pp. 513–516). [https\://doi.org/10.1145/2093973.2094062](https://doi.org/10.1145/2093973.2094062)
 
-Naciones Unidas. (2018). *La Agenda 2030 y los Objetivos de Desarrollo Sostenible: una oportunidad para América Latina y el Caribe* (LC/G.2681-P/Rev.3). Comisión Económica para América Latina y el Caribe (CEPAL). [https://repositorio.cepal.org/handle/11362/40155](https://repositorio.cepal.org/handle/11362/40155)
+Naciones Unidas. (2018). *La Agenda 2030 y los Objetivos de Desarrollo Sostenible: una oportunidad para América Latina y el Caribe* (LC/G.2681-P/Rev.3). Comisión Económica para América Latina y el Caribe (CEPAL). [https\://repositorio.cepal.org/handle/11362/40155](https://repositorio.cepal.org/handle/11362/40155)
 
-Nielsen Norman Group. (2020). *Design Systems 101: Components, Pattern Libraries, and Style Guides*. [https://www.nngroup.com/articles/design-systems-101/](https://www.nngroup.com/articles/design-systems-101/)
+Nielsen Norman Group. (2020). *Design Systems 101: Components, Pattern Libraries, and Style Guides*. [https\://www\.nngroup.com/articles/design-systems-101/](https://www.nngroup.com/articles/design-systems-101/)
 
-Pivotal Software. (2024). *Spring Boot Reference Documentation (Version 3.3.3)*. VMware Tanzu. [https://docs.spring.io/spring-boot/docs/current/reference/html/](https://docs.spring.io/spring-boot/docs/current/reference/html/)
+Pivotal Software. (2024). *Spring Boot Reference Documentation (Version 3.3.3)*. VMware Tanzu. [https\://docs.spring.io/spring-boot/docs/current/reference/html/](https://docs.spring.io/spring-boot/docs/current/reference/html/)
 
-Progressa Lean. (2020). *5W2H: Metodología para la identificación y resolución de problemas*. [https://www.progressalean.com/5w2h-tecnica-de-analisis-de-problemas/](https://www.progressalean.com/5w2h-tecnica-de-analisis-de-problemas/)
+Progressa Lean. (2020). *5W2H: Metodología para la identificación y resolución de problemas*. [https\://www\.progressalean.com/5w2h-tecnica-de-analisis-de-problemas/](https://www.progressalean.com/5w2h-tecnica-de-analisis-de-problemas/)
 
-Schwaber, K., & Sutherland, J. (2020). *La Guía de Scrum: Las Reglas del Juego*. Scrum.org. [https://scrumguides.org/scrum-guide.html](https://scrumguides.org/scrum-guide.html)
+Schwaber, K., & Sutherland, J. (2020). *La Guía de Scrum: Las Reglas del Juego*. Scrum.org. [https\://scrumguides.org/scrum-guide.html](https://scrumguides.org/scrum-guide.html)
 
 Sommerville, I. (2016). *Ingeniería del Software* (10.ª ed.). Pearson Educación.
 
-## Anexos
+## Anexos {#anexos}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
