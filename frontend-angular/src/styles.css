@@ -5628,3 +5628,85 @@ app-leaderboard .eco-card:hover {
     opacity: 0;
   }
 }
+
+/* Rutas: tarjeta de ahorro estimado en el panel izquierdo */
+.saving-teaser {
+  position: relative;
+  overflow: hidden;
+  margin-top: auto;
+  padding: 1rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  border-radius: 18px;
+  border: 2px solid #1E241E;
+  box-shadow: 0 4px 0 #1E241E;
+  background: linear-gradient(160deg, #E6F9CC, #F4FCEB);
+  color: #1E241E;
+}
+
+[data-theme="dark"] .saving-teaser {
+  background: linear-gradient(160deg, #1E3A2A, #19251F);
+  color: var(--text-main);
+}
+
+.saving-teaser small {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+.saving-teaser strong {
+  font-size: 1.45rem;
+  color: var(--emerald);
+}
+
+.teaser-pts {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.teaser-leaf {
+  position: absolute;
+  bottom: -12px;
+  width: 18px;
+  height: 18px;
+  color: #22C55E;
+  opacity: 0;
+  pointer-events: none;
+  animation: leaf-float 6s ease-in infinite;
+}
+
+.teaser-leaf.leaf-1 {
+  right: 14%;
+}
+
+.teaser-leaf.leaf-2 {
+  right: 34%;
+  width: 14px;
+  height: 14px;
+  animation-delay: 2s;
+}
+
+.teaser-leaf.leaf-3 {
+  right: 6%;
+  width: 16px;
+  height: 16px;
+  animation-delay: 3.6s;
+}
+
+@keyframes leaf-float {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-110px) rotate(50deg);
+    opacity: 0;
+  }
+}
