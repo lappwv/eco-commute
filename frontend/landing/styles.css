@@ -2706,3 +2706,22 @@ html[data-theme="dark"] .section.alt {
     padding: 3.25rem 0 !important;
   }
 }
+
+/* Fix: evitar desborde horizontal del hero y del simulador en celular */
+@media (max-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero-copy,
+  .hero-copy-main {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .sim-header {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+}
