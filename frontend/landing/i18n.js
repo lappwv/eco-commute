@@ -293,8 +293,8 @@ const translations = {
   }
 };
 
-localStorage.setItem("ecocommute_lang", "es_419");
-let currentLang = "es_419";
+const savedLang = localStorage.getItem("ecocommute_lang");
+let currentLang = savedLang === "en_US" ? "en_US" : "es_419";
 let currentCorridor = "miraflores";
 let currentKm = CORRIDORS.miraflores.km;
 let sessionRecycledGrams = 1920;
