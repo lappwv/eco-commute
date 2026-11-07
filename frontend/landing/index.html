@@ -18,10 +18,24 @@
       rel="stylesheet"
     />
     <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-      crossorigin=""
+            rel="stylesheet"
+            href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+            crossorigin=""
     />
+
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("ecocommute_theme_v3");
+          var theme =
+                  saved ||
+                  (window.matchMedia("(prefers-color-scheme: dark)").matches
+                          ? "dark"
+                          : "light");
+          document.documentElement.setAttribute("data-theme", theme);
+        } catch (e) {}
+      })();
+    </script>
 
     <link rel="stylesheet" href="./styles.css?v=20261106c" />
   </head>
