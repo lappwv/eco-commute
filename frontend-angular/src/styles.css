@@ -5135,3 +5135,25 @@ app-rewards .rewards-bottom-split {
     animation: none;
   }
 }
+
+/* Transición suave al abrir cada pantalla */
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.page-section {
+  animation: page-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-section {
+    animation: none;
+  }
+}
