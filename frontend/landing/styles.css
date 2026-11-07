@@ -2512,12 +2512,14 @@ b,
 /* ==========================================================================
    STYLIZED ARCHITECTURAL ILLUSTRATION OVERRIDES (LESS CARTOON · LARGER TEXT · CLEAR SECTIONS)
    ========================================================================== */
-:root,
-html[data-theme="light"] {
+:root {
   --display: 'Plus Jakarta Sans', 'Inter', sans-serif !important;
   --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
-  --ink: #0D1A13 !important;
-  --ink-secondary: #33473C !important;
+}
+
+html[data-theme="light"] {
+  --ink: #0D1A13;
+  --ink-secondary: #33473C;
 }
 
 html,
@@ -2702,5 +2704,24 @@ html[data-theme="dark"] .section.alt {
   .section.alt {
     min-height: auto !important;
     padding: 3.25rem 0 !important;
+  }
+}
+
+/* Fix: evitar desborde horizontal del hero y del simulador en celular */
+@media (max-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero-copy,
+  .hero-copy-main {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .sim-header {
+    flex-wrap: wrap;
+    gap: 0.5rem;
   }
 }

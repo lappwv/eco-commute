@@ -293,8 +293,8 @@ const translations = {
   }
 };
 
-localStorage.setItem("ecocommute_lang", "es_419");
-let currentLang = "es_419";
+const savedLang = localStorage.getItem("ecocommute_lang");
+let currentLang = savedLang === "en_US" ? "en_US" : "es_419";
 let currentCorridor = "miraflores";
 let currentKm = CORRIDORS.miraflores.km;
 let sessionRecycledGrams = 1920;
@@ -309,14 +309,11 @@ let limaTileLayer = null;
 function updateLimaMapTiles() {
   if (!limaMapInstance || typeof window.L === "undefined") return;
   const L = window.L;
-  const isDark = document.documentElement.getAttribute("data-theme") === "dark";
 
-  const tileUrl = isDark
-    ? "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-    : "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png";
+  const tileUrl = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
 
   const attribution =
-    '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener">CARTO</a>';
+      '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors';
 
   if (limaTileLayer) {
     limaMapInstance.removeLayer(limaTileLayer);
@@ -324,8 +321,7 @@ function updateLimaMapTiles() {
 
   limaTileLayer = L.tileLayer(tileUrl, {
     attribution,
-    maxZoom: 19,
-    subdomains: "abcd"
+    maxZoom: 19
   }).addTo(limaMapInstance);
 }
 
@@ -546,7 +542,10 @@ function setupThemeSwitcher() {
   const themeButtons = document.querySelectorAll(".biome-chip");
   const root = document.documentElement;
 
-  const savedTheme = localStorage.getItem("ecocommute_theme_v3") || "light";
+  const savedTheme =
+      localStorage.getItem("ecocommute_theme_v3") ||
+      root.getAttribute("data-theme") ||
+      "light";
   root.setAttribute("data-theme", savedTheme);
 
   themeButtons.forEach((btn) => {
