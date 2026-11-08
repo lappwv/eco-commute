@@ -428,10 +428,10 @@ interface QuickCorridorOption {
                 <span class="advisor-spark-icon"><app-icon name="spark" [size]="20"></app-icon></span>
                 <div>
                   <span class="advisor-kicker">{{ i18n.t('dash.advisorKicker') }}</span>
-                  <h3>{{ rec.title }}</h3>
+                  <h3>{{ translateRec(rec.title) }}</h3>
                 </div>
               </div>
-              <p class="advisor-text">{{ rec.recommendation }}</p>
+              <p class="advisor-text">{{ translateRec(rec.recommendation) }}</p>
               <a routerLink="/routes" class="inline-action-link">
                 <span>{{ i18n.t('dash.openSuggestedRoute') }}</span>
                 <app-icon name="arrow-right" [size]="15"></app-icon>
@@ -544,6 +544,22 @@ export class DashboardComponent implements OnInit {
     this.api.getDashboardSummary().subscribe(res => (this.summary = res));
     this.api.getCommunityImpact().subscribe(res => (this.community = res));
     this.api.getRecommendations().subscribe(res => (this.recommendation = res));
+  }
+
+  /** Textos conocidos de la recomendación (backend y respaldo local) y su clave del diccionario. */
+  private readonly knownRecommendations: Record<string, string> = {
+    'Corredor Verde Optimizado con IA': 'dash.rec.greenTitle',
+    'Prioriza viajes en bicicleta o caminata en horas valle para maximizar el ahorro de CO2 y ganar bonos de puntos verdes.':
+      'dash.rec.greenText',
+    'Corredor ciclista Arequipa – Salaverry': 'dash.rec.arequipaTitle',
+    'Si sales entre las 7:00 y 9:00 a.m., toma la ciclovía segregada de Av. Salaverry o Av. Arequipa: evitarás hasta 1,445 g de CO₂ por trayecto, ahorrarás 12 minutos frente al tráfico vehicular y sumarás puntos extra para tu racha semanal.':
+      'dash.rec.arequipaText'
+  };
+
+  /** Traduce la recomendación si es un texto conocido; si no, muestra el original del servidor. */
+  translateRec(text: string): string {
+    const key = this.knownRecommendations[text];
+    return key ? this.i18n.t(key) : text;
   }
 
   launchQuickRoute(): void {
