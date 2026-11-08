@@ -410,7 +410,9 @@ const SPANISH_DICTIONARY: Record<string, string> = {
   'dash.rec.arequipaTitle': 'Corredor ciclista Arequipa – Salaverry',
   'dash.rec.arequipaText': 'Si sales entre las 7:00 y 9:00 a.m., toma la ciclovía segregada de Av. Salaverry o Av. Arequipa: evitarás hasta 1,445 g de CO₂ por trayecto, ahorrarás 12 minutos frente al tráfico vehicular y sumarás puntos extra para tu racha semanal.',
 
-  'routes.gramsCo2': 'g de CO₂'
+  'routes.gramsCo2': 'g de CO₂',
+
+  'routes.legendDirect': 'Ruta directa'
 };
 
 const ENGLISH_DICTIONARY: Record<string, string> = {
@@ -817,7 +819,9 @@ const ENGLISH_DICTIONARY: Record<string, string> = {
   'dash.rec.arequipaTitle': 'Arequipa – Salaverry Bike Corridor',
   'dash.rec.arequipaText': 'If you leave between 7:00 and 9:00 a.m., take the segregated bike lane on Av. Salaverry or Av. Arequipa: you will avoid up to 1,445 g of CO₂ per trip, save 12 minutes compared to vehicle traffic and earn extra points for your weekly streak.',
 
-  'routes.gramsCo2': 'g of CO₂'
+  'routes.gramsCo2': 'g of CO₂',
+
+  'routes.legendDirect': 'Direct route'
 };
 
 const TRANSLATIONS: Record<LocaleCode, Record<string, string>> = {
