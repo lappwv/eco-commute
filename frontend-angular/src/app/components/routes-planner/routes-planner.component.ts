@@ -46,11 +46,12 @@ interface LimaPreset {
           <h1 class="page-title">{{ i18n.t('routes.title') }}</h1>
           <p class="page-subtitle">{{ i18n.t('routes.subtitle') }}</p>
         </div>
-        <div class="preset-chips-row">
+        <div class="preset-chips-row" role="group" aria-label="Corredores rapidos de Lima">
           <button
             type="button"
             class="chip-btn"
             *ngFor="let p of presets; let idx = index"
+            [attr.aria-pressed]="activePresetIndex === idx"
             [class.active]="activePresetIndex === idx"
             (click)="applyPreset(p, idx)"
           >
@@ -81,10 +82,11 @@ interface LimaPreset {
 
           <div class="form-group">
             <label>Modo de traslado</label>
-            <div class="mode-pills-vertical">
+            <div class="mode-pills-vertical" role="group" aria-label="Modo de traslado">
               <button
                 type="button"
                 class="mode-pill-row"
+                [attr.aria-pressed]="selectedProfile === 'BICYCLE'"
                 [class.selected]="selectedProfile === 'BICYCLE'"
                 (click)="selectedProfile = 'BICYCLE'; calculateRoutes()"
               >
@@ -96,6 +98,7 @@ interface LimaPreset {
               <button
                 type="button"
                 class="mode-pill-row"
+                [attr.aria-pressed]="selectedProfile === 'WALKING'"
                 [class.selected]="selectedProfile === 'WALKING'"
                 (click)="selectedProfile = 'WALKING'; calculateRoutes()"
               >
@@ -107,6 +110,7 @@ interface LimaPreset {
               <button
                 type="button"
                 class="mode-pill-row"
+                [attr.aria-pressed]="selectedProfile === 'CAR'"
                 [class.selected]="selectedProfile === 'CAR'"
                 (click)="selectedProfile = 'CAR'; calculateRoutes()"
               >
