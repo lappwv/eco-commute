@@ -2856,3 +2856,687 @@ html[data-theme="dark"] .footer-rider.rider-b {
   outline: 2px solid #000 !important;
   outline-offset: -1px;
 }
+
+/* ==================== COMPARATIVA: ESCENAS ANIMADAS AL HACER HOVER ==================== */
+/* Todo arranca en pausa y corre solo con el mouse encima: la escena se "pone en marcha". */
+.transport-cartoon-svg {
+  --veh-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Parallax con el puntero: JS escribe --px (-1..1) en .transport-card-media */
+.veh-par {
+  transition: transform 0.35s var(--veh-ease);
+}
+.veh-par-sky {
+  transform: translateX(calc(var(--px, 0) * -2px));
+}
+.veh-par-far {
+  transform: translateX(calc(var(--px, 0) * -5px));
+}
+.veh-par-mid {
+  transform: translateX(calc(var(--px, 0) * -9px));
+}
+.veh-par-rig {
+  transform: translateX(calc(var(--px, 0) * 7px));
+}
+
+/* Capas de fondo con scroll infinito (se duplican cada 320 px) */
+.veh-layer {
+  animation: veh-scroll var(--dur, 10s) linear infinite paused;
+}
+.veh-sky {
+  --dur: 34s;
+}
+.veh-far {
+  --dur: 15s;
+}
+.veh-far-slow {
+  --dur: 42s;
+}
+.veh-mid {
+  --dur: 6s;
+}
+
+/* Calle: líneas que corren */
+.veh-road {
+  animation: veh-dash 0.42s linear infinite paused;
+}
+.veh-road-slow {
+  animation-duration: 2.6s;
+}
+
+/* Ruedas y pedales */
+.veh-wheel {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: veh-spin var(--spin, 0.9s) linear infinite paused;
+}
+
+/* Vehículo: rebote, vibración y temblor de motor */
+.veh-bob,
+.veh-rumble,
+.veh-shake,
+.veh-creep {
+  animation-play-state: paused;
+}
+.veh-bob {
+  animation: veh-bob 0.45s ease-in-out infinite alternate paused;
+}
+.veh-bob-fast {
+  animation-duration: 0.3s;
+}
+.veh-rumble {
+  animation: veh-rumble 0.22s linear infinite paused;
+}
+.veh-shake {
+  animation: veh-shake 0.14s linear infinite alternate paused;
+}
+.veh-creep {
+  animation: veh-creep 3.4s ease-in-out infinite alternate paused;
+}
+
+/* Detalles: faros, LED, rayos, hojas, humo, bocina */
+.veh-beam {
+  animation: veh-beam 1.1s ease-in-out infinite paused;
+}
+.veh-led {
+  animation: veh-pulse 0.8s ease-in-out infinite paused;
+}
+.veh-blink,
+.veh-glow {
+  animation: veh-blink 0.9s ease-in-out infinite paused;
+}
+.veh-glow {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation-name: veh-glow;
+}
+.veh-sign {
+  animation: veh-sign 0.5s linear infinite paused;
+}
+.veh-glint {
+}
+.veh-bolt {
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+}
+.veh-speed {
+  opacity: 0;
+}
+.veh-leaf {
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+}
+.veh-puff {
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+}
+.veh-beep {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  opacity: 0;
+}
+.veh-beep text {
+  font-family: var(--display), "Outfit", sans-serif;
+}
+
+/* Run al pasar el mouse (o con foco dentro de la tarjeta) */
+.transport-card:is(:hover, :focus-within, .is-live)
+  :is(
+    .veh-layer, .veh-road, .veh-wheel, .veh-bob, .veh-rumble, .veh-shake, .veh-creep,
+    .veh-beam, .veh-led, .veh-blink, .veh-glow, .veh-sign
+  ) {
+  animation-play-state: running;
+}
+
+/* Efectos puntuales: solo existen mientras hay hover, al salir vuelven a su estado inicial */
+.transport-card:is(:hover, :focus-within, .is-live) .veh-glint {
+  animation: veh-glint 1.5s ease-in-out infinite;
+  animation-delay: var(--d, 0s);
+}
+.transport-card:is(:hover, :focus-within, .is-live) .veh-bolt {
+  animation: veh-bolt 1.2s ease-out infinite;
+}
+.transport-card:is(:hover, :focus-within, .is-live) .veh-speed {
+  animation: veh-speed 0.8s linear infinite;
+  animation-delay: var(--d, 0s);
+}
+.transport-card:is(:hover, :focus-within, .is-live) .veh-leaf {
+  animation: veh-leaf 2.2s ease-out infinite;
+  animation-delay: var(--d, 0s);
+}
+.transport-card:is(:hover, :focus-within, .is-live) .veh-puff {
+  animation: veh-puff 1.8s ease-out infinite;
+  animation-delay: var(--d, 0s);
+}
+.transport-card:is(:hover, :focus-within, .is-live) .veh-beep {
+  animation: veh-beep 2.4s ease-in-out infinite;
+}
+
+@keyframes veh-scroll {
+  to { transform: translateX(-320px); }
+}
+@keyframes veh-dash {
+  to { stroke-dashoffset: var(--dash, -32px); }
+}
+@keyframes veh-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes veh-bob {
+  from { transform: translateY(0); }
+  to { transform: translateY(-2px); }
+}
+@keyframes veh-rumble {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(0.5px, -0.7px); }
+  50% { transform: translate(-0.4px, 0.2px); }
+  75% { transform: translate(0.4px, -0.5px); }
+}
+@keyframes veh-shake {
+  from { transform: translate(-0.7px, 0); }
+  to { transform: translate(0.7px, -1px); }
+}
+@keyframes veh-creep {
+  from { transform: translateX(0); }
+  to { transform: translateX(6px); }
+}
+@keyframes veh-beam {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}
+@keyframes veh-pulse {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+@keyframes veh-blink {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 1; }
+}
+@keyframes veh-glow {
+  0%, 100% { opacity: 0.2; transform: scale(0.9); }
+  50% { opacity: 0.6; transform: scale(1.25); }
+}
+@keyframes veh-sign {
+  to { stroke-dashoffset: -9px; }
+}
+@keyframes veh-glint {
+  0% { transform: translateX(-12px); opacity: 0; }
+  40% { opacity: 1; }
+  100% { transform: translateX(34px); opacity: 0; }
+}
+@keyframes veh-bolt {
+  0%, 100% { opacity: 0; transform: scale(0.5) rotate(-8deg); }
+  20%, 55% { opacity: 1; transform: scale(1.05) rotate(0deg); }
+  75% { opacity: 0; transform: scale(0.8); }
+}
+@keyframes veh-speed {
+  0% { transform: translateX(26px); opacity: 0; }
+  30% { opacity: 0.9; }
+  100% { transform: translateX(-26px); opacity: 0; }
+}
+@keyframes veh-leaf {
+  0% { transform: translateY(0) rotate(0deg) scale(0.6); opacity: 0; }
+  20% { opacity: 1; }
+  100% { transform: translateY(-30px) rotate(55deg) scale(1.05); opacity: 0; }
+}
+@keyframes veh-puff {
+  0% { transform: translate(0, 0) scale(0.5); opacity: 0; }
+  20% { opacity: 0.55; }
+  100% { transform: translate(-22px, -34px) scale(1.9); opacity: 0; }
+}
+@keyframes veh-beep {
+  0%, 12% { opacity: 0; transform: scale(0.3); }
+  22% { opacity: 1; transform: scale(1.12); }
+  30%, 62% { opacity: 1; transform: scale(1); }
+  74%, 100% { opacity: 0; transform: scale(0.85); }
+}
+
+/* Resto de la tarjeta: respuesta suave al hover */
+.transport-co2-pill {
+  transition: transform 0.3s var(--veh-ease, ease), box-shadow 0.3s ease;
+}
+.transport-card:hover .transport-co2-pill {
+  transform: translateY(-3px) rotate(-3deg) scale(1.06);
+}
+.transport-card-metrics li {
+  transition: transform 0.35s var(--veh-ease, ease);
+}
+.transport-card:hover .transport-card-metrics li {
+  transform: translateX(4px);
+}
+.transport-card:hover .transport-card-metrics li:nth-child(2) {
+  transition-delay: 0.05s;
+}
+.transport-card:hover .transport-card-metrics li:nth-child(3) {
+  transition-delay: 0.1s;
+}
+.transport-card-banner .brand-inline-svg {
+  transform-origin: 50% 80%;
+}
+.transport-card:hover .transport-card-banner .brand-inline-svg {
+  animation: veh-wiggle 0.9s ease-in-out infinite;
+}
+@keyframes veh-wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  30% { transform: rotate(-14deg) scale(1.12); }
+  60% { transform: rotate(10deg) scale(1.05); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .transport-card .veh-layer, .transport-card .veh-road, .transport-card .veh-wheel,
+  .transport-card .veh-bob, .transport-card .veh-rumble, .transport-card .veh-shake,
+  .transport-card .veh-creep, .transport-card .veh-beam, .transport-card .veh-led,
+  .transport-card .veh-blink, .transport-card .veh-glow, .transport-card .veh-sign,
+  .transport-card .veh-glint, .transport-card .veh-bolt, .transport-card .veh-speed,
+  .transport-card .veh-leaf, .transport-card .veh-puff, .transport-card .veh-beep,
+  .veh-layer, .veh-road, .veh-wheel, .veh-bob, .veh-rumble, .veh-shake, .veh-creep,
+  .veh-beam, .veh-led, .veh-blink, .veh-glow, .veh-sign, .veh-glint, .veh-bolt,
+  .veh-speed, .veh-leaf, .veh-puff, .veh-beep,
+  .transport-card:hover .transport-card-banner .brand-inline-svg {
+    animation: none !important;
+  }
+
+  .veh-par,
+  .transport-card:hover .transport-co2-pill,
+  .transport-card:hover .transport-card-metrics li {
+    transform: none !important;
+  }
+}
+
+/* Tablet / celular: la escena siempre se ve completa y sin franjas laterales */
+@media (max-width: 1024px) {
+  .transport-card-media {
+    height: auto;
+    aspect-ratio: 320 / 185;
+  }
+}
+
+@media (max-width: 640px) {
+  .transport-grid {
+    max-width: 460px;
+    margin-inline: auto;
+  }
+}
+
+/* ==================== PULIDO: NAV, CÓMO FUNCIONA, HERO VIVO, CIFRAS Y OLAS ==================== */
+
+/* Nav: etiquetas cortas en una sola línea */
+.nav a {
+  white-space: nowrap;
+}
+
+/* ---- Scroll reveal: ahora sí se activa (JS agrega js-reveal-ready) ---- */
+html.js-reveal-ready [data-scroll-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---- Cómo funciona: recorrido con bici entre los 3 pasos ---- */
+.how-flow {
+  position: relative;
+  --how-x1: calc(16.667% - 0.4167rem);
+  --how-x2: 50%;
+  --how-x3: calc(83.333% + 0.4167rem);
+}
+
+.how-track {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  height: 64px;
+  align-items: center;
+  margin-bottom: 0.65rem;
+}
+
+.how-track-line,
+.how-track-fill {
+  position: absolute;
+  left: var(--how-x1);
+  top: 50%;
+  height: 5px;
+  border-radius: 3px;
+  transform: translateY(-50%);
+}
+
+.how-track-line {
+  right: calc(100% - var(--how-x3));
+  background: repeating-linear-gradient(90deg, rgba(30, 36, 30, 0.4) 0 12px, transparent 12px 22px);
+  background-size: 22px 100%;
+  animation: how-dash 0.9s linear infinite;
+}
+
+.how-track-fill {
+  width: 0;
+  background: #6CC016;
+  box-shadow: 0 0 0 1.5px #1E241E;
+  animation: how-fill 9s ease-in-out infinite;
+}
+
+.how-node {
+  position: relative;
+  z-index: 1;
+  justify-self: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: #1E241E;
+  background: #FFFFFF;
+  border: 2.5px solid #1E241E;
+  box-shadow: 0 3px 0 #1E241E;
+}
+
+html[data-theme="dark"] .how-node {
+  background: #1F3044;
+  color: #F8FAFC;
+  border-color: var(--sunny);
+  box-shadow: 0 3px 0 #0B121B;
+}
+
+.how-node.n1 { animation: how-node-1 9s ease-in-out infinite; }
+.how-node.n2 { animation: how-node-2 9s ease-in-out infinite; }
+.how-node.n3 { animation: how-node-3 9s ease-in-out infinite; }
+
+.how-rider {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: var(--how-x1);
+  width: 54px;
+  margin-top: -29px;
+  transform: translateX(-50%);
+  opacity: 0;
+  animation: how-ride 9s ease-in-out infinite;
+}
+
+.how-rider svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.how-rider-wheel {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: how-spin 0.7s linear infinite;
+}
+
+.how-step-icon svg {
+  animation: how-bob 3.2s ease-in-out infinite;
+}
+
+.how-step-card:nth-child(2) .how-step-icon svg { animation-delay: 0.4s; }
+.how-step-card:nth-child(3) .how-step-icon svg { animation-delay: 0.8s; }
+
+.how-it-works-strip.is-revealed .how-step-card {
+  animation: how-pop 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+  animation-delay: calc(var(--i, 0) * 130ms);
+}
+
+@keyframes how-dash {
+  to { background-position: 22px 0; }
+}
+@keyframes how-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes how-bob {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-3px) rotate(-5deg); }
+}
+@keyframes how-pop {
+  from { opacity: 0; transform: translateY(26px) scale(0.94); }
+}
+@keyframes how-ride {
+  0%   { left: var(--how-x1); opacity: 0; }
+  6%   { left: var(--how-x1); opacity: 1; }
+  38%  { left: var(--how-x2); opacity: 1; }
+  44%  { left: var(--how-x2); opacity: 0; }
+  52%  { left: var(--how-x2); opacity: 0; }
+  56%  { left: var(--how-x2); opacity: 1; }
+  86%  { left: var(--how-x3); opacity: 1; }
+  92%  { left: var(--how-x3); opacity: 0; }
+  100% { left: var(--how-x3); opacity: 0; }
+}
+@keyframes how-fill {
+  0%, 6%   { width: 0; opacity: 1; }
+  38%, 56% { width: calc(33.333% + 0.4167rem); opacity: 1; }
+  86%, 94% { width: calc(66.667% + 0.8333rem); opacity: 1; }
+  98%      { width: calc(66.667% + 0.8333rem); opacity: 0; }
+  100%     { width: 0; opacity: 0; }
+}
+@keyframes how-node-1 {
+  0%, 10% { transform: scale(1.18); background: var(--sunny); }
+  18%, 96% { transform: scale(1); background: #FFFFFF; }
+  100% { transform: scale(1.18); background: var(--sunny); }
+}
+@keyframes how-node-2 {
+  0%, 36% { transform: scale(1); background: #FFFFFF; }
+  44%, 56% { transform: scale(1.18); background: var(--sunny); }
+  64%, 100% { transform: scale(1); background: #FFFFFF; }
+}
+@keyframes how-node-3 {
+  0%, 84% { transform: scale(1); background: #FFFFFF; }
+  92%, 97% { transform: scale(1.18); background: var(--sunny); }
+  100% { transform: scale(1); background: #FFFFFF; }
+}
+
+@media (max-width: 900px) {
+  .how-track {
+    display: none;
+  }
+}
+
+/* ---- Hero: la escena de la ciclista siempre en movimiento ---- */
+.cartoon-scene-svg .hero-layer {
+  animation: hero-scroll 26s linear infinite;
+}
+.cartoon-scene-svg .hero-wheel {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: hero-spin var(--spin, 1.1s) linear infinite;
+}
+.cartoon-scene-svg .hero-bob {
+  animation: hero-bob 0.55s ease-in-out infinite alternate;
+}
+.cartoon-scene-svg .hero-road {
+  animation: hero-dash 0.5s linear infinite;
+}
+.cartoon-scene-svg .hero-card-float {
+  animation: hero-card-float 5.5s ease-in-out infinite alternate;
+}
+.cartoon-scene-svg .hero-route {
+  animation: hero-route 1.2s linear infinite;
+}
+.cartoon-scene-svg .hero-pin {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: hero-pin 1.6s ease-in-out infinite;
+}
+.cartoon-scene-svg .hero-ping {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: hero-ping 1.8s ease-out infinite;
+}
+.cartoon-scene-svg .hero-progress {
+  transform-box: fill-box;
+  transform-origin: 0 50%;
+  animation: hero-progress 4.5s ease-in-out infinite alternate;
+}
+.cartoon-scene-svg .hero-beam {
+  animation: hero-beam 2.4s ease-in-out infinite;
+}
+.cartoon-scene-svg .hero-streak {
+  opacity: 0;
+  animation: hero-streak 1.1s linear infinite;
+  animation-delay: var(--d, 0s);
+}
+.cartoon-scene-svg .hero-leaf {
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+  animation: hero-leaf 2.6s ease-out infinite;
+  animation-delay: var(--d, 0s);
+}
+
+@keyframes hero-scroll { to { transform: translateX(-460px); } }
+@keyframes hero-spin { to { transform: rotate(360deg); } }
+@keyframes hero-bob {
+  from { transform: translateY(0); }
+  to { transform: translateY(-1.8px); }
+}
+@keyframes hero-dash { to { stroke-dashoffset: -28px; } }
+@keyframes hero-card-float {
+  from { transform: translateY(0); }
+  to { transform: translateY(-4px); }
+}
+@keyframes hero-route { to { stroke-dashoffset: -10; } }
+@keyframes hero-pin {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+@keyframes hero-ping {
+  0% { transform: scale(1); opacity: 1; }
+  70%, 100% { transform: scale(1.5); opacity: 0.55; }
+}
+@keyframes hero-progress {
+  from { transform: scaleX(0.25); }
+  to { transform: scaleX(1); }
+}
+@keyframes hero-beam {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+@keyframes hero-streak {
+  0% { transform: translateX(0); opacity: 0; }
+  25% { opacity: 0.95; }
+  100% { transform: translateX(-34px); opacity: 0; }
+}
+@keyframes hero-leaf {
+  0% { transform: translateY(0) rotate(0deg) scale(0.6); opacity: 0; }
+  20% { opacity: 1; }
+  100% { transform: translateY(-34px) rotate(55deg) scale(1.05); opacity: 0; }
+}
+
+/* ---- Cifras de la calculadora: número grande, unidad pequeña ---- */
+.cutout-figure {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0 0.45rem;
+}
+
+.fig-num {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(2.2rem, 3.3vw, 3rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.fig-unit {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--ink-secondary);
+}
+
+.alchemy-summary-col .fig-num {
+  font-size: 1.7rem;
+}
+
+.alchemy-summary-col .fig-unit {
+  font-size: 0.85rem;
+}
+
+/* ---- Olas entre secciones ---- */
+.how-section,
+#vehiculos,
+#alquimia {
+  position: relative;
+  border-top: 0;
+}
+
+.how-section {
+  --wave-fill: var(--bg);
+  padding-bottom: 3.25rem;
+}
+
+#vehiculos {
+  --wave-fill: var(--bg-alt);
+}
+
+#alquimia {
+  --wave-fill: var(--bg);
+}
+
+.how-section::after,
+#vehiculos::after,
+#alquimia::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -39px;
+  height: 40px;
+  z-index: 1;
+  pointer-events: none;
+  background: var(--wave-fill);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' preserveAspectRatio='none'%3E%3Cpath d='M0 20Q300 -12 600 20T1200 20V40H0Z'/%3E%3C/svg%3E") repeat-x 0 100% / 1200px 40px;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' preserveAspectRatio='none'%3E%3Cpath d='M0 20Q300 -12 600 20T1200 20V40H0Z'/%3E%3C/svg%3E") repeat-x 0 100% / 1200px 40px;
+  animation: wave-drift 45s linear infinite;
+}
+
+#vehiculos::after {
+  animation-direction: reverse;
+}
+
+@keyframes wave-drift {
+  to {
+    -webkit-mask-position: -1200px 100%;
+    mask-position: -1200px 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .how-section::after,
+  #vehiculos::after,
+  #alquimia::after {
+    top: -25px;
+    height: 26px;
+    -webkit-mask-size: 760px 26px;
+    mask-size: 760px 26px;
+  }
+
+  @keyframes wave-drift {
+    to {
+      -webkit-mask-position: -760px 100%;
+      mask-position: -760px 100%;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .how-track-line, .how-track-fill, .how-node, .how-rider, .how-rider-wheel,
+  .how-step-icon svg, .how-it-works-strip.is-revealed .how-step-card,
+  .cartoon-scene-svg .hero-layer, .cartoon-scene-svg .hero-wheel, .cartoon-scene-svg .hero-bob,
+  .cartoon-scene-svg .hero-road, .cartoon-scene-svg .hero-card-float, .cartoon-scene-svg .hero-route,
+  .cartoon-scene-svg .hero-pin, .cartoon-scene-svg .hero-ping, .cartoon-scene-svg .hero-progress,
+  .cartoon-scene-svg .hero-beam, .cartoon-scene-svg .hero-streak, .cartoon-scene-svg .hero-leaf,
+  .how-section::after, #vehiculos::after, #alquimia::after {
+    animation: none !important;
+  }
+
+  .how-rider {
+    display: none;
+  }
+}
