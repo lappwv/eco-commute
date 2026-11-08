@@ -3671,11 +3671,32 @@ strong,
   object-fit: cover;
 }
 
-.eco-navbar,
 .eco-main,
 .eco-footer {
   position: relative;
   z-index: 1;
+}
+
+/* La barra queda por encima del contenido para que el menú móvil desplegable
+   no se tape con las tarjetas de la página. */
+.eco-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+@media (max-width: 1020px) {
+  .eco-nav-links {
+    z-index: 1001;
+    border: 2px solid #1E241E;
+    box-shadow: 0 10px 28px rgba(13, 26, 19, 0.28);
+    max-height: calc(100dvh - 84px);
+    overflow-y: auto;
+  }
+  .eco-nav-links a {
+    justify-content: flex-start;
+    min-height: 44px;
+  }
 }
 
 /* 2. Decorative Bike-Lane / Road Trim on Navbar & Footer */
