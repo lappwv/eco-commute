@@ -403,7 +403,14 @@ const SPANISH_DICTIONARY: Record<string, string> = {
   'admin.deleteChallengeTitle': 'Eliminar reto',
   'admin.deleteChallengeMsg': '¿Eliminar el reto "{title}"? Esta acción no se puede deshacer.',
   'admin.challengeDeleted': 'Reto eliminado.',
-  'admin.close': 'Cerrar'
+  'admin.close': 'Cerrar',
+
+  'dash.rec.greenTitle': 'Corredor Verde Optimizado con IA',
+  'dash.rec.greenText': 'Prioriza viajes en bicicleta o caminata en horas valle para maximizar el ahorro de CO2 y ganar bonos de puntos verdes.',
+  'dash.rec.arequipaTitle': 'Corredor ciclista Arequipa – Salaverry',
+  'dash.rec.arequipaText': 'Si sales entre las 7:00 y 9:00 a.m., toma la ciclovía segregada de Av. Salaverry o Av. Arequipa: evitarás hasta 1,445 g de CO₂ por trayecto, ahorrarás 12 minutos frente al tráfico vehicular y sumarás puntos extra para tu racha semanal.',
+
+  'routes.gramsCo2': 'g de CO₂'
 };
 
 const ENGLISH_DICTIONARY: Record<string, string> = {
@@ -803,7 +810,14 @@ const ENGLISH_DICTIONARY: Record<string, string> = {
   'admin.deleteChallengeTitle': 'Delete challenge',
   'admin.deleteChallengeMsg': 'Delete the challenge "{title}"? This action cannot be undone.',
   'admin.challengeDeleted': 'Challenge deleted.',
-  'admin.close': 'Close'
+  'admin.close': 'Close',
+
+  'dash.rec.greenTitle': 'AI-Optimized Green Corridor',
+  'dash.rec.greenText': 'Prioritize bike or walking trips during off-peak hours to maximize your CO2 savings and earn green points bonuses.',
+  'dash.rec.arequipaTitle': 'Arequipa – Salaverry Bike Corridor',
+  'dash.rec.arequipaText': 'If you leave between 7:00 and 9:00 a.m., take the segregated bike lane on Av. Salaverry or Av. Arequipa: you will avoid up to 1,445 g of CO₂ per trip, save 12 minutes compared to vehicle traffic and earn extra points for your weekly streak.',
+
+  'routes.gramsCo2': 'g of CO₂'
 };
 
 const TRANSLATIONS: Record<LocaleCode, Record<string, string>> = {
