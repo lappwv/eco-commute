@@ -3161,6 +3161,12 @@ html[data-theme="dark"] .footer-rider.rider-b {
   white-space: nowrap;
 }
 
+/* ---- Scroll reveal: ahora sí se activa (JS agrega js-reveal-ready) ---- */
+html.js-reveal-ready [data-scroll-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
 /* ---- Cómo funciona: recorrido con bici entre los 3 pasos ---- */
 .how-flow {
   position: relative;
@@ -3322,7 +3328,6 @@ html[data-theme="dark"] .how-node {
   }
 }
 
-
 /* ---- Hero: la escena de la ciclista siempre en movimiento ---- */
 .cartoon-scene-svg .hero-layer {
   animation: hero-scroll 26s linear infinite;
@@ -3414,6 +3419,37 @@ html[data-theme="dark"] .how-node {
   100% { transform: translateY(-34px) rotate(55deg) scale(1.05); opacity: 0; }
 }
 
+/* ---- Cifras de la calculadora: número grande, unidad pequeña ---- */
+.cutout-figure {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0 0.45rem;
+}
+
+.fig-num {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(2.2rem, 3.3vw, 3rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.fig-unit {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--ink-secondary);
+}
+
+.alchemy-summary-col .fig-num {
+  font-size: 1.7rem;
+}
+
+.alchemy-summary-col .fig-unit {
+  font-size: 0.85rem;
+}
 
 /* ---- Olas entre secciones ---- */
 .how-section,
