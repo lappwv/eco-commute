@@ -10,6 +10,7 @@ describe('LeaderboardComponent', () => {
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
+    localStorage.clear();
     TestBed.configureTestingModule({
       imports: [LeaderboardComponent],
       providers: [provideHttpClient(), provideHttpClientTesting(), provideNoopAnimations()]
