@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ApiService } from '../../services/api.service';
 import { I18nService } from '../../services/i18n.service';
 import { BadgeCatalogItem, DashboardBadge, GamificationMilestones, GamificationStats } from '../../models/api.models';
@@ -9,7 +12,7 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
 @Component({
   selector: 'app-gamification',
   standalone: true,
-  imports: [CommonModule, RouterModule, EcoIconComponent],
+  imports: [CommonModule, RouterModule, EcoIconComponent, MatCardModule, MatChipsModule, MatProgressBarModule],
   template: `
     <section class="page-section">
       <div class="section-header-row">
@@ -26,7 +29,7 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
       <!-- Diseño Asimétrico: Torre Vertical de Nivel/Métricas (Izq) + Lista Abierta de Insignias (Der) -->
       <div class="gamification-split-layout">
         <!-- Columna Vertical Izquierda: Unifica Nivel + 4 Estadísticas en 1 sola tarjeta vertical -->
-        <aside class="eco-card level-vertical-tower" *ngIf="milestones as m">
+        <mat-card class="eco-card level-vertical-tower" *ngIf="milestones as m">
           <div class="tower-shield-wrap">
             <span class="level-shield-large">
               <app-icon name="medal" [size]="34"></app-icon>
@@ -44,9 +47,11 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
               <span>Progreso de nivel</span>
               <strong>{{ m.progressPercentage }}%</strong>
             </div>
-            <div class="milestone-progress-track">
-              <div class="milestone-progress-fill" [style.width.%]="m.progressPercentage"></div>
-            </div>
+            <mat-progress-bar
+              class="milestone-progress-track"
+              mode="determinate"
+              [value]="m.progressPercentage"
+            ></mat-progress-bar>
           </div>
 
           <!-- Datos apilados verticalmente en vez de 4 tarjetas horizontales -->
@@ -80,7 +85,7 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
               </div>
             </li>
           </ul>
-        </aside>
+        </mat-card>
 
         <!-- Columna Derecha Abierta (Sin tarjeta contenedora redundante) -->
         <div class="badges-open-showcase">
@@ -102,15 +107,15 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
               <div class="badge-strip-body">
                 <div class="badge-strip-head">
                   <h3>{{ b.title }}</h3>
-                  <span class="badge-status-chip" [class.done]="b.unlocked">
-                    <app-icon [name]="b.unlocked ? 'check' : 'lock'" [size]="13"></app-icon>
-                    <span>{{ b.unlocked ? '¡Desbloqueada!' : b.progressPercent + '%' }}</span>
-                  </span>
+                  <mat-chip-set>
+                    <mat-chip disableRipple class="badge-status-chip" [class.done]="b.unlocked">
+                      <app-icon [name]="b.unlocked ? 'check' : 'lock'" [size]="13"></app-icon>
+                      <span>{{ b.unlocked ? '¡Desbloqueada!' : b.progressPercent + '%' }}</span>
+                    </mat-chip>
+                  </mat-chip-set>
                 </div>
                 <p>{{ b.description }}</p>
-                <div class="mode-progress-track">
-                  <div class="mode-progress-fill" [style.width.%]="b.progressPercent"></div>
-                </div>
+                <mat-progress-bar class="mode-progress-track" mode="determinate" [value]="b.progressPercent"></mat-progress-bar>
               </div>
             </article>
           </div>
