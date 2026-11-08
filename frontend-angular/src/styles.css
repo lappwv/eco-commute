@@ -6073,3 +6073,17 @@ app-leaderboard .eco-card:hover {
 .trips-empty-state span {
   font-size: 0.82rem;
 }
+
+/* CUENTA: espacio para que la etiqueta flotante de mat-form-field no se recorte */
+.mat-tab-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding-top: 1.35rem;
+}
+
+.auth-tab-group .mat-mdc-tab-body-content,
+.auth-tab-group .mat-mdc-tab-body.mat-mdc-tab-body-active {
+  overflow: visible;
+  overflow-y: visible;
+}
