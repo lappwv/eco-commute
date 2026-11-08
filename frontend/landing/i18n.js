@@ -124,7 +124,7 @@ const CORRIDORS = {
 
 const translations = {
   es_419: {
-    "nav.skip": "Saltar al contenido", "nav.how": "Cómo funciona", "nav.webapp": "¡Entrar a la App!", "hero.kicker": "¡Muévete sin humo por Lima!", "hero.btn_webapp": "¡Empezar ahora!", "hero.btn_planner": "Ver mapa de rutas", "how.eyebrow": "¡Tan fácil como jugar!", "how.title": "¿Cómo funciona EcoCommute en 3 pasos?", "how.step1_title": "1. Elige tu camino", "how.step1_desc": "Mira en el mapa qué ciclovía o vereda te lleva más rápido y seguro por Lima sin quedarte atrapado en el tráfico.", "how.step2_title": "2. Anota tu aventura", "how.step2_desc": "Guarda tu recorrido en tu bitácora para ver cuánto humo evitaste, subir de nivel y desbloquear medallas.", "how.step3_title": "3. ¡Canjea tus premios!", "how.step3_desc": "Cambia tus puntos por cafés gratis, paseos en bici y entradas a parques en tiendas amigas de Lima.",
+    "nav.skip": "Saltar al contenido", "nav.how": "Cómo funciona", "nav.webapp": "¡Entrar a la App!", "hero.kicker": "¡Muévete sin humo por Lima!", "hero.btn_webapp": "¡Empezar ahora!", "hero.btn_planner": "Ver mapa de rutas", "how.eyebrow": "¡Tan fácil como jugar!", "how.title": "¿Cómo funciona EcoCommute en 3 pasos?", "how.step1": "PASO 1", "how.step2": "PASO 2", "how.step3": "PASO 3", "how.step1_title": "1. Elige tu camino", "how.step1_desc": "Mira en el mapa qué ciclovía o vereda te lleva más rápido y seguro por Lima sin quedarte atrapado en el tráfico.", "how.step2_title": "2. Anota tu aventura", "how.step2_desc": "Guarda tu recorrido en tu bitácora para ver cuánto humo evitaste, subir de nivel y desbloquear medallas.", "how.step3_title": "3. ¡Canjea tus premios!", "how.step3_desc": "Cambia tus puntos por cafés gratis, paseos en bici y entradas a parques en tiendas amigas de Lima.",
     "nav.menu": "Menú",
     "meta.title": "EcoCommute — Muévete Feliz y Cuida Lima",
     "theme.day": "Día",
@@ -227,7 +227,7 @@ const translations = {
     "calc.card_reward_desc": "Puntos acumulados para canjear en cafés locales, talleres de bici y comercios aliados."
   },
   en_US: {
-    "nav.skip": "Skip to content", "nav.how": "How it works", "nav.webapp": "Enter the App!", "hero.kicker": "Move emission-free through Lima!", "hero.btn_webapp": "Start now!", "hero.btn_planner": "Explore route map", "how.eyebrow": "As easy as playing!", "how.title": "How does EcoCommute work in 3 steps?", "how.step1_title": "1. Pick your path", "how.step1_desc": "See on the map which bike lane or walkway gets you through Lima faster and safer without traffic jams.", "how.step2_title": "2. Log your adventure", "how.step2_desc": "Save your ride in your logbook to see how much smoke you avoided, level up, and unlock badges.", "how.step3_title": "3. Redeem your prizes!", "how.step3_desc": "Trade your points for free coffee, bike rides, and park passes at friendly local shops in Lima.",
+    "nav.skip": "Skip to content", "nav.how": "How it works", "nav.webapp": "Enter the App!", "hero.kicker": "Move emission-free through Lima!", "hero.btn_webapp": "Start now!", "hero.btn_planner": "Explore route map", "how.eyebrow": "As easy as playing!", "how.title": "How does EcoCommute work in 3 steps?", "how.step1": "STEP 1", "how.step2": "STEP 2", "how.step3": "STEP 3", "how.step1_title": "1. Pick your path", "how.step1_desc": "See on the map which bike lane or walkway gets you through Lima faster and safer without traffic jams.", "how.step2_title": "2. Log your adventure", "how.step2_desc": "Save your ride in your logbook to see how much smoke you avoided, level up, and unlock badges.", "how.step3_title": "3. Redeem your prizes!", "how.step3_desc": "Trade your points for free coffee, bike rides, and park passes at friendly local shops in Lima.",
     "nav.menu": "Menu",
     "meta.title": "EcoCommute — Move Happy and Care for Lima",
     "theme.day": "Day",
@@ -624,15 +624,13 @@ function applyTranslations(lang) {
     document.title = dict["meta.title"];
   }
 
-  const toggleBtn = document.getElementById("lang-toggle");
-  if (toggleBtn) {
-    toggleBtn.setAttribute("aria-pressed", lang === "en_US" ? "true" : "false");
-    const esSpan = toggleBtn.querySelector(".lang-es");
-    const enSpan = toggleBtn.querySelector(".lang-en");
-    if (esSpan && enSpan) {
-      esSpan.classList.toggle("active", lang !== "en_US");
-      enSpan.classList.toggle("active", lang === "en_US");
-    }
+  const esBtn = document.getElementById("lang-flag-es");
+  const enBtn = document.getElementById("lang-flag-en");
+  if (esBtn && enBtn) {
+    esBtn.classList.toggle("active", lang !== "en_US");
+    esBtn.setAttribute("aria-pressed", lang !== "en_US" ? "true" : "false");
+    enBtn.classList.toggle("active", lang === "en_US");
+    enBtn.setAttribute("aria-pressed", lang === "en_US" ? "true" : "false");
   }
 
   renderSimulatorMetrics();
@@ -640,13 +638,14 @@ function applyTranslations(lang) {
 }
 
 function setupLanguageToggle() {
-  const toggleBtn = document.getElementById("lang-toggle");
-  if (!toggleBtn) return;
-
-  toggleBtn.addEventListener("click", () => {
-    const nextLang = currentLang === "es_419" ? "en_US" : "es_419";
-    applyTranslations(nextLang);
-  });
+  const esBtn = document.getElementById("lang-flag-es");
+  const enBtn = document.getElementById("lang-flag-en");
+  if (esBtn) {
+    esBtn.addEventListener("click", () => applyTranslations("es_419"));
+  }
+  if (enBtn) {
+    enBtn.addEventListener("click", () => applyTranslations("en_US"));
+  }
 }
 
 function setupThemeSwitcher() {
