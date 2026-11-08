@@ -195,7 +195,7 @@ type ModeFilter = TransportMode | 'ALL';
               </div>
 
               <div class="trip-feed-impact">
-                <strong class="text-emerald">-{{ t.co2SavedGrams }} g CO₂</strong>
+                <strong class="text-emerald">-{{ (t.co2SavedGrams | number: '1.0-0') }} g CO₂</strong>
                 <span class="pts-pill">+{{ t.pointsEarned }} pts</span>
               </div>
 
@@ -310,7 +310,7 @@ export class TripsComponent implements OnInit {
   getPreviewSaved(): number {
     const base = this.getPreviewBaseline();
     const emit = Math.round((this.form.distanceKm || 0) * (this.co2Rates[this.form.transportMode] ?? 0));
-    return Math.max(0, base - emit);
+    return Math.round(Math.max(0, base - emit));
   }
 
   getPreviewCalories(): number {
@@ -329,7 +329,7 @@ export class TripsComponent implements OnInit {
         this.feedbackMsg = this.i18n.tn('trips.updatedMsg', {
           origin: updated.originName,
           destination: updated.destinationName,
-          co2: updated.co2SavedGrams
+          co2: Math.round(updated.co2SavedGrams)
         });
         this.editingTripId = null;
         this.loadTrips();
@@ -337,7 +337,7 @@ export class TripsComponent implements OnInit {
     } else {
       this.api.recordTrip(this.form).subscribe(created => {
         this.feedbackMsg = this.i18n.tn('trips.createdMsg', {
-          co2: created.co2SavedGrams,
+          co2: Math.round(created.co2SavedGrams),
           points: created.pointsEarned
         });
         this.loadTrips();
