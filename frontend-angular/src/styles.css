@@ -6482,3 +6482,23 @@ html[data-theme="dark"] {
 [data-theme="dark"] .corridor-preset-chip.mat-mdc-chip-selected .corridor-chip-tag {
   color: #14532D;
 }
+
+/* MODO OSCURO — mapa de Leaflet: los mosaicos de OpenStreetMap son blancos y
+   deslumbran dentro de una interfaz oscura. Se invierten y se atenúan solo
+   los mosaicos; las rutas y los marcadores conservan sus colores. */
+[data-theme="dark"] .leaflet-container {
+  background: #0f1713;
+}
+
+[data-theme="dark"] .leaflet-tile-pane {
+  filter: invert(1) hue-rotate(180deg) brightness(0.88) contrast(0.92) saturate(0.75);
+}
+
+[data-theme="dark"] .leaflet-control-attribution {
+  background: rgba(15, 23, 19, 0.82);
+  color: var(--text-muted);
+}
+
+[data-theme="dark"] .leaflet-control-attribution a {
+  color: var(--emerald);
+}
