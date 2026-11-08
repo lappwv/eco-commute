@@ -1,0 +1,32 @@
+@use '@angular/material' as mat;
+
+$eco-theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$green-palette
+  ),
+  typography: (
+    brand-family: Inter
+  ),
+  density: (
+    scale: 0
+  )
+));
+
+/* Tema de Angular Material basado en la paleta verde de la marca. */
+html {
+  @include mat.core();
+  @include mat.all-component-themes($eco-theme);
+
+  /* Reasigna los tokens de color a las variables CSS existentes para
+     mantener la identidad visual (y seguir el claro/oscuro del sitio). */
+  --mat-sys-primary: var(--emerald);
+  --mat-sys-on-primary: #ffffff;
+  --mat-sys-surface: var(--bg-card);
+  --mat-sys-on-surface: var(--text-main);
+  --mat-sys-on-surface-variant: var(--text-muted);
+  --mat-sys-outline: var(--border);
+  --mat-sys-outline-variant: var(--border);
+  --mat-sys-corner-medium: var(--radius-sm);
+  --mat-sys-corner-large: var(--radius-md);
+}
