@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService, DEFAULT_RENDER_API, LOCAL_BACKEND_API } from '../../services/auth.service';
 import { ApiService } from '../../services/api.service';
 import { UserProfile } from '../../models/api.models';
@@ -10,7 +10,7 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
 @Component({
   selector: 'app-auth',
   standalone: true,
-  imports: [CommonModule, FormsModule, EcoIconComponent],
+  imports: [CommonModule, FormsModule, RouterLink, EcoIconComponent],
   template: `
     <section class="page-section">
       <div class="section-header-row">
@@ -78,7 +78,13 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
                 <input type="number" [(ngModel)]="regWalkMin" name="regWalkMin" min="5" max="180" />
               </div>
             </div>
-            <button type="submit" class="btn-emerald full-width">
+            <div class="form-group">
+              <label class="checkbox-label">
+                <input type="checkbox" [(ngModel)]="regAcceptTerms" name="regAcceptTerms" required />
+                <span>Acepto los <a routerLink="/terms" target="_blank">Términos y Condiciones</a></span>
+              </label>
+            </div>
+            <button type="submit" class="btn-emerald full-width" [disabled]="!regAcceptTerms">
               <app-icon name="plus" [size]="16"></app-icon>
               <span>Registrarme en EcoCommute</span>
             </button>
