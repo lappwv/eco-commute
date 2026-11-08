@@ -6,6 +6,9 @@ import { I18nService } from '../../services/i18n.service';
 import { TransportMode, TripRequest, TripResponse } from '../../models/api.models';
 import { EcoIconComponent } from '../icon/eco-icon.component';
 
+type PeriodFilter = 'ALL' | 'LAST_7' | 'LAST_30';
+type ModeFilter = TransportMode | 'ALL';
+
 @Component({
   selector: 'app-trips',
   standalone: true,
@@ -108,14 +111,47 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
         <!-- Columna Derecha: Línea de Tiempo / Lista Vertical de Viajes (Sin tabla congestionada de 10 columnas) -->
         <div class="trips-feed-column">
           <div class="feed-header-inline">
-            <h2>Historial en tu bitácora ({{ trips.length }})</h2>
-            <span>Ordenado del más reciente al más antiguo</span>
+            <h2>Historial en tu bitácora</h2>
+            <span class="trips-filter-counter">{{ filteredTrips.length }} de {{ trips.length }}</span>
           </div>
 
-          <div class="trips-timeline-list">
+          <div class="preset-chips-row trips-mode-filters">
+            <button type="button" class="chip-btn" [class.active]="selectedMode === 'ALL'" (click)="setModeFilter('ALL')">
+              <strong>Todos</strong>
+            </button>
+            <button
+              type="button"
+              class="chip-btn"
+              *ngFor="let m of transportModes"
+              [class.active]="selectedMode === m"
+              (click)="setModeFilter(m)"
+            >
+              <strong>{{ formatShortMode(m) }}</strong>
+            </button>
+          </div>
+
+          <div class="preset-chips-row trips-period-filters">
+            <button type="button" class="chip-btn" [class.active]="selectedPeriod === 'ALL'" (click)="setPeriodFilter('ALL')">
+              <strong>Todos</strong>
+            </button>
+            <button type="button" class="chip-btn" [class.active]="selectedPeriod === 'LAST_7'" (click)="setPeriodFilter('LAST_7')">
+              <strong>Últimos 7 días</strong>
+            </button>
+            <button type="button" class="chip-btn" [class.active]="selectedPeriod === 'LAST_30'" (click)="setPeriodFilter('LAST_30')">
+              <strong>Últimos 30 días</strong>
+            </button>
+          </div>
+
+          <div class="trips-empty-state" *ngIf="filteredTrips.length === 0">
+            <app-icon name="route" [size]="26"></app-icon>
+            <strong>Sin resultados para estos filtros</strong>
+            <span>Prueba con otro medio de transporte o periodo.</span>
+          </div>
+
+          <div class="trips-timeline-list" *ngIf="filteredTrips.length > 0">
             <div
               class="trip-feed-item"
-              *ngFor="let t of trips"
+              *ngFor="let t of filteredTrips"
               [class.editing-row]="t.id === editingTripId"
             >
               <span class="trip-feed-icon">
@@ -164,6 +200,18 @@ export class TripsComponent implements OnInit {
   editingTripId: string | null = null;
   feedbackMsg = '';
 
+  readonly transportModes: TransportMode[] = [
+    'BICYCLE',
+    'WALKING',
+    'ELECTRIC_SCOOTER',
+    'PUBLIC_TRANSIT',
+    'CARPOOL',
+    'CAR_SOLO'
+  ];
+
+  selectedMode: ModeFilter = 'ALL';
+  selectedPeriod: PeriodFilter = 'ALL';
+
   form: TripRequest = {
     transportMode: 'BICYCLE',
     originName: 'San Isidro (Centro Financiero)',
@@ -204,6 +252,36 @@ export class TripsComponent implements OnInit {
     this.api.getTripsHistory(0, 25).subscribe(page => {
       this.trips = page.content || [];
     });
+  }
+
+  get filteredTrips(): TripResponse[] {
+    const periodLimitMs = this.selectedPeriod === 'LAST_7'
+      ? 7 * 24 * 60 * 60 * 1000
+      : this.selectedPeriod === 'LAST_30'
+        ? 30 * 24 * 60 * 60 * 1000
+        : null;
+    const now = Date.now();
+
+    return this.trips.filter(t => {
+      if (this.selectedMode !== 'ALL' && t.transportMode !== this.selectedMode) {
+        return false;
+      }
+      if (periodLimitMs !== null) {
+        const completedMs = new Date(t.completedAt).getTime();
+        if (now - completedMs > periodLimitMs) {
+          return false;
+        }
+      }
+      return true;
+    });
+  }
+
+  setModeFilter(mode: ModeFilter): void {
+    this.selectedMode = mode;
+  }
+
+  setPeriodFilter(period: PeriodFilter): void {
+    this.selectedPeriod = period;
   }
 
   getPreviewBaseline(): number {
