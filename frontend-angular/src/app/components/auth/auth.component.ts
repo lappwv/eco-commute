@@ -171,6 +171,7 @@ export class AuthComponent implements OnInit {
   regPassword = '';
   regBicycle = true;
   regWalkMin = 30;
+  regAcceptTerms = false;
 
   renderUrl = DEFAULT_RENDER_API;
   localUrl = LOCAL_BACKEND_API;
@@ -200,6 +201,9 @@ export class AuthComponent implements OnInit {
   }
 
   onRegister(): void {
+    if (!this.regAcceptTerms) {
+      return;
+    }
     this.auth
       .register({
         fullName: this.regName,
