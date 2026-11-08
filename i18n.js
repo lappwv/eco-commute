@@ -125,6 +125,7 @@ const CORRIDORS = {
 const translations = {
   es_419: {
     "nav.skip": "Saltar al contenido", "nav.how": "Cómo funciona", "nav.webapp": "¡Entrar a la App!", "hero.kicker": "¡Muévete sin humo por Lima!", "hero.btn_webapp": "¡Empezar ahora!", "hero.btn_planner": "Ver mapa de rutas", "how.eyebrow": "¡Tan fácil como jugar!", "how.title": "¿Cómo funciona EcoCommute en 3 pasos?", "how.step1_title": "1. Elige tu camino", "how.step1_desc": "Mira en el mapa qué ciclovía o vereda te lleva más rápido y seguro por Lima sin quedarte atrapado en el tráfico.", "how.step2_title": "2. Anota tu aventura", "how.step2_desc": "Guarda tu recorrido en tu bitácora para ver cuánto humo evitaste, subir de nivel y desbloquear medallas.", "how.step3_title": "3. ¡Canjea tus premios!", "how.step3_desc": "Cambia tus puntos por cafés gratis, paseos en bici y entradas a parques en tiendas amigas de Lima.",
+    "nav.menu": "Menú",
     "nav.routes": "Mapa",
     "nav.vehicles": "Transporte",
     "nav.impact": "Calculadora",
@@ -140,8 +141,8 @@ const translations = {
     "hero.stat_car_sub": "CO₂ por kilómetro",
     "hero.stat_eco_label": "En bici o a pie",
     "hero.stat_eco_sub": "Emisiones directas",
-    "hero.stat_saved_label": "CO₂ evitado hoy",
-    "hero.stat_saved_sub": "En rutas activas",
+    "hero.stat_saved_label": "Ejemplo de ahorro",
+    "hero.stat_saved_sub": "CO₂ en 4,2 km en bici",
 
     "map.eyebrow": "Mapa interactivo · Rutas reales en Lima",
     "map.by_bike": "en ciclovía",
@@ -149,7 +150,7 @@ const translations = {
     "map.stat_dist": "Distancia real",
     "map.stat_co2": "CO₂ evitado",
     "map.stat_points": "Ahorro y puntos",
-    "sim.btn_recycle_trip": "Registrar ruta",
+    "sim.simulate_trip": "Simular viaje",
 
         // Vehículos 4 cards
     "veh.eyebrow": "Comparativa de movilidad",
@@ -209,6 +210,7 @@ const translations = {
   },
   en_US: {
     "nav.skip": "Skip to content", "nav.how": "How it works", "nav.webapp": "Enter the App!", "hero.kicker": "Move emission-free through Lima!", "hero.btn_webapp": "Start now!", "hero.btn_planner": "Explore route map", "how.eyebrow": "As easy as playing!", "how.title": "How does EcoCommute work in 3 steps?", "how.step1_title": "1. Pick your path", "how.step1_desc": "See on the map which bike lane or walkway gets you through Lima faster and safer without traffic jams.", "how.step2_title": "2. Log your adventure", "how.step2_desc": "Save your ride in your logbook to see how much smoke you avoided, level up, and unlock badges.", "how.step3_title": "3. Redeem your prizes!", "how.step3_desc": "Trade your points for free coffee, bike rides, and park passes at friendly local shops in Lima.",
+    "nav.menu": "Menu",
     "nav.routes": "Map",
     "nav.vehicles": "Transport",
     "nav.impact": "Calculator",
@@ -224,8 +226,8 @@ const translations = {
     "hero.stat_car_sub": "CO₂ per kilometer",
     "hero.stat_eco_label": "By bike or foot",
     "hero.stat_eco_sub": "Direct emissions",
-    "hero.stat_saved_label": "CO₂ avoided today",
-    "hero.stat_saved_sub": "On active routes",
+    "hero.stat_saved_label": "Example savings",
+    "hero.stat_saved_sub": "CO₂ on a 4.2 km bike trip",
 
     "map.eyebrow": "Interactive map · Real routes in Lima",
     "map.by_bike": "by bike lane",
@@ -233,7 +235,7 @@ const translations = {
     "map.stat_dist": "Real distance",
     "map.stat_co2": "CO₂ avoided",
     "map.stat_points": "Savings & points",
-    "sim.btn_recycle_trip": "Log route",
+    "sim.simulate_trip": "Simulate trip",
 
         // Vehículos 4 cards
     "veh.eyebrow": "Urban mobility comparison",
@@ -297,8 +299,6 @@ const savedLang = localStorage.getItem("ecocommute_lang");
 let currentLang = savedLang === "en_US" ? "en_US" : "es_419";
 let currentCorridor = "miraflores";
 let currentKm = CORRIDORS.miraflores.km;
-let sessionRecycledGrams = 1920;
-let sessionTripsCount = 3;
 let alchemyTrips = 6;
 let alchemyKm = 4.2;
 
@@ -420,13 +420,6 @@ function setupLimaHeroMap() {
   limaRouteLayerGroup = L.layerGroup().addTo(limaMapInstance);
   updateLimaMapTiles();
   renderLimaMapRoute();
-}
-
-function updateSessionFloraBanner() {
-  const counterEl = document.getElementById("session-recycled-co2");
-  if (counterEl) {
-    counterEl.textContent = `${sessionRecycledGrams.toLocaleString()} g`;
-  }
 }
 
 function renderSimulatorMetrics() {
@@ -595,7 +588,6 @@ function applyTranslations(lang) {
     }
   }
 
-  updateSessionFloraBanner();
   renderSimulatorMetrics();
   renderAlchemyLab();
 }
@@ -668,7 +660,6 @@ function setupScrollAnimations() {
 
 function setupSimulator() {
   const corridorBtns = document.querySelectorAll(".corridor-btn");
-  const recycleBtn = document.getElementById("recycle-trip-btn");
   const routeTitleEl = document.getElementById("sim-route-title");
 
   corridorBtns.forEach((btn) => {
@@ -686,28 +677,6 @@ function setupSimulator() {
       routeTitleEl?.focus({ preventScroll: true });
     });
   });
-
-  if (recycleBtn) {
-    recycleBtn.addEventListener("click", () => {
-      const addedGrams = Math.round(currentKm * 152);
-      const earnedPts = Math.max(5, Math.round(currentKm * 3.57));
-      sessionRecycledGrams += addedGrams;
-      sessionTripsCount += 1;
-      updateSessionFloraBanner();
-
-      const labelSpan = recycleBtn.querySelector("[data-i18n='sim.btn_recycle_trip']");
-      if (labelSpan) {
-        const isEn = currentLang === "en_US";
-        labelSpan.textContent = isEn
-          ? `Route logged (+${earnedPts} pts)`
-          : `Ruta registrada (+${earnedPts} pts)`;
-        setTimeout(() => {
-          const dict = translations[currentLang] || translations.es_419;
-          labelSpan.textContent = dict["sim.btn_recycle_trip"];
-        }, 2200);
-      }
-    });
-  }
 }
 
 function setupAlchemyLab() {
@@ -823,7 +792,50 @@ function setupTransportTouchLive() {
   document.querySelectorAll(".transport-card").forEach((card) => observer.observe(card));
 }
 
+function setupLandingNavigation() {
+  const toggle = document.querySelector(".nav-toggle");
+  const nav = document.getElementById("landing-nav");
+  if (!toggle || !nav) return;
+
+  const topbar = toggle.closest(".topbar");
+  const compact = window.matchMedia("(max-width: 1120px)");
+  const isOpen = () => toggle.getAttribute("aria-expanded") === "true";
+  const setOpen = open => toggle.setAttribute("aria-expanded", String(open));
+
+  topbar.classList.add("has-mobile-menu");
+  toggle.addEventListener("click", () => setOpen(!isOpen()));
+
+  nav.addEventListener("click", event => {
+    const link = event.target.closest("a");
+    if (!compact.matches || !link) return;
+
+    setOpen(false);
+    if (link.hash && link.pathname === location.pathname) {
+      const section = document.getElementById(link.hash.slice(1));
+      section?.focus({ preventScroll: true });
+    }
+  });
+
+  topbar.addEventListener("keydown", event => {
+    if (event.key !== "Escape" || !isOpen()) return;
+    setOpen(false);
+    toggle.focus();
+  });
+
+  document.addEventListener("click", event => {
+    if (isOpen() && !topbar.contains(event.target)) setOpen(false);
+  });
+  topbar.addEventListener("focusout", event => {
+    if (event.relatedTarget && !topbar.contains(event.relatedTarget)) setOpen(false);
+  });
+  compact.addEventListener("change", () => {
+    if (compact.matches && nav.contains(document.activeElement)) toggle.focus();
+    setOpen(false);
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+  setupLandingNavigation();
   setupTransportParallax();
   setupTransportTouchLive();
   setupLimaHeroMap();
