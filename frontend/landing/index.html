@@ -60,7 +60,7 @@
     <!-- ==================== NAVBAR PLAYFUL ==================== -->
     <header class="topbar" role="banner">
       <div class="container topbar-inner">
-        <a class="brand" href="#inicio" aria-label="EcoCommute Inicio">
+        <a class="brand" href="#inicio" aria-label="EcoCommute Inicio" data-i18n-aria="aria.brand">
           <span class="brand-cartoon-badge">
             <img
               class="brand-logo"
@@ -80,7 +80,7 @@
           <span data-i18n="nav.menu">Menú</span>
         </button>
 
-        <nav id="landing-nav" class="nav" aria-label="Navegación principal">
+        <nav id="landing-nav" class="nav" aria-label="Navegación principal" data-i18n-aria="aria.mainNav">
           <a href="#como-funciona" data-i18n="nav.how">Cómo funciona</a>
           <a href="#simulador" data-i18n="nav.routes">Mapa</a>
           <a href="#vehiculos" data-i18n="nav.vehicles">Transporte</a>
@@ -95,14 +95,27 @@
         </nav>
 
         <div class="topbar-controls">
-          <div class="biome-switcher" id="theme-switcher" role="group" aria-label="Tema de color">
+          <button
+            type="button"
+            id="lang-toggle"
+            class="lang-toggle"
+            aria-label="Cambiar idioma (Español / English)"
+            data-i18n-aria="aria.lang"
+            aria-pressed="false"
+          >
+            <span class="lang-es active">ES</span>
+            <span class="lang-sep">/</span>
+            <span class="lang-en">EN</span>
+          </button>
+
+          <div class="biome-switcher" id="theme-switcher" role="group" aria-label="Tema de color" data-i18n-aria="aria.theme">
             <button
               type="button"
               class="biome-chip is-active"
               data-theme-target="light"
               aria-pressed="true"
             >
-              <span>Día</span>
+              <span data-i18n="theme.day">Día</span>
             </button>
             <button
               type="button"
@@ -110,7 +123,7 @@
               data-theme-target="dark"
               aria-pressed="false"
             >
-              <span>Noche</span>
+              <span data-i18n="theme.night">Noche</span>
             </button>
           </div>
         </div>
@@ -285,7 +298,7 @@
             </div>
 
             <!-- Resumen de métricas en píldoras cartoon -->
-            <dl class="hero-metrics" aria-label="Indicadores clave">
+            <dl class="hero-metrics" aria-label="Indicadores clave" data-i18n-aria="aria.heroMetrics">
               <div class="metric-item">
                 <dt data-i18n="hero.stat_car_label">En auto</dt>
                 <dd>
@@ -311,7 +324,7 @@
           </div>
 
           <!-- Columna Derecha dentro del gran círculo blanco: Mapa Interactivo de Lima -->
-          <aside id="simulador" tabindex="-1" class="sim-card" aria-label="Mapa de rutas en Lima" data-scroll-reveal>
+          <aside id="simulador" tabindex="-1" class="sim-card" aria-label="Mapa de rutas en Lima" data-i18n-aria="aria.simCard" data-scroll-reveal>
             <div class="sim-header">
               <div>
                 <span class="sim-eyebrow" data-i18n="map.eyebrow">Explora las rutas de Lima</span>
@@ -321,7 +334,7 @@
             </div>
 
             <!-- Selector de rutas predeterminadas -->
-            <div class="corridor-pills" role="group" aria-label="Rutas predeterminadas de Lima">
+            <div class="corridor-pills" role="group" aria-label="Rutas predeterminadas de Lima" data-i18n-aria="aria.presets">
               <button type="button" class="corridor-btn is-active" data-corridor="miraflores">
                 Miraflores → San Isidro
               </button>
@@ -338,7 +351,7 @@
 
             <!-- Mapa Real de Lima (Leaflet + Trazado de Ciclovía vs. Tráfico) -->
             <div class="lima-map-wrapper">
-              <div id="lima-hero-map" class="lima-hero-map" role="region" aria-label="Mapa interactivo del recorrido en Lima"></div>
+              <div id="lima-hero-map" class="lima-hero-map" role="region" aria-label="Mapa interactivo del recorrido en Lima" data-i18n-aria="aria.map"></div>
 
               <div class="map-floating-badges">
                 <span class="time-pill eco">
@@ -488,7 +501,7 @@
               </div>
               <div class="transport-card-media media-sky-green">
                 <!-- Ilustración Cartoon: Bicicleta Urbana Feliz en Ciclovía -->
-                <svg class="transport-cartoon-svg" viewBox="0 0 320 185" fill="none" role="img" aria-label="Ilustración estilizada de bicicleta urbana">
+                <svg class="transport-cartoon-svg" viewBox="0 0 320 185" fill="none" role="img" aria-label="Ilustración estilizada de bicicleta urbana" data-i18n-aria="aria.bikeArt">
     <defs>
       <linearGradient id="vBikeSky" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%" stop-color="#DCFCE7" />
@@ -631,7 +644,7 @@
             <article class="transport-card">
               <div class="transport-card-media media-sky-blue">
                 <!-- Ilustración Cartoon: Scooter Eléctrico con Rayitos de Energía -->
-                <svg class="transport-cartoon-svg" viewBox="0 0 320 185" fill="none" role="img" aria-label="Ilustración estilizada de scooter eléctrico">
+                <svg class="transport-cartoon-svg" viewBox="0 0 320 185" fill="none" role="img" aria-label="Ilustración estilizada de scooter eléctrico" data-i18n-aria="aria.scooterArt">
     <defs>
       <linearGradient id="vScootSky" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%" stop-color="#E0F2FE" />
@@ -767,7 +780,7 @@
             <article class="transport-card">
               <div class="transport-card-media media-sky-yellow">
                 <!-- Ilustración Cartoon: Bus / Metropolitano Alegre -->
-                <svg class="transport-cartoon-svg" viewBox="0 0 320 185" fill="none" role="img" aria-label="Ilustración estilizada de Bus Metropolitano">
+                <svg class="transport-cartoon-svg" viewBox="0 0 320 185" fill="none" role="img" aria-label="Ilustración estilizada de Bus Metropolitano" data-i18n-aria="aria.busArt">
     <defs>
       <linearGradient id="vBusSky" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%" stop-color="#FEF3C7" />
@@ -912,7 +925,7 @@
             <article class="transport-card is-traffic">
               <div class="transport-card-media media-sky-orange">
                 <!-- Ilustración Cartoon: Auto Atascado con Semáforo en Rojo y Nubes de Humo -->
-                <svg class="transport-cartoon-svg" viewBox="0 0 320 185" fill="none" role="img" aria-label="Ilustración estilizada de auto en hora punta">
+                <svg class="transport-cartoon-svg" viewBox="0 0 320 185" fill="none" role="img" aria-label="Ilustración estilizada de auto en hora punta" data-i18n-aria="aria.carArt">
     <defs>
       <linearGradient id="vCarSky" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%" stop-color="#FFEDD5" />
@@ -1054,7 +1067,7 @@
 
           <div class="alchemy-workbench" data-scroll-reveal>
             <div class="alchemy-controls-panel">
-              <div class="alchemy-preset-row" role="group" aria-label="Perfiles de viaje">
+              <div class="alchemy-preset-row" role="group" aria-label="Perfiles de viaje" data-i18n-aria="aria.profiles">
                 <button type="button" class="alchemy-preset" data-trips="4" data-km="3.5">
                   <span data-i18n="calc.preset_student">Estudiante (4 viajes/sem)</span>
                 </button>
@@ -1218,8 +1231,8 @@
           <strong>EcoCommute Lima</strong>
           <span>© 2026 EcoCommute · Ciudad Limpia y Feliz (ODS 11.2)</span>
         </div>
-        <nav class="footer-nav" aria-label="Enlaces secundarios">
-          <a href="./app/#/dashboard">¡Abrir Web App!</a>
+        <nav class="footer-nav" aria-label="Enlaces secundarios" data-i18n-aria="aria.footerNav">
+          <a href="./app/#/dashboard" data-i18n="nav.openApp">¡Abrir Web App!</a>
           <a href="#como-funciona" data-i18n="nav.how">Cómo funciona</a>
           <a href="#simulador" data-i18n="nav.routes">Mapa</a>
           <a href="#vehiculos" data-i18n="nav.vehicles">Transporte</a>
@@ -1234,6 +1247,6 @@
       crossorigin=""
       defer
     ></script>
-    <script src="./i18n.js?v=20261109d" defer></script>
+    <script src="./i18n.js?v=20261109e" defer></script>
   </body>
 </html>

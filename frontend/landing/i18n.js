@@ -126,6 +126,24 @@ const translations = {
   es_419: {
     "nav.skip": "Saltar al contenido", "nav.how": "Cómo funciona", "nav.webapp": "¡Entrar a la App!", "hero.kicker": "¡Muévete sin humo por Lima!", "hero.btn_webapp": "¡Empezar ahora!", "hero.btn_planner": "Ver mapa de rutas", "how.eyebrow": "¡Tan fácil como jugar!", "how.title": "¿Cómo funciona EcoCommute en 3 pasos?", "how.step1_title": "1. Elige tu camino", "how.step1_desc": "Mira en el mapa qué ciclovía o vereda te lleva más rápido y seguro por Lima sin quedarte atrapado en el tráfico.", "how.step2_title": "2. Anota tu aventura", "how.step2_desc": "Guarda tu recorrido en tu bitácora para ver cuánto humo evitaste, subir de nivel y desbloquear medallas.", "how.step3_title": "3. ¡Canjea tus premios!", "how.step3_desc": "Cambia tus puntos por cafés gratis, paseos en bici y entradas a parques en tiendas amigas de Lima.",
     "nav.menu": "Menú",
+    "meta.title": "EcoCommute — Muévete Feliz y Cuida Lima",
+    "theme.day": "Día",
+    "theme.night": "Noche",
+    "nav.openApp": "¡Abrir Web App!",
+    "aria.lang": "Cambiar idioma (Español / English)",
+    "aria.brand": "EcoCommute Inicio",
+    "aria.mainNav": "Navegación principal",
+    "aria.theme": "Tema de color",
+    "aria.heroMetrics": "Indicadores clave",
+    "aria.simCard": "Mapa de rutas en Lima",
+    "aria.presets": "Rutas predeterminadas de Lima",
+    "aria.map": "Mapa interactivo del recorrido en Lima",
+    "aria.bikeArt": "Ilustración estilizada de bicicleta urbana",
+    "aria.scooterArt": "Ilustración estilizada de scooter eléctrico",
+    "aria.busArt": "Ilustración estilizada de Bus Metropolitano",
+    "aria.carArt": "Ilustración estilizada de auto en hora punta",
+    "aria.profiles": "Perfiles de viaje",
+    "aria.footerNav": "Enlaces secundarios",
     "nav.routes": "Mapa",
     "nav.vehicles": "Transporte",
     "nav.impact": "Calculadora",
@@ -211,6 +229,24 @@ const translations = {
   en_US: {
     "nav.skip": "Skip to content", "nav.how": "How it works", "nav.webapp": "Enter the App!", "hero.kicker": "Move emission-free through Lima!", "hero.btn_webapp": "Start now!", "hero.btn_planner": "Explore route map", "how.eyebrow": "As easy as playing!", "how.title": "How does EcoCommute work in 3 steps?", "how.step1_title": "1. Pick your path", "how.step1_desc": "See on the map which bike lane or walkway gets you through Lima faster and safer without traffic jams.", "how.step2_title": "2. Log your adventure", "how.step2_desc": "Save your ride in your logbook to see how much smoke you avoided, level up, and unlock badges.", "how.step3_title": "3. Redeem your prizes!", "how.step3_desc": "Trade your points for free coffee, bike rides, and park passes at friendly local shops in Lima.",
     "nav.menu": "Menu",
+    "meta.title": "EcoCommute — Move Happy and Care for Lima",
+    "theme.day": "Day",
+    "theme.night": "Night",
+    "nav.openApp": "Open Web App!",
+    "aria.lang": "Change language (Español / English)",
+    "aria.brand": "EcoCommute Home",
+    "aria.mainNav": "Main navigation",
+    "aria.theme": "Color theme",
+    "aria.heroMetrics": "Key indicators",
+    "aria.simCard": "Lima route map",
+    "aria.presets": "Preset routes in Lima",
+    "aria.map": "Interactive map of the route in Lima",
+    "aria.bikeArt": "Stylized illustration of an urban bicycle",
+    "aria.scooterArt": "Stylized illustration of an electric scooter",
+    "aria.busArt": "Stylized illustration of a Metropolitano bus",
+    "aria.carArt": "Stylized illustration of a car in rush hour",
+    "aria.profiles": "Trip profiles",
+    "aria.footerNav": "Secondary links",
     "nav.routes": "Map",
     "nav.vehicles": "Transport",
     "nav.impact": "Calculator",
@@ -576,6 +612,17 @@ function applyTranslations(lang) {
       el.innerHTML = dict[key];
     }
   });
+
+  document.querySelectorAll("[data-i18n-aria]").forEach((el) => {
+    const key = el.getAttribute("data-i18n-aria");
+    if (dict[key] !== undefined) {
+      el.setAttribute("aria-label", dict[key]);
+    }
+  });
+
+  if (dict["meta.title"] !== undefined) {
+    document.title = dict["meta.title"];
+  }
 
   const toggleBtn = document.getElementById("lang-toggle");
   if (toggleBtn) {
