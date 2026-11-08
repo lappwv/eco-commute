@@ -5441,7 +5441,7 @@ app-leaderboard .podium-stepped-stage {
 
 /* Entre 1021px y 1120px: solo icono, el texto queda oculto visualmente (sigue legible para lectores de pantalla) */
 @media (min-width: 1021px) and (max-width: 1120px) {
-  .eco-nav-links a:not(.active) span {
+  .eco-nav-links a:not(.active) > span {
     position: absolute;
     width: 1px;
     height: 1px;
@@ -5990,5 +5990,19 @@ app-leaderboard .eco-card:hover {
     gap: 0.4rem !important;
     padding-left: 0.7rem !important;
     padding-right: 0.7rem !important;
+  }
+}
+
+
+/* PORTADA: el boton va pegado a la barra de navegacion, no al logo */
+@media (min-width: 1021px) {
+  .eco-nav-inner {
+    justify-content: flex-start;
+  }
+  .brand-cluster {
+    display: contents;
+  }
+  .landing-back-pill {
+    margin-left: auto;
   }
 }
