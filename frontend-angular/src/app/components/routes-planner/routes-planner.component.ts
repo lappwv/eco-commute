@@ -181,6 +181,7 @@ interface LimaPreset {
             <strong>{{ originName }} → {{ destName }}</strong>
             <div class="map-legend-pills">
               <span class="legend-chip eco"><i class="dot-green"></i> {{ i18n.t('routes.legendGreen') }}</span>
+              <span class="legend-chip direct"><i class="dot-blue"></i> {{ i18n.t('routes.legendDirect') }}</span>
               <span class="legend-chip car"><i class="dot-red"></i> {{ i18n.t('routes.legendCar') }}</span>
             </div>
           </div>

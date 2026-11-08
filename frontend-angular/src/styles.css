@@ -1126,6 +1126,7 @@ textarea {
 }
 
 .dot-green,
+.dot-blue,
 .dot-red {
   width: 9px;
   height: 9px;
@@ -1139,6 +1140,10 @@ textarea {
 
 .dot-red {
   background: #DC2626;
+}
+
+.dot-blue {
+  background: #2563EB;
 }
 
 .route-options-grid {
