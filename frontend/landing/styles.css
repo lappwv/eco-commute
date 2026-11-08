@@ -2849,3 +2849,10 @@ html[data-theme="dark"] .footer-rider.rider-b {
     left: 62%;
   }
 }
+/* Resaltar las tarjetas de los tres pasos */
+#como-funciona .how-step-card:hover,
+#como-funciona .how-step-card:focus-visible {
+  border-color: #000 !important;
+  outline: 2px solid #000 !important;
+  outline-offset: -1px;
+}
