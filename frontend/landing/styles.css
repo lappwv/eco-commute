@@ -821,7 +821,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .note-figures li span {
-  font-size: 0.72rem;
+  font-size: 0.8rem;
   color: var(--ink-muted);
 }
 
