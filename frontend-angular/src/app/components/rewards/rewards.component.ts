@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { ApiService } from '../../services/api.service';
 import { AuthService } from '../../services/auth.service';
 import { I18nService } from '../../services/i18n.service';
@@ -9,7 +12,7 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
 @Component({
   selector: 'app-rewards',
   standalone: true,
-  imports: [CommonModule, EcoIconComponent],
+  imports: [CommonModule, EcoIconComponent, MatButtonModule, MatCardModule, MatSnackBarModule],
   template: `
     <section class="page-section">
       <div class="section-header-row">
@@ -28,14 +31,6 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
             <strong>{{ u.currentPoints }} pts</strong>
           </div>
         </div>
-      </div>
-
-      <div class="toast-success" *ngIf="feedbackMsg">
-        <app-icon name="check" [size]="17"></app-icon>
-        <span>{{ feedbackMsg }}</span>
-      </div>
-      <div class="toast-error" *ngIf="errorMsg">
-        <span>{{ errorMsg }}</span>
       </div>
 
       <!-- Diseño Dividido sin Cajas Anidadas: Cupones Abiertos (Izq) + Columna Vertical de Retos y Canjes (Der) -->
@@ -65,6 +60,8 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
               <div class="ticket-stub-footer">
                 <span class="voucher-code">{{ r.code }}</span>
                 <button
+                  mat-flat-button
+                  color="primary"
                   type="button"
                   class="btn-emerald btn-compact"
                   [disabled]="(auth.currentUser?.currentPoints || 0) < r.pointsCost"
@@ -85,7 +82,7 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
         </div>
 
         <!-- Barra Vertical Derecha: Retos del Mes y Mis Cupones en 1 sola Columna Limpia -->
-        <aside class="eco-card rewards-sidebar-card">
+        <mat-card class="eco-card rewards-sidebar-card">
           <div class="sidebar-block">
             <h3>Retos colectivos del mes</h3>
             <p class="card-sub">Metas comunitarias activas en Lima</p>
@@ -124,7 +121,7 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
               <p class="empty-hint">Aún no tienes cupones canjeados. ¡Elige un beneficio de la izquierda!</p>
             </ng-template>
           </div>
-        </aside>
+        </mat-card>
       </div>
     </section>
   `
@@ -133,10 +130,13 @@ export class RewardsComponent implements OnInit {
   rewards: RewardItem[] = [];
   redemptions: RedemptionItem[] = [];
   challenges: ChallengeItem[] = [];
-  feedbackMsg = '';
-  errorMsg = '';
 
-  constructor(private api: ApiService, public auth: AuthService, public i18n: I18nService) {}
+  constructor(
+    private api: ApiService,
+    public auth: AuthService,
+    public i18n: I18nService,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.loadAll();
@@ -149,21 +149,23 @@ export class RewardsComponent implements OnInit {
   }
 
   onRedeem(r: RewardItem): void {
-    this.feedbackMsg = '';
-    this.errorMsg = '';
     try {
       this.api.redeemReward(r.id).subscribe({
         next: () => {
-          this.feedbackMsg = `Cupón generado para "${r.title}" (-${r.pointsCost} pts). Código disponible en tu lista.`;
+          this.snackBar.open(
+            `Cupón generado para "${r.title}" (-${r.pointsCost} pts). Código disponible en tu lista.`,
+            'Cerrar',
+            { duration: 5000 }
+          );
           this.loadAll();
         },
         error: err => {
-          this.errorMsg = err?.error?.message || 'No se pudo completar el canje.';
+          this.snackBar.open(err?.error?.message || 'No se pudo completar el canje.', 'Cerrar', { duration: 5000 });
         }
       });
     } catch (e: unknown) {
       const errObj = e as { error?: { message?: string } };
-      this.errorMsg = errObj?.error?.message || 'Saldo insuficiente para este beneficio.';
+      this.snackBar.open(errObj?.error?.message || 'Saldo insuficiente para este beneficio.', 'Cerrar', { duration: 5000 });
     }
   }
 
