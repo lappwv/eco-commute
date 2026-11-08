@@ -670,6 +670,7 @@ const ENGLISH_DICTIONARY: Record<string, string> = {
   'mode.form.CARPOOL': 'Carpool (85 g CO₂/km)',
   'mode.form.CAR_SOLO': 'Private Car (170 g CO₂/km)',
 
+  'level.1.title': 'Current level {level}',
   'level.name.1': 'Sustainable Explorer',
   'level.name.2': 'Urban Cyclist',
   'level.name.3': 'Clean Mobility Ambassador',
