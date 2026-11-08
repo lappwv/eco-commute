@@ -6006,3 +6006,22 @@ app-leaderboard .eco-card:hover {
     margin-left: auto;
   }
 }
+
+
+/* PORTADA: en todos los tamanos el boton queda junto a los controles, no pegado al logo */
+@media (max-width: 1020px) {
+  .eco-nav-inner {
+    justify-content: flex-start;
+  }
+  .brand-cluster {
+    display: contents;
+  }
+  .landing-back-pill {
+    margin-left: auto;
+  }
+}
+.landing-back-pill app-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
