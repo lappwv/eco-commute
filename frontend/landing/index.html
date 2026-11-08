@@ -340,8 +340,27 @@
             <h2 data-i18n="how.title">¿Cómo funciona EcoCommute en 3 pasos?</h2>
           </div>
 
+          <div class="how-flow">
+            <div class="how-track" aria-hidden="true">
+              <span class="how-track-line"></span>
+              <span class="how-track-fill"></span>
+              <span class="how-node n1">1</span>
+              <span class="how-node n2">2</span>
+              <span class="how-node n3">3</span>
+              <span class="how-rider">
+                <svg viewBox="0 0 54 34" fill="none">
+                  <g class="how-rider-wheel"><circle cx="11" cy="23" r="9" stroke="#1E241E" stroke-width="2.6" /><line x1="2.5" y1="23" x2="19.5" y2="23" stroke="#1E241E" stroke-width="1.3" /><line x1="11" y1="14.5" x2="11" y2="31.5" stroke="#1E241E" stroke-width="1.3" /></g>
+                  <g class="how-rider-wheel"><circle cx="43" cy="23" r="9" stroke="#1E241E" stroke-width="2.6" /><line x1="34.5" y1="23" x2="51.5" y2="23" stroke="#1E241E" stroke-width="1.3" /><line x1="43" y1="14.5" x2="43" y2="31.5" stroke="#1E241E" stroke-width="1.3" /></g>
+                  <path d="M11 23 L20 9 H34 L26 23 H11 Z" stroke="#16A34A" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" />
+                  <path d="M34 9 L43 23" stroke="#1E241E" stroke-width="2.6" stroke-linecap="round" />
+                  <path d="M31 6 H38" stroke="#1E241E" stroke-width="2.8" stroke-linecap="round" />
+                  <path d="M17 5 H24" stroke="#1E241E" stroke-width="3" stroke-linecap="round" />
+                  
+                </svg>
+              </span>
+            </div>
           <div class="how-it-works-strip" data-scroll-reveal>
-            <a href="./app/#/routes" class="how-step-card step-green">
+            <a href="./app/#/routes" class="how-step-card step-green" style="--i:0">
               <div class="how-step-top">
                 <span class="how-step-icon">
                   <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -358,7 +377,7 @@
               </p>
             </a>
 
-            <a href="./app/#/trips" class="how-step-card step-yellow">
+            <a href="./app/#/trips" class="how-step-card step-yellow" style="--i:1">
               <div class="how-step-top">
                 <span class="how-step-icon">
                   <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -376,7 +395,7 @@
               </p>
             </a>
 
-            <a href="./app/#/rewards" class="how-step-card step-blue">
+            <a href="./app/#/rewards" class="how-step-card step-blue" style="--i:2">
               <div class="how-step-top">
                 <span class="how-step-icon">
                   <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -391,6 +410,7 @@
                 Cambia tus puntos por cafés gratis, paseos en bici y entradas a parques en tiendas amigas de Lima.
               </p>
             </a>
+          </div>
           </div>
         </div>
       </section>
