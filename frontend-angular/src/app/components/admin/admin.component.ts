@@ -16,7 +16,7 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
         <div>
           <span class="eyebrow-tag">
             <app-icon name="shield" [size]="14"></app-icon>
-            Administración de Comunidad y Aliados
+            {{ i18n.t('admin.eyebrow') }}
           </span>
           <h1 class="page-title">{{ i18n.t('admin.title') }}</h1>
           <p class="page-subtitle">{{ i18n.t('admin.subtitle') }}</p>

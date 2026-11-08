@@ -30,7 +30,7 @@ interface LimaPreset {
         <div>
           <span class="eyebrow-tag">
             <app-icon name="route" [size]="14"></app-icon>
-            Simulador de Corredores Verdes · Lima
+            {{ i18n.t('routes.eyebrow') }}
           </span>
           <h1 class="page-title">{{ i18n.t('routes.title') }}</h1>
           <p class="page-subtitle">{{ i18n.t('routes.subtitle') }}</p>
