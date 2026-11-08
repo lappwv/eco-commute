@@ -3161,6 +3161,168 @@ html[data-theme="dark"] .footer-rider.rider-b {
   white-space: nowrap;
 }
 
+/* ---- Cómo funciona: recorrido con bici entre los 3 pasos ---- */
+.how-flow {
+  position: relative;
+  --how-x1: calc(16.667% - 0.4167rem);
+  --how-x2: 50%;
+  --how-x3: calc(83.333% + 0.4167rem);
+}
+
+.how-track {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  height: 64px;
+  align-items: center;
+  margin-bottom: 0.65rem;
+}
+
+.how-track-line,
+.how-track-fill {
+  position: absolute;
+  left: var(--how-x1);
+  top: 50%;
+  height: 5px;
+  border-radius: 3px;
+  transform: translateY(-50%);
+}
+
+.how-track-line {
+  right: calc(100% - var(--how-x3));
+  background: repeating-linear-gradient(90deg, rgba(30, 36, 30, 0.4) 0 12px, transparent 12px 22px);
+  background-size: 22px 100%;
+  animation: how-dash 0.9s linear infinite;
+}
+
+.how-track-fill {
+  width: 0;
+  background: #6CC016;
+  box-shadow: 0 0 0 1.5px #1E241E;
+  animation: how-fill 9s ease-in-out infinite;
+}
+
+.how-node {
+  position: relative;
+  z-index: 1;
+  justify-self: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: #1E241E;
+  background: #FFFFFF;
+  border: 2.5px solid #1E241E;
+  box-shadow: 0 3px 0 #1E241E;
+}
+
+html[data-theme="dark"] .how-node {
+  background: #1F3044;
+  color: #F8FAFC;
+  border-color: var(--sunny);
+  box-shadow: 0 3px 0 #0B121B;
+}
+
+.how-node.n1 { animation: how-node-1 9s ease-in-out infinite; }
+.how-node.n2 { animation: how-node-2 9s ease-in-out infinite; }
+.how-node.n3 { animation: how-node-3 9s ease-in-out infinite; }
+
+.how-rider {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: var(--how-x1);
+  width: 54px;
+  margin-top: -29px;
+  transform: translateX(-50%);
+  opacity: 0;
+  animation: how-ride 9s ease-in-out infinite;
+}
+
+.how-rider svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.how-rider-wheel {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: how-spin 0.7s linear infinite;
+}
+
+.how-step-icon svg {
+  animation: how-bob 3.2s ease-in-out infinite;
+}
+
+.how-step-card:nth-child(2) .how-step-icon svg { animation-delay: 0.4s; }
+.how-step-card:nth-child(3) .how-step-icon svg { animation-delay: 0.8s; }
+
+.how-it-works-strip.is-revealed .how-step-card {
+  animation: how-pop 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+  animation-delay: calc(var(--i, 0) * 130ms);
+}
+
+@keyframes how-dash {
+  to { background-position: 22px 0; }
+}
+@keyframes how-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes how-bob {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-3px) rotate(-5deg); }
+}
+@keyframes how-pop {
+  from { opacity: 0; transform: translateY(26px) scale(0.94); }
+}
+@keyframes how-ride {
+  0%   { left: var(--how-x1); opacity: 0; }
+  6%   { left: var(--how-x1); opacity: 1; }
+  38%  { left: var(--how-x2); opacity: 1; }
+  44%  { left: var(--how-x2); opacity: 0; }
+  52%  { left: var(--how-x2); opacity: 0; }
+  56%  { left: var(--how-x2); opacity: 1; }
+  86%  { left: var(--how-x3); opacity: 1; }
+  92%  { left: var(--how-x3); opacity: 0; }
+  100% { left: var(--how-x3); opacity: 0; }
+}
+@keyframes how-fill {
+  0%, 6%   { width: 0; opacity: 1; }
+  38%, 56% { width: calc(33.333% + 0.4167rem); opacity: 1; }
+  86%, 94% { width: calc(66.667% + 0.8333rem); opacity: 1; }
+  98%      { width: calc(66.667% + 0.8333rem); opacity: 0; }
+  100%     { width: 0; opacity: 0; }
+}
+@keyframes how-node-1 {
+  0%, 10% { transform: scale(1.18); background: var(--sunny); }
+  18%, 96% { transform: scale(1); background: #FFFFFF; }
+  100% { transform: scale(1.18); background: var(--sunny); }
+}
+@keyframes how-node-2 {
+  0%, 36% { transform: scale(1); background: #FFFFFF; }
+  44%, 56% { transform: scale(1.18); background: var(--sunny); }
+  64%, 100% { transform: scale(1); background: #FFFFFF; }
+}
+@keyframes how-node-3 {
+  0%, 84% { transform: scale(1); background: #FFFFFF; }
+  92%, 97% { transform: scale(1.18); background: var(--sunny); }
+  100% { transform: scale(1); background: #FFFFFF; }
+}
+
+@media (max-width: 900px) {
+  .how-track {
+    display: none;
+  }
+}
+
+
 /* ---- Olas entre secciones ---- */
 .how-section,
 #vehiculos,
