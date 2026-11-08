@@ -19,7 +19,7 @@ interface QuickCorridorOption {
   origin: string;
   destination: string;
   distanceLabel: string;
-  timeLabel: string;
+  timeMinutes: number;
 }
 
 @Component({
@@ -45,48 +45,48 @@ interface QuickCorridorOption {
         <div class="cartoon-banner-copy">
           <span class="eyebrow-tag hero-eyebrow-pill">
             <app-icon name="leaf" [size]="15"></app-icon>
-            <span>Hola, {{ s.fullName }} · Nivel {{ s.currentLevel }}</span>
+            <span>{{ i18n.tn('dash.heroGreeting', { name: s.fullName, level: s.currentLevel }) }}</span>
           </span>
-          <h1 class="cartoon-banner-title">Pedalea, ahorra y transforma Lima</h1>
+          <h1 class="cartoon-banner-title">{{ i18n.t('dash.heroTitle') }}</h1>
           <p class="cartoon-banner-sub">
-            Planifica tus recorridos por ciclovías segregadas, evita la congestión vehicular y convierte cada kilómetro limpio en beneficios reales.
+            {{ i18n.t('dash.heroSubtitle') }}
           </p>
 
           <!-- Buscador Rápido de Origen / Destino con Acción Principal "Iniciar ruta" -->
-          <div class="quick-route-launcher" role="region" aria-label="Planificador rápido de ruta">
+          <div class="quick-route-launcher" role="region" [attr.aria-label]="i18n.t('dash.quickRouteRegionLabel')">
             <mat-form-field appearance="outline" class="quick-route-field">
               <mat-label>
                 <app-icon name="pin" [size]="14"></app-icon>
-                Corredor rápido (Origen → Destino)
+                {{ i18n.t('dash.quickRouteLabel') }}
               </mat-label>
-              <mat-select [(ngModel)]="selectedQuickPreset" aria-label="Seleccionar ruta rápida en Lima">
+              <mat-select [(ngModel)]="selectedQuickPreset" [attr.aria-label]="i18n.t('dash.quickRouteSelectAria')">
                 <mat-option *ngFor="let c of quickCorridors" [value]="c.index">
-                  {{ c.origin }} → {{ c.destination }} ({{ c.distanceLabel }} · {{ c.timeLabel }})
+                  {{ c.origin }} → {{ c.destination }} ({{ c.distanceLabel }} · {{ i18n.tn('dash.bikeLaneMinutes', { min: c.timeMinutes }) }})
                 </mat-option>
               </mat-select>
             </mat-form-field>
 
             <button mat-flat-button color="primary" type="button" class="btn-start-route" (click)="launchQuickRoute()">
               <app-icon name="route" [size]="18"></app-icon>
-              <span>Iniciar ruta</span>
+              <span>{{ i18n.t('dash.startRoute') }}</span>
             </button>
           </div>
 
           <!-- Guía informativa lineal de los 3 pasos -->
-          <div class="hero-steps-guide" aria-label="Cómo funciona en 3 pasos">
+          <div class="hero-steps-guide" [attr.aria-label]="i18n.t('dash.stepsAriaLabel')">
             <a routerLink="/routes" class="step-guide-item active-step">
               <span class="step-guide-num">1</span>
-              <span>Planifica tu ruta</span>
+              <span>{{ i18n.t('dash.step1') }}</span>
             </a>
             <span class="step-guide-sep" aria-hidden="true">→</span>
             <a routerLink="/trips" class="step-guide-item">
               <span class="step-guide-num">2</span>
-              <span>Anota tu viaje</span>
+              <span>{{ i18n.t('dash.step2') }}</span>
             </a>
             <span class="step-guide-sep" aria-hidden="true">→</span>
             <a routerLink="/rewards" class="step-guide-item">
               <span class="step-guide-num">3</span>
-              <span>Canjea premios</span>
+              <span>{{ i18n.t('dash.step3') }}</span>
             </a>
           </div>
         </div>
@@ -314,45 +314,45 @@ interface QuickCorridorOption {
         <div class="section-divider-head">
           <span class="section-step-badge">01</span>
           <div>
-            <h2 class="section-block-title">Tu impacto personal acumulado</h2>
-            <p class="section-block-sub">Métricas verificadas a partir de tus recorridos registrados en Lima</p>
+            <h2 class="section-block-title">{{ i18n.t('dash.section1Title') }}</h2>
+            <p class="section-block-sub">{{ i18n.t('dash.section1Sub') }}</p>
           </div>
         </div>
 
-        <div class="eco-stat-ribbon" aria-label="Resumen de impacto personal">
+        <div class="eco-stat-ribbon" [attr.aria-label]="i18n.t('dash.personalSummaryAria')">
           <div class="ribbon-metric accent-green">
             <span class="ribbon-icon tint-green"><app-icon name="leaf" [size]="26"></app-icon></span>
             <div class="ribbon-copy">
-              <span class="ribbon-label">CO₂ evitado total</span>
+              <span class="ribbon-label">{{ i18n.t('dash.co2Saved') }}</span>
               <strong class="ribbon-val"><span [appCountUp]="s.totalCo2SavedKg" [decimals]="2"></span> <small>kg</small></strong>
-              <span class="ribbon-sub">≈ {{ s.treesEquivalent | number: '1.1-1' }} árboles urbanos</span>
+              <span class="ribbon-sub">{{ i18n.tn('dash.treesApprox', { count: (s.treesEquivalent | number: '1.1-1') }) }}</span>
             </div>
           </div>
 
           <div class="ribbon-metric accent-amber">
             <span class="ribbon-icon tint-yellow"><app-icon name="bike" [size]="26"></app-icon></span>
             <div class="ribbon-copy">
-              <span class="ribbon-label">Recorrido sostenible</span>
+              <span class="ribbon-label">{{ i18n.t('dash.distance') }}</span>
               <strong class="ribbon-val"><span [appCountUp]="s.totalDistanceKm" [decimals]="1"></span> <small>km</small></strong>
-              <span class="ribbon-sub">{{ s.totalTrips }} recorridos registrados</span>
+              <span class="ribbon-sub">{{ i18n.tn(s.totalTrips === 1 ? 'dash.tripsRegisteredOne' : 'dash.tripsRegisteredOther', { count: s.totalTrips }) }}</span>
             </div>
           </div>
 
           <div class="ribbon-metric accent-sky">
             <span class="ribbon-icon tint-blue"><app-icon name="bolt" [size]="26"></app-icon></span>
             <div class="ribbon-copy">
-              <span class="ribbon-label">Puntos disponibles</span>
+              <span class="ribbon-label">{{ i18n.t('dash.points') }}</span>
               <strong class="ribbon-val"><span [appCountUp]="s.currentPoints"></span> <small>pts</small></strong>
-              <a routerLink="/rewards" class="ribbon-link">Canjear beneficios →</a>
+              <a routerLink="/rewards" class="ribbon-link">{{ i18n.t('dash.redeemLink') }}</a>
             </div>
           </div>
 
           <div class="ribbon-metric accent-coral">
             <span class="ribbon-icon tint-orange"><app-icon name="flame" [size]="26"></app-icon></span>
             <div class="ribbon-copy">
-              <span class="ribbon-label">Energía activa</span>
+              <span class="ribbon-label">{{ i18n.t('dash.calories') }}</span>
               <strong class="ribbon-val"><span [appCountUp]="s.totalCaloriesBurned"></span> <small>kcal</small></strong>
-              <span class="ribbon-sub">Calorías quemadas en ruta</span>
+              <span class="ribbon-sub">{{ i18n.t('dash.caloriesSub') }}</span>
             </div>
           </div>
         </div>
@@ -363,8 +363,8 @@ interface QuickCorridorOption {
         <div class="section-divider-head">
           <span class="section-step-badge">02</span>
           <div>
-            <h2 class="section-block-title">Evolución semanal, rutas sugeridas y comunidad</h2>
-            <p class="section-block-sub">Detalle diario de emisiones evitadas y avance colectivo en la ciudad</p>
+            <h2 class="section-block-title">{{ i18n.t('dash.section2Title') }}</h2>
+            <p class="section-block-sub">{{ i18n.t('dash.section2Sub') }}</p>
           </div>
         </div>
 
@@ -373,13 +373,13 @@ interface QuickCorridorOption {
           <mat-card class="eco-card dash-main-chart-card">
             <div class="card-head-row">
               <div>
-                <h2>Emisiones evitadas esta semana</h2>
-                <p class="card-sub">Gramos de CO₂ que evitaste emitir cada día de la semana</p>
+                <h2>{{ i18n.t('dash.weeklyTitle') }}</h2>
+                <p class="card-sub">{{ i18n.t('dash.weeklySub') }}</p>
               </div>
               <mat-chip-set>
                 <mat-chip disableRipple>
                   <app-icon name="leaf" [size]="15"></app-icon>
-                  <span>Últimos 7 días</span>
+                  <span>{{ i18n.t('dash.last7days') }}</span>
                 </mat-chip>
               </mat-chip-set>
             </div>
@@ -400,8 +400,8 @@ interface QuickCorridorOption {
 
             <div class="chart-divider-Section">
               <div class="split-header-inline">
-                <h3>Cómo te moviste</h3>
-                <span>Distribución de tus {{ s.totalTrips }} viajes</span>
+                <h3>{{ i18n.t('dash.modeSplit') }}</h3>
+                <span>{{ i18n.tn('dash.modeDistribution', { count: s.totalTrips }) }}</span>
               </div>
               <div class="mode-bars">
                 <div class="mode-row" *ngFor="let m of getModeEntries(s.tripsByMode); trackBy: trackByMode">
@@ -414,7 +414,7 @@ interface QuickCorridorOption {
                     mode="determinate"
                     [value]="(m.count / Math.max(1, s.totalTrips)) * 100"
                   ></mat-progress-bar>
-                  <span class="mode-count">{{ m.count }} {{ m.count === 1 ? 'viaje' : 'viajes' }}</span>
+                  <span class="mode-count">{{ m.count }} {{ i18n.plural(m.count, 'dash.tripSingular', 'dash.tripsPlural') }}</span>
                 </div>
               </div>
             </div>
@@ -427,13 +427,13 @@ interface QuickCorridorOption {
               <div class="advisor-callout-top">
                 <span class="advisor-spark-icon"><app-icon name="spark" [size]="20"></app-icon></span>
                 <div>
-                  <span class="advisor-kicker">Ruta recomendada de hoy</span>
+                  <span class="advisor-kicker">{{ i18n.t('dash.advisorKicker') }}</span>
                   <h3>{{ rec.title }}</h3>
                 </div>
               </div>
               <p class="advisor-text">{{ rec.recommendation }}</p>
               <a routerLink="/routes" class="inline-action-link">
-                <span>Abrir ruta sugerida en el mapa</span>
+                <span>{{ i18n.t('dash.openSuggestedRoute') }}</span>
                 <app-icon name="arrow-right" [size]="15"></app-icon>
               </a>
             </div>
@@ -442,22 +442,22 @@ interface QuickCorridorOption {
             <div class="vertical-timeline-section">
               <div class="timeline-group" *ngIf="community as c">
                 <div class="timeline-head">
-                  <h3>Impacto colectivo en Lima</h3>
-                  <a routerLink="/leaderboard" class="link-emerald">Ver ranking →</a>
+                  <h3>{{ i18n.t('dash.collectiveImpactShort') }}</h3>
+                  <a routerLink="/leaderboard" class="link-emerald">{{ i18n.t('dash.viewRanking') }}</a>
                 </div>
                 <ul class="vertical-stat-list">
                   <li>
                     <span class="v-stat-dot green"><app-icon name="leaf" [size]="18"></app-icon></span>
                     <div class="v-stat-body">
-                      <strong>{{ c.totalCo2SavedTons | number: '1.2-2' }} toneladas de CO₂</strong>
-                      <span>Evitadas entre {{ c.totalActiveUsers }} vecinos activos</span>
+                      <strong>{{ i18n.tn('dash.tonsCo2', { value: (c.totalCo2SavedTons | number: '1.2-2') }) }}</strong>
+                      <span>{{ i18n.tn('dash.avoidedAmongNeighbors', { count: c.totalActiveUsers }) }}</span>
                     </div>
                   </li>
                   <li>
                     <span class="v-stat-dot yellow"><app-icon name="bike" [size]="18"></app-icon></span>
                     <div class="v-stat-body">
-                      <strong>{{ c.totalCleanKm | number: '1.0-0' }} km sin humo</strong>
-                      <span>Equivalentes a {{ c.totalTreesEquivalent | number: '1.0-0' }} árboles urbanos</span>
+                      <strong>{{ i18n.tn('dash.cleanKm', { value: (c.totalCleanKm | number: '1.0-0') }) }}</strong>
+                      <span>{{ i18n.tn('dash.equivalentTrees', { count: (c.totalTreesEquivalent | number: '1.0-0') }) }}</span>
                     </div>
                   </li>
                 </ul>
@@ -465,8 +465,8 @@ interface QuickCorridorOption {
 
               <div class="timeline-group">
                 <div class="timeline-head">
-                  <h3>Tus medallas recientes</h3>
-                  <a routerLink="/gamification" class="link-emerald">Ver todas →</a>
+                  <h3>{{ i18n.t('dash.recentBadges') }}</h3>
+                  <a routerLink="/gamification" class="link-emerald">{{ i18n.t('dash.viewAll') }}</a>
                 </div>
                 <div class="vertical-medals-list">
                   <div
@@ -478,7 +478,7 @@ interface QuickCorridorOption {
                       <app-icon [name]="b.code || b.iconEmoji" [size]="20"></app-icon>
                     </span>
                     <div class="v-medal-copy">
-                      <strong>{{ b.title }}</strong>
+                      <strong>{{ i18n.tc('badge', b.code, 'title', b.title) }}</strong>
                       <mat-progress-bar class="v-medal-bar" mode="determinate" [value]="b.progressPercent"></mat-progress-bar>
                     </div>
                     <span class="v-medal-pct">{{ b.progressPercent }}%</span>
@@ -505,28 +505,28 @@ export class DashboardComponent implements OnInit {
       origin: 'San Isidro (Centro Financiero)',
       destination: 'Miraflores (Parque Kennedy)',
       distanceLabel: '3.6 km',
-      timeLabel: '12 min en ciclovía'
+      timeMinutes: 12
     },
     {
       index: 1,
       origin: 'Jesús María (Av. Salaverry)',
       destination: 'San Isidro (Óvalo Gutiérrez)',
       distanceLabel: '4.2 km',
-      timeLabel: '14 min en ciclovía'
+      timeMinutes: 14
     },
     {
       index: 2,
       origin: 'Miraflores (Parque Kennedy)',
       destination: 'Barranco (Plaza Municipal)',
       distanceLabel: '3.1 km',
-      timeLabel: '11 min en ciclovía'
+      timeMinutes: 11
     },
     {
       index: 3,
       origin: 'Ciudad Universitaria (UNMSM)',
       destination: 'Centro Histórico (Plaza San Martín)',
       distanceLabel: '5.4 km',
-      timeLabel: '18 min en ciclovía'
+      timeMinutes: 18
     }
   ];
 
@@ -570,52 +570,45 @@ export class DashboardComponent implements OnInit {
   formatDay(day: string): string {
     if (!day) return '';
     const clean = day.trim().toUpperCase();
-    const dayMap: Record<string, string> = {
-      MON: 'Lun',
-      MONDAY: 'Lun',
-      LUN: 'Lun',
-      LUNES: 'Lun',
-      TUE: 'Mar',
-      TUESDAY: 'Mar',
-      MAR: 'Mar',
-      MARTES: 'Mar',
-      WED: 'Mié',
-      WEDNESDAY: 'Mié',
-      MIE: 'Mié',
-      MIÉ: 'Mié',
-      MIERCOLES: 'Mié',
-      MIÉRCOLES: 'Mié',
-      THU: 'Jue',
-      THURSDAY: 'Jue',
-      JUE: 'Jue',
-      JUEVES: 'Jue',
-      FRI: 'Vie',
-      FRIDAY: 'Vie',
-      VIE: 'Vie',
-      VIERNES: 'Vie',
-      SAT: 'Sáb',
-      SATURDAY: 'Sáb',
-      SAB: 'Sáb',
-      SÁB: 'Sáb',
-      SABADO: 'Sáb',
-      SÁBADO: 'Sáb',
-      SUN: 'Dom',
-      SUNDAY: 'Dom',
-      DOM: 'Dom',
-      DOMINGO: 'Dom'
+    const canonicalMap: Record<string, string> = {
+      MON: 'MON',
+      MONDAY: 'MON',
+      LUN: 'MON',
+      LUNES: 'MON',
+      TUE: 'TUE',
+      TUESDAY: 'TUE',
+      MAR: 'TUE',
+      MARTES: 'TUE',
+      WED: 'WED',
+      WEDNESDAY: 'WED',
+      MIE: 'WED',
+      MIÉ: 'WED',
+      MIERCOLES: 'WED',
+      MIÉRCOLES: 'WED',
+      THU: 'THU',
+      THURSDAY: 'THU',
+      JUE: 'THU',
+      JUEVES: 'THU',
+      FRI: 'FRI',
+      FRIDAY: 'FRI',
+      VIE: 'FRI',
+      VIERNES: 'FRI',
+      SAT: 'SAT',
+      SATURDAY: 'SAT',
+      SAB: 'SAT',
+      SÁB: 'SAT',
+      SABADO: 'SAT',
+      SÁBADO: 'SAT',
+      SUN: 'SUN',
+      SUNDAY: 'SUN',
+      DOM: 'SUN',
+      DOMINGO: 'SUN'
     };
-    return dayMap[clean] || day;
+    const canonical = canonicalMap[clean];
+    return canonical ? this.i18n.t(`day.${canonical}`) : day;
   }
 
   formatMode(mode: string): string {
-    const names: Record<string, string> = {
-      BICYCLE: 'Bicicleta',
-      WALKING: 'Caminata',
-      ELECTRIC_SCOOTER: 'Scooter eléctrico',
-      PUBLIC_TRANSIT: 'Transporte público',
-      CARPOOL: 'Auto compartido',
-      CAR_SOLO: 'Automóvil'
-    };
-    return names[mode] || mode;
+    return this.i18n.t(`mode.full.${mode}`);
   }
 }

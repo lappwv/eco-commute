@@ -48,47 +48,47 @@ type ModeFilter = TransportMode | 'ALL';
         <mat-card class="eco-card trips-vertical-form-card">
           <div class="card-head-row">
             <div>
-              <h2>{{ editingTripId ? 'Editar recorrido' : 'Anotar nuevo viaje' }}</h2>
-              <p class="card-sub">Calculamos al instante tu ahorro de CO₂ y puntos</p>
+              <h2>{{ editingTripId ? i18n.t('trips.editTitle') : i18n.t('trips.newTitle') }}</h2>
+              <p class="card-sub">{{ i18n.t('trips.formSub') }}</p>
             </div>
             <mat-chip-set *ngIf="editingTripId">
               <mat-chip disableRipple>
                 <app-icon name="edit" [size]="13"></app-icon>
-                <span>Editando</span>
+                <span>{{ i18n.t('trips.editing') }}</span>
               </mat-chip>
             </mat-chip-set>
           </div>
 
           <form (ngSubmit)="saveTrip()" class="eco-form-vertical">
             <mat-form-field appearance="outline" class="full-width">
-              <mat-label>Medio de transporte</mat-label>
+              <mat-label>{{ i18n.t('trips.transportMode') }}</mat-label>
               <mat-select [(ngModel)]="form.transportMode" name="transportMode" required>
-                <mat-option value="BICYCLE">Bicicleta Mecánica (0 g CO₂/km)</mat-option>
-                <mat-option value="WALKING">Caminata Peatonal (0 g CO₂/km)</mat-option>
-                <mat-option value="ELECTRIC_SCOOTER">Scooter / Bici Eléctrica (15 g CO₂/km)</mat-option>
-                <mat-option value="PUBLIC_TRANSIT">Transporte Público (45 g CO₂/km)</mat-option>
-                <mat-option value="CARPOOL">Auto Compartido (85 g CO₂/km)</mat-option>
-                <mat-option value="CAR_SOLO">Automóvil Particular (170 g CO₂/km)</mat-option>
+                <mat-option value="BICYCLE">{{ i18n.t('mode.form.BICYCLE') }}</mat-option>
+                <mat-option value="WALKING">{{ i18n.t('mode.form.WALKING') }}</mat-option>
+                <mat-option value="ELECTRIC_SCOOTER">{{ i18n.t('mode.form.ELECTRIC_SCOOTER') }}</mat-option>
+                <mat-option value="PUBLIC_TRANSIT">{{ i18n.t('mode.form.PUBLIC_TRANSIT') }}</mat-option>
+                <mat-option value="CARPOOL">{{ i18n.t('mode.form.CARPOOL') }}</mat-option>
+                <mat-option value="CAR_SOLO">{{ i18n.t('mode.form.CAR_SOLO') }}</mat-option>
               </mat-select>
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="full-width">
-              <mat-label>Punto de partida</mat-label>
-              <input matInput type="text" [(ngModel)]="form.originName" name="originName" required placeholder="Ej. San Isidro" />
+              <mat-label>{{ i18n.t('trips.origin') }}</mat-label>
+              <input matInput type="text" [(ngModel)]="form.originName" name="originName" required [placeholder]="i18n.t('trips.originPlaceholder')" />
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="full-width">
-              <mat-label>Destino</mat-label>
-              <input matInput type="text" [(ngModel)]="form.destinationName" name="destinationName" required placeholder="Ej. Miraflores" />
+              <mat-label>{{ i18n.t('trips.destination') }}</mat-label>
+              <input matInput type="text" [(ngModel)]="form.destinationName" name="destinationName" required [placeholder]="i18n.t('trips.destinationPlaceholder')" />
             </mat-form-field>
 
             <div class="form-row-2">
               <mat-form-field appearance="outline">
-                <mat-label>Distancia (km)</mat-label>
+                <mat-label>{{ i18n.t('trips.distanceKm') }}</mat-label>
                 <input matInput type="number" step="0.1" min="0.1" [(ngModel)]="form.distanceKm" name="distanceKm" required />
               </mat-form-field>
               <mat-form-field appearance="outline">
-                <mat-label>Duración (min)</mat-label>
+                <mat-label>{{ i18n.t('trips.durationMin') }}</mat-label>
                 <input matInput type="number" min="1" [(ngModel)]="form.durationMinutes" name="durationMinutes" required />
               </mat-form-field>
             </div>
@@ -96,15 +96,15 @@ type ModeFilter = TransportMode | 'ALL';
             <!-- Resumen Vertical/Compacto en lugar de 4 cajas separadas -->
             <div class="live-impact-strip">
               <div>
-                <span>Evitas emitir</span>
+                <span>{{ i18n.t('trips.avoidsEmitting') }}</span>
                 <strong class="text-emerald">-{{ getPreviewSaved() }} g CO₂</strong>
               </div>
               <div>
-                <span>Energía</span>
+                <span>{{ i18n.t('trips.energy') }}</span>
                 <strong>{{ getPreviewCalories() }} kcal</strong>
               </div>
               <div>
-                <span>Ganas</span>
+                <span>{{ i18n.t('trips.earns') }}</span>
                 <strong class="text-emerald">+{{ getPreviewPoints() }} pts</strong>
               </div>
             </div>
@@ -112,10 +112,10 @@ type ModeFilter = TransportMode | 'ALL';
             <div class="form-actions-stack">
               <button mat-flat-button color="primary" type="submit" class="btn-emerald full-width">
                 <app-icon [name]="editingTripId ? 'check' : 'plus'" [size]="16"></app-icon>
-                <span>{{ editingTripId ? 'Guardar cambios' : 'Añadir a mi bitácora' }}</span>
+                <span>{{ editingTripId ? i18n.t('trips.saveChanges') : i18n.t('trips.addToLog') }}</span>
               </button>
               <button mat-stroked-button type="button" class="full-width" *ngIf="editingTripId" (click)="cancelEdit()">
-                <span>Cancelar edición</span>
+                <span>{{ i18n.t('trips.cancelEdit') }}</span>
               </button>
             </div>
           </form>
@@ -129,13 +129,13 @@ type ModeFilter = TransportMode | 'ALL';
         <!-- Columna Derecha: Línea de Tiempo / Lista Vertical de Viajes (Sin tabla congestionada de 10 columnas) -->
         <div class="trips-feed-column">
           <div class="feed-header-inline">
-            <h2>Historial en tu bitácora</h2>
-            <span class="trips-filter-counter">{{ filteredTrips.length }} de {{ trips.length }}</span>
+            <h2>{{ i18n.t('trips.historyTitle') }}</h2>
+            <span class="trips-filter-counter">{{ i18n.tn('trips.counterOf', { count: filteredTrips.length, total: trips.length }) }}</span>
           </div>
 
-          <div class="preset-chips-row trips-mode-filters" role="group" aria-label="Filtrar por medio de transporte">
+          <div class="preset-chips-row trips-mode-filters" role="group" [attr.aria-label]="i18n.t('trips.filterModeAria')">
             <button type="button" class="chip-btn" [attr.aria-pressed]="selectedMode === 'ALL'" [class.active]="selectedMode === 'ALL'" (click)="setModeFilter('ALL')">
-              <strong>Todos</strong>
+              <strong>{{ i18n.t('trips.filterAll') }}</strong>
             </button>
             <button
               type="button"
@@ -149,22 +149,22 @@ type ModeFilter = TransportMode | 'ALL';
             </button>
           </div>
 
-          <div class="preset-chips-row trips-period-filters" role="group" aria-label="Filtrar por periodo">
+          <div class="preset-chips-row trips-period-filters" role="group" [attr.aria-label]="i18n.t('trips.filterPeriodAria')">
             <button type="button" class="chip-btn" [attr.aria-pressed]="selectedPeriod === 'ALL'" [class.active]="selectedPeriod === 'ALL'" (click)="setPeriodFilter('ALL')">
-              <strong>Todos</strong>
+              <strong>{{ i18n.t('trips.filterAll') }}</strong>
             </button>
             <button type="button" class="chip-btn" [attr.aria-pressed]="selectedPeriod === 'LAST_7'" [class.active]="selectedPeriod === 'LAST_7'" (click)="setPeriodFilter('LAST_7')">
-              <strong>Últimos 7 días</strong>
+              <strong>{{ i18n.t('trips.last7days') }}</strong>
             </button>
             <button type="button" class="chip-btn" [attr.aria-pressed]="selectedPeriod === 'LAST_30'" [class.active]="selectedPeriod === 'LAST_30'" (click)="setPeriodFilter('LAST_30')">
-              <strong>Últimos 30 días</strong>
+              <strong>{{ i18n.t('trips.last30days') }}</strong>
             </button>
           </div>
 
           <div class="trips-empty-state" *ngIf="filteredTrips.length === 0">
             <app-icon name="route" [size]="26"></app-icon>
-            <strong>Sin resultados para estos filtros</strong>
-            <span>Prueba con otro medio de transporte o periodo.</span>
+            <strong>{{ i18n.t('trips.emptyTitle') }}</strong>
+            <span>{{ i18n.t('trips.emptySub') }}</span>
           </div>
 
           <div class="trips-timeline-list" *ngIf="filteredTrips.length > 0">
@@ -186,11 +186,11 @@ type ModeFilter = TransportMode | 'ALL';
                 <div class="trip-feed-meta">
                   <span>{{ formatShortMode(t.transportMode) }}</span>
                   <span>·</span>
-                  <span>{{ t.distanceKm | number: '1.1-2' }} km en {{ t.durationMinutes }} min</span>
+                  <span>{{ i18n.tn('trips.tripMeta', { distance: (t.distanceKm | number: '1.1-2'), duration: t.durationMinutes }) }}</span>
                   <span>·</span>
                   <span>{{ t.caloriesBurned }} kcal</span>
                   <span>·</span>
-                  <span>{{ t.completedAt | date: 'dd/MM/yyyy HH:mm' }}</span>
+                  <span>{{ i18n.formatDate(t.completedAt) }}</span>
                 </div>
               </div>
 
@@ -200,10 +200,10 @@ type ModeFilter = TransportMode | 'ALL';
               </div>
 
               <div class="trip-feed-actions">
-                <button mat-icon-button type="button" class="btn-table-action" (click)="startEdit(t)" title="Editar recorrido" aria-label="Editar recorrido">
+                <button mat-icon-button type="button" class="btn-table-action" (click)="startEdit(t)" [title]="i18n.t('trips.editTooltip')" [attr.aria-label]="i18n.t('trips.editTooltip')">
                   <app-icon name="edit" [size]="14"></app-icon>
                 </button>
-                <button mat-icon-button type="button" class="btn-table-action danger" (click)="removeTrip(t)" title="Eliminar recorrido" aria-label="Eliminar recorrido">
+                <button mat-icon-button type="button" class="btn-table-action danger" (click)="removeTrip(t)" [title]="i18n.t('trips.deleteTooltip')" [attr.aria-label]="i18n.t('trips.deleteTooltip')">
                   <app-icon name="trash" [size]="14"></app-icon>
                 </button>
               </div>
@@ -326,13 +326,20 @@ export class TripsComponent implements OnInit {
     if (this.editingTripId) {
       const id = this.editingTripId;
       this.api.updateTrip(id, this.form).subscribe(updated => {
-        this.feedbackMsg = `Recorrido actualizado: ${updated.originName} → ${updated.destinationName} (-${updated.co2SavedGrams} g CO₂).`;
+        this.feedbackMsg = this.i18n.tn('trips.updatedMsg', {
+          origin: updated.originName,
+          destination: updated.destinationName,
+          co2: updated.co2SavedGrams
+        });
         this.editingTripId = null;
         this.loadTrips();
       });
     } else {
       this.api.recordTrip(this.form).subscribe(created => {
-        this.feedbackMsg = `Recorrido registrado: evitaste ${created.co2SavedGrams} g de CO₂ y sumaste +${created.pointsEarned} pts.`;
+        this.feedbackMsg = this.i18n.tn('trips.createdMsg', {
+          co2: created.co2SavedGrams,
+          points: created.pointsEarned
+        });
         this.loadTrips();
       });
     }
@@ -361,7 +368,7 @@ export class TripsComponent implements OnInit {
 
   removeTrip(t: TripResponse): void {
     this.api.deleteTrip(t.id).subscribe(() => {
-      this.feedbackMsg = `Se eliminó el recorrido (${t.originName} → ${t.destinationName}).`;
+      this.feedbackMsg = this.i18n.tn('trips.deletedMsg', { origin: t.originName, destination: t.destinationName });
       if (this.editingTripId === t.id) {
         this.editingTripId = null;
       }
@@ -370,14 +377,6 @@ export class TripsComponent implements OnInit {
   }
 
   formatShortMode(mode: TransportMode): string {
-    const map: Record<TransportMode, string> = {
-      BICYCLE: 'Bicicleta',
-      WALKING: 'Caminata',
-      ELECTRIC_SCOOTER: 'Scooter eléc.',
-      PUBLIC_TRANSIT: 'Transp. público',
-      CARPOOL: 'Carpool',
-      CAR_SOLO: 'Automóvil'
-    };
-    return map[mode] || mode;
+    return this.i18n.t(`mode.short.${mode}`);
   }
 }
