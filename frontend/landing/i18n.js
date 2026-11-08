@@ -552,18 +552,23 @@ function renderAlchemyLab(fromZero) {
   if (tripsOut) tripsOut.textContent = isEn ? `${alchemyTrips} rides/wk` : `${alchemyTrips} viajes/sem`;
   if (kmOut) kmOut.textContent = `${alchemyKm.toFixed(1)} km`;
 
+  const figNum = (el) => (el ? el.querySelector(".fig-num") : null);
+  const setUnit = (el, text) => {
+    const unit = el ? el.querySelector(".fig-unit") : null;
+    if (unit) unit.textContent = text;
+  };
+
   tickNumber(annualKgEl, annualKg, 1, (v) => v.toFixed(1), from);
-  tickNumber(fuelEl, fuelLiters, 0, (v) => (isEn ? `${Math.round(v)} L / yr` : `${Math.round(v)} L / año`), from);
-  tickNumber(hoursEl, trafficHours, 0, (v) => (isEn ? `${Math.round(v)} h / yr` : `${Math.round(v)} h / año`), from);
-  tickNumber(
-    petEl,
-    petBottles,
-    0,
-    (v) => (isEn ? `${Math.round(v).toLocaleString()} bottles` : `${Math.round(v).toLocaleString()} botellas`),
-    from
-  );
-  tickNumber(treesEl, trees, 1, (v) => (isEn ? `${v.toFixed(1)} trees` : `${v.toFixed(1)} árboles`), from);
-  tickNumber(ptsEl, greenPoints, 0, (v) => `+${Math.round(v).toLocaleString()} pts`, from);
+  tickNumber(figNum(fuelEl), fuelLiters, 0, (v) => String(Math.round(v)), from);
+  setUnit(fuelEl, isEn ? "L / yr" : "L / año");
+  tickNumber(figNum(hoursEl), trafficHours, 0, (v) => String(Math.round(v)), from);
+  setUnit(hoursEl, isEn ? "h / yr" : "h / año");
+  tickNumber(figNum(petEl), petBottles, 0, (v) => Math.round(v).toLocaleString(), from);
+  setUnit(petEl, isEn ? "bottles" : "botellas");
+  tickNumber(figNum(treesEl), trees, 1, (v) => v.toFixed(1), from);
+  setUnit(treesEl, isEn ? "trees" : "árboles");
+  tickNumber(figNum(ptsEl), greenPoints, 0, (v) => "+" + Math.round(v).toLocaleString(), from);
+  setUnit(ptsEl, "pts");
 }
 
 function applyTranslations(lang) {
@@ -639,10 +644,12 @@ function setupThemeSwitcher() {
 
 function setupScrollAnimations() {
   const elements = document.querySelectorAll("[data-scroll-reveal]");
-  if (!("IntersectionObserver" in window)) {
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!("IntersectionObserver" in window) || prefersReduced) {
     elements.forEach((el) => el.classList.add("is-revealed"));
     return;
   }
+  document.documentElement.classList.add("js-reveal-ready");
 
   const observer = new IntersectionObserver(
     (entries) => {
