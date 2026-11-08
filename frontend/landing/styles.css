@@ -738,7 +738,7 @@ html[data-theme="dark"] .time-pill.car {
   gap: 0.75rem;
 }
 
-.sim-footer-bar .btn-recycle-action {
+.sim-footer-bar .btn-simulate-trip {
   width: auto;
   white-space: nowrap;
   padding: 0.78rem 1.15rem;
@@ -844,9 +844,12 @@ input[type="range"]::-moz-range-thumb {
   line-height: 1.5;
 }
 
-.btn-recycle-action {
+.btn-simulate-trip {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  appearance: none;
+  text-decoration: none;
   background: var(--accent);
   color: #FFFFFF;
   border: none;
@@ -859,11 +862,11 @@ input[type="range"]::-moz-range-thumb {
   transition: background-color 0.18s ease, transform 0.18s ease;
 }
 
-html[data-theme="dark"] .btn-recycle-action {
+html[data-theme="dark"] .btn-simulate-trip {
   color: #0B0E0C;
 }
 
-.btn-recycle-action:hover {
+.btn-simulate-trip:hover {
   background: var(--accent-hover);
   transform: translateY(-1px);
 }
@@ -1287,7 +1290,7 @@ html[data-theme="dark"] .btn-recycle-action {
     grid-template-columns: 1fr;
   }
 
-  .sim-footer-bar .btn-recycle-action {
+  .sim-footer-bar .btn-simulate-trip {
     width: 100%;
   }
 
@@ -1907,7 +1910,7 @@ html[data-theme="dark"] .note-figures li {
   background: #283D56 !important;
 }
 
-.btn-recycle-action {
+.btn-simulate-trip {
   background: var(--sunny) !important;
   color: #1E241E !important;
   border: 2.5px solid #1E241E !important;
@@ -2250,7 +2253,7 @@ html[data-theme="light"] {
 .transport-co2-pill,
 .alchemy-preset,
 .corridor-btn,
-.btn-recycle-action {
+.btn-simulate-trip {
   border-width: 2px !important;
   box-shadow: 0 2px 0 rgba(30, 36, 30, 0.48) !important;
 }
@@ -2469,7 +2472,7 @@ b,
 .corridor-tag,
 .corridor-btn,
 .corridor-btn.is-active,
-.btn-recycle-action,
+.btn-simulate-trip,
 .alchemy-preset,
 .impact-stat-label {
   font-weight: 600 !important;
@@ -2634,7 +2637,7 @@ html[data-theme="dark"] .section.alt {
 .transport-co2-pill,
 .alchemy-preset,
 .corridor-btn,
-.btn-recycle-action {
+.btn-simulate-trip {
   border-width: 1px !important;
   box-shadow: 0 4px 12px rgba(13, 26, 19, 0.1) !important;
   font-family: 'Plus Jakarta Sans', sans-serif !important;
