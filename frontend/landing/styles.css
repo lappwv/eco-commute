@@ -2852,9 +2852,13 @@ html[data-theme="dark"] .footer-rider.rider-b {
 /* Resaltar las tarjetas de los tres pasos */
 #como-funciona .how-step-card:hover,
 #como-funciona .how-step-card:focus-visible {
-  border-color: #000 !important;
-  outline: 2px solid #000 !important;
+  border-color: var(--how-step-outline, #000) !important;
+  outline: 2px solid var(--how-step-outline, #000) !important;
   outline-offset: -1px;
+}
+
+html[data-theme="dark"] #como-funciona {
+  --how-step-outline: #FFF;
 }
 
 /* ==================== COMPARATIVA: ESCENAS ANIMADAS AL HACER HOVER ==================== */
@@ -3203,7 +3207,7 @@ html.js-reveal-ready [data-scroll-reveal].is-revealed {
 
 .how-track-line {
   right: calc(100% - var(--how-x3));
-  background: repeating-linear-gradient(90deg, rgba(30, 36, 30, 0.4) 0 12px, transparent 12px 22px);
+  background: repeating-linear-gradient(90deg, var(--how-track-dash, rgba(30, 36, 30, 0.4)) 0 12px, transparent 12px 22px);
   background-size: 22px 100%;
   animation: how-dash 0.9s linear infinite;
 }
@@ -3228,13 +3232,18 @@ html.js-reveal-ready [data-scroll-reveal].is-revealed {
   font-weight: 800;
   font-size: 1.05rem;
   color: #1E241E;
-  background: #FFFFFF;
+  background: var(--how-node-bg, #FFF);
   border: 2.5px solid #1E241E;
   box-shadow: 0 3px 0 #1E241E;
 }
 
+html[data-theme="dark"] .how-track {
+  --how-track-dash: var(--ink-muted);
+  --how-node-bg: #1F3044;
+  --how-node-active-bg: #365314;
+}
+
 html[data-theme="dark"] .how-node {
-  background: #1F3044;
   color: #F8FAFC;
   border-color: var(--sunny);
   box-shadow: 0 3px 0 #0B121B;
@@ -3251,9 +3260,20 @@ html[data-theme="dark"] .how-node {
   left: var(--how-x1);
   width: 54px;
   margin-top: -29px;
+  color: #1E241E;
   transform: translateX(-50%);
   opacity: 0;
   animation: how-ride 9s ease-in-out infinite;
+}
+
+html[data-theme="dark"] .how-rider {
+  --how-rider-frame: var(--accent);
+  color: var(--ink);
+  margin-top: -60px;
+}
+
+html[data-theme="dark"] .how-step-card.step-yellow .how-step-icon {
+  color: var(--ink);
 }
 
 .how-rider svg {
@@ -3267,6 +3287,10 @@ html[data-theme="dark"] .how-node {
   transform-box: fill-box;
   transform-origin: center;
   animation: how-spin 0.7s linear infinite;
+}
+
+.how-step-card.step-yellow .how-step-icon {
+  color: #1E241E;
 }
 
 .how-step-icon svg {
@@ -3313,19 +3337,19 @@ html[data-theme="dark"] .how-node {
   100%     { width: 0; opacity: 0; }
 }
 @keyframes how-node-1 {
-  0%, 10% { transform: scale(1.18); background: var(--sunny); }
-  18%, 96% { transform: scale(1); background: #FFFFFF; }
-  100% { transform: scale(1.18); background: var(--sunny); }
+  0%, 10% { transform: scale(1.18); background: var(--how-node-active-bg, var(--sunny)); }
+  18%, 96% { transform: scale(1); background: var(--how-node-bg, #FFF); }
+  100% { transform: scale(1.18); background: var(--how-node-active-bg, var(--sunny)); }
 }
 @keyframes how-node-2 {
-  0%, 36% { transform: scale(1); background: #FFFFFF; }
-  44%, 56% { transform: scale(1.18); background: var(--sunny); }
-  64%, 100% { transform: scale(1); background: #FFFFFF; }
+  0%, 36% { transform: scale(1); background: var(--how-node-bg, #FFF); }
+  44%, 56% { transform: scale(1.18); background: var(--how-node-active-bg, var(--sunny)); }
+  64%, 100% { transform: scale(1); background: var(--how-node-bg, #FFF); }
 }
 @keyframes how-node-3 {
-  0%, 84% { transform: scale(1); background: #FFFFFF; }
-  92%, 97% { transform: scale(1.18); background: var(--sunny); }
-  100% { transform: scale(1); background: #FFFFFF; }
+  0%, 84% { transform: scale(1); background: var(--how-node-bg, #FFF); }
+  92%, 97% { transform: scale(1.18); background: var(--how-node-active-bg, var(--sunny)); }
+  100% { transform: scale(1); background: var(--how-node-bg, #FFF); }
 }
 
 @media (max-width: 900px) {
