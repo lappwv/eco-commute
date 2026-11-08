@@ -4382,6 +4382,7 @@ h1, h2, h3, h4,
 
 .eco-navbar .brand-text strong {
   color: var(--text-main) !important;
+  text-shadow: none !important;
   font-size: 1.18rem !important;
   font-weight: 800 !important;
 }
