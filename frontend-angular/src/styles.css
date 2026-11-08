@@ -6053,6 +6053,11 @@ app-leaderboard .eco-card:hover {
   }
 }
 
+/* DIALOGO DE CONFIRMACION: boton destructivo en rojo (la paleta "warn" del tema sigue el verde) */
+.mat-mdc-dialog-container button.mat-warn {
+  --mdc-filled-button-container-color: var(--danger);
+}
+
 .trips-empty-state {
   display: flex;
   flex-direction: column;
