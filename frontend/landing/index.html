@@ -421,7 +421,7 @@
               </div>
               <div class="transport-card-media media-sky-green">
                 <!-- Ilustración Cartoon: Bicicleta Urbana Feliz en Ciclovía -->
-                <svg class="transport-cartoon-svg" viewBox="0 0 320 185" fill="none" aria-label="Ilustración estilizada de bicicleta urbana">
+                <svg class="transport-cartoon-svg" viewBox="0 0 320 185" fill="none" role="img" aria-label="Ilustración estilizada de bicicleta urbana">
     <defs>
       <linearGradient id="vBikeSky" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%" stop-color="#DCFCE7" />
@@ -431,53 +431,105 @@
         <stop offset="0%" stop-color="#10B981" />
         <stop offset="100%" stop-color="#047857" />
       </linearGradient>
+      <!-- Capas del fondo (se repiten cada 320 px para el scroll infinito) -->
+      <g id="vBikeCloud">
+        <g fill="#FFFFFF" opacity="0.8">
+          <ellipse cx="0" cy="0" rx="17" ry="7" />
+          <ellipse cx="-11" cy="2" rx="9" ry="5" />
+          <ellipse cx="11" cy="3" rx="10" ry="5" />
+        </g>
+      </g>
+      <g id="vBikeFar">
+        <rect x="24" y="38" width="34" height="110" rx="4" fill="#BBF7D0" opacity="0.65" />
+        <rect x="66" y="24" width="42" height="124" rx="4" fill="#86EFAC" opacity="0.45" />
+        <rect x="234" y="32" width="44" height="116" rx="4" fill="#BBF7D0" opacity="0.6" />
+        <ellipse cx="52" cy="126" rx="34" ry="24" fill="#22C55E" opacity="0.35" />
+        <ellipse cx="268" cy="124" rx="38" ry="26" fill="#16A34A" opacity="0.3" />
+      </g>
+      <g id="vBikeMid">
+        <rect x="12" y="110" width="5" height="38" rx="2" fill="#92400E" opacity="0.55" />
+        <circle cx="14.5" cy="104" r="14" fill="#16A34A" opacity="0.6" />
+        <rect x="156" y="116" width="5" height="32" rx="2" fill="#92400E" opacity="0.55" />
+        <circle cx="158.5" cy="110" r="12" fill="#15803D" opacity="0.55" />
+        <rect x="288" y="110" width="5" height="38" rx="2" fill="#92400E" opacity="0.55" />
+        <circle cx="290.5" cy="104" r="14" fill="#16A34A" opacity="0.6" />
+      </g>
     </defs>
     <rect width="320" height="185" fill="url(#vBikeSky)" />
-    <!-- Skyline suave y arboleda de Av. Arequipa -->
-    <rect x="24" y="38" width="34" height="110" rx="4" fill="#BBF7D0" opacity="0.65" />
-    <rect x="66" y="24" width="42" height="124" rx="4" fill="#86EFAC" opacity="0.45" />
-    <rect x="234" y="32" width="44" height="116" rx="4" fill="#BBF7D0" opacity="0.6" />
-    <ellipse cx="52" cy="126" rx="34" ry="24" fill="#22C55E" opacity="0.35" />
-    <ellipse cx="268" cy="124" rx="38" ry="26" fill="#16A34A" opacity="0.3" />
-    <!-- Ciclovía en perspectiva -->
+    <!-- Nubes -->
+    <g class="veh-par veh-par-sky"><g class="veh-layer veh-sky">
+      <use href="#vBikeCloud" x="86" y="24" />
+      <use href="#vBikeCloud" x="236" y="42" />
+      <use href="#vBikeCloud" x="406" y="24" />
+      <use href="#vBikeCloud" x="556" y="42" />
+    </g></g>
+    <!-- Skyline y arboleda de Av. Arequipa -->
+    <g class="veh-par veh-par-far"><g class="veh-layer veh-far">
+      <use href="#vBikeFar" />
+      <use href="#vBikeFar" x="320" />
+    </g></g>
+    <g class="veh-par veh-par-mid"><g class="veh-layer veh-mid">
+      <use href="#vBikeMid" />
+      <use href="#vBikeMid" x="320" />
+    </g></g>
+    <!-- Ciclovía -->
     <rect x="0" y="146" width="320" height="5" fill="#CBD5E1" />
     <rect x="0" y="151" width="320" height="34" fill="#15803D" />
-    <line x1="20" y1="168" x2="300" y2="168" stroke="#DCFCE7" stroke-width="2.4" stroke-dasharray="18 14" stroke-linecap="round" />
+    <line class="veh-road" style="--dash:-32px" x1="0" y1="168" x2="320" y2="168" stroke="#DCFCE7" stroke-width="2.4" stroke-dasharray="18 14" stroke-linecap="round" />
+    <!-- Líneas de velocidad -->
+    <g stroke="#34D399" stroke-width="2.6" stroke-linecap="round">
+      <line class="veh-speed" style="--d:0s" x1="22" y1="76" x2="58" y2="76" />
+      <line class="veh-speed" style="--d:.3s" x1="14" y1="96" x2="52" y2="96" />
+      <line class="veh-speed" style="--d:.6s" x1="26" y1="116" x2="60" y2="116" />
+    </g>
     <!-- Sombra -->
     <ellipse cx="160" cy="153" rx="76" ry="5.5" fill="#052E16" opacity="0.32" />
-    <!-- Ruedas de aleación con rayos y discos -->
-    <g transform="translate(98, 118)">
-      <circle r="31" stroke="#0F172A" stroke-width="5.5" />
-      <circle r="26.5" stroke="#94A3B8" stroke-width="1.8" />
-      <line x1="-25" y1="0" x2="25" y2="0" stroke="#94A3B8" stroke-width="1" />
-      <line x1="0" y1="-25" x2="0" y2="25" stroke="#94A3B8" stroke-width="1" />
-      <line x1="-18" y1="-18" x2="18" y2="18" stroke="#94A3B8" stroke-width="1" />
-      <line x1="-18" y1="18" x2="18" y2="-18" stroke="#94A3B8" stroke-width="1" />
-      <circle r="7.5" stroke="#64748B" stroke-width="1.6" />
-      <circle r="3.5" fill="#0F172A" />
-    </g>
-    <g transform="translate(222, 118)">
-      <circle r="31" stroke="#0F172A" stroke-width="5.5" />
-      <circle r="26.5" stroke="#94A3B8" stroke-width="1.8" />
-      <line x1="-25" y1="0" x2="25" y2="0" stroke="#94A3B8" stroke-width="1" />
-      <line x1="0" y1="-25" x2="0" y2="25" stroke="#94A3B8" stroke-width="1" />
-      <line x1="-18" y1="-18" x2="18" y2="18" stroke="#94A3B8" stroke-width="1" />
-      <line x1="-18" y1="18" x2="18" y2="-18" stroke="#94A3B8" stroke-width="1" />
-      <circle r="7.5" stroke="#64748B" stroke-width="1.6" />
-      <circle r="3.5" fill="#0F172A" />
-    </g>
-    <!-- Cuadro estilizado de geometría urbana -->
-    <path d="M98 118 L134 68 H194 L154 118 H98 Z" stroke="url(#vBikeFrame)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" />
-    <line x1="126" y1="53" x2="154" y2="118" stroke="#1E293B" stroke-width="4.5" stroke-linecap="round" />
-    <line x1="222" y1="118" x2="191" y2="48" stroke="#334155" stroke-width="4.5" stroke-linecap="round" />
-    <!-- Parrilla trasera y alforja -->
-    <path d="M92 82 H126 L112 114" stroke="#475569" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
-    <!-- Sillín de cuero y manubrio -->
-    <path d="M113 50 C118 46, 134 47, 140 51 C136 55, 118 55, 113 50 Z" fill="#78350F" />
-    <path d="M180 48 H199 C204 48 206 51 203 55" stroke="#0F172A" stroke-width="4.2" stroke-linecap="round" />
-    <circle cx="205" cy="60" r="4" fill="#FACC15" />
-    <polygon points="209,58 268,46 268,74" fill="#FEF08A" opacity="0.45" />
-    <circle cx="154" cy="118" r="8.5" fill="#0F172A" stroke="#10B981" stroke-width="2.2" />
+    <!-- Hojitas eco -->
+    <g transform="translate(138,44)"><path class="veh-leaf" style="--d:0s" d="M0 6 C-6 0 -4 -8 4 -10 C8 -4 6 4 0 6Z" fill="#8CE52E" stroke="#1E241E" stroke-width="1.2" /></g>
+    <g transform="translate(176,36)"><path class="veh-leaf" style="--d:.7s" d="M0 6 C-6 0 -4 -8 4 -10 C8 -4 6 4 0 6Z" fill="#8CE52E" stroke="#1E241E" stroke-width="1.2" /></g>
+    <g transform="translate(112,40)"><path class="veh-leaf" style="--d:1.4s" d="M0 6 C-6 0 -4 -8 4 -10 C8 -4 6 4 0 6Z" fill="#8CE52E" stroke="#1E241E" stroke-width="1.2" /></g>
+    <!-- Bicicleta -->
+    <g class="veh-par veh-par-rig"><g class="veh-bob">
+      <!-- Ruedas de aleación con rayos y discos -->
+      <g transform="translate(98, 118)"><g class="veh-wheel" style="--spin:.9s">
+        <circle r="31" stroke="#0F172A" stroke-width="5.5" />
+        <circle r="26.5" stroke="#94A3B8" stroke-width="1.8" />
+        <line x1="-25" y1="0" x2="25" y2="0" stroke="#94A3B8" stroke-width="1" />
+        <line x1="0" y1="-25" x2="0" y2="25" stroke="#94A3B8" stroke-width="1" />
+        <line x1="-18" y1="-18" x2="18" y2="18" stroke="#94A3B8" stroke-width="1" />
+        <line x1="-18" y1="18" x2="18" y2="-18" stroke="#94A3B8" stroke-width="1" />
+        <circle r="7.5" stroke="#64748B" stroke-width="1.6" />
+        <circle r="3.5" fill="#0F172A" />
+      </g></g>
+      <g transform="translate(222, 118)"><g class="veh-wheel" style="--spin:.9s">
+        <circle r="31" stroke="#0F172A" stroke-width="5.5" />
+        <circle r="26.5" stroke="#94A3B8" stroke-width="1.8" />
+        <line x1="-25" y1="0" x2="25" y2="0" stroke="#94A3B8" stroke-width="1" />
+        <line x1="0" y1="-25" x2="0" y2="25" stroke="#94A3B8" stroke-width="1" />
+        <line x1="-18" y1="-18" x2="18" y2="18" stroke="#94A3B8" stroke-width="1" />
+        <line x1="-18" y1="18" x2="18" y2="-18" stroke="#94A3B8" stroke-width="1" />
+        <circle r="7.5" stroke="#64748B" stroke-width="1.6" />
+        <circle r="3.5" fill="#0F172A" />
+      </g></g>
+      <!-- Cuadro estilizado de geometría urbana -->
+      <path d="M98 118 L134 68 H194 L154 118 H98 Z" stroke="url(#vBikeFrame)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" />
+      <line x1="126" y1="53" x2="154" y2="118" stroke="#1E293B" stroke-width="4.5" stroke-linecap="round" />
+      <line x1="222" y1="118" x2="191" y2="48" stroke="#334155" stroke-width="4.5" stroke-linecap="round" />
+      <!-- Parrilla trasera -->
+      <path d="M92 82 H126 L112 114" stroke="#475569" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+      <!-- Sillín de cuero y manubrio -->
+      <path d="M113 50 C118 46, 134 47, 140 51 C136 55, 118 55, 113 50 Z" fill="#78350F" />
+      <path d="M180 48 H199 C204 48 206 51 203 55" stroke="#0F172A" stroke-width="4.2" stroke-linecap="round" />
+      <circle cx="205" cy="60" r="4" fill="#FACC15" />
+      <polygon class="veh-beam" points="209,58 268,46 268,74" fill="#FEF08A" opacity="0.45" />
+      <!-- Plato y pedales -->
+      <circle cx="154" cy="118" r="8.5" fill="#0F172A" stroke="#10B981" stroke-width="2.2" />
+      <g transform="translate(154,118)"><g class="veh-wheel" style="--spin:.9s">
+        <line x1="-13" y1="0" x2="13" y2="0" stroke="#0F172A" stroke-width="3" stroke-linecap="round" />
+        <rect x="-17" y="-2.5" width="8" height="5" rx="2" fill="#475569" />
+        <rect x="9" y="-2.5" width="8" height="5" rx="2" fill="#475569" />
+      </g></g>
+    </g></g>
   </svg>
                 <span class="transport-co2-pill eco">0 g CO₂</span>
               </div>
@@ -512,7 +564,7 @@
             <article class="transport-card">
               <div class="transport-card-media media-sky-blue">
                 <!-- Ilustración Cartoon: Scooter Eléctrico con Rayitos de Energía -->
-                <svg class="transport-cartoon-svg" viewBox="0 0 320 185" fill="none" aria-label="Ilustración estilizada de scooter eléctrico">
+                <svg class="transport-cartoon-svg" viewBox="0 0 320 185" fill="none" role="img" aria-label="Ilustración estilizada de scooter eléctrico">
     <defs>
       <linearGradient id="vScootSky" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%" stop-color="#E0F2FE" />
@@ -522,42 +574,98 @@
         <stop offset="0%" stop-color="#334155" />
         <stop offset="100%" stop-color="#0F172A" />
       </linearGradient>
+      <g id="vScootCloud">
+        <g fill="#FFFFFF" opacity="0.85">
+          <ellipse cx="0" cy="0" rx="17" ry="7" />
+          <ellipse cx="-11" cy="2" rx="9" ry="5" />
+          <ellipse cx="11" cy="3" rx="10" ry="5" />
+        </g>
+      </g>
+      <g id="vScootFar">
+        <rect x="30" y="34" width="46" height="114" rx="5" fill="#BAE6FD" opacity="0.55" />
+        <rect x="86" y="52" width="38" height="96" rx="5" fill="#BAE6FD" opacity="0.38" />
+        <rect x="236" y="28" width="52" height="120" rx="5" fill="#BAE6FD" opacity="0.5" />
+        <g fill="#FFFFFF" opacity="0.55">
+          <rect x="40" y="46" width="8" height="8" rx="2" /><rect x="56" y="46" width="8" height="8" rx="2" />
+          <rect x="40" y="64" width="8" height="8" rx="2" /><rect x="56" y="64" width="8" height="8" rx="2" />
+          <rect x="248" y="42" width="8" height="8" rx="2" /><rect x="268" y="42" width="8" height="8" rx="2" />
+          <rect x="248" y="60" width="8" height="8" rx="2" /><rect x="268" y="60" width="8" height="8" rx="2" />
+        </g>
+      </g>
+      <g id="vScootMid">
+        <g stroke="#64748B" stroke-width="3" stroke-linecap="round" opacity="0.7">
+          <line x1="18" y1="148" x2="18" y2="84" /><line x1="18" y1="84" x2="30" y2="84" />
+          <line x1="150" y1="148" x2="150" y2="84" /><line x1="150" y1="84" x2="162" y2="84" />
+          <line x1="282" y1="148" x2="282" y2="84" /><line x1="282" y1="84" x2="294" y2="84" />
+        </g>
+        <g fill="#FEF08A">
+          <circle cx="30" cy="87" r="4" /><circle cx="162" cy="87" r="4" /><circle cx="294" cy="87" r="4" />
+        </g>
+      </g>
     </defs>
     <rect width="320" height="185" fill="url(#vScootSky)" />
-    <!-- Edificios modernos sutiles -->
-    <rect x="30" y="34" width="46" height="114" rx="5" fill="#BAE6FD" opacity="0.55" />
-    <rect x="86" y="52" width="38" height="96" rx="5" fill="#BAE6FD" opacity="0.38" />
-    <rect x="236" y="28" width="52" height="120" rx="5" fill="#BAE6FD" opacity="0.5" />
+    <g class="veh-par veh-par-sky"><g class="veh-layer veh-sky">
+      <use href="#vScootCloud" x="120" y="22" />
+      <use href="#vScootCloud" x="268" y="40" />
+      <use href="#vScootCloud" x="440" y="22" />
+      <use href="#vScootCloud" x="588" y="40" />
+    </g></g>
+    <!-- Edificios modernos -->
+    <g class="veh-par veh-par-far"><g class="veh-layer veh-far">
+      <use href="#vScootFar" />
+      <use href="#vScootFar" x="320" />
+    </g></g>
+    <g class="veh-par veh-par-mid"><g class="veh-layer veh-mid">
+      <use href="#vScootMid" />
+      <use href="#vScootMid" x="320" />
+    </g></g>
     <!-- Senda urbana -->
     <rect x="0" y="148" width="320" height="4" fill="#CBD5E1" />
     <rect x="0" y="152" width="320" height="33" fill="#0F172A" />
-    <line x1="24" y1="168" x2="296" y2="168" stroke="#38BDF8" stroke-opacity="0.65" stroke-width="2.2" stroke-dasharray="16 12" stroke-linecap="round" />
+    <line class="veh-road" style="--dash:-28px" x1="0" y1="168" x2="320" y2="168" stroke="#38BDF8" stroke-opacity="0.65" stroke-width="2.2" stroke-dasharray="16 12" stroke-linecap="round" />
+    <!-- Líneas de velocidad -->
+    <g stroke="#38BDF8" stroke-width="2.6" stroke-linecap="round">
+      <line class="veh-speed" style="--d:0s" x1="20" y1="82" x2="56" y2="82" />
+      <line class="veh-speed" style="--d:.25s" x1="12" y1="104" x2="50" y2="104" />
+      <line class="veh-speed" style="--d:.5s" x1="24" y1="126" x2="62" y2="126" />
+    </g>
     <ellipse cx="162" cy="153" rx="68" ry="5" fill="#020617" opacity="0.4" />
-    <!-- Ruedas macizas honeycomb -->
-    <g transform="translate(102, 131)">
-      <circle r="21" fill="#0F172A" />
-      <circle r="14" fill="#334155" stroke="#38BDF8" stroke-width="2" />
-      <circle r="5" fill="#E2E8F0" />
-    </g>
-    <g transform="translate(218, 131)">
-      <circle r="21" fill="#0F172A" />
-      <circle r="14" fill="#334155" stroke="#10B981" stroke-width="2" />
-      <circle r="5" fill="#E2E8F0" />
-    </g>
-    <!-- Guardabarros trasero con luz LED -->
-    <path d="M80 124 C84 108, 106 106, 118 122" stroke="#1E293B" stroke-width="5" stroke-linecap="round" />
-    <circle cx="81" cy="121" r="3" fill="#EF4444" />
-    <!-- Plataforma aluminio + tira LED verde -->
-    <rect x="104" y="124" width="102" height="11" rx="5.5" fill="url(#vScootStem)" />
-    <line x1="114" y1="129.5" x2="196" y2="129.5" stroke="#10B981" stroke-width="2.6" stroke-linecap="round" />
-    <!-- Cuello reforzado y columna de dirección -->
-    <path d="M196 128 L212 108 L196 38" stroke="url(#vScootStem)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
-    <line x1="218" y1="131" x2="208" y2="96" stroke="#64748B" stroke-width="5" stroke-linecap="round" />
-    <!-- Display digital y manubrio ergonómico -->
-    <rect x="183" y="32" width="28" height="8" rx="4" fill="#0F172A" />
-    <rect x="191" y="28" width="12" height="5" rx="2" fill="#38BDF8" />
-    <circle cx="204" cy="48" r="4" fill="#FEF08A" />
-    <polygon points="208,46 266,36 266,62" fill="#BAE6FD" opacity="0.45" />
+    <!-- Scooter -->
+    <g class="veh-par veh-par-rig"><g class="veh-bob veh-bob-fast">
+      <!-- Ruedas macizas honeycomb -->
+      <g transform="translate(102, 131)"><g class="veh-wheel" style="--spin:.6s">
+        <circle r="21" fill="#0F172A" />
+        <circle r="14" fill="#334155" stroke="#38BDF8" stroke-width="2" />
+        <line x1="-13" y1="0" x2="13" y2="0" stroke="#94A3B8" stroke-width="1.8" />
+        <line x1="-13" y1="0" x2="13" y2="0" stroke="#94A3B8" stroke-width="1.8" transform="rotate(60)" />
+        <line x1="-13" y1="0" x2="13" y2="0" stroke="#94A3B8" stroke-width="1.8" transform="rotate(120)" />
+        <circle r="5" fill="#E2E8F0" />
+      </g></g>
+      <g transform="translate(218, 131)"><g class="veh-wheel" style="--spin:.6s">
+        <circle r="21" fill="#0F172A" />
+        <circle r="14" fill="#334155" stroke="#10B981" stroke-width="2" />
+        <line x1="-13" y1="0" x2="13" y2="0" stroke="#94A3B8" stroke-width="1.8" />
+        <line x1="-13" y1="0" x2="13" y2="0" stroke="#94A3B8" stroke-width="1.8" transform="rotate(60)" />
+        <line x1="-13" y1="0" x2="13" y2="0" stroke="#94A3B8" stroke-width="1.8" transform="rotate(120)" />
+        <circle r="5" fill="#E2E8F0" />
+      </g></g>
+      <!-- Guardabarros trasero con luz LED -->
+      <path d="M80 124 C84 108, 106 106, 118 122" stroke="#1E293B" stroke-width="5" stroke-linecap="round" />
+      <circle class="veh-blink" cx="81" cy="121" r="3" fill="#EF4444" />
+      <!-- Plataforma aluminio + tira LED verde -->
+      <rect x="104" y="124" width="102" height="11" rx="5.5" fill="url(#vScootStem)" />
+      <line class="veh-led" x1="114" y1="129.5" x2="196" y2="129.5" stroke="#10B981" stroke-width="2.6" stroke-linecap="round" />
+      <!-- Cuello reforzado y columna de dirección -->
+      <path d="M196 128 L212 108 L196 38" stroke="url(#vScootStem)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+      <line x1="218" y1="131" x2="208" y2="96" stroke="#64748B" stroke-width="5" stroke-linecap="round" />
+      <!-- Display digital y manubrio -->
+      <rect x="183" y="32" width="28" height="8" rx="4" fill="#0F172A" />
+      <rect class="veh-led" x="191" y="28" width="12" height="5" rx="2" fill="#38BDF8" />
+      <circle cx="204" cy="48" r="4" fill="#FEF08A" />
+      <polygon class="veh-beam" points="208,46 266,36 266,62" fill="#BAE6FD" opacity="0.45" />
+      <!-- Rayo de energía -->
+      <polygon class="veh-bolt" points="156,92 146,108 153,108 148,122 160,104 153,104" fill="#FACC15" stroke="#1E241E" stroke-width="1.5" stroke-linejoin="round" />
+    </g></g>
   </svg>
                 <span class="transport-co2-pill eco">0 g CO₂</span>
               </div>
@@ -592,7 +700,7 @@
             <article class="transport-card">
               <div class="transport-card-media media-sky-yellow">
                 <!-- Ilustración Cartoon: Bus / Metropolitano Alegre -->
-                <svg class="transport-cartoon-svg" viewBox="0 0 320 185" fill="none" aria-label="Ilustración estilizada de Bus Metropolitano">
+                <svg class="transport-cartoon-svg" viewBox="0 0 320 185" fill="none" role="img" aria-label="Ilustración estilizada de Bus Metropolitano">
     <defs>
       <linearGradient id="vBusSky" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%" stop-color="#FEF3C7" />
@@ -607,42 +715,102 @@
         <stop offset="0%" stop-color="#0F172A" />
         <stop offset="100%" stop-color="#1E3A8A" />
       </linearGradient>
+      <g id="vBusCloud">
+        <g fill="#FFFFFF" opacity="0.85">
+          <ellipse cx="0" cy="0" rx="17" ry="7" />
+          <ellipse cx="-11" cy="2" rx="9" ry="5" />
+          <ellipse cx="11" cy="3" rx="10" ry="5" />
+        </g>
+      </g>
+      <g id="vBusFar">
+        <rect x="14" y="26" width="34" height="126" rx="4" fill="#FDE68A" opacity="0.7" />
+        <rect x="58" y="38" width="30" height="114" rx="4" fill="#FCD34D" opacity="0.4" />
+        <rect x="160" y="22" width="38" height="130" rx="4" fill="#FDE68A" opacity="0.7" />
+        <rect x="208" y="34" width="34" height="118" rx="4" fill="#FCD34D" opacity="0.4" />
+        <rect x="270" y="28" width="38" height="124" rx="4" fill="#FDE68A" opacity="0.65" />
+      </g>
+      <g id="vBusMid">
+        <!-- Estación BRT estilizada -->
+        <path d="M18 34 H148 L138 42 H18 Z" fill="#94A3B8" opacity="0.55" />
+        <rect x="34" y="42" width="6" height="14" fill="#CBD5E1" />
+        <rect x="112" y="42" width="6" height="14" fill="#CBD5E1" />
+        <!-- Postes de luz -->
+        <g stroke="#94A3B8" stroke-width="3" stroke-linecap="round" opacity="0.75">
+          <line x1="190" y1="54" x2="190" y2="36" /><line x1="190" y1="36" x2="200" y2="36" />
+          <line x1="296" y1="54" x2="296" y2="36" /><line x1="296" y1="36" x2="306" y2="36" />
+        </g>
+        <circle cx="200" cy="39" r="3.5" fill="#FEF08A" />
+        <circle cx="306" cy="39" r="3.5" fill="#FEF08A" />
+      </g>
     </defs>
     <rect width="320" height="185" fill="url(#vBusSky)" />
-    <!-- Estación BRT estilizada al fondo -->
-    <path d="M18 52 H148 L138 60 H18 Z" fill="#94A3B8" opacity="0.45" />
-    <rect x="34" y="60" width="6" height="88" fill="#CBD5E1" />
-    <rect x="112" y="60" width="6" height="88" fill="#CBD5E1" />
+    <g class="veh-par veh-par-sky"><g class="veh-layer veh-sky">
+      <use href="#vBusCloud" x="104" y="16" />
+      <use href="#vBusCloud" x="250" y="30" />
+      <use href="#vBusCloud" x="424" y="16" />
+      <use href="#vBusCloud" x="570" y="30" />
+    </g></g>
+    <g class="veh-par veh-par-far"><g class="veh-layer veh-far">
+      <use href="#vBusFar" />
+      <use href="#vBusFar" x="320" />
+    </g></g>
+    <g class="veh-par veh-par-mid"><g class="veh-layer veh-mid">
+      <use href="#vBusMid" />
+      <use href="#vBusMid" x="320" />
+    </g></g>
     <!-- Corredor segregado exclusivo -->
     <rect x="0" y="148" width="320" height="4" fill="#F59E0B" />
     <rect x="0" y="152" width="320" height="33" fill="#334155" />
-    <line x1="18" y1="168" x2="302" y2="168" stroke="#FDE047" stroke-width="2.2" stroke-dasharray="20 14" stroke-linecap="round" />
+    <line class="veh-road" style="--dash:-34px" x1="0" y1="168" x2="320" y2="168" stroke="#FDE047" stroke-width="2.2" stroke-dasharray="20 14" stroke-linecap="round" />
+    <!-- Líneas de velocidad -->
+    <g stroke="#F59E0B" stroke-width="2.6" stroke-linecap="round">
+      <line class="veh-speed" style="--d:0s" x1="6" y1="78" x2="30" y2="78" />
+      <line class="veh-speed" style="--d:.3s" x1="4" y1="100" x2="28" y2="100" />
+      <line class="veh-speed" style="--d:.6s" x1="8" y1="122" x2="30" y2="122" />
+    </g>
     <ellipse cx="162" cy="152" rx="116" ry="5.5" fill="#0F172A" opacity="0.38" />
-    <!-- Carrocería aerodinámica articulada BRT -->
-    <path d="M34 66 C34 59, 40 54, 48 54 H266 C276 54, 283 61, 286 72 L290 134 C290 139, 286 142, 281 142 H42 C37 142, 34 138, 34 133 V66 Z" fill="url(#vBusBody)" />
-    <!-- Fuelle articulado central -->
-    <rect x="142" y="55" width="14" height="86" fill="#1E293B" />
-    <line x1="146" y1="57" x2="146" y2="139" stroke="#475569" stroke-width="1.5" />
-    <line x1="152" y1="57" x2="152" y2="139" stroke="#475569" stroke-width="1.5" />
-    <!-- Franja inferior eco-ámbar -->
-    <rect x="34" y="116" width="255" height="12" fill="#F59E0B" />
-    <!-- Ventanales panorámicos con reflejos diagonales -->
-    <rect x="44" y="65" width="42" height="38" rx="5" fill="url(#vBusGlass)" />
-    <rect x="92" y="65" width="42" height="38" rx="5" fill="url(#vBusGlass)" />
-    <rect x="164" y="65" width="52" height="38" rx="5" fill="url(#vBusGlass)" />
-    <path d="M222 65 H274 L280 103 H222 V65 Z" fill="url(#vBusGlass)" />
-    <!-- Letrero LED frontal de ruta -->
-    <rect x="242" y="58" width="32" height="6" rx="3" fill="#0F172A" />
-    <line x1="246" y1="61" x2="270" y2="61" stroke="#4ADE80" stroke-width="2.2" stroke-linecap="round" />
-    <!-- Reflejos en vidrio -->
-    <line x1="52" y1="98" x2="72" y2="70" stroke="#BAE6FD" stroke-opacity="0.35" stroke-width="3" stroke-linecap="round" />
-    <line x1="174" y1="98" x2="194" y2="70" stroke="#BAE6FD" stroke-opacity="0.35" stroke-width="3" stroke-linecap="round" />
-    <!-- Ruedas dobles -->
-    <circle cx="84" cy="142" r="16" fill="#0F172A" />
-    <circle cx="84" cy="142" r="8" fill="#CBD5E1" />
-    <circle cx="236" cy="142" r="16" fill="#0F172A" />
-    <circle cx="236" cy="142" r="8" fill="#CBD5E1" />
-    <rect x="282" y="122" width="7" height="9" rx="2" fill="#FEF08A" />
+    <!-- Hojitas eco sobre el techo -->
+    <g transform="translate(96,50)"><path class="veh-leaf" style="--d:0s" d="M0 6 C-6 0 -4 -8 4 -10 C8 -4 6 4 0 6Z" fill="#8CE52E" stroke="#1E241E" stroke-width="1.2" /></g>
+    <g transform="translate(206,50)"><path class="veh-leaf" style="--d:.9s" d="M0 6 C-6 0 -4 -8 4 -10 C8 -4 6 4 0 6Z" fill="#8CE52E" stroke="#1E241E" stroke-width="1.2" /></g>
+    <!-- Bus -->
+    <g class="veh-par veh-par-rig"><g class="veh-rumble">
+      <!-- Carrocería aerodinámica articulada BRT -->
+      <path d="M34 66 C34 59, 40 54, 48 54 H266 C276 54, 283 61, 286 72 L290 134 C290 139, 286 142, 281 142 H42 C37 142, 34 138, 34 133 V66 Z" fill="url(#vBusBody)" />
+      <!-- Fuelle articulado central -->
+      <rect x="142" y="55" width="14" height="86" fill="#1E293B" />
+      <line x1="146" y1="57" x2="146" y2="139" stroke="#475569" stroke-width="1.5" />
+      <line x1="152" y1="57" x2="152" y2="139" stroke="#475569" stroke-width="1.5" />
+      <!-- Franja inferior eco-ámbar -->
+      <rect x="34" y="116" width="255" height="12" fill="#F59E0B" />
+      <!-- Ventanales panorámicos -->
+      <rect x="44" y="65" width="42" height="38" rx="5" fill="url(#vBusGlass)" />
+      <rect x="92" y="65" width="42" height="38" rx="5" fill="url(#vBusGlass)" />
+      <rect x="164" y="65" width="52" height="38" rx="5" fill="url(#vBusGlass)" />
+      <path d="M222 65 H274 L280 103 H222 V65 Z" fill="url(#vBusGlass)" />
+      <!-- Letrero LED frontal de ruta -->
+      <rect x="242" y="58" width="32" height="6" rx="3" fill="#0F172A" />
+      <line class="veh-sign" x1="246" y1="61" x2="270" y2="61" stroke="#4ADE80" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="6 3" />
+      <!-- Reflejos en vidrio -->
+      <g class="veh-glint" style="--d:0s">
+        <line x1="52" y1="98" x2="72" y2="70" stroke="#BAE6FD" stroke-opacity="0.55" stroke-width="3" stroke-linecap="round" />
+        <line x1="100" y1="98" x2="120" y2="70" stroke="#BAE6FD" stroke-opacity="0.55" stroke-width="3" stroke-linecap="round" />
+        <line x1="174" y1="98" x2="194" y2="70" stroke="#BAE6FD" stroke-opacity="0.55" stroke-width="3" stroke-linecap="round" />
+      </g>
+      <!-- Ruedas -->
+      <g transform="translate(84,142)"><g class="veh-wheel" style="--spin:.7s">
+        <circle r="16" fill="#0F172A" />
+        <circle r="8" fill="#CBD5E1" />
+        <line x1="-8" y1="0" x2="8" y2="0" stroke="#64748B" stroke-width="2" />
+        <line x1="0" y1="-8" x2="0" y2="8" stroke="#64748B" stroke-width="2" />
+      </g></g>
+      <g transform="translate(236,142)"><g class="veh-wheel" style="--spin:.7s">
+        <circle r="16" fill="#0F172A" />
+        <circle r="8" fill="#CBD5E1" />
+        <line x1="-8" y1="0" x2="8" y2="0" stroke="#64748B" stroke-width="2" />
+        <line x1="0" y1="-8" x2="0" y2="8" stroke="#64748B" stroke-width="2" />
+      </g></g>
+      <rect class="veh-blink" x="282" y="122" width="7" height="9" rx="2" fill="#FEF08A" />
+    </g></g>
   </svg>
                 <span class="transport-co2-pill eco">-75% CO₂</span>
               </div>
@@ -677,7 +845,7 @@
             <article class="transport-card is-traffic">
               <div class="transport-card-media media-sky-orange">
                 <!-- Ilustración Cartoon: Auto Atascado con Semáforo en Rojo y Nubes de Humo -->
-                <svg class="transport-cartoon-svg" viewBox="0 0 320 185" fill="none" aria-label="Ilustración estilizada de auto en hora punta">
+                <svg class="transport-cartoon-svg" viewBox="0 0 320 185" fill="none" role="img" aria-label="Ilustración estilizada de auto en hora punta">
     <defs>
       <linearGradient id="vCarSky" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%" stop-color="#FFEDD5" />
@@ -687,40 +855,90 @@
         <stop offset="0%" stop-color="#64748B" />
         <stop offset="100%" stop-color="#334155" />
       </linearGradient>
+      <g id="vCarCloud">
+        <g fill="#94A3B8" opacity="0.4">
+          <ellipse cx="0" cy="0" rx="17" ry="7" />
+          <ellipse cx="-11" cy="2" rx="9" ry="5" />
+          <ellipse cx="11" cy="3" rx="10" ry="5" />
+        </g>
+      </g>
+      <g id="vCarFar">
+        <rect x="16" y="52" width="40" height="98" rx="4" fill="#FDBA74" opacity="0.4" />
+        <rect x="64" y="70" width="34" height="80" rx="4" fill="#CBD5E1" opacity="0.5" />
+        <rect x="108" y="44" width="36" height="106" rx="4" fill="#FDBA74" opacity="0.3" />
+        <rect x="150" y="76" width="30" height="74" rx="4" fill="#CBD5E1" opacity="0.45" />
+        <rect x="290" y="58" width="24" height="92" rx="4" fill="#FDBA74" opacity="0.35" />
+      </g>
     </defs>
     <rect width="320" height="185" fill="url(#vCarSky)" />
-    <!-- Silueta de fila de autos delante en congestión -->
-    <path d="M214 114 L228 94 H278 L292 114 H306 V138 H206 V114 Z" fill="#94A3B8" opacity="0.55" />
-    <rect x="208" y="118" width="12" height="5" rx="2" fill="#EF4444" opacity="0.8" />
+    <g class="veh-par veh-par-sky"><g class="veh-layer veh-sky">
+      <use href="#vCarCloud" x="90" y="22" />
+      <use href="#vCarCloud" x="230" y="44" />
+      <use href="#vCarCloud" x="410" y="22" />
+      <use href="#vCarCloud" x="550" y="44" />
+    </g></g>
+    <!-- Ciudad: avanza muy lento (12 km/h) -->
+    <g class="veh-par veh-par-far"><g class="veh-layer veh-far veh-far-slow">
+      <use href="#vCarFar" />
+      <use href="#vCarFar" x="320" />
+    </g></g>
+    <!-- Fila de autos delante en congestión -->
+    <g class="veh-creep">
+      <path d="M214 114 L228 94 H278 L292 114 H306 V138 H206 V114 Z" fill="#94A3B8" opacity="0.55" />
+      <rect class="veh-blink" x="208" y="118" width="12" height="5" rx="2" fill="#EF4444" opacity="0.8" />
+    </g>
     <!-- Pórtico semafórico urbano en rojo -->
     <line x1="274" y1="22" x2="274" y2="148" stroke="#475569" stroke-width="4" />
     <line x1="224" y1="28" x2="274" y2="28" stroke="#475569" stroke-width="4" stroke-linecap="round" />
     <rect x="232" y="20" width="22" height="46" rx="6" fill="#1E293B" />
+    <circle class="veh-glow" cx="243" cy="31" r="11" fill="#EF4444" opacity="0.24" />
     <circle cx="243" cy="31" r="6" fill="#EF4444" />
-    <circle cx="243" cy="31" r="11" fill="#EF4444" opacity="0.24" />
     <circle cx="243" cy="43" r="5" fill="#475569" />
     <circle cx="243" cy="55" r="5" fill="#475569" />
     <!-- Calzada congestionada -->
     <rect x="0" y="148" width="320" height="37" fill="#334155" />
-    <line x1="16" y1="167" x2="304" y2="167" stroke="#94A3B8" stroke-width="2" stroke-dasharray="16 14" />
+    <line class="veh-road veh-road-slow" style="--dash:-30px" x1="0" y1="167" x2="320" y2="167" stroke="#94A3B8" stroke-width="2" stroke-dasharray="16 14" />
     <!-- Estelas de emisiones / humo -->
     <ellipse cx="38" cy="128" rx="18" ry="11" fill="#94A3B8" opacity="0.45" />
     <ellipse cx="24" cy="114" rx="14" ry="9" fill="#64748B" opacity="0.32" />
     <ellipse cx="48" cy="110" rx="12" ry="8" fill="#94A3B8" opacity="0.3" />
+    <g transform="translate(46,132)">
+      <circle class="veh-puff" style="--d:0s" r="9" fill="#64748B" />
+      <circle class="veh-puff" style="--d:.6s" r="8" fill="#94A3B8" />
+      <circle class="veh-puff" style="--d:1.2s" r="10" fill="#64748B" />
+    </g>
     <!-- Sedán estilizado principal -->
     <ellipse cx="146" cy="150" rx="86" ry="5.5" fill="#0F172A" opacity="0.4" />
-    <path d="M56 114 L84 78 C89 72, 96 70, 105 70 H174 C184 70, 192 73, 199 81 L222 108 L244 113 C250 115, 254 120, 254 126 V139 C254 142, 251 144, 248 144 H54 C50 144, 48 141, 48 137 V122 C48 117, 51 114, 56 114 Z" fill="url(#vCarBody)" />
-    <!-- Ventanillas polarizadas -->
-    <path d="M90 78 H138 V106 H70 L90 78 Z" fill="#0F172A" />
-    <path d="M145 78 H178 C184 78, 189 80, 194 86 L210 106 H145 V78 Z" fill="#0F172A" />
-    <!-- Luces de freno traseras y faros -->
-    <rect x="48" y="118" width="12" height="7" rx="2.5" fill="#EF4444" />
-    <rect x="242" y="119" width="11" height="7" rx="2.5" fill="#FDE047" />
-    <!-- Ruedas de aleación -->
-    <circle cx="96" cy="142" r="18" fill="#0F172A" />
-    <circle cx="96" cy="142" r="10" fill="#CBD5E1" />
-    <circle cx="204" cy="142" r="18" fill="#0F172A" />
-    <circle cx="204" cy="142" r="10" fill="#CBD5E1" />
+    <g class="veh-par veh-par-rig"><g class="veh-shake">
+      <path d="M56 114 L84 78 C89 72, 96 70, 105 70 H174 C184 70, 192 73, 199 81 L222 108 L244 113 C250 115, 254 120, 254 126 V139 C254 142, 251 144, 248 144 H54 C50 144, 48 141, 48 137 V122 C48 117, 51 114, 56 114 Z" fill="url(#vCarBody)" />
+      <!-- Ventanillas polarizadas -->
+      <path d="M90 78 H138 V106 H70 L90 78 Z" fill="#0F172A" />
+      <path d="M145 78 H178 C184 78, 189 80, 194 86 L210 106 H145 V78 Z" fill="#0F172A" />
+      <!-- Luces de freno traseras y faros -->
+      <rect class="veh-glow" x="44" y="114" width="20" height="15" rx="6" fill="#EF4444" opacity="0.25" />
+      <rect x="48" y="118" width="12" height="7" rx="2.5" fill="#EF4444" />
+      <rect x="242" y="119" width="11" height="7" rx="2.5" fill="#FDE047" />
+      <!-- Ruedas -->
+      <g transform="translate(96,142)"><g class="veh-wheel" style="--spin:2.2s">
+        <circle r="18" fill="#0F172A" />
+        <circle r="10" fill="#CBD5E1" />
+        <line x1="-10" y1="0" x2="10" y2="0" stroke="#64748B" stroke-width="2" />
+        <line x1="0" y1="-10" x2="0" y2="10" stroke="#64748B" stroke-width="2" />
+      </g></g>
+      <g transform="translate(204,142)"><g class="veh-wheel" style="--spin:2.2s">
+        <circle r="18" fill="#0F172A" />
+        <circle r="10" fill="#CBD5E1" />
+        <line x1="-10" y1="0" x2="10" y2="0" stroke="#64748B" stroke-width="2" />
+        <line x1="0" y1="-10" x2="0" y2="10" stroke="#64748B" stroke-width="2" />
+      </g></g>
+    </g></g>
+    <!-- Bocinazo -->
+    <g class="veh-beep" aria-hidden="true">
+      <path d="M78 54 H128 A13 13 0 0 0 128 28 H78 A13 13 0 0 0 78 54 Z" fill="#FFFFFF" stroke="#1E241E" stroke-width="2.2" />
+      <path d="M120 54 L128 64 L132 53" fill="#FFFFFF" stroke="#1E241E" stroke-width="2.2" stroke-linejoin="round" />
+      <path d="M118 52.5 H131" stroke="#FFFFFF" stroke-width="3.5" />
+      <text x="103" y="46" text-anchor="middle" font-size="15" font-weight="800" fill="#EF4444">BEEP!</text>
+    </g>
   </svg>
                 <span class="transport-co2-pill warn">152 g CO₂ / km</span>
               </div>
