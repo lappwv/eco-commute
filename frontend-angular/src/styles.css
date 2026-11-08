@@ -5992,3 +5992,17 @@ app-leaderboard .eco-card:hover {
     padding-right: 0.7rem !important;
   }
 }
+
+
+/* PORTADA: el boton va pegado a la barra de navegacion, no al logo */
+@media (min-width: 1021px) {
+  .eco-nav-inner {
+    justify-content: flex-start;
+  }
+  .brand-cluster {
+    display: contents;
+  }
+  .landing-back-pill {
+    margin-left: auto;
+  }
+}
