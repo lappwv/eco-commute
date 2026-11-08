@@ -169,10 +169,20 @@
       <div class="nav-utilities">
         <button
           type="button"
+          class="util-btn lang-toggle-btn"
+          (click)="i18n.toggleLocale()"
+          [attr.aria-label]="i18n.currentLocale === 'es_419' ? i18n.t('lang.switchToEnglish') : i18n.t('lang.switchToSpanish')"
+          [title]="i18n.t('lang.toggleTitle')"
+        >
+          <span>{{ i18n.currentLocale === 'es_419' ? 'EN' : 'ES' }}</span>
+        </button>
+
+        <button
+          type="button"
           class="util-btn icon-only"
           (click)="toggleTheme()"
-          [attr.aria-label]="activeTheme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'"
-          title="Cambiar apariencia"
+          [attr.aria-label]="activeTheme === 'dark' ? i18n.t('theme.toLight') : i18n.t('theme.toDark')"
+          [title]="i18n.t('theme.toggleTitle')"
         >
           <app-icon [name]="activeTheme === 'dark' ? 'sun' : 'moon'" [size]="16"></app-icon>
         </button>
