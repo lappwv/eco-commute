@@ -699,7 +699,44 @@ function setupCardTilt() {
   );
 }
 
+function setupTransportParallax() {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  document.querySelectorAll(".transport-card-media").forEach((media) => {
+    media.addEventListener(
+      "pointermove",
+      (event) => {
+        if (event.pointerType === "touch") return;
+        const rect = media.getBoundingClientRect();
+        const px = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
+        media.style.setProperty("--px", px.toFixed(3));
+      },
+      { passive: true }
+    );
+    media.addEventListener("pointerleave", () => media.style.setProperty("--px", "0"));
+  });
+}
+
+// Pantallas táctiles no tienen hover: la escena corre sola mientras la tarjeta está a la vista.
+function setupTransportTouchLive() {
+  if (!window.matchMedia("(hover: none)").matches) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (!("IntersectionObserver" in window)) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        entry.target.classList.toggle("is-live", entry.isIntersecting);
+      });
+    },
+    { threshold: 0.6 }
+  );
+  document.querySelectorAll(".transport-card").forEach((card) => observer.observe(card));
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+  setupTransportParallax();
+  setupTransportTouchLive();
   setupLimaHeroMap();
   setupThemeSwitcher();
   setupScrollAnimations();
