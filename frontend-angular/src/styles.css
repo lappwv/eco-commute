@@ -6039,3 +6039,24 @@ app-leaderboard .eco-card:hover {
 .trips-period-filters {
   margin-bottom: 1.1rem;
 }
+
+.trips-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 2.5rem 1rem;
+  text-align: center;
+  color: var(--text-muted);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.trips-empty-state strong {
+  color: var(--text-main);
+  font-size: 0.95rem;
+}
+
+.trips-empty-state span {
+  font-size: 0.82rem;
+}

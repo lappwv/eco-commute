@@ -142,7 +142,13 @@ type ModeFilter = TransportMode | 'ALL';
             </button>
           </div>
 
-          <div class="trips-timeline-list">
+          <div class="trips-empty-state" *ngIf="filteredTrips.length === 0">
+            <app-icon name="route" [size]="26"></app-icon>
+            <strong>Sin resultados para estos filtros</strong>
+            <span>Prueba con otro medio de transporte o periodo.</span>
+          </div>
+
+          <div class="trips-timeline-list" *ngIf="filteredTrips.length > 0">
             <div
               class="trip-feed-item"
               *ngFor="let t of filteredTrips"
