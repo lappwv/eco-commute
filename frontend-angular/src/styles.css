@@ -6175,7 +6175,19 @@ textarea:focus-visible,
    Angular Material: Corridor Preset Chips (Clean, Centered, Professional)
    ========================================================================== */
 
+.preset-chips-centered-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: -0.75rem 0 0.5rem 0;
+}
+
+.preset-chips-centered-wrapper mat-chip-listbox,
 .preset-chips-row mat-chip-listbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
