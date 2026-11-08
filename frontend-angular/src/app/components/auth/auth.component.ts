@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatTabsModule } from '@angular/material/tabs';
 import { AuthService, DEFAULT_RENDER_API, LOCAL_BACKEND_API } from '../../services/auth.service';
 import { ApiService } from '../../services/api.service';
 import { UserProfile } from '../../models/api.models';
@@ -10,7 +15,17 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
 @Component({
   selector: 'app-auth',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink, EcoIconComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterLink,
+    EcoIconComponent,
+    MatButtonModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTabsModule
+  ],
   template: `
     <section class="page-section">
       <div class="section-header-row">
@@ -28,77 +43,74 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
 
       <div class="grid-2-col">
         <!-- Left Card: Login / Register & 1-Click Demo Profiles -->
-        <article class="eco-card">
-          <div class="tab-pills">
-            <button type="button" class="tab-btn" [class.active]="tab === 'login'" (click)="tab = 'login'">
-              Iniciar sesión
-            </button>
-            <button type="button" class="tab-btn" [class.active]="tab === 'register'" (click)="tab = 'register'">
-              Crear cuenta
-            </button>
-          </div>
+        <mat-card class="eco-card">
+          <mat-tab-group class="auth-tab-group" [(selectedIndex)]="tabIndex" animationDuration="0ms">
+            <mat-tab label="Iniciar sesión">
+              <form (ngSubmit)="onLogin()" class="eco-form mat-tab-form">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Correo electrónico</mat-label>
+                  <input matInput type="email" [(ngModel)]="loginEmail" name="loginEmail" required />
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Contraseña</mat-label>
+                  <input matInput type="password" [(ngModel)]="loginPassword" name="loginPassword" required />
+                </mat-form-field>
+                <button mat-flat-button color="primary" type="submit" class="full-width">
+                  <app-icon name="check" [size]="16"></app-icon>
+                  <span>Entrar a mi cuenta</span>
+                </button>
+              </form>
+            </mat-tab>
 
-          <form *ngIf="tab === 'login'" (ngSubmit)="onLogin()" class="eco-form">
-            <div class="form-group">
-              <label>Correo electrónico</label>
-              <input type="email" [(ngModel)]="loginEmail" name="loginEmail" required />
-            </div>
-            <div class="form-group">
-              <label>Contraseña</label>
-              <input type="password" [(ngModel)]="loginPassword" name="loginPassword" required />
-            </div>
-            <button type="submit" class="btn-emerald full-width">
-              <app-icon name="check" [size]="16"></app-icon>
-              <span>Entrar a mi cuenta</span>
-            </button>
-          </form>
-
-          <form *ngIf="tab === 'register'" (ngSubmit)="onRegister()" class="eco-form">
-            <div class="form-group">
-              <label>Nombre completo</label>
-              <input type="text" [(ngModel)]="regName" name="regName" required placeholder="Ej. Valeria Paredes" />
-            </div>
-            <div class="form-group">
-              <label>Correo electrónico</label>
-              <input type="email" [(ngModel)]="regEmail" name="regEmail" required placeholder="valeria&#64;lima.pe" />
-            </div>
-            <div class="form-group">
-              <label>Contraseña</label>
-              <input type="password" [(ngModel)]="regPassword" name="regPassword" required />
-            </div>
-            <div class="form-row-2">
-              <div class="form-group checkbox-align">
-                <label class="checkbox-label">
-                  <input type="checkbox" [(ngModel)]="regBicycle" name="regBicycle" />
-                  <span>Cuento con bicicleta</span>
-                </label>
-              </div>
-              <div class="form-group">
-                <label>Caminata diaria máx. (min)</label>
-                <input type="number" [(ngModel)]="regWalkMin" name="regWalkMin" min="5" max="180" />
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="checkbox-label">
-                <input type="checkbox" [(ngModel)]="regAcceptTerms" name="regAcceptTerms" required />
-                <span>Acepto los <a routerLink="/terms" target="_blank">Términos y Condiciones</a></span>
-              </label>
-            </div>
-            <button type="submit" class="btn-emerald full-width" [disabled]="!regAcceptTerms">
-              <app-icon name="plus" [size]="16"></app-icon>
-              <span>Registrarme en EcoCommute</span>
-            </button>
-          </form>
+            <mat-tab label="Crear cuenta">
+              <form (ngSubmit)="onRegister()" class="eco-form mat-tab-form">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Nombre completo</mat-label>
+                  <input matInput type="text" [(ngModel)]="regName" name="regName" required placeholder="Ej. Valeria Paredes" />
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Correo electrónico</mat-label>
+                  <input matInput type="email" [(ngModel)]="regEmail" name="regEmail" required placeholder="valeria&#64;lima.pe" />
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Contraseña</mat-label>
+                  <input matInput type="password" [(ngModel)]="regPassword" name="regPassword" required />
+                </mat-form-field>
+                <div class="form-row-2">
+                  <div class="form-group checkbox-align">
+                    <label class="checkbox-label">
+                      <input type="checkbox" [(ngModel)]="regBicycle" name="regBicycle" />
+                      <span>Cuento con bicicleta</span>
+                    </label>
+                  </div>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Caminata diaria máx. (min)</mat-label>
+                    <input matInput type="number" [(ngModel)]="regWalkMin" name="regWalkMin" min="5" max="180" />
+                  </mat-form-field>
+                </div>
+                <div class="form-group">
+                  <label class="checkbox-label">
+                    <input type="checkbox" [(ngModel)]="regAcceptTerms" name="regAcceptTerms" required />
+                    <span>Acepto los <a routerLink="/terms" target="_blank">Términos y Condiciones</a></span>
+                  </label>
+                </div>
+                <button mat-flat-button color="primary" type="submit" class="full-width" [disabled]="!regAcceptTerms">
+                  <app-icon name="plus" [size]="16"></app-icon>
+                  <span>Registrarme en EcoCommute</span>
+                </button>
+              </form>
+            </mat-tab>
+          </mat-tab-group>
 
           <div class="demo-accounts-box">
             <h3>Acceso rápido con cuentas de prueba</h3>
             <p class="card-sub">Prueba la experiencia como ciudadana o como administrador de comercios aliados:</p>
             <div class="demo-btns-row">
-              <button type="button" class="btn-outline" (click)="quickDemoUser()">
+              <button mat-stroked-button type="button" (click)="quickDemoUser()">
                 <app-icon name="user" [size]="16"></app-icon>
                 <span>Ciudadana (Elena Rios)</span>
               </button>
-              <button type="button" class="btn-outline" (click)="quickDemoAdmin()">
+              <button mat-stroked-button type="button" (click)="quickDemoAdmin()">
                 <app-icon name="shield" [size]="16"></app-icon>
                 <span>Administrador</span>
               </button>
@@ -109,11 +121,11 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
             <app-icon name="check" [size]="17"></app-icon>
             <span>{{ feedbackMsg }}</span>
           </div>
-        </article>
+        </mat-card>
 
         <!-- Right Card: Active Profile Summary & Optional Server Settings -->
         <div class="stack-col">
-          <article class="eco-card" *ngIf="profile as p">
+          <mat-card class="eco-card" *ngIf="profile as p">
             <div class="profile-header">
               <img [src]="p.avatarUrl" [alt]="p.fullName" class="avatar-lg" />
               <div>
@@ -149,26 +161,27 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
               </summary>
               <div class="coords-drawer-body">
                 <div class="demo-btns-row">
-                  <button type="button" class="btn-outline" (click)="setServer(renderUrl)">
+                  <button mat-stroked-button type="button" (click)="setServer(renderUrl)">
                     <span>Nube (Render)</span>
                   </button>
-                  <button type="button" class="btn-outline" (click)="setServer(localUrl)">
+                  <button mat-stroked-button type="button" (click)="setServer(localUrl)">
                     <span>Localhost (8080)</span>
                   </button>
                 </div>
-                <div class="form-group">
-                  <input type="text" [(ngModel)]="customServerUrl" (change)="setServer(customServerUrl)" />
-                </div>
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>URL del servidor</mat-label>
+                  <input matInput type="text" [(ngModel)]="customServerUrl" (change)="setServer(customServerUrl)" />
+                </mat-form-field>
               </div>
             </details>
-          </article>
+          </mat-card>
         </div>
       </div>
     </section>
   `
 })
 export class AuthComponent implements OnInit {
-  tab: 'login' | 'register' = 'login';
+  tabIndex = 0;
   loginEmail = 'demo@ecocommute.org';
   loginPassword = 'Demo123!';
 
