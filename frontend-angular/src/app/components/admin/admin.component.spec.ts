@@ -10,6 +10,7 @@ describe('AdminComponent', () => {
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
+    localStorage.clear();
     TestBed.configureTestingModule({
       imports: [AdminComponent],
       providers: [provideHttpClient(), provideHttpClientTesting(), provideNoopAnimations()]

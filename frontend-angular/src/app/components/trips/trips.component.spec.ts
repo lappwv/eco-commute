@@ -10,6 +10,7 @@ describe('TripsComponent', () => {
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
+    localStorage.clear();
     TestBed.configureTestingModule({
       imports: [TripsComponent],
       providers: [provideHttpClient(), provideHttpClientTesting(), provideNoopAnimations()]
