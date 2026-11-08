@@ -2228,7 +2228,7 @@ textarea {
     gap: 0.3rem;
   }
   .user-pill-name,
-  .landing-back-pill span {
+  .landing-back-pill > span {
     display: none;
   }
 }
@@ -5429,7 +5429,7 @@ app-leaderboard .podium-stepped-stage {
     padding-right: 1rem;
   }
   .brand-sub,
-  .landing-back-pill span,
+  .landing-back-pill > span,
   .user-pill-name {
     display: none !important;
   }
