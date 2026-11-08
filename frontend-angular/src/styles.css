@@ -6459,3 +6459,26 @@ textarea {
     min-height: auto;
   }
 }
+
+
+/* ==========================================================================
+   MODO OSCURO — contraste del verde de marca
+   La paleta oscura no definía --emerald y heredaba #15803D (pensado para
+   fondo claro): textos, enlaces y etiquetas verdes quedaban entre 2:1 y 3.8:1.
+   ========================================================================== */
+[data-theme="dark"] {
+  --emerald: #4ADE80 !important;
+  --emerald-hover: #86EFAC !important;
+}
+
+/* Material: el color "primary" ahora es un verde claro, así que el texto
+   encima de él debe ser oscuro. */
+html[data-theme="dark"] {
+  --mat-sys-on-primary: #07120A;
+}
+
+/* MODO OSCURO — la etiqueta de distancia del corredor seleccionado tiene fondo
+   claro: con el verde brillante del tema oscuro quedaba ilegible (1.2:1). */
+[data-theme="dark"] .corridor-preset-chip.mat-mdc-chip-selected .corridor-chip-tag {
+  color: #14532D;
+}

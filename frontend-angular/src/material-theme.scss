@@ -13,6 +13,13 @@ $eco-theme: mat.define-theme((
   )
 ));
 
+$eco-dark-theme: mat.define-theme((
+  color: (
+    theme-type: dark,
+    primary: mat.$green-palette
+  )
+));
+
 /* Tema de Angular Material basado en la paleta verde de la marca. */
 html {
   @include mat.core();
@@ -29,4 +36,27 @@ html {
   --mat-sys-outline-variant: var(--border);
   --mat-sys-corner-medium: var(--radius-sm);
   --mat-sys-corner-large: var(--radius-md);
+}
+
+/* Modo oscuro: el tema de Material es claro por defecto, así que etiquetas,
+   valores de selectores, tablas, chips y menús seguían con colores claros
+   sobre fondo oscuro. Se aplican los colores del tema oscuro de Material y
+   luego se reasignan a la paleta de la marca. */
+html[data-theme="dark"] {
+  @include mat.all-component-colors($eco-dark-theme);
+  @include mat.system-level-colors($eco-dark-theme);
+
+  --mat-sys-primary: var(--emerald);
+  --mat-sys-on-primary: #07120a;
+  --mat-sys-background: var(--bg-page);
+  --mat-sys-surface: var(--bg-card);
+  --mat-sys-surface-container-lowest: var(--bg-page);
+  --mat-sys-surface-container-low: var(--bg-card);
+  --mat-sys-surface-container: var(--bg-card);
+  --mat-sys-surface-container-high: var(--bg-soft);
+  --mat-sys-surface-container-highest: var(--bg-elevated);
+  --mat-sys-on-surface: var(--text-main);
+  --mat-sys-on-surface-variant: var(--text-muted);
+  --mat-sys-outline: var(--border-strong);
+  --mat-sys-outline-variant: var(--border);
 }
