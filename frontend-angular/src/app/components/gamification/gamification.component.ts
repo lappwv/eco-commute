@@ -16,7 +16,7 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
         <div>
           <span class="eyebrow-tag">
             <app-icon name="medal" [size]="14"></app-icon>
-            Reconocimiento Ciudadano
+            {{ i18n.t('gamification.eyebrow') }}
           </span>
           <h1 class="page-title">{{ i18n.t('gamification.title') }}</h1>
           <p class="page-subtitle">{{ i18n.t('gamification.subtitle') }}</p>

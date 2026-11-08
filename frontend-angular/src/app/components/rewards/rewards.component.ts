@@ -16,7 +16,7 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
         <div>
           <span class="eyebrow-tag">
             <app-icon name="ticket" [size]="14"></app-icon>
-            Alianzas Locales · Lima
+            {{ i18n.t('rewards.eyebrow') }}
           </span>
           <h1 class="page-title">{{ i18n.t('rewards.title') }}</h1>
           <p class="page-subtitle">{{ i18n.t('rewards.subtitle') }}</p>
