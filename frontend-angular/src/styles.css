@@ -5725,3 +5725,70 @@ app-leaderboard .eco-card:hover {
     display: none;
   }
 }
+
+/* ==================== MI IMPACTO: EL CICLISTA AVANZA Y LA CIUDAD QUEDA ATRÁS ==================== */
+/* La calle ya no flota: se queda quieta y lo que se mueve es la escena */
+.cartoon-banner-art .dashboard-cartoon-svg {
+  animation: none;
+}
+
+.dashboard-cartoon-svg .dash-layer-far {
+  animation: dsh-scroll 30s linear infinite;
+  will-change: transform;
+}
+
+.dashboard-cartoon-svg .dash-layer-near {
+  animation: dsh-scroll 12s linear infinite;
+  will-change: transform;
+}
+
+.dashboard-cartoon-svg .dash-wheel {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: dsh-spin var(--spin, 1.1s) linear infinite;
+}
+
+.dashboard-cartoon-svg .dash-bob {
+  animation: dsh-bob 0.55s ease-in-out infinite alternate;
+}
+
+.dashboard-cartoon-svg .dash-road {
+  animation: dsh-road 0.5s linear infinite;
+}
+
+.dashboard-cartoon-svg .dash-road-2 {
+  animation: dsh-road-2 0.8s linear infinite;
+}
+
+@keyframes dsh-scroll {
+  to {
+    transform: translateX(-460px);
+  }
+}
+
+@keyframes dsh-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dsh-bob {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-1.8px);
+  }
+}
+
+@keyframes dsh-road {
+  to {
+    stroke-dashoffset: -28px;
+  }
+}
+
+@keyframes dsh-road-2 {
+  to {
+    stroke-dashoffset: -40px;
+  }
+}
