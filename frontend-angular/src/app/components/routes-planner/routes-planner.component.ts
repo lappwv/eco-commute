@@ -3,6 +3,7 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ApiService } from '../../services/api.service';
@@ -31,6 +32,7 @@ interface LimaPreset {
     EcoIconComponent,
     CountUpDirective,
     MatButtonModule,
+    MatChipsModule,
     MatFormFieldModule,
     MatInputModule
   ],
@@ -46,18 +48,20 @@ interface LimaPreset {
           <h1 class="page-title">{{ i18n.t('routes.title') }}</h1>
           <p class="page-subtitle">{{ i18n.t('routes.subtitle') }}</p>
         </div>
-        <div class="preset-chips-row" role="group" aria-label="Corredores rapidos de Lima">
-          <button
-            type="button"
-            class="chip-btn"
-            *ngFor="let p of presets; let idx = index"
-            [attr.aria-pressed]="activePresetIndex === idx"
-            [class.active]="activePresetIndex === idx"
-            (click)="applyPreset(p, idx)"
-          >
-            <strong>{{ p.label }}</strong>
-            <small>{{ p.corridorTag }}</small>
-          </button>
+        <div class="preset-chips-row" role="region" aria-label="Corredores rapidos de Lima">
+          <mat-chip-listbox aria-label="Seleccionar corredor rapido">
+            <mat-chip-option
+              *ngFor="let p of presets; let idx = index"
+              class="corridor-preset-chip"
+              [selected]="activePresetIndex === idx"
+              (selectionChange)="applyPreset(p, idx)"
+            >
+              <div class="corridor-chip-content">
+                <span class="corridor-chip-label">{{ p.label }}</span>
+                <span class="corridor-chip-tag">{{ p.corridorTag }}</span>
+              </div>
+            </mat-chip-option>
+          </mat-chip-listbox>
         </div>
       </div>
 
