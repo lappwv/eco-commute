@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { ApiService } from '../../services/api.service';
 import { I18nService } from '../../services/i18n.service';
 import { TransportMode, TripRequest, TripResponse } from '../../models/api.models';
@@ -12,7 +18,17 @@ type ModeFilter = TransportMode | 'ALL';
 @Component({
   selector: 'app-trips',
   standalone: true,
-  imports: [CommonModule, FormsModule, EcoIconComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    EcoIconComponent,
+    MatButtonModule,
+    MatCardModule,
+    MatChipsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule
+  ],
   template: `
     <section class="page-section">
       <div class="section-header-row">
@@ -29,50 +45,52 @@ type ModeFilter = TransportMode | 'ALL';
       <!-- Diseño Dividido: Formulario Vertical a la Izquierda + Bitácora Cronológica Abierta a la Derecha -->
       <div class="trips-split-layout">
         <!-- Columna Izquierda: Formulario Vertical Compacto (1 sola tarjeta) -->
-        <article class="eco-card trips-vertical-form-card">
+        <mat-card class="eco-card trips-vertical-form-card">
           <div class="card-head-row">
             <div>
               <h2>{{ editingTripId ? 'Editar recorrido' : 'Anotar nuevo viaje' }}</h2>
               <p class="card-sub">Calculamos al instante tu ahorro de CO₂ y puntos</p>
             </div>
-            <span class="badge-pill" *ngIf="editingTripId">
-              <app-icon name="edit" [size]="13"></app-icon>
-              <span>Editando</span>
-            </span>
+            <mat-chip-set *ngIf="editingTripId">
+              <mat-chip disableRipple>
+                <app-icon name="edit" [size]="13"></app-icon>
+                <span>Editando</span>
+              </mat-chip>
+            </mat-chip-set>
           </div>
 
           <form (ngSubmit)="saveTrip()" class="eco-form-vertical">
-            <div class="form-group">
-              <label>Medio de transporte</label>
-              <select [(ngModel)]="form.transportMode" name="transportMode" required>
-                <option value="BICYCLE">Bicicleta Mecánica (0 g CO₂/km)</option>
-                <option value="WALKING">Caminata Peatonal (0 g CO₂/km)</option>
-                <option value="ELECTRIC_SCOOTER">Scooter / Bici Eléctrica (15 g CO₂/km)</option>
-                <option value="PUBLIC_TRANSIT">Transporte Público (45 g CO₂/km)</option>
-                <option value="CARPOOL">Auto Compartido (85 g CO₂/km)</option>
-                <option value="CAR_SOLO">Automóvil Particular (170 g CO₂/km)</option>
-              </select>
-            </div>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Medio de transporte</mat-label>
+              <mat-select [(ngModel)]="form.transportMode" name="transportMode" required>
+                <mat-option value="BICYCLE">Bicicleta Mecánica (0 g CO₂/km)</mat-option>
+                <mat-option value="WALKING">Caminata Peatonal (0 g CO₂/km)</mat-option>
+                <mat-option value="ELECTRIC_SCOOTER">Scooter / Bici Eléctrica (15 g CO₂/km)</mat-option>
+                <mat-option value="PUBLIC_TRANSIT">Transporte Público (45 g CO₂/km)</mat-option>
+                <mat-option value="CARPOOL">Auto Compartido (85 g CO₂/km)</mat-option>
+                <mat-option value="CAR_SOLO">Automóvil Particular (170 g CO₂/km)</mat-option>
+              </mat-select>
+            </mat-form-field>
 
-            <div class="form-group">
-              <label>Punto de partida</label>
-              <input type="text" [(ngModel)]="form.originName" name="originName" required placeholder="Ej. San Isidro" />
-            </div>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Punto de partida</mat-label>
+              <input matInput type="text" [(ngModel)]="form.originName" name="originName" required placeholder="Ej. San Isidro" />
+            </mat-form-field>
 
-            <div class="form-group">
-              <label>Destino</label>
-              <input type="text" [(ngModel)]="form.destinationName" name="destinationName" required placeholder="Ej. Miraflores" />
-            </div>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Destino</mat-label>
+              <input matInput type="text" [(ngModel)]="form.destinationName" name="destinationName" required placeholder="Ej. Miraflores" />
+            </mat-form-field>
 
             <div class="form-row-2">
-              <div class="form-group">
-                <label>Distancia (km)</label>
-                <input type="number" step="0.1" min="0.1" [(ngModel)]="form.distanceKm" name="distanceKm" required />
-              </div>
-              <div class="form-group">
-                <label>Duración (min)</label>
-                <input type="number" min="1" [(ngModel)]="form.durationMinutes" name="durationMinutes" required />
-              </div>
+              <mat-form-field appearance="outline">
+                <mat-label>Distancia (km)</mat-label>
+                <input matInput type="number" step="0.1" min="0.1" [(ngModel)]="form.distanceKm" name="distanceKm" required />
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Duración (min)</mat-label>
+                <input matInput type="number" min="1" [(ngModel)]="form.durationMinutes" name="durationMinutes" required />
+              </mat-form-field>
             </div>
 
             <!-- Resumen Vertical/Compacto en lugar de 4 cajas separadas -->
@@ -92,11 +110,11 @@ type ModeFilter = TransportMode | 'ALL';
             </div>
 
             <div class="form-actions-stack">
-              <button type="submit" class="btn-emerald full-width">
+              <button mat-flat-button color="primary" type="submit" class="btn-emerald full-width">
                 <app-icon [name]="editingTripId ? 'check' : 'plus'" [size]="16"></app-icon>
                 <span>{{ editingTripId ? 'Guardar cambios' : 'Añadir a mi bitácora' }}</span>
               </button>
-              <button type="button" class="btn-outline full-width" *ngIf="editingTripId" (click)="cancelEdit()">
+              <button mat-stroked-button type="button" class="full-width" *ngIf="editingTripId" (click)="cancelEdit()">
                 <span>Cancelar edición</span>
               </button>
             </div>
@@ -106,7 +124,7 @@ type ModeFilter = TransportMode | 'ALL';
             <app-icon name="check" [size]="17"></app-icon>
             <span>{{ feedbackMsg }}</span>
           </div>
-        </article>
+        </mat-card>
 
         <!-- Columna Derecha: Línea de Tiempo / Lista Vertical de Viajes (Sin tabla congestionada de 10 columnas) -->
         <div class="trips-feed-column">
@@ -181,10 +199,10 @@ type ModeFilter = TransportMode | 'ALL';
               </div>
 
               <div class="trip-feed-actions">
-                <button type="button" class="btn-table-action" (click)="startEdit(t)" title="Editar recorrido">
+                <button mat-icon-button type="button" class="btn-table-action" (click)="startEdit(t)" title="Editar recorrido" aria-label="Editar recorrido">
                   <app-icon name="edit" [size]="14"></app-icon>
                 </button>
-                <button type="button" class="btn-table-action danger" (click)="removeTrip(t)" title="Eliminar recorrido">
+                <button mat-icon-button type="button" class="btn-table-action danger" (click)="removeTrip(t)" title="Eliminar recorrido" aria-label="Eliminar recorrido">
                   <app-icon name="trash" [size]="14"></app-icon>
                 </button>
               </div>
