@@ -2920,16 +2920,16 @@ html[data-theme="dark"] .footer-rider.rider-b {
   animation-play-state: paused;
 }
 .veh-bob {
-  animation: veh-bob 0.45s ease-in-out infinite alternate paused;
+  animation: veh-bob 0.8s ease-in-out infinite alternate paused;
 }
 .veh-bob-fast {
-  animation-duration: 0.3s;
+  animation-duration: 0.65s;
 }
 .veh-rumble {
-  animation: veh-rumble 0.22s linear infinite paused;
+  animation: veh-rumble 1s ease-in-out infinite alternate paused;
 }
 .veh-shake {
-  animation: veh-shake 0.14s linear infinite alternate paused;
+  animation: veh-shake 1.25s ease-in-out infinite alternate paused;
 }
 .veh-creep {
   animation: veh-creep 3.4s ease-in-out infinite alternate paused;
@@ -3026,18 +3026,16 @@ html[data-theme="dark"] .footer-rider.rider-b {
   to { transform: rotate(360deg); }
 }
 @keyframes veh-bob {
-  from { transform: translateY(0); }
-  to { transform: translateY(-2px); }
+  from { transform: translate(0, 0); }
+  to { transform: translate(17px, -2px); }
 }
 @keyframes veh-rumble {
-  0%, 100% { transform: translate(0, 0); }
-  25% { transform: translate(0.5px, -0.7px); }
-  50% { transform: translate(-0.4px, 0.2px); }
-  75% { transform: translate(0.4px, -0.5px); }
+  from { transform: translateX(0); }
+  to { transform: translateX(14px); }
 }
 @keyframes veh-shake {
-  from { transform: translate(-0.7px, 0); }
-  to { transform: translate(0.7px, -1px); }
+  from { transform: translate(0, 0); }
+  to { transform: translate(8px, -1px); }
 }
 @keyframes veh-creep {
   from { transform: translateX(0); }
@@ -3139,6 +3137,7 @@ html[data-theme="dark"] .footer-rider.rider-b {
     animation: none !important;
   }
 
+  .transport-card:hover .transport-cartoon-svg,
   .veh-par,
   .transport-card:hover .transport-co2-pill,
   .transport-card:hover .transport-card-metrics li {
