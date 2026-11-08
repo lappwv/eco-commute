@@ -2,6 +2,9 @@ import { Component, OnInit, AfterViewInit, OnDestroy, Inject, PLATFORM_ID, NgZon
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { ApiService } from '../../services/api.service';
 import { I18nService } from '../../services/i18n.service';
 import { RouteOption, RoutePlanResponse, TransportMode } from '../../models/api.models';
@@ -22,7 +25,15 @@ interface LimaPreset {
 @Component({
   selector: 'app-routes-planner',
   standalone: true,
-  imports: [CommonModule, FormsModule, EcoIconComponent, CountUpDirective],
+  imports: [
+    CommonModule,
+    FormsModule,
+    EcoIconComponent,
+    CountUpDirective,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule
+  ],
   template: `
     <section class="page-section">
       <!-- Cabecera con Corredores Rápidos en Línea (Sin tarjeta extra) -->
@@ -55,21 +66,17 @@ interface LimaPreset {
           <h3>Configura tu trayecto</h3>
 
           <div class="vertical-route-stops">
-            <div class="form-group">
-              <label>Punto de partida</label>
-              <div class="input-with-icon">
-                <app-icon name="pin" [size]="16"></app-icon>
-                <input type="text" [(ngModel)]="originName" name="originName" required placeholder="Ej. San Isidro" />
-              </div>
-            </div>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Punto de partida</mat-label>
+              <app-icon matPrefix name="pin" [size]="16"></app-icon>
+              <input matInput type="text" [(ngModel)]="originName" name="originName" required placeholder="Ej. San Isidro" />
+            </mat-form-field>
 
-            <div class="form-group">
-              <label>Destino</label>
-              <div class="input-with-icon">
-                <app-icon name="flag" [size]="16"></app-icon>
-                <input type="text" [(ngModel)]="destName" name="destName" required placeholder="Ej. Miraflores" />
-              </div>
-            </div>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Destino</mat-label>
+              <app-icon matPrefix name="flag" [size]="16"></app-icon>
+              <input matInput type="text" [(ngModel)]="destName" name="destName" required placeholder="Ej. Miraflores" />
+            </mat-form-field>
           </div>
 
           <div class="form-group">
@@ -122,29 +129,29 @@ interface LimaPreset {
             </summary>
             <div class="coords-drawer-body">
               <div class="form-row-2">
-                <div class="form-group">
-                  <label>Lat. origen</label>
-                  <input type="number" step="0.0001" [(ngModel)]="originLat" name="originLat" required />
-                </div>
-                <div class="form-group">
-                  <label>Lng. origen</label>
-                  <input type="number" step="0.0001" [(ngModel)]="originLng" name="originLng" required />
-                </div>
+                <mat-form-field appearance="outline">
+                  <mat-label>Lat. origen</mat-label>
+                  <input matInput type="number" step="0.0001" [(ngModel)]="originLat" name="originLat" required />
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label>Lng. origen</mat-label>
+                  <input matInput type="number" step="0.0001" [(ngModel)]="originLng" name="originLng" required />
+                </mat-form-field>
               </div>
               <div class="form-row-2">
-                <div class="form-group">
-                  <label>Lat. destino</label>
-                  <input type="number" step="0.0001" [(ngModel)]="destLat" name="destLat" required />
-                </div>
-                <div class="form-group">
-                  <label>Lng. destino</label>
-                  <input type="number" step="0.0001" [(ngModel)]="destLng" name="destLng" required />
-                </div>
+                <mat-form-field appearance="outline">
+                  <mat-label>Lat. destino</mat-label>
+                  <input matInput type="number" step="0.0001" [(ngModel)]="destLat" name="destLat" required />
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label>Lng. destino</mat-label>
+                  <input matInput type="number" step="0.0001" [(ngModel)]="destLng" name="destLng" required />
+                </mat-form-field>
               </div>
             </div>
           </details>
 
-          <button type="submit" class="btn-emerald full-width" [disabled]="loading">
+          <button mat-flat-button color="primary" type="submit" class="btn-emerald full-width" [disabled]="loading">
             <app-icon name="route" [size]="17"></app-icon>
             <span>{{ loading ? 'Calculando...' : 'Actualizar mapa' }}</span>
           </button>
@@ -223,6 +230,7 @@ interface LimaPreset {
           </ul>
 
           <button
+            mat-stroked-button
             type="button"
             class="btn-outline full-width"
             [class.btn-emerald]="opt.id === res.recommendedRouteId || opt.isAiRecommended"
