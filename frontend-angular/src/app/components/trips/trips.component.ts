@@ -133,14 +133,15 @@ type ModeFilter = TransportMode | 'ALL';
             <span class="trips-filter-counter">{{ filteredTrips.length }} de {{ trips.length }}</span>
           </div>
 
-          <div class="preset-chips-row trips-mode-filters">
-            <button type="button" class="chip-btn" [class.active]="selectedMode === 'ALL'" (click)="setModeFilter('ALL')">
+          <div class="preset-chips-row trips-mode-filters" role="group" aria-label="Filtrar por medio de transporte">
+            <button type="button" class="chip-btn" [attr.aria-pressed]="selectedMode === 'ALL'" [class.active]="selectedMode === 'ALL'" (click)="setModeFilter('ALL')">
               <strong>Todos</strong>
             </button>
             <button
               type="button"
               class="chip-btn"
               *ngFor="let m of transportModes"
+              [attr.aria-pressed]="selectedMode === m"
               [class.active]="selectedMode === m"
               (click)="setModeFilter(m)"
             >
@@ -148,14 +149,14 @@ type ModeFilter = TransportMode | 'ALL';
             </button>
           </div>
 
-          <div class="preset-chips-row trips-period-filters">
-            <button type="button" class="chip-btn" [class.active]="selectedPeriod === 'ALL'" (click)="setPeriodFilter('ALL')">
+          <div class="preset-chips-row trips-period-filters" role="group" aria-label="Filtrar por periodo">
+            <button type="button" class="chip-btn" [attr.aria-pressed]="selectedPeriod === 'ALL'" [class.active]="selectedPeriod === 'ALL'" (click)="setPeriodFilter('ALL')">
               <strong>Todos</strong>
             </button>
-            <button type="button" class="chip-btn" [class.active]="selectedPeriod === 'LAST_7'" (click)="setPeriodFilter('LAST_7')">
+            <button type="button" class="chip-btn" [attr.aria-pressed]="selectedPeriod === 'LAST_7'" [class.active]="selectedPeriod === 'LAST_7'" (click)="setPeriodFilter('LAST_7')">
               <strong>Últimos 7 días</strong>
             </button>
-            <button type="button" class="chip-btn" [class.active]="selectedPeriod === 'LAST_30'" (click)="setPeriodFilter('LAST_30')">
+            <button type="button" class="chip-btn" [attr.aria-pressed]="selectedPeriod === 'LAST_30'" [class.active]="selectedPeriod === 'LAST_30'" (click)="setPeriodFilter('LAST_30')">
               <strong>Últimos 30 días</strong>
             </button>
           </div>
