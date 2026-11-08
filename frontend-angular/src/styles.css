@@ -2228,7 +2228,7 @@ textarea {
     gap: 0.3rem;
   }
   .user-pill-name,
-  .landing-back-pill span {
+  .landing-back-pill > span {
     display: none;
   }
 }
@@ -5429,7 +5429,7 @@ app-leaderboard .podium-stepped-stage {
     padding-right: 1rem;
   }
   .brand-sub,
-  .landing-back-pill span,
+  .landing-back-pill > span,
   .user-pill-name {
     display: none !important;
   }
@@ -5948,5 +5948,47 @@ app-leaderboard .eco-card:hover {
   .redemption-row:hover {
     transform: none;
     background-image: none;
+  }
+}
+
+
+/* BOTON VOLVER A LA PORTADA: siempre legible, tambien con la pantalla chica */
+.landing-back-pill {
+  min-height: 36px;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.86rem;
+  font-weight: 700;
+  gap: 0.45rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.landing-back-pill app-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+@media (min-width: 1021px) and (max-width: 1320px), (max-width: 640px) {
+  .landing-back-pill {
+    width: 38px;
+    height: 38px;
+    min-height: 38px;
+    padding: 0;
+    justify-content: center;
+  }
+  .landing-back-pill app-icon {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Celular: que el encabezado no se desborde y el boton de portada se vea completo */
+@media (max-width: 480px) {
+  .brand-text {
+    display: none;
+  }
+  .eco-nav-inner {
+    gap: 0.4rem !important;
+    padding-left: 0.7rem !important;
+    padding-right: 0.7rem !important;
   }
 }
