@@ -2,6 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSelectModule } from '@angular/material/select';
 import { ApiService } from '../../services/api.service';
 import { I18nService } from '../../services/i18n.service';
 import { AiRecommendation, CommunityImpact, DashboardSummary } from '../../models/api.models';
@@ -19,7 +25,19 @@ interface QuickCorridorOption {
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule, EcoIconComponent, CountUpDirective],
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    EcoIconComponent,
+    CountUpDirective,
+    MatButtonModule,
+    MatCardModule,
+    MatChipsModule,
+    MatFormFieldModule,
+    MatProgressBarModule,
+    MatSelectModule
+  ],
   template: `
     <section class="page-section dashboard-page" *ngIf="summary as s">
       <!-- ==================== SECCIÓN 1: HERO PRINCIPAL DE RUTAS ==================== -->
@@ -36,23 +54,19 @@ interface QuickCorridorOption {
 
           <!-- Buscador Rápido de Origen / Destino con Acción Principal "Iniciar ruta" -->
           <div class="quick-route-launcher" role="region" aria-label="Planificador rápido de ruta">
-            <div class="quick-route-field">
-              <span class="quick-route-label">
+            <mat-form-field appearance="outline" class="quick-route-field">
+              <mat-label>
                 <app-icon name="pin" [size]="14"></app-icon>
-                <span>Corredor rápido (Origen → Destino)</span>
-              </span>
-              <select
-                class="quick-route-select"
-                [(ngModel)]="selectedQuickPreset"
-                aria-label="Seleccionar ruta rápida en Lima"
-              >
-                <option *ngFor="let c of quickCorridors" [ngValue]="c.index">
+                Corredor rápido (Origen → Destino)
+              </mat-label>
+              <mat-select [(ngModel)]="selectedQuickPreset" aria-label="Seleccionar ruta rápida en Lima">
+                <mat-option *ngFor="let c of quickCorridors" [value]="c.index">
                   {{ c.origin }} → {{ c.destination }} ({{ c.distanceLabel }} · {{ c.timeLabel }})
-                </option>
-              </select>
-            </div>
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
 
-            <button type="button" class="btn-start-route" (click)="launchQuickRoute()">
+            <button mat-flat-button color="primary" type="button" class="btn-start-route" (click)="launchQuickRoute()">
               <app-icon name="route" [size]="18"></app-icon>
               <span>Iniciar ruta</span>
             </button>
@@ -356,16 +370,18 @@ interface QuickCorridorOption {
 
         <div class="dash-editorial-grid">
           <!-- Panel Principal Izquierdo: Evolución Semanal y Reparto por Vehículo -->
-          <article class="eco-card dash-main-chart-card">
+          <mat-card class="eco-card dash-main-chart-card">
             <div class="card-head-row">
               <div>
                 <h2>Emisiones evitadas esta semana</h2>
                 <p class="card-sub">Gramos de CO₂ que evitaste emitir cada día de la semana</p>
               </div>
-              <span class="badge-pill">
-                <app-icon name="leaf" [size]="15"></app-icon>
-                <span>Últimos 7 días</span>
-              </span>
+              <mat-chip-set>
+                <mat-chip disableRipple>
+                  <app-icon name="leaf" [size]="15"></app-icon>
+                  <span>Últimos 7 días</span>
+                </mat-chip>
+              </mat-chip-set>
             </div>
 
             <div class="bar-chart-clean">
@@ -393,14 +409,16 @@ interface QuickCorridorOption {
                     <span class="mode-icon-chip"><app-icon [name]="m.mode" [size]="18"></app-icon></span>
                     <span class="mode-name">{{ formatMode(m.mode) }}</span>
                   </div>
-                  <div class="mode-progress-track">
-                    <div class="mode-progress-fill" [style.width.%]="(m.count / Math.max(1, s.totalTrips)) * 100"></div>
-                  </div>
+                  <mat-progress-bar
+                    class="mode-progress-track"
+                    mode="determinate"
+                    [value]="(m.count / Math.max(1, s.totalTrips)) * 100"
+                  ></mat-progress-bar>
                   <span class="mode-count">{{ m.count }} {{ m.count === 1 ? 'viaje' : 'viajes' }}</span>
                 </div>
               </div>
             </div>
-          </article>
+          </mat-card>
 
           <!-- Columna Vertical Derecha -->
           <aside class="dash-vertical-sidebar">
@@ -461,9 +479,7 @@ interface QuickCorridorOption {
                     </span>
                     <div class="v-medal-copy">
                       <strong>{{ b.title }}</strong>
-                      <div class="v-medal-bar">
-                        <div class="v-medal-fill" [style.width.%]="b.progressPercent"></div>
-                      </div>
+                      <mat-progress-bar class="v-medal-bar" mode="determinate" [value]="b.progressPercent"></mat-progress-bar>
                     </div>
                     <span class="v-medal-pct">{{ b.progressPercent }}%</span>
                   </div>
