@@ -130,6 +130,18 @@ type ModeFilter = TransportMode | 'ALL';
             </button>
           </div>
 
+          <div class="preset-chips-row trips-period-filters">
+            <button type="button" class="chip-btn" [class.active]="selectedPeriod === 'ALL'" (click)="setPeriodFilter('ALL')">
+              <strong>Todos</strong>
+            </button>
+            <button type="button" class="chip-btn" [class.active]="selectedPeriod === 'LAST_7'" (click)="setPeriodFilter('LAST_7')">
+              <strong>Últimos 7 días</strong>
+            </button>
+            <button type="button" class="chip-btn" [class.active]="selectedPeriod === 'LAST_30'" (click)="setPeriodFilter('LAST_30')">
+              <strong>Últimos 30 días</strong>
+            </button>
+          </div>
+
           <div class="trips-timeline-list">
             <div
               class="trip-feed-item"
