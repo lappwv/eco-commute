@@ -233,6 +233,14 @@ import { CommonModule } from '@angular/common';
         <path d="M5 12H19M13.5 6.5L19 12L13.5 17.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
 
+
+      <!-- HOME -->
+      <svg *ngSwitchCase="'home'" viewBox="0 0 24 24" fill="none">
+        <path d="M4 11.2L12 4L20 11.2V19.5A1.5 1.5 0 0 1 18.5 21H5.5A1.5 1.5 0 0 1 4 19.5V11.2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M9.5 21V14H14.5V21" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+      </svg>
+
+
       <!-- MENU -->
       <svg *ngSwitchCase="'menu'" viewBox="0 0 24 24" fill="none">
         <path d="M4 7H20M4 12H20M4 17H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
