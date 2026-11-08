@@ -171,7 +171,7 @@ interface LimaPreset {
             <svg class="teaser-leaf leaf-2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19C5 10 10 5 20 4c0 10-4 15-13 15z" fill="currentColor" /></svg>
             <svg class="teaser-leaf leaf-3" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19C5 10 10 5 20 4c0 10-4 15-13 15z" fill="currentColor" /></svg>
             <small>{{ i18n.t('routes.savingsTeaser') }}</small>
-            <strong><span [appCountUp]="r.aiGreenCorridorRoute.co2SavedGrams"></span> g de CO₂</strong>
+            <strong><span [appCountUp]="r.aiGreenCorridorRoute.co2SavedGrams"></span> {{ i18n.t('routes.gramsCo2') }}</strong>
             <span class="teaser-pts">+<span [appCountUp]="r.aiGreenCorridorRoute.potentialPoints"></span> {{ i18n.t('routes.savingsPts') }}</span>
           </div>
         </form>

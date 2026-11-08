@@ -49,60 +49,60 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
         <mat-card class="eco-card">
           <div class="card-head-row">
             <div>
-              <h2>{{ editingRewardId ? 'Editar beneficio #' + editingRewardId : 'Publicar beneficio aliado' }}</h2>
-              <p class="card-sub">Define el comercio, el costo en puntos y el icono de marca</p>
+              <h2>{{ editingRewardId ? i18n.tn('admin.editReward', { id: editingRewardId }) : i18n.t('admin.publishReward') }}</h2>
+              <p class="card-sub">{{ i18n.t('admin.rewardHint') }}</p>
             </div>
           </div>
 
           <form (ngSubmit)="saveReward()" class="eco-form">
             <div class="form-row-2">
               <mat-form-field appearance="outline">
-                <mat-label>Código del cupón</mat-label>
+                <mat-label>{{ i18n.t('admin.couponCode') }}</mat-label>
                 <input matInput type="text" [(ngModel)]="rewardForm.code" name="rCode" required />
               </mat-form-field>
               <mat-form-field appearance="outline">
-                <mat-label>Icono de marca</mat-label>
+                <mat-label>{{ i18n.t('admin.brandIcon') }}</mat-label>
                 <mat-select [(ngModel)]="rewardForm.iconEmoji" name="rIcon">
-                  <mat-option value="coffee">Café / Gastronomía</mat-option>
-                  <mat-option value="bike">Bicicleta / Movilidad</mat-option>
-                  <mat-option value="ticket">Pase cultural / Entrada</mat-option>
-                  <mat-option value="tree">Reforestación urbana</mat-option>
-                  <mat-option value="leaf">Beneficio sostenible</mat-option>
-                  <mat-option value="bolt">Energía / Descuento</mat-option>
+                  <mat-option value="coffee">{{ i18n.t('admin.icon.coffee') }}</mat-option>
+                  <mat-option value="bike">{{ i18n.t('admin.icon.bike') }}</mat-option>
+                  <mat-option value="ticket">{{ i18n.t('admin.icon.ticket') }}</mat-option>
+                  <mat-option value="tree">{{ i18n.t('admin.icon.tree') }}</mat-option>
+                  <mat-option value="leaf">{{ i18n.t('admin.icon.leaf') }}</mat-option>
+                  <mat-option value="bolt">{{ i18n.t('admin.icon.bolt') }}</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
 
             <div class="form-row-2">
               <mat-form-field appearance="outline">
-                <mat-label>Nombre del beneficio</mat-label>
+                <mat-label>{{ i18n.t('admin.rewardName') }}</mat-label>
                 <input matInput type="text" [(ngModel)]="rewardForm.title" name="rTitle" required />
               </mat-form-field>
               <mat-form-field appearance="outline">
-                <mat-label>Costo en puntos</mat-label>
+                <mat-label>{{ i18n.t('admin.pointsCost') }}</mat-label>
                 <input matInput type="number" min="10" [(ngModel)]="rewardForm.pointsCost" name="rPoints" required />
               </mat-form-field>
             </div>
 
             <mat-form-field appearance="outline" class="full-width">
-              <mat-label>Descripción y comercio aliado</mat-label>
+              <mat-label>{{ i18n.t('admin.rewardDesc') }}</mat-label>
               <input matInput type="text" [(ngModel)]="rewardForm.description" name="rDesc" required />
             </mat-form-field>
 
             <div class="form-group">
               <label class="checkbox-label">
                 <input type="checkbox" [(ngModel)]="rewardForm.active" name="rActive" />
-                <span>Disponible en el catálogo público</span>
+                <span>{{ i18n.t('admin.publicCatalog') }}</span>
               </label>
             </div>
 
             <div class="form-actions-row">
               <button mat-flat-button color="primary" type="submit" class="btn-emerald">
                 <app-icon [name]="editingRewardId ? 'check' : 'plus'" [size]="16"></app-icon>
-                <span>{{ editingRewardId ? 'Guardar cambios' : 'Crear beneficio' }}</span>
+                <span>{{ editingRewardId ? i18n.t('admin.saveChanges') : i18n.t('admin.createReward') }}</span>
               </button>
               <button mat-stroked-button type="button" *ngIf="editingRewardId" (click)="cancelRewardEdit()">
-                <span>Cancelar</span>
+                <span>{{ i18n.t('admin.cancel') }}</span>
               </button>
             </div>
           </form>
@@ -110,43 +110,43 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
           <div class="table-responsive mt-4">
             <table mat-table [dataSource]="rewards" class="eco-table">
               <ng-container matColumnDef="reward">
-                <th mat-header-cell *matHeaderCellDef>Beneficio</th>
+                <th mat-header-cell *matHeaderCellDef>{{ i18n.t('admin.colReward') }}</th>
                 <td mat-cell *matCellDef="let r">
                   <div class="user-cell">
                     <span class="mode-icon-chip">
                       <app-icon [name]="r.code || r.iconEmoji" [size]="16"></app-icon>
                     </span>
-                    <strong>{{ r.title }}</strong>
+                    <strong>{{ i18n.tc('reward', r.code, 'title', r.title) }}</strong>
                   </div>
                 </td>
               </ng-container>
 
               <ng-container matColumnDef="code">
-                <th mat-header-cell *matHeaderCellDef>Código</th>
+                <th mat-header-cell *matHeaderCellDef>{{ i18n.t('admin.colCode') }}</th>
                 <td mat-cell *matCellDef="let r"><code>{{ r.code }}</code></td>
               </ng-container>
 
               <ng-container matColumnDef="cost">
-                <th mat-header-cell *matHeaderCellDef>Costo</th>
+                <th mat-header-cell *matHeaderCellDef>{{ i18n.t('admin.colCost') }}</th>
                 <td mat-cell *matCellDef="let r"><span class="pts-pill">{{ r.pointsCost }} pts</span></td>
               </ng-container>
 
               <ng-container matColumnDef="status">
-                <th mat-header-cell *matHeaderCellDef>Estado</th>
+                <th mat-header-cell *matHeaderCellDef>{{ i18n.t('admin.colStatus') }}</th>
                 <td mat-cell *matCellDef="let r">
                   <span [class]="r.active ? 'status-ok' : 'status-warn'">
-                    {{ r.active ? 'Activo' : 'Pausado' }}
+                    {{ r.active ? i18n.t('admin.active') : i18n.t('admin.paused') }}
                   </span>
                 </td>
               </ng-container>
 
               <ng-container matColumnDef="actions">
-                <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                <th mat-header-cell *matHeaderCellDef>{{ i18n.t('admin.colActions') }}</th>
                 <td mat-cell *matCellDef="let r" class="actions-cell">
-                  <button mat-icon-button type="button" class="btn-table-action" (click)="editReward(r)" title="Editar" aria-label="Editar beneficio">
+                  <button mat-icon-button type="button" class="btn-table-action" (click)="editReward(r)" [title]="i18n.t('admin.edit')" [attr.aria-label]="i18n.t('admin.editRewardAria')">
                     <app-icon name="edit" [size]="14"></app-icon>
                   </button>
-                  <button mat-icon-button type="button" class="btn-table-action danger" (click)="deleteReward(r.id, r.title)" title="Eliminar" aria-label="Eliminar beneficio">
+                  <button mat-icon-button type="button" class="btn-table-action danger" (click)="deleteReward(r.id, i18n.tc('reward', r.code, 'title', r.title))" [title]="i18n.t('admin.delete')" [attr.aria-label]="i18n.t('admin.deleteRewardAria')">
                     <app-icon name="trash" [size]="14"></app-icon>
                   </button>
                 </td>
@@ -162,63 +162,63 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
         <mat-card class="eco-card">
           <div class="card-head-row">
             <div>
-              <h2>{{ editingChallengeId ? 'Editar reto #' + editingChallengeId : 'Crear reto comunitario' }}</h2>
-              <p class="card-sub">Configura las metas colectivas del mes para Lima Metropolitana</p>
+              <h2>{{ editingChallengeId ? i18n.tn('admin.editChallenge', { id: editingChallengeId }) : i18n.t('admin.createChallenge') }}</h2>
+              <p class="card-sub">{{ i18n.t('admin.challengeHint') }}</p>
             </div>
           </div>
 
           <form (ngSubmit)="saveChallenge()" class="eco-form">
             <div class="form-row-2">
               <mat-form-field appearance="outline">
-                <mat-label>Título del reto</mat-label>
+                <mat-label>{{ i18n.t('admin.challengeTitle') }}</mat-label>
                 <input matInput type="text" [(ngModel)]="challengeForm.title" name="cTitle" required />
               </mat-form-field>
               <mat-form-field appearance="outline">
-                <mat-label>Valor de la meta</mat-label>
+                <mat-label>{{ i18n.t('admin.goalValue') }}</mat-label>
                 <input matInput type="number" step="1" min="1" [(ngModel)]="challengeForm.goalValue" name="cGoalVal" required />
               </mat-form-field>
             </div>
 
             <div class="form-row-2">
               <mat-form-field appearance="outline">
-                <mat-label>Unidad de medida</mat-label>
+                <mat-label>{{ i18n.t('admin.goalUnit') }}</mat-label>
                 <mat-select [(ngModel)]="challengeForm.goalUnit" name="cGoalUnit" required>
-                  <mat-option value="kg_co2">kg de CO₂ evitado</mat-option>
-                  <mat-option value="km">Kilómetros sostenibles</mat-option>
-                  <mat-option value="trips">Recorridos completados</mat-option>
+                  <mat-option value="kg_co2">{{ i18n.t('admin.unit.kg_co2') }}</mat-option>
+                  <mat-option value="km">{{ i18n.t('admin.unit.km') }}</mat-option>
+                  <mat-option value="trips">{{ i18n.t('admin.unit.trips') }}</mat-option>
                 </mat-select>
               </mat-form-field>
               <mat-form-field appearance="outline">
-                <mat-label>Fecha de inicio</mat-label>
+                <mat-label>{{ i18n.t('admin.startDate') }}</mat-label>
                 <input matInput type="date" [(ngModel)]="challengeForm.periodStart" name="cStart" required />
               </mat-form-field>
             </div>
 
             <div class="form-row-2">
               <mat-form-field appearance="outline">
-                <mat-label>Fecha de cierre</mat-label>
+                <mat-label>{{ i18n.t('admin.endDate') }}</mat-label>
                 <input matInput type="date" [(ngModel)]="challengeForm.periodEnd" name="cEnd" required />
               </mat-form-field>
               <div class="form-group checkbox-align">
                 <label class="checkbox-label">
                   <input type="checkbox" [(ngModel)]="challengeForm.active" name="cActive" />
-                  <span>Reto activo</span>
+                  <span>{{ i18n.t('admin.challengeActive') }}</span>
                 </label>
               </div>
             </div>
 
             <mat-form-field appearance="outline" class="full-width">
-              <mat-label>Descripción para los vecinos</mat-label>
+              <mat-label>{{ i18n.t('admin.challengeDesc') }}</mat-label>
               <input matInput type="text" [(ngModel)]="challengeForm.description" name="cDesc" required />
             </mat-form-field>
 
             <div class="form-actions-row">
               <button mat-flat-button color="primary" type="submit" class="btn-emerald">
                 <app-icon [name]="editingChallengeId ? 'check' : 'plus'" [size]="16"></app-icon>
-                <span>{{ editingChallengeId ? 'Guardar cambios' : 'Publicar reto' }}</span>
+                <span>{{ editingChallengeId ? i18n.t('admin.saveChanges') : i18n.t('admin.publishChallenge') }}</span>
               </button>
               <button mat-stroked-button type="button" *ngIf="editingChallengeId" (click)="cancelChallengeEdit()">
-                <span>Cancelar</span>
+                <span>{{ i18n.t('admin.cancel') }}</span>
               </button>
             </div>
           </form>
@@ -226,36 +226,36 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
           <div class="table-responsive mt-4">
             <table mat-table [dataSource]="challenges" class="eco-table">
               <ng-container matColumnDef="challenge">
-                <th mat-header-cell *matHeaderCellDef>Reto</th>
-                <td mat-cell *matCellDef="let c"><strong>{{ c.title }}</strong></td>
+                <th mat-header-cell *matHeaderCellDef>{{ i18n.t('admin.colChallenge') }}</th>
+                <td mat-cell *matCellDef="let c"><strong>{{ i18n.tc('challenge', c.id, 'title', c.title) }}</strong></td>
               </ng-container>
 
               <ng-container matColumnDef="goal">
-                <th mat-header-cell *matHeaderCellDef>Meta</th>
-                <td mat-cell *matCellDef="let c">{{ c.goalValue }} {{ c.goalUnit }}</td>
+                <th mat-header-cell *matHeaderCellDef>{{ i18n.t('admin.colGoal') }}</th>
+                <td mat-cell *matCellDef="let c">{{ c.goalValue }} {{ unitLabel(c.goalUnit) }}</td>
               </ng-container>
 
               <ng-container matColumnDef="period">
-                <th mat-header-cell *matHeaderCellDef>Vigencia</th>
+                <th mat-header-cell *matHeaderCellDef>{{ i18n.t('admin.colPeriod') }}</th>
                 <td mat-cell *matCellDef="let c">{{ c.periodStart }} → {{ c.periodEnd }}</td>
               </ng-container>
 
               <ng-container matColumnDef="status">
-                <th mat-header-cell *matHeaderCellDef>Estado</th>
+                <th mat-header-cell *matHeaderCellDef>{{ i18n.t('admin.colStatus') }}</th>
                 <td mat-cell *matCellDef="let c">
                   <span [class]="c.active ? 'status-ok' : 'status-warn'">
-                    {{ c.active ? 'Activo' : 'Cerrado' }}
+                    {{ c.active ? i18n.t('admin.active') : i18n.t('admin.closed') }}
                   </span>
                 </td>
               </ng-container>
 
               <ng-container matColumnDef="actions">
-                <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                <th mat-header-cell *matHeaderCellDef>{{ i18n.t('admin.colActions') }}</th>
                 <td mat-cell *matCellDef="let c" class="actions-cell">
-                  <button mat-icon-button type="button" class="btn-table-action" (click)="editChallenge(c)" title="Editar" aria-label="Editar reto">
+                  <button mat-icon-button type="button" class="btn-table-action" (click)="editChallenge(c)" [title]="i18n.t('admin.edit')" [attr.aria-label]="i18n.t('admin.editChallengeAria')">
                     <app-icon name="edit" [size]="14"></app-icon>
                   </button>
-                  <button mat-icon-button type="button" class="btn-table-action danger" (click)="deleteChallenge(c.id, c.title)" title="Eliminar" aria-label="Eliminar reto">
+                  <button mat-icon-button type="button" class="btn-table-action danger" (click)="deleteChallenge(c.id, i18n.tc('challenge', c.id, 'title', c.title))" [title]="i18n.t('admin.delete')" [attr.aria-label]="i18n.t('admin.deleteChallengeAria')">
                     <app-icon name="trash" [size]="14"></app-icon>
                   </button>
                 </td>
@@ -308,6 +308,13 @@ export class AdminComponent implements OnInit {
     this.loadData();
   }
 
+  /** Etiqueta traducida de la unidad de una meta; si no hay traducción, muestra el valor original. */
+  unitLabel(unit: string): string {
+    const key = `rewards.goalUnit.${unit}`;
+    const label = this.i18n.t(key);
+    return label === key ? unit : label;
+  }
+
   loadData(): void {
     this.api.getAdminRewards().subscribe(res => (this.rewards = res));
     this.api.getAdminChallenges().subscribe(res => (this.challenges = res));
@@ -316,13 +323,13 @@ export class AdminComponent implements OnInit {
   saveReward(): void {
     if (this.editingRewardId) {
       this.api.updateAdminReward(this.editingRewardId, this.rewardForm).subscribe(res => {
-        this.snackBar.open(`Beneficio actualizado: ${res.title}`, 'Cerrar', { duration: 4000 });
+        this.snackBar.open(this.i18n.tn('admin.rewardUpdated', { title: res.title }), this.i18n.t('admin.close'), { duration: 4000 });
         this.editingRewardId = null;
         this.loadData();
       });
     } else {
       this.api.createAdminReward(this.rewardForm).subscribe(res => {
-        this.snackBar.open(`Beneficio publicado: ${res.title}`, 'Cerrar', { duration: 4000 });
+        this.snackBar.open(this.i18n.tn('admin.rewardPublished', { title: res.title }), this.i18n.t('admin.close'), { duration: 4000 });
         this.loadData();
       });
     }
@@ -347,14 +354,15 @@ export class AdminComponent implements OnInit {
   deleteReward(id: number, title: string): void {
     const ref = this.dialog.open(ConfirmDialogComponent, {
       data: {
-        title: 'Eliminar beneficio',
-        message: `¿Eliminar "${title}" del catálogo? Esta acción no se puede deshacer.`
+        title: this.i18n.t('admin.deleteRewardTitle'),
+        message: this.i18n.tn('admin.deleteRewardMsg', { title }),
+        confirmLabel: this.i18n.t('admin.delete')
       }
     });
     ref.afterClosed().subscribe(confirmed => {
       if (!confirmed) return;
       this.api.deleteAdminReward(id).subscribe(() => {
-        this.snackBar.open('Beneficio eliminado del catálogo.', 'Cerrar', { duration: 4000 });
+        this.snackBar.open(this.i18n.t('admin.rewardDeleted'), this.i18n.t('admin.close'), { duration: 4000 });
         this.loadData();
       });
     });
@@ -363,13 +371,13 @@ export class AdminComponent implements OnInit {
   saveChallenge(): void {
     if (this.editingChallengeId) {
       this.api.updateAdminChallenge(this.editingChallengeId, this.challengeForm).subscribe(res => {
-        this.snackBar.open(`Reto actualizado: ${res.title}`, 'Cerrar', { duration: 4000 });
+        this.snackBar.open(this.i18n.tn('admin.challengeUpdated', { title: res.title }), this.i18n.t('admin.close'), { duration: 4000 });
         this.editingChallengeId = null;
         this.loadData();
       });
     } else {
       this.api.createAdminChallenge(this.challengeForm).subscribe(res => {
-        this.snackBar.open(`Reto comunitario creado: ${res.title}`, 'Cerrar', { duration: 4000 });
+        this.snackBar.open(this.i18n.tn('admin.challengeCreated', { title: res.title }), this.i18n.t('admin.close'), { duration: 4000 });
         this.loadData();
       });
     }
@@ -395,14 +403,15 @@ export class AdminComponent implements OnInit {
   deleteChallenge(id: number, title: string): void {
     const ref = this.dialog.open(ConfirmDialogComponent, {
       data: {
-        title: 'Eliminar reto',
-        message: `¿Eliminar el reto "${title}"? Esta acción no se puede deshacer.`
+        title: this.i18n.t('admin.deleteChallengeTitle'),
+        message: this.i18n.tn('admin.deleteChallengeMsg', { title }),
+        confirmLabel: this.i18n.t('admin.delete')
       }
     });
     ref.afterClosed().subscribe(confirmed => {
       if (!confirmed) return;
       this.api.deleteAdminChallenge(id).subscribe(() => {
-        this.snackBar.open('Reto eliminado.', 'Cerrar', { duration: 4000 });
+        this.snackBar.open(this.i18n.t('admin.challengeDeleted'), this.i18n.t('admin.close'), { duration: 4000 });
         this.loadData();
       });
     });

@@ -11,6 +11,7 @@ import { AuthService, DEFAULT_RENDER_API, LOCAL_BACKEND_API } from '../../servic
 import { ApiService } from '../../services/api.service';
 import { UserProfile } from '../../models/api.models';
 import { EcoIconComponent } from '../icon/eco-icon.component';
+import { I18nService } from '../../services/i18n.service';
 
 @Component({
   selector: 'app-auth',
@@ -32,11 +33,11 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
         <div>
           <span class="eyebrow-tag">
             <app-icon name="user" [size]="14"></app-icon>
-            Tu Cuenta EcoCommute
+            {{ i18n.t('auth.eyebrow') }}
           </span>
-          <h1 class="page-title">Perfil y Acceso Rápido</h1>
+          <h1 class="page-title">{{ i18n.t('auth.title') }}</h1>
           <p class="page-subtitle">
-            Inicia sesión con tu cuenta o cambia entre los perfiles de demostración con un clic.
+            {{ i18n.t('auth.subtitle') }}
           </p>
         </div>
       </div>
@@ -45,74 +46,74 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
         <!-- Left Card: Login / Register & 1-Click Demo Profiles -->
         <mat-card class="eco-card">
           <mat-tab-group class="auth-tab-group" [(selectedIndex)]="tabIndex" animationDuration="0ms">
-            <mat-tab label="Iniciar sesión">
+            <mat-tab [label]="i18n.t('auth.tabLogin')">
               <form (ngSubmit)="onLogin()" class="eco-form mat-tab-form">
                 <mat-form-field appearance="outline" class="full-width">
-                  <mat-label>Correo electrónico</mat-label>
+                  <mat-label>{{ i18n.t('auth.email') }}</mat-label>
                   <input matInput type="email" [(ngModel)]="loginEmail" name="loginEmail" required />
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="full-width">
-                  <mat-label>Contraseña</mat-label>
+                  <mat-label>{{ i18n.t('auth.password') }}</mat-label>
                   <input matInput type="password" [(ngModel)]="loginPassword" name="loginPassword" required />
                 </mat-form-field>
                 <button mat-flat-button color="primary" type="submit" class="full-width">
                   <app-icon name="check" [size]="16"></app-icon>
-                  <span>Entrar a mi cuenta</span>
+                  <span>{{ i18n.t('auth.enter') }}</span>
                 </button>
               </form>
             </mat-tab>
 
-            <mat-tab label="Crear cuenta">
+            <mat-tab [label]="i18n.t('auth.tabRegister')">
               <form (ngSubmit)="onRegister()" class="eco-form mat-tab-form">
                 <mat-form-field appearance="outline" class="full-width">
-                  <mat-label>Nombre completo</mat-label>
-                  <input matInput type="text" [(ngModel)]="regName" name="regName" required placeholder="Ej. Valeria Paredes" />
+                  <mat-label>{{ i18n.t('auth.fullName') }}</mat-label>
+                  <input matInput type="text" [(ngModel)]="regName" name="regName" required [placeholder]="i18n.t('auth.namePlaceholder')" />
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="full-width">
-                  <mat-label>Correo electrónico</mat-label>
+                  <mat-label>{{ i18n.t('auth.email') }}</mat-label>
                   <input matInput type="email" [(ngModel)]="regEmail" name="regEmail" required placeholder="valeria&#64;lima.pe" />
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="full-width">
-                  <mat-label>Contraseña</mat-label>
+                  <mat-label>{{ i18n.t('auth.password') }}</mat-label>
                   <input matInput type="password" [(ngModel)]="regPassword" name="regPassword" required />
                 </mat-form-field>
                 <div class="form-row-2">
                   <div class="form-group checkbox-align">
                     <label class="checkbox-label">
                       <input type="checkbox" [(ngModel)]="regBicycle" name="regBicycle" />
-                      <span>Cuento con bicicleta</span>
+                      <span>{{ i18n.t('auth.hasBike') }}</span>
                     </label>
                   </div>
                   <mat-form-field appearance="outline">
-                    <mat-label>Caminata diaria máx. (min)</mat-label>
+                    <mat-label>{{ i18n.t('auth.walkMax') }}</mat-label>
                     <input matInput type="number" [(ngModel)]="regWalkMin" name="regWalkMin" min="5" max="180" />
                   </mat-form-field>
                 </div>
                 <div class="form-group">
                   <label class="checkbox-label">
                     <input type="checkbox" [(ngModel)]="regAcceptTerms" name="regAcceptTerms" required />
-                    <span>Acepto los <a routerLink="/terms" target="_blank">Términos y Condiciones</a></span>
+                    <span>{{ i18n.t('auth.acceptPre') }} <a routerLink="/terms" target="_blank">{{ i18n.t('auth.termsLink') }}</a></span>
                   </label>
                 </div>
                 <button mat-flat-button color="primary" type="submit" class="full-width" [disabled]="!regAcceptTerms">
                   <app-icon name="plus" [size]="16"></app-icon>
-                  <span>Registrarme en EcoCommute</span>
+                  <span>{{ i18n.t('auth.register') }}</span>
                 </button>
               </form>
             </mat-tab>
           </mat-tab-group>
 
           <div class="demo-accounts-box">
-            <h3>Acceso rápido con cuentas de prueba</h3>
-            <p class="card-sub">Prueba la experiencia como ciudadana o como administrador de comercios aliados:</p>
+            <h3>{{ i18n.t('auth.demoTitle') }}</h3>
+            <p class="card-sub">{{ i18n.t('auth.demoSub') }}</p>
             <div class="demo-btns-row">
               <button mat-stroked-button type="button" (click)="quickDemoUser()">
                 <app-icon name="user" [size]="16"></app-icon>
-                <span>Ciudadana (Elena Rios)</span>
+                <span>{{ i18n.t('auth.demoUser') }}</span>
               </button>
               <button mat-stroked-button type="button" (click)="quickDemoAdmin()">
                 <app-icon name="shield" [size]="16"></app-icon>
-                <span>Administrador</span>
+                <span>{{ i18n.t('auth.demoAdmin') }}</span>
               </button>
             </div>
           </div>
@@ -129,7 +130,7 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
             <div class="profile-header">
               <img [src]="p.avatarUrl" [alt]="p.fullName" class="avatar-lg" />
               <div>
-                <span class="badge-emerald">{{ p.role === 'ROLE_ADMIN' ? 'Perfil Administrador' : 'Perfil Ciudadano' }}</span>
+                <span class="badge-emerald">{{ p.role === 'ROLE_ADMIN' ? i18n.t('auth.roleAdmin') : i18n.t('auth.roleUser') }}</span>
                 <h2>{{ p.fullName }}</h2>
                 <p class="card-sub">{{ p.email }}</p>
               </div>
@@ -138,38 +139,38 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
             <div class="kpi-mini-grid">
               <div class="kpi-mini">
                 <strong>{{ p.currentPoints }} pts</strong>
-                <span>Puntos</span>
+                <span>{{ i18n.t('auth.points') }}</span>
               </div>
               <div class="kpi-mini">
-                <strong>Nivel {{ p.currentLevel }}</strong>
-                <span>Progreso</span>
+                <strong>{{ i18n.tn('auth.level', { level: p.currentLevel }) }}</strong>
+                <span>{{ i18n.t('auth.progress') }}</span>
               </div>
               <div class="kpi-mini">
-                <strong>{{ p.streakDays }} días</strong>
-                <span>Racha</span>
+                <strong>{{ i18n.tn(p.streakDays === 1 ? 'auth.daysOne' : 'auth.daysOther', { count: p.streakDays }) }}</strong>
+                <span>{{ i18n.t('auth.streak') }}</span>
               </div>
               <div class="kpi-mini">
                 <strong>{{ p.totalCo2SavedKg | number: '1.2-2' }} kg</strong>
-                <span>CO₂ evitado</span>
+                <span>{{ i18n.t('auth.co2Avoided') }}</span>
               </div>
             </div>
 
             <details class="coords-drawer mt-4">
               <summary>
                 <app-icon name="sliders" [size]="14"></app-icon>
-                <span>Configuración avanzada de servidor</span>
+                <span>{{ i18n.t('auth.advanced') }}</span>
               </summary>
               <div class="coords-drawer-body">
                 <div class="demo-btns-row">
                   <button mat-stroked-button type="button" (click)="setServer(renderUrl)">
-                    <span>Nube (Render)</span>
+                    <span>{{ i18n.t('auth.cloud') }}</span>
                   </button>
                   <button mat-stroked-button type="button" (click)="setServer(localUrl)">
                     <span>Localhost (8080)</span>
                   </button>
                 </div>
                 <mat-form-field appearance="outline" class="full-width">
-                  <mat-label>URL del servidor</mat-label>
+                  <mat-label>{{ i18n.t('auth.serverUrl') }}</mat-label>
                   <input matInput type="text" [(ngModel)]="customServerUrl" (change)="setServer(customServerUrl)" />
                 </mat-form-field>
               </div>
@@ -199,7 +200,7 @@ export class AuthComponent implements OnInit {
   profile: UserProfile | null = null;
   feedbackMsg = '';
 
-  constructor(private auth: AuthService, private api: ApiService, private router: Router) {
+  constructor(private auth: AuthService, private api: ApiService, private router: Router, public i18n: I18nService) {
     this.customServerUrl = this.auth.apiBase;
   }
 
@@ -213,7 +214,7 @@ export class AuthComponent implements OnInit {
 
   onLogin(): void {
     this.auth.login({ email: this.loginEmail, password: this.loginPassword }).subscribe(res => {
-      this.feedbackMsg = `Sesión iniciada como ${res.fullName}`;
+      this.feedbackMsg = this.i18n.tn('auth.loggedAs', { name: res.fullName });
       this.refreshProfile();
       setTimeout(() => this.router.navigate(['/dashboard']), 700);
     });
@@ -232,7 +233,7 @@ export class AuthComponent implements OnInit {
         maxWalkingMinutes: this.regWalkMin
       })
       .subscribe(res => {
-        this.feedbackMsg = `Cuenta creada para ${res.fullName}`;
+        this.feedbackMsg = this.i18n.tn('auth.created', { name: res.fullName });
         this.refreshProfile();
         setTimeout(() => this.router.navigate(['/dashboard']), 700);
       });
@@ -254,7 +255,7 @@ export class AuthComponent implements OnInit {
     this.customServerUrl = url;
     this.auth.setApiBase(url);
     this.api.checkHealth().subscribe(() => {
-      this.feedbackMsg = `Servidor actualizado: ${url}`;
+      this.feedbackMsg = this.i18n.tn('auth.serverUpdated', { url });
       this.refreshProfile();
     });
   }
