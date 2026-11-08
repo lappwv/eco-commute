@@ -125,6 +125,7 @@ const CORRIDORS = {
 const translations = {
   es_419: {
     "nav.skip": "Saltar al contenido", "nav.how": "Cómo funciona", "nav.webapp": "¡Entrar a la App!", "hero.kicker": "¡Muévete sin humo por Lima!", "hero.btn_webapp": "¡Empezar ahora!", "hero.btn_planner": "Ver mapa de rutas", "how.eyebrow": "¡Tan fácil como jugar!", "how.title": "¿Cómo funciona EcoCommute en 3 pasos?", "how.step1_title": "1. Elige tu camino", "how.step1_desc": "Mira en el mapa qué ciclovía o vereda te lleva más rápido y seguro por Lima sin quedarte atrapado en el tráfico.", "how.step2_title": "2. Anota tu aventura", "how.step2_desc": "Guarda tu recorrido en tu bitácora para ver cuánto humo evitaste, subir de nivel y desbloquear medallas.", "how.step3_title": "3. ¡Canjea tus premios!", "how.step3_desc": "Cambia tus puntos por cafés gratis, paseos en bici y entradas a parques en tiendas amigas de Lima.",
+    "nav.menu": "Menú",
     "nav.routes": "Mapa",
     "nav.vehicles": "Transporte",
     "nav.impact": "Calculadora",
@@ -209,6 +210,7 @@ const translations = {
   },
   en_US: {
     "nav.skip": "Skip to content", "nav.how": "How it works", "nav.webapp": "Enter the App!", "hero.kicker": "Move emission-free through Lima!", "hero.btn_webapp": "Start now!", "hero.btn_planner": "Explore route map", "how.eyebrow": "As easy as playing!", "how.title": "How does EcoCommute work in 3 steps?", "how.step1_title": "1. Pick your path", "how.step1_desc": "See on the map which bike lane or walkway gets you through Lima faster and safer without traffic jams.", "how.step2_title": "2. Log your adventure", "how.step2_desc": "Save your ride in your logbook to see how much smoke you avoided, level up, and unlock badges.", "how.step3_title": "3. Redeem your prizes!", "how.step3_desc": "Trade your points for free coffee, bike rides, and park passes at friendly local shops in Lima.",
+    "nav.menu": "Menu",
     "nav.routes": "Map",
     "nav.vehicles": "Transport",
     "nav.impact": "Calculator",
@@ -823,7 +825,50 @@ function setupTransportTouchLive() {
   document.querySelectorAll(".transport-card").forEach((card) => observer.observe(card));
 }
 
+function setupLandingNavigation() {
+  const toggle = document.querySelector(".nav-toggle");
+  const nav = document.getElementById("landing-nav");
+  if (!toggle || !nav) return;
+
+  const topbar = toggle.closest(".topbar");
+  const compact = window.matchMedia("(max-width: 1120px)");
+  const isOpen = () => toggle.getAttribute("aria-expanded") === "true";
+  const setOpen = open => toggle.setAttribute("aria-expanded", String(open));
+
+  topbar.classList.add("has-mobile-menu");
+  toggle.addEventListener("click", () => setOpen(!isOpen()));
+
+  nav.addEventListener("click", event => {
+    const link = event.target.closest("a");
+    if (!compact.matches || !link) return;
+
+    setOpen(false);
+    if (link.hash && link.pathname === location.pathname) {
+      const section = document.getElementById(link.hash.slice(1));
+      section?.focus({ preventScroll: true });
+    }
+  });
+
+  topbar.addEventListener("keydown", event => {
+    if (event.key !== "Escape" || !isOpen()) return;
+    setOpen(false);
+    toggle.focus();
+  });
+
+  document.addEventListener("click", event => {
+    if (isOpen() && !topbar.contains(event.target)) setOpen(false);
+  });
+  topbar.addEventListener("focusout", event => {
+    if (event.relatedTarget && !topbar.contains(event.relatedTarget)) setOpen(false);
+  });
+  compact.addEventListener("change", () => {
+    if (compact.matches && nav.contains(document.activeElement)) toggle.focus();
+    setOpen(false);
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+  setupLandingNavigation();
   setupTransportParallax();
   setupTransportTouchLive();
   setupLimaHeroMap();
