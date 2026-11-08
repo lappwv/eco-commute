@@ -6464,3 +6464,9 @@ textarea {
 html[data-theme="dark"] {
   --mat-sys-on-primary: #07120A;
 }
+
+/* MODO OSCURO — la etiqueta de distancia del corredor seleccionado tiene fondo
+   claro: con el verde brillante del tema oscuro quedaba ilegible (1.2:1). */
+[data-theme="dark"] .corridor-preset-chip.mat-mdc-chip-selected .corridor-chip-tag {
+  color: #14532D;
+}
