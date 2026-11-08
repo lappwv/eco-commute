@@ -6092,3 +6092,15 @@ app-leaderboard .eco-card:hover {
   overflow: visible;
   overflow-y: visible;
 }
+
+/* ACCESIBILIDAD: indicador de foco visible y consistente en toda la app */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--emerald);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
