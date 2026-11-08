@@ -3153,3 +3153,93 @@ html[data-theme="dark"] .footer-rider.rider-b {
     margin-inline: auto;
   }
 }
+
+/* ==================== PULIDO: NAV, CÓMO FUNCIONA, HERO VIVO, CIFRAS Y OLAS ==================== */
+
+/* Nav: etiquetas cortas en una sola línea */
+.nav a {
+  white-space: nowrap;
+}
+
+/* ---- Olas entre secciones ---- */
+.how-section,
+#vehiculos,
+#alquimia {
+  position: relative;
+  border-top: 0;
+}
+
+.how-section {
+  --wave-fill: var(--bg);
+  padding-bottom: 3.25rem;
+}
+
+#vehiculos {
+  --wave-fill: var(--bg-alt);
+}
+
+#alquimia {
+  --wave-fill: var(--bg);
+}
+
+.how-section::after,
+#vehiculos::after,
+#alquimia::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -39px;
+  height: 40px;
+  z-index: 1;
+  pointer-events: none;
+  background: var(--wave-fill);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' preserveAspectRatio='none'%3E%3Cpath d='M0 20Q300 -12 600 20T1200 20V40H0Z'/%3E%3C/svg%3E") repeat-x 0 100% / 1200px 40px;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' preserveAspectRatio='none'%3E%3Cpath d='M0 20Q300 -12 600 20T1200 20V40H0Z'/%3E%3C/svg%3E") repeat-x 0 100% / 1200px 40px;
+  animation: wave-drift 45s linear infinite;
+}
+
+#vehiculos::after {
+  animation-direction: reverse;
+}
+
+@keyframes wave-drift {
+  to {
+    -webkit-mask-position: -1200px 100%;
+    mask-position: -1200px 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .how-section::after,
+  #vehiculos::after,
+  #alquimia::after {
+    top: -25px;
+    height: 26px;
+    -webkit-mask-size: 760px 26px;
+    mask-size: 760px 26px;
+  }
+
+  @keyframes wave-drift {
+    to {
+      -webkit-mask-position: -760px 100%;
+      mask-position: -760px 100%;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .how-track-line, .how-track-fill, .how-node, .how-rider, .how-rider-wheel,
+  .how-step-icon svg, .how-it-works-strip.is-revealed .how-step-card,
+  .cartoon-scene-svg .hero-layer, .cartoon-scene-svg .hero-wheel, .cartoon-scene-svg .hero-bob,
+  .cartoon-scene-svg .hero-road, .cartoon-scene-svg .hero-card-float, .cartoon-scene-svg .hero-route,
+  .cartoon-scene-svg .hero-pin, .cartoon-scene-svg .hero-ping, .cartoon-scene-svg .hero-progress,
+  .cartoon-scene-svg .hero-beam, .cartoon-scene-svg .hero-streak, .cartoon-scene-svg .hero-leaf,
+  .how-section::after, #vehiculos::after, #alquimia::after {
+    animation: none !important;
+  }
+
+  .how-rider {
+    display: none;
+  }
+}
