@@ -141,8 +141,8 @@ const translations = {
     "hero.stat_car_sub": "CO₂ por kilómetro",
     "hero.stat_eco_label": "En bici o a pie",
     "hero.stat_eco_sub": "Emisiones directas",
-    "hero.stat_saved_label": "CO₂ evitado hoy",
-    "hero.stat_saved_sub": "En rutas activas",
+    "hero.stat_saved_label": "Ejemplo de ahorro",
+    "hero.stat_saved_sub": "CO₂ en 4,2 km en bici",
 
     "map.eyebrow": "Mapa interactivo · Rutas reales en Lima",
     "map.by_bike": "en ciclovía",
@@ -150,7 +150,7 @@ const translations = {
     "map.stat_dist": "Distancia real",
     "map.stat_co2": "CO₂ evitado",
     "map.stat_points": "Ahorro y puntos",
-    "sim.btn_recycle_trip": "Registrar ruta",
+    "sim.simulate_trip": "Simular viaje",
 
         // Vehículos 4 cards
     "veh.eyebrow": "Comparativa de movilidad",
@@ -226,8 +226,8 @@ const translations = {
     "hero.stat_car_sub": "CO₂ per kilometer",
     "hero.stat_eco_label": "By bike or foot",
     "hero.stat_eco_sub": "Direct emissions",
-    "hero.stat_saved_label": "CO₂ avoided today",
-    "hero.stat_saved_sub": "On active routes",
+    "hero.stat_saved_label": "Example savings",
+    "hero.stat_saved_sub": "CO₂ on a 4.2 km bike trip",
 
     "map.eyebrow": "Interactive map · Real routes in Lima",
     "map.by_bike": "by bike lane",
@@ -235,7 +235,7 @@ const translations = {
     "map.stat_dist": "Real distance",
     "map.stat_co2": "CO₂ avoided",
     "map.stat_points": "Savings & points",
-    "sim.btn_recycle_trip": "Log route",
+    "sim.simulate_trip": "Simulate trip",
 
         // Vehículos 4 cards
     "veh.eyebrow": "Urban mobility comparison",
@@ -299,8 +299,6 @@ const savedLang = localStorage.getItem("ecocommute_lang");
 let currentLang = savedLang === "en_US" ? "en_US" : "es_419";
 let currentCorridor = "miraflores";
 let currentKm = CORRIDORS.miraflores.km;
-let sessionRecycledGrams = 1920;
-let sessionTripsCount = 3;
 let alchemyTrips = 6;
 let alchemyKm = 4.2;
 
@@ -422,13 +420,6 @@ function setupLimaHeroMap() {
   limaRouteLayerGroup = L.layerGroup().addTo(limaMapInstance);
   updateLimaMapTiles();
   renderLimaMapRoute();
-}
-
-function updateSessionFloraBanner() {
-  const counterEl = document.getElementById("session-recycled-co2");
-  if (counterEl) {
-    counterEl.textContent = `${sessionRecycledGrams.toLocaleString()} g`;
-  }
 }
 
 function renderSimulatorMetrics() {
@@ -597,7 +588,6 @@ function applyTranslations(lang) {
     }
   }
 
-  updateSessionFloraBanner();
   renderSimulatorMetrics();
   renderAlchemyLab();
 }
@@ -670,7 +660,6 @@ function setupScrollAnimations() {
 
 function setupSimulator() {
   const corridorBtns = document.querySelectorAll(".corridor-btn");
-  const recycleBtn = document.getElementById("recycle-trip-btn");
   const routeTitleEl = document.getElementById("sim-route-title");
 
   corridorBtns.forEach((btn) => {
@@ -688,28 +677,6 @@ function setupSimulator() {
       routeTitleEl?.focus({ preventScroll: true });
     });
   });
-
-  if (recycleBtn) {
-    recycleBtn.addEventListener("click", () => {
-      const addedGrams = Math.round(currentKm * 152);
-      const earnedPts = Math.max(5, Math.round(currentKm * 3.57));
-      sessionRecycledGrams += addedGrams;
-      sessionTripsCount += 1;
-      updateSessionFloraBanner();
-
-      const labelSpan = recycleBtn.querySelector("[data-i18n='sim.btn_recycle_trip']");
-      if (labelSpan) {
-        const isEn = currentLang === "en_US";
-        labelSpan.textContent = isEn
-          ? `Route logged (+${earnedPts} pts)`
-          : `Ruta registrada (+${earnedPts} pts)`;
-        setTimeout(() => {
-          const dict = translations[currentLang] || translations.es_419;
-          labelSpan.textContent = dict["sim.btn_recycle_trip"];
-        }, 2200);
-      }
-    });
-  }
 }
 
 function setupAlchemyLab() {
