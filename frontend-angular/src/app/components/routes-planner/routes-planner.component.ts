@@ -48,8 +48,8 @@ interface LimaPreset {
           <h1 class="page-title">{{ i18n.t('routes.title') }}</h1>
           <p class="page-subtitle">{{ i18n.t('routes.subtitle') }}</p>
         </div>
-        <div class="preset-chips-row" role="region" aria-label="Corredores rapidos de Lima">
-          <mat-chip-listbox aria-label="Seleccionar corredor rapido">
+        <div class="preset-chips-row" role="region" [attr.aria-label]="i18n.t('routes.presetsAria')">
+          <mat-chip-listbox [attr.aria-label]="i18n.t('routes.presetsSelectAria')">
             <mat-chip-option
               *ngFor="let p of presets; let idx = index"
               class="corridor-preset-chip"
@@ -68,25 +68,25 @@ interface LimaPreset {
       <!-- 1. Escenario Unificado: Controles Verticales + Mapa Interactivo en un solo contenedor -->
       <div class="planner-unified-stage">
         <form (ngSubmit)="calculateRoutes()" class="planner-sidebar-form">
-          <h3>Configura tu trayecto</h3>
+          <h3>{{ i18n.t('routes.configureTrip') }}</h3>
 
           <div class="vertical-route-stops">
             <mat-form-field appearance="outline" class="full-width">
-              <mat-label>Punto de partida</mat-label>
+              <mat-label>{{ i18n.t('routes.origin') }}</mat-label>
               <app-icon matPrefix name="pin" [size]="16"></app-icon>
-              <input matInput type="text" [(ngModel)]="originName" name="originName" required placeholder="Ej. San Isidro" />
+              <input matInput type="text" [(ngModel)]="originName" name="originName" required [placeholder]="i18n.t('routes.originPlaceholder')" />
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="full-width">
-              <mat-label>Destino</mat-label>
+              <mat-label>{{ i18n.t('routes.destination') }}</mat-label>
               <app-icon matPrefix name="flag" [size]="16"></app-icon>
-              <input matInput type="text" [(ngModel)]="destName" name="destName" required placeholder="Ej. Miraflores" />
+              <input matInput type="text" [(ngModel)]="destName" name="destName" required [placeholder]="i18n.t('routes.destinationPlaceholder')" />
             </mat-form-field>
           </div>
 
           <div class="form-group">
-            <label>Modo de traslado</label>
-            <div class="mode-pills-vertical" role="group" aria-label="Modo de traslado">
+            <label>{{ i18n.t('routes.travelMode') }}</label>
+            <div class="mode-pills-vertical" role="group" [attr.aria-label]="i18n.t('routes.travelMode')">
               <button
                 type="button"
                 class="mode-pill-row"
@@ -95,7 +95,7 @@ interface LimaPreset {
                 (click)="selectedProfile = 'BICYCLE'; calculateRoutes()"
               >
                 <app-icon name="bike" [size]="18"></app-icon>
-                <span>Bicicleta</span>
+                <span>{{ i18n.t('routes.modeBike') }}</span>
                 <small>0 g CO₂/km</small>
               </button>
 
@@ -107,7 +107,7 @@ interface LimaPreset {
                 (click)="selectedProfile = 'WALKING'; calculateRoutes()"
               >
                 <app-icon name="walk" [size]="18"></app-icon>
-                <span>Caminata</span>
+                <span>{{ i18n.t('routes.modeWalk') }}</span>
                 <small>0 g CO₂/km</small>
               </button>
 
@@ -119,7 +119,7 @@ interface LimaPreset {
                 (click)="selectedProfile = 'CAR'; calculateRoutes()"
               >
                 <app-icon name="car" [size]="18"></app-icon>
-                <span>Auto (Ref.)</span>
+                <span>{{ i18n.t('routes.modeCar') }}</span>
                 <small>170 g CO₂/km</small>
               </button>
             </div>
@@ -127,32 +127,32 @@ interface LimaPreset {
 
           <label class="checkbox-label">
             <input type="checkbox" [(ngModel)]="enableAiOptimization" name="enableAi" />
-            <span>Priorizar calles arboladas (+10 pts)</span>
+            <span>{{ i18n.t('routes.prioritizeTrees') }}</span>
           </label>
 
           <details class="coords-drawer">
             <summary>
               <app-icon name="sliders" [size]="14"></app-icon>
-              <span>Coordenadas GPS manuales</span>
+              <span>{{ i18n.t('routes.manualGps') }}</span>
             </summary>
             <div class="coords-drawer-body">
               <div class="form-row-2">
                 <mat-form-field appearance="outline">
-                  <mat-label>Lat. origen</mat-label>
+                  <mat-label>{{ i18n.t('routes.latOrigin') }}</mat-label>
                   <input matInput type="number" step="0.0001" [(ngModel)]="originLat" name="originLat" required />
                 </mat-form-field>
                 <mat-form-field appearance="outline">
-                  <mat-label>Lng. origen</mat-label>
+                  <mat-label>{{ i18n.t('routes.lngOrigin') }}</mat-label>
                   <input matInput type="number" step="0.0001" [(ngModel)]="originLng" name="originLng" required />
                 </mat-form-field>
               </div>
               <div class="form-row-2">
                 <mat-form-field appearance="outline">
-                  <mat-label>Lat. destino</mat-label>
+                  <mat-label>{{ i18n.t('routes.latDest') }}</mat-label>
                   <input matInput type="number" step="0.0001" [(ngModel)]="destLat" name="destLat" required />
                 </mat-form-field>
                 <mat-form-field appearance="outline">
-                  <mat-label>Lng. destino</mat-label>
+                  <mat-label>{{ i18n.t('routes.lngDest') }}</mat-label>
                   <input matInput type="number" step="0.0001" [(ngModel)]="destLng" name="destLng" required />
                 </mat-form-field>
               </div>
@@ -161,16 +161,16 @@ interface LimaPreset {
 
           <button mat-flat-button color="primary" type="submit" class="btn-emerald full-width" [disabled]="loading">
             <app-icon name="route" [size]="17"></app-icon>
-            <span>{{ loading ? 'Calculando...' : 'Actualizar mapa' }}</span>
+            <span>{{ loading ? i18n.t('routes.calculating') : i18n.t('routes.updateMap') }}</span>
           </button>
 
           <div class="saving-teaser" *ngIf="planResult as r">
             <svg class="teaser-leaf leaf-1" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19C5 10 10 5 20 4c0 10-4 15-13 15z" fill="currentColor" /></svg>
             <svg class="teaser-leaf leaf-2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19C5 10 10 5 20 4c0 10-4 15-13 15z" fill="currentColor" /></svg>
             <svg class="teaser-leaf leaf-3" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19C5 10 10 5 20 4c0 10-4 15-13 15z" fill="currentColor" /></svg>
-            <small>Tu ahorro estimado</small>
+            <small>{{ i18n.t('routes.savingsTeaser') }}</small>
             <strong><span [appCountUp]="r.aiGreenCorridorRoute.co2SavedGrams"></span> g de CO₂</strong>
-            <span class="teaser-pts">+<span [appCountUp]="r.aiGreenCorridorRoute.potentialPoints"></span> pts por pedalear esta ruta</span>
+            <span class="teaser-pts">+<span [appCountUp]="r.aiGreenCorridorRoute.potentialPoints"></span> {{ i18n.t('routes.savingsPts') }}</span>
           </div>
         </form>
 
@@ -178,8 +178,8 @@ interface LimaPreset {
           <div class="map-overlay-bar">
             <strong>{{ originName }} → {{ destName }}</strong>
             <div class="map-legend-pills">
-              <span class="legend-chip eco"><i class="dot-green"></i> Corredor verde</span>
-              <span class="legend-chip car"><i class="dot-red"></i> Tráfico auto</span>
+              <span class="legend-chip eco"><i class="dot-green"></i> {{ i18n.t('routes.legendGreen') }}</span>
+              <span class="legend-chip car"><i class="dot-red"></i> {{ i18n.t('routes.legendCar') }}</span>
             </div>
           </div>
           <div class="map-loading-bar" *ngIf="loading"></div>
@@ -205,35 +205,35 @@ interface LimaPreset {
                 <app-icon [name]="opt.mode" [size]="20"></app-icon>
               </span>
               <span class="badge-emerald" *ngIf="opt.id === res.recommendedRouteId || opt.isAiRecommended">
-                ★ Recomendada
+                {{ i18n.t('routes.recommended') }}
               </span>
               <span class="pts-pill" *ngIf="opt.potentialPoints > 0">+<span [appCountUp]="opt.potentialPoints"></span> pts</span>
             </div>
-            <h3>{{ opt.title }}</h3>
-            <p class="route-summary">{{ opt.summary }}</p>
+            <h3>{{ translateRouteTitle(opt) }}</h3>
+            <p class="route-summary">{{ translateRouteSummary(opt) }}</p>
           </div>
 
           <!-- Lista Vertical de Datos para Lectura Rápida -->
           <ul class="route-vertical-stats">
             <li>
-              <span>Distancia total</span>
+              <span>{{ i18n.t('routes.distanceTotal') }}</span>
               <strong><span [appCountUp]="opt.distanceKm" [decimals]="2"></span> km</strong>
             </li>
             <li>
-              <span>Tiempo estimado</span>
+              <span>{{ i18n.t('routes.timeEstimate') }}</span>
               <strong><span [appCountUp]="opt.durationMinutes"></span> min</strong>
             </li>
             <li>
-              <span>CO₂ evitado</span>
+              <span>{{ i18n.t('routes.co2Avoided') }}</span>
               <strong class="text-emerald">-<span [appCountUp]="opt.co2SavedGrams"></span> g</strong>
             </li>
             <li>
-              <span>Energía activa</span>
+              <span>{{ i18n.t('routes.activeEnergy') }}</span>
               <strong><span [appCountUp]="opt.caloriesBurned"></span> kcal</strong>
             </li>
             <li *ngIf="opt.aiInsight as ai">
-              <span>Índice verde / Sombra</span>
-              <strong>{{ ai.greenScore }}/100 · {{ ai.shadeTreeCoveragePercent }}% árboles</strong>
+              <span>{{ i18n.t('routes.greenIndex') }}</span>
+              <strong>{{ i18n.tn('routes.greenIndexValue', { green: ai.greenScore, shade: ai.shadeTreeCoveragePercent }) }}</strong>
             </li>
           </ul>
 
@@ -245,7 +245,7 @@ interface LimaPreset {
             (click)="recordThisRoute(opt)"
           >
             <app-icon name="check" [size]="16"></app-icon>
-            <span>Anotar este viaje (+{{ opt.potentialPoints }} pts)</span>
+            <span>{{ i18n.t('routes.recordTrip') }} (+{{ opt.potentialPoints }} pts)</span>
           </button>
         </article>
       </div>
@@ -386,6 +386,30 @@ export class RoutesPlannerComponent implements OnInit, AfterViewInit, OnDestroy 
     return [res.aiGreenCorridorRoute, res.standardProfileRoute, res.baselineCarRoute];
   }
 
+  // Los titulos/resumenes de ruta pueden venir del backend en espanol (sin codigo propio);
+  // se traducen por id + modo, que son estables, en vez de parchear el texto recibido.
+  translateRouteTitle(opt: RouteOption): string {
+    if (opt.id === 'route-baseline-car') return this.i18n.t('routes.result.carTitle');
+    if (opt.id === 'route-standard-direct') {
+      return opt.mode === 'WALKING'
+        ? this.i18n.t('routes.result.walkDirectTitle')
+        : this.i18n.t('routes.result.bikeDirectTitle');
+    }
+    if (opt.id === 'route-ai-green-corridor') {
+      return opt.isAiRecommended
+        ? this.i18n.t('routes.result.greenRecommendedTitle')
+        : this.i18n.t('routes.result.greenTitle');
+    }
+    return opt.title;
+  }
+
+  translateRouteSummary(opt: RouteOption): string {
+    if (opt.id === 'route-baseline-car') return this.i18n.t('routes.result.carSummary');
+    if (opt.id === 'route-standard-direct') return this.i18n.t('routes.result.directSummary');
+    if (opt.id === 'route-ai-green-corridor') return this.i18n.t('routes.result.greenSummary');
+    return opt.summary;
+  }
+
   recordThisRoute(opt: RouteOption): void {
     const mode: TransportMode = opt.mode || 'BICYCLE';
     this.api
@@ -401,7 +425,10 @@ export class RoutesPlannerComponent implements OnInit, AfterViewInit, OnDestroy 
         durationMinutes: opt.durationMinutes
       })
       .subscribe(saved => {
-        this.recordedBanner = `Recorrido guardado en tu bitácora: evitaste ${saved.co2SavedGrams} g de CO₂ y sumaste +${saved.pointsEarned} pts.`;
+        this.recordedBanner = this.i18n.tn('routes.recordedMsg', {
+          co2: saved.co2SavedGrams,
+          points: saved.pointsEarned
+        });
         setTimeout(() => this.router.navigate(['/trips']), 1200);
       });
   }

@@ -34,17 +34,16 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
             <span class="level-shield-large">
               <app-icon name="medal" [size]="34"></app-icon>
             </span>
-            <span class="eyebrow-tag">Nivel actual {{ m.currentLevel }}</span>
+            <span class="eyebrow-tag">{{ i18n.tn('gamification.currentLevel', { level: m.currentLevel }) }}</span>
             <h2>{{ getLevelName(m.currentLevel) }}</h2>
             <p class="card-sub">
-              <strong>{{ m.currentPoints }} pts</strong> acumulados · Próxima meta:
-              <strong>{{ m.nextMilestonePoints }} pts</strong>
+              {{ i18n.tn('gamification.pointsAccumulated', { points: m.currentPoints, next: m.nextMilestonePoints }) }}
             </p>
           </div>
 
           <div class="tower-progress-box">
             <div class="tower-progress-labels">
-              <span>Progreso de nivel</span>
+              <span>{{ i18n.t('gamification.levelProgress') }}</span>
               <strong>{{ m.progressPercentage }}%</strong>
             </div>
             <mat-progress-bar
@@ -59,29 +58,29 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
             <li>
               <span class="tower-stat-icon"><app-icon name="bolt" [size]="18"></app-icon></span>
               <div>
-                <span>Puntos para canjes</span>
+                <span>{{ i18n.t('gamification.pointsForRedeeming') }}</span>
                 <strong>{{ st.currentPoints }} pts</strong>
               </div>
             </li>
             <li>
               <span class="tower-stat-icon"><app-icon name="flame" [size]="18"></app-icon></span>
               <div>
-                <span>Racha activa sin auto</span>
-                <strong>{{ st.streakDays }} días seguidos</strong>
+                <span>{{ i18n.t('gamification.activeStreak') }}</span>
+                <strong>{{ st.streakDays === 1 ? i18n.t('gamification.streakDaySingular') : i18n.tn('gamification.streakDaysPlural', { count: st.streakDays }) }}</strong>
               </div>
             </li>
             <li>
               <span class="tower-stat-icon"><app-icon name="leaf" [size]="18"></app-icon></span>
               <div>
-                <span>Emisiones evitadas</span>
+                <span>{{ i18n.t('gamification.emissionsAvoided') }}</span>
                 <strong>{{ st.totalCo2SavedKg | number: '1.2-2' }} kg CO₂</strong>
               </div>
             </li>
             <li>
               <span class="tower-stat-icon"><app-icon name="bike" [size]="18"></app-icon></span>
               <div>
-                <span>Recorridos limpios</span>
-                <strong>{{ st.totalTrips }} viajes ({{ st.totalDistanceKm | number: '1.1-1' }} km)</strong>
+                <span>{{ i18n.t('gamification.cleanTrips') }}</span>
+                <strong>{{ i18n.tn('gamification.cleanTripsValue', { count: st.totalTrips, km: (st.totalDistanceKm | number: '1.1-1') }) }}</strong>
               </div>
             </li>
           </ul>
@@ -90,8 +89,8 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
         <!-- Columna Derecha Abierta (Sin tarjeta contenedora redundante) -->
         <div class="badges-open-showcase">
           <div class="feed-header-inline">
-            <h2>Colección de insignias ({{ userBadges.length }})</h2>
-            <span>Se desbloquean automáticamente al cumplir cada meta</span>
+            <h2>{{ i18n.tn('gamification.badgeCollection', { count: userBadges.length }) }}</h2>
+            <span>{{ i18n.t('gamification.badgeCollectionSub') }}</span>
           </div>
 
           <div class="badges-horizontal-list">
@@ -106,15 +105,15 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
 
               <div class="badge-strip-body">
                 <div class="badge-strip-head">
-                  <h3>{{ b.title }}</h3>
+                  <h3>{{ i18n.tc('badge', b.code, 'title', b.title) }}</h3>
                   <mat-chip-set>
                     <mat-chip disableRipple class="badge-status-chip" [class.done]="b.unlocked">
                       <app-icon [name]="b.unlocked ? 'check' : 'lock'" [size]="13"></app-icon>
-                      <span>{{ b.unlocked ? '¡Desbloqueada!' : b.progressPercent + '%' }}</span>
+                      <span>{{ b.unlocked ? i18n.t('gamification.unlocked') : b.progressPercent + '%' }}</span>
                     </mat-chip>
                   </mat-chip-set>
                 </div>
-                <p>{{ b.description }}</p>
+                <p>{{ i18n.tc('badge', b.code, 'description', b.description) }}</p>
                 <mat-progress-bar class="mode-progress-track" mode="determinate" [value]="b.progressPercent"></mat-progress-bar>
               </div>
             </article>
@@ -140,13 +139,8 @@ export class GamificationComponent implements OnInit {
   }
 
   getLevelName(level: number): string {
-    const names: Record<number, string> = {
-      1: 'Explorador Sostenible',
-      2: 'Ciclista Urbano',
-      3: 'Embajador de Movilidad Limpia',
-      4: 'Guardián del Aire de Lima',
-      5: 'Leyenda Cero Emisiones'
-    };
-    return names[level] || `Nivel ${level} EcoCommute`;
+    const key = `level.name.${level}`;
+    const translated = this.i18n.t(key);
+    return translated === key ? this.i18n.tn('level.name.generic', { level }) : translated;
   }
 }
