@@ -1426,20 +1426,36 @@ html[data-theme="dark"] .nav-cta-pill {
   margin-bottom: 0.25rem;
 }
 
+.how-step-icon,
+.impact-icon-chip {
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  background: var(--icon-chip-bg, #E3F9C6);
+  color: #1E241E;
+  border: 1.5px solid currentColor;
+}
+
 .how-step-icon {
-  width: 44px;
-  height: 44px;
+  width: 46px;
+  height: 46px;
   border-radius: 12px;
-  background: var(--accent-soft);
-  color: var(--accent);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .how-step-icon svg {
-  width: 22px;
-  height: 22px;
+  width: 30px;
+  height: 30px;
+}
+
+.step-yellow .how-step-icon,
+.card-tint-blue .impact-icon-chip {
+  --icon-chip-bg: #DFF4FE;
+}
+
+.step-blue .how-step-icon,
+.card-tint-yellow .impact-icon-chip,
+.card-tint-orange .impact-icon-chip {
+  --icon-chip-bg: #FFF4C8;
 }
 
 .how-step-num {
@@ -1470,20 +1486,14 @@ html[data-theme="dark"] .nav-cta-pill {
 }
 
 .impact-icon-chip {
-  width: 34px;
-  height: 34px;
+  width: 38px;
+  height: 38px;
   border-radius: 10px;
-  background: var(--accent-soft);
-  color: var(--accent);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
 }
 
 .impact-icon-chip svg {
-  width: 18px;
-  height: 18px;
+  width: 24px;
+  height: 24px;
 }
 
 @media (max-width: 900px) {
@@ -1965,14 +1975,6 @@ html[data-theme="dark"] .how-step-card.step-blue {
   background: #1F3044;
 }
 
-.how-step-icon,
-.impact-icon-chip {
-  background: #FFFFFF !important;
-  color: #4E9A06 !important;
-  border: 2px solid #1E241E;
-  box-shadow: 0 3px 0 #1E241E;
-}
-
 .how-step-num {
   background: #FFFFFF;
   color: #1E241E !important;
@@ -2299,11 +2301,9 @@ html[data-theme="light"] {
 
 /* ==================== UNBOXED ICONS & GRAY/WHITE ASPHALT ROAD ELEMENTS ==================== */
 
-/* 1. Quitar recuadros innecesarios alrededor de los íconos y el logo */
+/* 1. Quitar el recuadro alrededor del logo */
 .brand-cartoon-badge,
-.brand-cartoon-badge.sm,
-.how-step-icon,
-.impact-icon-chip {
+.brand-cartoon-badge.sm {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
@@ -2322,18 +2322,6 @@ html[data-theme="light"] {
 .brand-logo-sm {
   width: 24px;
   height: auto;
-}
-
-.how-step-icon svg {
-  width: 36px !important;
-  height: 36px !important;
-  filter: drop-shadow(0 2px 0 rgba(30, 36, 30, 0.2));
-}
-
-.impact-icon-chip svg {
-  width: 30px !important;
-  height: 30px !important;
-  filter: drop-shadow(0 2px 0 rgba(30, 36, 30, 0.18));
 }
 
 /* 2. Fondo con pistas grises y líneas blancas discontinuas */
@@ -3272,10 +3260,6 @@ html[data-theme="dark"] .how-rider {
   margin-top: -60px;
 }
 
-html[data-theme="dark"] .how-step-card.step-yellow .how-step-icon {
-  color: var(--ink);
-}
-
 .how-rider svg {
   display: block;
   width: 100%;
@@ -3287,10 +3271,6 @@ html[data-theme="dark"] .how-step-card.step-yellow .how-step-icon {
   transform-box: fill-box;
   transform-origin: center;
   animation: how-spin 0.7s linear infinite;
-}
-
-.how-step-card.step-yellow .how-step-icon {
-  color: #1E241E;
 }
 
 .how-step-icon svg {
