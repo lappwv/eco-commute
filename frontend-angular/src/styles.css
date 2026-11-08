@@ -6507,3 +6507,12 @@ html[data-theme="dark"] {
 [data-theme="dark"] .leaflet-control-attribution a {
   color: var(--emerald);
 }
+
+/* MODO OSCURO — hover de los botones con contorno (por ejemplo "Anotar este
+   viaje"): la regla clara (#E8F8D1) no tenía versión oscura y dejaba el texto
+   claro sobre fondo verde claro, ilegible. */
+[data-theme="dark"] .btn-outline:hover {
+  background: var(--emerald-soft) !important;
+  color: var(--text-main) !important;
+  border-color: var(--emerald) !important;
+}
