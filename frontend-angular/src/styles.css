@@ -6104,3 +6104,81 @@ textarea:focus-visible,
   outline-offset: 2px;
   border-radius: 4px;
 }
+
+/* ==========================================================================
+   Angular Material: Corridor Preset Chips (Clean, Centered, Professional)
+   ========================================================================== */
+
+.preset-chips-row mat-chip-listbox {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.corridor-preset-chip {
+  --mdc-chip-container-shape-radius: 9999px;
+  --mdc-chip-container-height: auto;
+  --mdc-chip-elevated-container-color: var(--bg-card);
+  --mdc-chip-flat-container-color: var(--bg-card);
+  --mdc-chip-label-text-color: var(--text-main);
+  --mdc-chip-outline-color: var(--border);
+  --mdc-chip-outline-width: 1px;
+  background-color: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 9999px !important;
+  padding: 0.35rem 0.85rem !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  cursor: pointer;
+}
+
+.corridor-preset-chip:hover {
+  border-color: var(--emerald-border) !important;
+  background-color: var(--bg-soft) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06) !important;
+}
+
+.corridor-preset-chip.mat-mdc-chip-selected,
+.corridor-preset-chip[aria-selected="true"] {
+  background-color: var(--emerald-soft) !important;
+  border-color: var(--emerald) !important;
+  box-shadow: 0 2px 8px rgba(21, 128, 61, 0.15) !important;
+}
+
+.corridor-preset-chip.mat-mdc-chip-selected .corridor-chip-label {
+  color: var(--emerald) !important;
+  font-weight: 700;
+}
+
+.corridor-chip-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.15rem 0.25rem;
+}
+
+.corridor-chip-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-main);
+  letter-spacing: -0.01em;
+}
+
+.corridor-chip-tag {
+  font-size: 0.73rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: var(--bg-soft);
+  padding: 0.1rem 0.45rem;
+  border-radius: 9999px;
+  border: 1px solid var(--border);
+}
+
+.corridor-preset-chip.mat-mdc-chip-selected .corridor-chip-tag {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: var(--emerald-border);
+  color: var(--emerald);
+}
