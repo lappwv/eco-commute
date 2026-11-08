@@ -19,7 +19,7 @@ type ModeFilter = TransportMode | 'ALL';
         <div>
           <span class="eyebrow-tag">
             <app-icon name="bike" [size]="14"></app-icon>
-            Registro Personal de Movilidad
+            {{ i18n.t('trips.eyebrow') }}
           </span>
           <h1 class="page-title">{{ i18n.t('trips.title') }}</h1>
           <p class="page-subtitle">{{ i18n.t('trips.subtitle') }}</p>
