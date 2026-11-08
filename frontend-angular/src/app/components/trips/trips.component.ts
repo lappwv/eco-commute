@@ -111,14 +111,29 @@ type ModeFilter = TransportMode | 'ALL';
         <!-- Columna Derecha: Línea de Tiempo / Lista Vertical de Viajes (Sin tabla congestionada de 10 columnas) -->
         <div class="trips-feed-column">
           <div class="feed-header-inline">
-            <h2>Historial en tu bitácora ({{ trips.length }})</h2>
-            <span>Ordenado del más reciente al más antiguo</span>
+            <h2>Historial en tu bitácora</h2>
+            <span class="trips-filter-counter">{{ filteredTrips.length }} de {{ trips.length }}</span>
+          </div>
+
+          <div class="preset-chips-row trips-mode-filters">
+            <button type="button" class="chip-btn" [class.active]="selectedMode === 'ALL'" (click)="setModeFilter('ALL')">
+              <strong>Todos</strong>
+            </button>
+            <button
+              type="button"
+              class="chip-btn"
+              *ngFor="let m of transportModes"
+              [class.active]="selectedMode === m"
+              (click)="setModeFilter(m)"
+            >
+              <strong>{{ formatShortMode(m) }}</strong>
+            </button>
           </div>
 
           <div class="trips-timeline-list">
             <div
               class="trip-feed-item"
-              *ngFor="let t of trips"
+              *ngFor="let t of filteredTrips"
               [class.editing-row]="t.id === editingTripId"
             >
               <span class="trip-feed-icon">
