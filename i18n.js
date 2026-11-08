@@ -124,10 +124,10 @@ const CORRIDORS = {
 
 const translations = {
   es_419: {
-    "nav.skip": "Saltar al contenido", "nav.how": "¿Cómo funciona?", "nav.webapp": "¡Entrar a la App!", "hero.kicker": "¡Muévete sin humo por Lima!", "hero.btn_webapp": "¡Empezar ahora!", "hero.btn_planner": "Ver mapa de rutas", "how.eyebrow": "¡Tan fácil como jugar!", "how.title": "¿Cómo funciona EcoCommute en 3 pasos?", "how.step1_title": "1. Elige tu camino", "how.step1_desc": "Mira en el mapa qué ciclovía o vereda te lleva más rápido y seguro por Lima sin quedarte atrapado en el tráfico.", "how.step2_title": "2. Anota tu aventura", "how.step2_desc": "Guarda tu recorrido en tu bitácora para ver cuánto humo evitaste, subir de nivel y desbloquear medallas.", "how.step3_title": "3. ¡Canjea tus premios!", "how.step3_desc": "Cambia tus puntos por cafés gratis, paseos en bici y entradas a parques en tiendas amigas de Lima.",
-    "nav.routes": "Rutas en Lima",
-    "nav.vehicles": "Comparativa de Transporte",
-    "nav.impact": "Calculadora de Ahorro",
+    "nav.skip": "Saltar al contenido", "nav.how": "Cómo funciona", "nav.webapp": "¡Entrar a la App!", "hero.kicker": "¡Muévete sin humo por Lima!", "hero.btn_webapp": "¡Empezar ahora!", "hero.btn_planner": "Ver mapa de rutas", "how.eyebrow": "¡Tan fácil como jugar!", "how.title": "¿Cómo funciona EcoCommute en 3 pasos?", "how.step1_title": "1. Elige tu camino", "how.step1_desc": "Mira en el mapa qué ciclovía o vereda te lleva más rápido y seguro por Lima sin quedarte atrapado en el tráfico.", "how.step2_title": "2. Anota tu aventura", "how.step2_desc": "Guarda tu recorrido en tu bitácora para ver cuánto humo evitaste, subir de nivel y desbloquear medallas.", "how.step3_title": "3. ¡Canjea tus premios!", "how.step3_desc": "Cambia tus puntos por cafés gratis, paseos en bici y entradas a parques en tiendas amigas de Lima.",
+    "nav.routes": "Mapa",
+    "nav.vehicles": "Transporte",
+    "nav.impact": "Calculadora",
     "nav.terms": "Términos y Privacidad",
 
     "hero.title": "Pedalea, explora y <em>transforma tu ciudad</em>",
@@ -208,10 +208,10 @@ const translations = {
     "calc.card_reward_desc": "Puntos acumulados para canjear en cafés locales, talleres de bici y comercios aliados."
   },
   en_US: {
-    "nav.skip": "Skip to content", "nav.how": "How it works?", "nav.webapp": "Enter the App!", "hero.kicker": "Move emission-free through Lima!", "hero.btn_webapp": "Start now!", "hero.btn_planner": "Explore route map", "how.eyebrow": "As easy as playing!", "how.title": "How does EcoCommute work in 3 steps?", "how.step1_title": "1. Pick your path", "how.step1_desc": "See on the map which bike lane or walkway gets you through Lima faster and safer without traffic jams.", "how.step2_title": "2. Log your adventure", "how.step2_desc": "Save your ride in your logbook to see how much smoke you avoided, level up, and unlock badges.", "how.step3_title": "3. Redeem your prizes!", "how.step3_desc": "Trade your points for free coffee, bike rides, and park passes at friendly local shops in Lima.",
-    "nav.routes": "Lima Routes",
-    "nav.vehicles": "Mobility Comparison",
-    "nav.impact": "Savings Calculator",
+    "nav.skip": "Skip to content", "nav.how": "How it works", "nav.webapp": "Enter the App!", "hero.kicker": "Move emission-free through Lima!", "hero.btn_webapp": "Start now!", "hero.btn_planner": "Explore route map", "how.eyebrow": "As easy as playing!", "how.title": "How does EcoCommute work in 3 steps?", "how.step1_title": "1. Pick your path", "how.step1_desc": "See on the map which bike lane or walkway gets you through Lima faster and safer without traffic jams.", "how.step2_title": "2. Log your adventure", "how.step2_desc": "Save your ride in your logbook to see how much smoke you avoided, level up, and unlock badges.", "how.step3_title": "3. Redeem your prizes!", "how.step3_desc": "Trade your points for free coffee, bike rides, and park passes at friendly local shops in Lima.",
+    "nav.routes": "Map",
+    "nav.vehicles": "Transport",
+    "nav.impact": "Calculator",
     "nav.terms": "Terms & Privacy",
 
     "hero.title": "PEDAL, EXPLORE, <em>LOVE YOUR CITY</em>",
@@ -552,18 +552,23 @@ function renderAlchemyLab(fromZero) {
   if (tripsOut) tripsOut.textContent = isEn ? `${alchemyTrips} rides/wk` : `${alchemyTrips} viajes/sem`;
   if (kmOut) kmOut.textContent = `${alchemyKm.toFixed(1)} km`;
 
+  const figNum = (el) => (el ? el.querySelector(".fig-num") : null);
+  const setUnit = (el, text) => {
+    const unit = el ? el.querySelector(".fig-unit") : null;
+    if (unit) unit.textContent = text;
+  };
+
   tickNumber(annualKgEl, annualKg, 1, (v) => v.toFixed(1), from);
-  tickNumber(fuelEl, fuelLiters, 0, (v) => (isEn ? `${Math.round(v)} L / yr` : `${Math.round(v)} L / año`), from);
-  tickNumber(hoursEl, trafficHours, 0, (v) => (isEn ? `${Math.round(v)} h / yr` : `${Math.round(v)} h / año`), from);
-  tickNumber(
-    petEl,
-    petBottles,
-    0,
-    (v) => (isEn ? `${Math.round(v).toLocaleString()} bottles` : `${Math.round(v).toLocaleString()} botellas`),
-    from
-  );
-  tickNumber(treesEl, trees, 1, (v) => (isEn ? `${v.toFixed(1)} trees` : `${v.toFixed(1)} árboles`), from);
-  tickNumber(ptsEl, greenPoints, 0, (v) => `+${Math.round(v).toLocaleString()} pts`, from);
+  tickNumber(figNum(fuelEl), fuelLiters, 0, (v) => String(Math.round(v)), from);
+  setUnit(fuelEl, isEn ? "L / yr" : "L / año");
+  tickNumber(figNum(hoursEl), trafficHours, 0, (v) => String(Math.round(v)), from);
+  setUnit(hoursEl, isEn ? "h / yr" : "h / año");
+  tickNumber(figNum(petEl), petBottles, 0, (v) => Math.round(v).toLocaleString(), from);
+  setUnit(petEl, isEn ? "bottles" : "botellas");
+  tickNumber(figNum(treesEl), trees, 1, (v) => v.toFixed(1), from);
+  setUnit(treesEl, isEn ? "trees" : "árboles");
+  tickNumber(figNum(ptsEl), greenPoints, 0, (v) => "+" + Math.round(v).toLocaleString(), from);
+  setUnit(ptsEl, "pts");
 }
 
 function applyTranslations(lang) {
@@ -639,10 +644,12 @@ function setupThemeSwitcher() {
 
 function setupScrollAnimations() {
   const elements = document.querySelectorAll("[data-scroll-reveal]");
-  if (!("IntersectionObserver" in window)) {
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!("IntersectionObserver" in window) || prefersReduced) {
     elements.forEach((el) => el.classList.add("is-revealed"));
     return;
   }
+  document.documentElement.classList.add("js-reveal-ready");
 
   const observer = new IntersectionObserver(
     (entries) => {
