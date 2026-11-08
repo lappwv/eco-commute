@@ -6035,3 +6035,7 @@ app-leaderboard .eco-card:hover {
 .trips-mode-filters {
   margin-bottom: 0.9rem;
 }
+
+.trips-period-filters {
+  margin-bottom: 1.1rem;
+}
