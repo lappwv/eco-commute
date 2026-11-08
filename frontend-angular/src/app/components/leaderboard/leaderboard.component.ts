@@ -16,7 +16,7 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
         <div>
           <span class="eyebrow-tag">
             <app-icon name="trophy" [size]="14"></app-icon>
-            Comunidad EcoCommute · Lima
+            {{ i18n.t('leaderboard.eyebrow') }}
           </span>
           <h1 class="page-title">{{ i18n.t('leaderboard.title') }}</h1>
           <p class="page-subtitle">{{ i18n.t('leaderboard.subtitle') }}</p>

@@ -169,10 +169,20 @@
       <div class="nav-utilities">
         <button
           type="button"
+          class="util-btn lang-toggle-btn"
+          (click)="i18n.toggleLocale()"
+          [attr.aria-label]="i18n.currentLocale === 'es_419' ? i18n.t('lang.switchToEnglish') : i18n.t('lang.switchToSpanish')"
+          [title]="i18n.t('lang.toggleTitle')"
+        >
+          <span>{{ i18n.currentLocale === 'es_419' ? 'EN' : 'ES' }}</span>
+        </button>
+
+        <button
+          type="button"
           class="util-btn icon-only"
           (click)="toggleTheme()"
-          [attr.aria-label]="activeTheme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'"
-          title="Cambiar apariencia"
+          [attr.aria-label]="activeTheme === 'dark' ? i18n.t('theme.toLight') : i18n.t('theme.toDark')"
+          [title]="i18n.t('theme.toggleTitle')"
         >
           <app-icon [name]="activeTheme === 'dark' ? 'sun' : 'moon'" [size]="16"></app-icon>
         </button>
@@ -211,15 +221,15 @@
         <div>
           <strong>EcoCommute Lima</strong>
           <span class="footer-sep">·</span>
-          <span>Plataforma ciudadana para medir, premiar y compartir movilidad baja en carbono</span>
+          <span>{{ i18n.t('footer.tagline') }}</span>
         </div>
       </div>
       <div class="footer-links">
-        <a href="/eco-commute/">Portada</a>
-        <a routerLink="/routes">Comparador de rutas</a>
-        <a routerLink="/trips">Bitácora de viajes</a>
-        <a routerLink="/rewards">Catálogo de beneficios</a>
-        <a routerLink="/terms">Privacidad y Términos</a>
+        <a href="/eco-commute/">{{ i18n.t('footer.home') }}</a>
+        <a routerLink="/routes">{{ i18n.t('footer.routes') }}</a>
+        <a routerLink="/trips">{{ i18n.t('footer.trips') }}</a>
+        <a routerLink="/rewards">{{ i18n.t('footer.rewards') }}</a>
+        <a routerLink="/terms">{{ i18n.t('footer.terms') }}</a>
       </div>
     </div>
   </footer>
