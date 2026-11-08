@@ -6,6 +6,9 @@ import { I18nService } from '../../services/i18n.service';
 import { TransportMode, TripRequest, TripResponse } from '../../models/api.models';
 import { EcoIconComponent } from '../icon/eco-icon.component';
 
+type PeriodFilter = 'ALL' | 'LAST_7' | 'LAST_30';
+type ModeFilter = TransportMode | 'ALL';
+
 @Component({
   selector: 'app-trips',
   standalone: true,
@@ -164,6 +167,18 @@ export class TripsComponent implements OnInit {
   editingTripId: string | null = null;
   feedbackMsg = '';
 
+  readonly transportModes: TransportMode[] = [
+    'BICYCLE',
+    'WALKING',
+    'ELECTRIC_SCOOTER',
+    'PUBLIC_TRANSIT',
+    'CARPOOL',
+    'CAR_SOLO'
+  ];
+
+  selectedMode: ModeFilter = 'ALL';
+  selectedPeriod: PeriodFilter = 'ALL';
+
   form: TripRequest = {
     transportMode: 'BICYCLE',
     originName: 'San Isidro (Centro Financiero)',
@@ -204,6 +219,36 @@ export class TripsComponent implements OnInit {
     this.api.getTripsHistory(0, 25).subscribe(page => {
       this.trips = page.content || [];
     });
+  }
+
+  get filteredTrips(): TripResponse[] {
+    const periodLimitMs = this.selectedPeriod === 'LAST_7'
+      ? 7 * 24 * 60 * 60 * 1000
+      : this.selectedPeriod === 'LAST_30'
+        ? 30 * 24 * 60 * 60 * 1000
+        : null;
+    const now = Date.now();
+
+    return this.trips.filter(t => {
+      if (this.selectedMode !== 'ALL' && t.transportMode !== this.selectedMode) {
+        return false;
+      }
+      if (periodLimitMs !== null) {
+        const completedMs = new Date(t.completedAt).getTime();
+        if (now - completedMs > periodLimitMs) {
+          return false;
+        }
+      }
+      return true;
+    });
+  }
+
+  setModeFilter(mode: ModeFilter): void {
+    this.selectedMode = mode;
+  }
+
+  setPeriodFilter(period: PeriodFilter): void {
+    this.selectedPeriod = period;
   }
 
   getPreviewBaseline(): number {
