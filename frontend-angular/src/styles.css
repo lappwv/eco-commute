@@ -6040,6 +6040,19 @@ app-leaderboard .eco-card:hover {
   margin-bottom: 1.1rem;
 }
 
+/* ENCABEZADO: boton de idioma, solo en escritorio (>= 641px) */
+.lang-toggle-btn {
+  min-width: 36px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 640px) {
+  .lang-toggle-btn {
+    display: none;
+  }
+}
+
 .trips-empty-state {
   display: flex;
   flex-direction: column;
