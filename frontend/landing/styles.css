@@ -171,7 +171,6 @@ output,
 .vr-hud-box strong,
 .veh-stat-chip strong,
 .veh-opt-co2,
-.alchemy-summary-col strong,
 .cutout-figure {
   font-family: var(--mono);
   font-variant-numeric: tabular-nums;
@@ -179,10 +178,6 @@ output,
 
 .text-eco {
   color: var(--accent) !important;
-}
-
-.text-eco-bright {
-  color: var(--accent-bright) !important;
 }
 
 /* ==================== ANIMACIONES AL SCROLLEAR ==================== */
@@ -1144,16 +1139,16 @@ html[data-theme="dark"] .btn-recycle-action {
   gap: 1rem;
 }
 
-.alchemy-summary-col span {
-  display: block;
-  font-size: 0.76rem;
-  color: rgba(242, 245, 243, 0.65);
-  margin-bottom: 0.25rem;
+.alchemy-summary-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
-.alchemy-summary-col strong {
-  font-size: clamp(1.35rem, 2vw, 1.7rem);
+.alchemy-summary-col > span {
+  font-size: 0.76rem;
   font-weight: 600;
+  text-transform: uppercase;
 }
 
 .alchemy-cards-grid {
@@ -2147,18 +2142,6 @@ html[data-theme="dark"] .slider-group {
   box-shadow: 0 4px 0 #1E241E;
 }
 
-.alchemy-summary-col span {
-  color: #1E241E !important;
-  font-weight: 800;
-  text-transform: uppercase;
-}
-
-.alchemy-summary-col strong {
-  color: #FFFFFF !important;
-  text-shadow: 0 2px 0 #1E241E;
-  font-family: var(--display);
-}
-
 .impact-stat-card.card-tint-green {
   background: #E8FCD2;
 }
@@ -2488,8 +2471,6 @@ b,
 .corridor-btn.is-active,
 .btn-recycle-action,
 .alchemy-preset,
-.alchemy-summary-col span,
-.alchemy-summary-col strong,
 .impact-stat-label {
   font-weight: 600 !important;
 }
@@ -3429,7 +3410,8 @@ html[data-theme="dark"] .how-rider {
 }
 
 /* ---- Cifras de la calculadora: número grande, unidad pequeña ---- */
-.cutout-figure {
+.cutout-figure,
+.alchemy-summary-value {
   display: flex;
   align-items: baseline;
   flex-wrap: wrap;
@@ -3452,11 +3434,16 @@ html[data-theme="dark"] .how-rider {
   color: var(--ink-secondary);
 }
 
-.alchemy-summary-col .fig-num {
+.alchemy-summary-value {
+  margin-block-start: auto;
+}
+
+.alchemy-summary-value .fig-num {
   font-size: 1.7rem;
 }
 
-.alchemy-summary-col .fig-unit {
+.alchemy-summary-value .fig-unit {
+  color: inherit;
   font-size: 0.85rem;
 }
 
