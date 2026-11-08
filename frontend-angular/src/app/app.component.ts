@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, Inject, PLATFORM_ID, NgZone } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { RouterModule, Router } from '@angular/router';
+import { RouterModule, Router, NavigationEnd } from '@angular/router';
+import { combineLatest, filter, startWith } from 'rxjs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from './services/auth.service';
@@ -43,6 +44,27 @@ export class AppComponent implements OnInit, OnDestroy {
       });
     }
     this.api.backendOnline$.subscribe(status => (this.backendOnline = status));
+
+    if (this.isBrowser) {
+      // Se suscribe después del servicio de idioma, así su título ("Página · EcoCommute") prevalece
+      combineLatest([
+        this.router.events.pipe(
+          filter(event => event instanceof NavigationEnd),
+          startWith(null)
+        ),
+        this.i18n.locale$
+      ]).subscribe(() => this.updateDocumentTitle());
+    }
+  }
+
+  /** Título de la pestaña según la pantalla actual y el idioma. */
+  private updateDocumentTitle(): void {
+    let route = this.router.routerState.snapshot.root;
+    while (route.firstChild) {
+      route = route.firstChild;
+    }
+    const key = route.data?.['titleKey'] as string | undefined;
+    document.title = key ? `${this.i18n.t(key)} · EcoCommute Lima` : this.i18n.t('meta.title');
   }
 
   ngOnDestroy(): void {
