@@ -468,14 +468,74 @@ function renderSimulatorMetrics() {
   renderLimaMapRoute();
 }
 
-function renderAlchemyLab() {
+// ---- Number ticker (estilo Magic UI): el número viaja con un resorte hasta su nuevo valor ----
+const NUMBER_TICKER_STIFFNESS = 160;
+const NUMBER_TICKER_DAMPING = 44;
+const numberTickers = new WeakMap();
+
+function tickNumber(el, target, decimals, render, from) {
+  if (!el) return;
+
+  let state = numberTickers.get(el);
+  if (!state) {
+    state = { cur: target, vel: 0, raf: 0, last: 0 };
+    numberTickers.set(el, state);
+  }
+  state.target = target;
+  state.render = render;
+  state.eps = 0.25 * Math.pow(10, -decimals);
+  if (from !== undefined) {
+    state.cur = from;
+    state.vel = 0;
+  }
+
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (prefersReduced || state.cur === target) {
+    cancelAnimationFrame(state.raf);
+    state.raf = 0;
+    state.cur = target;
+    state.vel = 0;
+    el.textContent = render(target);
+    return;
+  }
+
+  el.textContent = render(state.cur);
+  if (state.raf) return;
+
+  const step = (now) => {
+    const dt = Math.min((now - state.last) / 1000, 0.05);
+    state.last = now;
+    const slices = Math.max(1, Math.ceil(dt * 240));
+    const h = dt / slices;
+    for (let i = 0; i < slices; i++) {
+      const accel = -NUMBER_TICKER_STIFFNESS * (state.cur - state.target) - NUMBER_TICKER_DAMPING * state.vel;
+      state.vel += accel * h;
+      state.cur += state.vel * h;
+    }
+
+    if (Math.abs(state.cur - state.target) < state.eps && Math.abs(state.vel) < state.eps * 20) {
+      state.cur = state.target;
+      state.vel = 0;
+      state.raf = 0;
+      el.textContent = state.render(state.target);
+      return;
+    }
+    el.textContent = state.render(state.cur);
+    state.raf = requestAnimationFrame(step);
+  };
+
+  state.last = performance.now();
+  state.raf = requestAnimationFrame(step);
+}
+
+function renderAlchemyLab(fromZero) {
   const isEn = currentLang === "en_US";
+  const from = fromZero === true ? 0 : undefined;
   const annualKm = alchemyTrips * alchemyKm * 52;
   const annualGrams = annualKm * 152;
-  const annualKgNum = annualGrams / 1000;
-  const annualKg = annualKgNum.toFixed(1);
+  const annualKg = Number((annualGrams / 1000).toFixed(1));
   const petBottles = Math.round(annualGrams / 82.8);
-  const trees = (annualGrams / 21000).toFixed(1);
+  const trees = Number((annualGrams / 21000).toFixed(1));
   const greenPoints = Math.round(annualKm * 3.57);
   const fuelLiters = Math.round(annualKm * 0.065);
   const trafficHours = Math.round((alchemyTrips * 52 * (alchemyKm * 1.9)) / 60);
@@ -491,12 +551,19 @@ function renderAlchemyLab() {
 
   if (tripsOut) tripsOut.textContent = isEn ? `${alchemyTrips} rides/wk` : `${alchemyTrips} viajes/sem`;
   if (kmOut) kmOut.textContent = `${alchemyKm.toFixed(1)} km`;
-  if (annualKgEl) annualKgEl.textContent = annualKg;
-  if (fuelEl) fuelEl.textContent = isEn ? `${fuelLiters} L / yr` : `${fuelLiters} L / año`;
-  if (hoursEl) hoursEl.textContent = isEn ? `${trafficHours} h / yr` : `${trafficHours} h / año`;
-  if (petEl) petEl.textContent = isEn ? `${petBottles.toLocaleString()} bottles` : `${petBottles.toLocaleString()} botellas`;
-  if (treesEl) treesEl.textContent = isEn ? `${trees} trees` : `${trees} árboles`;
-  if (ptsEl) ptsEl.textContent = `+${greenPoints.toLocaleString()} pts`;
+
+  tickNumber(annualKgEl, annualKg, 1, (v) => v.toFixed(1), from);
+  tickNumber(fuelEl, fuelLiters, 0, (v) => (isEn ? `${Math.round(v)} L / yr` : `${Math.round(v)} L / año`), from);
+  tickNumber(hoursEl, trafficHours, 0, (v) => (isEn ? `${Math.round(v)} h / yr` : `${Math.round(v)} h / año`), from);
+  tickNumber(
+    petEl,
+    petBottles,
+    0,
+    (v) => (isEn ? `${Math.round(v).toLocaleString()} bottles` : `${Math.round(v).toLocaleString()} botellas`),
+    from
+  );
+  tickNumber(treesEl, trees, 1, (v) => (isEn ? `${v.toFixed(1)} trees` : `${v.toFixed(1)} árboles`), from);
+  tickNumber(ptsEl, greenPoints, 0, (v) => `+${Math.round(v).toLocaleString()} pts`, from);
 }
 
 function applyTranslations(lang) {
@@ -671,6 +738,21 @@ function setupAlchemyLab() {
   }
 
   renderAlchemyLab();
+
+  // Al llegar a la calculadora los números suben desde 0, como en Magic UI.
+  const workbench = document.querySelector(".alchemy-workbench");
+  if (workbench && "IntersectionObserver" in window) {
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          revealObserver.disconnect();
+          renderAlchemyLab(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
+    revealObserver.observe(workbench);
+  }
 }
 
 function setupCardTilt() {
@@ -699,7 +781,44 @@ function setupCardTilt() {
   );
 }
 
+function setupTransportParallax() {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  document.querySelectorAll(".transport-card-media").forEach((media) => {
+    media.addEventListener(
+      "pointermove",
+      (event) => {
+        if (event.pointerType === "touch") return;
+        const rect = media.getBoundingClientRect();
+        const px = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
+        media.style.setProperty("--px", px.toFixed(3));
+      },
+      { passive: true }
+    );
+    media.addEventListener("pointerleave", () => media.style.setProperty("--px", "0"));
+  });
+}
+
+// Pantallas táctiles no tienen hover: la escena corre sola mientras la tarjeta está a la vista.
+function setupTransportTouchLive() {
+  if (!window.matchMedia("(hover: none)").matches) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (!("IntersectionObserver" in window)) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        entry.target.classList.toggle("is-live", entry.isIntersecting);
+      });
+    },
+    { threshold: 0.6 }
+  );
+  document.querySelectorAll(".transport-card").forEach((card) => observer.observe(card));
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+  setupTransportParallax();
+  setupTransportTouchLive();
   setupLimaHeroMap();
   setupThemeSwitcher();
   setupScrollAnimations();
