@@ -6025,3 +6025,13 @@ app-leaderboard .eco-card:hover {
   align-items: center;
   justify-content: center;
 }
+
+/* BITACORA: filtros por medio de transporte y por periodo */
+.trips-filter-counter {
+  font-weight: 700;
+  color: var(--emerald);
+}
+
+.trips-mode-filters {
+  margin-bottom: 0.9rem;
+}
