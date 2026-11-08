@@ -3758,3 +3758,45 @@ html[data-theme="dark"] .how-rider {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+
+/* ==================== CONTRASTE (WCAG AA) ====================
+   El verde de marca (#4E9A06) y el naranja (#D9480F) quedaban entre 2.8:1 y
+   4.3:1 al usarse como color de texto o como fondo de texto blanco. Se
+   definen tonos más profundos solo para esos usos; los fondos decorativos
+   conservan el verde de marca. */
+html:not([data-theme="dark"]) {
+  --accent-ink: #3B7A04;
+  --warn-ink: #C2410C;
+}
+
+html:not([data-theme="dark"]) .val-emerald,
+html:not([data-theme="dark"]) .metric-value.text-eco,
+html:not([data-theme="dark"]) .metric-value.text-accent,
+html:not([data-theme="dark"]) .cutout-figure.text-eco {
+  color: var(--accent-ink) !important;
+}
+
+html:not([data-theme="dark"]) .time-pill.eco {
+  background: var(--accent-ink);
+}
+
+html:not([data-theme="dark"]) .time-pill.car,
+html:not([data-theme="dark"]) .metric-value.text-warn,
+html:not([data-theme="dark"]) .transport-card-sub.text-warn {
+  color: var(--warn-ink);
+}
+
+.transport-co2-pill.warn {
+  background: #C2410C !important;
+}
+
+.skip-link {
+  background: #3B7A04;
+  color: #FFFFFF;
+}
+
+html[data-theme="dark"] .skip-link {
+  background: var(--accent);
+  color: #0B0E0C;
+}
