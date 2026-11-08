@@ -59,7 +59,7 @@ export class AppComponent implements OnInit, OnDestroy {
       '.eco-card, .ribbon-metric, .ticket-voucher-card, .badge-row-strip, .podium-pillar, ' +
       '.quick-route-launcher, .hero-steps-guide, .v-medal-row, .trip-feed-item, ' +
       '.live-impact-strip, .tower-progress-box, .balance-card-inline, .vertical-timeline-section, ' +
-      '.route-vertical-col'
+      '.route-vertical-col, .cartoon-banner-art, .saving-teaser, .advisor-callout'
     ) as HTMLElement | null;
     if (!card) return;
 
