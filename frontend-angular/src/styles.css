@@ -3671,11 +3671,32 @@ strong,
   object-fit: cover;
 }
 
-.eco-navbar,
 .eco-main,
 .eco-footer {
   position: relative;
   z-index: 1;
+}
+
+/* La barra queda por encima del contenido para que el menú móvil desplegable
+   no se tape con las tarjetas de la página. */
+.eco-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+@media (max-width: 1020px) {
+  .eco-nav-links {
+    z-index: 1001;
+    border: 2px solid #1E241E;
+    box-shadow: 0 10px 28px rgba(13, 26, 19, 0.28);
+    max-height: calc(100dvh - 84px);
+    overflow-y: auto;
+  }
+  .eco-nav-links a {
+    justify-content: flex-start;
+    min-height: 44px;
+  }
 }
 
 /* 2. Decorative Bike-Lane / Road Trim on Navbar & Footer */
@@ -4382,6 +4403,7 @@ h1, h2, h3, h4,
 
 .eco-navbar .brand-text strong {
   color: var(--text-main) !important;
+  text-shadow: none !important;
   font-size: 1.18rem !important;
   font-weight: 800 !important;
 }
@@ -6091,6 +6113,96 @@ app-leaderboard .eco-card:hover {
 .auth-tab-group .mat-mdc-tab-body.mat-mdc-tab-body-active {
   overflow: visible;
   overflow-y: visible;
+}
+
+/* ACCESIBILIDAD: indicador de foco visible y consistente en toda la app */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--emerald);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   Angular Material: Corridor Preset Chips (Clean, Centered, Professional)
+   ========================================================================== */
+
+.preset-chips-row mat-chip-listbox {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.corridor-preset-chip {
+  --mdc-chip-container-shape-radius: 9999px;
+  --mdc-chip-container-height: auto;
+  --mdc-chip-elevated-container-color: var(--bg-card);
+  --mdc-chip-flat-container-color: var(--bg-card);
+  --mdc-chip-label-text-color: var(--text-main);
+  --mdc-chip-outline-color: var(--border);
+  --mdc-chip-outline-width: 1px;
+  background-color: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 9999px !important;
+  padding: 0.35rem 0.85rem !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  cursor: pointer;
+}
+
+.corridor-preset-chip:hover {
+  border-color: var(--emerald-border) !important;
+  background-color: var(--bg-soft) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06) !important;
+}
+
+.corridor-preset-chip.mat-mdc-chip-selected,
+.corridor-preset-chip[aria-selected="true"] {
+  background-color: var(--emerald-soft) !important;
+  border-color: var(--emerald) !important;
+  box-shadow: 0 2px 8px rgba(21, 128, 61, 0.15) !important;
+}
+
+.corridor-preset-chip.mat-mdc-chip-selected .corridor-chip-label {
+  color: var(--emerald) !important;
+  font-weight: 700;
+}
+
+.corridor-chip-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.15rem 0.25rem;
+}
+
+.corridor-chip-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-main);
+  letter-spacing: -0.01em;
+}
+
+.corridor-chip-tag {
+  font-size: 0.73rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: var(--bg-soft);
+  padding: 0.1rem 0.45rem;
+  border-radius: 9999px;
+  border: 1px solid var(--border);
+}
+
+.corridor-preset-chip.mat-mdc-chip-selected .corridor-chip-tag {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: var(--emerald-border);
+  color: var(--emerald);
 }
 
 
