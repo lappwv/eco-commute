@@ -3876,3 +3876,94 @@ html[data-theme="dark"] .skip-link {
     padding: 2.75rem 0 !important;
   }
 }
+
+/* ==================== PULIDO: ONDAS CON MOVIMIENTO SUAVE ==================== */
+/* La ola principal deriva despacio y ademas "respira" (sube y baja la cresta). */
+.how-section::after,
+#vehiculos::after,
+#alquimia::after {
+  transform-origin: 50% 100%;
+  animation:
+    wave-drift 26s linear infinite,
+    wave-swell 6.5s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+#vehiculos::after {
+  animation-direction: reverse, alternate;
+  animation-delay: 0s, -2s;
+}
+
+#alquimia::after {
+  animation-delay: 0s, -4s;
+}
+
+/* Segunda ola translucida detras de la principal: da profundidad bajo el hero. */
+.how-section::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -52px;
+  height: 54px;
+  z-index: 1;
+  pointer-events: none;
+  background: var(--wave-fill);
+  opacity: 0.38;
+  transform-origin: 50% 100%;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' preserveAspectRatio='none'%3E%3Cpath d='M0 22Q300 -10 600 22T1200 22V40H0Z'/%3E%3C/svg%3E") repeat-x 300px 100% / 1200px 54px;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' preserveAspectRatio='none'%3E%3Cpath d='M0 22Q300 -10 600 22T1200 22V40H0Z'/%3E%3C/svg%3E") repeat-x 300px 100% / 1200px 54px;
+  animation:
+    wave-drift-back 38s linear infinite,
+    wave-swell 8s ease-in-out -3s infinite alternate;
+}
+
+@keyframes wave-drift-back {
+  from {
+    -webkit-mask-position: -900px 100%;
+    mask-position: -900px 100%;
+  }
+  to {
+    -webkit-mask-position: 300px 100%;
+    mask-position: 300px 100%;
+  }
+}
+
+@keyframes wave-swell {
+  from {
+    transform: scaleY(0.82);
+  }
+  to {
+    transform: scaleY(1.12);
+  }
+}
+
+@media (max-width: 640px) {
+  .how-section::before {
+    top: -34px;
+    height: 36px;
+    -webkit-mask-size: 760px 36px;
+    mask-size: 760px 36px;
+  }
+
+  @keyframes wave-drift-back {
+    from {
+      -webkit-mask-position: -570px 100%;
+      mask-position: -570px 100%;
+    }
+    to {
+      -webkit-mask-position: 190px 100%;
+      mask-position: 190px 100%;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .how-section::before,
+  .how-section::after,
+  #vehiculos::after,
+  #alquimia::after {
+    animation: none !important;
+    transform: none !important;
+  }
+}
