@@ -6555,3 +6555,239 @@ html[data-theme="dark"] {
     white-space: nowrap;
   }
 }
+
+
+/* ==========================================================================
+   MI IMPACTO: pulido visual (hero, separaciones, metricas y paleta)
+   ========================================================================== */
+
+/* 1. Tarjeta del hero: selector y boton simetricos y alineados al centro */
+app-dashboard .quick-route-launcher {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.75rem !important;
+  padding: 0.75rem !important;
+  border-radius: 18px !important;
+  max-width: 640px !important;
+}
+
+app-dashboard .quick-route-field {
+  flex: 1 1 auto;
+  display: block;
+  margin: 0;
+}
+
+app-dashboard .quick-route-field .mat-mdc-text-field-wrapper {
+  height: 56px;
+  border-radius: 12px;
+}
+
+app-dashboard .quick-route-field .mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}
+
+app-dashboard .quick-route-field .mat-mdc-form-field-infix {
+  display: flex;
+  align-items: center;
+  min-height: 56px;
+  padding-top: 18px !important;
+  padding-bottom: 14px !important;
+}
+
+app-dashboard .quick-route-field .mat-mdc-floating-label app-icon {
+  vertical-align: -2px;
+  margin-right: 0.2rem;
+}
+
+app-dashboard .btn-start-route {
+  flex: 0 0 auto;
+  height: 56px !important;
+  min-height: 56px;
+  padding: 0 1.5rem !important;
+  border-radius: 12px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.5rem;
+}
+
+app-dashboard .btn-start-route .mdc-button__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@media (max-width: 680px) {
+  app-dashboard .quick-route-launcher {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+  app-dashboard .btn-start-route {
+    width: 100%;
+  }
+}
+
+/* 2. Separaciones verticales: sin etapas a pantalla completa */
+app-dashboard .dash-fullscreen-stage,
+app-dashboard .dash-section-block {
+  min-height: auto !important;
+  justify-content: flex-start !important;
+  padding: 1.75rem 0 !important;
+  gap: 1.25rem !important;
+  border-bottom: none !important;
+}
+
+app-dashboard .dash-fullscreen-stage {
+  padding-top: 1rem !important;
+  padding-bottom: 0.75rem !important;
+}
+
+app-dashboard .cartoon-hero-banner {
+  min-height: auto !important;
+  padding: 2.5rem 2.75rem !important;
+}
+
+app-dashboard .eco-stat-ribbon {
+  padding: 1.75rem 2rem !important;
+}
+
+@media (max-width: 900px) {
+  app-dashboard .dash-fullscreen-stage,
+  app-dashboard .dash-section-block {
+    padding: 1.25rem 0 !important;
+  }
+  app-dashboard .cartoon-hero-banner {
+    padding: 1.75rem !important;
+  }
+}
+
+/* 3. Metricas: sin lineas de color encima de las cajas */
+app-dashboard .ribbon-metric,
+app-dashboard .ribbon-metric.accent-green,
+app-dashboard .ribbon-metric.accent-amber,
+app-dashboard .ribbon-metric.accent-sky,
+app-dashboard .ribbon-metric.accent-coral {
+  border-top: none !important;
+  padding-top: 1rem !important;
+}
+
+/* 4. Ultima seccion: acentos complementarios suaves (ambar, azul, terracota) */
+app-dashboard {
+  --impact-amber: #D97706;
+  --impact-amber-soft: #FEF3E2;
+  --impact-sky: #0284C7;
+  --impact-sky-soft: #E6F3FB;
+  --impact-terra: #C2552D;
+  --impact-terra-soft: #FBEDE6;
+}
+
+[data-theme="dark"] app-dashboard {
+  --impact-amber: #FBBF24;
+  --impact-amber-soft: rgba(251, 191, 36, 0.1);
+  --impact-sky: #38BDF8;
+  --impact-sky-soft: rgba(56, 189, 248, 0.1);
+  --impact-terra: #F0997B;
+  --impact-terra-soft: rgba(240, 153, 123, 0.1);
+}
+
+/* Grafico semanal: degradado verde a azul en lugar de verde puro */
+app-dashboard .bar-fill {
+  --liquid-top: #5FB8E0;
+  background: linear-gradient(180deg, #5FB8E0 0%, #3B9C8F 55%, #2F7D4F 100%) !important;
+}
+
+/* Reparto por medio: cada fila con su propio acento */
+app-dashboard .mode-row .mode-progress-track {
+  --mdc-linear-progress-active-indicator-color: var(--impact-sky);
+}
+app-dashboard .mode-row:nth-child(4n + 1) .mode-progress-track {
+  --mdc-linear-progress-active-indicator-color: #2F8F57;
+}
+app-dashboard .mode-row:nth-child(4n + 2) .mode-progress-track {
+  --mdc-linear-progress-active-indicator-color: var(--impact-amber);
+}
+app-dashboard .mode-row:nth-child(4n + 3) .mode-progress-track {
+  --mdc-linear-progress-active-indicator-color: var(--impact-sky);
+}
+app-dashboard .mode-row:nth-child(4n + 4) .mode-progress-track {
+  --mdc-linear-progress-active-indicator-color: var(--impact-terra);
+}
+app-dashboard .mode-row:nth-child(4n + 2) .mode-icon-chip { color: var(--impact-amber) !important; }
+app-dashboard .mode-row:nth-child(4n + 3) .mode-icon-chip { color: var(--impact-sky) !important; }
+app-dashboard .mode-row:nth-child(4n + 4) .mode-icon-chip { color: var(--impact-terra) !important; }
+
+/* Ruta recomendada: tarjeta calida ambar */
+app-dashboard .advisor-callout {
+  background: linear-gradient(145deg, var(--impact-amber-soft) 0%, var(--bg-card) 100%) !important;
+  border: 1px solid rgba(217, 119, 6, 0.28) !important;
+  border-left: 5px solid var(--impact-amber) !important;
+  outline-color: rgba(217, 119, 6, 0.3) !important;
+}
+app-dashboard .advisor-callout .advisor-kicker,
+app-dashboard .advisor-callout .inline-action-link,
+app-dashboard .advisor-spark-icon {
+  color: var(--impact-amber) !important;
+}
+
+/* Impacto colectivo: azul y terracota */
+app-dashboard .v-stat-dot.green { color: var(--impact-sky) !important; }
+app-dashboard .v-stat-dot.yellow { color: var(--impact-terra) !important; }
+
+/* Medallas: barras con acentos alternos */
+app-dashboard .v-medal-row .v-medal-bar {
+  --mdc-linear-progress-active-indicator-color: var(--impact-terra);
+}
+app-dashboard .v-medal-row:nth-child(3n + 2) .v-medal-bar {
+  --mdc-linear-progress-active-indicator-color: var(--impact-sky);
+}
+app-dashboard .v-medal-row:nth-child(3n + 3) .v-medal-bar {
+  --mdc-linear-progress-active-indicator-color: var(--impact-amber);
+}
+
+/* ==========================================================================
+   FONDO ANIMADO GLOBAL: movimiento ligero, lento y casi imperceptible
+   ========================================================================== */
+.eco-map-backdrop::before {
+  background: radial-gradient(circle, rgba(34, 197, 94, 0.07), transparent 65%) !important;
+  animation: backdrop-drift-a 90s ease-in-out infinite alternate !important;
+}
+
+.eco-map-backdrop::after {
+  background: radial-gradient(circle, rgba(2, 132, 199, 0.05), transparent 65%) !important;
+  animation: backdrop-drift-b 110s ease-in-out infinite alternate !important;
+}
+
+@keyframes backdrop-drift-a {
+  to { transform: translate(3vmax, 2vmax) scale(1.04); }
+}
+
+@keyframes backdrop-drift-b {
+  to { transform: translate(-3vmax, -2vmax) scale(1.04); }
+}
+
+.map-backdrop-svg {
+  opacity: 0.6;
+}
+
+.map-backdrop-svg path[stroke-dasharray] {
+  animation: corridor-flow 60s linear infinite !important;
+}
+
+.backdrop-riders {
+  opacity: 0.4;
+}
+
+.backdrop-riders circle {
+  filter: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eco-map-backdrop::before,
+  .eco-map-backdrop::after,
+  .map-backdrop-svg path[stroke-dasharray] {
+    animation: none !important;
+  }
+  .backdrop-riders {
+    display: none;
+  }
+}
