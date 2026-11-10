@@ -609,6 +609,25 @@ function renderAlchemyLab(fromZero) {
     if (unit) unit.textContent = text;
   };
 
+  // Pulso breve en la cifra que cambio (no en cada evento del slider).
+  const bump = (el, value) => {
+    if (!el || fromZero === true) return;
+    const key = String(value);
+    if (el.dataset.lastValue === key) return;
+    const isFirst = el.dataset.lastValue === undefined;
+    el.dataset.lastValue = key;
+    if (isFirst) return;
+    el.classList.remove("is-bump");
+    void el.offsetWidth;
+    el.classList.add("is-bump");
+  };
+  bump(annualKgEl, annualKg);
+  bump(figNum(fuelEl), fuelLiters);
+  bump(figNum(hoursEl), trafficHours);
+  bump(figNum(petEl), petBottles);
+  bump(figNum(treesEl), trees);
+  bump(figNum(ptsEl), greenPoints);
+
   tickNumber(annualKgEl, annualKg, 1, (v) => v.toFixed(1), from);
   tickNumber(figNum(fuelEl), fuelLiters, 0, (v) => String(Math.round(v)), from);
   setUnit(fuelEl, isEn ? "L / yr" : "L / año");
