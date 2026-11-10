@@ -6892,6 +6892,11 @@ app-routes-planner .planner-unified-stage {
   padding-top: 0 !important;
 }
 
+/* Sin la linea del encabezado, las pestanas ya no necesitan subir sobre el */
+app-routes-planner .preset-chips-centered-wrapper {
+  margin: 0.25rem 0 0.75rem;
+}
+
 
 /* ==========================================================================
    RUTAS: tarjetas de resultado (filas alineadas entre las tres con subgrid)
