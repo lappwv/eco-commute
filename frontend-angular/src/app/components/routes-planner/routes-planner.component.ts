@@ -195,60 +195,86 @@ interface LimaPreset {
         <span>{{ recordedBanner }}</span>
       </div>
 
-      <!-- 2. Comparativa en 3 Columnas Verticales Lado a Lado (En vez de 3 bloques apilados) -->
-      <div class="route-columns-3" *ngIf="planResult as res">
+      <!-- 2. Comparativa: 3 tarjetas con filas alineadas (subgrid) -->
+      <div class="route-cards-grid" *ngIf="planResult as res">
         <article
-          class="route-vertical-col"
+          class="route-card"
           *ngFor="let opt of getOrderedRoutes(res)"
-          [class.recommended]="opt.id === res.recommendedRouteId || opt.isAiRecommended"
+          [ngClass]="'route-card--' + modeClass(opt)"
+          [class.is-recommended]="isRecommended(opt, res)"
         >
-          <div class="route-col-top">
-            <div class="route-col-badges">
-              <span class="route-mode-avatar" [class.car-mode]="opt.mode === 'CAR_SOLO'">
-                <app-icon [name]="opt.mode" [size]="20"></app-icon>
-              </span>
-              <span class="badge-emerald" *ngIf="opt.id === res.recommendedRouteId || opt.isAiRecommended">
-                {{ i18n.t('routes.recommended') }}
-              </span>
-              <span class="pts-pill" *ngIf="opt.potentialPoints > 0">+<span [appCountUp]="opt.potentialPoints"></span> pts</span>
+          <header class="route-card-head">
+            <span class="route-card-icon">
+              <app-icon [name]="opt.mode" [size]="30"></app-icon>
+            </span>
+            <div class="route-card-heading">
+              <span class="route-card-kicker">{{ modeLabel(opt) }}</span>
+              <h3>{{ translateRouteTitle(opt) }}</h3>
             </div>
-            <h3>{{ translateRouteTitle(opt) }}</h3>
-            <p class="route-summary">{{ translateRouteSummary(opt) }}</p>
-          </div>
+            <span class="route-card-badge" *ngIf="isRecommended(opt, res)">{{ i18n.t('routes.recommended') }}</span>
+          </header>
 
-          <!-- Lista Vertical de Datos para Lectura Rápida -->
-          <ul class="route-vertical-stats">
+          <p class="route-card-summary">{{ translateRouteSummary(opt) }}</p>
+
+          <ul class="route-card-metrics">
             <li>
-              <span>{{ i18n.t('routes.distanceTotal') }}</span>
+              <app-icon name="route" [size]="16"></app-icon>
+              <span class="metric-label">{{ i18n.t('routes.distanceTotal') }}</span>
               <strong><span [appCountUp]="opt.distanceKm" [decimals]="2"></span> km</strong>
             </li>
             <li>
-              <span>{{ i18n.t('routes.timeEstimate') }}</span>
+              <app-icon name="clock" [size]="16"></app-icon>
+              <span class="metric-label">{{ i18n.t('routes.timeEstimate') }}</span>
               <strong><span [appCountUp]="opt.durationMinutes"></span> min</strong>
             </li>
             <li>
-              <span>{{ i18n.t('routes.co2Avoided') }}</span>
-              <strong class="text-emerald">-<span [appCountUp]="opt.co2SavedGrams"></span> g</strong>
-            </li>
-            <li>
-              <span>{{ i18n.t('routes.activeEnergy') }}</span>
+              <app-icon name="flame" [size]="16"></app-icon>
+              <span class="metric-label">{{ i18n.t('routes.activeEnergy') }}</span>
               <strong><span [appCountUp]="opt.caloriesBurned"></span> kcal</strong>
             </li>
-            <li *ngIf="opt.aiInsight as ai">
-              <span>{{ i18n.t('routes.greenIndex') }}</span>
-              <strong>{{ i18n.tn('routes.greenIndexValue', { green: ai.greenScore, shade: ai.shadeTreeCoveragePercent }) }}</strong>
+            <li>
+              <app-icon name="globe" [size]="16"></app-icon>
+              <span class="metric-label">{{ i18n.t('routes.card.co2Emitted') }}</span>
+              <strong><span [appCountUp]="opt.co2EmittedGrams"></span> g</strong>
+            </li>
+            <li>
+              <app-icon name="tree" [size]="16"></app-icon>
+              <span class="metric-label">{{ i18n.t('routes.greenIndex') }}</span>
+              <strong *ngIf="opt.aiInsight as ai; else noGreen">{{ i18n.tn('routes.greenIndexValue', { green: ai.greenScore, shade: ai.shadeTreeCoveragePercent }) }}</strong>
+              <ng-template #noGreen><strong class="metric-empty">{{ i18n.t('routes.card.noGreenData') }}</strong></ng-template>
             </li>
           </ul>
 
+          <div class="route-card-bars">
+            <div class="route-bar">
+              <div class="route-bar-label">
+                <span><app-icon name="leaf" [size]="14"></app-icon> {{ i18n.t('routes.co2Avoided') }}</span>
+                <strong>{{ opt.co2SavedGrams > 0 ? '-' : '' }}<span [appCountUp]="opt.co2SavedGrams"></span> g</strong>
+              </div>
+              <div class="route-bar-track" role="presentation">
+                <span class="route-bar-fill co2" [style.width.%]="barPercent(opt.co2SavedGrams, maxCo2(res))"></span>
+              </div>
+            </div>
+            <div class="route-bar">
+              <div class="route-bar-label">
+                <span><app-icon name="clock" [size]="14"></app-icon> {{ i18n.t('routes.card.relativeTime') }}</span>
+                <strong>{{ barPercent(opt.durationMinutes, maxDuration(res)) }}%</strong>
+              </div>
+              <div class="route-bar-track" role="presentation">
+                <span class="route-bar-fill time" [style.width.%]="barPercent(opt.durationMinutes, maxDuration(res))"></span>
+              </div>
+            </div>
+          </div>
+
           <button
-            mat-stroked-button
+            mat-flat-button
             type="button"
-            class="btn-outline full-width"
-            [class.btn-emerald]="opt.id === res.recommendedRouteId || opt.isAiRecommended"
+            class="route-card-cta"
             (click)="recordThisRoute(opt)"
           >
             <app-icon name="check" [size]="16"></app-icon>
-            <span>{{ i18n.t('routes.recordTrip') }} (+{{ opt.potentialPoints }} pts)</span>
+            <span>{{ i18n.t('routes.recordTrip') }}</span>
+            <span class="route-card-cta-pts" *ngIf="opt.potentialPoints > 0">+{{ opt.potentialPoints }} pts</span>
           </button>
         </article>
       </div>
@@ -387,6 +413,35 @@ export class RoutesPlannerComponent implements OnInit, AfterViewInit, OnDestroy 
 
   getOrderedRoutes(res: RoutePlanResponse): RouteOption[] {
     return [res.aiGreenCorridorRoute, res.standardProfileRoute, res.baselineCarRoute];
+  }
+
+  isRecommended(opt: RouteOption, res: RoutePlanResponse): boolean {
+    return opt.id === res.recommendedRouteId || opt.isAiRecommended;
+  }
+
+  // Solo presentacion: clase y etiqueta por medio, y anchos relativos de las barras
+  modeClass(opt: RouteOption): string {
+    if (opt.mode === 'CAR_SOLO') return 'car';
+    return opt.id === 'route-ai-green-corridor' ? 'green' : 'direct';
+  }
+
+  modeLabel(opt: RouteOption): string {
+    if (opt.mode === 'CAR_SOLO') return this.i18n.t('routes.modeCar');
+    if (opt.mode === 'WALKING') return this.i18n.t('routes.modeWalk');
+    return this.i18n.t('routes.modeBike');
+  }
+
+  maxCo2(res: RoutePlanResponse): number {
+    return Math.max(...this.getOrderedRoutes(res).map(o => o.co2SavedGrams || 0));
+  }
+
+  maxDuration(res: RoutePlanResponse): number {
+    return Math.max(...this.getOrderedRoutes(res).map(o => o.durationMinutes || 0));
+  }
+
+  barPercent(value: number, max: number): number {
+    if (!max || !value) return 0;
+    return Math.round((value / max) * 100);
   }
 
   // Los titulos/resumenes de ruta pueden venir del backend en espanol (sin codigo propio);
