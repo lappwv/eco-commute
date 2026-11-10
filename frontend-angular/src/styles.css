@@ -7281,13 +7281,6 @@ app-routes-planner .preset-chips-centered-wrapper {
   padding: 1.4rem 1.5rem;
 }
 
-/* Los paneles grandes no se inclinan al pasar el mouse */
-.trips-page .trips-panel:hover {
-  transform: none;
-  background-image: none !important;
-  box-shadow: var(--shadow-card) !important;
-}
-
 .trips-panel-head {
   display: flex;
   align-items: center;
@@ -7542,13 +7535,16 @@ app-routes-planner .preset-chips-centered-wrapper {
   border: 1px solid var(--border);
   background: var(--bg-card);
   box-shadow: inset 3px 0 0 color-mix(in srgb, var(--trip-accent) 70%, transparent);
-  animation: trips-fade-up 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: trips-fade-up 0.45s cubic-bezier(0.22, 1, 0.36, 1) backwards;
   animation-delay: calc(min(var(--i, 0), 10) * 45ms);
-  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s ease, border-color 0.28s ease;
 }
 
+/* Inclinacion 3D que sigue al cursor (variables --rx, --ry, --mx, --my desde app.component) */
 .trip-entry:hover {
-  transform: translateY(-2px);
+  transform: perspective(900px) translateY(-3px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.12s ease-out, box-shadow 0.28s ease, border-color 0.28s ease;
+  background-image: radial-gradient(240px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--trip-accent) 12%, transparent), transparent 65%);
   border-color: color-mix(in srgb, var(--trip-accent) 35%, var(--border));
   box-shadow:
     inset 3px 0 0 var(--trip-accent),
