@@ -6516,3 +6516,42 @@ html[data-theme="dark"] {
   color: var(--text-main) !important;
   border-color: var(--emerald) !important;
 }
+
+/* NAVBAR: la marca nunca se corta ni se tapa en anchos intermedios */
+.eco-brand,
+.brand-text {
+  flex-shrink: 0;
+}
+.brand-text strong,
+.brand-sub {
+  white-space: nowrap;
+}
+.eco-nav-links {
+  min-width: 0;
+}
+@media (min-width: 1021px) and (max-width: 1600px) {
+  .eco-nav-inner {
+    gap: 0.6rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .landing-back-pill > span,
+  .user-pill-name {
+    display: none !important;
+  }
+  .landing-back-pill {
+    width: 38px;
+    height: 38px;
+    min-height: 38px;
+    padding: 0;
+    justify-content: center;
+  }
+  .eco-nav-links a:not(.active) > span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+}
