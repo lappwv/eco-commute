@@ -148,6 +148,17 @@ const translations = {
     "nav.vehicles": "Transporte",
     "nav.impact": "Calculadora",
     "nav.terms": "Términos y Privacidad",
+    "terms.metaTitle": "Términos y Privacidad — EcoCommute Lima",
+    "terms.eyebrow": "Transparencia y Protección de Datos",
+    "terms.title": "Privacidad y Términos de Uso",
+    "terms.subtitle": "Cómo cuidamos tu información de movilidad y cómo calculamos tus ahorros de emisiones en Lima.",
+    "terms.back": "Volver",
+    "terms.s1.title": "1. Protección de Datos Personales (Ley N° 29733 — Perú)",
+    "terms.s1.body": "EcoCommute procesa tus trayectos de origen y destino únicamente con el propósito de estimar emisiones de CO₂ evitadas, tiempo de viaje, energía activa y puntos canjeables en comercios aliados. Nunca compartimos ni vendemos tus ubicaciones individuales a terceros; los reportes distritales solo muestran indicadores colectivos y anónimos.",
+    "terms.s2.title": "2. Cómo calculamos tu impacto ambiental",
+    "terms.s2.body": "Para cada recorrido comparamos las emisiones de un automóvil particular promedio en Lima Metropolitana (<strong>170 g CO₂/km</strong>) frente al medio sostenible que elegiste (<strong>0 g CO₂/km</strong> en bicicleta mecánica o caminata, <strong>15 g CO₂/km</strong> en micromovilidad eléctrica y <strong>45 g CO₂/km</strong> en transporte público masivo).",
+    "terms.s3.title": "3. Canje responsable de beneficios",
+    "terms.s3.body": "Los puntos acumulados por tus recorridos verificados pueden canjearse en cafeterías, sistemas de bicicleta pública y espacios culturales afiliados en Lima. Cada cupón es personal y tiene vigencia de 30 días desde su emisión.",
 
     "hero.title": "Pedalea, explora y <em>transforma tu ciudad</em>",
     "hero.lead":
@@ -251,6 +262,17 @@ const translations = {
     "nav.vehicles": "Transport",
     "nav.impact": "Calculator",
     "nav.terms": "Terms & Privacy",
+    "terms.metaTitle": "Terms & Privacy — EcoCommute Lima",
+    "terms.eyebrow": "Transparency and Data Protection",
+    "terms.title": "Privacy and Terms of Use",
+    "terms.subtitle": "How we protect your mobility information and how we calculate your emission savings in Lima.",
+    "terms.back": "Back",
+    "terms.s1.title": "1. Personal Data Protection (Law No. 29733 — Peru)",
+    "terms.s1.body": "EcoCommute processes your origin and destination trips solely to estimate avoided CO₂ emissions, travel time, active energy and points redeemable at partner stores. We never share or sell your individual locations to third parties; district reports only show collective, anonymous indicators.",
+    "terms.s2.title": "2. How we calculate your environmental impact",
+    "terms.s2.body": "For each trip we compare the emissions of an average private car in Metropolitan Lima (<strong>170 g CO₂/km</strong>) with the sustainable mode you chose (<strong>0 g CO₂/km</strong> by mechanical bicycle or on foot, <strong>15 g CO₂/km</strong> on electric micromobility and <strong>45 g CO₂/km</strong> on mass public transport).",
+    "terms.s3.title": "3. Responsible reward redemption",
+    "terms.s3.body": "Points earned from your verified trips can be redeemed at cafés, public bicycle systems and affiliated cultural venues in Lima. Each coupon is personal and valid for 30 days from issue.",
 
     "hero.title": "PEDAL, EXPLORE, <em>LOVE YOUR CITY</em>",
     "hero.lead":
@@ -620,8 +642,9 @@ function applyTranslations(lang) {
     }
   });
 
-  if (dict["meta.title"] !== undefined) {
-    document.title = dict["meta.title"];
+  const titleKey = document.body.dataset.titleKey || "meta.title";
+  if (dict[titleKey] !== undefined) {
+    document.title = dict[titleKey];
   }
 
   const esBtn = document.getElementById("lang-flag-es");
