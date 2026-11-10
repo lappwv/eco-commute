@@ -6892,6 +6892,15 @@ app-routes-planner .planner-unified-stage {
   padding-top: 0 !important;
 }
 
+/* Divisores internos del escenario: finos y del color de borde de la tarjeta */
+app-routes-planner .planner-sidebar-form {
+  border-right: 1px solid var(--border) !important;
+}
+
+app-routes-planner .map-overlay-bar {
+  border-bottom: 1px solid var(--border) !important;
+}
+
 /* Sin la linea del encabezado, las pestanas ya no necesitan subir sobre el */
 app-routes-planner .preset-chips-centered-wrapper {
   margin: 0.25rem 0 0.75rem;
