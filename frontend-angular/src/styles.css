@@ -6874,3 +6874,367 @@ app-dashboard .v-medal-row:nth-child(3n + 3) .v-medal-bar {
     padding: 0.65rem 0.75rem;
   }
 }
+
+
+/* ==========================================================================
+   RUTAS: sin divisores sueltos, solo bordes de tarjetas
+   ========================================================================== */
+
+/* El encabezado no lleva linea inferior: cruzaba las pestanas de corredores */
+app-routes-planner .section-header-row {
+  border-bottom: none !important;
+  padding-bottom: 0 !important;
+}
+
+/* El escenario ya no tiene la franja superior: sin el relleno de 7px queda
+   el panel izquierdo pegado al borde de la tarjeta, sin linea blanca */
+app-routes-planner .planner-unified-stage {
+  padding-top: 0 !important;
+}
+
+/* Divisores internos del escenario: finos y del color de borde de la tarjeta */
+app-routes-planner .planner-sidebar-form {
+  border-right: 1px solid var(--border) !important;
+}
+
+app-routes-planner .map-overlay-bar {
+  border-bottom: 1px solid var(--border) !important;
+}
+
+@media (max-width: 1040px) {
+  app-routes-planner .planner-sidebar-form {
+    border-right: none !important;
+    border-bottom: 1px solid var(--border) !important;
+  }
+}
+
+/* Sin la linea del encabezado, las pestanas ya no necesitan subir sobre el */
+app-routes-planner .preset-chips-centered-wrapper {
+  margin: 0.25rem 0 0.75rem;
+}
+
+
+/* ==========================================================================
+   RUTAS: tarjetas de resultado (filas alineadas entre las tres con subgrid)
+   ========================================================================== */
+
+.route-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(5, auto);
+  column-gap: 1.25rem;
+  row-gap: 0;
+  align-items: stretch;
+  margin-top: 0.5rem;
+}
+
+.route-card {
+  --card-accent: #64748B;
+  --card-accent-soft: rgba(100, 116, 139, 0.1);
+  grid-row: span 5;
+  display: grid;
+  grid-template-rows: subgrid;
+  row-gap: 1rem;
+  position: relative;
+  padding: 1.4rem 1.4rem 1.3rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: var(--shadow-sm);
+  min-width: 0;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+.route-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card);
+  border-color: var(--border-strong);
+}
+
+.route-card--green {
+  --card-accent: #15803D;
+  --card-accent-soft: rgba(21, 128, 61, 0.1);
+}
+
+.route-card--direct {
+  --card-accent: #2563EB;
+  --card-accent-soft: rgba(37, 99, 235, 0.1);
+}
+
+[data-theme="dark"] .route-card--green {
+  --card-accent: #4ADE80;
+  --card-accent-soft: rgba(74, 222, 128, 0.12);
+}
+
+[data-theme="dark"] .route-card--direct {
+  --card-accent: #60A5FA;
+  --card-accent-soft: rgba(96, 165, 250, 0.12);
+}
+
+[data-theme="dark"] .route-card.is-recommended {
+  border-color: rgba(74, 222, 128, 0.4);
+}
+
+[data-theme="dark"] .route-card--car {
+  --card-accent: #94A3B8;
+  --card-accent-soft: rgba(148, 163, 184, 0.12);
+}
+
+/* Recomendada: acento sutil, linea superior y borde con el color del medio */
+.route-card.is-recommended {
+  border-color: rgba(21, 128, 61, 0.38);
+  box-shadow: 0 10px 28px -14px rgba(21, 128, 61, 0.35);
+}
+
+.route-card.is-recommended::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 18px;
+  right: 18px;
+  height: 3px;
+  border-radius: 0 0 3px 3px;
+  background: var(--card-accent);
+}
+
+.route-card-head {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  min-width: 0;
+}
+
+.route-card-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: var(--card-accent-soft);
+  color: var(--card-accent);
+}
+
+.route-card-heading {
+  flex: 1;
+  min-width: 0;
+}
+
+.route-card-kicker {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.route-card-heading h3 {
+  margin: 0.15rem 0 0;
+  font-size: 1.08rem;
+  line-height: 1.25;
+  color: var(--text-main);
+}
+
+.route-card-badge {
+  flex: none;
+  align-self: flex-start;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  white-space: nowrap;
+  color: var(--card-accent);
+  background: var(--card-accent-soft);
+}
+
+.route-card-summary {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.route-card-metrics {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+  align-content: start;
+}
+
+.route-card-metrics li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    "icon label"
+    "icon value";
+  column-gap: 0.5rem;
+  align-items: center;
+  padding: 0.6rem 0.7rem;
+  border-radius: 12px;
+  background: var(--bg-soft);
+  min-width: 0;
+}
+
+.route-card-metrics li:last-child {
+  grid-column: 1 / -1;
+}
+
+.route-card-metrics li app-icon {
+  grid-area: icon;
+  color: var(--card-accent);
+}
+
+.route-card-metrics .metric-label {
+  grid-area: label;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.route-card-metrics li strong {
+  grid-area: value;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.route-card-metrics li strong.metric-empty {
+  font-weight: 500;
+  font-size: 0.8rem;
+  color: var(--text-subtle);
+}
+
+.route-card-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.route-bar-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.route-bar-label span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.route-bar-label strong {
+  font-size: 0.82rem;
+  color: var(--text-main);
+}
+
+.route-bar-track {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--bg-elevated);
+  overflow: hidden;
+}
+
+.route-bar-fill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  transition: width 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.route-bar-fill.co2 {
+  background: #22C55E;
+}
+
+.route-bar-fill.time {
+  background: var(--card-accent);
+  opacity: 0.55;
+}
+
+.route-card-cta.mat-mdc-unelevated-button {
+  align-self: end;
+  width: 100%;
+  height: 44px;
+  border-radius: 12px;
+  font-weight: 700;
+  background: var(--card-accent-soft) !important;
+  color: var(--card-accent) !important;
+  box-shadow: none !important;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.route-card-cta.mat-mdc-unelevated-button .mdc-button__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.route-card-cta:hover {
+  background: var(--card-accent) !important;
+  color: #FFFFFF !important;
+}
+
+[data-theme="dark"] .route-card-cta:hover {
+  color: #0B0E0C !important;
+}
+
+.route-card.is-recommended .route-card-cta.mat-mdc-unelevated-button {
+  background: var(--emerald) !important;
+  color: #FFFFFF !important;
+}
+
+[data-theme="dark"] .route-card.is-recommended .route-card-cta.mat-mdc-unelevated-button {
+  color: #0B0E0C !important;
+}
+
+.route-card-cta-pts {
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  background: color-mix(in srgb, currentColor 14%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .route-card,
+  .route-bar-fill {
+    transition: none;
+  }
+  .route-card:hover {
+    transform: none;
+  }
+}
+
+/* Tablet: dos columnas no alinean bien tres tarjetas, se apilan con filas propias */
+@media (max-width: 1024px) {
+  .route-cards-grid {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+    row-gap: 1rem;
+  }
+  .route-card {
+    grid-row: auto;
+    grid-template-rows: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .route-card {
+    padding: 1.15rem 1rem;
+  }
+  .route-card-icon {
+    width: 48px;
+    height: 48px;
+  }
+}
