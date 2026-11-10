@@ -6901,6 +6901,13 @@ app-routes-planner .map-overlay-bar {
   border-bottom: 1px solid var(--border) !important;
 }
 
+@media (max-width: 1040px) {
+  app-routes-planner .planner-sidebar-form {
+    border-right: none !important;
+    border-bottom: 1px solid var(--border) !important;
+  }
+}
+
 /* Sin la linea del encabezado, las pestanas ya no necesitan subir sobre el */
 app-routes-planner .preset-chips-centered-wrapper {
   margin: 0.25rem 0 0.75rem;
