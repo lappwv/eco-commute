@@ -54,7 +54,7 @@ interface QuickCorridorOption {
 
           <!-- Buscador Rápido de Origen / Destino con Acción Principal "Iniciar ruta" -->
           <div class="quick-route-launcher" role="region" [attr.aria-label]="i18n.t('dash.quickRouteRegionLabel')">
-            <mat-form-field appearance="outline" class="quick-route-field">
+            <mat-form-field appearance="outline" subscriptSizing="dynamic" class="quick-route-field">
               <mat-label>
                 <app-icon name="pin" [size]="14"></app-icon>
                 {{ i18n.t('dash.quickRouteLabel') }}
