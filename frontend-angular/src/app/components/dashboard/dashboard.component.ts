@@ -398,6 +398,26 @@ interface QuickCorridorOption {
               </div>
             </div>
 
+            <ul class="week-summary-strip" *ngIf="weekStats as w" [attr.aria-label]="i18n.t('dash.weekSummaryLabel')">
+              <li class="week-stat">
+                <span class="week-stat-label">{{ i18n.t('dash.weekTotal') }}</span>
+                <strong>{{ formatGrams(w.total) }}</strong>
+              </li>
+              <li class="week-stat">
+                <span class="week-stat-label">{{ i18n.t('dash.weekBestDay') }}</span>
+                <strong>{{ w.bestDay ? formatDay(w.bestDay) : '–' }}</strong>
+                <small *ngIf="w.bestDay">{{ formatGrams(w.bestGrams) }}</small>
+              </li>
+              <li class="week-stat">
+                <span class="week-stat-label">{{ i18n.t('dash.weekAverage') }}</span>
+                <strong>{{ formatGrams(w.average) }}</strong>
+              </li>
+              <li class="week-stat">
+                <span class="week-stat-label">{{ i18n.t('dash.weekActiveDays') }}</span>
+                <strong>{{ i18n.tn('dash.weekActiveDaysValue', { count: w.activeDays }) }}</strong>
+              </li>
+            </ul>
+
             <div class="chart-divider-Section">
               <div class="split-header-inline">
                 <h3>{{ i18n.t('dash.modeSplit') }}</h3>
@@ -566,6 +586,29 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/routes'], {
       queryParams: { preset: this.selectedQuickPreset }
     });
+  }
+
+  /** Resumen de la semana calculado con los datos del grafico (sin llamadas extra al backend). */
+  get weekStats(): { total: number; average: number; bestDay: string; bestGrams: number; activeDays: number } | null {
+    const trend = this.summary?.weeklyTrend;
+    if (!trend?.length) return null;
+    const total = trend.reduce((acc, x) => acc + (x.co2SavedGrams || 0), 0);
+    const best = trend.reduce((a, b) => ((b.co2SavedGrams || 0) > (a.co2SavedGrams || 0) ? b : a));
+    return {
+      total,
+      average: Math.round(total / trend.length),
+      bestDay: (best.co2SavedGrams || 0) > 0 ? best.dayOfWeek : '',
+      bestGrams: best.co2SavedGrams || 0,
+      activeDays: trend.filter(x => (x.co2SavedGrams || 0) > 0).length
+    };
+  }
+
+  /** Gramos con separador de miles segun el idioma; pasa a kg desde 1000 g. */
+  formatGrams(grams: number): string {
+    if (grams >= 1000) {
+      return this.i18n.formatNumber(grams / 1000, { maximumFractionDigits: 2 }) + ' kg';
+    }
+    return this.i18n.formatNumber(grams, { maximumFractionDigits: 0 }) + ' g';
   }
 
   getBarHeightPercent(grams: number): number {
