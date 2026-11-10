@@ -17,138 +17,440 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles.css?v=20261104c" />
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("ecocommute_theme_v3");
+          var theme =
+                  saved ||
+                  (window.matchMedia("(prefers-color-scheme: dark)").matches
+                          ? "dark"
+                          : "light");
+          document.documentElement.setAttribute("data-theme", theme);
+        } catch (e) {}
+      })();
+    </script>
+
+    <link rel="stylesheet" href="./styles.css?v=20261109h" />
     <style>
-      .terms-container {
-        width: min(860px, 100% - 3rem);
+      /* Misma decoracion que la pagina de Terminos de la app Angular */
+      body.terms-page {
+        --terms-border: #E2DFD5;
+        --terms-border-strong: #CCC8BA;
+        background-image: none !important;
+        background-color: var(--bg);
+      }
+      .eco-map-backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        overflow: hidden;
+        color: #1E241E;
+      }
+      html[data-theme="dark"] body.terms-page {
+        --terms-border: #222C26;
+        --terms-border-strong: #2F3D34;
+      }
+      html[data-theme="dark"] .eco-map-backdrop {
+        color: #94A3B8;
+        opacity: 0.55;
+      }
+      .map-backdrop-svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+      .eco-map-backdrop::before,
+      .eco-map-backdrop::after {
+        content: "";
+        position: absolute;
+        width: 46vmax;
+        height: 46vmax;
+        border-radius: 50%;
+        filter: blur(70px);
+        pointer-events: none;
+      }
+      .eco-map-backdrop::before {
+        top: -14vmax;
+        left: -10vmax;
+        background: radial-gradient(circle, rgba(34, 197, 94, 0.16), transparent 65%);
+        animation: terms-float-a 26s ease-in-out infinite alternate;
+      }
+      .eco-map-backdrop::after {
+        bottom: -16vmax;
+        right: -12vmax;
+        background: radial-gradient(circle, rgba(2, 132, 199, 0.12), transparent 65%);
+        animation: terms-float-b 32s ease-in-out infinite alternate;
+      }
+      @keyframes terms-float-a {
+        to { transform: translate(14vmax, 10vmax) scale(1.15); }
+      }
+      @keyframes terms-float-b {
+        to { transform: translate(-12vmax, -8vmax) scale(1.2); }
+      }
+      .map-backdrop-svg path[stroke-dasharray] {
+        animation: terms-corridor-flow 14s linear infinite;
+      }
+      @keyframes terms-corridor-flow {
+        to { stroke-dashoffset: -112; }
+      }
+      .backdrop-riders circle {
+        filter: drop-shadow(0 0 6px rgba(22, 163, 74, 0.55));
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .eco-map-backdrop::before,
+        .eco-map-backdrop::after,
+        .map-backdrop-svg path[stroke-dasharray] {
+          animation: none;
+        }
+        .backdrop-riders {
+          display: none;
+        }
+      }
+
+      .terms-page .footer {
+        position: relative;
+        z-index: 2;
+      }
+      .terms-main {
+        position: relative;
+        z-index: 1;
+        width: min(1080px, 100% - 3rem);
         margin-inline: auto;
         padding: calc(68px + 2.5rem) 0 4rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
       }
-      .terms-container h1 {
-        font-size: clamp(1.9rem, 2.5vw, 2.75rem);
-        margin-bottom: 0.75rem;
+      .terms-header {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--terms-border);
       }
-      .terms-container .meta {
-        font-family: var(--mono);
-        color: var(--accent);
-        font-size: 0.78rem;
-        font-weight: 600;
-        margin-bottom: 0.75rem;
-        text-transform: uppercase;
-        letter-spacing: 0.06em;
-      }
-      .terms-section {
-        margin-top: 1.5rem;
-        padding: 1.65rem;
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: var(--radius-lg);
-        box-shadow: var(--shadow-sm);
-      }
-      .terms-section h2 {
-        font-size: 1.25rem;
-        margin-bottom: 0.75rem;
-        color: var(--ink);
-      }
-      .terms-section p,
-      .terms-section li {
-        color: var(--ink-secondary);
-        font-size: 0.95rem;
-        line-height: 1.68;
-      }
-      .terms-section strong {
-        color: var(--ink);
-      }
-      .terms-section ul {
-        padding-left: 1.35rem;
-        margin-bottom: 0;
-      }
-      .terms-section li + li {
-        margin-top: 0.55rem;
-      }
-      .back-nav {
-        margin-bottom: 1.5rem;
-      }
-      .back-nav a {
+      .terms-eyebrow {
         display: inline-flex;
         align-items: center;
-        gap: 0.45rem;
+        gap: 0.4rem;
+        font-size: 0.74rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
         color: var(--accent);
+        margin-bottom: 0.35rem;
+      }
+      .terms-eyebrow svg {
+        width: 14px;
+        height: 14px;
+        flex-shrink: 0;
+      }
+      .terms-title {
+        font-size: clamp(1.55rem, 2.4vw, 2.1rem);
+        font-weight: 800;
+        color: var(--ink);
+        line-height: 1.18;
+        margin: 0;
+      }
+      .terms-subtitle {
+        font-size: 0.95rem;
+        color: var(--ink-secondary);
+        max-width: 680px;
+        margin: 0.3rem 0 0;
+      }
+      .terms-back {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.62rem 1.15rem;
+        border-radius: 10px;
         font-size: 0.88rem;
         font-weight: 600;
+        white-space: nowrap;
         text-decoration: none;
+        background: var(--card);
+        color: var(--ink);
+        border: 1px solid var(--terms-border-strong);
+        transition: all 0.16s ease;
       }
-      .back-nav a:hover {
-        text-decoration: underline;
+      .terms-back:hover,
+      .terms-back:focus-visible {
+        border-color: var(--accent);
+        color: var(--accent);
+        background: var(--accent-soft);
+      }
+      .terms-card {
+        display: flex;
+        flex-direction: column;
+        gap: 0.85rem;
+        background: var(--card);
+        border: 1px solid var(--terms-border);
+        border-radius: 18px;
+        padding: 1.45rem;
+        box-shadow: 0 8px 24px -6px rgba(17, 22, 19, 0.06), 0 2px 6px -1px rgba(17, 22, 19, 0.03);
+      }
+      .terms-card h2 {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--ink);
+        margin: 0.4rem 0 0;
+      }
+      .terms-card p {
+        color: var(--ink-secondary);
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin: 0;
+      }
+      .terms-card strong {
+        color: var(--ink);
       }
     </style>
   </head>
-  <body>
+  <body class="terms-page" data-title-key="terms.metaTitle">
+    <a class="skip-link" href="#main-content" data-i18n="nav.skip">Saltar al contenido</a>
+
+    <!-- Fondo cartografico de Lima, identico al de la app -->
+  <div class="eco-map-backdrop" aria-hidden="true">
+    <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" fill="none" class="map-backdrop-svg">
+      <defs>
+        <linearGradient id="termsParkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#16A34A" stop-opacity="0.08" />
+          <stop offset="100%" stop-color="#0D9488" stop-opacity="0.03" />
+        </linearGradient>
+        <linearGradient id="termsCorridorGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#15803D" stop-opacity="0.05" />
+          <stop offset="50%" stop-color="#16A34A" stop-opacity="0.16" />
+          <stop offset="100%" stop-color="#0284C7" stop-opacity="0.06" />
+        </linearGradient>
+      </defs>
+
+      <!-- Retícula urbana fina -->
+      <g stroke="currentColor" stroke-width="0.9" opacity="0.055">
+        <line x1="0" y1="130" x2="1440" y2="130" />
+        <line x1="0" y1="290" x2="1440" y2="290" />
+        <line x1="0" y1="470" x2="1440" y2="470" />
+        <line x1="0" y1="650" x2="1440" y2="650" />
+        <line x1="0" y1="810" x2="1440" y2="810" />
+        <line x1="170" y1="0" x2="170" y2="900" />
+        <line x1="390" y1="0" x2="390" y2="900" />
+        <line x1="690" y1="0" x2="690" y2="900" />
+        <line x1="1010" y1="0" x2="1010" y2="900" />
+        <line x1="1270" y1="0" x2="1270" y2="900" />
+        <!-- Diagonales tipo Av. Arequipa / Av. Salaverry -->
+        <line x1="260" y1="0" x2="680" y2="900" />
+        <line x1="940" y1="0" x2="1320" y2="900" />
+      </g>
+
+      <!-- Polígonos estilizados de áreas verdes metropolitanas -->
+      <path d="M55 150 L185 118 L235 205 L125 258 L42 215 Z" fill="url(#termsParkGrad)" />
+      <path d="M1160 495 L1335 458 L1395 568 L1245 628 L1148 565 Z" fill="url(#termsParkGrad)" />
+      <path d="M90 665 L245 632 L295 725 L160 778 L75 730 Z" fill="url(#termsParkGrad)" />
+
+      <!-- Corredor ciclista estilizado principal -->
+      <path
+        d="M-60 250 C 190 250, 260 115, 510 115 C 770 115, 820 385, 1080 385 C 1250 385, 1345 255, 1500 255"
+        stroke="url(#termsCorridorGlow)"
+        stroke-width="14"
+        stroke-linecap="round"
+      />
+      <path
+        d="M-60 250 C 190 250, 260 115, 510 115 C 770 115, 820 385, 1080 385 C 1250 385, 1345 255, 1500 255"
+        stroke="#16A34A"
+        stroke-width="1.6"
+        stroke-dasharray="8 8"
+        stroke-linecap="round"
+        opacity="0.22"
+      />
+
+      <!-- Corredor secundario sur -->
+      <path
+        d="M-40 760 C 240 760, 320 565, 600 565 C 860 565, 950 775, 1215 775 C 1340 775, 1410 705, 1500 690"
+        stroke="currentColor"
+        stroke-width="8"
+        stroke-linecap="round"
+        opacity="0.045"
+      />
+      <path
+        d="M-40 760 C 240 760, 320 565, 600 565 C 860 565, 950 775, 1215 775 C 1340 775, 1410 705, 1500 690"
+        stroke="currentColor"
+        stroke-width="1.3"
+        stroke-dasharray="6 8"
+        stroke-linecap="round"
+        opacity="0.14"
+      />
+
+      <!-- Nodos de interconexión discretos -->
+      <g opacity="0.28">
+        <circle cx="510" cy="115" r="9" fill="#FFFFFF" stroke="#16A34A" stroke-width="2" />
+        <circle cx="510" cy="115" r="3.2" fill="#16A34A" />
+        <circle cx="1080" cy="385" r="9" fill="#FFFFFF" stroke="#16A34A" stroke-width="2" />
+        <circle cx="1080" cy="385" r="3.2" fill="#0284C7" />
+        <circle cx="600" cy="565" r="7.5" fill="#FFFFFF" stroke="#0D9488" stroke-width="1.8" />
+      </g>
+      <!-- Ciclistas que recorren los corredores (movimiento permanente) -->
+      <g class="backdrop-riders">
+        <circle r="14" fill="#16A34A" opacity="0.14">
+          <animateMotion dur="26s" repeatCount="indefinite" begin="0s" path="M-60 250 C 190 250, 260 115, 510 115 C 770 115, 820 385, 1080 385 C 1250 385, 1345 255, 1500 255" />
+        </circle>
+        <circle r="5" fill="#16A34A" opacity="0.7">
+          <animateMotion dur="26s" repeatCount="indefinite" begin="0s" path="M-60 250 C 190 250, 260 115, 510 115 C 770 115, 820 385, 1080 385 C 1250 385, 1345 255, 1500 255" />
+        </circle>
+        <circle r="14" fill="#16A34A" opacity="0.14">
+          <animateMotion dur="26s" repeatCount="indefinite" begin="-13s" path="M-60 250 C 190 250, 260 115, 510 115 C 770 115, 820 385, 1080 385 C 1250 385, 1345 255, 1500 255" />
+        </circle>
+        <circle r="5" fill="#16A34A" opacity="0.7">
+          <animateMotion dur="26s" repeatCount="indefinite" begin="-13s" path="M-60 250 C 190 250, 260 115, 510 115 C 770 115, 820 385, 1080 385 C 1250 385, 1345 255, 1500 255" />
+        </circle>
+        <circle r="14" fill="#16A34A" opacity="0.14">
+          <animateMotion dur="32s" repeatCount="indefinite" begin="-8s" path="M-40 760 C 240 760, 320 565, 600 565 C 860 565, 950 775, 1215 775 C 1340 775, 1410 705, 1500 690" />
+        </circle>
+        <circle r="5" fill="#16A34A" opacity="0.7">
+          <animateMotion dur="32s" repeatCount="indefinite" begin="-8s" path="M-40 760 C 240 760, 320 565, 600 565 C 860 565, 950 775, 1215 775 C 1340 775, 1410 705, 1500 690" />
+        </circle>
+      </g>
+    </svg>
+  </div>
+
     <header class="topbar" role="banner">
       <div class="container topbar-inner">
-        <a class="brand" href="./index.html">
-          <img
-            class="brand-logo"
-            src="./media/logo-ecocommute.png"
-            alt="EcoCommute Logo"
-            width="30"
-            height="37"
-          />
+        <a class="brand" href="./index.html" aria-label="EcoCommute Inicio" data-i18n-aria="aria.brand">
+          <span class="brand-cartoon-badge">
+            <img
+              class="brand-logo"
+              src="./media/logo-ecocommute.png"
+              alt="EcoCommute Logo"
+              width="28"
+              height="34"
+            />
+          </span>
           <span class="brand-text">EcoCommute</span>
         </a>
-        <nav class="nav" aria-label="Navegación principal">
-          <a href="./index.html#como-funciona">Cómo funciona</a>
-          <a href="./index.html#inicio">Rutas en Lima</a>
-          <a href="./index.html#vehiculos">Comparativa</a>
-          <a href="./index.html#alquimia">Calculadora</a>
-          <a href="./app/#/dashboard" class="nav-cta-pill">Ir a mi panel</a>
+
+        <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="landing-nav">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <path d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <span data-i18n="nav.menu">Menú</span>
+        </button>
+
+        <nav id="landing-nav" class="nav" aria-label="Navegación principal" data-i18n-aria="aria.mainNav">
+          <a href="./index.html#como-funciona" data-i18n="nav.how">Cómo funciona</a>
+          <a href="./index.html#simulador" data-i18n="nav.routes">Mapa</a>
+          <a href="./index.html#vehiculos" data-i18n="nav.vehicles">Transporte</a>
+          <a href="./index.html#alquimia" data-i18n="nav.impact">Calculadora</a>
+          <a href="./app/#/dashboard" class="nav-cta-pill">
+            <svg class="brand-inline-svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M19.5 4.5C13 4.5 7.5 7.8 5.5 14.2C5 15.9 5 17.7 5.5 19.5C7.3 20 9.1 20 10.8 19.5C17.2 17.5 20.5 12 19.5 4.5Z" fill="#6CC016" stroke="#1E241E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M4.5 19.5C8.5 15.5 12 12 15.5 9.5" stroke="#1E241E" stroke-width="2.2" stroke-linecap="round"/>
+            </svg>
+            <span data-i18n="nav.webapp">¡Entrar a la App!</span>
+          </a>
         </nav>
+
+        <div class="topbar-controls">
+          <div class="lang-switcher" role="group" aria-label="Idioma / Language">
+            <button
+              type="button"
+              id="lang-flag-es"
+              class="lang-flag-btn active"
+              aria-pressed="true"
+              aria-label="Español"
+              title="Español"
+            >
+              <svg viewBox="0 0 30 20" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                <rect width="30" height="20" fill="#AA151B" />
+                <rect y="5" width="30" height="10" fill="#F1BF00" />
+              </svg>
+            </button>
+            <button
+              type="button"
+              id="lang-flag-en"
+              class="lang-flag-btn"
+              aria-pressed="false"
+              aria-label="English"
+              title="English"
+            >
+              <svg viewBox="0 0 30 20" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                <rect width="30" height="20" fill="#B22234" />
+                <rect y="2" width="30" height="2" fill="#FFFFFF" />
+                <rect y="6" width="30" height="2" fill="#FFFFFF" />
+                <rect y="10" width="30" height="2" fill="#FFFFFF" />
+                <rect y="14" width="30" height="2" fill="#FFFFFF" />
+                <rect y="18" width="30" height="2" fill="#FFFFFF" />
+                <rect width="13" height="11" fill="#3C3B6E" />
+              </svg>
+            </button>
+          </div>
+
+          <div class="biome-switcher" id="theme-switcher" role="group" aria-label="Tema de color" data-i18n-aria="aria.theme">
+            <button
+              type="button"
+              class="biome-chip is-active"
+              data-theme-target="light"
+              aria-pressed="true"
+            >
+              <span data-i18n="theme.day">Día</span>
+            </button>
+            <button
+              type="button"
+              class="biome-chip"
+              data-theme-target="dark"
+              aria-pressed="false"
+            >
+              <span data-i18n="theme.night">Noche</span>
+            </button>
+          </div>
+        </div>
       </div>
     </header>
 
-    <main class="terms-container" role="main">
-      <div class="back-nav">
-        <a href="./index.html">&larr; Volver a la portada de EcoCommute</a>
+    <main id="main-content" class="terms-main" role="main" tabindex="-1">
+      <div class="terms-header">
+        <div>
+          <span class="terms-eyebrow">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 3.4L19 6.4V11.8C19 16.1 16 19.5 12 20.8C8 19.5 5 16.1 5 11.8V6.4L12 3.4Z" fill="currentColor" fill-opacity="0.16" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+              <path d="M9.5 12.2L11.2 13.9L14.8 10.3" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span data-i18n="terms.eyebrow">Transparencia y Protección de Datos</span>
+          </span>
+          <h1 class="terms-title" data-i18n="terms.title">Privacidad y Términos de Uso</h1>
+          <p class="terms-subtitle" data-i18n="terms.subtitle">Cómo cuidamos tu información de movilidad y cómo calculamos tus ahorros de emisiones en Lima.</p>
+        </div>
+        <a href="./index.html" class="terms-back" data-i18n="terms.back">Volver</a>
       </div>
 
-      <header>
-        <div class="meta">Transparencia y Privacidad · Noviembre 2026</div>
-        <h1>Privacidad y Términos de Uso</h1>
-        <p class="lead">
-          EcoCommute Lima ayuda a los ciudadanos a comparar alternativas de movilidad baja en carbono, registrar sus recorridos diarios y canjear puntos en comercios locales aliados.
-        </p>
-      </header>
+      <article class="terms-card">
+        <h2 data-i18n="terms.s1.title">1. Protección de Datos Personales (Ley N° 29733 — Perú)</h2>
+        <p data-i18n="terms.s1.body">EcoCommute procesa tus trayectos de origen y destino únicamente para estimar emisiones de CO₂ evitadas, tiempo de viaje y puntos canjeables.</p>
 
-      <section class="terms-section" id="privacidad">
-        <h2>1. Protección de Datos Personales (Ley N° 29733 — Perú)</h2>
-        <ul>
-          <li><strong>Datos recopilados:</strong> Correo de acceso, contraseña cifrada mediante BCrypt, distrito y bitácora de viajes registrados voluntariamente.</li>
-          <li><strong>Geolocalización responsable:</strong> Los puntos de partida y destino solo se emplean para estimar distancia, tiempo y emisiones evitadas. No realizamos seguimiento en segundo plano ni compartimos tus rutas individuales con terceros.</li>
-          <li><strong>Control total:</strong> Puedes editar o eliminar cualquiera de tus viajes registrados en tu bitácora en cualquier momento.</li>
-        </ul>
-      </section>
+        <h2 data-i18n="terms.s2.title">2. Cómo calculamos tu impacto ambiental</h2>
+        <p data-i18n="terms.s2.body">Comparamos las emisiones de un automóvil particular promedio en Lima Metropolitana frente al medio sostenible que elegiste.</p>
 
-      <section class="terms-section" id="calculo">
-        <h2>2. Cálculo de Emisiones y Beneficios</h2>
-        <ul>
-          <li><strong>Comparativa transparente:</strong> Comparamos tus traslados frente a un automóvil particular promedio en Lima Metropolitana (152–170 g CO₂/km) frente a 0 g CO₂/km en bicicleta o caminata.</li>
-          <li><strong>Canjes en comercios aliados:</strong> Los puntos obtenidos por viajes verificados se canjean por cupones digitales para cafeterías, sistemas de bicicleta compartida y espacios culturales de Lima.</li>
-        </ul>
-      </section>
+        <h2 data-i18n="terms.s3.title">3. Canje responsable de beneficios</h2>
+        <p data-i18n="terms.s3.body">Los puntos de tus recorridos verificados pueden canjearse en comercios aliados de Lima.</p>
+      </article>
     </main>
 
     <footer class="footer" role="contentinfo">
       <div class="container footer-inner">
         <div class="footer-brand">
-          <img class="brand-logo-sm" src="./media/logo-ecocommute.png" alt="" width="22" height="27" />
+          <span class="brand-cartoon-badge sm">
+            <img class="brand-logo-sm" src="./media/logo-ecocommute.png" alt="" width="20" height="24" />
+          </span>
           <strong>EcoCommute Lima</strong>
-          <span>© 2026 EcoCommute · Movilidad Sostenible (ODS 11.2)</span>
+          <span>© 2026 EcoCommute · Ciudad Limpia y Feliz (ODS 11.2)</span>
         </div>
-        <nav class="footer-nav">
-          <a href="./index.html">Portada</a>
-          <a href="./app/#/dashboard">Abrir Aplicación</a>
+        <nav class="footer-nav" aria-label="Enlaces secundarios" data-i18n-aria="aria.footerNav">
+          <a href="./app/#/dashboard" data-i18n="nav.openApp">¡Abrir Web App!</a>
+          <a href="./index.html#como-funciona" data-i18n="nav.how">Cómo funciona</a>
         </nav>
       </div>
     </footer>
+
+    <script src="./i18n.js?v=20261109t" defer></script>
   </body>
 </html>
