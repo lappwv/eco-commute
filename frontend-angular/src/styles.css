@@ -6874,3 +6874,20 @@ app-dashboard .v-medal-row:nth-child(3n + 3) .v-medal-bar {
     padding: 0.65rem 0.75rem;
   }
 }
+
+
+/* ==========================================================================
+   RUTAS: sin divisores sueltos, solo bordes de tarjetas
+   ========================================================================== */
+
+/* El encabezado no lleva linea inferior: cruzaba las pestanas de corredores */
+app-routes-planner .section-header-row {
+  border-bottom: none !important;
+  padding-bottom: 0 !important;
+}
+
+/* El escenario ya no tiene la franja superior: sin el relleno de 7px queda
+   el panel izquierdo pegado al borde de la tarjeta, sin linea blanca */
+app-routes-planner .planner-unified-stage {
+  padding-top: 0 !important;
+}
