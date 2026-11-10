@@ -148,6 +148,16 @@ const translations = {
     "nav.vehicles": "Transporte",
     "nav.impact": "Calculadora",
     "nav.terms": "Términos y Privacidad",
+    "footer.tagline": "Muévete sin humo, suma puntos y ayuda a que Lima respire mejor en cada viaje.",
+    "footer.explore": "Explora",
+    "footer.app": "En la app",
+    "footer.link_routes": "Planificar rutas",
+    "footer.link_rewards": "Recompensas",
+    "footer.link_ranking": "Ranking por distrito",
+    "footer.pledge_title": "Nuestro compromiso",
+    "footer.pledge_body": "Alineados con el ODS 11.2: transporte seguro, accesible y sostenible para todas las personas de Lima.",
+    "footer.copy": "© 2026 EcoCommute · Ciudad Limpia y Feliz",
+    "footer.made": "Hecho con cariño en Lima, Perú",
     "terms.metaTitle": "Términos y Privacidad — EcoCommute Lima",
     "terms.eyebrow": "Transparencia y Protección de Datos",
     "terms.title": "Privacidad y Términos de Uso",
@@ -262,6 +272,16 @@ const translations = {
     "nav.vehicles": "Transport",
     "nav.impact": "Calculator",
     "nav.terms": "Terms & Privacy",
+    "footer.tagline": "Move smoke-free, earn points and help Lima breathe better with every trip.",
+    "footer.explore": "Explore",
+    "footer.app": "In the app",
+    "footer.link_routes": "Plan routes",
+    "footer.link_rewards": "Rewards",
+    "footer.link_ranking": "District ranking",
+    "footer.pledge_title": "Our commitment",
+    "footer.pledge_body": "Aligned with SDG 11.2: safe, accessible and sustainable transport for everyone in Lima.",
+    "footer.copy": "© 2026 EcoCommute · Clean and Happy City",
+    "footer.made": "Made with love in Lima, Peru",
     "terms.metaTitle": "Terms & Privacy — EcoCommute Lima",
     "terms.eyebrow": "Transparency and Data Protection",
     "terms.title": "Privacy and Terms of Use",
@@ -608,6 +628,25 @@ function renderAlchemyLab(fromZero) {
     const unit = el ? el.querySelector(".fig-unit") : null;
     if (unit) unit.textContent = text;
   };
+
+  // Pulso breve en la cifra que cambio (no en cada evento del slider).
+  const bump = (el, value) => {
+    if (!el || fromZero === true) return;
+    const key = String(value);
+    if (el.dataset.lastValue === key) return;
+    const isFirst = el.dataset.lastValue === undefined;
+    el.dataset.lastValue = key;
+    if (isFirst) return;
+    el.classList.remove("is-bump");
+    void el.offsetWidth;
+    el.classList.add("is-bump");
+  };
+  bump(annualKgEl, annualKg);
+  bump(figNum(fuelEl), fuelLiters);
+  bump(figNum(hoursEl), trafficHours);
+  bump(figNum(petEl), petBottles);
+  bump(figNum(treesEl), trees);
+  bump(figNum(ptsEl), greenPoints);
 
   tickNumber(annualKgEl, annualKg, 1, (v) => v.toFixed(1), from);
   tickNumber(figNum(fuelEl), fuelLiters, 0, (v) => String(Math.round(v)), from);
