@@ -3844,3 +3844,35 @@ html[data-theme="dark"] .skip-link {
   background: var(--accent);
   color: #0B0E0C;
 }
+
+/* ==================== PULIDO: SIN HUECOS ENTRE SECCIONES ==================== */
+/* Las secciones ya no se estiran a toda la pantalla: miden lo que mide su contenido. */
+.how-section,
+.section,
+.section.alt {
+  min-height: 0 !important;
+  justify-content: flex-start !important;
+  padding: clamp(2.75rem, 2rem + 2vw, 3.75rem) 0 !important;
+}
+
+.how-section {
+  padding-top: clamp(2.5rem, 2rem + 2vw, 3.5rem) !important;
+}
+
+.hero-section {
+  min-height: 0 !important;
+  padding-bottom: clamp(3rem, 2.4rem + 1.6vw, 3.75rem) !important;
+}
+
+.how-header,
+.section-header {
+  margin-bottom: clamp(1.75rem, 1.4rem + 1.2vw, 2.5rem) !important;
+}
+
+@media (max-width: 900px) {
+  .how-section,
+  .section,
+  .section.alt {
+    padding: 2.75rem 0 !important;
+  }
+}
