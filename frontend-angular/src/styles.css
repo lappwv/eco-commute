@@ -7949,3 +7949,85 @@ app-gamification .badge-row-strip.unlocked .badge-icon-medallion::after {
     opacity: 0;
   }
 }
+
+/* COMUNIDAD: podio clásico (2.º · 1.º · 3.º) con alturas escalonadas.
+   Cada columna tiene su color de medalla y un numeral grande como base. La
+   entrada es en cascada: sube primero el 3.º, luego el 2.º y al final el 1.º.
+   En móvil se mantiene la lista simple, sin escalones. */
+app-leaderboard .podium-pillar {
+  --medal: #c2763a;
+}
+
+app-leaderboard .podium-pillar.pillar-silver {
+  --medal: #94a3b8;
+}
+
+app-leaderboard .podium-pillar.pillar-gold {
+  --medal: #f5b800;
+}
+
+@media (min-width: 681px) {
+  app-leaderboard .podium-stepped-stage {
+    align-items: end;
+  }
+
+  app-leaderboard .podium-pillar {
+    justify-content: flex-start;
+    padding-bottom: 4.6rem;
+    background-image: linear-gradient(to top, color-mix(in srgb, var(--medal) 20%, transparent), transparent 60%);
+  }
+
+  app-leaderboard .podium-pillar.pillar-silver {
+    order: 1;
+    padding-bottom: 7rem;
+  }
+
+  app-leaderboard .podium-pillar.pillar-gold {
+    order: 2;
+    padding-bottom: 9.4rem;
+  }
+
+  app-leaderboard .podium-pillar.pillar-bronze {
+    order: 3;
+  }
+
+  app-leaderboard .podium-pillar::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0.4rem;
+    transform: translateX(-50%);
+    font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+    font-size: 4.4rem;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: color-mix(in srgb, var(--medal) 42%, transparent);
+    pointer-events: none;
+  }
+
+  app-leaderboard .podium-pillar.pillar-gold::before {
+    content: "1";
+    font-size: 5.6rem;
+  }
+
+  app-leaderboard .podium-pillar.pillar-silver::before {
+    content: "2";
+  }
+
+  app-leaderboard .podium-pillar.pillar-bronze::before {
+    content: "3";
+  }
+
+  .eco-main app-leaderboard .podium-pillar.pillar-bronze {
+    animation-delay: 0s;
+  }
+
+  .eco-main app-leaderboard .podium-pillar.pillar-silver {
+    animation-delay: 0.12s;
+  }
+
+  .eco-main app-leaderboard .podium-pillar.pillar-gold {
+    animation-delay: 0.24s;
+  }
+}
