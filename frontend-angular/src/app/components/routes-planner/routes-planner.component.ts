@@ -76,13 +76,13 @@ interface LimaPreset {
             <mat-form-field appearance="outline" class="full-width">
               <mat-label>{{ i18n.t('routes.origin') }}</mat-label>
               <app-icon matPrefix name="pin" [size]="16"></app-icon>
-              <input matInput type="text" [(ngModel)]="originName" name="originName" required [placeholder]="i18n.t('routes.originPlaceholder')" />
+              <input matInput type="text" [(ngModel)]="originName" name="originName" required [attr.title]="originName" [placeholder]="i18n.t('routes.originPlaceholder')" />
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="full-width">
               <mat-label>{{ i18n.t('routes.destination') }}</mat-label>
               <app-icon matPrefix name="flag" [size]="16"></app-icon>
-              <input matInput type="text" [(ngModel)]="destName" name="destName" required [placeholder]="i18n.t('routes.destinationPlaceholder')" />
+              <input matInput type="text" [(ngModel)]="destName" name="destName" required [attr.title]="destName" [placeholder]="i18n.t('routes.destinationPlaceholder')" />
             </mat-form-field>
           </div>
 

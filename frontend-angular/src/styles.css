@@ -7775,3 +7775,353 @@ app-routes-planner .preset-chips-centered-wrapper {
     transition: none;
   }
 }
+
+
+/* ==========================================================================
+   PULIDO VISUAL DE LA APP
+   ========================================================================== */
+
+/* RUTAS: campos de origen y destino con aire.
+   El texto estaba pegado al icono y al borde, y "San Isidro (Centro
+   Financiero)" no cabía en 225 px. El panel crece con la pantalla (340-420 px),
+   el icono se separa del borde y del texto, y si aun así es largo se corta con
+   puntos suspensivos (el título muestra el texto completo). */
+@media (min-width: 1041px) {
+  app-routes-planner .planner-unified-stage {
+    grid-template-columns: clamp(340px, 30vw, 420px) minmax(0, 1fr);
+  }
+}
+
+app-routes-planner .vertical-route-stops {
+  padding-left: 1.5rem !important;
+}
+
+app-routes-planner .vertical-route-stops .mat-mdc-form-field-icon-prefix {
+  padding: 0 0.7rem 0 1rem;
+}
+
+app-routes-planner .vertical-route-stops .mat-mdc-form-field-infix {
+  min-width: 0;
+}
+
+app-routes-planner .vertical-route-stops input.mat-mdc-input-element {
+  padding-left: 0.1rem;
+  text-overflow: ellipsis;
+}
+
+/* BENEFICIOS: icono grande de marca, sin recuadro, con el color de cada tipo de beneficio. */
+app-rewards .ticket-voucher-card {
+  --kind: #15803d;
+}
+
+app-rewards .ticket-voucher-card[data-kind^="COFFEE"] {
+  --kind: #d97706;
+}
+
+app-rewards .ticket-voucher-card[data-kind^="BIKE"] {
+  --kind: #0284c7;
+}
+
+app-rewards .ticket-voucher-card[data-kind^="PARK"] {
+  --kind: #7c3aed;
+}
+
+app-rewards .ticket-voucher-card[data-kind^="TREE"] {
+  --kind: #15803d;
+}
+
+app-rewards .reward-icon-badge {
+  width: auto !important;
+  height: auto !important;
+  padding: 0 !important;
+  display: inline-flex;
+  align-items: center;
+  color: var(--kind) !important;
+  background: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  transition: transform 220ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+app-rewards .reward-icon-badge app-icon svg {
+  width: 2.75rem !important;
+  height: 2.75rem !important;
+}
+
+[data-theme="dark"] app-rewards .reward-icon-badge {
+  color: color-mix(in srgb, var(--kind) 55%, #ffffff) !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  app-rewards .ticket-voucher-card:hover .reward-icon-badge {
+    transform: translateY(-2px) rotate(-6deg) scale(1.08);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  app-rewards .reward-icon-badge {
+    transition: none;
+  }
+}
+
+/* LOGROS: medallas con anillo de progreso.
+   Bloqueada: icono apagado y un arco verde con el avance. Desbloqueada: medalla
+   dorada con un brillo que pasa una vez al aparecer y otra al pasar el mouse. */
+app-gamification .badge-icon-medallion {
+  --medal: var(--emerald);
+  position: relative;
+  flex: none;
+  width: 4.25rem !important;
+  height: 4.25rem !important;
+  border-radius: 50% !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: var(--text-subtle) !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  background:
+    radial-gradient(circle, var(--bg-card) 0 62%, transparent 63%),
+    conic-gradient(var(--medal) calc(var(--p, 0) * 1%), color-mix(in srgb, var(--text-muted) 24%, transparent) 0) !important;
+  transition: transform 220ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+app-gamification .badge-icon-medallion app-icon svg {
+  width: 1.8rem !important;
+  height: 1.8rem !important;
+  opacity: 0.55;
+  filter: grayscale(1);
+}
+
+app-gamification .badge-row-strip.unlocked .badge-icon-medallion {
+  --medal: #f5b800;
+  color: #b45309 !important;
+  background:
+    radial-gradient(circle, color-mix(in srgb, #fbbf24 24%, var(--bg-card)) 0 62%, transparent 63%),
+    conic-gradient(#f5b800, #fde68a, #f5b800) !important;
+  box-shadow: 0 0 0 4px color-mix(in srgb, #f5b800 16%, transparent), 0 10px 22px -12px #f59e0b !important;
+}
+
+[data-theme="dark"] app-gamification .badge-row-strip.unlocked .badge-icon-medallion {
+  color: #fcd34d !important;
+}
+
+app-gamification .badge-row-strip.unlocked .badge-icon-medallion app-icon svg {
+  opacity: 1;
+  filter: none;
+}
+
+/* Brillo diagonal: solo transform, una pasada */
+app-gamification .badge-row-strip.unlocked .badge-icon-medallion::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.55) 50%, transparent 65%);
+  transform: translateX(-130%);
+  animation: medal-shine 900ms cubic-bezier(0.23, 1, 0.32, 1) 500ms 1 both;
+  pointer-events: none;
+}
+
+@keyframes medal-shine {
+  to {
+    transform: translateX(130%);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  app-gamification .badge-row-strip:hover .badge-icon-medallion {
+    transform: scale(1.06);
+  }
+
+  app-gamification .badge-row-strip.unlocked:hover .badge-icon-medallion::after {
+    animation: medal-shine 700ms cubic-bezier(0.23, 1, 0.32, 1) 1 both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  app-gamification .badge-icon-medallion {
+    transition: none;
+  }
+
+  app-gamification .badge-row-strip.unlocked .badge-icon-medallion::after {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+/* COMUNIDAD: podio clásico (2.º · 1.º · 3.º) con alturas escalonadas.
+   Cada columna tiene su color de medalla y un numeral grande como base. La
+   entrada es en cascada: sube primero el 3.º, luego el 2.º y al final el 1.º.
+   En móvil se mantiene la lista simple, sin escalones. */
+app-leaderboard .podium-pillar {
+  --medal: #c2763a;
+}
+
+app-leaderboard .podium-pillar.pillar-silver {
+  --medal: #94a3b8;
+}
+
+app-leaderboard .podium-pillar.pillar-gold {
+  --medal: #f5b800;
+}
+
+@media (min-width: 681px) {
+  app-leaderboard .podium-stepped-stage {
+    align-items: end;
+  }
+
+  app-leaderboard .podium-pillar {
+    justify-content: flex-start;
+    padding-bottom: 4.6rem;
+    background-image: linear-gradient(to top, color-mix(in srgb, var(--medal) 20%, transparent), transparent 60%);
+  }
+
+  app-leaderboard .podium-pillar.pillar-silver {
+    order: 1;
+    padding-bottom: 7rem;
+  }
+
+  app-leaderboard .podium-pillar.pillar-gold {
+    order: 2;
+    padding-bottom: 9.4rem;
+  }
+
+  app-leaderboard .podium-pillar.pillar-bronze {
+    order: 3;
+  }
+
+  app-leaderboard .podium-pillar::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0.4rem;
+    transform: translateX(-50%);
+    font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+    font-size: 4.4rem;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: color-mix(in srgb, var(--medal) 42%, transparent);
+    pointer-events: none;
+  }
+
+  app-leaderboard .podium-pillar.pillar-gold::before {
+    content: "1";
+    font-size: 5.6rem;
+  }
+
+  app-leaderboard .podium-pillar.pillar-silver::before {
+    content: "2";
+  }
+
+  app-leaderboard .podium-pillar.pillar-bronze::before {
+    content: "3";
+  }
+
+  .eco-main app-leaderboard .podium-pillar.pillar-bronze {
+    animation-delay: 0s;
+  }
+
+  .eco-main app-leaderboard .podium-pillar.pillar-silver {
+    animation-delay: 0.12s;
+  }
+
+  .eco-main app-leaderboard .podium-pillar.pillar-gold {
+    animation-delay: 0.24s;
+  }
+}
+
+/* BITÁCORA: barra de distancia de cada viaje (longitud relativa al viaje más
+   largo de la lista). Es un solo trazo fino con el color del medio; crece con
+   transform para no tocar el layout. */
+.trips-page .trip-dist-bar {
+  height: 4px;
+  margin-top: 0.55rem;
+  border-radius: 999px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--trip-accent) 14%, transparent);
+}
+
+.trips-page .trip-dist-bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--trip-accent);
+  transform-origin: left center;
+  transform: scaleX(var(--w, 0));
+  animation: trip-bar-grow 650ms cubic-bezier(0.23, 1, 0.32, 1) backwards;
+  animation-delay: calc(120ms + min(var(--i, 0), 10) * 45ms);
+}
+
+@keyframes trip-bar-grow {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+/* BITÁCORA: entrada del viaje recién registrado. Sube desde arriba con un
+   anillo del color del medio que se desvanece; solo transform y opacity. */
+.trips-page .trip-entry.just-added {
+  position: relative;
+  animation: trip-pop-in 460ms cubic-bezier(0.23, 1, 0.32, 1) both;
+  animation-delay: 0s;
+}
+
+.trips-page .trip-entry.just-added::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border: 2px solid var(--trip-accent);
+  border-radius: inherit;
+  opacity: 0;
+  pointer-events: none;
+  animation: trip-ring 1300ms cubic-bezier(0.23, 1, 0.32, 1) 250ms both;
+}
+
+@keyframes trip-pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(-14px) scale(0.97);
+  }
+}
+
+@keyframes trip-ring {
+  0% {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.035);
+  }
+}
+
+/* "+N pts" que vuela desde el botón hasta el contador del menú (lo anima trips.component.ts). */
+.points-fly {
+  position: fixed;
+  z-index: 3000;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  background: #fde047;
+  color: #1e241e;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: 0 8px 18px -8px rgba(0, 0, 0, 0.45);
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trips-page .trip-dist-bar span,
+  .trips-page .trip-entry.just-added,
+  .trips-page .trip-entry.just-added::after {
+    animation: none;
+  }
+}
+
+[data-theme="dark"] app-leaderboard .podium-pillar::before {
+  color: color-mix(in srgb, var(--medal) 62%, transparent);
+}
