@@ -7775,3 +7775,36 @@ app-routes-planner .preset-chips-centered-wrapper {
     transition: none;
   }
 }
+
+
+/* ==========================================================================
+   PULIDO VISUAL DE LA APP
+   ========================================================================== */
+
+/* RUTAS: campos de origen y destino con aire.
+   El texto estaba pegado al icono y al borde, y "San Isidro (Centro
+   Financiero)" no cabía en 225 px. El panel crece con la pantalla (340-420 px),
+   el icono se separa del borde y del texto, y si aun así es largo se corta con
+   puntos suspensivos (el título muestra el texto completo). */
+@media (min-width: 1041px) {
+  app-routes-planner .planner-unified-stage {
+    grid-template-columns: clamp(340px, 30vw, 420px) minmax(0, 1fr);
+  }
+}
+
+app-routes-planner .vertical-route-stops {
+  padding-left: 1.5rem !important;
+}
+
+app-routes-planner .vertical-route-stops .mat-mdc-form-field-icon-prefix {
+  padding: 0 0.7rem 0 1rem;
+}
+
+app-routes-planner .vertical-route-stops .mat-mdc-form-field-infix {
+  min-width: 0;
+}
+
+app-routes-planner .vertical-route-stops input.mat-mdc-input-element {
+  padding-left: 0.1rem;
+  text-overflow: ellipsis;
+}
