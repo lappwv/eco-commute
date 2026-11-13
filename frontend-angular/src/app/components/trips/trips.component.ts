@@ -208,6 +208,9 @@ type ModeFilter = TransportMode | 'ALL';
                     <span>{{ t.caloriesBurned }} kcal</span>
                     <span>{{ i18n.formatDate(t.completedAt) }}</span>
                   </div>
+                  <div class="trip-dist-bar" aria-hidden="true">
+                    <span [style.--w]="distanceRatio(t)"></span>
+                  </div>
                 </div>
 
                 <div class="trip-feed-impact">
@@ -373,6 +376,12 @@ export class TripsComponent implements OnInit {
         this.loadTrips();
       });
     }
+  }
+
+  /** Largo de la barra de un viaje (0 a 1) respecto al más largo de la lista visible. */
+  distanceRatio(t: TripResponse): number {
+    const max = Math.max(...this.filteredTrips.map(x => x.distanceKm), 0.1);
+    return Math.round(Math.max(0.06, t.distanceKm / max) * 100) / 100;
   }
 
   startEdit(t: TripResponse): void {
