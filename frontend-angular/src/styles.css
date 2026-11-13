@@ -7808,3 +7808,58 @@ app-routes-planner .vertical-route-stops input.mat-mdc-input-element {
   padding-left: 0.1rem;
   text-overflow: ellipsis;
 }
+
+/* BENEFICIOS: icono grande de marca, sin recuadro, con el color de cada tipo de beneficio. */
+app-rewards .ticket-voucher-card {
+  --kind: #15803d;
+}
+
+app-rewards .ticket-voucher-card[data-kind^="COFFEE"] {
+  --kind: #d97706;
+}
+
+app-rewards .ticket-voucher-card[data-kind^="BIKE"] {
+  --kind: #0284c7;
+}
+
+app-rewards .ticket-voucher-card[data-kind^="PARK"] {
+  --kind: #7c3aed;
+}
+
+app-rewards .ticket-voucher-card[data-kind^="TREE"] {
+  --kind: #15803d;
+}
+
+app-rewards .reward-icon-badge {
+  width: auto !important;
+  height: auto !important;
+  padding: 0 !important;
+  display: inline-flex;
+  align-items: center;
+  color: var(--kind) !important;
+  background: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  transition: transform 220ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+app-rewards .reward-icon-badge app-icon svg {
+  width: 2.75rem !important;
+  height: 2.75rem !important;
+}
+
+[data-theme="dark"] app-rewards .reward-icon-badge {
+  color: color-mix(in srgb, var(--kind) 55%, #ffffff) !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  app-rewards .ticket-voucher-card:hover .reward-icon-badge {
+    transform: translateY(-2px) rotate(-6deg) scale(1.08);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  app-rewards .reward-icon-badge {
+    transition: none;
+  }
+}

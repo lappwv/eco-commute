@@ -42,11 +42,11 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
           </div>
 
           <div class="rewards-grid-2">
-            <div class="ticket-voucher-card" *ngFor="let r of rewards">
+            <div class="ticket-voucher-card" *ngFor="let r of rewards" [attr.data-kind]="r.code">
               <div class="ticket-main">
                 <div class="ticket-top-row">
                   <span class="reward-icon-badge">
-                    <app-icon [name]="r.code || r.iconEmoji" [size]="22"></app-icon>
+                    <app-icon [name]="r.code || r.iconEmoji" [size]="44"></app-icon>
                   </span>
                   <span class="pts-cost-pill">
                     <app-icon name="bolt" [size]="13"></app-icon>
