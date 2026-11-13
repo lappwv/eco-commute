@@ -8060,8 +8060,64 @@ app-leaderboard .podium-pillar.pillar-gold {
   }
 }
 
+/* BITÁCORA: entrada del viaje recién registrado. Sube desde arriba con un
+   anillo del color del medio que se desvanece; solo transform y opacity. */
+.trips-page .trip-entry.just-added {
+  position: relative;
+  animation: trip-pop-in 460ms cubic-bezier(0.23, 1, 0.32, 1) both;
+  animation-delay: 0s;
+}
+
+.trips-page .trip-entry.just-added::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border: 2px solid var(--trip-accent);
+  border-radius: inherit;
+  opacity: 0;
+  pointer-events: none;
+  animation: trip-ring 1300ms cubic-bezier(0.23, 1, 0.32, 1) 250ms both;
+}
+
+@keyframes trip-pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(-14px) scale(0.97);
+  }
+}
+
+@keyframes trip-ring {
+  0% {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.035);
+  }
+}
+
+/* "+N pts" que vuela desde el botón hasta el contador del menú (lo anima trips.component.ts). */
+.points-fly {
+  position: fixed;
+  z-index: 3000;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  background: #fde047;
+  color: #1e241e;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: 0 8px 18px -8px rgba(0, 0, 0, 0.45);
+  will-change: transform, opacity;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .trips-page .trip-dist-bar span {
+  .trips-page .trip-dist-bar span,
+  .trips-page .trip-entry.just-added,
+  .trips-page .trip-entry.just-added::after {
     animation: none;
   }
 }

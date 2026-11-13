@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -112,7 +112,7 @@ type ModeFilter = TransportMode | 'ALL';
             </div>
 
             <div class="form-actions-stack">
-              <button mat-flat-button color="primary" type="submit" class="btn-emerald full-width">
+              <button mat-flat-button color="primary" type="submit" class="btn-emerald full-width" #saveBtn>
                 <app-icon [name]="editingTripId ? 'check' : 'plus'" [size]="16"></app-icon>
                 <span>{{ editingTripId ? i18n.t('trips.saveChanges') : i18n.t('trips.addToLog') }}</span>
               </button>
@@ -190,6 +190,7 @@ type ModeFilter = TransportMode | 'ALL';
                 *ngFor="let t of filteredTrips; let i = index; trackBy: trackTrip"
                 [ngClass]="'mode-' + t.transportMode"
                 [class.editing-row]="t.id === editingTripId"
+                [class.just-added]="t.id === justAddedId"
                 [style.--i]="i"
               >
                 <span class="trip-mode-badge" aria-hidden="true">
@@ -238,6 +239,9 @@ export class TripsComponent implements OnInit {
   trips: TripResponse[] = [];
   editingTripId: string | null = null;
   feedbackMsg = '';
+  /** Id del viaje recién registrado: activa su animación de entrada unos segundos. */
+  justAddedId: string | null = null;
+  @ViewChild('saveBtn', { read: ElementRef }) private saveBtn?: ElementRef<HTMLElement>;
 
   readonly transportModes: TransportMode[] = [
     'BICYCLE',
@@ -373,6 +377,9 @@ export class TripsComponent implements OnInit {
           co2: Math.round(created.co2SavedGrams),
           points: created.pointsEarned
         });
+        this.justAddedId = created.id;
+        setTimeout(() => (this.justAddedId = null), 2400);
+        this.flyPoints(created.pointsEarned);
         this.loadTrips();
       });
     }
@@ -382,6 +389,48 @@ export class TripsComponent implements OnInit {
   distanceRatio(t: TripResponse): number {
     const max = Math.max(...this.filteredTrips.map(x => x.distanceKm), 0.1);
     return Math.round(Math.max(0.06, t.distanceKm / max) * 100) / 100;
+  }
+
+  /**
+   * Un "+N pts" sale del botón y vuela hasta el contador del menú. Usa la API de
+   * animaciones web (solo transform y opacity) y se omite con prefers-reduced-motion.
+   */
+  private flyPoints(points: number): void {
+    if (points <= 0 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const from = this.saveBtn?.nativeElement.getBoundingClientRect();
+    const target = document.querySelector<HTMLElement>('.user-pill-pts');
+    const to = target?.getBoundingClientRect();
+    if (!from || !target || !to || to.width === 0) return;
+
+    const startX = from.left + from.width / 2;
+    const startY = from.top + from.height / 2;
+    const dx = to.left + to.width / 2 - startX;
+    const dy = to.top + to.height / 2 - startY;
+
+    const chip = document.createElement('span');
+    chip.className = 'points-fly';
+    chip.textContent = `+${points} pts`;
+    chip.setAttribute('aria-hidden', 'true');
+    chip.style.left = `${startX}px`;
+    chip.style.top = `${startY}px`;
+    document.body.appendChild(chip);
+
+    const flight = chip.animate(
+      [
+        { transform: 'translate(-50%, -50%) scale(0.8)', opacity: 0 },
+        { offset: 0.18, transform: 'translate(-50%, calc(-50% - 26px)) scale(1.1)', opacity: 1 },
+        { transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(0.55)`, opacity: 0.25 }
+      ],
+      { duration: 800, easing: 'cubic-bezier(0.23, 1, 0.32, 1)', fill: 'forwards' }
+    );
+    setTimeout(() => chip.remove(), 2000); // respaldo si la pestaña estaba en segundo plano
+    flight.onfinish = () => {
+      chip.remove();
+      target.animate(
+        [{ transform: 'scale(1)' }, { transform: 'scale(1.14)' }, { transform: 'scale(1)' }],
+        { duration: 320, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' }
+      );
+    };
   }
 
   startEdit(t: TripResponse): void {
