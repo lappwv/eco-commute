@@ -7863,3 +7863,89 @@ app-rewards .reward-icon-badge app-icon svg {
     transition: none;
   }
 }
+
+/* LOGROS: medallas con anillo de progreso.
+   Bloqueada: icono apagado y un arco verde con el avance. Desbloqueada: medalla
+   dorada con un brillo que pasa una vez al aparecer y otra al pasar el mouse. */
+app-gamification .badge-icon-medallion {
+  --medal: var(--emerald);
+  position: relative;
+  flex: none;
+  width: 4.25rem !important;
+  height: 4.25rem !important;
+  border-radius: 50% !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: var(--text-subtle) !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  background:
+    radial-gradient(circle, var(--bg-card) 0 62%, transparent 63%),
+    conic-gradient(var(--medal) calc(var(--p, 0) * 1%), color-mix(in srgb, var(--text-muted) 24%, transparent) 0) !important;
+  transition: transform 220ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+app-gamification .badge-icon-medallion app-icon svg {
+  width: 1.8rem !important;
+  height: 1.8rem !important;
+  opacity: 0.55;
+  filter: grayscale(1);
+}
+
+app-gamification .badge-row-strip.unlocked .badge-icon-medallion {
+  --medal: #f5b800;
+  color: #b45309 !important;
+  background:
+    radial-gradient(circle, color-mix(in srgb, #fbbf24 24%, var(--bg-card)) 0 62%, transparent 63%),
+    conic-gradient(#f5b800, #fde68a, #f5b800) !important;
+  box-shadow: 0 0 0 4px color-mix(in srgb, #f5b800 16%, transparent), 0 10px 22px -12px #f59e0b !important;
+}
+
+[data-theme="dark"] app-gamification .badge-row-strip.unlocked .badge-icon-medallion {
+  color: #fcd34d !important;
+}
+
+app-gamification .badge-row-strip.unlocked .badge-icon-medallion app-icon svg {
+  opacity: 1;
+  filter: none;
+}
+
+/* Brillo diagonal: solo transform, una pasada */
+app-gamification .badge-row-strip.unlocked .badge-icon-medallion::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.55) 50%, transparent 65%);
+  transform: translateX(-130%);
+  animation: medal-shine 900ms cubic-bezier(0.23, 1, 0.32, 1) 500ms 1 both;
+  pointer-events: none;
+}
+
+@keyframes medal-shine {
+  to {
+    transform: translateX(130%);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  app-gamification .badge-row-strip:hover .badge-icon-medallion {
+    transform: scale(1.06);
+  }
+
+  app-gamification .badge-row-strip.unlocked:hover .badge-icon-medallion::after {
+    animation: medal-shine 700ms cubic-bezier(0.23, 1, 0.32, 1) 1 both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  app-gamification .badge-icon-medallion {
+    transition: none;
+  }
+
+  app-gamification .badge-row-strip.unlocked .badge-icon-medallion::after {
+    animation: none;
+    opacity: 0;
+  }
+}

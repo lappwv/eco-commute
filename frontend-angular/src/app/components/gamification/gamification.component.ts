@@ -99,8 +99,8 @@ import { EcoIconComponent } from '../icon/eco-icon.component';
               *ngFor="let b of userBadges"
               [class.unlocked]="b.unlocked"
             >
-              <span class="badge-icon-medallion">
-                <app-icon [name]="b.code || b.iconEmoji" [size]="24"></app-icon>
+              <span class="badge-icon-medallion" [style.--p]="b.unlocked ? 100 : b.progressPercent">
+                <app-icon [name]="b.code || b.iconEmoji" [size]="28"></app-icon>
               </span>
 
               <div class="badge-strip-body">
