@@ -8121,3 +8121,7 @@ app-leaderboard .podium-pillar.pillar-gold {
     animation: none;
   }
 }
+
+[data-theme="dark"] app-leaderboard .podium-pillar::before {
+  color: color-mix(in srgb, var(--medal) 62%, transparent);
+}
