@@ -8125,3 +8125,133 @@ app-leaderboard .podium-pillar.pillar-gold {
 [data-theme="dark"] app-leaderboard .podium-pillar::before {
   color: color-mix(in srgb, var(--medal) 62%, transparent);
 }
+
+/* LOGROS: la tarjeta de nivel y la coleccion de insignias terminan a la misma
+   altura. Ambas columnas se estiran a la fila del grid y las filas de insignias
+   reparten el alto sobrante, asi el borde inferior coincide siempre. */
+@media (min-width: 1041px) {
+  app-gamification .gamification-split-layout {
+    align-items: stretch;
+  }
+
+  app-gamification .level-vertical-tower {
+    height: auto;
+    margin: 0;
+  }
+
+  app-gamification .badges-open-showcase {
+    min-height: 100%;
+  }
+
+  app-gamification .badges-horizontal-list {
+    flex: 1;
+    grid-auto-rows: 1fr;
+    align-content: stretch;
+  }
+
+  app-gamification .badge-row-strip {
+    margin: 0;
+  }
+
+  /* Si la tarjeta de nivel queda mas alta que su contenido, las metricas se
+     anclan abajo para que no quede un hueco al final. */
+  app-gamification .tower-vertical-stats {
+    margin-top: auto;
+  }
+}
+
+/* LOGROS: medalla desbloqueada viva. Anillo conico dorado, ambar y verde que
+   gira lento, halo que respira y un destello que vuelve cada pocos segundos. */
+app-gamification .badge-row-strip.unlocked .badge-icon-medallion {
+  isolation: isolate;
+  background: radial-gradient(circle, color-mix(in srgb, #fbbf24 22%, var(--bg-card)) 0 62%, transparent 63%) !important;
+  animation: medal-glow 2.8s ease-in-out infinite;
+}
+
+app-gamification .badge-row-strip.unlocked .badge-icon-medallion::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, #f5b800, #fde68a, #f59e0b, #22c55e, #86efac, #f5b800);
+  -webkit-mask: radial-gradient(circle, transparent 0 61%, #000 62%);
+  mask: radial-gradient(circle, transparent 0 61%, #000 62%);
+  animation: medal-spin 6s linear infinite;
+}
+
+app-gamification .badge-row-strip.unlocked .badge-icon-medallion app-icon {
+  position: relative;
+  z-index: 1;
+}
+
+app-gamification .badge-row-strip.unlocked .badge-icon-medallion::after {
+  z-index: 2;
+  animation: medal-sheen 4.5s cubic-bezier(0.23, 1, 0.32, 1) 0.5s infinite both;
+}
+
+@keyframes medal-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes medal-glow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 0 rgba(245, 158, 11, 0));
+  }
+  50% {
+    filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.55));
+  }
+}
+
+@keyframes medal-sheen {
+  0% {
+    transform: translateX(-130%);
+  }
+  22%,
+  100% {
+    transform: translateX(130%);
+  }
+}
+
+/* Barras de progreso: crecen desde la izquierda al entrar */
+app-gamification .mdc-linear-progress__bar-inner {
+  transform-origin: left center;
+  animation: gami-bar-in 1s cubic-bezier(0.22, 1, 0.36, 1) 0.25s both;
+}
+
+@keyframes gami-bar-in {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+/* Metricas de la torre: el icono reacciona al pasar el mouse */
+app-gamification .tower-stat-icon {
+  transition: transform 200ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  app-gamification .tower-vertical-stats li:hover .tower-stat-icon {
+    transform: translateY(-2px) rotate(-6deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  app-gamification .badge-row-strip.unlocked .badge-icon-medallion,
+  app-gamification .badge-row-strip.unlocked .badge-icon-medallion::before,
+  app-gamification .mdc-linear-progress__bar-inner {
+    animation: none;
+  }
+
+  app-gamification .badge-row-strip.unlocked .badge-icon-medallion::after {
+    animation: none;
+    opacity: 0;
+  }
+
+  app-gamification .tower-stat-icon {
+    transition: none;
+  }
+}
